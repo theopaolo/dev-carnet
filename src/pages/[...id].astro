@@ -1,0 +1,165 @@
+---
+import { getCollection, render } from "astro:content";
+import Lesson from "../layouts/Lesson.astro";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("cours", (c) => !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
+  return all.map((c) => {
+    // Chapitre précédent / suivant dans le même cours (l'index compte comme premier)
+    const course = c.id.split("/")[0];
+    const siblings = all
+      .filter((x) => x.id === course || x.id.startsWith(course + "/"))
+      .sort((a, b) => Number(a.id !== course) - Number(b.id !== course) || a.data.order - b.data.order);
+    const i = siblings.indexOf(c);
+    // Position : l'index du cours est la présentation, les chapitres comptent à partir de 1
+    return {
+      params: { id: c.id },
+      props: { c, prev: siblings[i - 1], next: siblings[i + 1], n: i, total: siblings.length - 1 },
+    };
+  });
+}
+
+const { c, prev, next, n, total } = Astro.props;
+const { Content, headings } = await render(c);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Lesson title={c.data.title} id={c.id} headings={headings}>
+  <Content />
+  {(prev || next) && (
+    <nav class="pager" aria-label="Chapitres">
+      {n > 0 && <p class="pager-pos">Chapitre {n} sur {total}</p>}
+      {prev && (
+        <a rel="prev" href={`${base}/${prev.id}/`} aria-keyshortcuts="p">
+          <span class="pager-label">← Précédent <kbd>P</kbd></span>
+          <span class="pager-title">{prev.data.title}</span>
+        </a>
+      )}
+      {next && (
+        <a rel="next" href={`${base}/${next.id}/`} aria-keyshortcuts="s">
+          <span class="pager-label">Suivant → <kbd>S</kbd></span>
+          <span class="pager-title">{next.data.title}</span>
+        </a>
+      )}
+    </nav>
+  )}
+</Lesson>
+
+<script>
+  // Raccourcis P et S : chapitre précédent et suivant. Seulement quand le focus est sur la page,
+  // pas sur un lien, un bouton ou un champ (WCAG 2.1.4), sans modificateur ni dialog ouvert
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
+    const onPage = [document.body, document.getElementById("contenu"), null].includes(document.activeElement);
+    if (!onPage || document.querySelector("dialog[open]")) return;
+    const rel = { p: "prev", s: "next" }[e.key.toLowerCase()];
+    const a = rel && document.querySelector<HTMLAnchorElement>(`.pager a[rel="${rel}"]`);
+    if (a) location.href = a.href;
+  });
+</script>
+
+<style>
+  /* Fin de chapitre : les liens reprennent les cartes des diagrammes, le suivant en accent */
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pager-pos {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .pager a {
+    display: grid;
+    gap: 2px;
+    align-content: start;
+    padding: 10px 14px;
+    color: var(--node-text);
+    text-decoration: none;
+    background: var(--node-fill);
+    border: 1.25px solid var(--node-stroke);
+    border-radius: 6px;
+    box-shadow: 0 2px 0 var(--node-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pager a[rel="prev"] {
+    grid-column: 1;
+  }
+
+  .pager a[rel="next"] {
+    grid-column: 2;
+    text-align: right;
+    color: var(--accent-text);
+    background: var(--accent-fill);
+    border-color: var(--accent-stroke);
+    box-shadow: 0 2px 0 var(--accent-shadow);
+  }
+
+  .pager a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 var(--node-shadow);
+  }
+
+  .pager a[rel="next"]:hover {
+    box-shadow: 0 3px 0 var(--accent-shadow);
+  }
+
+  .pager a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .pager-label {
+    font-size: 0.8125rem;
+    color: var(--node-sub);
+  }
+
+  .pager a[rel="next"] .pager-label {
+    color: var(--accent-sub);
+  }
+
+  .pager-title {
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .pager kbd {
+    margin-left: 4px;
+    padding: 0 4px;
+    font: 0.6875rem "Roboto Mono", monospace;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    opacity: 0.7;
+  }
+
+  /* Au doigt, pas de clavier : pas de raccourci affiché */
+  @media (pointer: coarse) {
+    .pager kbd {
+      display: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .pager {
+      grid-template-columns: 1fr;
+    }
+    .pager a[rel="prev"],
+    .pager a[rel="next"] {
+      grid-column: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pager a {
+      transition: none;
+    }
+  }
+</style>

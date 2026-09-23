@@ -1,0 +1,25 @@
+{
+  "width": 620,
+  "height": 126,
+  "cx": [
+    [ "PERSONNE", 56 ],
+    [ "EFFECTUER", 179 ],
+    [ "RESERVATION", 308 ],
+    [ "CONCERNER", 441 ],
+    [ "ATELIER", 566 ]
+  ],
+  "cy": [
+    [ "PERSONNE", 63 ],
+    [ "EFFECTUER", 63 ],
+    [ "RESERVATION", 63 ],
+    [ "CONCERNER", 63 ],
+    [ "ATELIER", 63 ]
+  ],
+  "shift": [
+    [ "EFFECTUER,PERSONNE,0", 0 ],
+    [ "EFFECTUER,RESERVATION,0", 0 ],
+    [ "CONCERNER,RESERVATION,0", 0 ],
+    [ "CONCERNER,ATELIER,0", 0 ]
+  ],
+  "ratio": []
+}

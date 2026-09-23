@@ -1,0 +1,1309 @@
+/* Thème des cours : typographie, code, diagrammes Mermaid, mode sombre.
+   Toutes les couleurs passent par les jetons de :root, redéfinis pour le sombre. */
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/RobotoMono-VariableFont_wght.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/RobotoMono-Italic-VariableFont_wght.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inclusive Sans";
+  src: url("../assets/fonts/InclusiveSans-VariableFont_wght.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inclusive Sans";
+  src: url("../assets/fonts/InclusiveSans-Italic-VariableFont_wght.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+:root {
+  --bg-page: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-canvas: #f4f4f6;
+  --dot: #d1d5db;
+  --border: #e2e4e9;
+  --border-strong: #b9c0cf;
+  --text: #1e2530;
+  --text-muted: #56637a;
+  --heading: #202637;
+  --accent: #9475c6;
+  --accent-bg: #f5effd;
+  --code-bg: #eaecf1;
+  --code-text: #24292f;
+  --scroll-edge: rgba(32, 38, 55, 0.18);
+  --radius: 8px;
+
+  /* Diagrammes */
+  --node-fill: #e8ecf4;
+  --node-stroke: #3f4658;
+  --node-text: #202637;
+  --node-sub: #4b5567;
+  --node-shadow: #b9c0cf;
+  --accent-fill: #eee5fa;
+  --accent-stroke: #8261b6;
+  --accent-text: #51357e;
+  --accent-sub: #644594;
+  --accent-shadow: #d4c4e9;
+  --store-fill: #e6f3ea;
+  --store-stroke: #2f7a4f;
+  --store-text: #1f5a3a;
+  --store-sub: #2a6a45;
+  --store-shadow: #b3d4bf;
+  --link: #3f4658;
+  --pill-bg: #ffffff;
+  --pill-border: #b9c0cf;
+  --pill-text: #3f4658;
+  --pill-shadow: #d5d9e2;
+  --cluster-fill: rgba(255, 255, 255, 0.45);
+  --cluster-stroke: #8e97aa;
+
+  /* Contexte des diagrammes animés, une couleur par rôle de message */
+  --ctx-system: #5e6b7e;
+  --ctx-tools: #a3abbd;
+  --ctx-user: #9475c6;
+  --ctx-assistant: #4a67d6;
+  --ctx-tool: #2f8f5b;
+  --ctx-summary: #8a5cc2;
+}
+
+[data-theme="dark"] {
+  --bg-page: #14171f;
+  --bg-surface: #1b1f2a;
+  --bg-canvas: #181c26;
+  --dot: #2a3040;
+  --border: #2c3242;
+  --border-strong: #4a5268;
+  --text: #e6e8ee;
+  --text-muted: #a3abbd;
+  --heading: #f2f4f8;
+  --accent: #c4a6ee;
+  --accent-bg: #292236;
+  --code-bg: #262c3a;
+  --code-text: #e6e8ee;
+  --scroll-edge: rgba(0, 0, 0, 0.55);
+
+  --node-fill: #232a3b;
+  --node-stroke: #aab3c8;
+  --node-text: #e6e8ee;
+  --node-sub: #b8c0d0;
+  --node-shadow: #0b0d12;
+  --accent-fill: #322844;
+  --accent-stroke: #c4a6ee;
+  --accent-text: #dcc8fa;
+  --accent-sub: #c7acee;
+  --accent-shadow: #0b0d12;
+  --store-fill: #17301f;
+  --store-stroke: #5fbf87;
+  --store-text: #a6e3bf;
+  --store-sub: #8fd3aa;
+  --store-shadow: #0b0d12;
+  --link: #b3bccd;
+  --pill-bg: #1b1f2a;
+  --pill-border: #4a5268;
+  --pill-text: #d3d8e3;
+  --pill-shadow: #0b0d12;
+  --cluster-fill: rgba(255, 255, 255, 0.03);
+  --cluster-stroke: #6b7590;
+
+  --ctx-system: #8e97aa;
+  --ctx-tools: #5a6379;
+  --ctx-user: #c4a6ee;
+  --ctx-assistant: #7f98f0;
+  --ctx-tool: #5fbf87;
+  --ctx-summary: #b592e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-page);
+  color: var(--text);
+  font-family: "Inclusive Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* 100 % : respecte la taille choisie dans le navigateur. Tout le reste est en rem ou em */
+  font-size: 100%;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Boutons A- / A+ de la barre du haut (src/scripts/reading.js) */
+html[data-size="-1"] { font-size: 93.75%; }
+html[data-size="1"] { font-size: 112.5%; }
+html[data-size="2"] { font-size: 125%; }
+html[data-size="3"] { font-size: 137.5%; }
+
+/* Les ancres ne passent pas sous la barre du haut collante */
+:target,
+h1[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.content {
+  font-size: 1.0625rem;
+  /* Mots longs (noms de fichiers, service_completed_successfully) : coupés au bord
+     de la colonne plutôt que de la faire déborder sur téléphone */
+  overflow-wrap: break-word;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* Titres */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin: 48px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1:first-child,
+.toc-inline + h1 {
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin: 36px 0 16px;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin: 24px 0 12px;
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 1.25rem;
+}
+
+ul,
+ol {
+  padding-left: 24px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+hr {
+  border: none;
+  border-top: 1px dashed var(--border-strong);
+  margin: 48px 0;
+}
+
+/* Code en ligne */
+:not(pre) > code {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.88em;
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  /* Un code coupé en fin de ligne garde son fond et ses marges sur chaque morceau */
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Blocs de code (Shiki, thèmes github-light / github-dark) */
+pre.astro-code {
+  background: var(--bg-canvas) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 20px 0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.astro-code span {
+  color: var(--shiki-light);
+}
+
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark);
+}
+
+/* Images du contenu (schémas SVG) : jamais plus larges que la colonne */
+.content img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tableau ouvert : filets horizontaux seulement */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+th,
+td {
+  padding: 10px 16px 10px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
+}
+
+th {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  border-bottom-color: var(--border-strong);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Téléphone : le tableau défile seul, la page ne défile pas en largeur */
+@media (max-width: 760px) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+  th,
+  td {
+    min-width: 8rem;
+    padding: 10px 12px 10px 0;
+  }
+}
+
+/* Citations : définitions, phrases clés, exemples de texte. Un filet fin et un
+   retrait suffisent, le texte garde le contraste du corps */
+blockquote {
+  margin: 28px 0;
+  padding: 2px 0 2px 20px;
+  border-left: 1px solid var(--border-strong);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Diagrammes ---------- */
+
+/* Bande "canevas" pointillée réservée aux diagrammes */
+.diagram {
+  margin: 32px 0 40px;
+  padding: 24px 16px;
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: visible;
+  white-space: normal;
+  text-align: center;
+  font-family: "Inclusive Sans", sans-serif;
+}
+
+/* Un diagramme plus large que la colonne défile sur le côté. Ombre au bord qui
+   cache encore du contenu : les bandes « local » suivent le défilement et couvrent
+   l'ombre une fois le bord atteint */
+div.mermaid {
+  overflow-x: auto;
+  cursor: zoom-in;
+  background:
+    linear-gradient(to right, var(--bg-canvas) 30%, transparent) left / 32px 100% no-repeat local,
+    linear-gradient(to left, var(--bg-canvas) 30%, transparent) right / 32px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--scroll-edge), transparent) left / 12px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--scroll-edge), transparent) right / 12px 100% no-repeat scroll;
+}
+
+/* --w : largeur naturelle du SVG, posée par diagrams.js. 16px de largeur = 1rem */
+div.mermaid > svg {
+  display: inline-block;
+  width: 100%;
+  max-width: calc(var(--w, 10000) * 0.0625rem);
+  /* Pas plus petit que 0,8 fois la taille naturelle : étiquettes à 12px au moins */
+  min-width: calc(var(--w, 0) * 0.8px);
+  height: auto !important;
+}
+
+/* Cartes : ombre portée dure de 2px, sans flou */
+.mermaid .node rect,
+.mermaid .node polygon,
+.mermaid .node circle,
+.mermaid .node path {
+  fill: var(--node-fill) !important;
+  stroke: var(--node-stroke) !important;
+  stroke-width: 1.25px !important;
+  rx: 6px !important;
+  ry: 6px !important;
+  filter: drop-shadow(0 2px 0 var(--node-shadow));
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.mermaid .node:hover rect,
+.mermaid .node:hover polygon {
+  filter: drop-shadow(0 3px 0 var(--node-shadow));
+  transform: translateY(-1px);
+}
+
+/* Sélecteurs sans préfixe .mermaid : Mermaid mesure les étiquettes dans un
+   conteneur temporaire hors de div.mermaid, la mesure doit voir la même police */
+.node .label p {
+  margin: 0;
+}
+
+.nodeLabel {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--node-text) !important;
+  line-height: 1.45 !important;
+}
+
+/* Sous-titre mono : Git["Git<br/><code>code source</code>"] */
+.nodeLabel code {
+  display: block;
+  margin-top: 3px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--node-sub);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Cartes "runtime" en accent : ce qui tourne. Automatique par id Mermaid
+   (Container, Containers, API, Worker, Migrate) ou à la main : Node:::accent */
+.mermaid .node[id*="flowchart-Container"] rect,
+.mermaid .node[id*="flowchart-API-"] rect,
+.mermaid .node[id*="flowchart-Worker-"] rect,
+.mermaid .node[id*="flowchart-Migrate-"] rect,
+.mermaid .node.accent rect {
+  fill: var(--accent-fill) !important;
+  stroke: var(--accent-stroke) !important;
+  filter: drop-shadow(0 2px 0 var(--accent-shadow));
+}
+
+.mermaid .node[id*="flowchart-Container"] .nodeLabel,
+.mermaid .node[id*="flowchart-API-"] .nodeLabel,
+.mermaid .node[id*="flowchart-Worker-"] .nodeLabel,
+.mermaid .node[id*="flowchart-Migrate-"] .nodeLabel,
+.mermaid .node.accent .nodeLabel {
+  color: var(--accent-text) !important;
+}
+
+.mermaid .node[id*="flowchart-Container"] .nodeLabel code,
+.mermaid .node[id*="flowchart-API-"] .nodeLabel code,
+.mermaid .node[id*="flowchart-Worker-"] .nodeLabel code,
+.mermaid .node[id*="flowchart-Migrate-"] .nodeLabel code,
+.mermaid .node.accent .nodeLabel code {
+  color: var(--accent-sub);
+}
+
+/* Cartes "stockage" : volumes et données. Ids Volume, Data, Dist ou Node:::store */
+.mermaid .node[id*="flowchart-Volume"] rect,
+.mermaid .node[id*="flowchart-Data-"] rect,
+.mermaid .node[id*="flowchart-Dist-"] rect,
+.mermaid .node.store rect {
+  fill: var(--store-fill) !important;
+  stroke: var(--store-stroke) !important;
+  filter: drop-shadow(0 2px 0 var(--store-shadow));
+}
+
+.mermaid .node[id*="flowchart-Volume"] .nodeLabel,
+.mermaid .node[id*="flowchart-Data-"] .nodeLabel,
+.mermaid .node[id*="flowchart-Dist-"] .nodeLabel,
+.mermaid .node.store .nodeLabel {
+  color: var(--store-text) !important;
+}
+
+.mermaid .node[id*="flowchart-Volume"] .nodeLabel code,
+.mermaid .node[id*="flowchart-Data-"] .nodeLabel code,
+.mermaid .node[id*="flowchart-Dist-"] .nodeLabel code,
+.mermaid .node.store .nodeLabel code {
+  color: var(--store-sub);
+}
+
+/* Groupes (subgraph) : cadre pointillé, étiquette mono */
+.mermaid .cluster rect {
+  fill: var(--cluster-fill) !important;
+  stroke: var(--cluster-stroke) !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: 4 4;
+  rx: 8px !important;
+  ry: 8px !important;
+}
+
+.cluster-label .nodeLabel {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--pill-text) !important;
+}
+
+/* Flèches */
+.mermaid .flowchart-link {
+  stroke: var(--link) !important;
+  stroke-width: 1.5px !important;
+}
+
+.mermaid .edge-pattern-solid {
+  stroke-dasharray: none !important;
+}
+
+.mermaid svg.diagram-stepping .flowchart-link,
+.mermaid svg.diagram-stepping .edgeLabels > .edgeLabel {
+  opacity: 0.15;
+  transition: opacity 0.18s ease-out;
+}
+
+.mermaid svg.diagram-stepping .flowchart-link.revealed,
+.mermaid svg.diagram-stepping .edgeLabels > .edgeLabel.revealed {
+  opacity: 1;
+}
+
+.mermaid svg.diagram-stepping .flowchart-link.current {
+  stroke: var(--accent-stroke) !important;
+  stroke-width: 2.5px !important;
+}
+
+.mermaid marker path {
+  fill: var(--link) !important;
+  stroke: var(--link) !important;
+}
+
+/* Étiquette sur flèche : pastille bordée, lisible sur les traits.
+   Les flèches sans texte ont une étiquette vide, cachée par diagrams.js. */
+.mermaid .edgeLabel .labelBkg {
+  background: var(--pill-bg) !important;
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+  padding: 1px 7px;
+  box-shadow: 0 1px 0 var(--pill-shadow);
+}
+
+.edgeLabel,
+.edgeLabel p {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 11px !important;
+  color: var(--pill-text) !important;
+  background: transparent !important;
+  margin: 0;
+}
+
+/* Barre sous le diagramme : légende à gauche, bouton zoom à droite */
+.diagram-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  cursor: default;
+  text-align: left;
+}
+
+.diagram-caption {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.diagram-caption strong {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.diagram-caption .fig,
+.zoom-btn,
+.zoom-close,
+.theme-toggle,
+.seq-btn {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.diagram-caption .fig {
+  margin-right: 4px;
+}
+
+.diagram-motion,
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.diagram-motion:empty,
+.zoom-controls:empty {
+  display: none;
+}
+
+.diagram-motion .seq-count,
+.zoom-controls .seq-count {
+  margin-left: 4px;
+  font: 0.75rem "Roboto Mono", monospace;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.zoom-btn,
+.zoom-close,
+.theme-toggle,
+.seq-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 5px 10px;
+  font: 500 0.8125rem "Inclusive Sans", sans-serif;
+  border-radius: 6px;
+  box-shadow: 0 1px 0 var(--pill-shadow);
+  cursor: pointer;
+}
+
+.zoom-btn {
+  margin-left: auto;
+  cursor: zoom-in;
+}
+
+.zoom-btn:hover,
+.zoom-close:hover,
+.theme-toggle:hover,
+.seq-btn:hover:not(:disabled) {
+  color: var(--heading);
+  border-color: var(--node-stroke);
+}
+
+.zoom-btn:focus-visible,
+.zoom-close:focus-visible,
+.theme-toggle:focus-visible,
+.seq-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Zoom plein écran */
+dialog.zoom {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 40px;
+  border: none;
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  cursor: zoom-out;
+  outline: none;
+}
+
+.zoom-body,
+.zoom-body svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+}
+
+.zoom-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  cursor: zoom-out;
+}
+
+.zoom-controls {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  cursor: default;
+}
+
+/* Téléphone : le diagramme agrandi garde sa taille naturelle et se parcourt au doigt */
+@media (max-width: 760px) {
+  .diagram-bar {
+    flex-wrap: wrap;
+  }
+  .diagram-caption {
+    flex-basis: 100%;
+  }
+  .diagram-motion .seq-btn,
+  .zoom-controls .seq-btn {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+  dialog.zoom {
+    padding: 56px 12px 12px;
+  }
+  .zoom-body {
+    overflow: auto;
+    cursor: default;
+  }
+  .zoom-body svg {
+    width: calc(var(--w, 800) * 1px) !important;
+    height: auto !important;
+  }
+}
+
+@media print {
+  dialog.zoom,
+  .zoom-btn,
+  .diagram-motion {
+    display: none;
+  }
+  .mermaid svg.diagram-stepping .flowchart-link,
+  .mermaid svg.diagram-stepping .edgeLabels > .edgeLabel {
+    opacity: 1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mermaid svg.diagram-stepping .flowchart-link,
+  .mermaid svg.diagram-stepping .edgeLabels > .edgeLabel {
+    transition: none;
+  }
+}
+
+/* ---------- Diagrammes animés (```animated, src/scripts/sequence.js) ---------- */
+
+/* Tailles en em : le plein écran agrandit tout en changeant font-size */
+.seq {
+  --dur: 0.7s;
+  font-size: 0.9375rem;
+  text-align: left;
+  padding: 24px 20px 16px;
+}
+
+.seq [hidden] {
+  display: none !important;
+}
+
+.seq-src {
+  margin: 0;
+  font: 12px/1.5 "Roboto Mono", monospace;
+  white-space: pre-wrap;
+}
+
+.seq-actors,
+.seq-row,
+.seq-lifelines {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
+
+.seq-actor {
+  justify-self: center;
+  padding: 0.45em 0.9em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--node-text);
+  background: var(--node-fill);
+  border: 1.25px solid var(--node-stroke);
+  border-radius: 6px;
+  box-shadow: 0 2px 0 var(--node-shadow);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Destinataire du message en cours */
+.seq-actor.active {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+  box-shadow: 0 2px 0 var(--accent-shadow);
+}
+
+.seq-rows {
+  position: relative;
+  min-height: 2em;
+  padding: 0.4em 0;
+}
+
+.seq-lifelines {
+  position: absolute;
+  inset: 0;
+}
+
+.seq-lifelines i {
+  margin-left: 50%;
+  border-left: 1px dashed var(--cluster-stroke);
+}
+
+.seq-row {
+  position: relative;
+  z-index: 1;
+  padding: 0.3em 0;
+}
+
+/* La flèche va du milieu d'une colonne au milieu de l'autre */
+.seq-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+  margin-inline: calc(100% / (2 * var(--span)));
+}
+
+.seq-label {
+  max-width: 100%;
+  padding: 0.05em 0.5em;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.8em;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 var(--pill-shadow);
+}
+
+.seq-track {
+  position: relative;
+  align-self: stretch;
+  height: 10px;
+}
+
+.seq-line {
+  position: absolute;
+  inset: 4px 0 auto;
+  border-top: 1.5px solid var(--link);
+}
+
+.dashed .seq-line {
+  border-top-style: dashed;
+}
+
+/* Pointe de flèche */
+.seq-line::after {
+  content: "";
+  position: absolute;
+  top: -5.75px;
+  right: -1px;
+  border: 5px solid transparent;
+  border-left: 8px solid var(--link);
+  border-right: 0;
+}
+
+.rtl .seq-line::after {
+  right: auto;
+  left: -1px;
+  border-left: 0;
+  border-right: 8px solid var(--link);
+}
+
+.seq-dot {
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+}
+
+.seq-self {
+  justify-self: center;
+}
+
+.seq-self .seq-label {
+  display: inline-block;
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+/* Bloc loop : aucune marge horizontale nette, les colonnes restent alignées */
+.seq-loop {
+  margin: 0.3em -0.6em;
+  padding: 0 calc(0.6em - 1px) 0.2em;
+  border: 1px dashed var(--cluster-stroke);
+  border-radius: 6px;
+  background: var(--cluster-fill);
+}
+
+.seq-loop-label {
+  display: inline-block;
+  margin-top: 0.4em;
+  padding: 0 0.5em;
+  font: 500 0.7em/1.6 "Roboto Mono", monospace;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+}
+
+/* Disposition loop : étoile, positions en % posées par sequence.js */
+.seq-stage {
+  position: relative;
+  height: 20em;
+  margin-top: 0.5em;
+}
+
+.seq-edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.seq-edges line {
+  stroke: var(--cluster-stroke);
+  stroke-width: 1.5px;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 0.3s;
+}
+
+.seq-edges line.on {
+  stroke: var(--accent-stroke);
+  stroke-dasharray: none;
+}
+
+.seq-stage .seq-actor {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.seq-stage .seq-dot {
+  z-index: 2;
+  margin-top: -5px;
+}
+
+.seq-stage-label {
+  position: absolute;
+  z-index: 3;
+  max-width: 16em;
+  transform: translate(-50%, -50%);
+}
+
+.seq-stage-label.self {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+.seq-turn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.seq-turn .seq-loop-label {
+  margin: 0;
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
+}
+
+.seq-turn .seq-loop-label.on {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+.seq-turn-n {
+  font: 600 0.75em "Roboto Mono", monospace;
+  color: var(--heading);
+}
+
+/* Étape en cours : le trait se trace, le point voyage, l'étiquette apparaît */
+.current .seq-line {
+  animation: seq-draw var(--dur) ease-in-out both;
+}
+
+.current .rtl .seq-line {
+  animation-name: seq-draw-rtl;
+}
+
+.current .seq-dot {
+  animation: seq-travel var(--dur) ease-in-out;
+}
+
+.current .rtl .seq-dot {
+  animation-name: seq-travel-rtl;
+}
+
+.current .seq-label {
+  animation: seq-fade 0.35s ease-out 0.1s both;
+}
+
+@keyframes seq-draw {
+  from { clip-path: inset(-8px 100% -8px 0); }
+  to { clip-path: inset(-8px 0 -8px 0); }
+}
+
+@keyframes seq-draw-rtl {
+  from { clip-path: inset(-8px 0 -8px 100%); }
+  to { clip-path: inset(-8px 0 -8px 0); }
+}
+
+@keyframes seq-travel {
+  from { left: 0; opacity: 1; }
+  85% { opacity: 1; }
+  to { left: 100%; opacity: 0; }
+}
+
+@keyframes seq-travel-rtl {
+  from { left: 100%; opacity: 1; }
+  85% { opacity: 1; }
+  to { left: 0; opacity: 0; }
+}
+
+@keyframes seq-fade {
+  from { opacity: 0; transform: translateY(3px); }
+}
+
+.seq-note {
+  min-height: 3.4em;
+  margin: 0.6em 0 0;
+  font-size: 0.93em;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* Contexte : une barre empilée par rôle, 100 % = contexte à la dernière étape */
+.seq-ctx {
+  margin-top: 0.4em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--border);
+}
+
+.seq-ctx-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4em;
+  font: 500 0.75em "Roboto Mono", monospace;
+  color: var(--text-muted);
+}
+
+.seq-bar-wrap {
+  position: relative;
+}
+
+/* Repère du budget de contexte (%% budget:) */
+.seq-budget {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--accent-stroke);
+}
+
+.seq-bar {
+  display: flex;
+  height: 0.9em;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.seg {
+  flex: none;
+  width: 0;
+  background: var(--c, var(--border-strong));
+  box-shadow: inset -1px 0 0 var(--bg-surface);
+  transition: width 0.5s ease 0.5s;
+}
+
+.seg.new {
+  animation: seq-pulse 1.2s ease-out 0.5s;
+}
+
+@keyframes seq-pulse {
+  0%, 40% { filter: brightness(1.35) saturate(1.2); }
+}
+
+[data-role="system"] { --c: var(--ctx-system); }
+[data-role="tools"] { --c: var(--ctx-tools); }
+[data-role="user"] { --c: var(--ctx-user); }
+[data-role="assistant"] { --c: var(--ctx-assistant); }
+[data-role="tool"] { --c: var(--ctx-tool); }
+[data-role="summary"] { --c: var(--ctx-summary); }
+[data-role="docs"] { --c: var(--ctx-tool); }
+
+.seq-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em 1.2em;
+  margin: 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+  font: 0.75em "Roboto Mono", monospace;
+  color: var(--text-muted);
+}
+
+.seq-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+}
+
+.seq-legend i {
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 2px;
+  background: var(--c, var(--border-strong));
+}
+
+.seq-legend b {
+  font-weight: 500;
+  color: var(--heading);
+}
+
+.seq .diagram-caption {
+  font-size: 0.85em;
+}
+
+.seq-controls {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.seq-btn {
+  font-size: 0.83em;
+}
+
+.seq-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.seq-play {
+  min-width: 5.5em;
+  justify-content: center;
+}
+
+.seq-count {
+  min-width: 3.5em;
+  font: 0.75em "Roboto Mono", monospace;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.seq:fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  margin: 0;
+  padding: 4vh 6vw;
+  font-size: clamp(16px, min(1.5vw, 2.2vh), 28px);
+  overflow: hidden;
+}
+
+/* Un long diagramme défile dans sa vue, la barre de contexte et les contrôles restent visibles */
+.seq:fullscreen > * {
+  flex-shrink: 0;
+}
+
+.seq:fullscreen > .seq-view {
+  flex-shrink: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.seq:fullscreen .seq-actors {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding-bottom: 0.3em;
+  background: var(--bg-canvas);
+}
+
+/* Version texte sous le diagramme animé */
+.seq-text {
+  margin-top: 12px;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.seq-text summary {
+  width: fit-content;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.seq-text summary:hover {
+  color: var(--heading);
+}
+
+.seq-text summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.seq-text p {
+  margin: 10px 0 6px;
+}
+
+.seq-text ol {
+  margin: 8px 0 0;
+}
+
+.seq-text li {
+  margin-bottom: 8px;
+}
+
+.seq-text-meta,
+.seq-text-note {
+  display: block;
+  color: var(--text-muted);
+}
+
+.seq-text-meta {
+  font: 0.75rem/1.6 "Roboto Mono", monospace;
+}
+
+.seq:fullscreen .seq-text {
+  display: none;
+}
+
+/* Bouton Copier des blocs de code (src/scripts/reading.js) */
+.code-block {
+  position: relative;
+}
+
+/* La première ligne ne passe pas sous le bouton Copier */
+.code-block pre.astro-code {
+  padding-right: 5rem;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  font: 500 0.75rem "Inclusive Sans", sans-serif;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.copy-btn:hover,
+.copy-btn:focus-visible {
+  opacity: 1;
+  color: var(--heading);
+  border-color: var(--node-stroke);
+}
+
+.copy-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media print {
+  .copy-btn,
+  .seq-text {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .seq {
+    padding: 16px 10px 12px;
+    font-size: 0.8125rem;
+  }
+  /* Tailles fixes : les tailles en em du diagramme tombaient sous 10px sur téléphone */
+  .seq .seq-btn,
+  .seq .seq-count,
+  .seq .diagram-caption {
+    font-size: 0.8125rem;
+  }
+  .seq .seq-label,
+  .seq .seq-loop-label,
+  .seq-ctx-head,
+  .seq-legend {
+    font-size: 0.75rem;
+  }
+  .seq .diagram-bar {
+    flex-wrap: wrap;
+  }
+  /* Cibles tactiles de 44px */
+  .seq .seq-btn {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seq *,
+  .seq *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* À l'impression, toutes les étapes */
+@media print {
+  .seq .seq-row[hidden] {
+    display: grid !important;
+  }
+  .seq .seq-loop[hidden] {
+    display: block !important;
+  }
+  .seq-controls {
+    display: none;
+  }
+}
