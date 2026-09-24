@@ -72,7 +72,8 @@ function open() {
 }
 
 if (dialog) {
-  document.querySelector(".search-open")?.addEventListener("click", open);
+  // Bouton de la barre du haut, et grand champ sur l'accueil
+  document.querySelectorAll(".search-open").forEach((b) => b.addEventListener("click", open));
   document.addEventListener("keydown", (e) => {
     // « / » seul : seulement quand le focus est sur la page, pas sur un lien ou un champ (WCAG 2.1.4)
     const onPage = [document.body, document.getElementById("contenu"), null].includes(document.activeElement);

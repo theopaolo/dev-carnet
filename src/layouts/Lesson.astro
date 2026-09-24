@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCourses } from "../lib/courses";
 import "../styles/theme.css";
 
 interface Props {
@@ -11,16 +11,11 @@ interface Props {
 const { title, id = "", headings = [] } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const toc = headings.filter((h) => h.depth <= 2);
+// L'accueil est lui-même la liste des cours : pas de barre latérale
+const home = !id;
 
-// Barre latérale : un groupe par cours (index.md), ses chapitres dessous,
-// replié sauf pour le cours en cours de lecture
-const all = (await getCollection("cours", (c) => !c.data.hidden)).sort((a, b) => a.data.order - b.data.order);
-const groups = all
-  .filter((c) => !c.id.includes("/"))
-  .map((c) => ({
-    course: c,
-    chapters: all.filter((x) => x.id.startsWith(c.id + "/")).sort((a, b) => a.data.order - b.data.order),
-  }));
+// Barre latérale : les cours, repliés sauf celui en cours de lecture, puis les fiches d'une page
+const { all, courses, sheets } = await getCourses();
 const href = (i: string) => `${base}/${i}/`;
 // Cours de la page affichée, rappelé dans la barre du haut
 const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
@@ -64,7 +59,7 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
         <button type="button" class="theme-toggle search-open" aria-keyshortcuts="Control+K Meta+K /">
           Rechercher <kbd>/</kbd>
         </button>
-        <a class="theme-toggle chapters-link" href="#chapitres">Chapitres</a>
+        {!home && <a class="theme-toggle chapters-link" href="#chapitres">Chapitres</a>}
         <div class="size-btns" role="group" aria-label="Taille du texte">
           <button type="button" class="theme-toggle" data-size-step="-1" aria-label="A− réduire le texte">A−</button>
           <button type="button" class="theme-toggle" data-size-step="1" aria-label="A+ agrandir le texte">A+</button>
@@ -94,16 +89,15 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
       </div>
     </dialog>
 
-    <div class="shell">
-      <nav class="sidebar" id="chapitres" aria-label="Cours">
-        {groups.map(({ course, chapters }) =>
-          chapters.length === 0 ? (
-            <a class="nav-title" href={href(course.id)} aria-current={course.id === id ? "page" : undefined}>
-              {course.data.title}
-            </a>
-          ) : (
+    <div class:list={["shell", home && "shell-home"]}>
+      {!home && (
+        <nav class="sidebar" id="chapitres" aria-label="Cours">
+          <p class="nav-section">Cours</p>
+          {courses.map(({ course, chapters }) => (
             <details class="nav-group" open={id === course.id || id.startsWith(course.id + "/")}>
-              <summary class="nav-title">{course.data.title}</summary>
+              <summary class="nav-title">
+                <span>{course.data.title}</span>
+              </summary>
               <ul>
                 <li>
                   <a href={href(course.id)} aria-current={course.id === id ? "page" : undefined}>Présentation</a>
@@ -115,14 +109,44 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
                 ))}
               </ul>
             </details>
-          ),
-        )}
-      </nav>
+          ))}
+          <p class="nav-section">Fiches</p>
+          <ul>
+            {sheets.map(({ course }) => (
+              <li>
+                <a class="nav-title" href={href(course.id)} aria-current={course.id === id ? "page" : undefined}>
+                  {course.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
-      <main class:list={["content", id === "rgpd/01-reperes-ia-act-rgpd" && "legal-guide"]} id="contenu" tabindex="-1">
+      <div class="page">
+        <main
+          class:list={["content", id === "rgpd/01-reperes-ia-act-rgpd" && "legal-guide"]}
+          id="contenu"
+          tabindex="-1"
+        >
+          {toc.length > 0 && (
+            <details class="toc-inline">
+              <summary class="theme-toggle">Sur cette page</summary>
+              <ul>
+                {toc.map((h) => (
+                  <li class={`depth-${h.depth}`}>
+                    <a href={`#${h.slug}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+          <slot />
+        </main>
+
         {toc.length > 0 && (
-          <details class="toc-inline">
-            <summary class="theme-toggle">Sur cette page</summary>
+          <aside class="toc" aria-label="Sommaire">
+            <p class="nav-section">Sommaire</p>
             <ul>
               {toc.map((h) => (
                 <li class={`depth-${h.depth}`}>
@@ -130,23 +154,9 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
                 </li>
               ))}
             </ul>
-          </details>
+          </aside>
         )}
-        <slot />
-      </main>
-
-      {toc.length > 0 && (
-        <aside class="toc" aria-label="Sommaire">
-          <p class="nav-title">Sommaire</p>
-          <ul>
-            {toc.map((h) => (
-              <li class={`depth-${h.depth}`}>
-                <a href={`#${h.slug}`}>{h.text}</a>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )}
+      </div>
     </div>
 
     <script>
@@ -191,7 +201,15 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
           chapters.append(nav);
         }
         chapters.showModal();
+        chapters.querySelector('[aria-current="page"]')?.scrollIntoView({ block: "center" });
       });
+
+      // Barre latérale : l'entrée de la page affichée est visible sans avoir à la chercher
+      const nav = document.querySelector(".shell > .sidebar");
+      const here = nav?.querySelector('[aria-current="page"]');
+      if (here && here.offsetTop + here.offsetHeight > nav.clientHeight) {
+        nav.scrollTop = here.offsetTop - nav.clientHeight / 3;
+      }
       chapters.querySelector("[data-close]").addEventListener("click", () => chapters.close());
       // Clic sur le fond, hors du contenu du dialog
       chapters.addEventListener("click", (e) => {
@@ -433,7 +451,11 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
   }
 
   dialog.chapters .sidebar {
-    padding: 12px;
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: 16px 12px 24px;
+    background: none;
     border: none;
     font-size: 1rem;
   }
@@ -567,13 +589,31 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     display: block;
   }
 
+  /* Coque : la barre latérale occupe le bord gauche sur toute la hauteur,
+     le contenu et le sommaire sont centrés dans le reste */
   .shell {
     display: grid;
+    grid-template-columns: 18rem minmax(0, 1fr);
+  }
+
+  .page {
+    display: grid;
     /* 48rem : environ 80 caractères par ligne, quelle que soit la taille du texte */
-    grid-template-columns: 14rem minmax(0, 48rem) 15rem;
+    grid-template-columns: minmax(0, 48rem) 15rem;
     justify-content: center;
     gap: 48px;
-    padding: 40px 24px 96px;
+    min-width: 0;
+    padding: 40px 32px 96px;
+  }
+
+  /* Accueil : une colonne pleine largeur, la page gère ses marges */
+  .shell-home {
+    display: block;
+  }
+
+  .shell-home .page {
+    display: block;
+    padding: 0 0 96px;
   }
 
   .content {
@@ -582,66 +622,35 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
 
   .sidebar,
   .toc {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  /* Panneau teinté comme le canevas des diagrammes, défile seul sous la barre du haut */
+  .sidebar {
+    position: sticky;
+    top: 3.25rem;
+    align-self: start;
+    height: calc(100vh - 3.25rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 28px 14px 64px;
+    background: var(--bg-canvas);
+    border-right: 1px solid var(--border);
+    /* Ouverture animée des groupes (::details-content, navigateurs récents) */
+    interpolate-size: allow-keywords;
+  }
+
+  .toc {
     position: sticky;
     top: 4.75rem;
     align-self: start;
     max-height: calc(100vh - 6.25rem);
     overflow-y: auto;
-    font-size: 0.875rem;
-  }
-
-  .nav-title {
-    display: block;
-    margin: 0 0 6px;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--heading);
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .nav-title:hover {
-    background: var(--bg-canvas);
-  }
-
-  summary.nav-title {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  summary.nav-title::-webkit-details-marker {
-    display: none;
-  }
-
-  /* Chevron qui pivote à l'ouverture */
-  summary.nav-title::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-right: 1.5px solid var(--text-muted);
-    border-bottom: 1.5px solid var(--text-muted);
-    transform: rotate(-45deg);
-    transition: transform 0.15s ease;
-    flex-shrink: 0;
-  }
-
-  details[open] > summary.nav-title::before {
-    transform: rotate(45deg);
-  }
-
-  .nav-group + .nav-group,
-  .nav-title + .nav-group,
-  .nav-group + .nav-title {
-    margin-top: 12px;
-  }
-
-  .nav-group ul {
+    padding-left: 12px;
     border-left: 1px solid var(--border);
-    margin-left: 4px;
   }
 
   .sidebar ul,
@@ -656,19 +665,97 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     margin: 0;
   }
 
-  .sidebar a,
+  /* Étiquettes de rubrique : Cours, Fiches, Sommaire */
+  .nav-section {
+    margin: 0 0 6px;
+    padding: 0 10px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .sidebar > * + .nav-section {
+    margin-top: 28px;
+  }
+
+  /* Titre de cours ou de fiche : le chevron à droite, le texte aligné pour tous */
+  .nav-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--heading);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  summary.nav-title {
+    list-style: none;
+  }
+
+  summary.nav-title::-webkit-details-marker {
+    display: none;
+  }
+
+  summary.nav-title::after {
+    content: "";
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-right: 3px;
+    border-right: 1.5px solid var(--text-muted);
+    border-bottom: 1.5px solid var(--text-muted);
+    transform: rotate(-45deg);
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  details[open] > summary.nav-title::after {
+    transform: rotate(45deg);
+  }
+
+  .nav-group + .nav-group {
+    margin-top: 2px;
+  }
+
+  .nav-group[open] {
+    margin-bottom: 10px;
+  }
+
+  .nav-group::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      block-size 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      content-visibility 0.25s allow-discrete;
+  }
+
+  .nav-group[open]::details-content {
+    block-size: auto;
+  }
+
+  /* Chapitres : un filet relie les pages d'un même cours */
+  .nav-group ul {
+    margin: 2px 0 0 10px;
+    padding: 4px 0 4px 8px;
+    border-left: 1px solid var(--border-strong);
+  }
+
+  .sidebar ul a,
   .toc a {
     display: block;
     padding: 5px 10px;
     border-radius: 6px;
     color: var(--text-muted);
     text-decoration: none;
-    line-height: 1.4;
   }
 
-  /* Cours sans chapitres : même couleur que les autres titres, texte aligné après les chevrons */
-  .sidebar a.nav-title {
-    padding-left: 24px;
+  .sidebar ul a.nav-title {
+    display: flex;
     color: var(--heading);
   }
 
@@ -676,29 +763,41 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     padding-left: 22px;
   }
 
-  .sidebar a:hover,
+  /* Survol : un cran plus foncé que le panneau, dans les deux thèmes */
+  .nav-title:hover,
+  .sidebar ul a:hover {
+    color: var(--heading);
+    background: color-mix(in srgb, var(--border) 70%, transparent);
+  }
+
   .toc a:hover {
     color: var(--heading);
     background: var(--bg-canvas);
   }
 
   /* Position courante : couleurs de l'acteur actif des diagrammes, lisibles au projecteur */
-  .sidebar a[aria-current="page"],
+  .sidebar ul a[aria-current="page"],
   .toc a.active {
     color: var(--accent-text);
     background: var(--accent-fill);
     box-shadow: inset 0 0 0 1px var(--accent-stroke);
+  }
+
+  .nav-group a[aria-current="page"],
+  .toc a.active {
     font-weight: 500;
   }
 
-  .toc {
-    border-left: 1px solid var(--border);
-    padding-left: 12px;
+  @media (prefers-reduced-motion: reduce) {
+    summary.nav-title::after,
+    .nav-group::details-content {
+      transition: none;
+    }
   }
 
   @media (max-width: 1180px) {
-    .shell {
-      grid-template-columns: 14rem minmax(0, 1fr);
+    .page {
+      grid-template-columns: minmax(0, 48rem);
     }
     .toc {
       display: none;
@@ -711,9 +810,9 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
   /* Texte agrandi (A+ 2 et 3) : les colonnes en px ne suivent pas la taille du texte,
      le sommaire disparaît pour laisser au moins 40rem au contenu */
   @media (min-width: 761px) {
-    html[data-size="2"] .shell,
-    html[data-size="3"] .shell {
-      grid-template-columns: 14rem minmax(0, 48rem);
+    html[data-size="2"] .page,
+    html[data-size="3"] .page {
+      grid-template-columns: minmax(0, 48rem);
     }
     html[data-size="2"] .toc,
     html[data-size="3"] .toc {
@@ -732,9 +831,12 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
       display: none;
     }
     html[data-present] .shell {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    html[data-present] .page {
       grid-template-columns: minmax(0, 72rem);
     }
-    html[data-present] .content > :not(.diagram) {
+    html[data-present] .shell:not(.shell-home) .content > :not(.diagram) {
       max-width: 48rem;
       margin-inline: auto;
     }
@@ -748,14 +850,19 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
   @media (max-width: 760px) {
     .shell {
       grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
+    }
+    .page {
+      padding: 32px 20px 48px;
     }
     /* Le contenu d'abord, les chapitres en bas de page (lien Chapitres dans la barre) */
     .sidebar {
       order: 2;
       position: static;
-      max-height: none;
-      padding-top: 24px;
+      height: auto;
+      overflow: visible;
+      padding: 24px 10px 96px;
+      background: none;
+      border-right: 0;
       border-top: 1px solid var(--border);
     }
     .topbar {

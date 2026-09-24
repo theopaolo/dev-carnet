@@ -1,83 +1,236 @@
 ---
-import { getCollection } from "astro:content";
 import Lesson from "../layouts/Lesson.astro";
+import { getCourses } from "../lib/courses";
 
-const all = await getCollection("cours", (c) => !c.data.hidden);
-const cours = all.filter((c) => !c.id.includes("/")).sort((a, b) => a.data.order - b.data.order);
+const { courses, sheets } = await getCourses();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (id: string) => `${base}/${id}/`;
 
-// Présentation d'un cours : premier paragraphe de texte de son index.md, sans balisage Markdown
+// Présentation d'un cours : premier paragraphe de texte de son index.md, sans balisage Markdown.
+// Un paragraphe qui finit par « : » annonce une liste et ne se lit pas seul
 const intro = (body = "") => {
   const para = body
     .split(/\n\s*\n/)
     .map((b) => b.trim())
-    .find((b) => b && !/^(#|>|-|\*|\d+\.|```|\||!\[|<)/.test(b));
+    .find((b) => b && !/^(#|>|-|\*|\d+\.|```|\||!\[|<)/.test(b) && !b.endsWith(":"));
   return (para ?? "")
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
     .replace(/[*`]/g, "")
     .replace(/\s+/g, " ");
 };
-const chapters = (id: string) => all.filter((x) => x.id.startsWith(id + "/")).length;
 ---
 
 <Lesson title="Carnet">
-  <h1>Carnet</h1>
-  <p class="lede">Des cours de programmation, à relire après la séance ou à projeter en classe.</p>
-  <ul class="courses">
-    {cours.map((c) => {
-      const n = chapters(c.id);
-      return (
-        <li>
-          <h2>
-            <a href={`${base}/${c.id}/`}>{c.data.title}</a>
-          </h2>
-          <p>{intro(c.body)}</p>
-          <span class="count">{n > 0 ? `${n} chapitres` : "Une page"}</span>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Carnet</h1>
+      <p class="lede">Des cours de programmation, à relire après la séance ou à projeter en classe.</p>
+      <button type="button" class="search-open hero-search" aria-keyshortcuts="Control+K Meta+K /">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        Rechercher dans les cours
+        <kbd>/</kbd>
+      </button>
+    </div>
+  </header>
+
+  <section class="wrap index" aria-labelledby="cours">
+    <h2 id="cours">Cours</h2>
+    <ul class="courses">
+      {courses.map(({ course, chapters }) => (
+        <li class="course">
+          <div class="course-head">
+            <h3>
+              <a href={href(course.id)}>{course.data.title}</a>
+            </h3>
+            <p>{intro(course.body)}</p>
+            <span class="count">
+              {chapters.length} {chapters.length > 1 ? "chapitres" : "chapitre"}
+            </span>
+          </div>
+          <ol class="chapter-list" aria-label={`Chapitres : ${course.data.title}`}>
+            {chapters.map((c, i) => (
+              <li>
+                <a href={href(c.id)}>
+                  <span class="n" aria-hidden="true">{i + 1}</span>
+                  <span class="t">{c.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
         </li>
-      );
-    })}
-  </ul>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap index" aria-labelledby="fiches">
+    <h2 id="fiches">Fiches</h2>
+    <ul class="sheets">
+      {sheets.map(({ course }) => {
+        const text = intro(course.body);
+        return (
+          <li>
+            <h3>
+              <a href={href(course.id)}>{course.data.title}</a>
+            </h3>
+            {text && <p>{text}</p>}
+          </li>
+        );
+      })}
+    </ul>
+  </section>
 </Lesson>
 
 <style>
+  .wrap {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 32px;
+  }
+
+  /* En-tête posé sur le canevas pointillé des diagrammes */
+  .hero {
+    padding: 72px 0 64px;
+    background-color: var(--bg-canvas);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 12px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero h1 {
+    margin: 0 0 12px;
+    padding: 0;
+    border: 0;
+    font-size: clamp(2.75rem, 2rem + 3vw, 4rem);
+    line-height: 1.05;
+  }
+
   .lede {
+    max-width: 34rem;
+    margin: 0 0 32px;
+    font-size: 1.25rem;
+    line-height: 1.5;
     color: var(--text-muted);
   }
 
-  .courses {
-    list-style: none;
-    margin: 32px 0 0;
-    padding: 0;
+  /* Grand champ de recherche : ouvre la même fenêtre que le bouton de la barre du haut */
+  .hero-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: min(100%, 34rem);
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    text-align: left;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    box-shadow: 0 1px 0 var(--pill-shadow);
+    cursor: text;
+    transition: border-color 0.15s ease, color 0.15s ease;
   }
 
-  .courses li {
-    margin: 0;
-    padding: 20px 0 22px;
-    border-top: 1px solid var(--border);
+  .hero-search:hover {
+    color: var(--heading);
+    border-color: var(--node-stroke);
   }
 
-  .courses h2 {
-    margin: 0 0 6px;
-    font-size: 1.25rem;
-  }
-
-  .courses h2 a {
-    text-decoration: none;
-  }
-
-  .courses h2 a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .courses h2 a:focus-visible {
+  .hero-search:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
 
-  .courses p {
-    margin: 0 0 10px;
+  .hero-search svg {
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .hero-search kbd {
+    margin-left: auto;
+  }
+
+  .index {
+    padding-top: 56px;
+  }
+
+  .index h2 {
+    margin: 0 0 16px;
+    font-size: 1.5rem;
+  }
+
+  .courses,
+  .sheets,
+  .chapter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .courses > li,
+  .sheets > li,
+  .chapter-list > li {
+    margin: 0;
+  }
+
+  /* Un cours par ligne : présentation à gauche, sommaire des chapitres à droite */
+  .course {
+    display: grid;
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    gap: 20px 64px;
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--border);
+  }
+
+  .course h3,
+  .sheets h3 {
+    margin: 0 0 8px;
+    line-height: 1.25;
+  }
+
+  .course h3 {
+    font-size: 1.375rem;
+  }
+
+  .sheets h3 {
+    font-size: 1.125rem;
+  }
+
+  .course h3 a,
+  .sheets h3 a {
+    text-decoration: none;
+  }
+
+  .course h3 a:hover,
+  .sheets h3 a:hover,
+  .chapter-list a:hover .t {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .course h3 a:focus-visible,
+  .sheets h3 a:focus-visible,
+  .chapter-list a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .course-head p,
+  .sheets p {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
     color: var(--text-muted);
+  }
+
+  .course-head p {
+    margin-bottom: 16px;
   }
 
   /* Même étiquette que « Fig. 1 » sous les diagrammes */
@@ -89,5 +242,93 @@ const chapters = (id: string) => all.filter((x) => x.id.startsWith(id + "/")).le
     border: 1px solid var(--pill-border);
     border-radius: 4px;
     padding: 1px 6px;
+  }
+
+  /* Chapitres en deux colonnes quand la place le permet, numérotés comme dans « Chapitre 3 sur 13 » */
+  .chapter-list {
+    columns: 2 15rem;
+    column-gap: 40px;
+    padding-top: 4px;
+    font-size: 0.9375rem;
+  }
+
+  .chapter-list li {
+    break-inside: avoid;
+  }
+
+  .chapter-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 5px 0;
+    line-height: 1.4;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .chapter-list .n {
+    flex: none;
+    min-width: 1.25rem;
+    font: 0.8125rem "Roboto Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--text-muted);
+  }
+
+  .chapter-list a:hover {
+    color: var(--heading);
+  }
+
+  .chapter-list a:hover .n {
+    color: var(--accent);
+  }
+
+  /* Fiches d'une page : deux par ligne */
+  .sheets {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 64px;
+  }
+
+  .sheets > li {
+    padding: 24px 0 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 900px) {
+    .course {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .wrap {
+      padding-inline: 20px;
+    }
+    .hero {
+      padding: 44px 0 40px;
+    }
+    .lede {
+      font-size: 1.125rem;
+    }
+    .index {
+      padding-top: 40px;
+    }
+    .course {
+      gap: 16px;
+      padding: 24px 0 28px;
+    }
+    .chapter-list a {
+      padding: 7px 0;
+    }
+    .sheets {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-search {
+      transition: none;
+    }
   }
 </style>
