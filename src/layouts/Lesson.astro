@@ -78,7 +78,12 @@ const navLabel = group ? "Chapitres" : "Fiches";
       </div>
     </header>
 
-    <dialog class="search" aria-label="Rechercher dans les cours" data-index={`${base}/search.json`}>
+    <dialog
+      class="search"
+      aria-label="Rechercher dans les cours"
+      data-index={`${base}/search.json`}
+      data-course={course && href(course.id)}
+    >
       <input type="search" placeholder="Rechercher dans les cours" aria-label="Rechercher" autocomplete="off" />
       <p class="search-status" role="status"></p>
       <ul class="search-results"></ul>

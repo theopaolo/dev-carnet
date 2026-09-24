@@ -6,6 +6,8 @@ const dialog = document.querySelector("dialog.search");
 const input = dialog?.querySelector("input");
 const list = dialog?.querySelector(".search-results");
 const status = dialog?.querySelector(".search-status");
+// Adresse du cours de la page affichée (« /docker/ »), absente sur l'accueil
+const course = dialog?.dataset.course;
 let index = null;
 
 // Sans accents ni majuscules. Même longueur que le texte d'origine (NFC),
@@ -51,7 +53,14 @@ function run() {
   }
   const hits = index
     .filter((e) => words.every((w) => e.n.includes(w) || e.t.includes(w)))
-    .map((e) => ({ e, score: words.reduce((s, w) => s + (e.n.includes(w) ? 10 : 0) + e.t.split(w).length - 1, 0) }))
+    .map((e) => ({
+      e,
+      // Le cours ouvert compte comme un mot trouvé dans le titre : ses pages passent devant,
+      // un titre qui correspond mieux ailleurs reste dans la liste
+      score:
+        (course && e.url.startsWith(course) ? 10 : 0) +
+        words.reduce((s, w) => s + (e.n.includes(w) ? 10 : 0) + e.t.split(w).length - 1, 0),
+    }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 12);
   status.textContent = hits.length ? `${hits.length === 12 ? "12 premiers" : hits.length} résultats` : "Aucun résultat";
