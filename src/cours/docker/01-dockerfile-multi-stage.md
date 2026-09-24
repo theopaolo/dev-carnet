@@ -5,8 +5,9 @@ order: 1
 
 # Dockerfile multi-stage
 
-Un Dockerfile contient différentes étapes selon les besoins et environnements de développement.  
-Exemple pour une FastAPI python
+Un Dockerfile multi-stage déclare plusieurs étapes (stages) dans un seul fichier. Chaque environnement construit l’étape dont il a besoin.
+
+## Exemple Python (FastAPI)
 
 ```dockerfile
 # ---------- Base commune ----------
@@ -70,9 +71,9 @@ flowchart TD
     Production --> Prod["Production"]
 ```
 
-`builder` n'est pas une image à déployer mais une étape intermédiaire utilisée pour fabriquer les dépendances.
+`builder` ne se déploie pas. C’est une étape intermédiaire qui compile les dépendances en wheels.
 
-En local, Compose peut demander explicitement :
+En local, Compose demande un stage précis avec `target` :
 
 ```
 services:
@@ -82,7 +83,9 @@ services:
       target: dev
 ```
 
-Et docker construit jusqu’au stage `dev` ce qui donne `Uvicorn + --reload`
+Docker construit alors jusqu’au stage `dev`, qui lance Uvicorn avec `--reload`.
+
+## Exemple Node : le Dockerfile en un seul stage
 
 ```dockerfile
 FROM node:24
@@ -94,7 +97,7 @@ RUN npm run build
 CMD ["npm", "start"]
 ```
 
-Cela fonctionne mais l’image finale contient potentiellement beaucoup de choses inutiles en production :
+Ce Dockerfile fonctionne, mais l’image finale embarque des outils inutiles en production :
 
 - TypeScript ;
 - Vite ;
@@ -104,7 +107,7 @@ Cela fonctionne mais l’image finale contient potentiellement beaucoup de chose
 - outils de build ;
 - `devDependencies`.
 
-Le multi-stage permet de créer plusieurs étapes spécialisées.
+Le multi-stage découpe ce fichier en étapes spécialisées.
 
 ## Stage `base`
 
@@ -114,9 +117,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 ```
 
-`base` contient les éléments communs.
-
-Base : Node.js, WORKDIR : package.json
+`base` contient ce que les autres stages partagent : Node.js, le dossier de travail et les fichiers `package.json`.
 
 ## Stage `dev`
 
@@ -136,9 +137,9 @@ Cette image peut contenir :
 - code source ;
 - outils de debug.
 
-Compose peut explicitement sélectionner ce stage :
+Compose sélectionne ce stage avec `target` :
 
-```dockerfile
+```yaml
 build:
   context: .
   target: dev
@@ -153,7 +154,7 @@ COPY . .
 RUN npm run build
 ```
 
-Son seul rôle est de construire l’application : il compile les sources TypeScript dans `dist/`.
+Ce stage compile les sources TypeScript dans `dist/`. Il ne fait rien d’autre.
 
 ## Stage `production`
 
@@ -166,13 +167,13 @@ COPY --from=build /app/dist ./dist
 CMD ["node", "dist/server.js"]
 ```
 
-La ligne importante est :
+La ligne qui compte :
 
 ```dockerfile
 COPY --from=build /app/dist ./dist
 ```
 
-Elle récupère uniquement le résultat produit par le stage `build`.
+Elle copie seulement le résultat du stage `build`.
 
 ```mermaid
 flowchart TD
@@ -197,7 +198,7 @@ L’image de production n’a donc pas besoin de contenir :
 - les outils de build ;
 - les devDependencies.
 
-Cela permet notamment :
+Résultat :
 
 - des images plus petites ;
 - moins de surface d’attaque ;

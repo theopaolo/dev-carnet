@@ -58,7 +58,7 @@ Un [plugin MkDocs](https://www.mkdocs.org/dev-guide/plugins/) complet devient ut
 
 ## Conférence Living Documentation
 
-La [vidéo indiquée par Samuel Rozé](https://www.youtube.com/watch?v=hjjuhiCwgf0) correspond au sujet présenté au Forum PHP 2020. Le [diaporama retrouvé](https://www.slideshare.net/slideshow/living-documentation/238968322) et les captures fournies ont servi à examiner les exemples. La vidéo complète n’a pas été visionnée pour cette préparation.
+La [vidéo indiquée par Samuel Rozé](https://www.youtube.com/watch?v=hjjuhiCwgf0) correspond au sujet présenté au Forum PHP 2020. Le [diaporama](https://www.slideshare.net/slideshow/living-documentation/238968322) et les captures fournies montrent les exemples cités ici.
 
 Trois idées sont mises en pratique dans le kit : relier des scénarios au comportement, conserver les décisions dans le dépôt et publier une documentation que d’autres métiers peuvent consulter. La capture suivante montre le résultat présenté dans la conférence, pas une interface fournie par ce kit.
 
@@ -90,4 +90,4 @@ Un plan de réalisation et un ADR peuvent se compléter. Le premier organise des
 | 8. Vérification | [Artefacts GitHub Actions](https://docs.github.com/en/actions/tutorials/store-and-share-data) et [configuration MkDocs](https://www.mkdocs.org/user-guide/configuration/) |
 | 9. Documentation vivante | [Livre de Cyrille Martraire](https://www.informit.com/store/living-documentation-continuous-knowledge-sharing-by-9780134689326), [Example Mapping](https://cucumber.io/docs/bdd/example-mapping/), [Gherkin](https://cucumber.io/docs/gherkin/reference/) |
 
-La lecture du dictionnaire de Bibi d’objets a servi à construire l’exercice sur les emprunts successifs. Les diagrammes de cette ressource n’ont pas fait l’objet d’une validation détaillée. Les règles complémentaires proposées dans le chapitre 6 restent à confirmer avec le métier.
+L’exercice sur les emprunts successifs part du dictionnaire de Bibi d’objets. Les règles complémentaires proposées au chapitre 6 restent à confirmer avec le métier.

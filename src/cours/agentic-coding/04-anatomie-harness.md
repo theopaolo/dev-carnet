@@ -92,7 +92,7 @@ objectif
  → réponse finale
 ```
 
-Relire une trajectoire montre pourquoi un agent échoue : une information arrivée trop tard, un outil manquant, une règle inutile, une action répétée, une tâche déclarée terminée sans test. Une grande partie du travail sur les agents consiste moins à rendre le modèle intelligent qu’à construire correctement le monde dans lequel il travaille.
+Relire une trajectoire montre pourquoi un agent échoue : une information arrivée trop tard, un outil manquant, une règle inutile, une action répétée, une tâche déclarée terminée sans test.
 
 [OpenTelemetry](https://opentelemetry.io/) sert de format commun pour les traces et les métriques. Il ne remplace pas les événements métier nécessaires pour comprendre une décision.
 
@@ -121,7 +121,7 @@ Ces trois niveaux se complètent. Ils ne forment pas une chronologie où l’un 
 
 ## Commencer petit
 
-Le monde agentique pousse à dessiner un routeur, un planificateur, un critique, un superviseur et un agent qui supervise les agents avant d’avoir lancé une seule tâche. Commencez plutôt par un modèle, quelques outils et une boucle. Puis ajoutez une couche en réponse à une panne observée :
+La tentation est de dessiner un routeur, un planificateur, un critique, un superviseur et un agent qui supervise les agents avant d’avoir lancé une seule tâche. Commencez plutôt par un modèle, quelques outils et une boucle. Puis ajoutez une couche en réponse à une panne observée :
 
 | Problème observé | Réponse |
 | --- | --- |
@@ -132,7 +132,7 @@ Le monde agentique pousse à dessiner un routeur, un planificateur, un critique,
 | Une opération est dangereuse | Permission ou isolation |
 | Les sessions deviennent longues | Mémoire externe |
 
-Les modèles progressent plus vite que l’orchestration. En 2024, un agent pouvait avoir besoin d’une machine à états détaillée. Les modèles de 2026 planifient seuls une bonne partie du travail. Évitez de coder dans le harness une intelligence que le modèle fournit déjà. Le harness construit la route : bons outils, bon contexte, bon retour d’information, bonnes permissions, critère de réussite. Le modèle conduit.
+Les modèles progressent plus vite que l’orchestration. En 2024, un agent pouvait avoir besoin d’une machine à états détaillée. Les modèles de 2026 planifient seuls une bonne partie du travail. Évitez de coder dans le harness une intelligence que le modèle fournit déjà. Le harness fournit les outils, le contexte, le retour d’information, les permissions et le critère de réussite. Le modèle choisit les actions.
 
 ## Sources
 

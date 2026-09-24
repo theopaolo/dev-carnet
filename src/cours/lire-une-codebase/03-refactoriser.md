@@ -7,7 +7,7 @@ order: 3
 
 ## Quand refactoriser
 
-_Traduction de :_ [_https://refactoring.guru/refactoring/when_](https://refactoring.guru/refactoring/when)
+_Traduit et adapté de [Refactoring.Guru](https://refactoring.guru/refactoring/when)._
 
 **La règle de trois**
 
@@ -17,15 +17,15 @@ _Traduction de :_ [_https://refactoring.guru/refactoring/when_](https://refactor
 
 ### Quand tu ajoutes une fonctionnalité
 
-Le refactoring t’aide à comprendre le code des autres. Si tu dois travailler avec du code sale écrit par quelqu’un d’autre, essaie d’abord de le refactoriser. Un code propre est beaucoup plus facile à comprendre. Tu l’améliores non seulement pour toi, mais aussi pour celles et ceux qui l’utiliseront après toi.
+Le refactoring t’aide à comprendre le code des autres. Si tu dois travailler avec du code sale écrit par quelqu’un d’autre, essaie d’abord de le refactoriser. Un code propre se comprend plus vite. Tu l’améliores pour toi et pour les personnes qui l’utiliseront après toi.
 
-Le refactoring facilite l’ajout de nouvelles fonctionnalités. Il est beaucoup plus simple de faire évoluer un code propre.
+Le refactoring facilite aussi l’ajout de nouvelles fonctionnalités.
 
 ### Quand tu corriges un bug
 
 Les bugs dans le code se comportent comme les insectes dans la vraie vie : ils vivent dans les endroits les plus sombres et les plus sales du code. Nettoie ton code, et les erreurs finiront presque par se révéler d’elles-mêmes.
 
-Les managers apprécient le refactoring proactif, parce qu’il évite d’avoir à prévoir des tâches de refactoring spécifiques plus tard. Des responsables contents font des développeurs contents !
+Les managers apprécient le refactoring proactif, parce qu’il évite d’avoir à prévoir des tâches de refactoring spécifiques plus tard.
 
 ### Pendant une code review
 
@@ -37,8 +37,8 @@ L’idéal est de faire ce type de review en binôme avec l’auteur ou l’autr
 
 ### Conseils génériques
 
-**Ne pas tout réparer,** face à beaucoup de problèmes, en choisir un, fixer, commit, recommencer.
+**Ne pas tout réparer.** Face à beaucoup de problèmes, choisis-en un, corrige-le, commite, recommence.
 
-**Cartographier,** lire le code dans le désordre sans avoir cartographié la structure d'abord génère de la confusion inutile.
+**Cartographier d'abord.** Lire le code dans le désordre, sans avoir vu la structure, t'embrouille pour rien.
 
-**Vérifier ses modification,** avant chaque changement : comment vous saurez que ça fonctionne toujours ? Testez manuellement le cas d'usage avant et après.
+**Vérifier ses modifications.** Avant chaque changement, demande-toi comment tu sauras que ça fonctionne toujours. Teste le cas d'usage à la main avant et après.

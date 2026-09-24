@@ -200,12 +200,12 @@ Cette démarche complète la documentation extraite du code. L’une aide à con
 
 ## Exercice : faire évoluer une règle
 
-1. En groupe, décider si une réservation annulée devrait pouvoir être réactivée.
-2. Écrire un exemple accepté, un exemple refusé et une question non résolue.
-3. Choisir si cette modification nécessite un nouvel ADR. Conserver le précédent comme trace historique.
-4. Ajouter le scénario avant de modifier le code. Constater son échec ou son absence de définition.
-5. Implémenter le comportement convenu dans une copie du kit.
-6. Relancer les tests, générer la documentation et faire expliquer la règle par une personne qui n’a pas écrit le code.
+1. En groupe, décidez si une réservation annulée devrait pouvoir être réactivée.
+2. Écrivez un exemple accepté, un exemple refusé et une question non résolue.
+3. Décidez si cette modification nécessite un nouvel ADR. Conservez le précédent comme trace historique.
+4. Ajoutez le scénario avant de modifier le code. Constatez son échec ou son absence de définition.
+5. Implémentez le comportement convenu dans une copie du kit.
+6. Relancez les tests, générez la documentation et faites expliquer la règle par une personne qui n’a pas écrit le code.
 
 Le corrigé doit suivre la décision prise par le groupe. Pour une première démonstration plus courte, le [guide d’animation](https://github.com/theopaolo/cours-documentation-web/blob/main/guide-animation.md) fournit une régression préparée et réversible sur la capacité.
 

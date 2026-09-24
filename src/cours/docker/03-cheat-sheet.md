@@ -195,10 +195,10 @@ postgresql://user:password@db:5432/app
 
 ## Attention à localhost
 
-Depuis ton ordinateur :
+Depuis votre ordinateur :
 
 ```text
-localhost = ton ordinateur
+localhost = votre ordinateur
 ```
 
 Depuis un conteneur :
@@ -320,7 +320,7 @@ Voir la configuration réellement résolue :
 docker compose config
 ```
 
-Très utile pour vérifier :
+Pour vérifier :
 
 - variables ;
 - anchors ;

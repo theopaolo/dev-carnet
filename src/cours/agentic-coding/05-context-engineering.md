@@ -37,7 +37,7 @@ Le 23 septembre 2026, la commande `/context` d’une session Claude Code utilis�
 
 Près de 30 000 tokens sont occupés avant que l’agent ait lu une ligne du projet. Si les 126 outils MCP avaient été chargés avec leurs schémas complets, ils auraient ajouté 62 500 tokens de plus. Claude Code garde leurs noms et charge un schéma seulement quand le modèle en a besoin. C’est du context engineering appliqué aux outils eux-mêmes.
 
-## Pourquoi c’est important
+## Pourquoi trier le contexte
 
 ### Le contexte se dégrade avant d’être plein
 

@@ -18,5 +18,5 @@ Le framework de **Jorma Sajaniemi** est un vocabulaire qui aide à comprendre le
 | Gatherer | accumule et agrège des données |
 | Container | contient plusieurs éléments |
 | Follower | garde trace d'une valeur précédente |
-| Organizer | variable transformée |
-| Temporary | utilisée brièvement, jetée |
+| Organizer | stocke une version réorganisée des données (triée, inversée) |
+| Temporary | garde une valeur le temps d’une opération |

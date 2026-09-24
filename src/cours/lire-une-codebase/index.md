@@ -5,11 +5,11 @@ order: 4
 
 # Lire, comprendre et améliorer une codebase
 
-On passe plus de temps à lire du code qu'à en écrire. Comprendre l'existant, le sien comme celui des autres, c'est la compétence centrale du métier, et c'est rarement celle qu'on enseigne. Ce cours prend le problème par là.
+On passe plus de temps à lire du code qu'à en écrire. Comprendre l'existant, le tien comme celui des autres, est une compétence centrale du métier, et on l'enseigne rarement. Ce cours part de là.
 
-L'objectif n'est pas d'écrire du code parfait, mais de rendre du code existant plus clair, plus sûr et plus simple à faire évoluer, pour toi comme pour celles et ceux qui passeront après. On part de la lecture (entrer dans un codebase inconnu sans se noyer), on outille la compréhension (nommer, repérer les smells, partager un vocabulaire commun), puis on améliore (refactorer par petits pas, faire et recevoir une review constructive).
+Le but est de rendre du code existant plus clair, plus sûr et plus simple à faire évoluer, pour toi comme pour les personnes qui passeront après. On commence par la lecture : entrer dans une codebase inconnue sans s'y perdre. On outille ensuite la compréhension : nommer, repérer les smells, partager un vocabulaire. Enfin on améliore : refactoriser par petits pas, faire et recevoir une review constructive.
 
-Le fil rouge, c'est la charge cognitive. Lire du code inconnu est difficile parce qu'il faut tenir la syntaxe, l'intention et l'exécution en tête en même temps. Savoir nommer ce qui coince, c'est déjà savoir quoi faire. Et git reste ton filet : tant que tu commits, tu ne peux rien casser définitivement.
+Le fil rouge est la charge cognitive. Lire du code inconnu demande de tenir en tête la syntaxe, l'intention et l'exécution en même temps. Nommer ce qui bloque indique déjà quoi faire. Git te sert de filet : tant que tu commites, tu peux revenir à un état qui marchait.
 
 ## Sections
 

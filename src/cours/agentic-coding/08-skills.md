@@ -112,9 +112,9 @@ Tout le périmètre est lu et chaque problème cite sa ligne.
 
 Le nom ne contient que des lettres minuscules, des chiffres et des tirets. Il correspond exactement au nom du dossier. Selon l’outil, le dossier est `.agents/skills/`, `.claude/skills/` ou `~/.config/<outil>/skills/` pour des skills personnels valables dans tous vos projets.
 
-## La description décide de tout
+## Le modèle choisit sur la description
 
-Le modèle ne lit que la description pour choisir un skill. Elle doit dire ce que fait le skill, quand l’utiliser et quand ne pas l’utiliser.
+Pour choisir un skill, le modèle ne lit que sa description. Elle doit dire ce que fait le skill, quand l’utiliser et quand ne pas l’utiliser.
 
 Une description vague :
 

@@ -126,9 +126,9 @@ Les types du dictionnaire doivent préciser les unités et conventions. Une capa
 
 La ressource [Bibi d’objets](https://docmost.ludique.dev/share/gcbrd7j46z/p/bibi-d-objets-5Sn6BRDnSM) présente notamment les données Adhérent, Objet, Emprunt et Catégorie. Le [mémento Merise](https://memento-dev.fr/docs/merise) permet de revoir le passage du dictionnaire au MCD puis au MLD et au MPD.
 
-À partir de ces données, écrire deux emprunts successifs du même objet par le même adhérent. Un emprunt doit pouvoir être distingué du précédent, par exemple par son identifiant. Une contrainte unique sur le seul couple adhérent-objet empêcherait ces deux occurrences. La règle d’unicité de Réserve ta place ne se transpose donc pas automatiquement.
+À partir de ces données, écris deux emprunts successifs du même objet par le même adhérent. Un emprunt doit pouvoir être distingué du précédent, par exemple par son identifiant. Une contrainte unique sur le seul couple adhérent-objet empêcherait ces deux occurrences. La règle d’unicité de Réserve ta place ne se transpose donc pas automatiquement.
 
-Préciser aussi si « date de retour » est la date prévue ou le retour effectivement constaté. Si les deux sont utiles, les nommer séparément. Demander si un objet peut appartenir à plusieurs catégories avant de choisir la cardinalité. Ces réponses sont des décisions du métier, aucune génération de SQL ne les invente.
+Précise aussi si « date de retour » est la date prévue ou le retour effectivement constaté. Si les deux sont utiles, nomme-les séparément. Demande si un objet peut appartenir à plusieurs catégories avant de choisir la cardinalité. Ces réponses sont des décisions du métier, aucune génération de SQL ne les invente.
 
 Pour reproduire les schémas, utilise les commandes du [kit](/documentation/10-demonstration/). Mocodo génère depuis un modèle textuel. SchemaSpy inspecte une base existante. Leurs entrées et leurs questions sont différentes.
 

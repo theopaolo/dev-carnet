@@ -5,21 +5,21 @@ order: 4
 
 # Préparer et recevoir une review
 
-> La qualité d'une review dépend aussi de comment le changement est présenté. Ça, c'est le travail de l'auteur·rice, avant celui du·de la relecteur·rice.
+> La qualité d'une review dépend aussi de la façon dont le changement est présenté. Ce travail revient à l'auteur·rice, avant le·la relecteur·rice.
 
 ## Côté auteur·rice : rendre sa PR relisible
 
 ### Une PR = une intention
 
-Si tu ne peux pas résumer ta PR en une phrase, c'est qu'elle en fait plusieurs, et il faut la découper. (C'est le même test de la phrase que pour une fonction.)
+Si tu ne peux pas résumer ta PR en une phrase, elle fait plusieurs choses : découpe-la. C'est le même test de la phrase que pour une fonction.
 
-Une PR qui mélange « je corrige un bug », « je renomme trois variables » et « j'ajoute une feature » est impossible à relire proprement : le·la relecteur·rice ne sait plus ce qui est le cœur du changement et ce qui est du bruit. Un diff qu'on peut tenir en tête d'un coup se review bien ; un diff de 800 lignes se review mal, ou pas du tout. Si ta PR dépasse ce que tu peux relire toi-même en une passe, elle est trop grosse.
+Une PR qui mélange « je corrige un bug », « je renomme trois variables » et « j'ajoute une feature » est impossible à relire proprement : le·la relecteur·rice ne sait plus ce qui est le cœur du changement et ce qui est du bruit. Un diff qu'on peut tenir en tête d'un coup se relit bien. Un diff de 800 lignes se relit mal, ou pas du tout. Si ta PR dépasse ce que tu peux relire toi-même en une passe, elle est trop grosse.
 
 ### Se relire avant de faire relire
 
 Avant de demander une review, lis ton propre diff comme si c'était celui de quelqu'un d'autre. Tu attraperas la moitié des `nitpick` toi-même : le `console.log` oublié, la variable `tmp` jamais renommée, le commentaire mort. C'est l'exercice de « relire son vieux code », mais à chaud.
 
-Ça respecte le temps de l'autre, et ça évite de faire porter à la review un travail que tu pouvais faire seul·e.
+Tu respectes ainsi le temps de l'autre, et la review ne porte pas un travail que tu pouvais faire seul·e.
 
 ### Décrire la PR
 
@@ -47,7 +47,7 @@ Tu peux utiliser les conventional comments sur ta propre PR pour guider la relec
 - `note: le TODO ici part dans un ticket séparé, pas dans cette PR`
 - `question: est-ce que ce nom colle au vocabulaire métier ?`
 
-Tu diriges l'attention là où elle est utile, et tu réduis les allers-retours : le·la relecteur·rice n'a pas à deviner tes doutes, tu les as déjà pointés.
+Tu diriges l'attention là où elle sert et tu réduis les allers-retours : le·la relecteur·rice n'a pas à deviner tes doutes.
 
 ### Checklist avant d'ouvrir la PR
 
@@ -61,9 +61,9 @@ Tu diriges l'attention là où elle est utile, et tu réduis les allers-retours 
 
 ### Le code n'est pas toi
 
-C'est le pendant de « on parle du code, pas du·de la développeur·se », et ça marche dans les deux sens : quand on relit le tien, une remarque sur ton code n'est pas une remarque sur toi. La review sert à rendre le code plus clair et plus sûr, pas à établir qui a raison.
+C'est le pendant de « on parle du code, pas de la personne », dans l'autre sens : une remarque sur ton code n'est pas une remarque sur toi. La review sert à rendre le code plus clair et plus sûr, pas à établir qui a raison.
 
-Si une remarque te pique, c'est souvent le signe qu'il y a quelque chose à regarder, parfois dans le code, parfois juste dans la façon dont elle est formulée, relis-la à froid avant de répondre.
+Si une remarque te pique, il y a souvent quelque chose à regarder, parfois dans le code, parfois dans sa formulation. Relis-la à froid avant de répondre.
 
 ### Répondre selon le label
 
@@ -77,8 +77,8 @@ Le format conventional comments te dit quoi faire de chaque remarque :
 | `question` | Tu réponds. Souvent la réponse mérite d'atterrir dans le code ou la doc, pas juste dans le fil. |
 | `praise` | Tu accuses réception. C'est de l'info utile : tu sais ce qui a marché. |
 
-### Cloturer une pr
+### Clore les fils de discussion
 
-Une remarque traitée se clôt : un commit qui répond, ou une réponse argumentée si tu déclines. Ne laisse pas un fil ouvert sans réponse, c'est ce qui fait traîner une review sur des jours.
+Une remarque traitée se clôt : un commit qui répond, ou une réponse argumentée si tu déclines. Ne laisse pas un fil ouvert sans réponse : c'est ce qui fait traîner une review pendant des jours.
 
 Décliner une suggestion est légitime : « je garde comme ça parce que X » est une réponse valable.

@@ -5,7 +5,7 @@ order: 6
 
 # Mémoire et état
 
-Une session finit toujours par se terminer. Le contexte est compacté, la conversation est fermée, une autre personne reprend la tâche. Sans mémoire, l’agent repart de zéro : il relit le README, redécouvre la structure du projet et retente la correction qui avait échoué la veille.
+Toute session se termine. Le contexte est compacté, la conversation est fermée, une autre personne reprend la tâche. Sans mémoire, l’agent repart de zéro : il relit le README, redécouvre la structure du projet et retente la correction qui avait échoué la veille.
 
 ## État, contexte et mémoire
 

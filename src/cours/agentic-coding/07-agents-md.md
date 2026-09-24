@@ -40,7 +40,7 @@ Gardez les informations vraies pour presque toutes les tâches :
 
 Chaque règle doit pouvoir changer une décision de l’agent. « Écris du bon code » ne change rien. « Les montants sont stockés en centimes, en entiers, jamais en flottants » change la façon d’écrire une fonction de prix.
 
-## Court
+## Un fichier court
 
 Un `AGENTS.md` utile tient souvent en une trentaine de lignes. Il est envoyé à chaque appel, pour chaque tâche. Un fichier de 500 lignes qui couvre tous les cas occupe le contexte dès le démarrage, pour des règles qui ne concernent pas la tâche en cours.
 

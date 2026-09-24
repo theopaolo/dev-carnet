@@ -5,9 +5,9 @@ order: 6
 
 # ADR
 
-## Documenter les décisions technique
+## Documenter les décisions techniques
 
-Proposé par Michael Nygard, dans un article de blog intitulé “[Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)”. Les documents d'architecture volumineux sont difficiles à lire et à maintenir. Quand les raisons d'un choix ne sont pas écrites, une nouvelle équipe risque de le conserver ou de le remplacer sans connaître les contraintes auxquelles il répondait.
+Michael Nygard a proposé les ADR (Architecture Decision Records) en 2011, dans un billet intitulé « [Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) ». Son constat : les documents d'architecture volumineux sont difficiles à lire et à maintenir. Quand les raisons d'un choix ne sont pas écrites, une nouvelle équipe risque de le conserver ou de le remplacer sans connaître les contraintes auxquelles il répondait.
 
 Nygard propose un fichier court par décision, stocké dans le dépôt avec le code. Le livre _Software Architecture: The Hard Parts_ (Ford, Richards, Sadalage, Dehghani, 2021) utilise aussi des ADR pour suivre les décisions prises au fil d'un projet.
 
@@ -70,7 +70,7 @@ Utiliser fetch natif pour les appels HTTP.
 
 Adapte le niveau de détail aux effets de la décision. Un choix de base de données peut demander une page. Un choix de bibliothèque peut tenir en dix lignes. Dans les deux cas, donne le contexte et au moins une conséquence négative.
 
-> Plus de modèles : https://github.com/architecture-decision-record/architecture-decision-record/tree/main/locales/fr/mod%C3%A8les
+> Plus de modèles : [modèles d'ADR en français](https://github.com/architecture-decision-record/architecture-decision-record/tree/main/locales/fr/mod%C3%A8les)
 
 ## Règles de rédaction et de suivi
 

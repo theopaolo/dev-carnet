@@ -88,7 +88,7 @@ Les applications de bureau et les interfaces web conviennent aux personnes qui n
 
 ## Choisir
 
-Le meilleur outil dans l’absolu n’existe pas. Posez plutôt ces questions :
+Le bon outil dépend de votre usage. Posez ces questions :
 
 - Où vit l’agent : votre machine, un conteneur, le cloud ?
 - Le modèle est-il imposé par l’éditeur ou choisi par vous ?

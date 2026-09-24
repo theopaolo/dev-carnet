@@ -5,16 +5,18 @@ order: 7
 
 # Le RGPD pour les développeur·euses
 
-En tant que développeur·euse, le **R**èglement **G**énéral sur la **P**rotection des **D**onnées (RGPD) fait partie de l’architecture d’un projet, au même titre que les performances, le schéma de base de données, l’API ou le choix d’une stack technique.
+Pour un·e développeur·euse, le **R**èglement **G**énéral sur la **P**rotection des **D**onnées (RGPD) fait partie de l’architecture d’un projet, au même titre que les performances, le schéma de base de données, l’API ou le choix de la stack.
 
-L’objectif n’est pas de devenir juriste, mais de concevoir des applications qui traitent les données personnelles de manière transparente, sécurisée et proportionnée.
+Ce cours ne fait pas de vous un·e juriste. Il montre comment concevoir une application qui traite les données personnelles de façon transparente, sécurisée et proportionnée.
 
-Le RGPD repose sur une idée simple : **Chaque donnée personnelle doit avoir une raison d’être.**
+Pour un produit d’IA, lisez aussi le chapitre [Repères AI Act et RGPD](./01-reperes-ia-act-rgpd/), avec la pyramide des risques, les rôles et la méthode de classement d’un usage.
 
-À chaque fonctionnalité, on devrait pouvoir répondre à ces questions :
+Le RGPD part d’un principe : **chaque donnée personnelle doit avoir une raison d’être.**
+
+Pour chaque fonctionnalité, vous devez pouvoir répondre à ces questions :
 
 - Pourquoi cette donnée est-elle collectée ?
-- Est-elle réellement nécessaire ?
+- Est-elle nécessaire ?
 - Quelle est sa base légale ?
 - Qui peut y accéder ?
 - Combien de temps est-elle conservée ?
@@ -23,19 +25,19 @@ Le RGPD repose sur une idée simple : **Chaque donnée personnelle doit avoir un
 
 **Référence :** RGPD art. 5 : [Principes relatifs au traitement des données personnelles](https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre2).
 
-Lorsqu’on développe une fonctionnalité, on commence souvent par la base de donnée :
+Quand on développe une fonctionnalité, on commence souvent par la base de données :
 
 Créer une table Users → Ajouter une colonne email → Créer un formulaire → Afficher le profil
 
-Le RGPD, lui invite à changer cette logique, et réfléchir en terme de besoin métier :
+Le RGPD demande de partir du besoin métier :
 
 L'utilisateur souhaite créer un compte → Le produit doit permettre son authentification → Un traitement de données est nécessaire → L'email est indispensable → La base légale est le contrat → La donnée est stockée en base
 
-**Une même donnée peut avoir plusieurs usages,** un adresse mail peut servir l’authentification, mais aussi l’envoie de facture ou un abonnement à une newsletter, dans ce cas nous avons trois cadre légaux : contrat, obligation légale et consentement.
+**Une même donnée peut avoir plusieurs usages.** Une adresse email sert à l’authentification, à l’envoi des factures et à la newsletter. Chaque usage a sa base légale : contrat, obligation légale et consentement.
 
 ### Identifier les données personnelles
 
-Une donnée personnelle est toute information permettant d’identifier une personne, directement ou indirectement.
+Une donnée personnelle est une information qui permet d’identifier une personne, directement ou indirectement.
 
 Exemples :
 
@@ -50,7 +52,7 @@ Exemples :
 - Identifiant utilisateur
 - Localisation GPS
 
-Même une combinaison de plusieurs informations (par exemple : ville + date de naissance + profession) peut permettre d’identifier une personne.
+Une combinaison d’informations (par exemple ville + date de naissance + profession) peut aussi identifier une personne.
 
 Dès qu’une application traite ce type d’information, le RGPD s’applique.
 
@@ -61,9 +63,9 @@ RGPD art. 4 [(Définition des données personnelles)](https://www.cnil.fr/fr/reg
 
 CNIL - [Qu’est-ce qu’une donnée personnelle ?](https://www.cnil.fr/fr/definition/donnee-personnelle)
 
-France num - [Qu’est-ce qu’une donée personelle ?](https://www.francenum.gouv.fr/formations/rgpd-quest-ce-quune-donnee-personnelle)
+France num - [Qu’est-ce qu’une donnée personnelle ?](https://www.francenum.gouv.fr/formations/rgpd-quest-ce-quune-donnee-personnelle)
 
-### Lister par les fonctionnalités
+### Lister les fonctionnalités
 
 Par exemple :
 
@@ -80,7 +82,7 @@ Chaque fonctionnalité devient un traitement.
 
 ### Décrire le traitement
 
-Pour chaque traitement, répondre aux mêmes questions.
+Pour chaque traitement, répondez aux mêmes questions.
 
 | **Question** | **Exemple** |
 | --- | --- |
@@ -90,7 +92,7 @@ Pour chaque traitement, répondre aux mêmes questions.
 | Qui y accède ? | Utilisateur + administrateur |
 | Combien de temps ? | Jusqu’à suppression du compte |
 
-### Justifier chaque collecte donnée
+### Justifier chaque donnée collectée
 
 | **Donnée** | **Obligatoire** | **Pourquoi ?** |
 | --- | --- | --- |
@@ -100,7 +102,7 @@ Pour chaque traitement, répondre aux mêmes questions.
 | Mot de passe (hashé) | Oui | Authentification |
 | Avatar | Non | Personnalisation |
 
-_Si une donnée n’a aucune utilité clairement définie, il ne faut probablement pas la collecter._
+_Une donnée sans usage défini ne se collecte pas._
 
 
 **Références**
@@ -110,11 +112,7 @@ _Si une donnée n’a aucune utilité clairement définie, il ne faut probableme
 
 ### Choisir la bonne base légale
 
-Appliquer le RGPD n’est pas égale à demander le consentement pour tout.
-
-Le consentement est **une** des six bases légales prévues par le RGPD.
-
-Le plus souvent, une application web utilise principalement quatre bases légales.
+Appliquer le RGPD ne veut pas dire demander le consentement pour tout. Le consentement est **une** des six bases légales prévues par l’article 6. Une application web en utilise surtout quatre :
 
 | **Base légale** | **Quand l’utiliser ?** |
 | --- | --- |
@@ -123,7 +121,7 @@ Le plus souvent, une application web utilise principalement quatre bases légale
 | Obligation légale | Facturation, comptabilité |
 | Intérêt légitime | Sécurité, lutte contre la fraude |
 
-Par exemples :
+Exemples :
 
 | **Traitement** | **Base légale** | **Consentement ?** |
 | --- | --- | --- |
@@ -132,9 +130,9 @@ Par exemples :
 | Envoi d’une facture | Contrat + obligation légale | ❌ Non |
 | Conservation des factures | Obligation légale | ❌ Non |
 | Newsletter | Consentement | ✅ Oui |
-| Publicité ciblée | Consentement | ✅   |
+| Publicité ciblée | Consentement | ✅ Oui |
 
-Le fait qu’un utilisateur crée un compte constitue déjà un contrat. Les données strictement nécessaires à l’exécution de ce contrat (adresse e-mail, mot de passe, abonnement…) n’ont donc pas besoin d’un consentement spécifique.
+Créer un compte revient à conclure un contrat. Les données strictement nécessaires à ce contrat (adresse email, mot de passe, abonnement…) n’ont pas besoin d’un consentement séparé.
 
 
 **Références**
@@ -147,7 +145,7 @@ Le fait qu’un utilisateur crée un compte constitue déjà un contrat. Les don
 
 ### Définir une durée de conservation
 
-Chaque donnée doit avoir une durée de conservation.
+Chaque donnée a une durée de conservation.
 
 | **Traitement** | **Donnée** | **Base légale** | **Durée** |
 | --- | --- | --- | --- |
@@ -155,7 +153,7 @@ Chaque donnée doit avoir une durée de conservation.
 | Paiement | Historique | Contrat + obligation légale | 10 ans |
 | Newsletter | Email | Consentement | Jusqu’au retrait du consentement |
 
-Une donnée ne doit jamais être conservée “pour toujours” sans justification.
+Aucune donnée ne se conserve « pour toujours » sans justification.
 
 
 **Références**
@@ -165,16 +163,16 @@ Une donnée ne doit jamais être conservée “pour toujours” sans justificati
 
 ### Prévoir les droits des utilisateurs
 
-Une personne doit pouvoir exercer ses droits facilement :
+Une personne doit pouvoir, sans démarche compliquée :
 
-- Consulter ses données
-- Modifier ses données
-- Télécharger ses données
-- Supprimer son compte
-- Retirer son consentement
-- Contacter le responsable du traitement
+- consulter ses données
+- modifier ses données
+- télécharger ses données
+- supprimer son compte
+- retirer son consentement
+- contacter le responsable du traitement.
 
-Cela influence directement les endpoints de l’API.
+La plupart de ces droits deviennent des endpoints de l’API :
 
 ```plaintext
 GET    /me
@@ -189,19 +187,19 @@ POST   /newsletter/unsubscribe
 
 - RGPD [art. 12 à 23](https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre3)
 - CNIL - [Les droits des personnes](https://www.cnil.fr/fr/respecter-les-droits-des-personnes/repondre-aux-demandes-dexercice-des-droits)
-- **Guide pratique duré de conservation**
+- **Guide pratique durées de conservation**
 
 ### Et ensuite ?
 
-Une fois toutes ces questions répondues, il devient possible de générer :
+Avec les réponses à ces questions, vous pouvez produire :
 
-- le registre des traitements de la CNIL ;
+- le registre des traitements (modèle CNIL) ;
 - la politique de confidentialité ;
 - les mentions d’information ;
 - la checklist Privacy by Design ;
 - les besoins techniques (API, base de données, durées de rétention, suppression).
 
-## Exemple de Cartographie des traitements
+## Exemple de cartographie des traitements
 
 | **Fonctionnalité** | **Traitement** | **Données** | **Base légale** | **Durée** | **Obligatoire** | **Modifiable** | **Suppression** |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -221,7 +219,7 @@ Une fois toutes ces questions répondues, il devient possible de générer :
 
 | **Table** | **Colonne** | **Donnée personnelle ?** | **Pourquoi ?** | **Traitement** |
 | --- | --- | --- | --- | --- |
-| users | id  | ❌   | Identifiant technique | —   |
+| users | id  | ✅   | Identifiant technique, rattaché à une personne | Compte |
 | users | email | ✅   | Connexion | Compte |
 | users | first_name | ✅   | Affichage | Profil |
 | users | last_name | ✅   | Affichage | Profil |
@@ -231,7 +229,7 @@ Une fois toutes ces questions répondues, il devient possible de générer :
 | subscriptions | started_at | ⚠️ Oui | Historique | Abonnement |
 | invoices | billing_address | ✅   | Facturation | Paiement |
 
-## Quand l’utilisateur clique sur “Supprimer mon compte”
+## Quand l’utilisateur clique sur « Supprimer mon compte »
 
 | **Élément** | **Action** |
 | --- | --- |
@@ -243,7 +241,7 @@ Une fois toutes ces questions répondues, il devient possible de générer :
 | Factures | Conservées |
 | Logs | Purge automatique après la durée prévue |
 
-### Fiche par fonctionnalité :
+### Fiche par fonctionnalité
 
 **Finalité :**
 

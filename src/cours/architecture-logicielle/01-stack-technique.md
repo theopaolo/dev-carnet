@@ -5,15 +5,15 @@ order: 1
 
 # Comprendre une stack technique
 
-Une stack technique est l'ensemble des briques technologies utilisées pour construire, exécuter et livrer une application. Chaque technologie remplit un rôle dans une couche du système, par exemple l'interface, le backend, les données ou l'hébergement.
+Une stack technique est l'ensemble des briques technologiques utilisées pour construire, exécuter et livrer une application. Chaque technologie remplit un rôle dans une couche du système, par exemple l'interface, le backend, les données ou l'hébergement.
 
 ![Couches de la stack technique d’Airbnb : client, serveur, base de données et hébergement.](/ressources/architecture-logicielle/files/01a02491-57bf-75bd-9cc3-920e9233932f/image.png)
 
-https://syndicode.com/blog/how-to-choose-tech-stack/
+Source : [Syndicode](https://syndicode.com/blog/how-to-choose-tech-stack/)
 
 ![Couches de la stack technique de Netflix : client, serveur, base de données et hébergement.](/ressources/architecture-logicielle/files/01a02491-1adc-74fb-b069-08757e715dd9/image.png)
 
-https://syndicode.com/blog/how-to-choose-tech-stack/
+Source : [Syndicode](https://syndicode.com/blog/how-to-choose-tech-stack/)
 
 ## Décrire le périmètre
 
@@ -66,7 +66,7 @@ Angular, Express et Node.js utilisent JavaScript ou TypeScript. MongoDB stocke d
 
 Le nom **MEAN** ne précise ni l'hébergeur, ni le proxy inverse, ni les outils de test et de livraison. Il ne donne pas non plus les versions. Cette dernière information compte, car un ancien projet MEAN peut utiliser AngularJS tandis qu'un projet récent utilise Angular.
 
-Une variante est **MERN**, on **A**ngular est remplacé par **R**eact.
+Dans la variante **MERN**, **R**eact remplace **A**ngular.
 
 ### La stack TALL
 
@@ -114,7 +114,7 @@ Une stack n'a pas besoin d'un acronyme. Un projet peut annoncer simplement : Vue
 | données |     |     |     |     |
 | déploiement |     |     |     |     |
 
-Ressources
+## Ressources
 
 - MongoDB, [What Is the MEAN Stack?](https://www.mongodb.com/resources/languages/mean-stack), distinction entre MEAN, MERN et MEVN.
 - TALL stack, [Reactive Laravel Apps with the TALL stack](https://tallstack.dev/), composition de l'acronyme.

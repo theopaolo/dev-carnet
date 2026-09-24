@@ -11,7 +11,7 @@ Dans une architecture client-serveur web, le navigateur envoie des requêtes à 
 
 Le front, une application JavaScript, envoie des requêtes HTTP à l’API REST du back et reçoit du JSON. Seul le back accède à la base de données. Un projet peut ranger ces applications dans des dossiers `client/` et `server/`, ou dans deux dépôts distincts.
 
-Deux applications demandent deux chaînes de livraison et un moyen de synchroniser les contrats de données. Une configuration CORS est nécessaire si elles utilisent des origines différentes. Cette séparation convient lorsqu'une même API alimente plusieurs clients, par exemple web et mobile, ou lorsque les équipes front et back livrent à des rythmes différents. Pour un site vitrine, un monolithe ou un générateur statique demande généralement moins d'exploitation. La fiche [Frontend, backend et stratégies de rendu](https://docmost.ludique.dev/share/bcfabao2nc/p/frontend-backend-et-strategies-de-rendu-kgZb1oxgoQ) détaille les responsabilités et les options de rendu.
+Deux applications demandent deux chaînes de livraison et un moyen de synchroniser les contrats de données. Une configuration CORS est nécessaire si elles utilisent des origines différentes. Cette séparation convient lorsqu'une même API alimente plusieurs clients, par exemple web et mobile, ou lorsque les équipes front et back livrent à des rythmes différents. Pour un site vitrine, un monolithe ou un générateur statique demande généralement moins d'exploitation. Le chapitre [Frontend, backend et stratégies de rendu](/architecture-logicielle/02-rendu-web/) détaille les responsabilités et les options de rendu.
 
 ### Monolithe modulaire
 
@@ -28,8 +28,6 @@ Une architecture en couches sépare par exemple la présentation, les cas d'usag
 Ce découpage aide lorsqu'une même règle métier est utilisée par plusieurs interfaces. Il ajoute des passages entre couches et peut disperser une petite fonctionnalité dans plusieurs fichiers.
 
 ## MVC (Modèle, Vue, Contrôleur)
-
----
 
 MVC sépare trois responsabilités : les données et règles métier dans le modèle, leur affichage dans la vue et le traitement des actions dans le contrôleur. Cette séparation permet de modifier l'affichage sans réécrire les règles métier, tant que les interfaces entre les trois parties restent stables.
 
@@ -64,10 +62,8 @@ Un ORM traduit entre les objets du langage et les tables SQL. Le code accède pa
 
 L'abstraction peut masquer le coût des requêtes générées. Un N+1 charge une liste, puis exécute une requête supplémentaire pour chaque élément au lieu de regrouper le chargement. Il reste invisible tant que l'équipe n'inspecte pas les requêtes ou leurs mesures. L'ORM ajoute aussi une API à apprendre. En échange, il automatise la conversion entre objets et tables et fournit généralement des requêtes paramétrées. Celles-ci réduisent le risque d'injection SQL lorsque l'application n'insère pas de fragments SQL non contrôlés.
 
-Le niveau évite de comparer des solutions qui ne répondent pas à la même question. Un monolithe peut utiliser MVC, exposer une API REST et accéder aux données avec un ORM. Ces choix se combinent et chacun demande sa propre justification.
+Ces patterns se situent à des niveaux différents : déploiement, organisation interne, interface, accès aux données. Les ranger par niveau évite de comparer des solutions qui ne répondent pas à la même question. Un monolithe peut utiliser MVC, exposer une API REST et accéder aux données avec un ORM. Ces choix se combinent et chacun demande sa propre justification.
 
 ---
 
-La liste continue avec les SPA, le rendu côté serveur, Jamstack, client-serveur, backend for frontend et microservices.
-
-Chaque pattern répond à un problème et ajoute ses propres contraintes. Le nom du pattern donne un point de départ, mais la décision doit encore décrire le contexte dans lequel il est appliqué.
+D'autres patterns existent : Jamstack, backend for frontend, microservices. Chacun répond à un problème et ajoute ses propres contraintes. Le nom du pattern ne suffit pas à justifier un choix : la décision décrit aussi le contexte dans lequel il s'applique.

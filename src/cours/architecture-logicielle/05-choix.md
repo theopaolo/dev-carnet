@@ -7,11 +7,11 @@ order: 5
 
 _Tout choix comporte un compromis. Si une option semble n’avoir aucun inconvénient, alors son coût n’a pas encore été identifié (Fundamentals of Software Architecture, 2020)._
 
-Une décision d'architecture est un choix technique avec des conséquences qui structurent la vie du projet. La décision se doit d’être argumentée, définir pourquoi une option répond mieux qu'une autre aux contraintes du projet. Choisir React ou Vue, PostgreSQL ou SQLite, Axios ou fetch, JWT ou session, Express ou Laravel sont des choix d'architecture.
+Une décision d'architecture est un choix technique avec des conséquences qui structurent la vie du projet. Elle s'argumente : elle dit pourquoi une option répond mieux qu'une autre aux contraintes du projet. React ou Vue, PostgreSQL ou SQLite, Axios ou fetch, JWT ou session, Express ou Laravel : chacun de ces choix peut en être une.
 
 [Michael Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) considère comme des choix d’architecture les décisions qui touchent à la structure du système, ses caractéristiques de qualité, ses dépendances, ses interfaces ou la façon dont le projet est construit. La portée, le coût d’un retour en arrière et la durée de ses effets déterminent le niveau de documentation nécessaire. On ne documente pas tous les choix. Un choix qui change un seul fichier et se remplace sans migration **est un détail de conception**. Un choix qui touche plusieurs composants, impose un contrat entre équipes ou demande une migration mérite d’être documenté.
 
-**Voici un schéma pour savoir si c’est un choix à documenter ou un détail de conception :**
+**Ce schéma aide à trier un choix à documenter d'un détail de conception :**
 
 ```mermaid
 flowchart TD
@@ -58,4 +58,4 @@ Le même raisonnement s'applique aux critères de valeur. « Je ne veux pas de p
 
 ## Documenter les raisons
 
-Dans la deuxième loi de Richards et Ford on donne plus d’importance au _pourquoi_ qu'au _comment_. Le code montre comment la solution fonctionne, mais il ne conserve pas les alternatives écartées ni les contraintes du moment. Un [ADR](/architecture-logicielle/06-adr/) enregistre ces raisons au moment de la décision.
+La deuxième loi de Richards et Ford dit que le _pourquoi_ compte plus que le _comment_. Le code montre comment la solution fonctionne, mais il ne conserve pas les alternatives écartées ni les contraintes du moment. Un [ADR](/architecture-logicielle/06-adr/) enregistre ces raisons au moment de la décision.

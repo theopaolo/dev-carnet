@@ -23,7 +23,7 @@ Le frontend envoie une requête HTTPS au backend. Le backend interroge la base a
 
 Frontend et backend peuvent vivre dans le même dépôt et être livrés ensemble. Ils peuvent aussi être séparés en plusieurs applications.
 
-### CSR : rendu côté client
+## CSR : rendu côté client
 
 Avec le client-side rendering, le serveur envoie un document HTML initial, souvent minimal, puis le navigateur charge le JavaScript. Ce code demande les données et construit l'interface.
 
@@ -91,9 +91,9 @@ Une single-page application intercepte les **changements de route dans le naviga
 
 ![Architecture d’une SPA : le navigateur gère l’interface, la navigation et l’accès aux données du serveur.](/ressources/architecture-logicielle/files/01a044d5-281f-7229-b43b-3560d846f552/image.png)
 
-**SPA et CSR ne sont pas synonymes**. Une SPA entièrement CSR construit son premier écran dans le navigateur. Une application SSR ou SSG peut envoyer un premier HTML complet, l'hydrater, puis utiliser une navigation SPA pour les routes suivantes. Next.js, Nuxt, SvelteKit peuvent suivre ce second fonctionnement.
+**SPA et CSR ne sont pas synonymes**. Une SPA entièrement CSR construit son premier écran dans le navigateur. Une application SSR ou SSG peut envoyer un premier HTML complet, l'hydrater, puis utiliser une navigation SPA pour les routes suivantes. Next.js, Nuxt et SvelteKit peuvent suivre ce second fonctionnement.
 
-A l’inverse une application multipage, ou **MPA**, laisse le navigateur demander un nouveau document HTML à chaque changement de page. Ce fonctionnement peut être rendu sur le serveur ou servi depuis des fichiers statiques.
+À l’inverse, une application multipage, ou **MPA**, laisse le navigateur demander un nouveau document HTML à chaque changement de page. Ce fonctionnement peut être rendu sur le serveur ou servi depuis des fichiers statiques.
 
 ## Rendu hybride
 

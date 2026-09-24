@@ -5,15 +5,13 @@ order: 2
 
 # Docker, Git et les environnements
 
-On rencontre généralement plusieurs environnements :
+Un projet a en général trois environnements :
 
 - développement local ;
 - staging / préproduction ;
 - production.
 
-Il ne faut pas nécessairement les associer à trois branches Git différentes.
-
-Le modèle important est plutôt :
+Ils ne correspondent pas forcément à trois branches Git. Le modèle à retenir :
 
 ```mermaid
 flowchart TD
@@ -31,11 +29,9 @@ flowchart TD
     Registry --> Prod
 ```
 
-L’idée essentielle est :
-
 > **Build once, deploy many.**
 
-On construit l’image une seule fois puis on déploie exactement cette image dans plusieurs environnements.
+La CI construit l’image une seule fois, puis cette même image part dans chaque environnement.
 
 ---
 
@@ -57,17 +53,17 @@ Par exemple, `git.example.org/theo/monapp` peut stocker le code Git, et `git.exa
 
 ## Push
 
-Après un build : `docker build -t git.example.org/theo/monapp:abc123` on peut envoyer l’image : `docker push git.example.org/theo/monapp:abc123`
+Après un build avec `docker build -t git.example.org/theo/monapp:abc123 .`, envoyez l’image avec `docker push git.example.org/theo/monapp:abc123`.
 
 ## Pull
 
-Un serveur peut ensuite récupérer exactement cette image : `docker pull git.example.org/theo/monapp:abc123`
+Un serveur récupère ensuite cette image précise : `docker pull git.example.org/theo/monapp:abc123`
 
 ---
 
 # CI/CD
 
-Un pipeline classique peut être :
+Un pipeline classique :
 
 1. Le développeur fait `git push`.
 2. Forgejo Actions ou GitHub Actions lance les tests, le lint et le typecheck.
@@ -76,17 +72,13 @@ Un pipeline classique peut être :
 5. Le staging déploie cette image.
 6. Après validation, la production déploie la même image.
 
-Le serveur de staging et le serveur de production n’ont idéalement pas besoin de reconstruire l’application.
-
-Ils récupèrent une image déjà construite.
+Les serveurs de staging et de production ne reconstruisent pas l’application. Ils récupèrent une image déjà construite.
 
 ---
 
 # Développement local
 
-Le développement local est différent.
-
-On veut souvent :
+En local, les besoins changent. On veut :
 
 - hot reload ;
 - bind mounts ;
@@ -96,17 +88,13 @@ On veut souvent :
 
 Docker Compose construit l’image au stage `dev` et lance deux conteneurs : l’API et PostgreSQL. Un bind mount place le code local dans le conteneur de l’API.
 
-On peut simplement faire : `docker compose up --build`
-
-Le registry n’est donc pas forcément impliqué dans la boucle de développement quotidienne.
+Un `docker compose up --build` suffit. Le registry n’intervient pas dans la boucle de développement quotidienne.
 
 ---
 
 # Staging et production
 
-La différence entre staging et production doit principalement venir de la **configuration**, pas du code.
-
-Par exemple :
+Staging et production diffèrent par leur **configuration**. Le code est le même.
 
 ### Staging
 
@@ -130,13 +118,13 @@ L’image reste la même.
 
 # Git et versions
 
-Il n’est pas nécessaire d’avoir : `develop -> staging -> production` sous forme de trois branches.
+Trois branches `develop -> staging -> production` ne sont pas nécessaires.
 
 On peut garder `main` comme branche principale et identifier les déploiements par commit.
 
 Par exemple, avec les commits `A`, `B`, `C`, `D` et `E` sur `main`, la production peut utiliser l’image `app:C` pendant que staging teste `app:E`.
 
-Lorsque `E` est validé, production utilise ensuite exactement l’image `E`.
+Une fois `E` validé, la production passe à l’image `app:E`, celle que staging a testée.
 
 ---
 
@@ -152,6 +140,6 @@ Docker image
 app:1.4.0
 ```
 
-On peut également conserver le SHA : `app:a81f25d`
+On peut aussi taguer par SHA : `app:a81f25d`.
 
-Éviter de dépendre uniquement de : `app:latest` car `latest` ne permet pas de savoir précisément quelle version est exécutée.
+Ne dépendez pas uniquement de `app:latest` : ce tag ne dit pas quelle version tourne.

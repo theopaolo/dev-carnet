@@ -13,33 +13,23 @@ Compare les options à partir de critères définis avant l'évaluation. Sinon, 
 
 **Complexité.** Compte les services, les dépendances et les couches que l'option ajoute. Chacun demande de la configuration, du suivi et des connaissances pour diagnostiquer une panne. Ce coût apparaît à chaque correction et à chaque évolution du projet.
 
-**Evolutivité (scaling).** Estime la charge réaliste et son évolution. Dimensionner un outil pour une charge très supérieure aux prévisions ajoute des coûts sans répondre au besoin actuel. Demande quelle charge l'option supporte et combien coûterait une migration si cette limite était dépassée.
+**Évolutivité (scaling).** Estime la charge réaliste et son évolution. Dimensionner un outil pour une charge très supérieure aux prévisions ajoute des coûts sans répondre au besoin actuel. Demande quelle charge l'option supporte et combien coûterait une migration si cette limite était dépassée.
 
 **Délai et coût.** Intègre le temps d'apprentissage, l'implémentation, l'hébergement et les licences. Une technologie inconnue de l'équipe peut coûter plus cher qu'une option déjà maîtrisée, même si elle obtient de meilleurs résultats sur un autre critère.
 
 **Réversibilité.** Évalue le travail nécessaire pour changer d'option : migration des données, adaptation du code, formation et interruption de service. Une décision facile à inverser peut être testée rapidement. Une décision coûteuse à inverser mérite une comparaison documentée dans un ADR.
 
-**Maturité de la solution.**
-
-La simplicité et la maturité sont deux critères distincts. Une solution récente peut être simple. Une solution ancienne peut accumuler de nombreuses options et demander davantage de configuration.
+**Maturité de la solution.** La simplicité et la maturité sont deux critères distincts. Une solution récente peut être simple. Une solution ancienne peut accumuler de nombreuses options et demander davantage de configuration.
 
 Pour évaluer la maturité, regarde la fréquence des versions, la durée de support, le traitement des failles, le nombre de mainteneurs actifs et la stabilité des interfaces. Pour évaluer la simplicité, compte les composants, les configurations et les connaissances nécessaires à l'exploitation.
 
-**Sécurité**
+**Sécurité.** Vérifie les recommandations auprès des organismes et spécifications concernés, puis contrôle leur date. Consulte par exemple OWASP, les avis de sécurité associés aux CVE et les RFC. Pour le stockage des mots de passe, la [fiche OWASP Password Storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) recommande Argon2id pour une nouvelle application et réserve bcrypt aux systèmes anciens où Argon2 et scrypt ne sont pas disponibles.
 
-Vérifie les recommandations auprès des organismes et spécifications concernés, puis contrôle leur date. Consulte par exemple OWASP, les avis de sécurité associés aux CVE et les RFC. Pour le stockage des mots de passe, la [fiche OWASP Password Storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) recommande Argon2id pour une nouvelle application et réserve bcrypt aux systèmes anciens où Argon2 et scrypt ne sont pas disponibles.
+**Observabilité.** Détermine ce que l'équipe doit pouvoir expliquer pendant un incident. Les journaux, métriques et traces doivent permettre de relier une erreur à une requête, d'identifier le composant concerné et de mesurer la durée du problème. Collecter des données sans question opérationnelle produit du volume sans aider au diagnostic.
 
-**Observabilité**
+**Testabilité.** Évalue la possibilité de tester les règles métier sans dépendre d'un réseau ou d'un service tiers, la durée de la suite de tests et la reproductibilité des environnements. Une architecture difficile à isoler ralentit la détection des régressions.
 
-Détermine ce que l'équipe doit pouvoir expliquer pendant un incident. Les journaux, métriques et traces doivent permettre de relier une erreur à une requête, d'identifier le composant concerné et de mesurer la durée du problème. Collecter des données sans question opérationnelle produit du volume sans aider au diagnostic.
-
-**Testabilité**
-
-Évalue la possibilité de tester les règles métier sans dépendre d'un réseau ou d'un service tiers, la durée de la suite de tests et la reproductibilité des environnements. Une architecture difficile à isoler ralentit la détection des régressions.
-
-**Interopérabilité**
-
-Liste les systèmes qui échangent des données, les formats, les protocoles et les règles de version. Un contrat d'API doit préciser comment un consommateur ancien réagit lorsqu'un champ ou une opération change.
+**Interopérabilité.** Liste les systèmes qui échangent des données, les formats, les protocoles et les règles de version. Un contrat d'API doit préciser comment un consommateur ancien réagit lorsqu'un champ ou une opération change.
 
 ## Critères de contexte et de valeurs
 
@@ -72,10 +62,10 @@ Voici une grille d'exercice pour un outil associatif de réservation de salles. 
 | Exploitation technique | 3   | 5   | 15  | 2   | 6   |
 | Coût estimé sur 3 ans | 2   | 2   | 4   | 4   | 8   |
 | Souveraineté des données | 3   | 2   | 6   | 5   | 15  |
-| Réversibilité | 2   | 3   | 6   | 5   | 15  |
-| Total |     |     | 46  |     | 50  |
+| Réversibilité | 2   | 3   | 6   | 5   | 10  |
+| Total |     |     | 46  |     | 45  |
 
-Dans cet exemple, le SaaS réduit le délai de mise en route et le besoin de compétences internes. L'option auto-hébergée donne davantage de contrôle sur les données, réduit le coût estimé sur trois ans et facilite la migration. Les poids définis avec le client déterminent l'option retenue. L'ADR conserve cette comparaison.
+Dans cet exemple, le SaaS réduit le délai de mise en route et le besoin de compétences internes. L'option auto-hébergée donne davantage de contrôle sur les données, réduit le coût estimé sur trois ans et facilite la migration. Un point d'écart sépare les deux totaux : passer le poids du coût de 2 à 3 suffit à inverser le résultat. Ce genre d'écart se tranche avec le client, pas avec la grille. L'ADR conserve la comparaison et la raison du choix.
 
 ## Évaluer aussi le coût des critères de valeur
 

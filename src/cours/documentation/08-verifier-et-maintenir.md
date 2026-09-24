@@ -103,7 +103,7 @@ Cette démonstration prépare une copie temporaire du code, remplace le contrôl
 
 Demande au groupe quelle phrase de la documentation devient fausse. Corrigé : une demande peut désormais dépasser la capacité. Un test qui vérifie uniquement la création de la première réservation ne détecterait pas ce défaut.
 
-Pour relier les tests aux discussions métier et aux pages consultées par les autres collègues, poursuivre avec la [documentation vivante et le BDD](/documentation/09-documentation-vivante/).
+Pour relier les tests aux discussions métier et aux pages consultées par les autres collègues, poursuis avec la [documentation vivante et le BDD](/documentation/09-documentation-vivante/).
 
 ## Exercice : faire reprendre le projet
 

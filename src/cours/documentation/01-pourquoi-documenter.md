@@ -5,7 +5,7 @@ order: 1
 
 # Pourquoi documenter un projet ?
 
-Une application s'exécute sur ton ordinateur. Tu connais la commande pour la démarrer, le compte de test et les raisons du choix de stockage. Pourtant, ces informations ne sont pas toujours évidentes pour quelqu'un qui découvre le dépôt.
+Une application s'exécute sur ton ordinateur. Tu connais la commande pour la démarrer, le compte de test et les raisons du choix de stockage. Quelqu'un qui découvre le dépôt ne connaît rien de tout cela.
 
 Explique ce qu'il faut savoir pour utiliser ou reprendre le projet :
 

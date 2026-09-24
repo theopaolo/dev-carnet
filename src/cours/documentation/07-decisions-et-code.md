@@ -134,11 +134,11 @@ Ouvre ensuite le commit identifié avec git show suivi de son identifiant. Le [g
 
 Pour la référence du code, lance npm run docs:api après installation. [reserver et annuler](https://github.com/theopaolo/cours-documentation-web/blob/main/demo/src/reservations.mjs) comportent des annotations JSDoc sur les paramètres, effets et erreurs. La génération extrait ces informations. Les tests vérifient les comportements couverts.
 
-Exercice : expliquer pourquoi le message « Réservation déjà existante » peut arriver alors qu’il reste une place. Le doublon est contrôlé indépendamment de la capacité et inclut les réservations annulées. Si ce choix ne convient plus au métier, proposer une évolution de la règle et de l’ADR.
+Exercice : explique pourquoi le message « Réservation déjà existante » peut arriver alors qu’il reste une place. Le doublon est contrôlé indépendamment de la capacité et inclut les réservations annulées. Si ce choix ne convient plus au métier, propose une évolution de la règle et de l’ADR.
 
 ## Exercice : documenter un choix et une règle
 
-Pour apprendre à afficher les descriptions et les types directement au survol dans VS Code, suivre la [manipulation JSDoc, TSDoc et TypeDoc](/documentation/12-documentation-editeur/). Elle fournit un appel JavaScript documenté, une variante TypeScript et un mauvais type à faire détecter. L’aide dans l’éditeur et la référence publiée réutilisent les informations placées près du code.
+Pour apprendre à afficher les descriptions et les types directement au survol dans VS Code, suis la [manipulation JSDoc, TSDoc et TypeDoc](/documentation/12-documentation-editeur/). Elle fournit un appel JavaScript documenté, une variante TypeScript et un mauvais type à faire détecter. L’aide dans l’éditeur et la référence publiée réutilisent les informations placées près du code.
 
 Choisis une décision de ton projet. Retrouve ses raisons dans les échanges ou les fichiers conservés, puis rédige un ADR. Signale les raisons que tu n'as pas pu confirmer.
 

@@ -5,11 +5,11 @@ order: 0
 
 # Docker
 
-## C’est quoi docker ?
+## Docker en bref
 
-Docker permet de construire et d’exécuter une application dans un environnement reproductible.
+Docker construit et exécute une application dans un environnement reproductible.
 
-Les principaux concepts à retenir sont :
+Les concepts principaux :
 
 - `Dockerfile` → décrit comment construire une **image**
 - `Image` → environnement exécutable immuable contenant l’application et ses dépendances
@@ -40,7 +40,7 @@ flowchart LR
 
 ## Image et conteneur
 
-Une **image** est un modèle **immuable** en lecture seule à partir duquel Docker peut créer des conteneurs. Elle peut contenir par exemple :
+Une **image** est un modèle **immuable**, en lecture seule, à partir duquel Docker crée des conteneurs. Elle peut contenir par exemple :
 
 - un système Linux minimal ;
 - Node.js ;
@@ -56,15 +56,15 @@ Une même image peut lancer plusieurs conteneurs avec des commandes différentes
 - le conteneur de migration lance `npm run db:migrate` ;
 - le conteneur worker lance `npm run worker`.
 
-Les trois conteneurs utilisent le même environnement logiciel, mais exécutent des commandes différentes.
+Les trois conteneurs partagent le même environnement logiciel et exécutent chacun leur commande.
 
 ------------------------------------------------------------------------
 
 # Docker Compose
 
-Docker Compose permet de décrire et d’orchestrer une application composée de plusieurs services.
+Docker Compose décrit et orchestre une application composée de plusieurs services.
 
-Il s’occupe notamment :
+Il se charge :
 
 - de construire ou récupérer les images ;
 - de créer les conteneurs ;
@@ -92,15 +92,15 @@ Le projet contient ici deux services. Le navigateur appelle `api` (Node.js), et 
 
 ## Nom du projet
 
-Avec : `name: mon-projet` on définit le nom du projet Compose.
+`name: mon-projet` définit le nom du projet Compose.
 
 Compose s’en sert pour nommer et isoler les ressources qu’il crée, par exemple :
 
 ```
-monprojet-api-1
-monprojet-db-1
-monprojet_default
-monprojet_db-data
+mon-projet-api-1
+mon-projet-db-1
+mon-projet_default
+mon-projet_db-data
 ```
 
 Sans `name`, Compose utilise généralement le nom du dossier courant.
@@ -115,7 +115,7 @@ Documentation : https://docs.docker.com/reference/compose-file/version-and-name
 
 Si aucun réseau n’est déclaré, Compose crée automatiquement un réseau `default`.
 
-Tous les services y sont connectés et deviennent accessibles par leur **nom de service** grâce au DNS interne de Docker.
+Tous les services y sont connectés. Le DNS interne de Docker les rend joignables par leur **nom de service**.
 
 ``` plaintext
 services:
@@ -125,9 +125,9 @@ services:
     image: postgres:16
 ```
 
-L’API peut contacter PostgreSQL avec : `db:5432` plutôt qu’avec une adresse IP.
+L’API contacte PostgreSQL avec `db:5432`, sans adresse IP.
 
-Une URL PostgreSQL peut donc ressembler à : postgresql://user:password\@db:5432/mydb
+Une URL PostgreSQL ressemble donc à `postgresql://user:password@db:5432/mydb`.
 
 Documentation :
 
@@ -136,11 +136,7 @@ Documentation :
 
 ## `localhost`
 
-Différencier `localhost` du nom d’un service.
-
-Dans un conteneur, `localhost` désigne le conteneur lui-même. Pour joindre PostgreSQL, l’API utilise donc le nom du service : `db:5432`.
-
-Du coup depuis votre API : `localhost:5432` ne désigne pas PostgreSQL. Il faut utiliser le nom du service **db** donc : `db:5432`
+Dans un conteneur, `localhost` désigne le conteneur lui-même. Depuis l’API, `localhost:5432` ne mène donc pas à PostgreSQL. L’API utilise le nom du service : `db:5432`.
 
 ------------------------------------------------------------------------
 
@@ -164,7 +160,7 @@ ports:
 
 permet d’accéder depuis la machine à : `http://localhost:8080` alors que l’application écoute toujours sur le port `3000` dans le conteneur.
 
-Les services Docker n’utilisent pas ces ports exposés pour communiquer entre eux, ils utilisent directement :
+Les services Docker n’utilisent pas ces ports exposés pour communiquer entre eux. Ils utilisent directement :
 
 ```
 api:3000
@@ -179,13 +175,13 @@ ports:
   - "5432:5432"
 ```
 
-Il faut **exposer** uniquement ce que la machine **hôte** doit pouvoir atteindre.
+**Exposez** seulement ce que la machine **hôte** doit atteindre.
 
 ------------------------------------------------------------------------
 
 # Réseaux explicites
 
-Des réseaux explicites deviennent intéressants lorsqu’on souhaite isoler certains services.
+Des réseaux explicites servent à isoler certains services.
 
 ```
 services:
@@ -207,13 +203,9 @@ networks:
   backend:
 ```
 
-Le frontend peut contacter l’API.
+Le frontend contacte l’API. L’API contacte PostgreSQL. Le frontend ne peut pas joindre PostgreSQL, car ils ne partagent aucun réseau.
 
-L’API peut contacter PostgreSQL.
-
-Le frontend ne peut pas directement contacter PostgreSQL car ils ne partagent aucun réseau.
-
-Pour la plupart des environnements de développement simples, le réseau `default` suffit.
+Pour un environnement de développement simple, le réseau `default` suffit.
 
 ------------------------------------------------------------------------
 
@@ -230,14 +222,14 @@ build:
 
 Docker utilise le répertoire courant comme **contexte de build**.
 
-Le Dockerfile peut donc accéder aux fichiers présents dans ce contexte :
+Le Dockerfile accède aux fichiers présents dans ce contexte :
 
 ```
 COPY package.json .
 COPY apps/api ./apps/api
 ```
 
-Il est important de limiter ce que Docker reçoit grâce à `.dockerignore`.
+Limitez ce que Docker reçoit avec `.dockerignore`.
 
 Exemple :
 
@@ -251,11 +243,11 @@ dist
 .DS_Store
 ```
 
-Cela permet :
+Ce fichier sert à :
 
-- d’accélérer les builds ;
-- d’éviter d’envoyer des fichiers inutiles ;
-- d’éviter d’inclure accidentellement des secrets.
+- accélérer les builds ;
+- ne pas envoyer de fichiers inutiles ;
+- ne pas inclure un secret par accident.
 
 Documentation : https://docs.docker.com/reference/compose-file/build/
 
@@ -269,7 +261,7 @@ Les modifications effectuées pendant son exécution sont écrites dans sa **co
 
 Par exemple PostgreSQL écrit ses données dans : `/var/lib/postgresql/data`
 
-Sans volume, ces données appartiennent au conteneur, si jamais le conteneur est supprimé, sa **couche writable** disparaît également.
+Sans volume, ces données appartiennent au conteneur. Si le conteneur est supprimé, sa **couche writable** disparaît avec lui.
 
 ## Volume nommé
 
@@ -299,11 +291,7 @@ On peut supprimer puis recréer le conteneur PostgreSQL tout en conservant :
 
 Le volume possède un cycle de vie indépendant du conteneur.
 
-Attention : `docker compose down` supprime les conteneurs mais conserve généralement les volumes nommés.
-
-Puis : `docker compose down -v` supprime également les volumes.
-
-Dans le cas d’une base de données de développement, cela signifie généralement : **base remise à zéro**.
+Attention : `docker compose down` supprime les conteneurs et conserve les volumes nommés. `docker compose down -v` supprime aussi les volumes. Pour une base de développement, cela veut dire **base remise à zéro**.
 
 ------------------------------------------------------------------------
 
@@ -316,13 +304,11 @@ volumes:
   - ./apps/api:/repo/apps/api
 ```
 
-C’est particulièrement utile en développement.
-
-Lorsqu’un fichier est modifié dans l’IDE : `apps/api/src/server.ts` le conteneur voit immédiatement la modification.
+C’est utile en développement : quand vous modifiez `apps/api/src/server.ts` dans l’IDE, le conteneur voit la modification tout de suite.
 
 Documentation : https://docs.docker.com/engine/storage/bind-mounts/
 
-On peut grossièrement retenir :
+En résumé :
 
 | Type          | Usage                                      |
 |---------------|--------------------------------------------|
@@ -333,7 +319,7 @@ On peut grossièrement retenir :
 
 # `node_modules` et Docker
 
-Il faut faire attention lorsqu’on monte tout le projet :
+Attention quand vous montez tout le projet :
 
 ```
 volumes:
@@ -356,7 +342,7 @@ Le code vient de la machine hôte, mais `node_modules` reste propre au contene
 
 # Dépendances entre services
 
-Compose permet de déclarer qu’un service dépend d’un autre avec `depends_on`.
+`depends_on` déclare qu’un service dépend d’un autre.
 
 ```
 api:
@@ -365,7 +351,7 @@ api:
       condition: service_healthy
 ```
 
-Il existe notamment trois conditions utiles.
+Trois conditions sont utiles.
 
 ## `service_started`
 
@@ -375,9 +361,7 @@ depends_on:
     condition: service_started
 ```
 
-Le conteneur `db` doit être démarré.
-
-Cela ne garantit pas que PostgreSQL soit déjà prêt à accepter des connexions.
+Le conteneur `db` doit être démarré. PostgreSQL n’accepte pas forcément encore de connexions à ce moment-là.
 
 ## `service_healthy`
 
@@ -387,9 +371,7 @@ depends_on:
     condition: service_healthy
 ```
 
-Compose attend que le `healthcheck` du service soit valide.
-
-C’est généralement préférable pour une base de données.
+Compose attend que le `healthcheck` du service réussisse. C’est le bon choix pour une base de données.
 
 ## `service_completed_successfully`
 
@@ -401,18 +383,18 @@ depends_on:
 
 Compose attend que le service se termine avec un code de sortie `0`.
 
-C’est particulièrement adapté à :
+Cette condition convient aux :
 
 - migrations ;
-- initialisation ;
-- génération de fichiers ;
-- setup ponctuel.
+- initialisations ;
+- générations de fichiers ;
+- tâches ponctuelles.
 
 ------------------------------------------------------------------------
 
 # Healthchecks
 
-Un healthcheck permet de vérifier si un service est réellement opérationnel.
+Un healthcheck vérifie qu’un service répond, pas seulement que son conteneur tourne.
 
 Exemple PostgreSQL :
 
@@ -437,13 +419,13 @@ Le démarrage peut ensuite suivre cet ordre :
 3. La migration démarre et se termine avec le code 0 : elle passe à l’état `service_completed_successfully`.
 4. L’API démarre.
 
-C’est généralement plus robuste que : `Postgres démarre puis API démarre immédiatement`
+Sans healthcheck, l’API démarre dès que le conteneur Postgres existe et peut échouer à sa première connexion.
 
 ------------------------------------------------------------------------
 
 # Une image commune pour plusieurs services
 
-Un pattern intéressant consiste à utiliser une même image pour plusieurs rôles.
+Une même image peut servir à plusieurs rôles.
 
 Par exemple :
 
@@ -465,25 +447,25 @@ L’image peut contenir :
 - les dépendances ;
 - les scripts npm.
 
-Mais chaque conteneur choisit ce qu’il exécute.
+Chaque conteneur choisit ce qu’il exécute.
 
 1.  Le service `migrate` effectue son travail puis s’arrête.
 2.  Le service `api` reste actif et écoute les requêtes HTTP.
 
-Ca évite de maintenir artificiellement :
+Vous évitez ainsi de maintenir :
 
 ``` plaintext
 Dockerfile.api
 Dockerfile.migrate
 ```
 
-alors que les deux utilisent exactement le même environnement.
+alors que les deux utilisent le même environnement.
 
 ------------------------------------------------------------------------
 
 # Plusieurs applications dans un même conteneur
 
-Il est techniquement possible de lancer plusieurs processus dans un seul conteneur :
+Un seul conteneur peut lancer plusieurs processus :
 
 ``` plaintext
 app
@@ -502,26 +484,22 @@ command: >
   '
 ```
 
-Cela peut être acceptable pour un environnement de développement simple.
+Pour un environnement de développement simple, ça passe. Un conteneur par application reste plus lisible : `app1` (Vite, port 5173) appelle `app2` (API, port 8787), qui appelle `postgres` (port 5432).
 
-Mais il est souvent plus clair d’avoir un conteneur par application : `app1` (Vite, port 5173) appelle `app2` (API, port 8787), qui appelle `postgres` (port 5432).
-
-Cela apporte notamment :
+Vous obtenez :
 
 - des logs distincts ;
 - des healthchecks distincts ;
 - des redémarrages indépendants ;
 - une meilleure visibilité de l’état de chaque service.
 
-On peut par exemple faire : `docker compose logs app1`ou : `docker compose restart app2` sans toucher aux autres services.
-
-Un conteneur par responsabilité principale est en général plus simple à exploiter.
+Vous pouvez lancer `docker compose logs app1` ou `docker compose restart app2` sans toucher aux autres services.
 
 ------------------------------------------------------------------------
 
 # Variables d’environnement
 
-Il faut distinguer plusieurs mécanismes.
+Compose a plusieurs mécanismes.
 
 ## `environment`
 
@@ -548,7 +526,7 @@ environment:
 
 Compose remplace `${DATABASE_URL}` avant de démarrer le conteneur.
 
-La valeur peut notamment venir :
+La valeur vient :
 
 - du shell ;
 - d’un fichier `.env`.
@@ -571,7 +549,7 @@ BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?BETTER_AUTH_SECRET is required}
 
 Compose refuse de démarrer si la variable n’est pas définie.
 
-C’est utile pour les paramètres critiques.
+Utilisez-le pour les paramètres sans lesquels l’application ne peut pas tourner.
 
 Documentation : https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/
 
@@ -579,7 +557,7 @@ Documentation : https://docs.docker.com/compose/how-tos/environment-variables/v
 
 # Secrets
 
-Il ne faut pas stocker de véritables secrets directement dans :
+Ne stockez pas de vrais secrets dans :
 
 - le Dockerfile ;
 - `compose.yaml` ;
@@ -595,7 +573,7 @@ environment:
 
 ## `.env` local
 
-Pour un environnement de développement, un `.env` non commité est souvent suffisant.
+En développement, un `.env` non commité suffit en général.
 
 ``` yaml
 BETTER_AUTH_SECRET=...
@@ -609,14 +587,14 @@ environment:
   BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
 ```
 
-Ajouter :
+Ajoutez au `.gitignore` :
 
 ``` plaintext
 .env
 .env.local
 ```
 
-et également `.env` dans `.dockerignore`.
+et ajoutez aussi `.env` dans `.dockerignore`.
 
 Un fichier `.env.example` peut en revanche être versionné :
 
@@ -627,7 +605,7 @@ DATABASE_URL=
 
 ## Docker Secrets
 
-Compose permet également de déclarer des secrets.
+Compose déclare aussi des secrets.
 
 ``` yaml
 services:
@@ -642,18 +620,12 @@ secrets:
 
 Le secret devient disponible dans le conteneur sous : `/run/secrets/better_auth_secret`
 
-Attention : un Docker Secret devient un **fichier**, pas automatiquement une variable d’environnement.
-
-Une application qui attend : `process.env.BETTER_AUTH_SECRET` ne le trouvera donc pas automatiquement.
-
-Il faut soit :
+Attention : un Docker Secret devient un **fichier**, pas une variable d’environnement. Une application qui lit `process.env.BETTER_AUTH_SECRET` ne le trouvera pas. Deux solutions :
 
 - lire le fichier depuis l’application ;
-- soit injecter le secret autrement.
+- injecter le secret autrement.
 
-Pour un développement local : `.env gitignored` est généralement suffisant.
-
-Pour la production : `secret manager / Docker Secret / secret CI` est préférable.
+En développement local, un `.env` ignoré par Git suffit. En production, préférez un gestionnaire de secrets, un Docker Secret ou un secret de CI.
 
 Documentation : https://docs.docker.com/reference/compose-file/secrets/
 
@@ -671,15 +643,15 @@ Pour des projets Node.js / TypeScript :
 
 1.  Utiliser le **nom du service comme hostname** : `db:5432`, `redis:6379`, `api:3000`, plutôt que des IP.
 
-2.  Ne déclarer des `networks:` explicites que lorsqu’il existe réellement un besoin d’isolation. Le réseau `default` suffit souvent.
+2.  Ne déclarer des `networks:` explicites qu’en cas de besoin d’isolation. Le réseau `default` suffit souvent.
 
 3.  Utiliser `service_healthy` pour une base de données plutôt que `service_started` si le service suivant doit immédiatement s’y connecter.
 
 4.  Utiliser `service_completed_successfully` pour les migrations, setups ou tâches ponctuelles.
 
-5.  Ajouter des `healthcheck` aux services importants.
+5.  Ajouter un `healthcheck` aux services dont d’autres dépendent.
 
-6.  Ne jamais commit de véritables secrets dans `compose.yaml`.
+6.  Ne pas commiter de vrais secrets dans `compose.yaml`.
 
 7.  Utiliser un `.env` ignoré par Git pour le développement et un mécanisme de secrets adapté pour la production.
 
@@ -697,25 +669,21 @@ Pour des projets Node.js / TypeScript :
 
 14. Garder les `node_modules` Linux dans le conteneur plutôt que de réutiliser ceux de macOS ou Windows.
 
-15. Maintenir un `.dockerignore`, particulièrement avec : `context: .`
+15. Maintenir un `.dockerignore`, surtout avec `context: .`
 
-16. Utiliser une image commune avec des commandes différentes pour des services comme `api`, `migrate` et `worker`lorsqu’ils partagent le même environnement.
+16. Utiliser une image commune avec des commandes différentes pour des services comme `api`, `migrate` et `worker` lorsqu’ils partagent le même environnement.
 
-17. Préférer un Dockerfile multi-stage pour séparer clairement développement, build et production.
+17. Préférer un Dockerfile multi-stage pour séparer développement, build et production.
 
 18. Construire l’image de production une seule fois, puis déployer cette même image en staging et en production.
 
 19. Identifier les images avec un numéro de version ou un SHA Git plutôt que de dépendre uniquement de `latest`.
 
-20. Utiliser régulièrement : `docker compose config`
-
-pour comprendre réellement ce que Compose va exécuter.
+20. Lancer `docker compose config` pour voir ce que Compose va exécuter, variables résolues.
 
 ------------------------------------------------------------------------
 
 # Modèle mental à retenir
-
-On peut résumer l’ensemble ainsi :
 
 > **Git versionne le code. Docker construit un artefact exécutable. Le registry distribue cet artefact. Compose organise son exécution. Les volumes conservent les données qui doivent survivre aux conteneurs.**
 

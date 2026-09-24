@@ -1307,3 +1307,266 @@ dialog.zoom {
     display: none;
   }
 }
+
+/* Chapitre RIA : figures adaptées aux couleurs et à la typographie de Carnet. */
+.legal-guide {
+  --legal-ban: #b93c35;
+  --legal-high: #b7661f;
+  --legal-transparency: #a07808;
+  --legal-minimal: #32768b;
+  --legal-model: #69717d;
+}
+
+.legal-guide .diagram {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.legal-guide .legal-hint {
+  display: none;
+  margin: 0 0 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+[data-theme="dark"] .legal-guide {
+  --legal-ban: #ed7770;
+  --legal-high: #f0a15c;
+  --legal-transparency: #e4be48;
+  --legal-minimal: #83c6d5;
+  --legal-model: #a9b1bf;
+}
+
+.legal-guide .quadrant {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.7fr) repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 1.75rem 0;
+  line-height: 1.45;
+}
+
+.legal-guide .quadrant .axis {
+  display: flex;
+  align-items: end;
+  padding: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.legal-guide .quadrant .row-axis { align-items: center; }
+
+.legal-guide .quadrant .cell {
+  padding: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+}
+
+.legal-guide .quadrant .cell b {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--heading);
+}
+
+.legal-guide .quadrant .both {
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+.legal-guide .scroll,
+.legal-guide .legal-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.legal-guide .legal-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.legal-guide .legal-roles {
+  display: grid;
+  grid-template-columns: 3.5rem repeat(4, minmax(8.5rem, 1fr));
+  gap: 0.75rem;
+  min-width: 44rem;
+  align-items: stretch;
+  text-align: center;
+  line-height: 1.35;
+  font-size: 0.9rem;
+}
+
+.legal-guide .legal-actor {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 0.25rem;
+  min-height: 5rem;
+  padding: 0.65rem 0.5rem;
+  border: 1px solid var(--node-stroke);
+  border-radius: 4px;
+  background: var(--node-fill);
+  color: var(--node-text);
+}
+
+.legal-guide .legal-actor:not(:nth-child(5))::after {
+  content: "→";
+  position: absolute;
+  left: calc(100% + 0.2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.15rem;
+}
+
+.legal-guide .legal-actor span,
+.legal-guide .legal-roles small { color: var(--text-muted); }
+
+.legal-guide .legal-actor-active {
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+  color: var(--accent-text);
+}
+
+.legal-guide .legal-row-label {
+  align-self: center;
+  text-align: left;
+  color: var(--text-muted);
+}
+
+.legal-guide .legal-roles > :nth-child(n + 11) {
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+}
+
+.legal-guide .niveau {
+  display: grid;
+  grid-template-columns: 0.55rem minmax(0, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.legal-guide .legal-pyramid {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.legal-guide .legal-pyramid img { display: block; width: 100%; background: #fff; }
+.legal-guide .legal-pyramid figcaption { margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem; }
+
+.legal-guide .niveau .bar { border-radius: 2px; }
+.legal-guide .bar.ban { background: var(--legal-ban); }
+.legal-guide .bar.high { background: var(--legal-high); }
+.legal-guide .bar.transp { background: var(--legal-transparency); }
+.legal-guide .bar.min { background: var(--legal-minimal); }
+.legal-guide .bar.gpai { background: var(--legal-model); }
+.legal-guide .niveau h3 { margin-top: 0; }
+.legal-guide .niveau .art { color: var(--text-muted); font-size: 0.8em; font-weight: 400; }
+
+.legal-guide .legal-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.legal-guide .legal-flow-steps { list-style: none; padding: 0; margin: 0; }
+.legal-guide .legal-flow-steps li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(10rem, 0.9fr);
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  position: relative;
+}
+
+.legal-guide .legal-flow-steps li:not(:last-child)::after {
+  content: "non ↓";
+  position: absolute;
+  left: 1rem;
+  bottom: -1.55rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.legal-guide .legal-question,
+.legal-guide .legal-outcome {
+  display: grid;
+  align-content: center;
+  gap: 0.25rem;
+  min-height: 5.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+
+.legal-guide .legal-question {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+}
+
+.legal-guide .legal-question span,
+.legal-guide .legal-outcome span,
+.legal-guide .legal-outcome small { font-size: 0.8rem; }
+.legal-guide .legal-question span { color: var(--text-muted); }
+.legal-guide .legal-outcome { color: #fff; }
+.legal-guide .legal-outcome span,
+.legal-guide .legal-outcome small { color: inherit; }
+.legal-guide .legal-ban { background: #a93530; }
+.legal-guide .legal-high { background: #aa5b1c; }
+.legal-guide .legal-transparency { background: #d7ad26; color: #27200b; }
+.legal-guide .legal-minimal { background: #2d6f83; }
+.legal-guide .legal-flow-final { grid-template-columns: 1fr !important; }
+.legal-guide .legal-gdpr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 2px solid var(--accent-stroke);
+  border-radius: 4px;
+  background: var(--accent-fill);
+  color: var(--accent-text);
+  text-align: center;
+  font-weight: 600;
+  writing-mode: vertical-rl;
+}
+.legal-guide .legal-caption { color: var(--text-muted); font-size: 0.875rem; }
+
+.legal-guide .retenir {
+  padding: 0.85rem 1rem 0.2rem;
+  border-top: 2px solid var(--accent-stroke);
+  background: var(--accent-fill);
+  margin: 1.5rem 0;
+}
+.legal-guide .retenir > p:first-child { margin-bottom: 0.3rem; font-weight: 700; color: var(--accent-text); }
+.legal-guide .glossaire { display: grid; grid-template-columns: minmax(8rem, 0.65fr) minmax(0, 1.5fr); gap: 0.35rem 1rem; }
+.legal-guide .glossaire dt { font-weight: 600; color: var(--heading); }
+.legal-guide .glossaire dd { margin: 0 0 0.8rem; }
+.legal-guide .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.legal-guide .check { list-style: none; padding: 0; }
+.legal-guide .check li { padding-left: 1.5rem; position: relative; }
+.legal-guide .check li::before { content: ""; position: absolute; left: 0; top: 0.45rem; width: 0.75rem; height: 0.75rem; border: 1px solid var(--accent-stroke); border-radius: 2px; }
+.legal-guide svg { display: block; min-width: 48rem; max-width: none; font-family: "Inclusive Sans", sans-serif; }
+.legal-guide svg .t { fill: var(--text); font-size: 13px; }
+.legal-guide svg .ts { fill: var(--text-muted); font-size: 12px; }
+.legal-guide svg .th { fill: var(--heading); font-size: 14px; font-weight: 700; }
+.legal-guide svg .line { stroke: var(--text-muted); stroke-width: 1.5; fill: none; }
+.legal-guide svg .axisline { stroke: var(--accent-stroke); stroke-width: 3; }
+.legal-guide svg .today { stroke: var(--legal-ban); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.legal-guide svg .f-accent { fill: var(--accent-stroke); }
+.legal-guide td.num { white-space: nowrap; font-weight: 700; }
+
+@media (max-width: 760px) {
+  .legal-guide .legal-hint { display: block; }
+  .legal-guide .quadrant { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .legal-guide .quadrant .axis:first-child { display: none; }
+  .legal-guide .quadrant .row-axis { grid-column: 1 / -1; padding: 0.25rem 0; }
+  .legal-guide .legal-flow { grid-template-columns: minmax(0, 1fr); }
+  .legal-guide .legal-flow-steps li { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; }
+  .legal-guide .legal-flow-steps li:not(:last-child)::after { bottom: -1.6rem; }
+  .legal-guide .legal-gdpr { min-height: 3.5rem; writing-mode: horizontal-tb; }
+  .legal-guide .glossaire,
+  .legal-guide .cols { grid-template-columns: minmax(0, 1fr); }
+}
