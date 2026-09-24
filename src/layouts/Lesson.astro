@@ -21,6 +21,7 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
 // Barre latérale : les chapitres de ce cours seulement, ou la liste des fiches sur une fiche.
 // Les autres cours restent sur l'accueil, à un clic, sans distraire la lecture
 const group = courses.find((g) => g.course === course);
+const navLabel = group ? "Chapitres" : "Fiches";
 ---
 
 <!doctype html>
@@ -61,7 +62,7 @@ const group = courses.find((g) => g.course === course);
         <button type="button" class="theme-toggle search-open" aria-keyshortcuts="Control+K Meta+K /">
           Rechercher <kbd>/</kbd>
         </button>
-        {!home && <a class="theme-toggle chapters-link" href="#chapitres">Chapitres</a>}
+        {!home && <a class="theme-toggle chapters-link" href="#chapitres">{navLabel}</a>}
         <div class="size-btns" role="group" aria-label="Taille du texte">
           <button type="button" class="theme-toggle" data-size-step="-1" aria-label="A− réduire le texte">A−</button>
           <button type="button" class="theme-toggle" data-size-step="1" aria-label="A+ agrandir le texte">A+</button>
@@ -86,7 +87,7 @@ const group = courses.find((g) => g.course === course);
     <!-- Téléphone : le bouton Chapitres ouvre une copie de la barre latérale -->
     <dialog class="chapters" aria-labelledby="chapters-title">
       <div class="chapters-head">
-        <p class="chapters-title" id="chapters-title">Chapitres</p>
+        <p class="chapters-title" id="chapters-title">{navLabel}</p>
         <button type="button" class="theme-toggle" data-close>Fermer</button>
       </div>
     </dialog>
