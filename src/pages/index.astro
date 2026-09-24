@@ -18,18 +18,39 @@ const intro = (body = "") => {
     .replace(/[*`]/g, "")
     .replace(/\s+/g, " ");
 };
+
+// Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plus
+// (page renommée ou supprimée) n'affiche rien
+const pages = Object.fromEntries([
+  ...courses.flatMap(({ course, chapters }) => [
+    [course.id, { url: href(course.id), title: course.data.title, where: "Présentation du cours" }],
+    ...chapters.map((c, i) => [
+      c.id,
+      { url: href(c.id), title: c.data.title, where: `${course.data.title}, chapitre ${i + 1} sur ${chapters.length}` },
+    ]),
+  ]),
+  ...sheets.map(({ course }) => [course.id, { url: href(course.id), title: course.data.title, where: "Fiche" }]),
+]);
 ---
 
 <Lesson title="Carnet">
   <header class="hero">
-    <div class="wrap">
-      <h1>Carnet</h1>
-      <p class="lede">Des cours de programmation, à relire après la séance ou à projeter en classe.</p>
-      <button type="button" class="search-open hero-search" aria-keyshortcuts="Control+K Meta+K /">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-        Rechercher dans les cours
-        <kbd>/</kbd>
-      </button>
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Carnet</h1>
+        <p class="lede">Des cours de programmation, à relire après la séance ou à projeter en classe.</p>
+        <button type="button" class="search-open hero-search" aria-keyshortcuts="Control+K Meta+K /">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          Rechercher dans les cours
+          <kbd>/</kbd>
+        </button>
+      </div>
+      <a class="resume" hidden data-pages={JSON.stringify(pages)}>
+        <span class="resume-label">Reprendre la lecture →</span>
+        <span class="resume-title"></span>
+        <span class="resume-where"></span>
+        <span class="resume-where resume-section"></span>
+      </a>
     </div>
   </header>
 
@@ -79,6 +100,22 @@ const intro = (body = "") => {
     </ul>
   </section>
 </Lesson>
+
+<script>
+  // Reprendre : Lesson.astro retient la dernière page lue et sa section. Rien à la première visite
+  const card = document.querySelector<HTMLAnchorElement>(".resume");
+  try {
+    const { id, slug, section } = JSON.parse(localStorage.getItem("resume")) ?? {};
+    const page = JSON.parse(card.dataset.pages)[id];
+    if (page?.url) {
+      card.href = page.url + (slug ? `#${encodeURIComponent(slug)}` : "");
+      card.querySelector(".resume-title").textContent = page.title;
+      card.querySelector(".resume-where").textContent = page.where;
+      if (section) card.querySelector(".resume-section").textContent = `Section : ${section}`;
+      card.hidden = false;
+    }
+  } catch {}
+</script>
 
 <style>
   .wrap {
@@ -151,6 +188,59 @@ const intro = (body = "") => {
 
   .hero-search kbd {
     margin-left: auto;
+  }
+
+  /* Le lien Reprendre à droite, aligné sur le bas du champ de recherche */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 34rem) minmax(0, 22rem);
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px 48px;
+  }
+
+  /* Même carte que « Suivant » en fin de chapitre : accent de l'acteur actif des diagrammes */
+  .resume {
+    display: grid;
+    gap: 2px;
+    padding: 12px 16px;
+    color: var(--accent-text);
+    text-decoration: none;
+    background: var(--accent-fill);
+    border: 1.25px solid var(--accent-stroke);
+    border-radius: 6px;
+    box-shadow: 0 2px 0 var(--accent-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .resume[hidden] {
+    display: none;
+  }
+
+  .resume:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 var(--accent-shadow);
+  }
+
+  .resume:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .resume-label,
+  .resume-where {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--accent-sub);
+  }
+
+  .resume-section:empty {
+    display: none;
+  }
+
+  .resume-title {
+    font-weight: 600;
+    line-height: 1.4;
   }
 
   .index {
@@ -299,6 +389,9 @@ const intro = (body = "") => {
     .course {
       grid-template-columns: minmax(0, 1fr);
     }
+    .hero-grid {
+      grid-template-columns: minmax(0, 34rem);
+    }
   }
 
   @media (max-width: 760px) {
@@ -327,7 +420,8 @@ const intro = (body = "") => {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-search {
+    .hero-search,
+    .resume {
       transition: none;
     }
   }

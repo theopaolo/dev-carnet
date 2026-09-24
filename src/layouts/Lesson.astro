@@ -128,6 +128,7 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
           class:list={["content", id === "rgpd/01-reperes-ia-act-rgpd" && "legal-guide"]}
           id="contenu"
           tabindex="-1"
+          data-page={id || undefined}
         >
           {toc.length > 0 && (
             <details class="toc-inline">
@@ -216,6 +217,17 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
         if (e.target === chapters) chapters.close();
       });
 
+      // Reprendre : la dernière page lue et sa section, relues par le lien de l'accueil.
+      // Rien ne quitte le navigateur
+      const pageId = document.getElementById("contenu").dataset.page;
+      const remember = (section) => {
+        if (!pageId) return;
+        try {
+          localStorage.setItem("resume", JSON.stringify({ id: pageId, ...section }));
+        } catch {}
+      };
+      remember();
+
       // Surligne l'entrée du sommaire dont le titre est à l'écran
       const toc = document.querySelector(".toc");
       const links = new Map(
@@ -226,6 +238,8 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
         if (!a || a.classList.contains("active")) return;
         links.forEach((l) => l.classList.remove("active"));
         a.classList.add("active");
+        // Le titre de la page (depth-1) ramène en haut : pas de section à retenir
+        remember(a.parentElement.classList.contains("depth-2") ? { slug: id, section: a.textContent } : undefined);
         // Un long sommaire défile dans sa colonne : l'entrée active reste visible
         if (a.offsetTop < toc.scrollTop || a.offsetTop + a.offsetHeight > toc.scrollTop + toc.clientHeight) {
           toc.scrollTop = a.offsetTop - toc.clientHeight / 2;
