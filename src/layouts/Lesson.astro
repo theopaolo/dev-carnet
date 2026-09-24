@@ -14,11 +14,13 @@ const toc = headings.filter((h) => h.depth <= 2);
 // L'accueil est lui-même la liste des cours : pas de barre latérale
 const home = !id;
 
-// Barre latérale : les cours, repliés sauf celui en cours de lecture, puis les fiches d'une page
 const { all, courses, sheets } = await getCourses();
 const href = (i: string) => `${base}/${i}/`;
 // Cours de la page affichée, rappelé dans la barre du haut
 const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
+// Barre latérale : les chapitres de ce cours seulement, ou la liste des fiches sur une fiche.
+// Les autres cours restent sur l'accueil, à un clic, sans distraire la lecture
+const group = courses.find((g) => g.course === course);
 ---
 
 <!doctype html>
@@ -92,34 +94,35 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     <div class:list={["shell", home && "shell-home"]}>
       {!home && (
         <nav class="sidebar" id="chapitres" aria-label="Cours">
-          <p class="nav-section">Cours</p>
-          {courses.map(({ course, chapters }) => (
-            <details class="nav-group" open={id === course.id || id.startsWith(course.id + "/")}>
-              <summary class="nav-title">
-                <span>{course.data.title}</span>
-              </summary>
-              <ul>
+          <a class="nav-back" href={base + "/"}>← Tous les cours</a>
+          {group ? (
+            <>
+              <p class="nav-title">{group.course.data.title}</p>
+              <ul class="nav-chapters">
                 <li>
-                  <a href={href(course.id)} aria-current={course.id === id ? "page" : undefined}>Présentation</a>
+                  <a href={href(group.course.id)} aria-current={group.course.id === id ? "page" : undefined}>Présentation</a>
                 </li>
-                {chapters.map((c) => (
+                {group.chapters.map((c) => (
                   <li>
                     <a href={href(c.id)} aria-current={c.id === id ? "page" : undefined}>{c.data.title}</a>
                   </li>
                 ))}
               </ul>
-            </details>
-          ))}
-          <p class="nav-section">Fiches</p>
-          <ul>
-            {sheets.map(({ course }) => (
-              <li>
-                <a class="nav-title" href={href(course.id)} aria-current={course.id === id ? "page" : undefined}>
-                  {course.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
+            </>
+          ) : (
+            <>
+              <p class="nav-section">Fiches</p>
+              <ul>
+                {sheets.map(({ course }) => (
+                  <li>
+                    <a class="nav-title" href={href(course.id)} aria-current={course.id === id ? "page" : undefined}>
+                      {course.data.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </nav>
       )}
 
@@ -336,7 +339,6 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
 
   .sidebar a:focus-visible,
   .toc a:focus-visible,
-  .nav-title:focus-visible,
   .brand:focus-visible,
   .search-results a:focus-visible {
     outline: 2px solid var(--accent);
@@ -475,8 +477,7 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
   }
 
   /* Cibles tactiles d'au moins 44px */
-  dialog.chapters .sidebar a,
-  dialog.chapters .nav-title {
+  dialog.chapters .sidebar a {
     padding-block: 12px;
   }
 
@@ -653,8 +654,6 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     padding: 28px 14px 64px;
     background: var(--bg-canvas);
     border-right: 1px solid var(--border);
-    /* Ouverture animée des groupes (::details-content, navigateurs récents) */
-    interpolate-size: allow-keywords;
   }
 
   .toc {
@@ -688,16 +687,20 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     color: var(--text-muted);
   }
 
-  .sidebar > * + .nav-section {
-    margin-top: 28px;
+  /* Retour à la liste de tous les cours, au-dessus du cours affiché */
+  .nav-back {
+    display: block;
+    margin: 0 0 20px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
   }
 
-  /* Titre de cours ou de fiche : le chevron à droite, le texte aligné pour tous */
+  /* Titre du cours affiché, ou d'une fiche */
   .nav-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    display: block;
+    margin: 0;
     padding: 7px 10px;
     border-radius: 6px;
     font-size: 0.9375rem;
@@ -705,55 +708,10 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     line-height: 1.35;
     color: var(--heading);
     text-decoration: none;
-    cursor: pointer;
-  }
-
-  summary.nav-title {
-    list-style: none;
-  }
-
-  summary.nav-title::-webkit-details-marker {
-    display: none;
-  }
-
-  summary.nav-title::after {
-    content: "";
-    flex: none;
-    width: 6px;
-    height: 6px;
-    margin-right: 3px;
-    border-right: 1.5px solid var(--text-muted);
-    border-bottom: 1.5px solid var(--text-muted);
-    transform: rotate(-45deg);
-    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  details[open] > summary.nav-title::after {
-    transform: rotate(45deg);
-  }
-
-  .nav-group + .nav-group {
-    margin-top: 2px;
-  }
-
-  .nav-group[open] {
-    margin-bottom: 10px;
-  }
-
-  .nav-group::details-content {
-    block-size: 0;
-    overflow-y: clip;
-    transition:
-      block-size 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-      content-visibility 0.25s allow-discrete;
-  }
-
-  .nav-group[open]::details-content {
-    block-size: auto;
   }
 
   /* Chapitres : un filet relie les pages d'un même cours */
-  .nav-group ul {
+  .nav-chapters {
     margin: 2px 0 0 10px;
     padding: 4px 0 4px 8px;
     border-left: 1px solid var(--border-strong);
@@ -769,7 +727,6 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
   }
 
   .sidebar ul a.nav-title {
-    display: flex;
     color: var(--heading);
   }
 
@@ -778,7 +735,7 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
   }
 
   /* Survol : un cran plus foncé que le panneau, dans les deux thèmes */
-  .nav-title:hover,
+  .nav-back:hover,
   .sidebar ul a:hover {
     color: var(--heading);
     background: color-mix(in srgb, var(--border) 70%, transparent);
@@ -797,16 +754,9 @@ const course = id ? all.find((c) => c.id === id.split("/")[0]) : undefined;
     box-shadow: inset 0 0 0 1px var(--accent-stroke);
   }
 
-  .nav-group a[aria-current="page"],
+  .nav-chapters a[aria-current="page"],
   .toc a.active {
     font-weight: 500;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    summary.nav-title::after,
-    .nav-group::details-content {
-      transition: none;
-    }
   }
 
   @media (max-width: 1180px) {
