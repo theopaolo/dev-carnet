@@ -1,6 +1,22 @@
 /* Thème des cours : typographie, code, diagrammes Mermaid, mode sombre.
    Toutes les couleurs passent par les jetons de :root, redéfinis pour le sombre. */
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 @font-face {
   font-family: "Roboto Mono";
   src: url("../assets/fonts/RobotoMono-VariableFont_wght.woff2") format("woff2");
