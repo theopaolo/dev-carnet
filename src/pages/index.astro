@@ -5,19 +5,33 @@ import { getCourses, intro } from "../lib/courses";
 const { courses, sheets } = await getCourses();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = (id: string) => `${base}/${id}/`;
-const lede = "Des cours de programmation, à relire après la séance ou à projeter en classe.";
+const lede = "Notes, fiches et petits cours de dev.";
 
 // Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plus
 // (page renommée ou supprimée) n'affiche rien
 const pages = Object.fromEntries([
   ...courses.flatMap(({ course, chapters }) => [
-    [course.id, { url: href(course.id), title: course.data.title, where: "Présentation du cours" }],
+    [
+      course.id,
+      {
+        url: href(course.id),
+        title: course.data.title,
+        where: "Présentation du cours",
+      },
+    ],
     ...chapters.map((c, i) => [
       c.id,
-      { url: href(c.id), title: c.data.title, where: `${course.data.title}, chapitre ${i + 1} sur ${chapters.length}` },
+      {
+        url: href(c.id),
+        title: c.data.title,
+        where: `${course.data.title}, chapitre ${i + 1} sur ${chapters.length}`,
+      },
     ]),
   ]),
-  ...sheets.map(({ course }) => [course.id, { url: href(course.id), title: course.data.title, where: "Fiche" }]),
+  ...sheets.map(({ course }) => [
+    course.id,
+    { url: href(course.id), title: course.data.title, where: "Fiche" },
+  ]),
 ]);
 ---
 
@@ -27,8 +41,23 @@ const pages = Object.fromEntries([
       <div>
         <h1>Carnet</h1>
         <p class="lede">{lede}</p>
-        <button type="button" class="search-open hero-search" aria-keyshortcuts="Control+K Meta+K /">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        <button
+          type="button"
+          class="search-open hero-search"
+          aria-keyshortcuts="Control+K Meta+K /"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
           Rechercher dans les cours
           <kbd>/</kbd>
         </button>
@@ -56,11 +85,16 @@ const pages = Object.fromEntries([
               {chapters.length} {chapters.length > 1 ? "chapitres" : "chapitre"}
             </span>
           </div>
-          <ol class="chapter-list" aria-label={`Chapitres : ${course.data.title}`}>
+          <ol
+            class="chapter-list"
+            aria-label={`Chapitres : ${course.data.title}`}
+          >
             {chapters.map((c, i) => (
               <li>
                 <a href={href(c.id)}>
-                  <span class="n" aria-hidden="true">{i + 1}</span>
+                  <span class="n" aria-hidden="true">
+                    {i + 1}
+                  </span>
                   <span class="t">{c.data.title}</span>
                 </a>
               </li>
@@ -93,13 +127,16 @@ const pages = Object.fromEntries([
   // Reprendre : Lesson.astro retient la dernière page lue et sa section. Rien à la première visite
   const card = document.querySelector<HTMLAnchorElement>(".resume");
   try {
-    const { id, slug, section } = JSON.parse(localStorage.getItem("resume")) ?? {};
+    const { id, slug, section } =
+      JSON.parse(localStorage.getItem("resume")) ?? {};
     const page = JSON.parse(card.dataset.pages)[id];
     if (page?.url) {
       card.href = page.url + (slug ? `#${encodeURIComponent(slug)}` : "");
       card.querySelector(".resume-title").textContent = page.title;
       card.querySelector(".resume-where").textContent = page.where;
-      if (section) card.querySelector(".resume-section").textContent = `Section : ${section}`;
+      if (section)
+        card.querySelector(".resume-section").textContent =
+          `Section : ${section}`;
       card.hidden = false;
     }
   } catch {}
@@ -126,7 +163,9 @@ const pages = Object.fromEntries([
     border: 1.25px solid var(--accent-stroke);
     border-radius: 6px;
     box-shadow: 0 2px 0 var(--accent-shadow);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
   }
 
   .resume[hidden] {
@@ -275,7 +314,9 @@ const pages = Object.fromEntries([
   .chapter-list .n {
     flex: none;
     min-width: 1.25rem;
-    font: 0.8125rem "Roboto Mono", monospace;
+    font:
+      0.8125rem "Roboto Mono",
+      monospace;
     font-variant-numeric: tabular-nums;
     text-align: right;
     color: var(--text-muted);
