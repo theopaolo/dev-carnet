@@ -9,25 +9,20 @@ Ce cours explique comment fonctionne un agent de code comme Claude Code, Codex, 
 
 > Un agent de code est un programme qui prépare un contexte, interroge un modèle, exécute des outils autorisés, observe leurs résultats et recommence jusqu’à une condition d’arrêt.
 
-La phrase à garder pendant les deux journées :
-
 > Le modèle demande. Le harness décide et exécute. L’outil agit sur l’environnement. Le résultat revient dans le contexte.
 
-## Public
+## Prérequis
 
-Le cours s’adresse à des développeurs qui utilisent surtout un chat avec copier-coller et n’ont pas encore configuré d’agent de code ni de clé d’API. Il ne demande pas de connaissances en apprentissage automatique.
+Vous pouvez suivre ce cours si vous utilisez surtout un chat avec copier-coller et n’avez pas encore configuré d’agent de code ni de clé d’API. Aucune connaissance en apprentissage automatique n’est nécessaire.
 
 ## Objectifs
 
-À la fin du premier jour, vous savez :
+Ce cours vous aide à :
 
 - distinguer modèle, fournisseur d’API, harness, outil et environnement
 - expliquer le trajet d’un appel d’outil et de son résultat
 - distinguer contexte courant, mémoire externe et règles de projet
-- formuler une tâche avec un résultat observable.
-
-À la fin du second jour, vous savez :
-
+- formuler une tâche avec un résultat observable
 - retracer une requête dans le mini-harness TypeScript fourni
 - vérifier une affirmation de l’agent avec le code ou une expérience
 - rédiger un `AGENTS.md` utile pour votre projet
@@ -48,20 +43,9 @@ Le cours s’adresse à des développeurs qui utilisent surtout un chat avec cop
 10. [Permissions et prompt injection](10-securite/) : où placer la frontière de confiance.
 11. [Formuler une tâche](11-bien-prompter/) : objectif, contexte, contraintes et critère de fin.
 12. [Vers l’AI engineering](12-ai-engineering/) : RAG, embeddings, routage de modèles et boucles longues.
-13. [Exercices et quiz](13-exercices/) : les trois TP du jour 2 et les questions de révision.
+13. [Exercices et quiz](13-exercices/) : trois TP et des questions de révision.
 
-## Déroulé
-
-| Séance | Contenu | Chapitres |
-| --- | --- | --- |
-| Jour 1, matin | Comprendre la boucle | 1 à 4 |
-| Jour 1, après-midi | Concevoir la boucle : contexte, règles, permissions | 5 à 11 |
-| Jour 2, matin | TP 1 et TP 2 sur le mini-harness | 3, 4, 7 |
-| Jour 2, après-midi | TP 3 dans votre projet : `AGENTS.md` et skill | 7, 8 |
-
-Le chapitre 12 sert d’ouverture. Il n’est pas présenté en entier pendant les deux jours.
-
-## Matériel
+## Pour pratiquer
 
 - Le dépôt `mini-harness` : une boucle ReAct en TypeScript avec Bun, sept outils et trois TP dans `exercises/`.
 - `demo-harness.ts` : une trace rejouable avec un faux modèle, sans compte ni clé d’API.

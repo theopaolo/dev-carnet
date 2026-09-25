@@ -31,13 +31,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       {n > 0 && <p class="pager-pos">Chapitre {n} sur {total}</p>}
       {prev && (
         <a rel="prev" href={`${base}/${prev.id}/`} aria-keyshortcuts="p">
-          <span class="pager-label">← Précédent <kbd>P</kbd></span>
+          <span class="pager-label"><span class="arrow-prev">Précédent</span> <kbd aria-hidden="true">P</kbd></span>
           <span class="pager-title">{prev.data.title}</span>
         </a>
       )}
       {next && (
         <a rel="next" href={`${base}/${next.id}/`} aria-keyshortcuts="s">
-          <span class="pager-label">Suivant → <kbd>S</kbd></span>
+          <span class="pager-label"><span class="arrow-next">Suivant</span> <kbd aria-hidden="true">S</kbd></span>
           <span class="pager-title">{next.data.title}</span>
         </a>
       )}

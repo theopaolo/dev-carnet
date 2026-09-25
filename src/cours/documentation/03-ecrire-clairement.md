@@ -86,7 +86,7 @@ Cette instruction donne un emplacement, un prérequis et un résultat observable
 
 Pour documenter une configuration inconnue, écris « Adresse du serveur de courriel de test à obtenir auprès de l’équipe » et indique le rôle de la variable. N’invente pas une valeur qui ressemble à une configuration vérifiée.
 
-Demande à un binôme de réécrire : « Une réservation ne marche pas quand c’est plein ». Corrigé possible : « Quand le nombre de réservations confirmées atteint la capacité de la séance, une nouvelle demande est refusée avec le message Atelier complet. L’historique ne change pas. » Le test doit vérifier le refus et l’absence d’ajout.
+Réécris : « Une réservation ne marche pas quand c’est plein ». Corrigé possible : « Quand le nombre de réservations confirmées atteint la capacité de la séance, une nouvelle demande est refusée avec le message Atelier complet. L’historique ne change pas. » Le test doit vérifier le refus et l’absence d’ajout.
 
 ## Exercice : préciser sans inventer
 

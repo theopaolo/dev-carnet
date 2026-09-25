@@ -131,9 +131,9 @@ La génération ne prouve pas l’exactitude des phrases. Un bloc @example n’e
 
 Documenter en priorité les points d’entrée utilisés par d’autres personnes, les effets et les limites. Pour un collègue du support, publier aussi les règles en langage métier et leurs exemples. Le survol aide surtout la personne qui travaille dans le code.
 
-## Exercice en binôme, quinze minutes
+## Exercice : vérifier un contrat dans l’éditeur
 
-Choisir une fonction dont le contrat manque de précision. Une personne écrit le commentaire, l’autre utilise la fonction depuis un second fichier.
+Choisis une fonction dont le contrat manque de précision. Écris le commentaire, puis utilise la fonction depuis un second fichier.
 
 Vérifier que le survol explique le résultat et les effets. Passer volontairement une valeur du mauvais type et lire le diagnostic. Corriger l’appel, puis expliquer une contrainte que le type ne peut pas garantir, par exemple « capacité entière et positive ou nulle ».
 

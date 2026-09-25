@@ -199,7 +199,7 @@ function addBars() {
     const svg = d.querySelector("svg");
     if (!svg) return;
     // Mermaid bloque le SVG à sa largeur naturelle en px. theme.css la convertit
-    // en rem : le diagramme grandit avec A+ et avec le mode Projeter
+    // en rem : le diagramme grandit avec A+ et avec le mode Focus
     svg.style.removeProperty("max-width");
     svg.style.setProperty("--w", svg.viewBox.baseVal.width);
     // Flèche sans texte : Mermaid pose quand même une étiquette vide

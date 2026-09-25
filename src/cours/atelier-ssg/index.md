@@ -1,9 +1,9 @@
 ---
-title: 'Atelier SSG : mini-blog tech'
+title: 'Créer un mini-blog avec un SSG'
 order: 8
 ---
 
-# Atelier SSG : mini-blog tech
+# Créer un mini-blog avec un SSG
 
 Fabriquez un mini-blog que vous alimenterez tout au long de votre M2 : questionnements, découvertes, apprentissages, envies.
 

@@ -26,7 +26,7 @@ Les trois captures ont été fournies pour ce cours :
 
 Source : Samuel Rozé, *Living Documentation*, 2020. [Vidéo indiquée](https://www.youtube.com/watch?v=hjjuhiCwgf0), [diaporama retrouvé](https://www.slideshare.net/slideshow/living-documentation/238968322).
 
-Ces captures ne sont pas placées sous les licences Creative Commons des photos. Leur présence ici ne vaut pas attribution d’une licence de redistribution générale. Les explications du cours sont reformulées et les exemples exécutables ont été créés pour l’atelier.
+Ces captures ne sont pas placées sous les licences Creative Commons des photos. Leur présence ici ne vaut pas attribution d’une licence de redistribution générale. Les explications du cours sont reformulées et les exemples exécutables ont été créés pour ce cours.
 
 ## Schémas du cours
 

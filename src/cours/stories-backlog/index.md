@@ -90,7 +90,7 @@ Un parcours utilisateur cartographie toute l'expérience d'un persona avec le pr
 
 Le scénario suffit quand vous partez de zéro sur un produit neuf et voulez alimenter un backlog vite. Le user journey sert dans deux cas : vous reprenez un produit existant et voulez diagnostiquer toute l'expérience avant de décider quoi modifier, ou vous avez accès à de vrais utilisateurs et voulez structurer ce que vous apprenez d'eux.
 
-Le user journey se fait avant le backlog. C'est une activité de _discovery_, souvent menée dans un outil collaboratif (Figma, Miro) ou avec des post-its. Comptez une demi-journée avec l'équipe, idéalement à partir d'entretiens utilisateurs réels.
+Le user journey se fait avant le backlog, idéalement à partir d'entretiens utilisateurs réels. On peut le construire dans un outil collaboratif (Figma, Miro) ou avec des post-its.
 
 Les deux formes partent d'un persona précis et d'un objectif précis. Un user journey « pour tous les utilisateurs » est aussi inutile qu'un scénario sans prénom.
 

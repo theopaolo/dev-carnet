@@ -34,18 +34,20 @@
 }
 
 :root {
-  --bg-page: #ffffff;
-  --bg-surface: #ffffff;
-  --bg-canvas: #f4f4f6;
-  --dot: #d1d5db;
-  --border: #e2e4e9;
-  --border-strong: #b9c0cf;
+  /* Papier ivoire (vélin d'un carnet Rhodia) posé sur le bureau. L'encre reste bleu-noir */
+  --bg-desk: #f2eee6;
+  --bg-page: #fdfbf7;
+  --bg-surface: #fffefc;
+  --bg-canvas: #f6f2eb;
+  --dot: #d8d1c4;
+  --border: #e7e2d8;
+  --border-strong: #c6beb1;
   --text: #1e2530;
   --text-muted: #56637a;
   --heading: #202637;
   --accent: #9475c6;
   --accent-bg: #f5effd;
-  --code-bg: #eaecf1;
+  --code-bg: #efebe3;
   --code-text: #24292f;
   --scroll-edge: rgba(32, 38, 55, 0.18);
   --radius: 8px;
@@ -67,10 +69,10 @@
   --store-sub: #2a6a45;
   --store-shadow: #b3d4bf;
   --link: #3f4658;
-  --pill-bg: #ffffff;
-  --pill-border: #b9c0cf;
+  --pill-bg: #fffefc;
+  --pill-border: #c6beb1;
   --pill-text: #3f4658;
-  --pill-shadow: #d5d9e2;
+  --pill-shadow: #e0dace;
   --cluster-fill: rgba(255, 255, 255, 0.45);
   --cluster-stroke: #8e97aa;
 
@@ -84,6 +86,7 @@
 }
 
 [data-theme="dark"] {
+  --bg-desk: #0f1117;
   --bg-page: #14171f;
   --bg-surface: #1b1f2a;
   --bg-canvas: #181c26;
@@ -135,7 +138,7 @@
 }
 
 html {
-  background: var(--bg-page);
+  background: var(--bg-desk);
   color: var(--text);
   font-family: "Inclusive Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   /* 100 % : respecte la taille choisie dans le navigateur. Tout le reste est en rem ou em */
@@ -1214,6 +1217,30 @@ dialog.zoom {
 
 .seq:fullscreen .seq-text {
   display: none;
+}
+
+/* Flèche des liens de navigation (Reprendre, Tous les cours, Précédent, Suivant), dessinée en SVG.
+   Elle glisse vers sa destination au survol du lien */
+.arrow-next::after,
+.arrow-prev::before {
+  content: "";
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.arrow-next::after { margin-left: 0.3em; }
+.arrow-prev::before { margin-right: 0.3em; transform: scaleX(-1); }
+a:is(:hover, :focus-visible) .arrow-next::after,
+a.arrow-next:is(:hover, :focus-visible)::after { transform: translateX(4px); }
+a:is(:hover, :focus-visible) .arrow-prev::before,
+a.arrow-prev:is(:hover, :focus-visible)::before { transform: scaleX(-1) translateX(4px); }
+@media (prefers-reduced-motion: reduce) {
+  .arrow-next::after,
+  .arrow-prev::before { transition: none; }
 }
 
 /* Lien de section sur les titres (src/scripts/reading.js) : « # » au survol, « Lien copié » au clic */

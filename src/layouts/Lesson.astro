@@ -56,7 +56,7 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
       document.documentElement.dataset.theme = dark ? "dark" : "light";
       const size = Number(read("textSize"));
       if (size >= -1 && size <= 3 && size !== 0) document.documentElement.dataset.size = size;
-      // Projeter : pour la séance en cours seulement (sessionStorage)
+      // Focus : pour la séance en cours seulement (sessionStorage)
       try {
         if (sessionStorage.getItem("present") === "1") document.documentElement.dataset.present = "";
       } catch {}
@@ -78,9 +78,9 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
           <button type="button" class="theme-toggle" data-size-step="-1" aria-label="A− réduire le texte">A−</button>
           <button type="button" class="theme-toggle" data-size-step="1" aria-label="A+ agrandir le texte">A+</button>
         </div>
-        <button type="button" class="theme-toggle present-toggle" data-present-toggle aria-pressed="false">
-          <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M232,64V48a16,16,0,0,0-16-16H40A16,16,0,0,0,24,48V64A16,16,0,0,0,40,80v96H32a8,8,0,0,0,0,16h88v17.38a24,24,0,1,0,16,0V192h88a8,8,0,0,0,0-16h-8V80A16,16,0,0,0,232,64ZM128,240a8,8,0,1,1,8-8A8,8,0,0,1,128,240ZM40,48H216V64H40ZM200,176H56V80H200Z"/></svg>
-          Projeter
+        <button type="button" class="theme-toggle present-toggle" data-present-toggle aria-pressed="false" title="Masquer la barre latérale et le sommaire">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+          Focus
         </button>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Changer de thème" title="Changer de thème">
           <svg class="when-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -111,7 +111,7 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     <div class:list={["shell", home && "shell-home"]}>
       {!home && (
         <nav class="sidebar" id="chapitres" aria-label="Cours">
-          <a class="nav-back" href={base + "/"}>← Tous les cours</a>
+          <a class="nav-back arrow-prev" href={base + "/"}>Tous les cours</a>
           {group ? (
             <>
               <p class="nav-title">{group.course.data.title}</p>
@@ -196,7 +196,7 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
         document.dispatchEvent(new Event("themechange"));
       });
 
-      // Projection : une colonne, sans barre latérale ni sommaire. Mémorisé d'un chapitre à l'autre
+      // Focus : une colonne, sans barre latérale ni sommaire, pour lire ou projeter. Mémorisé d'un chapitre à l'autre
       const present = document.querySelector("[data-present-toggle]");
       const root = document.documentElement;
       present.setAttribute("aria-pressed", String("present" in root.dataset));
@@ -299,8 +299,7 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     gap: 12px;
     height: 3.25rem;
     padding: 0 24px;
-    background: var(--bg-page);
-    border-bottom: 1px solid var(--border);
+    background: var(--bg-desk);
   }
 
   .tools {
@@ -708,6 +707,11 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     gap: 48px;
     min-width: 0;
     padding: 40px 32px 96px;
+    /* Feuille du carnet : papier ivoire aux coins arrondis, posée sur le bureau */
+    margin: 0 16px 16px 0;
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: 10px;
   }
 
   /* Accueil : une colonne pleine largeur, la page gère ses marges */
@@ -717,7 +721,28 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
 
   .shell-home .page {
     display: block;
+    position: relative;
+    margin-left: 16px;
     padding: 0 0 96px;
+    /* L'en-tête pointillé suit les coins arrondis */
+    overflow: clip;
+  }
+
+  /* Élastique du carnet, sur toute la hauteur de l'accueil. Au milieu de la marge droite,
+     seulement quand la marge est assez large pour ne pas toucher le texte */
+  @media (min-width: 82rem) {
+    .shell-home .page::after {
+      content: "";
+      position: absolute;
+      inset: 0 calc(25% - 18rem - 10px) 0 auto;
+      width: 20px;
+      /* Trame du tissu : une ligne plus sombre tous les 3px, bords tissés plus foncés */
+      background: repeating-linear-gradient(transparent 0 2px, rgb(0 0 0 / 0.16) 2px 3px) var(--accent-stroke);
+      box-shadow:
+        inset 2px 0 rgb(0 0 0 / 0.14),
+        inset -2px 0 rgb(0 0 0 / 0.14),
+        3px 0 6px rgb(40 30 15 / 0.2);
+    }
   }
 
   .content {
@@ -741,8 +766,6 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 28px 14px 64px;
-    background: var(--bg-canvas);
-    border-right: 1px solid var(--border);
   }
 
   .toc {
@@ -877,7 +900,7 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
       display: block;
     }
 
-    /* Projection : une seule colonne. Le texte garde 48rem, les diagrammes prennent 72rem.
+    /* Focus : une seule colonne. Le texte garde 48rem, les diagrammes prennent 72rem.
        Pas sur téléphone, où le bouton est caché et la barre latérale nécessaire */
     html[data-present] .sidebar,
     html[data-present] .toc {
@@ -885,6 +908,9 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     }
     html[data-present] .shell {
       grid-template-columns: minmax(0, 1fr);
+    }
+    html[data-present] .page {
+      margin-left: 16px;
     }
     html[data-present] .page {
       grid-template-columns: minmax(0, 72rem);
@@ -913,6 +939,13 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     .shell {
       grid-template-columns: minmax(0, 1fr);
     }
+    /* Téléphone : la feuille occupe tout l'écran */
+    .page,
+    .shell-home .page {
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+    }
     .page {
       padding: 32px 20px 48px;
     }
@@ -929,6 +962,7 @@ const summary = text.length > 200 ? text.slice(0, text.lastIndexOf(" ", 199)) + 
     }
     .topbar {
       padding: 0 16px;
+      border-bottom: 1px solid var(--border);
     }
     .chapters-link {
       display: inline-flex !important;

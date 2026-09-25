@@ -5,7 +5,7 @@ order: 13
 
 # Exercices et quiz
 
-Le jour 2 se passe au clavier. Les consignes complètes et les gabarits de rendu se trouvent dans le dossier `exercises/` du dépôt `mini-harness`. Cette page résume chaque TP et rassemble les questions de révision.
+Les consignes complètes et les gabarits de rendu se trouvent dans le dossier `exercises/` du dépôt `mini-harness`. Cette page résume chaque TP et rassemble les questions de révision.
 
 ## Règle commune
 
@@ -28,17 +28,17 @@ bun run typecheck
 bun run test
 ```
 
-Le mini-harness n’a pas de modèle par défaut. Si ce modèle gratuit n’est plus disponible ou gère mal les appels d’outils, prenez celui vérifié par l’animateur le matin même.
+Le mini-harness n’a pas de modèle par défaut. Si ce modèle gratuit n’est plus disponible ou gère mal les appels d’outils, choisissez un autre modèle compatible avec les appels d’outils.
 
 ## TP 1 : observer le mini-harness
 
-Durée : 55 minutes, puis 25 minutes de mise en commun. Fichier : `exercises/tp-1.md`.
+Fichier : `exercises/tp-1.md`.
 
 Vous utilisez OpenCode ou Pi pour enquêter sur le mini-harness. Demandez d’abord « Explique ce que fait ce projet » et gardez la réponse : vous devrez confirmer ou corriger chacune de ses affirmations.
 
 Retrouvez ensuite le parcours d’une mission, de la commande à la réponse finale, avec pour chaque étape le fichier, la fonction et ce qui entre et sort. Reconstituez la requête complète envoyée à OpenRouter, y compris les définitions d’outils, avec `--debug`.
 
-Avant de lire le code, votez :
+Avant de lire le code, formulez vos hypothèses :
 
 - la mémoire survit-elle à une nouvelle exécution ?
 - `--debug` montre-t-il toute la fenêtre de contexte ?
@@ -50,7 +50,7 @@ Si vous étudiez `run_js`, lisez le filtre et testez seulement une opération di
 
 ## TP 2 : `AGENTS.md` et un nouvel outil
 
-Durée : 60 minutes, puis 15 minutes de démonstrations. Fichier : `exercises/tp-2.md`.
+Fichier : `exercises/tp-2.md`.
 
 1. Demandez à l’agent un plan sans écriture pour ajouter un outil `list_files(path)`. Gardez ce plan.
 2. Écrivez un `AGENTS.md` pour le mini-harness ([chapitre 7](../07-agents-md/)). Rechargez la session et prouvez que le fichier est chargé.
@@ -61,7 +61,7 @@ Pour l’argument invalide, distinguez le schéma JSON présenté au modèle et 
 
 ## TP 3 : un skill pour votre projet
 
-Durée : 1 heure 35. Fichier : `exercises/tp-3.md`.
+Fichier : `exercises/tp-3.md`.
 
 Dans votre propre projet, déjà installé, avec une commande de vérification qui fonctionne :
 

@@ -5,7 +5,7 @@ order: 11
 
 # Exemples, fichiers exécutables et corrigés
 
-Utilise cette page pour préparer les manipulations et comparer les productions des groupes. Les exemples concernent Réserve ta place. Leur transposition à un autre projet demande de vérifier ses propres règles.
+Compare ton travail avec ces exemples et corrigés. Ils concernent Réserve ta place. Pour les adapter à un autre projet, vérifie ses règles.
 
 ## 1. Une réponse utile au support
 
@@ -13,7 +13,7 @@ Question : « Alice a annulé, il reste une place, pourquoi ne peut-elle pas ré
 
 Réponse : « L’annulation libère la place, mais conserve sa réservation. Le service refuse une nouvelle création pour la même personne et la même séance. Une autre personne peut prendre la place. »
 
-Faire retrouver l’exemple refusé dans les scénarios, puis sa raison dans l’ADR. Si la réponse n’est pas acceptable pour le métier, noter une demande d’évolution.
+Retrouve l’exemple refusé dans les scénarios, puis sa raison dans l’ADR. Si la réponse n’est pas acceptable pour le métier, note une demande d’évolution.
 
 ## 2. Un classement Diátaxis
 
@@ -28,13 +28,13 @@ Le classement porte sur l’intention de la page. Une FAQ mêlant toutes ces int
 
 ## 3. Une règle précise
 
-Remplacer « les annulations sont bien gérées » par « une annulation conserve la réservation et libère sa place. Répéter l’annulation conserve le statut annulé. »
+Remplace « les annulations sont bien gérées » par « une annulation conserve la réservation et libère sa place. Répéter l’annulation conserve le statut annulé. »
 
-Pour vérifier la seconde phrase, l’exercice du guide d’animation ajoute un test qui appelle deux fois annuler sur la même réservation.
+Pour vérifier la seconde phrase, ajoute un test qui appelle deux fois `annuler` sur la même réservation.
 
 ## 4. Une procédure vérifiable
 
-Le [README complet](/documentation/10-demonstration/) est le document à essayer. Deux personnes doivent retrouver le dossier de départ, les prérequis et le résultat attendu sans explication supplémentaire.
+Le [README complet](/documentation/10-demonstration/) est le document à essayer. Une autre personne doit retrouver le dossier de départ, les prérequis et le résultat attendu sans explication supplémentaire.
 
 Le programme principal doit afficher successivement une réservation confirmée, une réservation annulée et le refus d’une nouvelle création.
 

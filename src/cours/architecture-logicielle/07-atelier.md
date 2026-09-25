@@ -1,15 +1,15 @@
 ---
-title: 'Atelier : justifier ses choix'
+title: 'Exercice : justifier ses choix'
 order: 7
 ---
 
-# Atelier : justifier ses propres choix techniques
+# Exercice : justifier ses choix techniques
 
 > Objectif : représenter le projet, inventorier ses choix techniques, vérifier les arguments qui les soutiennent et documenter deux décisions dans des ADR.
 
-## Livrables
+## À produire
 
-À la fin de l'atelier, le groupe remet :
+À la fin de l'exercice, conservez :
 
 - une vue de contexte du système
 - un inventaire des choix existants
@@ -91,7 +91,7 @@ Si une migration est proposée, décomposez son estimation : conversion des donn
 
 ## 7\. Relire avec une autre personne
 
-Échangez les ADR entre groupes. La personne qui relit ne doit pas connaître les discussions qui ont produit le document. Elle utilise cette grille :
+Faites relire vos ADR par une personne qui ne connaît pas les discussions à l’origine des décisions. Elle utilise cette grille :
 
 | Point de contrôle | Validé | À revoir | Commentaire |
 | --- | --- | --- | --- |

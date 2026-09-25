@@ -115,7 +115,6 @@ Le [prolongement JSDoc, TSDoc et TypeDoc](/documentation/12-documentation-editeu
 | [Définitions des étapes](https://github.com/theopaolo/cours-documentation-web/blob/main/demo/features/steps/reservations.mjs) | Liaison entre phrases et code |
 | [Tests natifs](https://github.com/theopaolo/cours-documentation-web/blob/main/demo/tests/reservations.test.mjs) | Exemples exécutables sans dépendance |
 | [ADR](/documentation/13-adr-001/) | Raisons du choix retenu dans le kit |
-| [Guide d’animation](https://github.com/theopaolo/cours-documentation-web/blob/main/guide-animation.md) | Préparation et déroulé pédagogique |
 
 ## Dépanner
 

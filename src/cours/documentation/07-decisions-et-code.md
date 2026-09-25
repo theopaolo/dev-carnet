@@ -130,7 +130,7 @@ git blame -w -- demo/src/reservations.mjs
 git log -p -- demo/src/reservations.mjs
 ~~~
 
-Ouvre ensuite le commit identifié avec git show suivi de son identifiant. Le [git blame officiel](https://git-scm.com/docs/git-blame) attribue les lignes à des révisions. Son résultat ne donne pas automatiquement le raisonnement de la décision. Lis le message, la proposition de changement et l’ADR associés. Le [guide d’animation](https://github.com/theopaolo/cours-documentation-web/blob/main/guide-animation.md) propose un essai dans un dépôt jetable, car le dossier du cours peut être distribué sans historique Git.
+Ouvre ensuite le commit identifié avec `git show` suivi de son identifiant. Le [git blame officiel](https://git-scm.com/docs/git-blame) attribue les lignes à des révisions. Son résultat ne donne pas automatiquement le raisonnement de la décision. Lis le message, la proposition de changement et l’ADR associés. Si le dossier du cours n’a pas d’historique Git, fais cet essai dans un dépôt jetable.
 
 Pour la référence du code, lance npm run docs:api après installation. [reserver et annuler](https://github.com/theopaolo/cours-documentation-web/blob/main/demo/src/reservations.mjs) comportent des annotations JSDoc sur les paramètres, effets et erreurs. La génération extrait ces informations. Les tests vérifient les comportements couverts.
 

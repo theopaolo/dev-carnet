@@ -17,8 +17,6 @@ Un « atelier » désigne une séance à une date précise. Une « réservation 
 
 Le [kit de démonstration](/documentation/10-demonstration/) fournit les règles de réservation en JavaScript, des tests et des scénarios BDD. Il fonctionne en mémoire. L’interface web, PostgreSQL et l’envoi de courriels des exemples d’architecture restent fictifs. Les commandes du kit sont exécutables depuis la racine de ce dossier. Les exemples concernant ton application sont à adapter.
 
-Pour animer une séance, commence par le [guide de préparation et le déroulé de cinq heures](https://github.com/theopaolo/cours-documentation-web/blob/main/guide-animation.md). Les neuf chapitres constituent un support de référence. Le déroulé sélectionne les exercices réalisables en séance et réserve les intégrations avancées au travail suivant.
-
 ## Parcours
 
 Chaque chapitre explique une méthode, l'illustre et propose un exercice sur ton projet.

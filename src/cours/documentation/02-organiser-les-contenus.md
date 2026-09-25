@@ -86,7 +86,7 @@ Dans le kit, « Réaliser sa première réservation pas à pas » serait un tuto
 
 Un rapport de tests peut alimenter la référence des règles. Il ne remplace pas le tutoriel qui accompagne une première utilisation. Évite de transformer le menu en liste d’outils : un collègue cherchera « Pourquoi la demande est refusée ? » avant de chercher « Cucumber ».
 
-La navigation du [site MkDocs](https://github.com/theopaolo/cours-documentation-web/blob/main/mkdocs.yml) regroupe le cours, les manipulations et les ressources. Pour un produit réel, crée plutôt des entrées selon les tâches des lecteurs : réserver, gérer les ateliers, intégrer l’API, intervenir en cas d’incident.
+Pour un produit réel, crée des entrées selon les tâches des lecteurs : réserver, gérer les ateliers, intégrer l’API, intervenir en cas d’incident.
 
 Exercice court : classe une procédure d’installation, une liste de statuts et une décision de stockage. Corrigé : guide pratique, référence, explication. Une introduction peut renvoyer vers les trois sans les recopier.
 

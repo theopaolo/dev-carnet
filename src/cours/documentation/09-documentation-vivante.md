@@ -75,7 +75,7 @@ flowchart TB
 ```
 
 
-Pendant dix minutes, classe les contributions. « Il reste une place, Alice réserve » est un exemple. « Ne pas dépasser la capacité » est une règle. « Une annulation permet-elle de revenir ? » est une question à résoudre.
+Classe les contributions. « Il reste une place, Alice réserve » est un exemple. « Ne pas dépasser la capacité » est une règle. « Une annulation permet-elle de revenir ? » est une question à résoudre.
 
 ![Notes regroupées sur un mur lors d’un atelier consacré aux besoins de recherche.](./visuels/sources/atelier-notes.jpg)
 
@@ -200,14 +200,14 @@ Cette démarche complète la documentation extraite du code. L’une aide à con
 
 ## Exercice : faire évoluer une règle
 
-1. En groupe, décidez si une réservation annulée devrait pouvoir être réactivée.
+1. Décidez si une réservation annulée devrait pouvoir être réactivée.
 2. Écrivez un exemple accepté, un exemple refusé et une question non résolue.
 3. Décidez si cette modification nécessite un nouvel ADR. Conservez le précédent comme trace historique.
 4. Ajoutez le scénario avant de modifier le code. Constatez son échec ou son absence de définition.
 5. Implémentez le comportement convenu dans une copie du kit.
 6. Relancez les tests, générez la documentation et faites expliquer la règle par une personne qui n’a pas écrit le code.
 
-Le corrigé doit suivre la décision prise par le groupe. Pour une première démonstration plus courte, le [guide d’animation](https://github.com/theopaolo/cours-documentation-web/blob/main/guide-animation.md) fournit une régression préparée et réversible sur la capacité.
+Le corrigé dépend de la règle choisie. Pour observer une régression plus courte, lance `npm run demo:regression` dans le kit : la commande prépare une copie temporaire et vérifie que les tests détectent un dépassement de capacité.
 
 À discuter : quelle information de ton projet peut être extraite automatiquement, et quelle information doit encore être expliquée par une personne ?
 

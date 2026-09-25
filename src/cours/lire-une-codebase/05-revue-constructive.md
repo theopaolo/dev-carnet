@@ -142,6 +142,6 @@ Un commentaire comme _« ce n'est pas formulé correctement »_ laisse l'auteur�
 | Le code respecte-t-il les conventions du projet ? | □   | □   |     |
 | Ai-je compris ce code sans demander d'explication ? | □   | □   |     |
 
-**Atelier en binômes :** review croisée de code avec cette grille.
+Utilise cette grille pour relire un changement de code, seul ou avec une autre personne.
 
 Une revue de code ne cherche pas à montrer qu'un développeur s'est trompé. Elle rend le code plus facile à comprendre, plus sûr et plus simple à faire évoluer, et l'équipe en sort avec une meilleure connaissance du projet.

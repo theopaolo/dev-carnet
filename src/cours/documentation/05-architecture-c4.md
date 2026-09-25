@@ -106,7 +106,7 @@ sequenceDiagram
 
 [Source de la séquence](https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/reservation-sequence.mmd). Ce dessin propose un comportement à discuter. La gestion transactionnelle des accès concurrents reste à concevoir dans une application réelle.
 
-Exercice : ajoute un service d’export aux deux vues C4, nomme son échange puis régénère les SVG avec `npm run docs:diagrams`. Demande au binôme qui utilise ce service et quelles données sortent de l’application.
+Exercice : ajoute un service d’export aux deux vues C4, nomme son échange puis régénère les SVG avec `npm run docs:diagrams`. Vérifie qui utilise ce service et quelles données sortent de l’application.
 
 Un diagramme Mermaid écrit à la main reste un modèle à maintenir. Le [graphe des imports du kit](https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/dependances.svg), lui, est extrait du code. Il ne permet pas de déduire tous les utilisateurs, services externes ou raisons des choix d’architecture.
 

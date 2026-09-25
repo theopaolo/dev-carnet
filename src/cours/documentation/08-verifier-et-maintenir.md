@@ -101,7 +101,7 @@ npm run demo:regression
 
 Cette démonstration prépare une copie temporaire du code, remplace le contrôle de capacité « supérieur ou égal » par « strictement supérieur » et exécute les tests. Deux tests doivent échouer dans la copie. Le script confirme ensuite que le défaut préparé a été détecté et termine avec succès. Le code de travail reste intact.
 
-Demande au groupe quelle phrase de la documentation devient fausse. Corrigé : une demande peut désormais dépasser la capacité. Un test qui vérifie uniquement la création de la première réservation ne détecterait pas ce défaut.
+Quelle phrase de la documentation devient fausse ? Une demande peut désormais dépasser la capacité. Un test qui vérifie uniquement la création de la première réservation ne détecterait pas ce défaut.
 
 Pour relier les tests aux discussions métier et aux pages consultées par les autres collègues, poursuis avec la [documentation vivante et le BDD](/documentation/09-documentation-vivante/).
 

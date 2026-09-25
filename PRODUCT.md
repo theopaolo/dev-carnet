@@ -35,7 +35,7 @@ The site is called Carnet. It holds the author's personal teaching materials: co
 - Static Astro site. There is no server, no accounts and no stored learner data.
 - No analytics or tracking. The only third-party requests allowed are fonts and Mermaid.
 - French only. All interface copy stays in French and no translation is planned.
-- Reader features: full-text search, a "Reprendre la lecture" link on the home page to the last page and section read (kept in `localStorage`), per-page table of contents, a sidebar that lists only the current course (or the fiches) with a link back to all courses, light and dark themes, adjustable text size, copy buttons on code blocks, section headings that link to their section and copy its address, fullscreen diagrams, flowchart playback, and a text version under each animated sequence diagram. Shared links show a preview built from the page's first paragraph, and a missing page offers search and a link back to its course.
+- Reader features: full-text search, a "Reprendre la lecture" link on the home page to the last page and section read (kept in `localStorage`), per-page table of contents, a sidebar that lists only the current course (or the fiches) with a link back to all courses, light and dark themes, adjustable text size, a Focus mode that hides the sidebar and table of contents (for reading alone or projecting), copy buttons on code blocks, section headings that link to their section and copy its address, fullscreen diagrams, flowchart playback, and a text version under each animated sequence diagram. Shared links show a preview built from the page's first paragraph, and a missing page offers search and a link back to its course.
 - The site name is Carnet.
 
 ## Brand Commitments
@@ -45,7 +45,7 @@ The site is called Carnet. It holds the author's personal teaching materials: co
 
 ## Evidence on Hand
 
-- Ten courses: Docker, Agentic coding, Documenter son projet web, Architecture logicielle, Lire, comprendre et améliorer une codebase, Méthodologie de projet numérique, Stories et backlog, Le RGPD pour les développeur·euses, Atelier SSG and Veille. Docker has three annex pages; Agentic coding has 13 chapters; Documentation has 15 published chapters and a hidden teacher guide.
+- Ten courses: Docker, Agentic coding, Documenter son projet web, Architecture logicielle, Lire, comprendre et améliorer une codebase, Méthodologie de projet numérique, Stories et backlog, Le RGPD pour les développeur·euses, Créer un mini-blog avec un SSG and Veille. Docker has three annex pages; Agentic coding has 13 chapters; Documentation has 15 published chapters.
 - The documentation course ships SVG visuals in `src/cours/documentation/visuels/`, with their credits in the chapter `16-credits.md`.
 - There is no ludique.dev logo or brand asset in the repo yet. Future work must not invent one.
 

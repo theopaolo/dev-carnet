@@ -13,4 +13,4 @@ Ce cours présente les couches d’une application, les stratégies de rendu et 
 4. [Critères d’un choix technique](/architecture-logicielle/04-criteres/)
 5. [Faire des choix techniques](/architecture-logicielle/05-choix/)
 6. [ADR](/architecture-logicielle/06-adr/)
-7. [Atelier : justifier ses choix](/architecture-logicielle/07-atelier/)
+7. [Exercice : justifier ses choix](/architecture-logicielle/07-atelier/)
