@@ -1,6 +1,8 @@
 ---
 title: Les harnesses de code
 order: 2
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Les harnesses de code
@@ -47,7 +49,7 @@ Question de contrôle : OpenCode est-il le modèle ? Non. OpenCode est le produi
 
 ## Où vit l’agent
 
-Les outils ci-dessous ont été vérifiés en septembre 2026. Plusieurs existent sous plusieurs formes : Claude Code a un CLI, une application de bureau, une version web et des extensions d’IDE.
+Les outils ci-dessous ont été vérifiés au moment de rédiger ce guide, en septembre 2026. Plusieurs existent sous plusieurs formes : Claude Code a un CLI, une application de bureau, une version web et des extensions d’IDE.
 
 ### Dans le terminal (CLI et TUI)
 

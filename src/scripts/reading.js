@@ -55,8 +55,9 @@ for (const h of document.querySelectorAll(".content > h2[id], .content > h3[id]"
   const a = document.createElement("a");
   a.className = "heading-link";
   a.href = `#${h.id}`;
-  a.append(...h.childNodes);
-  h.append(a);
+  // Le bouton Ruban du titre (notebook.js, parfois exécuté avant) reste hors du lien
+  a.append(...[...h.childNodes].filter((n) => n.nodeName !== "BUTTON"));
+  h.prepend(a);
   a.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(a.href);

@@ -1,6 +1,8 @@
 ---
 title: 'Frontend, backend et rendu'
 order: 2
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-24"
 ---
 
 # Frontend, backend et stratégies de rendu

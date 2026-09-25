@@ -22,9 +22,14 @@ export async function getStaticPaths() {
 const { c, prev, next, n, total } = Astro.props;
 const { Content, headings } = await render(c);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const dateFormat = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" });
 ---
 
 <Lesson title={c.data.title} id={c.id} headings={headings}>
+  <p class="lesson-dates">
+    <span>Publié le : <time datetime={c.data.publishedAt}>{dateFormat.format(new Date(c.data.publishedAt))}</time></span>
+    <span>Mise à jour le : <time datetime={c.data.updatedAt}>{dateFormat.format(new Date(c.data.updatedAt))}</time></span>
+  </p>
   <Content />
   {(prev || next) && (
     <nav class="pager" aria-label="Chapitres">
@@ -59,6 +64,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 </script>
 
 <style>
+  .lesson-dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    margin: 0 0 12px;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .lesson-dates + :global(h1) {
+    margin-top: 0;
+  }
+
   /* Fin de chapitre : les liens reprennent les cartes des diagrammes, le suivant en accent */
   .pager {
     display: grid;

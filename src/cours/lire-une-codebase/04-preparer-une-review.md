@@ -1,6 +1,8 @@
 ---
 title: 'Préparer et recevoir une review'
 order: 4
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-24"
 ---
 
 # Préparer et recevoir une review

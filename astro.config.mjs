@@ -4,9 +4,6 @@ import { remarkMermaid } from "./src/lib/remark-mermaid.mjs";
 import { rehypeHeadingIds } from "./src/lib/rehype-heading-ids.mjs";
 
 export default defineConfig({
-  // GitHub Pages sous un sous-chemin : décommenter et adapter.
-  // site: "https://theopaolo.github.io",
-  // base: "/carnet",
   markdown: {
     processor: unified({ remarkPlugins: [remarkMermaid], rehypePlugins: [rehypeHeadingIds] }),
     shikiConfig: {

@@ -1,6 +1,8 @@
 ---
 title: "Documenter son projet web"
 order: 0
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Documenter son projet web

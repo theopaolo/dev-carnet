@@ -1,6 +1,8 @@
 ---
 title: Vers l’AI engineering
 order: 12
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-23"
 ---
 
 # Vers l’AI engineering

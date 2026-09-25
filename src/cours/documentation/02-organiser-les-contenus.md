@@ -1,6 +1,8 @@
 ---
 title: "Organiser les contenus"
 order: 2
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Organiser les contenus selon les besoins

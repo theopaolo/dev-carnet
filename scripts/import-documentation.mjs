@@ -95,10 +95,20 @@ function convert(srcPath, slug, title, order) {
   });
 
   const hidden = HIDDEN.has(slug) ? "hidden: true\n" : "";
-  const out = `---\ntitle: "${title.replace(/"/g, '\\"')}"\norder: ${order}\n${hidden}---\n\n${md}`;
+  const previous = previousPages.get(slug) ?? "";
+  const today = new Date().toISOString().slice(0, 10);
+  const publishedAt = previous.match(/^publishedAt: "([\d-]+)"$/m)?.[1] ?? today;
+  const unchanged = previous.replace(/^---\n[\s\S]*?\n---\n\n/, "") === md;
+  const updatedAt = unchanged ? previous.match(/^updatedAt: "([\d-]+)"$/m)?.[1] ?? today : today;
+  const out = `---\ntitle: "${title.replace(/"/g, '\\"')}"\norder: ${order}\npublishedAt: "${publishedAt}"\nupdatedAt: "${updatedAt}"\n${hidden}---\n\n${md}`;
   writeFileSync(join(DEST, slug + ".md"), out);
 }
 
+// Les dates éditoriales du site survivent à la régénération des fichiers.
+const previousPages = new Map(PAGES.map(([, slug]) => {
+  const path = join(DEST, slug + ".md");
+  return [slug, existsSync(path) ? readFileSync(path, "utf8") : ""];
+}));
 rmSync(DEST, { recursive: true, force: true });
 mkdirSync(join(DEST, "visuels"), { recursive: true });
 PAGES.forEach(([src, slug, title], i) => convert(src, slug, title, i));

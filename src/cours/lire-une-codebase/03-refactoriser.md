@@ -1,6 +1,8 @@
 ---
 title: 'Refactoriser'
 order: 3
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-24"
 ---
 
 # Refactoriser

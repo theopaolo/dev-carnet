@@ -13,10 +13,15 @@ export const collections = {
     }),
     schema: z.object({
       title: z.string(),
+      publishedAt: z.string().date(),
+      updatedAt: z.string().date(),
       // Ordre dans la barre latérale
       order: z.number().default(0),
       // Page réservée à l'enseignant : ni construite, ni listée
       hidden: z.boolean().default(false),
+    }).refine((page) => page.updatedAt >= page.publishedAt, {
+      message: "La mise à jour ne peut pas précéder la publication.",
+      path: ["updatedAt"],
     }),
   }),
 };

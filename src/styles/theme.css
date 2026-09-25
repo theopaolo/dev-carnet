@@ -99,6 +99,12 @@
   --ctx-assistant: #4a67d6;
   --ctx-tool: #2f8f5b;
   --ctx-summary: #8a5cc2;
+
+  /* Carnet de l'élève : rubans violet, encre et gris, surligneur (src/scripts/notebook.js) */
+  --ribbon-0: #8261b6;
+  --ribbon-1: #3f4658;
+  --ribbon-2: #a89e8c;
+  --annot: #e9dcfa;
 }
 
 [data-theme="dark"] {
@@ -147,6 +153,11 @@
   --ctx-assistant: #7f98f0;
   --ctx-tool: #5fbf87;
   --ctx-summary: #b592e6;
+
+  --ribbon-0: #c4a6ee;
+  --ribbon-1: #aab3c8;
+  --ribbon-2: #6b7590;
+  --annot: #5a4380;
 }
 
 * {
@@ -1257,6 +1268,181 @@ a.arrow-prev:is(:hover, :focus-visible)::before { transform: scaleX(-1) translat
 @media (prefers-reduced-motion: reduce) {
   .arrow-next::after,
   .arrow-prev::before { transition: none; }
+}
+
+/* Rubans : trois marque-pages tissés qui pendent sous la barre du haut, à droite de la feuille.
+   Celui de la page affichée pend plus bas. Au survol, l'étiquette dit où il mène */
+.ribbons {
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  display: flex;
+  gap: 5px;
+  filter: drop-shadow(1px 2px 1.5px rgb(40 30 15 / 0.25));
+}
+
+.ribbons:empty,
+html[data-notes-hidden] .ribbons {
+  display: none;
+}
+
+.ribbon {
+  position: relative;
+  display: block;
+}
+
+.ribbon-band {
+  display: block;
+  width: 14px;
+  height: 26px;
+  background: repeating-linear-gradient(transparent 0 2px, rgb(0 0 0 / 0.12) 2px 3px) var(--c);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 5px), 0 100%);
+  transition: height 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Couleur de chaque emplacement : rail, sommaire, titres, Pochette */
+[data-slot="0"] { --c: var(--ribbon-0); }
+[data-slot="1"] { --c: var(--ribbon-1); }
+[data-slot="2"] { --c: var(--ribbon-2); }
+.ribbon[data-here] .ribbon-band { height: 38px; }
+.ribbon:is(:hover, :focus-visible) .ribbon-band { height: 44px; }
+.ribbon:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.ribbon-label {
+  position: absolute;
+  top: 8px;
+  right: calc(100% + 8px);
+  width: max-content;
+  max-width: 16rem;
+  padding: 4px 8px;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--heading);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.ribbon:is(:hover, :focus-visible) .ribbon-label { opacity: 1; }
+
+/* Téléphone : rubans plus fins, dans la marge de la feuille */
+@media (max-width: 760px) {
+  .ribbons { right: 4px; gap: 3px; }
+  .ribbon-band { width: 10px; }
+}
+
+/* Section marquée : le ruban pend dans la marge gauche de la feuille, à hauteur du titre */
+.content > :is(h1, h2)[data-slot] {
+  position: relative;
+}
+
+.content > :is(h1, h2)[data-slot]::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -26px;
+  width: 12px;
+  height: calc(100% + 18px);
+  max-height: 64px;
+  background: repeating-linear-gradient(transparent 0 2px, rgb(0 0 0 / 0.12) 2px 3px) var(--c);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 5px), 0 100%);
+  transform-origin: top;
+  animation: ribbon-drop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-notes-hidden] .content > [data-slot]::before {
+  display: none;
+}
+
+@keyframes ribbon-drop {
+  from { transform: scaleY(0); }
+}
+
+/* Téléphone : le bouton à droite du titre montre le ruban posé (Lesson.astro) */
+@media (max-width: 760px) {
+  .content > :is(h1, h2)[data-slot]::before { display: none; }
+}
+
+/* Notes : passage surligné, note posée sous son paragraphe */
+mark.annot {
+  padding: 0 1px;
+  color: inherit;
+  background: var(--annot);
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  cursor: pointer;
+}
+
+mark.annot:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 2px; }
+
+html[data-notes-hidden] mark.annot { background: none; cursor: auto; }
+
+.note-card {
+  margin: -8px 0 20px;
+  padding: 10px 14px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--accent-text);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-shadow);
+  border-radius: 6px;
+}
+
+li > .note-card { margin: 8px 0; }
+.note-card p { margin: 0; white-space: pre-wrap; }
+
+.note-card textarea {
+  display: block;
+  width: 100%;
+  padding: 6px 8px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.note-card textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.note-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.note-link {
+  padding: 2px 0;
+  font: inherit;
+  font-size: 0.8125rem;
+  color: var(--accent-sub);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.note-link:hover { color: var(--accent-text); }
+.note-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+.annot-tool {
+  position: absolute;
+  z-index: 15;
+}
+
+.annot-tool[hidden] { display: none; }
+.annot-tool svg { width: 1rem; height: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-band,
+  .ribbon-label { transition: none; }
+  .content > :is(h1, h2)[data-slot]::before { animation: none; }
 }
 
 /* Lien de section sur les titres (src/scripts/reading.js) : « # » au survol, « Lien copié » au clic */

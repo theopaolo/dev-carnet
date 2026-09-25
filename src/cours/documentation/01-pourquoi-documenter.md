@@ -1,6 +1,8 @@
 ---
 title: "Pourquoi documenter"
 order: 1
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-24"
 ---
 
 # Pourquoi documenter un projet ?

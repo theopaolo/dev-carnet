@@ -1,6 +1,8 @@
 ---
 title: 'Lire, comprendre et améliorer une codebase'
 order: 4
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-24"
 ---
 
 # Lire, comprendre et améliorer une codebase

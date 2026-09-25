@@ -1,6 +1,8 @@
 ---
 title: "Exemples et corrigés"
 order: 11
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Exemples, fichiers exécutables et corrigés

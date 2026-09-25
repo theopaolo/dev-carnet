@@ -1,6 +1,8 @@
 ---
 title: MCP
 order: 9
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # MCP : Model Context Protocol
@@ -9,7 +11,7 @@ Le **Model Context Protocol** permet à une application d’IA de découvrir et 
 
 MCP définit les échanges avec le serveur. Le harness reste responsable de la boucle, des appels au modèle, du contexte et des autorisations.
 
-Au 21 septembre 2026, la version courante du protocole est `2026-07-28`. L’exercice de ce chapitre utilise le SDK TypeScript **v1** et la révision **`2025-11-25`**. Le numéro du SDK et la date du protocole sont deux versions différentes.
+Au moment de rédiger ce guide, en septembre 2026, la version courante du protocole est `2026-07-28`. L’exercice de ce chapitre utilise le SDK TypeScript **v1** et la révision **`2025-11-25`**. Le numéro du SDK et la date du protocole sont deux versions différentes.
 
 ## Pourquoi un protocole
 

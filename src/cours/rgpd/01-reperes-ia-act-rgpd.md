@@ -1,6 +1,8 @@
 ---
 title: "Repères AI Act et RGPD"
 order: 1
+publishedAt: "2026-09-24"
+updatedAt: "2026-09-25"
 ---
 
 # Repères AI Act et RGPD
@@ -328,7 +330,7 @@ Une liste à relire avant la mise en production d'un produit qui utilise un mod�
 
 ## Documents à vérifier
 
-Ouvrez le texte officiel quand une décision en dépend. Les articles de blog et les outils de vulgarisation datent vite : en septembre 2026, plusieurs affichent encore les dates d'avant l'Omnibus.
+Ouvrez le texte officiel quand une décision en dépend. Les articles de blog et les outils de vulgarisation datent vite : au moment de rédiger ce guide, en septembre 2026, plusieurs affichent encore les dates d'avant l'Omnibus.
 
 <div class="scroll">
 <table>

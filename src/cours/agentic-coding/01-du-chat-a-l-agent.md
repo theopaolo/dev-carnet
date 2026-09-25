@@ -1,6 +1,8 @@
 ---
 title: Du chat à l’agent
 order: 1
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-23"
 ---
 
 # Du chat à l’agent

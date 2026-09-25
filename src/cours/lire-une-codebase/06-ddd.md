@@ -1,6 +1,8 @@
 ---
 title: 'Domain-Driven Design'
 order: 6
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-24"
 ---
 
 # DDD : Domain-Driven Design

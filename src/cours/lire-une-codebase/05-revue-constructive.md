@@ -1,6 +1,8 @@
 ---
 title: 'Faire une revue de code constructive'
 order: 5
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Faire une revue de code constructive

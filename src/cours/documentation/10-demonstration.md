@@ -1,6 +1,8 @@
 ---
 title: "Démonstration JavaScript"
 order: 10
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Réserve ta place : démonstration des règles métier

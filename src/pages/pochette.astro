@@ -1,0 +1,309 @@
+---
+import Lesson from "../layouts/Lesson.astro";
+---
+
+<Lesson title="Pochette | Carnet" description="Les rubans et les notes posés dans les cours de Carnet.">
+  <header class="hero">
+    <div class="wrap">
+      <h1>Pochette</h1>
+      <p class="lede">
+        Les rubans et les notes posés dans les cours. Ils restent dans ce navigateur : l'export les met à l'abri et les ramène sur un autre ordinateur.
+      </p>
+    </div>
+  </header>
+
+  <div class="wrap pocket">
+    <section aria-labelledby="rubans">
+      <h2 id="rubans">Rubans</h2>
+      <ul class="pocket-ribbons"></ul>
+      <p class="pocket-empty" data-empty="ribbons">
+        Aucun ruban. Dans le sommaire d'un chapitre, le ruban à droite d'une section la marque. Trois rubans au plus, comme dans un carnet.
+      </p>
+    </section>
+
+    <section aria-labelledby="notes">
+      <h2 id="notes">Notes</h2>
+      <div class="pocket-notes"></div>
+      <p class="pocket-empty" data-empty="notes">
+        Aucune note. Dans un chapitre, sélectionnez un passage puis Annoter pour le surligner et écrire une note.
+      </p>
+    </section>
+
+    <section aria-labelledby="detachees" data-detached hidden>
+      <h2 id="detachees">Notes détachées</h2>
+      <p class="pocket-help">Le passage de ces notes a été modifié ou retiré de sa page. La note reste ici.</p>
+      <div class="pocket-detached"></div>
+    </section>
+
+    <section aria-labelledby="sauvegarde">
+      <h2 id="sauvegarde">Sauvegarde et affichage</h2>
+      <p class="pocket-help">
+        L'export est un fichier Markdown lisible, avec les liens vers les pages. Il se réimporte ici, sur ce navigateur ou un autre.
+      </p>
+      <div class="pocket-actions">
+        <button type="button" class="theme-toggle" data-export>Exporter en Markdown</button>
+        <button type="button" class="theme-toggle" data-import>Importer un export</button>
+        <input type="file" accept=".md,text/markdown" hidden />
+      </div>
+      <p class="pocket-status" role="status"></p>
+      <label class="pocket-switch">
+        <input type="checkbox" data-show />
+        Afficher les rubans et les notes dans les pages
+      </label>
+      <p class="pocket-help">À décocher avant de projeter un cours : les notes restent dans la Pochette.</p>
+    </section>
+  </div>
+</Lesson>
+
+<script>
+  import { load, save, pageUrl, where, plural, render as renderNotebook } from "../scripts/notebook.js";
+
+  const esc = (s = "") => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const status = document.querySelector(".pocket-status");
+
+  // Notes groupées par page, dans l'ordre où elles ont été écrites
+  function byPage(notes) {
+    const groups = new Map();
+    for (const n of notes.sort((a, b) => a.at - b.at)) groups.set(n.page, [...(groups.get(n.page) ?? []), n]);
+    return [...groups.values()];
+  }
+
+  function renderNotes(notes, linked) {
+    return byPage(notes)
+      .map(
+        (group) => `<article class="pocket-page">
+          <h3><a href="${esc(pageUrl(group[0].page))}">${esc(group[0].title)}</a>
+            ${group[0].course && group[0].course !== group[0].title ? `<span>${esc(group[0].course)}</span>` : ""}</h3>
+          ${group
+            .map(
+              (n) => `<div class="pocket-note">
+                <blockquote>${linked ? `<a href="${esc(pageUrl(n.page, `note-${n.id}`))}">${esc(n.quote)}</a>` : esc(n.quote)}</blockquote>
+                ${n.text ? `<p>${esc(n.text)}</p>` : ""}
+                <button type="button" class="note-link" data-remove-note="${esc(n.id)}">Supprimer</button>
+              </div>`,
+            )
+            .join("")}
+        </article>`,
+      )
+      .join("");
+  }
+
+  function render() {
+    const ribbons = load("ribbons").sort((a, b) => a.slot - b.slot);
+    const notes = load("notes");
+    const attached = notes.filter((n) => !n.detached);
+    const detached = notes.filter((n) => n.detached);
+    document.querySelector(".pocket-ribbons").innerHTML = ribbons
+      .map(
+        (r) => `<li><span class="ribbon-band" data-slot="${r.slot}" aria-hidden="true"></span>
+          <a href="${esc(pageUrl(r.page, r.slug))}">${esc(where(r))}</a>
+          <button type="button" class="note-link" data-remove-ribbon="${r.slot}">Retirer</button></li>`,
+      )
+      .join("");
+    document.querySelector(".pocket-notes").innerHTML = renderNotes(attached, true);
+    document.querySelector(".pocket-detached").innerHTML = renderNotes(detached, false);
+    document.querySelector("[data-detached]").hidden = !detached.length;
+    document.querySelector('[data-empty="ribbons"]').hidden = ribbons.length > 0;
+    document.querySelector('[data-empty="notes"]').hidden = attached.length > 0;
+    renderNotebook();
+  }
+
+  document.querySelector(".pocket").addEventListener("click", (e) => {
+    const ribbon = e.target.closest("[data-remove-ribbon]")?.dataset.removeRibbon;
+    const note = e.target.closest("[data-remove-note]")?.dataset.removeNote;
+    if (ribbon) save("ribbons", load("ribbons").filter((r) => String(r.slot) !== ribbon));
+    if (note) save("notes", load("notes").filter((n) => n.id !== note));
+    if (ribbon || note) render();
+  });
+
+  // Export : Markdown lisible, et les données brutes en commentaire pour le réimport
+  document.querySelector("[data-export]").addEventListener("click", () => {
+    const ribbons = load("ribbons").sort((a, b) => a.slot - b.slot);
+    const notes = load("notes");
+    const url = (page, hash) => location.origin + pageUrl(page, hash);
+    const md = [`# Pochette Carnet`, ``, `Exportée le ${new Date().toLocaleDateString("fr-FR")}.`, ``];
+    if (ribbons.length) md.push(`## Rubans`, ``, ...ribbons.map((r) => `- [${where(r)}](${url(r.page, r.slug)})`), ``);
+    if (notes.length) md.push(`## Notes`, ``);
+    for (const group of byPage(notes)) {
+      md.push(`### [${group[0].title}](${url(group[0].page)})`, ``);
+      for (const n of group) {
+        md.push(...n.quote.split("\n").map((l) => `> ${l}`), ``);
+        if (n.text) md.push(n.text, ``);
+        if (n.detached) md.push(`_Note détachée : ce passage n'est plus dans la page._`, ``);
+      }
+    }
+    // « -- » fermerait le commentaire HTML : échappé en JSON
+    md.push(`<!-- carnet ${JSON.stringify({ ribbons, notes }).replace(/--/g, "-\\u002d")} -->`, ``);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([md.join("\n")], { type: "text/markdown" }));
+    a.download = `pochette-carnet-${new Date().toISOString().slice(0, 10)}.md`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  // Import : notes fusionnées par identifiant, les trois rubans les plus récents
+  const file = document.querySelector('input[type="file"]');
+  document.querySelector("[data-import]").addEventListener("click", () => file.click());
+  file.addEventListener("change", async () => {
+    try {
+      const data = JSON.parse((await file.files[0].text()).match(/<!-- carnet (.*) -->/)[1]);
+      const isNote = (n) => ["id", "page", "title", "quote", "text"].every((k) => typeof n?.[k] === "string");
+      const isRibbon = (r) => ["page", "slug", "title"].every((k) => typeof r?.[k] === "string");
+      const notes = new Map([...load("notes"), ...data.notes.filter(isNote)].map((n) => [n.id, n]));
+      const ribbons = [...load("ribbons"), ...data.ribbons.filter(isRibbon)]
+        .sort((a, b) => b.at - a.at)
+        .filter((r, i, all) => all.findIndex((x) => x.page === r.page && x.slug === r.slug) === i)
+        .slice(0, 3)
+        .map((r, slot) => ({ ...r, slot }));
+      save("notes", [...notes.values()]);
+      save("ribbons", ribbons);
+      status.textContent = `Import terminé : ${plural(notes.size, "note")} et ${plural(ribbons.length, "ruban")} dans la Pochette.`;
+      render();
+    } catch {
+      status.textContent = "Ce fichier n'est pas un export de la Pochette.";
+    }
+    file.value = "";
+  });
+
+  const show = document.querySelector<HTMLInputElement>("[data-show]");
+  show.checked = !("notesHidden" in document.documentElement.dataset);
+  show.addEventListener("change", () => {
+    try {
+      if (show.checked) localStorage.removeItem("notesHidden");
+      else localStorage.setItem("notesHidden", "1");
+    } catch {}
+    if (show.checked) delete document.documentElement.dataset.notesHidden;
+    else document.documentElement.dataset.notesHidden = "";
+  });
+
+  render();
+</script>
+
+<!-- Global : les listes sont construites par le script, hors de la portée des styles scopés -->
+<style is:global>
+  /* Même marge gauche que le titre, lignes de 48rem comme les chapitres */
+  .pocket {
+    display: grid;
+    gap: 48px;
+    padding-top: 48px;
+  }
+
+  .pocket > * {
+    max-width: 48rem;
+  }
+
+  .pocket h2 {
+    margin: 0 0 16px;
+    font-size: 1.5rem;
+  }
+
+  .pocket-empty,
+  .pocket-help {
+    margin: 0 0 12px;
+    color: var(--text-muted);
+  }
+
+  .pocket-ribbons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pocket-ribbons li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .pocket-ribbons .ribbon-band {
+    flex: none;
+    height: 22px;
+  }
+
+  .pocket-ribbons a,
+  .pocket-page h3 a {
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+
+  .pocket-ribbons button {
+    margin-left: auto;
+  }
+
+  .pocket-page {
+    padding: 16px 0 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pocket-page h3 {
+    margin: 0 0 12px;
+    font-size: 1.125rem;
+  }
+
+  .pocket-page h3 span {
+    margin-left: 8px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .pocket-note {
+    margin: 0 0 20px;
+  }
+
+  .pocket-note blockquote {
+    margin: 0 0 6px;
+    padding: 0;
+    border: 0;
+  }
+
+  .pocket-note blockquote a {
+    color: inherit;
+    text-decoration: none;
+    background: var(--annot);
+  }
+
+  .pocket-note blockquote a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .pocket-note p {
+    margin: 0 0 4px;
+    padding: 8px 12px;
+    color: var(--accent-text);
+    white-space: pre-wrap;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-shadow);
+    border-radius: 6px;
+  }
+
+  .pocket-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .pocket-status:empty {
+    display: none;
+  }
+
+  .pocket-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 24px 0 4px;
+    font-weight: 500;
+    color: var(--heading);
+    cursor: pointer;
+  }
+
+  .pocket-switch input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--accent-stroke);
+  }
+</style>

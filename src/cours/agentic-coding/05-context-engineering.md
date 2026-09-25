@@ -1,6 +1,8 @@
 ---
 title: Context engineering
 order: 5
+publishedAt: "2026-09-23"
+updatedAt: "2026-09-25"
 ---
 
 # Context engineering
@@ -24,7 +26,7 @@ Quand un agent travaille pendant une heure, le prompt initial ne représente qu�
 
 ## Ce que coûte un agent avant le premier message
 
-Le 23 septembre 2026, la commande `/context` d’une session Claude Code utilisée pour préparer ce cours donnait, avant toute lecture de fichier :
+Au moment de rédiger ce guide, en septembre 2026, la commande `/context` d’une session Claude Code utilisée pour préparer ce cours donnait, avant toute lecture de fichier :
 
 | Élément | Tokens |
 | --- | --- |
