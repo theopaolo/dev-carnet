@@ -6,9 +6,9 @@ import { getCourses, intro } from "../lib/courses";
 const { courses, sheets } = await getCourses();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = (id: string) => `${base}/${id}/`;
-const lede = "Notes, fiches et petits cours de dev.";
+const lede = "Notes, fiches et petits cours.";
 
-// Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plus
+// Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plusÏ
 // (page renommée ou supprimée) n'affiche rien
 const pages = Object.fromEntries([
   ...courses.flatMap(({ course, chapters }) => [
@@ -40,7 +40,7 @@ const pages = Object.fromEntries([
   <header class="hero">
     <div class="wrap hero-grid">
       <div>
-        <h1>Carnet</h1>
+        <h1>Carnet de dev</h1>
         <p class="lede">{lede}</p>
         <button
           type="button"
@@ -65,7 +65,9 @@ const pages = Object.fromEntries([
       </div>
       <div class="hero-side">
         <a class="resume" hidden data-pages={JSON.stringify(pages)}>
-          <span class="resume-label"><span class="arrow-next">Reprendre la lecture</span></span>
+          <span class="resume-label">
+            <span class="arrow-next">Reprendre la lecture</span>
+          </span>
           <span class="resume-title"></span>
           <span class="resume-where"></span>
           <span class="resume-where resume-section"></span>
@@ -75,19 +77,58 @@ const pages = Object.fromEntries([
           <p class="guide-title">Mode d'emploi</p>
           <ul>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-              <span><strong>Ruban</strong> : marquez une section du sommaire</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+              </svg>
+              <span>
+                <strong>Ruban</strong> : marquez une section du sommaire
+              </span>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.4 3.6a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
-              <span><strong>Annoter</strong> : sélectionnez un passage</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 20h9" />
+                <path d="M16.4 3.6a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+              <span>
+                <strong>Annoter</strong> : sélectionnez un passage
+              </span>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
-              <span><strong>Focus</strong> : masque les colonnes</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
+              </svg>
+              <span>
+                <strong>Focus</strong> : masque les colonnes
+              </span>
             </li>
             <li class="guide-keys">
-              <kbd>/</kbd> recherche, <kbd>P</kbd> précédent, <kbd>S</kbd> suivant
+              <kbd>/</kbd> recherche, <kbd>P</kbd> précédent, <kbd>S</kbd>{" "}
+              suivant
             </li>
           </ul>
         </div>
@@ -271,7 +312,9 @@ const pages = Object.fromEntries([
 
   .guide kbd {
     padding: 0 4px;
-    font: 0.75rem "Roboto Mono", monospace;
+    font:
+      0.75rem "Roboto Mono",
+      monospace;
     color: var(--pill-text);
     border: 1px solid var(--pill-border);
     border-radius: 3px;
