@@ -1216,6 +1216,44 @@ dialog.zoom {
   display: none;
 }
 
+/* Lien de section sur les titres (src/scripts/reading.js) : « # » au survol, « Lien copié » au clic */
+.heading-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.heading-link::after {
+  content: "#";
+  content: "#" / "";
+  margin-left: 0.4em;
+  font: 400 0.8em "Roboto Mono", monospace;
+  color: var(--text-muted);
+  opacity: 0;
+}
+
+.heading-link:hover::after,
+.heading-link:focus-visible::after {
+  opacity: 1;
+}
+
+.heading-link:hover::after {
+  color: var(--accent);
+}
+
+.heading-link[data-copied]::after {
+  content: "Lien copié";
+  margin-left: 0.75rem;
+  font: 500 0.75rem "Inclusive Sans", sans-serif;
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.heading-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* Bouton Copier des blocs de code (src/scripts/reading.js) */
 .code-block {
   position: relative;

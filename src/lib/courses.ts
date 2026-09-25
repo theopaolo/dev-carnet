@@ -13,3 +13,18 @@ export async function getCourses() {
     sheets: groups.filter((g) => g.chapters.length === 0),
   };
 }
+
+// Présentation d'une page : premier paragraphe de texte, sans balisage Markdown. Sert à l'accueil
+// et aux aperçus de lien (meta description). Un paragraphe qui finit par « : » annonce une liste
+// et ne se lit pas seul, un paragraphe en italique est une citation ou une source
+export const intro = (body = "") => {
+  const para = body
+    .replace(/^(```|~~~)[\s\S]*?^\1/gm, "")
+    .split(/\n\s*\n/)
+    .map((b) => b.trim())
+    .find((b) => b && !/^(#|>|-|\*|_|\d+\.|```|\||!\[|<)/.test(b) && !b.endsWith(":"));
+  return (para ?? "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[*`]|\b_|_\b/g, "")
+    .replace(/\s+/g, " ");
+};

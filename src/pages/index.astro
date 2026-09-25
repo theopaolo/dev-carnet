@@ -1,23 +1,11 @@
 ---
 import Lesson from "../layouts/Lesson.astro";
-import { getCourses } from "../lib/courses";
+import { getCourses, intro } from "../lib/courses";
 
 const { courses, sheets } = await getCourses();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = (id: string) => `${base}/${id}/`;
-
-// Présentation d'un cours : premier paragraphe de texte de son index.md, sans balisage Markdown.
-// Un paragraphe qui finit par « : » annonce une liste et ne se lit pas seul
-const intro = (body = "") => {
-  const para = body
-    .split(/\n\s*\n/)
-    .map((b) => b.trim())
-    .find((b) => b && !/^(#|>|-|\*|\d+\.|```|\||!\[|<)/.test(b) && !b.endsWith(":"));
-  return (para ?? "")
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/[*`]/g, "")
-    .replace(/\s+/g, " ");
-};
+const lede = "Des cours de programmation, à relire après la séance ou à projeter en classe.";
 
 // Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plus
 // (page renommée ou supprimée) n'affiche rien
@@ -33,12 +21,12 @@ const pages = Object.fromEntries([
 ]);
 ---
 
-<Lesson title="Carnet">
+<Lesson title="Carnet" description={lede}>
   <header class="hero">
     <div class="wrap hero-grid">
       <div>
         <h1>Carnet</h1>
-        <p class="lede">Des cours de programmation, à relire après la séance ou à projeter en classe.</p>
+        <p class="lede">{lede}</p>
         <button type="button" class="search-open hero-search" aria-keyshortcuts="Control+K Meta+K /">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           Rechercher dans les cours
@@ -118,78 +106,6 @@ const pages = Object.fromEntries([
 </script>
 
 <style>
-  .wrap {
-    max-width: 72rem;
-    margin-inline: auto;
-    padding-inline: 32px;
-  }
-
-  /* En-tête posé sur le canevas pointillé des diagrammes */
-  .hero {
-    padding: 72px 0 64px;
-    background-color: var(--bg-canvas);
-    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-position: 12px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .hero h1 {
-    margin: 0 0 12px;
-    padding: 0;
-    border: 0;
-    font-size: clamp(2.75rem, 2rem + 3vw, 4rem);
-    line-height: 1.05;
-  }
-
-  .lede {
-    max-width: 34rem;
-    margin: 0 0 32px;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: var(--text-muted);
-  }
-
-  /* Grand champ de recherche : ouvre la même fenêtre que le bouton de la barre du haut */
-  .hero-search {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: min(100%, 34rem);
-    padding: 12px 14px;
-    font: inherit;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--text-muted);
-    text-align: left;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-strong);
-    border-radius: 8px;
-    box-shadow: 0 1px 0 var(--pill-shadow);
-    cursor: text;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .hero-search:hover {
-    color: var(--heading);
-    border-color: var(--node-stroke);
-  }
-
-  .hero-search:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  .hero-search svg {
-    flex: none;
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .hero-search kbd {
-    margin-left: auto;
-  }
-
   /* Le lien Reprendre à droite, aligné sur le bas du champ de recherche */
   .hero-grid {
     display: grid;
@@ -395,15 +311,6 @@ const pages = Object.fromEntries([
   }
 
   @media (max-width: 760px) {
-    .wrap {
-      padding-inline: 20px;
-    }
-    .hero {
-      padding: 44px 0 40px;
-    }
-    .lede {
-      font-size: 1.125rem;
-    }
     .index {
       padding-top: 40px;
     }
@@ -420,7 +327,6 @@ const pages = Object.fromEntries([
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-search,
     .resume {
       transition: none;
     }

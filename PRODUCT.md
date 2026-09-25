@@ -35,7 +35,7 @@ The site is called Carnet. It holds the author's personal teaching materials: co
 - Static Astro site. There is no server, no accounts and no stored learner data.
 - No analytics or tracking. The only third-party requests allowed are fonts and Mermaid.
 - French only. All interface copy stays in French and no translation is planned.
-- Reader features: full-text search, a "Reprendre la lecture" link on the home page to the last page and section read (kept in `localStorage`), per-page table of contents, a sidebar that lists only the current course (or the fiches) with a link back to all courses, light and dark themes, adjustable text size, copy buttons on code blocks, fullscreen diagrams, flowchart playback, and a text version under each animated sequence diagram.
+- Reader features: full-text search, a "Reprendre la lecture" link on the home page to the last page and section read (kept in `localStorage`), per-page table of contents, a sidebar that lists only the current course (or the fiches) with a link back to all courses, light and dark themes, adjustable text size, copy buttons on code blocks, section headings that link to their section and copy its address, fullscreen diagrams, flowchart playback, and a text version under each animated sequence diagram. Shared links show a preview built from the page's first paragraph, and a missing page offers search and a link back to its course.
 - The site name is Carnet.
 
 ## Brand Commitments

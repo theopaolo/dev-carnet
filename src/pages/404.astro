@@ -1,0 +1,63 @@
+---
+import Lesson from "../layouts/Lesson.astro";
+import { getCourses } from "../lib/courses";
+
+const { courses } = await getCourses();
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+// Adresse et titre de chaque cours : un chapitre renommé garde l'adresse de son cours au début
+const known = courses.map(({ course }) => [`${base}/${course.id}/`, course.data.title]);
+---
+
+<Lesson title="Page introuvable | Carnet" description="Aucune page ne correspond à cette adresse.">
+  <header class="hero">
+    <div class="wrap">
+      <h1>Page introuvable</h1>
+      <p class="lede">Aucune page ne correspond à cette adresse. Si un chapitre a été renommé, la recherche le retrouve par son titre.</p>
+      <button type="button" class="search-open hero-search" aria-keyshortcuts="Control+K Meta+K /">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        Rechercher dans les cours
+        <kbd>/</kbd>
+      </button>
+      <p class="lost-links">
+        <a class="lost-course" hidden data-courses={JSON.stringify(known)}></a>
+        <a href={base + "/"}>Tous les cours</a>
+      </p>
+    </div>
+  </header>
+</Lesson>
+
+<script>
+  // L'adresse demandée commence par celle d'un cours : lien direct vers ce cours
+  const link = document.querySelector<HTMLAnchorElement>(".lost-course");
+  const hit = JSON.parse(link.dataset.courses).find(([url]) => location.pathname.startsWith(url));
+  if (hit) {
+    link.href = hit[0];
+    link.textContent = `Revenir au cours ${hit[1]}`;
+    link.hidden = false;
+  }
+</script>
+
+<style>
+  .lost-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin: 24px 0 0;
+  }
+
+  .lost-links a {
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+
+  .lost-links a:hover {
+    color: var(--heading);
+    text-decoration-thickness: 2px;
+  }
+
+  .lost-links a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+</style>

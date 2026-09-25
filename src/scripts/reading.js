@@ -1,4 +1,4 @@
-// Confort de lecture : taille du texte (A- / A+) et bouton Copier sur les blocs de code.
+// Confort de lecture : taille du texte (A- / A+), bouton Copier sur les blocs de code, liens de section.
 
 // Taille : html[data-size] de -1 à 3, appliquée avant le rendu par le script en tête de Lesson.astro
 const MIN = -1;
@@ -46,4 +46,22 @@ for (const pre of document.querySelectorAll(".content pre.astro-code")) {
     setTimeout(() => (btn.textContent = "Copier"), 1800);
   });
   wrap.append(btn);
+}
+
+// Titres de section : le titre devient un lien vers sa section, et le clic copie l'adresse
+// à envoyer aux élèves. Le lien enveloppe le texte : un lecteur d'écran lit le titre, sans « # »
+for (const h of document.querySelectorAll(".content > h2[id], .content > h3[id]")) {
+  if (h.querySelector("a")) continue;
+  const a = document.createElement("a");
+  a.className = "heading-link";
+  a.href = `#${h.id}`;
+  a.append(...h.childNodes);
+  h.append(a);
+  a.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(a.href);
+      a.dataset.copied = "";
+      setTimeout(() => delete a.dataset.copied, 1800);
+    } catch {}
+  });
 }
