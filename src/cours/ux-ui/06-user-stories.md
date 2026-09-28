@@ -2,7 +2,7 @@
 title: 'Les user stories'
 order: 6
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # Les user stories
@@ -35,7 +35,7 @@ Les équipes vérifient leurs stories avec six critères, résumés par le mot a
 | N | Négociable | L'équipe peut-elle encore en discuter les détails ? |
 | V | Utile (_valuable_) | Apporte-t-elle quelque chose à l'utilisateur ou au client ? |
 | E | Estimable | L'équipe peut-elle dire combien de temps elle prendra ? |
-| S | Petite (_small_) | Tient-elle en une ou deux semaines de travail ? |
+| S | Petite (_small_) | Peut-on la terminer sans la découper davantage ? |
 | T | Testable | Des critères d'acceptation permettent-ils de vérifier qu'elle est finie ? |
 
 Une story décrit un besoin, le pourquoi. Une spécification technique décrit une solution, le comment.
@@ -48,7 +48,7 @@ Une story décrit un besoin, le pourquoi. Une spécification technique décrit u
 
 Une liste de stories ne montre pas le parcours en entier. La story map range les stories dans l'ordre où l'utilisateur les vit. Jeff Patton a rendu cette méthode populaire dans les équipes agiles.
 
-Une équipe agile livre un produit par petites versions, souvent toutes les deux semaines. Elle montre chaque version aux utilisateurs et améliore la suivante avec leurs retours. La méthode Scrum est expliquée dans le cours [Stories et backlog](/stories-backlog/#la-methode-scrum).
+Une équipe agile peut livrer un produit par petites versions, recueillir des retours, puis améliorer la suivante. La méthode Scrum est expliquée dans le cours [Stories et backlog](/stories-backlog/#la-methode-scrum).
 
 ### À quoi elle sert
 
@@ -101,17 +101,13 @@ La journey map suit la personne : ce qu'elle fait, pense et ressent, sur tous l
 
 ## L'activité
 
-En équipe, 45 minutes.
+En équipe, 30 minutes.
 
-1. Listez 5 à 7 choses que votre persona voudrait faire sur la page de la MJC.
-2. Transformez-en 5 en user stories, au format « En tant que…, je veux… afin de… ».
-3. Pour 2 de ces stories, ajoutez 3 critères d'acceptation.
-4. Relisez chaque story : vient-elle d'un besoin entendu en entretien, ou d'une contrainte du brief ?
-5. Vérifiez que l'ensemble couvre le choix de l'atelier, du créneau et la confirmation. Prévoyez aussi le cas d'une séance complète et celui d'une personne mineure.
+Écrivez trois user stories pour choisir un atelier, réserver un créneau et connaître le résultat de la réservation. Utilisez la forme « En tant que…, je veux… afin de… ».
 
-Rendu : 5 stories, dans la section « 4. User stories ».
+Pour la réservation, ajoutez deux critères qui permettront de vérifier qu'elle fonctionne. Gardez en tête la séance complète et l'accord parental.
 
-Mardi, pendant le test de la maquette, vous vérifierez vos critères un par un.
+Rendu : trois stories et deux critères dans votre fichier d'équipe.
 
 ## Pour aller plus loin
 

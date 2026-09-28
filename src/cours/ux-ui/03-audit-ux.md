@@ -2,28 +2,30 @@
 title: "L'audit UX"
 order: 3
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # L'audit UX
 
-Pour auditer un site, faites une tâche précise, notez ce qui se passe, puis examinez le résultat à l'aide de cinq principes présentés sur [Laws of UX](https://lawsofux.com/fr/). Appuyez vos constats sur des captures et proposez un changement si nécessaire.
+**Travail individuel, 30 minutes.**
 
-Vous travaillez seul et sans IA pendant 35 minutes, puis en équipe pendant 15 minutes. On termine tous ensemble.
+1. Choisissez un site ci-dessous et faites la tâche proposée.
+2. Notez ce qui vous aide ou vous gêne, en vous appuyant sur les lois UX vues en cours.
+3. Ajoutez une capture pour illustrer vos remarques et proposez une amélioration.
 
-## Qui audite quoi
+Déposez le tout dans un cadre à votre prénom, dans la section « Audit UX » de votre fichier Figma ou Penpot.
 
-Dans chaque équipe, répartissez-vous les trois sites. Chacun réalise sa tâche et prépare son audit avant de comparer les résultats.
+## Les sites au choix
 
-| Élève | La tâche | Ce qu'il faut regarder |
-| --- | --- | --- |
-| A | [Hacker News](https://news.ycombinator.com/) : ouvrir les commentaires du troisième article qui en a, sans ouvrir l'article. | La taille des liens, les lignes qui se répètent |
-| B | [Wikipédia](https://www.wikipedia.org/) : trouver l'article « volcan » en français depuis le portail. | Le nombre de choix, la façon dont les langues sont rangées |
-| C | [Photopea](https://www.photopea.com/) : entrer dans l'éditeur, puis trouver comment démarrer un projet vide. | Les menus, ce qui ressemble à d'autres logiciels |
+| Site | La tâche |
+| --- | --- |
+| [Hacker News](https://news.ycombinator.com/) | Ouvrir les commentaires du troisième article qui en a, sans ouvrir l'article. |
+| [Wikipédia](https://www.wikipedia.org/) | Trouver l'article « volcan » en français depuis le portail. |
+| [Photopea](https://www.photopea.com/) | Entrer dans l'éditeur, puis trouver comment démarrer un projet vide. |
 
-À deux, choisissez deux sites différents. Ne créez pas de compte et ne publiez rien.
+Ne créez pas de compte et ne publiez rien.
 
-## La grille
+## Les lois pour vous guider
 
 | Loi | Ce qu'elle dit | Ce que vous cherchez |
 | --- | --- | --- |
@@ -33,67 +35,15 @@ Dans chaque équipe, répartissez-vous les trois sites. Chacun réalise sa tâch
 | [Proximité](https://lawsofux.com/fr/loi-de-proximit%C3%A9/) | Des éléments proches semblent aller ensemble. | Quels éléments lisez-vous comme un bloc ? Vont-ils vraiment ensemble ? |
 | [Similarité](https://lawsofux.com/fr/loi-de-similarit%C3%A9/) | Des éléments qui se ressemblent semblent avoir le même rôle. | Deux éléments qui se ressemblent font-ils la même chose ? |
 
-## La méthode pas à pas
-
-1. Premier contact, 2 minutes. Ouvrez le site sans cliquer. Notez ce que vous voyez en premier et à quoi le site sert selon vous.
-2. La tâche, 5 minutes. Faites la tâche. Notez chaque action et ce qui se passe. Si vous bloquez, notez où et combien de temps. Si tout se passe bien, notez-le aussi : c'est un résultat.
-3. Les preuves, 3 minutes. Faites deux ou trois captures d'écran des moments importants. Sur Mac : Cmd + Maj + 4. Sur Windows : Windows + Maj + S.
-4. La grille, 20 minutes. Pour chaque loi, ouvrez sa fiche sur Laws of UX et lisez le résumé. Cherchez la loi sur votre site. Remplissez la ligne : respectée ou non, ce que vous avez vu, ce que vous changeriez.
-5. Le choix, 5 minutes. Choisissez le problème qui vous a le plus gêné. Proposez un changement et dites comment vous vérifieriez qu'il marche. Notez aussi ce qui marche bien.
-6. En équipe, 15 minutes. Chacun présente ses constats en 3 minutes. Comparez les trois interfaces : quels choix aident à réaliser la tâche ? Lesquels demandent de connaître le site ou le logiciel ?
-
 ## Un exemple
 
 Exemple pour l'appli d'un snack imaginaire :
 
-| Loi | Respectée ? | Ce que j'ai vu | Ce que je changerais |
+| Loi | Effet sur la tâche | Ce que j'ai vu | Ce que je changerais |
 | --- | --- | --- | --- |
-| Fitts | Non | Le bouton « Commander » fait la taille d'un mot et touche le lien « Annuler ». J'ai appuyé deux fois sur « Annuler » par erreur. | Un bouton sur toute la largeur de l'écran, éloigné de « Annuler ». |
-
-Pour vérifier : faire commander trois personnes sur la nouvelle version, et compter les clics sur « Annuler ».
+| Fitts | Gêne la commande | Le bouton « Commander » fait la taille d'un mot et touche le lien « Annuler ». J'ai appuyé deux fois sur « Annuler » par erreur. | Un bouton sur toute la largeur de l'écran, éloigné de « Annuler ». |
 
 Notez ce que vous avez vu ou fait. « C'est mal fait » ne décrit aucun problème.
-
-## La fiche à rendre
-
-Copiez ce modèle dans la section « Audit UX » du fichier Figma ou Penpot de l'équipe. Placez vos réponses et vos captures dans un cadre à votre prénom.
-
-```text
-Prénom :
-Site et tâche :
-Premier contact, ce que je vois en premier :
-Ce que j'ai fait et ce qui s'est passé :
-
-Loi de Fitts
-Respectée : oui, non ou en partie
-Ce que j'ai vu :
-Ce que je changerais :
-
-Loi de Hick
-Respectée : oui, non ou en partie
-Ce que j'ai vu :
-Ce que je changerais :
-
-Loi de Jakob
-Respectée : oui, non ou en partie
-Ce que j'ai vu :
-Ce que je changerais :
-
-Proximité
-Respectée : oui, non ou en partie
-Ce que j'ai vu :
-Ce que je changerais :
-
-Similarité
-Respectée : oui, non ou en partie
-Ce que j'ai vu :
-Ce que je changerais :
-
-Le problème qui m'a le plus gêné :
-Ma proposition :
-Comment la tester :
-Ce qui marche bien :
-```
 
 ## Pour la discussion
 
@@ -104,5 +54,5 @@ Ce qui marche bien :
 
 ## Si vous avez fini
 
-- Choisissez une autre loi sur [Laws of UX](https://lawsofux.com/fr/) et ajoutez-la à votre fiche.
+- Choisissez une autre loi sur [Laws of UX](https://lawsofux.com/fr/) et cherchez un exemple sur votre site.
 - Lisez les [10 heuristiques de Nielsen](https://www.nngroup.com/articles/ten-usability-heuristics/), une autre grille d'audit très utilisée. En anglais.

@@ -18,7 +18,9 @@ export function locate(text, { quote, prefix = "", suffix = "" }) {
   let best = -1;
   let bestScore = -1;
   for (let i = text.indexOf(quote); quote && i !== -1; i = text.indexOf(quote, i + 1)) {
-    const score = (text.slice(0, i).endsWith(prefix) ? 2 : 0) + (text.slice(i + quote.length).startsWith(suffix) ? 1 : 0);
+    const score =
+      (text.slice(0, i).endsWith(prefix) ? 2 : 0) +
+      (text.slice(i + quote.length).startsWith(suffix) ? 1 : 0);
     if (score > bestScore) [best, bestScore] = [i, score];
   }
   return best;

@@ -2,7 +2,7 @@
 title: 'User flow, séquence et UML'
 order: 10
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # User flow, séquence et UML
@@ -32,7 +32,7 @@ Nielsen Norman Group compare le journey et le user flow :
 | Le moment | Avant, pendant et après l'usage du produit | Pendant l'usage du produit |
 | Ce qu'on note | Les actions, les pensées, les émotions | Les actions de l'utilisateur, les réponses du produit |
 | Le schéma | Une journey map | Un organigramme ou un wireflow |
-| D'où viennent les infos | Des entretiens et de l'observation | Des tests de la maquette ou du site |
+| D'où viennent les infos | Des entretiens et de l'observation | Du brief, des besoins recueillis et des tests |
 
 Un user flow zoome sur une étape du journey. Celui-ci détaille l'étape « Commander » du [journey d'Inès](/ux-ui/07-journey/#un-exemple).
 
@@ -55,7 +55,7 @@ flowchart TD
     J -->|Réessaie| G
 ```
 
-Chaque losange ajoute un écran ou un message aux wireframes. Ici, il faut dessiner la connexion et le message d'erreur, en plus du parcours sans problème.
+Chaque branche du flow doit apparaître dans les wireframes. Ici, il faut prévoir la connexion et le message d'erreur, en plus du parcours sans problème.
 
 Nielsen Norman Group dessine aussi le user flow en _wireflow_ : les wireframes des écrans, posés en ligne et reliés par des flèches. Chaque flèche part de l'élément sur lequel l'utilisateur clique ou appuie. Dans Figma, reliez vos wireframes avec l'outil flèche (Maj + L).
 
@@ -136,7 +136,7 @@ stateDiagram-v2
     Annulee --> [*]
 ```
 
-Chaque état devient un message pour l'utilisateur, comme « Ta commande est prête ». Pour le développeur, il devient une valeur enregistrée dans la base de données.
+Certains états donnent lieu à un message, comme « Ta commande est prête ». Le système garde aussi une trace de l'état de la commande.
 
 ## Pour aller plus loin
 

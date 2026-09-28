@@ -1,0 +1,124 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  --cluster-space: 12px;
+  height: 3.25rem;
+  padding: 0 24px;
+  background: var(--bg-desk);
+  flex-wrap: nowrap;
+}
+
+.tools {
+  --cluster-space: 8px;
+  flex-wrap: nowrap;
+}
+
+.size-btns {
+  --cluster-space: 4px;
+  flex-wrap: nowrap;
+}
+
+.search-open kbd {
+  padding: 0 5px;
+  font: 0.75rem var(--font-mono);
+  color: var(--text-muted);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+}
+
+.chapters-link {
+  display: none !important;
+  text-decoration: none;
+}
+
+.brand:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.where {
+  align-items: baseline;
+  --cluster-space: 8px;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.brand {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.where-course {
+  overflow: hidden;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.where-course::before {
+  content: "/";
+  margin-right: 8px;
+  color: var(--border-strong);
+}
+
+.where-course:hover {
+  color: var(--heading);
+}
+
+.where-course:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Bouton enfoncé : mêmes couleurs que l'acteur actif des diagrammes animés */
+.tools [aria-pressed="true"] {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+  box-shadow: 0 1px 0 var(--accent-shadow);
+}
+
+.tools .button svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.button .when-dark,
+[data-theme="dark"] .button .when-light {
+  display: none;
+}
+
+[data-theme="dark"] .button .when-dark {
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chapters-link {
+    display: inline-flex !important;
+  }
+  /* Boutons de la barre à 44px au doigt */
+  .tools .button {
+    min-height: 44px;
+  }
+  .tool-label,
+  .search-open kbd,
+  .size-btns,
+  .present-toggle {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .where-course {
+    display: none;
+  }
+}

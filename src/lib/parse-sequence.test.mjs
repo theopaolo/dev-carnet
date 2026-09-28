@@ -22,7 +22,10 @@ test("participants, messages, contexte, notes et boucles", () => {
 
   assert.equal(s.title, "Titre");
   assert.equal(s.desc, "Description");
-  assert.deepEqual(s.actors.map((a) => a.label), ["Harness", "U", "M"]);
+  assert.deepEqual(
+    s.actors.map((a) => a.label),
+    ["Harness", "U", "M"],
+  );
   assert.deepEqual(s.initial, [{ role: "system", tokens: 100, label: "Prompt système" }]);
   assert.equal(s.steps.length, 5);
   assert.deepEqual([s.steps[0].from, s.steps[0].to], [1, 0]);

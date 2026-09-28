@@ -1,0 +1,26 @@
+---
+import preferences from "../scripts/preferences-init.js?raw";
+interface Props {
+  title: string;
+  pageTitle: string;
+  summary: string;
+}
+const { title, pageTitle, summary } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{pageTitle}</title>
+{summary && <meta name="description" content={summary} />}
+<meta property="og:site_name" content="Carnet" />
+<meta property="og:title" content={title} />
+{summary && <meta property="og:description" content={summary} />}
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_FR" />
+<link rel="icon" href="data:," />
+<!-- Fixe l'ordre avant les feuilles de composants injectées par Astro. -->
+<style is:inline>
+  @layer settings, reset, base, compositions, components, utilities;
+</style>
+<!-- Applique le thème et la taille mémorisés avant le premier rendu, pour éviter le flash -->
+<script is:inline set:html={preferences} />

@@ -1,0 +1,82 @@
+/* Flèche des liens de navigation (Reprendre, Tous les cours, Précédent, Suivant), dessinée en SVG.
+   Elle glisse vers sa destination au survol du lien */
+.arrow-next::after,
+.arrow-prev::before {
+  content: "";
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.arrow-next::after {
+  margin-left: 0.3em;
+}
+.arrow-prev::before {
+  margin-right: 0.3em;
+  transform: scaleX(-1);
+}
+a:is(:hover, :focus-visible) .arrow-next::after,
+a.arrow-next:is(:hover, :focus-visible)::after {
+  transform: translateX(4px);
+}
+a:is(:hover, :focus-visible) .arrow-prev::before,
+a.arrow-prev:is(:hover, :focus-visible)::before {
+  transform: scaleX(-1) translateX(4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrow-next::after,
+  .arrow-prev::before {
+    transition: none;
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 5px 10px;
+  font: 500 0.8125rem var(--font-sans);
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 6px;
+  box-shadow: 0 1px 0 var(--pill-shadow);
+  cursor: pointer;
+}
+.button:hover:not(:disabled) {
+  color: var(--heading);
+  border-color: var(--node-stroke);
+}
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.diagram-caption .fig {
+  padding: 1px 6px;
+  font: 0.75rem var(--font-mono);
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+}
+
+.panel-dialog {
+  padding: 0;
+  color: var(--text);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+.panel-dialog::backdrop {
+  background: rgba(10, 12, 18, 0.45);
+}

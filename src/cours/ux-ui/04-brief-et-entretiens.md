@@ -1,96 +1,65 @@
 ---
-title: 'Le brief et les entretiens'
+title: 'Préparer la réservation'
 order: 4
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
-# Le brief et les entretiens
+# Préparer la réservation
 
-## Étape 1 : le brief
+## Le brief
 
-Un brief est la commande du client : ce qu'il veut, pour qui, et avec quelles contraintes.
+La MJC des Tilleuls est une maison des jeunes et de la culture fictive. Elle propose des ateliers pour les 15–25 ans : photo, escalade, musique, théâtre, graff, jeu de rôle… La séance d'essai est gratuite et sans engagement.
 
-> La MJC des Tilleuls est une maison des jeunes et de la culture (fictive). Elle propose des ateliers pour les 15-25 ans : escalade, e-sport, DJ, théâtre d'impro, graff, jeu de rôle, photo, couture. Avant de s'inscrire pour l'année, on peut essayer un atelier gratuitement.
->
-> La page doit permettre de choisir un atelier, de réserver une séance d'essai et de voir que la réservation est confirmée.
+Vous concevez le parcours qui permet de choisir un atelier, de réserver une séance d'essai et d'obtenir une confirmation. Gardez ce même projet pour la suite de la semaine.
 
-La page doit tenir compte de quatre contraintes :
+### Les règles du projet
 
-- L'âge minimum de l'atelier.
-- Le matériel à apporter, ou fourni sur place.
-- L'accord d'un parent pour les moins de 18 ans.
-- Les places limitées, avec une liste d'attente quand la séance est complète.
+Ces règles sont fixées pour l'exercice :
 
-Choisissez un type d'ateliers pour votre équipe : sport, musique, scène, arts visuels ou jeu.
+- Les ateliers accueillent les 15–25 ans, débutants compris.
+- Le matériel est fourni. Prévoyez une tenue adaptée pour le sport. Un téléphone suffit pour la photo.
+- La réservation demande un prénom, un nom, un âge, une adresse e-mail et une séance.
+- Les moins de 18 ans peuvent réserver. Un message leur demande d'apporter une autorisation parentale le jour de la séance.
+- Chaque séance a dix places. Quand elle est complète, on peut rejoindre une liste d'attente. La MJC contacte la personne par e-mail si une place se libère.
+- La confirmation rappelle l'atelier, la date, l'heure, le lieu et ce qu'il faut apporter.
 
-Vous concevez le parcours d'inscription à une séance d'essai gratuite : liste des ateliers, fiche d'un atelier, réservation et confirmation. La séance complète et l'accord parental doivent aussi apparaître dans les écrans. L'inscription annuelle reste hors du périmètre.
+Choisissez une date, un horaire et un lieu fictifs pour votre séance. Si une autre information manque, proposez une solution et notez votre hypothèse.
 
-Gardez ce même projet pour les personas, les stories, le journey, le sitemap, les wireframes et la maquette UI.
+## Préparer votre parcours de réservation
 
-### Questions au client
+**En équipe, 30 minutes.**
 
-Je joue le responsable de la MJC. Je réponds à vos questions pendant 15 minutes. Préparez-en au moins trois. Quelques pistes :
+1. Choisissez une activité pour votre MJC : photo, escalade, musique…
+2. Une personne du groupe raconte une inscription à une activité qu'elle a réellement vécue. Les autres l'écoutent, posent les questions ci-dessous et prennent quelques notes.
+3. À partir de ce récit et du brief, notez ce que votre futur site devra permettre de comprendre et de faire.
 
-- Combien de places y a-t-il par séance ? Que se passe-t-il quand c'est complet ?
-- Quels jours et à quelle heure ont lieu les séances ?
-- Qui fait la réservation : le jeune ou ses parents ?
-- Comment la MJC reçoit-elle l'accord d'un parent ?
-- Comment les jeunes entendent-ils parler de la MJC aujourd'hui ?
-- Dans six mois, qu'est-ce qui vous dirait que la page est réussie ?
+### Les questions à poser
 
-Rendu : les réponses du client, dans la section « 1. Brief ».
+- « Raconte la dernière fois que tu t'es inscrit à une activité. »
+- « Comment as-tu choisi et trouvé les informations nécessaires ? »
+- « Qu'est-ce qui t'a compliqué la tâche ou fait hésiter ? »
 
-## Étape 2 : les entretiens
+Vous pouvez utiliser ces questions telles quelles. Une personne raconte, les autres écoutent. Un seul récit suffit pour l'exercice, sans changement de rôles. Les groupes travaillent en parallèle.
 
-Un entretien est une discussion de 10 à 15 minutes avec une personne de la cible. Elle raconte ce qu'elle a vécu. Vous écoutez et vous notez.
+Le formateur passe pour vous aider à préciser vos idées. Par exemple : « Qu'est-ce qui vous fait dire ça ? » ou « Où cette information doit-elle apparaître ? »
 
-Pour obtenir un récit concret, demandez : « Raconte-moi la dernière fois que… ».
+### Un seul rendu
 
-| Les bonnes questions | Les questions à éviter |
+Dans votre fichier Figma ou Penpot, créez un cadre **« 1–2. Préparer la réservation »** avec :
+
+- L'activité choisie.
+- Deux ou trois besoins ou difficultés entendus dans le récit.
+- Ce que vous prévoyez dans le site pour y répondre.
+
+Exemple fictif :
+
+| Ce que vous notez | Exemple |
 | --- | --- |
-| « Raconte la dernière fois que tu t'es inscrit à une activité. » | « Tu aimerais une appli pour ça ? » Elle propose déjà une solution. |
-| « Comment as-tu choisi ? » | « C'est pratique, non ? » Elle souffle la réponse. |
-| « Qu'est-ce qui a été compliqué ? » | « Tu utiliserais notre site ? » On prédit mal ce qu'on fera plus tard. |
+| Activité choisie | Initiation à la photo |
+| Difficulté racontée | « Je ne savais pas si les débutants étaient acceptés. » |
+| Réponse prévue dans le site | Afficher « accessible aux débutants » sur la fiche, avant la réservation. |
 
-Pendant l'entretien :
+Séparez ce que la personne a raconté de ce que vous supposez. Marquez vos suppositions « à vérifier ». Notez seulement un prénom ou une initiale pour identifier le récit, sans coordonnées personnelles. Ce témoignage ne représente pas tous les utilisateurs.
 
-- Une personne pose les questions, une autre note.
-- Notez ce que la personne dit et fait, avec ses mots.
-- Relancez avec « Pourquoi ? », « Et ensuite ? » ou « Tu as un exemple ? ».
-- Gardez vos idées de solution pour après.
-- Notez un prénom ou une initiale, jamais de nom de famille ni de coordonnées.
-
-### L'activité
-
-En équipe, 30 minutes.
-
-1. Une personne de chaque équipe part se faire interroger par l'équipe suivante : l'équipe 1 reçoit quelqu'un de la dernière équipe, l'équipe 2 quelqu'un de l'équipe 1, et ainsi de suite. J'annonce les rotations sur Discord.
-2. Préparez 3 questions sur une inscription passée à une activité : le choix, les démarches et l'arrivée à la première séance. Commencez par « Raconte… ».
-3. Menez 2 entretiens de 10 minutes.
-4. À la fin, listez les besoins et les freins que vous avez entendus.
-
-Modèle de notes, un par entretien :
-
-```text
-Personne interrogée : prénom ou initiale, âge
-Ce qu'elle a raconté :
-Ses besoins :
-Ce qui l'a freinée :
-Une phrase à retenir, avec ses mots :
-```
-
-Rendu : les notes des deux entretiens et la liste des besoins et des freins, dans la section « 2. Entretiens ».
-
-Interrogez de vraies personnes. Une IA peut inventer une réponse plausible, mais elle ne peut pas raconter une expérience vécue.
-
-## À lire
-
-- [Commencez par la recherche utilisateur](https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4041896-commencez-par-la-recherche-utilisateur), OpenClassrooms.
-- [User Interviews 101](https://www.nngroup.com/articles/user-interviews/), Nielsen Norman Group. En anglais.
-- [Méthodologie de projet numérique](/methodologie-projet/), avec un questionnaire client complet.
-
-## Pour la discussion
-
-- Qu'avez-vous appris que vous n'auriez pas deviné ?
-- Une réponse a-t-elle contredit une idée de votre équipe ?
+Gardez ce cadre pour construire ensuite votre persona et vos user stories.

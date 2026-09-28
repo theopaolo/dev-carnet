@@ -1,0 +1,146 @@
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/RobotoMono-VariableFont_wght.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/RobotoMono-Italic-VariableFont_wght.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inclusive Sans";
+  src: url("../assets/fonts/InclusiveSans-VariableFont_wght.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inclusive Sans";
+  src: url("../assets/fonts/InclusiveSans-Italic-VariableFont_wght.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: "Inclusive Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+  --space-base: 16px;
+
+  /* Papier ivoire (vélin d'un carnet Rhodia) posé sur le bureau. L'encre reste bleu-noir */
+  --bg-desk: #f2eee6;
+  --bg-page: #fdfbf7;
+  --bg-surface: #fffefc;
+  --bg-canvas: #f6f2eb;
+  --dot: #d8d1c4;
+  --border: #e7e2d8;
+  --border-strong: #c6beb1;
+  --text: #1e2530;
+  --text-muted: #56637a;
+  --heading: #202637;
+  --accent: #9475c6;
+  --accent-bg: #f5effd;
+  --code-bg: #efebe3;
+  --code-text: #24292f;
+  --scroll-edge: rgba(32, 38, 55, 0.18);
+  --radius: 8px;
+
+  /* Diagrammes */
+  --node-fill: #e8ecf4;
+  --node-stroke: #3f4658;
+  --node-text: #202637;
+  --node-sub: #4b5567;
+  --node-shadow: #b9c0cf;
+  --accent-fill: #eee5fa;
+  --accent-stroke: #8261b6;
+  --accent-text: #51357e;
+  --accent-sub: #644594;
+  --accent-shadow: #d4c4e9;
+  --store-fill: #e6f3ea;
+  --store-stroke: #2f7a4f;
+  --store-text: #1f5a3a;
+  --store-sub: #2a6a45;
+  --store-shadow: #b3d4bf;
+  --link: #3f4658;
+  --pill-bg: #fffefc;
+  --pill-border: #c6beb1;
+  --pill-text: #3f4658;
+  --pill-shadow: #e0dace;
+  --cluster-fill: rgba(255, 255, 255, 0.45);
+  --cluster-stroke: #8e97aa;
+
+  /* Contexte des diagrammes animés, une couleur par rôle de message */
+  --ctx-system: #5e6b7e;
+  --ctx-tools: #a3abbd;
+  --ctx-user: #9475c6;
+  --ctx-assistant: #4a67d6;
+  --ctx-tool: #2f8f5b;
+  --ctx-summary: #8a5cc2;
+
+  /* Carnet de l'élève : rubans violet, encre et gris, surligneur (src/scripts/notebook.js) */
+  --ribbon-0: #8261b6;
+  --ribbon-1: #3f4658;
+  --ribbon-2: #a89e8c;
+  --annot: #e9dcfa;
+}
+
+[data-theme="dark"] {
+  --bg-desk: #0f1117;
+  --bg-page: #14171f;
+  --bg-surface: #1b1f2a;
+  --bg-canvas: #181c26;
+  --dot: #2a3040;
+  --border: #2c3242;
+  --border-strong: #4a5268;
+  --text: #e6e8ee;
+  --text-muted: #a3abbd;
+  --heading: #f2f4f8;
+  --accent: #c4a6ee;
+  --accent-bg: #292236;
+  --code-bg: #262c3a;
+  --code-text: #e6e8ee;
+  --scroll-edge: rgba(0, 0, 0, 0.55);
+
+  --node-fill: #232a3b;
+  --node-stroke: #aab3c8;
+  --node-text: #e6e8ee;
+  --node-sub: #b8c0d0;
+  --node-shadow: #0b0d12;
+  --accent-fill: #322844;
+  --accent-stroke: #c4a6ee;
+  --accent-text: #dcc8fa;
+  --accent-sub: #c7acee;
+  --accent-shadow: #0b0d12;
+  --store-fill: #17301f;
+  --store-stroke: #5fbf87;
+  --store-text: #a6e3bf;
+  --store-sub: #8fd3aa;
+  --store-shadow: #0b0d12;
+  --link: #b3bccd;
+  --pill-bg: #1b1f2a;
+  --pill-border: #4a5268;
+  --pill-text: #d3d8e3;
+  --pill-shadow: #0b0d12;
+  --cluster-fill: rgba(255, 255, 255, 0.03);
+  --cluster-stroke: #6b7590;
+
+  --ctx-system: #8e97aa;
+  --ctx-tools: #5a6379;
+  --ctx-user: #c4a6ee;
+  --ctx-assistant: #7f98f0;
+  --ctx-tool: #5fbf87;
+  --ctx-summary: #b592e6;
+
+  --ribbon-0: #c4a6ee;
+  --ribbon-1: #aab3c8;
+  --ribbon-2: #6b7590;
+  --annot: #5a4380;
+}

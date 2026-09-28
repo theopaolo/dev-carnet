@@ -2,14 +2,12 @@
 title: "L'architecture de l'information"
 order: 8
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # L'architecture de l'information
 
-C'est l'étape 6 du projet, mardi matin. Vous passez des besoins du persona à la structure du site.
-
-L'architecture de l'information, ou IA, consiste à organiser, nommer et ranger le contenu pour que l'utilisateur trouve vite ce qu'il cherche. Dans un site bien rangé, on fait moins de clics et on hésite moins.
+L'architecture de l'information, ou IA, organise et nomme les contenus pour aider les personnes à trouver ce qu'elles cherchent. Dans le projet MJC, elle relie les besoins du persona au parcours d'inscription.
 
 ## Trois cercles
 
@@ -33,9 +31,11 @@ venn-beta
 | Contenu | Quelles informations le site doit-il montrer ? | Le brief et vos user stories |
 | Contexte | Où, quand, pourquoi et sur quel appareil consultent-ils ce contenu ? | Votre journey |
 
-Un site qui oublie un cercle crée des blocages. Un menu complet, rangé avec les mots du restaurant et pas ceux des clients, oublie les utilisateurs. Une appli pensée pour un grand écran, alors que les clients commandent debout dans la rue, oublie le contexte.
+Un menu rangé avec les mots du restaurateur peut être difficile à comprendre pour ses clients. Si ces clients commandent sur leur téléphone, une interface conçue seulement pour un grand écran risque aussi de les gêner.
 
-## Trois livrables
+## De la structure aux écrans
+
+Pour passer du contenu aux écrans, vous utiliserez trois documents :
 
 | Livrable | La question | Où l'apprendre |
 | --- | --- | --- |
@@ -45,7 +45,7 @@ Un site qui oublie un cercle crée des blocages. Un menu complet, rangé avec le
 
 ## Le sitemap
 
-Le sitemap, ou arborescence, montre toutes les pages du site rangées en arbre. L'accueil est à la racine. Chaque niveau en dessous demande un clic de plus.
+Le sitemap, ou arborescence, montre comment les pages du site sont regroupées. L'accueil est à la racine. Les liens de navigation déterminent ensuite le chemin réel entre les pages.
 
 Voici le sitemap de l'appli d'un snack de quartier :
 
@@ -73,11 +73,11 @@ flowchart LR
 | | Sitemap plat | Sitemap profond |
 | --- | --- | --- |
 | Sa forme | Peu de niveaux. Beaucoup de pages juste sous l'accueil. | Plusieurs niveaux de catégories. |
-| Ses avantages | Tout est à 1 ou 2 clics. Le menu montre tout. | Chaque catégorie est claire. Le premier niveau reste court. Le site peut grandir. |
-| Ses défauts | Le menu devient long quand les pages se multiplient. | Il faut plus de clics. On se perd plus facilement. Il faut un fil d'Ariane. |
+| Ses avantages | Les pages principales sont proches de l'accueil. Le menu montre tout. | Le premier niveau reste court. On peut ajouter des pages dans chaque catégorie. |
+| Ses défauts | Le menu devient long quand les pages se multiplient. | Certaines pages sont plus difficiles à trouver si les catégories sont mal nommées. Un fil d'Ariane peut aider à se repérer. |
 | Il convient à | Un petit site, une page de réservation | Un site avec beaucoup de contenus, comme une boutique |
 
-La loi de Hick s'applique ici : un premier niveau court aide à décider vite.
+Regrouper les pages sous des intitulés clairs peut aider à choisir sans parcourir tout le site.
 
 ## La navigation
 
@@ -93,15 +93,13 @@ La navigation relie les pages entre elles. Un site combine en général plusieur
 
 ## L'activité
 
-En équipe, 45 minutes.
+En équipe, 30 minutes.
 
-1. Listez les contenus nécessaires à l'inscription à la MJC : ateliers, âge minimum, créneaux, matériel, accord parental, liste d'attente et confirmation. Complétez avec vos user stories et votre journey. Faites une carte par contenu.
-2. Rangez les cartes en groupes.
-3. Nommez chaque groupe avec les mots de votre persona.
-4. Dessinez l'arbre dans Figma, ou dans [draw.io](https://app.diagrams.net/) puis collez l'export PNG dans Figma. Distinguez les pages des informations qu'elles contiennent. Une confirmation peut être un état du formulaire plutôt qu'une page séparée.
-5. Relisez chaque user story. Montrez où le persona trouve l'information et comment il rejoint la réservation.
+Dessinez l'arbre des pages de votre site. Donnez-leur des noms clairs et indiquez où se trouvent les informations nécessaires à l'inscription.
 
-Rendu : le sitemap, dans la section « 6. Sitemap ».
+Vérifiez que votre persona peut trouver un atelier et réserver. Distinguez les pages de leur contenu : une confirmation peut être un état du formulaire.
+
+Rendu : le sitemap dans votre fichier d'équipe. Un schéma simple suffit.
 
 ## À lire
 

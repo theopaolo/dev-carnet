@@ -2,7 +2,7 @@
 title: "Les lois de l'UX"
 order: 2
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # Les lois de l'UX
@@ -29,7 +29,7 @@ Plus il y a de choix, plus on met de temps à décider. Le temps augmente avec l
 
 Dans une interface :
 
-- Un formulaire d'inscription est découpé en étapes courtes.
+- Les options d'un formulaire sont regroupées par sujet.
 - Un menu garde peu d'entrées, rangées en groupes.
 - Une longue liste a une recherche ou des filtres.
 
@@ -57,7 +57,7 @@ Dans une interface :
 
 - Une barre de progression montre ce qui reste à faire, par exemple « Étape 2 sur 3 ».
 - Un long formulaire est découpé en étapes, et chaque étape finie fait avancer la barre.
-- Une progression ne part pas de zéro. Un profil qu'on vient de créer est déjà rempli à 20 %, une carte de fidélité a déjà un tampon.
+- Un avantage réel déjà obtenu apparaît dès le départ, comme deux tampons offerts sur une carte de fidélité.
 
 En 2006, les chercheurs Joseph Nunes et Xavier Drèze ont distribué des cartes de fidélité dans une station de lavage. La première carte demandait 8 tampons. La seconde en demandait 10, dont 2 déjà offerts. Il fallait donc 8 lavages dans les deux cas. 19 % des clients ont rempli la première carte, et 34 % la seconde.
 
@@ -87,15 +87,9 @@ Fiches Laws of UX : [loi de proximité](https://lawsofux.com/fr/loi-de-proximit
 - [Pourquoi le web est devenu si moche ?](https://www.youtube.com/watch?v=dPi-o1rsHpI), vidéo de Basti UI, 17 minutes, sur les sites qui se ressemblent tous aujourd'hui. Regardez-la avec la loi de Jakob en tête.
 - [The UX Psychology Behind Apps People Can't Stop Using](https://www.youtube.com/watch?v=2TlIg3VokY8), vidéo d'uxpeak, 12 minutes. Six principes de psychologie, chacun avec un écran avant et après, dont une barre de progression qui ne part pas de zéro. En anglais, avec des sous-titres automatiques.
 
-## Deux principes pour la MJC
+## Repérer un principe UX
 
-Seul, 10 minutes.
-
-1. Sur téléphone, ouvrez un des sites de MJC choisis pendant le roasting.
-2. Cherchez deux lois ou principes dans la présentation des ateliers ou le parcours d'inscription.
-3. Postez une capture sur Discord, avec le nom de chaque principe et l'élément concerné. Ajoutez une idée à appliquer à votre projet.
-
-Choisissez un écran qui ne montre ni vos messages ni vos contacts.
+Cette observation peut se faire pendant le roasting ou l'audit : repérez une loi UX sur le site choisi et expliquez son effet sur votre tâche.
 
 ## Pour la discussion
 

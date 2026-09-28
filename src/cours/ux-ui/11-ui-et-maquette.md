@@ -2,7 +2,7 @@
 title: "L'UI et la maquette"
 order: 11
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # L'UI et la maquette
@@ -42,59 +42,43 @@ Dans Figma, composez l'élément avec du texte et des formes, organisez son cont
 
 ## Atelier UI de la MJC
 
-Reprenez vos wireframes dans le fichier d'équipe. Choisissez les contenus de vos ateliers à partir du brief et des réponses du client. Utilisez des coordonnées fictives dans les formulaires.
+Reprenez vos wireframes dans le fichier d'équipe. Choisissez les contenus de vos ateliers à partir du brief et du cadre « 1–2. Préparer la réservation ». Utilisez des coordonnées fictives dans les formulaires.
 
 ### Choisir les styles
 
-En équipe, 30 minutes.
+En équipe, 20 minutes.
 
-1. Posez côte à côte vos trois wireframes : liste des ateliers, fiche d'un atelier et réservation.
-2. Créez la planche de styles. Essayez-les sur une carte d'atelier avant de les appliquer partout.
-3. Vérifiez que le nom, l'âge minimum, le créneau et la gratuité de l'essai se lisent sans zoomer au format prévu.
+Choisissez une police, quelques couleurs et des espacements réguliers. Essayez-les sur une carte d'atelier et vérifiez sa lisibilité.
 
-### Dessiner les parties de l'interface
+### Créer les composants
 
-En équipe, 1 heure. Répartissez-vous ces éléments, puis assemblez-les.
+En équipe, 40 minutes.
 
-| Partie à dessiner | Contenu | États à prévoir |
-| --- | --- | --- |
-| Carte d'atelier | Nom, description courte, âge minimum, accès à la fiche | Atelier avec séance disponible, atelier dont les séances sont complètes |
-| Choix du créneau | Jour, horaire et disponibilité | Disponible, sélectionné, complet avec accès à la liste d'attente |
-| Formulaire | Libellés, champs nécessaires, aide sur l'accord parental et bouton de réservation | Saisie normale, information manquante, erreur expliquée |
-| Message de résultat | Atelier, créneau, statut et prochaine étape | Réservation confirmée, inscription en liste d'attente, accord parental à fournir si le brief le prévoit |
-
-1. Créez les composants de base : bouton, champ et carte. Réutilisez-les dans ces quatre parties.
-2. Ajoutez les états qui changent leur apparence ou leur texte. Pour une erreur, indiquez ce qui manque et comment le corriger.
-3. Prévoyez un état de focus visible pour les éléments interactifs. Il servira lors de l'intégration au clavier.
-4. Comparez les réalisations : mêmes styles de texte, mêmes espacements, mêmes boutons pour les mêmes actions.
+Créez un bouton, un champ de formulaire et une carte d'atelier réutilisables. Prévoyez un focus visible et un message d'erreur compréhensible.
 
 ### Assembler la maquette
 
-En équipe, 45 minutes.
+En équipe, 1 heure.
 
-1. Dupliquez vos wireframes pour conserver la version en gris.
-2. Appliquez les styles et remplacez les éléments répétés par les instances de vos composants.
-3. Ajoutez les variantes d'écran prévues le matin : séance complète, erreur, accord parental et confirmation.
-4. Reliez les écrans dans le mode Prototype pour simuler le choix d'un atelier, d'un créneau et la réservation. Les états du formulaire peuvent être simulés par des écrans préparés.
-5. Relisez vos critères d'acceptation. Vérifiez où chacun apparaît dans le prototype.
+Appliquez vos styles et composants aux trois wireframes. Gardez une copie de la version en gris. Reliez les écrans pour pouvoir essayer une réservation.
 
-Rendu : la planche de styles, les composants et la maquette reliée, dans la section « 8. UI et maquette ».
+Conservez les états prévus : erreur, confirmation, séance complète et accord parental. Vérifiez les critères de votre story de réservation.
+
+Rendu : la maquette cliquable dans votre fichier d'équipe, avec les styles et composants utilisés.
 
 ## Tester l'inscription
 
-En équipe, 45 minutes. Une personne d'une autre équipe teste, une personne observe et une autre prend des notes. Présentez le contexte sans montrer les boutons à utiliser :
+En équipe, 30 minutes.
 
-> Tu veux essayer une activité à la MJC des Tilleuls. Choisis un atelier qui correspond à ton âge et à tes disponibilités, puis réserve une séance d'essai. À la fin, dis ce que tu as réservé et ce qu'il te reste à faire avant de venir.
+Demandez à une personne qui n'a pas conçu la maquette de réserver une séance. Laissez-la essayer sans la guider et notez ce qui la bloque.
 
-1. Laissez la personne avancer sans la guider. Notez où elle hésite, ce qu'elle comprend et les questions qu'elle pose.
-2. Faites-lui ensuite essayer une séance complète, puis le cas d'une personne mineure. Vérifiez qu'elle distingue réservation confirmée, liste d'attente et accord parental à fournir.
-3. Pour chaque blocage, notez l'écran, l'action tentée et ce qui s'est passé. Distinguez une difficulté de l'interface d'une interaction que votre prototype ne simule pas.
-4. Corrigez le blocage le plus gênant et faites réessayer la partie concernée.
-5. Reliez cette correction à un besoin relevé en entretien ou à une contrainte du brief. Notez si le nouvel essai résout le blocage observé.
+> Tu veux essayer une activité à la MJC. Choisis un atelier et réserve une séance. Explique ensuite ce que tu as réservé et ce qu'il te reste à faire avant de venir.
 
-Rendu : les observations, le besoin ou la contrainte concernés, le critère d'acceptation, la correction avant/après et le résultat du nouvel essai, dans la section « 9. Test ».
+Corrigez le principal problème, puis faites réessayer. Vérifiez aussi que les messages de séance complète et d'accord parental sont compréhensibles.
 
-Le prototype permet de tester les libellés, la compréhension et l'enchaînement des écrans. Le fonctionnement au clavier, les lecteurs d'écran et l'envoi réel du formulaire seront vérifiés sur la page codée.
+Rendu : quelques notes sur le problème observé, votre correction et le résultat du nouvel essai.
+
+Le prototype sert à vérifier la compréhension et le parcours. Le clavier et le fonctionnement réel du formulaire seront testés sur la page codée.
 
 ## Pour la discussion
 

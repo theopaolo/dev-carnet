@@ -1,8 +1,7 @@
 // ```mermaid [play] → <pre class="diagram"><div class="mermaid">…</div></pre>
 // ```animated [loop] → <div class="diagram seq">…</div>
 // Le rendu se fait côté client (src/scripts/diagrams.js), pas par Shiki.
-const escape = (s) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const escape = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 export function remarkMermaid() {
   return (tree) => {

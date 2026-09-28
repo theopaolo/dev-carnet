@@ -1,0 +1,120 @@
+/* Lien d'évitement : invisible jusqu'au premier Tab */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 20;
+  padding: 8px 14px;
+  color: var(--heading);
+  background: var(--bg-surface);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.content:focus {
+  outline: none;
+}
+
+/* Coque : la barre latérale occupe le bord gauche sur toute la hauteur,
+     le contenu et le sommaire sont centrés dans le reste */
+.shell {
+  display: grid;
+  grid-template-columns: 18rem minmax(0, 1fr);
+}
+
+.page {
+  display: grid;
+  /* 48rem : environ 80 caractères par ligne, quelle que soit la taille du texte */
+  grid-template-columns: minmax(0, 48rem) 15rem;
+  justify-content: center;
+  gap: 48px;
+  min-width: 0;
+  padding: 40px 32px 96px;
+  /* Feuille du carnet : papier ivoire aux coins arrondis, posée sur le bureau */
+  margin: 0 16px 16px 0;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* Accueil : une colonne pleine largeur, la page gère ses marges */
+.shell-home {
+  display: block;
+}
+
+.shell-home .page {
+  display: block;
+  position: relative;
+  margin-left: 16px;
+  padding: 0 0 96px;
+  /* L'en-tête pointillé suit les coins arrondis */
+  overflow: clip;
+}
+@media (min-width: 82rem) {
+  .shell-home .page::after {
+    content: "";
+    position: absolute;
+    inset: 0 calc(25% - 18rem - 10px) 0 auto;
+    width: 20px;
+    /* Trame du tissu : une ligne plus sombre tous les 3px, bords tissés plus foncés */
+    background: repeating-linear-gradient(transparent 0 2px, rgb(0 0 0 / 0.16) 2px 3px)
+      var(--accent-stroke);
+    box-shadow:
+      inset 2px 0 rgb(0 0 0 / 0.14),
+      inset -2px 0 rgb(0 0 0 / 0.14),
+      3px 0 6px rgb(40 30 15 / 0.2);
+  }
+}
+
+.content {
+  min-width: 0;
+}
+
+@media (max-width: 1180px) {
+  .page {
+    grid-template-columns: minmax(0, 48rem);
+  }
+}
+@media (min-width: 761px) {
+  html[data-size="2"] .page,
+  html[data-size="3"] .page {
+    grid-template-columns: minmax(0, 48rem);
+  }
+  html[data-present] .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html[data-present] .page {
+    margin-left: 16px;
+    grid-template-columns: minmax(0, 72rem);
+  }
+  html[data-present] .shell:not(.shell-home) .content > :not(.diagram) {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  /* Diagrammes une fois et demie plus grands, un diagramme haut tient dans l'écran */
+  html[data-present] div.mermaid > svg {
+    max-width: calc(var(--w, 10000) * 0.09375rem);
+    max-height: 80vh;
+  }
+}
+
+@media (max-width: 760px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Téléphone : la feuille occupe tout l'écran */
+  .page,
+  .shell-home .page {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .page {
+    padding: 32px 20px 48px;
+  }
+}

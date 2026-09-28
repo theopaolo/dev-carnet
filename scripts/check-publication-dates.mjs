@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
+import { privateCourses } from "../src/lib/private-courses.mjs";
 
 const root = new URL("../", import.meta.url);
 const format = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" });
 let count = 0;
 for (const path of readdirSync(new URL("src/cours/", root), { recursive: true })) {
-  if (!path.endsWith(".md")) continue;
+  if (!path.endsWith(".md") || path.split("/").at(-1).startsWith("_")) continue;
+  if (privateCourses.includes(path.split("/")[0])) continue;
   const md = readFileSync(new URL(`src/cours/${path}`, root), "utf8");
   const frontmatter = md.split("---")[1];
   if (/^hidden: true$/m.test(frontmatter)) continue;
@@ -18,7 +20,9 @@ for (const path of readdirSync(new URL("src/cours/", root), { recursive: true })
   assert(dates[1] >= dates[0], `${path} : mise à jour avant publication`);
   const id = path.replace(/\.md$/, "").replace(/\/index$/, "");
   const html = readFileSync(new URL(`dist/${id}/index.html`, root), "utf8");
-  const metadata = html.match(/<p class="lesson-dates"[^>]*>([\s\S]*?)<\/p>/)?.[1];
+  const metadata = html.match(
+    /<p\b[^>]*class="[^"]*\blesson-dates\b[^"]*"[^>]*>([\s\S]*?)<\/p>/,
+  )?.[1];
   assert(metadata, `${path} : dates absentes de la page construite`);
   assert.equal((metadata.match(/<time /g) ?? []).length, 2, path);
   for (const date of dates) {

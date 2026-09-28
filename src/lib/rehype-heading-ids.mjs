@@ -3,7 +3,8 @@
 // et Astro garde l'id posé ici pour le sommaire et la recherche (rehypeHeadingIds)
 import Slugger from "github-slugger";
 
-const text = (node) => (node.type === "text" ? node.value : (node.children ?? []).map(text).join(""));
+const text = (node) =>
+  node.type === "text" ? node.value : (node.children ?? []).map(text).join("");
 
 export function rehypeHeadingIds() {
   return (tree) => {

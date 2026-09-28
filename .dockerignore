@@ -2,3 +2,8 @@ node_modules
 dist
 .astro
 .git
+.env
+.env.*
+src/cours/threejs/
+public/ressources/threejs/
+src/pages/ressources/threejs/

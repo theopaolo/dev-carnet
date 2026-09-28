@@ -45,7 +45,7 @@ The site is called Carnet. It holds the author's personal teaching materials: co
 
 ## Evidence on Hand
 
-- Ten courses: Docker, Agentic coding, Documenter son projet web, Architecture logicielle, Lire, comprendre et améliorer une codebase, Méthodologie de projet numérique, Stories et backlog, Le RGPD pour les développeur·euses, Créer un mini-blog avec un SSG and Veille. Docker has three annex pages; Agentic coding has 13 chapters; Documentation has 15 published chapters.
+- Eleven courses: Docker, Agentic coding, Documenter son projet web, Architecture logicielle, Lire, comprendre et améliorer une codebase, Méthodologie de projet numérique, Stories et backlog, Le RGPD pour les développeur·euses, Créer un mini-blog avec un SSG, Veille and Creative coding avec Three.js. Docker has three annex pages; Agentic coding has 13 chapters; Documentation has 15 published chapters.
 - The documentation course ships SVG visuals in `src/cours/documentation/visuels/`, with their credits in the chapter `16-credits.md`.
 - There is no ludique.dev logo or brand asset in the repo yet. Future work must not invent one.
 

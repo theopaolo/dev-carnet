@@ -1,0 +1,27 @@
+---
+import type { MarkdownHeading } from "astro";
+interface Props {
+  headings: MarkdownHeading[];
+  inline?: boolean;
+}
+const { headings, inline = false } = Astro.props;
+const Element = inline ? "details" : "aside";
+---
+
+<Element class={inline ? "toc-inline" : "toc"} aria-label={inline ? undefined : "Sommaire"}>
+  {inline ? <summary class="button">Sur cette page</summary> : <p class="nav-section">Sommaire</p>}
+  <ul>
+    {headings.map((heading) => (
+      <li class={`depth-${heading.depth}`}>
+        <a href={`#${heading.slug}`}>{heading.text}</a>
+        <button
+          type="button"
+          class="toc-ribbon"
+          data-ribbon={heading.slug}
+          aria-pressed="false"
+          aria-label={`Ruban : ${heading.text}`}
+        ></button>
+      </li>
+    ))}
+  </ul>
+</Element>

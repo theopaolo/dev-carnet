@@ -1,68 +1,42 @@
-// Confort de lecture : taille du texte (A- / A+), bouton Copier sur les blocs de code, liens de section.
-
-// Taille : html[data-size] de -1 à 3, appliquée avant le rendu par le script en tête de Lesson.astro
-const MIN = -1;
-const MAX = 3;
-const root = document.documentElement;
-const smaller = document.querySelector('[data-size-step="-1"]');
-const bigger = document.querySelector('[data-size-step="1"]');
-
-function setSize(n) {
-  if (n === 0) delete root.dataset.size;
-  else root.dataset.size = n;
-  try {
-    localStorage.setItem("textSize", n);
-  } catch {}
-  smaller.disabled = n <= MIN;
-  bigger.disabled = n >= MAX;
-}
-
-const current = () => Number(root.dataset.size ?? 0);
-if (smaller && bigger) {
-  setSize(current());
-  smaller.addEventListener("click", () => setSize(Math.max(MIN, current() - 1)));
-  bigger.addEventListener("click", () => setSize(Math.min(MAX, current() + 1)));
-}
-
 // Copier : chaque bloc Shiki est enveloppé pour que le bouton ne défile pas avec le code
-for (const pre of document.querySelectorAll(".content pre.astro-code")) {
-  const wrap = document.createElement("div");
-  wrap.className = "code-block";
-  pre.replaceWith(wrap);
-  wrap.append(pre);
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "copy-btn";
-  btn.textContent = "Copier";
-  btn.addEventListener("click", async () => {
+for (const code of document.querySelectorAll(".content pre.astro-code")) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "code-block";
+  code.replaceWith(wrapper);
+  wrapper.append(code);
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "copy-btn";
+  button.textContent = "Copier";
+  button.addEventListener("click", async () => {
     try {
-      await navigator.clipboard.writeText(pre.innerText.replace(/\n$/, ""));
-      btn.textContent = "Copié";
+      await navigator.clipboard.writeText(code.innerText.replace(/\n$/, ""));
+      button.textContent = "Copié";
     } catch {
       // Presse-papiers refusé (contexte non sécurisé) : sélectionner le code, copie au clavier
-      getSelection().selectAllChildren(pre);
-      btn.textContent = "Sélectionné";
+      getSelection().selectAllChildren(code);
+      button.textContent = "Sélectionné";
     }
-    setTimeout(() => (btn.textContent = "Copier"), 1800);
+    setTimeout(() => (button.textContent = "Copier"), 1800);
   });
-  wrap.append(btn);
+  wrapper.append(button);
 }
 
 // Titres de section : le titre devient un lien vers sa section, et le clic copie l'adresse
 // à envoyer aux élèves. Le lien enveloppe le texte : un lecteur d'écran lit le titre, sans « # »
-for (const h of document.querySelectorAll(".content > h2[id], .content > h3[id]")) {
-  if (h.querySelector("a")) continue;
-  const a = document.createElement("a");
-  a.className = "heading-link";
-  a.href = `#${h.id}`;
+for (const heading of document.querySelectorAll(".content > h2[id], .content > h3[id]")) {
+  if (heading.querySelector("a")) continue;
+  const link = document.createElement("a");
+  link.className = "heading-link";
+  link.href = `#${heading.id}`;
   // Le bouton Ruban du titre (notebook.js, parfois exécuté avant) reste hors du lien
-  a.append(...[...h.childNodes].filter((n) => n.nodeName !== "BUTTON"));
-  h.prepend(a);
-  a.addEventListener("click", async () => {
+  link.append(...[...heading.childNodes].filter((node) => node.nodeName !== "BUTTON"));
+  heading.prepend(link);
+  link.addEventListener("click", async () => {
     try {
-      await navigator.clipboard.writeText(a.href);
-      a.dataset.copied = "";
-      setTimeout(() => delete a.dataset.copied, 1800);
+      await navigator.clipboard.writeText(link.href);
+      link.dataset.copied = "";
+      setTimeout(() => delete link.dataset.copied, 1800);
     } catch {}
   });
 }

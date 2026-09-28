@@ -1,7 +1,7 @@
 import mermaid from "mermaid";
 
 // Rendu Mermaid + barre légende/zoom sous chaque diagramme.
-// Les flowcharts sont stylés par theme.css. Les autres types (séquence, état,
+// Les flowcharts sont stylés par diagrams.css. Les autres types (séquence, état,
 // entités) prennent leurs couleurs des themeVariables : on re-rend au changement de thème.
 const common = {
   startOnLoad: false,
@@ -11,69 +11,40 @@ const common = {
   sequence: { actorMargin: 60, messageMargin: 40, mirrorActors: false },
 };
 
-const fonts = { fontFamily: "Inclusive Sans, system-ui, sans-serif", fontSize: "15px" };
-
-// Mêmes valeurs que les jetons de theme.css
-const themeVariables = {
-  light: {
-    ...fonts,
-    background: "#f4f4f6",
-    mainBkg: "#e8ecf4",
-    primaryColor: "#e8ecf4",
-    primaryTextColor: "#202637",
-    primaryBorderColor: "#3f4658",
-    secondaryColor: "#eee5fa",
-    tertiaryColor: "#e6f3ea",
-    lineColor: "#3f4658",
-    textColor: "#1e2530",
-    noteBkgColor: "#eee5fa",
-    noteTextColor: "#51357e",
-    noteBorderColor: "#8261b6",
-    actorBkg: "#e8ecf4",
-    actorBorder: "#3f4658",
-    actorTextColor: "#202637",
-    actorLineColor: "#8e97aa",
-    signalColor: "#3f4658",
-    signalTextColor: "#1e2530",
-    labelBoxBkgColor: "#f4f4f6",
-    labelBoxBorderColor: "#8e97aa",
-    labelTextColor: "#1e2530",
-    loopTextColor: "#1e2530",
-    activationBkgColor: "#eee5fa",
-    activationBorderColor: "#8261b6",
-    attributeBackgroundColorOdd: "#ffffff",
-    attributeBackgroundColorEven: "#f4f4f6",
-  },
-  dark: {
-    ...fonts,
-    background: "#181c26",
-    mainBkg: "#232a3b",
-    primaryColor: "#232a3b",
-    primaryTextColor: "#e6e8ee",
-    primaryBorderColor: "#aab3c8",
-    secondaryColor: "#322844",
-    tertiaryColor: "#17301f",
-    lineColor: "#b3bccd",
-    textColor: "#e6e8ee",
-    noteBkgColor: "#322844",
-    noteTextColor: "#dcc8fa",
-    noteBorderColor: "#c4a6ee",
-    actorBkg: "#232a3b",
-    actorBorder: "#aab3c8",
-    actorTextColor: "#e6e8ee",
-    actorLineColor: "#6b7590",
-    signalColor: "#b3bccd",
-    signalTextColor: "#e6e8ee",
-    labelBoxBkgColor: "#181c26",
-    labelBoxBorderColor: "#4a5268",
-    labelTextColor: "#e6e8ee",
-    loopTextColor: "#e6e8ee",
-    activationBkgColor: "#322844",
-    activationBorderColor: "#c4a6ee",
-    attributeBackgroundColorOdd: "#1b1f2a",
-    attributeBackgroundColorEven: "#232a3b",
-  },
-};
+function themeVariables() {
+  const styles = getComputedStyle(document.documentElement);
+  const color = (token) => styles.getPropertyValue(token).trim();
+  return {
+    fontFamily: styles.getPropertyValue("--font-sans").trim(),
+    fontSize: "15px",
+    background: color("--bg-canvas"),
+    mainBkg: color("--node-fill"),
+    primaryColor: color("--node-fill"),
+    primaryTextColor: color("--node-text"),
+    primaryBorderColor: color("--node-stroke"),
+    secondaryColor: color("--accent-fill"),
+    tertiaryColor: color("--store-fill"),
+    lineColor: color("--link"),
+    textColor: color("--text"),
+    noteBkgColor: color("--accent-fill"),
+    noteTextColor: color("--accent-text"),
+    noteBorderColor: color("--accent-stroke"),
+    actorBkg: color("--node-fill"),
+    actorBorder: color("--node-stroke"),
+    actorTextColor: color("--node-text"),
+    actorLineColor: color("--cluster-stroke"),
+    signalColor: color("--link"),
+    signalTextColor: color("--text"),
+    labelBoxBkgColor: color("--bg-canvas"),
+    labelBoxBorderColor: color("--border-strong"),
+    labelTextColor: color("--text"),
+    loopTextColor: color("--text"),
+    activationBkgColor: color("--accent-fill"),
+    activationBorderColor: color("--accent-stroke"),
+    attributeBackgroundColorOdd: color("--bg-surface"),
+    attributeBackgroundColorEven: color("--bg-canvas"),
+  };
+}
 
 // Tout de suite, avant toute attente : sinon Mermaid lance son propre rendu au
 // chargement de la page et les diagrammes se rendent deux fois, mélangés
@@ -83,28 +54,31 @@ mermaid.startOnLoad = false;
 const zoom = document.createElement("dialog");
 zoom.className = "zoom mermaid";
 zoom.dataset.processed = "true"; // ignoré par mermaid.run()
-zoom.innerHTML = '<div class="zoom-controls"></div><button type="button" class="zoom-close">Fermer</button><div class="zoom-body"></div>';
+zoom.innerHTML =
+  '<div class="zoom-controls cluster"></div><button type="button" class="button zoom-close">Fermer</button><div class="zoom-body"></div>';
 document.body.append(zoom);
 // Un clic ferme, sauf sur le diagramme au téléphone : il s'y parcourt au doigt
-zoom.addEventListener("click", (e) => {
-  if (e.target.closest(".zoom-controls")) return;
-  if (!e.target.closest(".zoom-body svg") || !matchMedia("(max-width: 760px)").matches) zoom.close();
+zoom.addEventListener("click", (event) => {
+  if (event.target.closest(".zoom-controls")) return;
+  if (!event.target.closest(".zoom-body svg") || !matchMedia("(max-width: 760px)").matches)
+    zoom.close();
 });
 
 const motionStops = [];
 let stopZoomMotion = () => {};
 
 // Seulement sur les flowcharts marqués ```mermaid play : l'ordre des flèches y a un sens
-function mountMotion(d, svg, controls) {
-  if (!d.closest("pre[data-play]") || !svg.classList.contains("flowchart")) return () => {};
+function mountMotion(diagram, svg, controls) {
+  if (!diagram.closest("pre[data-play]") || !svg.classList.contains("flowchart")) return () => {};
   const edges = [...svg.querySelectorAll(".edgePaths path.flowchart-link")];
   if (!edges.length) return () => {};
   const labels = [...svg.querySelectorAll(".edgeLabels > .edgeLabel")];
-  controls.innerHTML = '<button type="button" class="seq-btn" data-act="prev" aria-label="Connexion précédente">‹</button>' +
-    '<button type="button" class="seq-btn" data-act="play" aria-pressed="false">Lecture</button>' +
-    '<button type="button" class="seq-btn" data-act="next" aria-label="Connexion suivante">›</button>' +
+  controls.innerHTML =
+    '<button type="button" class="button seq-btn" data-act="prev" aria-label="Connexion précédente">‹</button>' +
+    '<button type="button" class="button seq-btn" data-act="play" aria-pressed="false">Lecture</button>' +
+    '<button type="button" class="button seq-btn" data-act="next" aria-label="Connexion suivante">›</button>' +
     '<span class="seq-count" aria-live="polite"></span>';
-  let cur = edges.length;
+  let currentStep = edges.length;
   let timer;
   let drawing;
   const play = controls.querySelector('[data-act="play"]');
@@ -116,26 +90,29 @@ function mountMotion(d, svg, controls) {
     drawing = null;
   }
 
-  function show(k) {
-    const forward = k > cur;
+  function show(step) {
+    const forward = step > currentStep;
     clearDrawing();
-    cur = k;
+    currentStep = step;
     svg.classList.add("diagram-stepping");
     edges.forEach((edge, i) => {
-      edge.classList.toggle("revealed", i < k);
-      edge.classList.toggle("current", i === k - 1);
+      edge.classList.toggle("revealed", i < step);
+      edge.classList.toggle("current", i === step - 1);
     });
-    labels.forEach((label, i) => label.classList.toggle("revealed", i < k));
-    controls.querySelector(".seq-count").textContent = `${k} / ${edges.length}`;
-    controls.querySelector('[data-act="prev"]').disabled = k === 0;
-    controls.querySelector('[data-act="next"]').disabled = k === edges.length;
+    labels.forEach((label, i) => label.classList.toggle("revealed", i < step));
+    controls.querySelector(".seq-count").textContent = `${step} / ${edges.length}`;
+    controls.querySelector('[data-act="prev"]').disabled = step === 0;
+    controls.querySelector('[data-act="next"]').disabled = step === edges.length;
 
     if (forward && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const edge = edges[k - 1];
+      const edge = edges[step - 1];
       const length = edge.getTotalLength();
       edge.style.setProperty("stroke-dasharray", `${length}`, "important");
       const animation = edge.animate(
-        [{ strokeDashoffset: length, opacity: 0.35 }, { strokeDashoffset: 0, opacity: 1 }],
+        [
+          { strokeDashoffset: length, opacity: 0.35 },
+          { strokeDashoffset: 0, opacity: 1 },
+        ],
         { duration: 550, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
       );
       drawing = { edge, animation };
@@ -151,36 +128,44 @@ function mountMotion(d, svg, controls) {
     play.setAttribute("aria-pressed", "false");
   }
 
-  controls.addEventListener("click", (e) => {
-    const act = e.target.closest("[data-act]")?.dataset.act;
+  controls.addEventListener("click", (event) => {
+    const act = event.target.closest("[data-act]")?.dataset.act;
     if (act === "play") {
       if (timer) return stop();
-      if (cur === edges.length) show(0);
+      if (currentStep === edges.length) show(0);
       play.textContent = "Pause";
       play.setAttribute("aria-pressed", "true");
-      show(cur + 1);
-      timer = setInterval(() => cur < edges.length ? show(cur + 1) : stop(), 1100);
+      show(currentStep + 1);
+      timer = setInterval(
+        () => (currentStep < edges.length ? show(currentStep + 1) : stop()),
+        1100,
+      );
     }
     if (act === "prev" || act === "next") {
       stop();
-      show(Math.max(0, Math.min(edges.length, cur + (act === "next" ? 1 : -1))));
+      show(Math.max(0, Math.min(edges.length, currentStep + (act === "next" ? 1 : -1))));
     }
   });
-  controls.querySelector(".seq-count").textContent = `${cur} / ${edges.length}`;
+  controls.querySelector(".seq-count").textContent = `${currentStep} / ${edges.length}`;
   controls.querySelector('[data-act="next"]').disabled = true;
   return stop;
 }
 
-function openZoom(d) {
+function openZoom(diagram) {
   stopZoomMotion();
-  const svg = d.querySelector("svg").cloneNode(true);
-  zoom.setAttribute("aria-label", svg.querySelector(":scope > title")?.textContent || "Diagramme agrandi");
+  const svg = diagram.querySelector("svg").cloneNode(true);
+  zoom.setAttribute(
+    "aria-label",
+    svg.querySelector(":scope > title")?.textContent || "Diagramme agrandi",
+  );
   svg.classList.remove("diagram-stepping");
-  svg.querySelectorAll(".revealed, .current").forEach((el) => el.classList.remove("revealed", "current"));
+  svg
+    .querySelectorAll(".revealed, .current")
+    .forEach((el) => el.classList.remove("revealed", "current"));
   zoom.querySelector(".zoom-body").replaceChildren(svg);
   const controls = zoom.querySelector(".zoom-controls");
   controls.replaceChildren();
-  stopZoomMotion = mountMotion(d, svg, controls);
+  stopZoomMotion = mountMotion(diagram, svg, controls);
   zoom.showModal();
 }
 zoom.addEventListener("close", () => stopZoomMotion());
@@ -194,17 +179,17 @@ const expandIcon =
 //       accDescr: Du code source au conteneur qui tourne
 function addBars() {
   const all = [...document.querySelectorAll(".diagram")];
-  document.querySelectorAll("div.mermaid").forEach((d) => {
-    const n = all.indexOf(d.closest(".diagram")) + 1;
-    const svg = d.querySelector("svg");
+  document.querySelectorAll("div.mermaid").forEach((diagram) => {
+    const figure = all.indexOf(diagram.closest(".diagram")) + 1;
+    const svg = diagram.querySelector("svg");
     if (!svg) return;
-    // Mermaid bloque le SVG à sa largeur naturelle en px. theme.css la convertit
+    // Mermaid bloque le SVG à sa largeur naturelle en px. diagrams.css la convertit
     // en rem : le diagramme grandit avec A+ et avec le mode Focus
     svg.style.removeProperty("max-width");
     svg.style.setProperty("--w", svg.viewBox.baseVal.width);
     // Flèche sans texte : Mermaid pose quand même une étiquette vide
-    svg.querySelectorAll(".edgeLabel .labelBkg").forEach((l) => {
-      if (!l.textContent.trim()) l.style.display = "none";
+    svg.querySelectorAll(".edgeLabel .labelBkg").forEach((label) => {
+      if (!label.textContent.trim()) label.style.display = "none";
     });
     const title = svg.querySelector(":scope > title")?.textContent.trim();
     const desc = svg.querySelector(":scope > desc")?.textContent.trim();
@@ -212,35 +197,39 @@ function addBars() {
     bar.className = "diagram-bar";
     bar.innerHTML =
       '<p class="diagram-caption"></p>' +
-      '<div class="diagram-motion"></div>' +
-      '<button type="button" class="zoom-btn">' + expandIcon + " Agrandir</button>";
-    const cap = bar.querySelector(".diagram-caption");
+      '<div class="diagram-motion cluster"></div>' +
+      '<button type="button" class="button zoom-btn">' +
+      expandIcon +
+      " Agrandir</button>";
+    const caption = bar.querySelector(".diagram-caption");
     if (title || desc) {
-      cap.innerHTML = '<span class="fig">Fig. ' + n + '</span> <strong></strong> <span class="desc"></span>';
-      cap.querySelector("strong").textContent = title || "";
-      cap.querySelector(".desc").textContent = desc || "";
+      caption.innerHTML =
+        '<span class="fig">Fig. ' + figure + '</span> <strong></strong> <span class="desc"></span>';
+      caption.querySelector("strong").textContent = title || "";
+      caption.querySelector(".desc").textContent = desc || "";
     }
-    motionStops.push(mountMotion(d, svg, bar.querySelector(".diagram-motion")));
-    bar.querySelector(".zoom-btn").addEventListener("click", () => openZoom(d));
-    d.closest("pre").append(bar);
+    motionStops.push(mountMotion(diagram, svg, bar.querySelector(".diagram-motion")));
+    bar.querySelector(".zoom-btn").addEventListener("click", () => openZoom(diagram));
+    diagram.closest("pre").append(bar);
   });
 }
 
 // Source de chaque diagramme, gardée pour re-rendre au changement de thème
-const sources = new Map([...document.querySelectorAll("div.mermaid")].map((d) => [d, d.textContent]));
-sources.forEach((_, d) => d.addEventListener("click", () => openZoom(d)));
+const sources = new Map(
+  [...document.querySelectorAll("div.mermaid")].map((diagram) => [diagram, diagram.textContent]),
+);
+sources.forEach((_, diagram) => diagram.addEventListener("click", () => openZoom(diagram)));
 
 async function renderAll() {
   // Mermaid mesure les étiquettes au rendu : attendre Inclusive Sans, sinon les cartes
   // sont taillées pour la police de secours et le texte déborde
   await document.fonts.ready;
-  const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-  mermaid.initialize({ ...common, themeVariables: themeVariables[theme] });
+  mermaid.initialize({ ...common, themeVariables: themeVariables() });
   motionStops.splice(0).forEach((stop) => stop());
-  document.querySelectorAll("pre.diagram > .diagram-bar").forEach((b) => b.remove());
-  sources.forEach((src, d) => {
-    d.removeAttribute("data-processed");
-    d.textContent = src;
+  document.querySelectorAll("pre.diagram > .diagram-bar").forEach((bar) => bar.remove());
+  sources.forEach((source, diagram) => {
+    diagram.removeAttribute("data-processed");
+    diagram.textContent = source;
   });
   // run() rejette si un seul diagramme a une erreur de syntaxe : on l'affiche
   // en console et on pose quand même les barres sous ceux qui ont été rendus.

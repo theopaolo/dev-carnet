@@ -1,0 +1,66 @@
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-desk);
+  color: var(--text);
+  font-family: var(--font-sans);
+  /* 100 % : respecte la taille choisie dans le navigateur. Tout le reste est en rem ou em */
+  font-size: 100%;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Boutons A- / A+ de la barre du haut (src/scripts/preferences.js) */
+html[data-size="-1"] {
+  font-size: 93.75%;
+}
+html[data-size="1"] {
+  font-size: 112.5%;
+}
+html[data-size="2"] {
+  font-size: 125%;
+}
+html[data-size="3"] {
+  font-size: 137.5%;
+}
+
+/* Les ancres ne passent pas sous la barre du haut collante */
+:target,
+h1[id],
+h2[id],
+h3[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.content {
+  font-size: 1.0625rem;
+  /* Mots longs (noms de fichiers, service_completed_successfully) : coupés au bord
+     de la colonne plutôt que de la faire déborder sur téléphone */
+  overflow-wrap: break-word;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}

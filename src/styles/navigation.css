@@ -1,0 +1,310 @@
+.sidebar a:focus-visible,
+.toc a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Chapitres (téléphone) : même cadre que la recherche */
+dialog.chapters {
+  width: min(28rem, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  margin: 16px auto auto;
+}
+
+.chapters-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 10px 12px 10px 20px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: nowrap;
+}
+
+.chapters-title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+dialog.chapters .sidebar {
+  position: static;
+  height: auto;
+  overflow: visible;
+  padding: 16px 12px 24px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+/* Cibles tactiles d'au moins 44px */
+dialog.chapters .sidebar a {
+  padding-block: 12px;
+}
+
+/* Sommaire dans le contenu, quand la colonne de droite n'est pas affichée */
+.toc-inline {
+  display: none;
+  margin: 0 0 28px;
+  font-size: 0.9375rem;
+}
+
+.toc-inline summary {
+  list-style: none;
+}
+
+.toc-inline summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc-inline summary::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-right: 2px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+.toc-inline[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.toc-inline ul {
+  list-style: none;
+  margin: 12px 0 0 4px;
+  padding: 0;
+  border-left: 1px solid var(--border);
+}
+
+.toc-inline li {
+  margin: 0;
+}
+
+.toc-inline a {
+  display: block;
+  padding: 6px 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.toc-inline li.depth-2 a {
+  padding-left: 24px;
+}
+
+.toc-inline a:hover {
+  color: var(--heading);
+}
+
+.toc-inline a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.sidebar,
+.toc {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Panneau teinté comme le canevas des diagrammes, défile seul sous la barre du haut */
+.sidebar {
+  position: sticky;
+  top: 3.25rem;
+  align-self: start;
+  height: calc(100vh - 3.25rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 28px 14px 16px;
+}
+
+/* Pochette au dos du carnet : en bas de la barre latérale, visible pendant que la liste défile.
+     L'anneau couleur bureau masque les chapitres qui passent dessous */
+.sidebar .pocket-card {
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+  box-shadow:
+    0 1px 0 var(--pill-shadow),
+    0 16px 0 16px var(--bg-desk);
+}
+
+.toc {
+  position: sticky;
+  top: 4.75rem;
+  align-self: start;
+  max-height: calc(100vh - 6.25rem);
+  overflow-y: auto;
+  padding-left: 0px;
+  border-left: 1px solid var(--border);
+}
+
+.toc ul {
+  padding-left: 8px;
+}
+
+.sidebar ul,
+.toc ul {
+  list-style: none;
+}
+
+.sidebar li,
+.toc li {
+  margin: 0;
+}
+
+/* De l'air entre la liste et la Pochette */
+.sidebar > ul {
+  margin-bottom: 40px;
+}
+
+/* Étiquettes de rubrique : Cours, Fiches, Sommaire */
+.nav-section {
+  margin: 0 0 6px;
+  padding: 0 10px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Retour à la liste de tous les cours, au-dessus du cours affiché */
+.nav-back {
+  display: block;
+  margin: 0 0 20px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+/* Titre du cours affiché, ou d'une fiche */
+.nav-title {
+  display: block;
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--heading);
+  text-decoration: none;
+}
+
+/* Chapitres : un filet relie les pages d'un même cours */
+.nav-chapters {
+  margin: 0 0 0 10px;
+  padding: 4px 0 4px 4px;
+  border-left: 1px solid var(--border-strong);
+}
+
+.sidebar ul a,
+.toc a {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.sidebar ul a.nav-title {
+  color: var(--heading);
+}
+
+.toc li.depth-2 a {
+  padding-left: 22px;
+}
+
+/* Ruban d'une section : à droite de son entrée du sommaire, et sur téléphone à droite de son titre.
+     Contour au survol et sur la section lue, ruban tissé à la couleur de son emplacement une fois
+     posé (src/scripts/notebook.js) */
+.toc li,
+.toc-inline li {
+  position: relative;
+}
+
+.toc a,
+.toc-inline a {
+  padding-right: 32px;
+}
+@media (pointer: coarse) {
+  .toc a,
+  .toc-inline a {
+    padding-right: 48px;
+  }
+}
+
+/* Survol : un cran plus foncé que le panneau, dans les deux thèmes */
+.nav-back:hover,
+.sidebar ul a:hover {
+  color: var(--heading);
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.toc a:hover {
+  color: var(--heading);
+  background: var(--bg-canvas);
+}
+
+/* Position courante : couleurs de l'acteur actif des diagrammes, lisibles au projecteur */
+.sidebar ul a[aria-current="page"],
+.toc a.active {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  box-shadow: inset 0 0 0 1px var(--accent-stroke);
+}
+
+.nav-chapters a[aria-current="page"],
+.toc a.active {
+  font-weight: 500;
+}
+
+@media (max-width: 1180px) {
+  .toc {
+    display: none;
+  }
+  .toc-inline {
+    display: block;
+  }
+}
+@media (min-width: 761px) {
+  html[data-size="2"] .toc,
+  html[data-size="3"] .toc {
+    display: none;
+  }
+  html[data-size="2"] .toc-inline,
+  html[data-size="3"] .toc-inline,
+  html[data-present] .toc-inline {
+    display: block;
+  }
+
+  /* Focus : une seule colonne. Le texte garde 48rem, les diagrammes prennent 72rem.
+       Pas sur téléphone, où le bouton est caché et la barre latérale nécessaire */
+  html[data-present] .sidebar,
+  html[data-present] .toc {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Le contenu d'abord, les chapitres en bas de page (lien Chapitres dans la barre) */
+  .sidebar {
+    order: 2;
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: 24px 10px 96px;
+    background: none;
+    border-right: 0;
+    border-top: 1px solid var(--border);
+  }
+  /* La Pochette suit la liste, en bas de page et dans le dialog Chapitres */
+  .sidebar .pocket-card {
+    position: relative;
+    box-shadow: 0 1px 0 var(--pill-shadow);
+  }
+}

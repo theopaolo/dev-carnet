@@ -2,7 +2,7 @@
 title: "L'UX et l'UI"
 order: 1
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # L'UX et l'UI
@@ -47,7 +47,7 @@ Le designer Jesse James Garrett découpe un produit en cinq plans, du plus abstr
 | --- | --- | --- |
 | 1. Stratégie (_strategy_) | Que veulent les utilisateurs et le client ? | Brief, entretiens et persona, lundi |
 | 2. Périmètre (_scope_) | Quelles fonctions et quels contenus ? | User stories, lundi |
-| 3. Structure | Comment ranger les pages et enchaîner les étapes ? | Journey lundi, sitemap mardi |
+| 3. Structure | Comment ranger les pages et enchaîner les étapes ? | Journey et sitemap, lundi |
 | 4. Squelette (_skeleton_) | Où placer chaque élément sur l'écran ? | Zoning et wireframes, mardi |
 | 5. Surface | À quoi ressemble l'écran : couleurs, polices, images ? | Style guide et maquette, mardi |
 
@@ -83,7 +83,7 @@ flowchart TD
 | --- | --- |
 | 1. Empathie | Entretiens et persona, lundi |
 | 2. Définition | User stories et journey, lundi |
-| 3. Idéation | Sitemap et zoning, mardi |
+| 3. Idéation | Sitemap lundi, zoning mardi |
 | 4. Prototypage | Wireframes et maquette, mardi |
 | 5. Test | Test de la maquette mardi, tests d'accessibilité mercredi |
 
@@ -106,13 +106,12 @@ flowchart TD
 
 ## Le roasting
 
-Un roasting est une critique qui pique, mais qui explique. En équipe, 30 minutes.
+En équipe, 20 minutes.
 
-1. Choisissez deux sites de MJC ou de centres socioculturels qui présentent leurs ateliers.
-2. Sur chaque site, cherchez une activité pour un jeune de 17 ans, son horaire et la marche à suivre pour s'inscrire. Arrêtez-vous avant tout envoi de formulaire. Ne créez pas de compte et ne payez rien.
-3. Chacun note ses réponses à trois questions. Comment je me sens ? Qu'est-ce qui est clair ? Qu'est-ce qui est confus ou frustrant ?
-4. Mettez en commun. Gardez une idée à reprendre et un problème à éviter dans le parcours d'inscription de votre MJC.
+Choisissez un site de MJC ou de centre socioculturel. Cherchez une activité pour un jeune de 17 ans et comment s'y inscrire.
 
-Rendu : 2 minutes à l'oral, écran partagé sur Discord.
+Gardez une idée à reprendre et un problème à éviter dans votre projet, avec une capture. Déposez vos remarques dans votre fichier d'équipe.
+
+Arrêtez-vous avant tout envoi de formulaire. Ne créez pas de compte et ne payez rien.
 
 Critiquez l'interface, pas la personne qui l'a faite. Pas de contenu choquant. « C'est nul » ne compte pas : dites quel élément gêne et ce qu'il empêche de faire.

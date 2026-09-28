@@ -2,31 +2,31 @@
 title: 'Le zoning et les wireframes'
 order: 9
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # Le zoning et les wireframes
 
-C'est l'étape 7 du projet, mardi matin. Vous dessinez les écrans, en partant du plus simple.
+Mardi matin, vous dessinez les écrans de la MJC, du zoning aux wireframes.
 
 ## Du zoning au prototype
 
-Un écran se conçoit en quatre niveaux, du plus grossier au plus fini. Plus on avance, plus un changement coûte cher. Déplacer une zone sur un zoning prend une minute. Déplacer un bloc dans une page codée demande de reprendre le HTML et le CSS.
+Vous passerez par quatre niveaux, des grandes zones à la maquette cliquable. Modifier l'ordre des zones sur un zoning demande moins de travail que de reprendre une page déjà codée.
 
 | Niveau | Ce qu'il montre | Avec quoi | Quand |
 | --- | --- | --- | --- |
 | Zoning | Les grandes zones de l'écran, avec leur nom | Papier, ou rectangles dans Figma | Mardi matin |
 | Wireframe | Le contenu de chaque zone, en gris : titres, textes, champs, boutons | Figma | Mardi matin |
 | Maquette | L'écran final, avec les couleurs, les polices et les images | Figma, avec le style guide | Mardi après-midi |
-| Prototype | La maquette rendue cliquable, pour tester le parcours | Figma, onglet Prototype | Pour le test, si vous avez le temps |
+| Prototype | La maquette rendue cliquable, pour tester le parcours | Figma, onglet Prototype | Mardi après-midi |
 
 ## Le zoning
 
 Le zoning découpe un écran en grandes zones, avant le wireframe. Chaque zone a un nom et une place. On décide ce qui va où, sans dessiner les détails.
 
-1. Le plus important va en haut.
-2. Chaque zone répond à un besoin du persona.
-3. On dessine des blocs et des noms. Pas de texte, pas d'image, pas de couleur.
+1. Placez d'abord les informations nécessaires au choix de l'atelier.
+2. Organisez les zones autour des besoins du persona.
+3. Dessinez des blocs et nommez-les. Gardez les textes détaillés, les images et les couleurs pour la suite.
 
 Voici le zoning de la page menu du snack, sur téléphone :
 
@@ -92,24 +92,19 @@ Un rectangle barré d'une croix, ici `[X]`, remplace une image.
 
 ### Le zoning
 
-En équipe, 30 minutes.
+En équipe, 20 minutes.
 
-1. Chacun dessine seul le zoning de la fiche atelier, sur papier ou dans Figma. 10 minutes.
-2. Partez de votre journey : quelles infos votre persona doit-il voir avant de réserver ?
-3. Comparez vos zonings. Retenez les zones et leur ordre en vous appuyant sur les besoins du persona.
+Dessinez les grandes zones de la fiche atelier. Placez en premier ce dont votre persona a besoin pour décider de réserver. Des rectangles avec un nom suffisent.
 
 ### Les wireframes
 
-En équipe, 1 heure. Répartissez-vous les écrans.
+En équipe, 1 heure.
 
-1. Dessinez trois écrans : la liste des ateliers, la fiche d'un atelier, la réservation.
-2. Choisissez le format selon l'appareil de votre persona.
-3. Partez du zoning de l'équipe. Écrivez les vrais libellés.
-4. Relisez le brief : l'âge minimum, le matériel, l'accord d'un parent et les places limitées doivent trouver leur place.
-5. Relisez vos user stories : chaque critère d'acceptation se voit-il sur un écran ?
-6. Ajoutez les états nécessaires : séance complète avec liste d'attente, information manquante, accord parental selon la règle du brief et confirmation de réservation. Une variante d'écran suffit.
+Dessinez en gris la liste des ateliers, la fiche d'un atelier et la réservation, avec les vrais textes et boutons. Répartissez-vous le travail comme vous voulez.
 
-Rendu : le zoning, les 3 wireframes et leurs états, dans la section « 7. Zoning et wireframes ». Vous les reprendrez dans [la maquette UI](/ux-ui/11-ui-et-maquette/).
+Prévoyez la confirmation, une erreur de saisie et une séance complète avec liste d'attente. Faites apparaître les contraintes du brief, dont l'âge minimum, le matériel et l'accord parental.
+
+Rendu : le zoning et les trois écrans avec leurs états, dans votre fichier d'équipe. Ils serviront de base à [la maquette UI](/ux-ui/11-ui-et-maquette/).
 
 ## À lire
 

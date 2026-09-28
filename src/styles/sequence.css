@@ -1,0 +1,610 @@
+/* ---------- Diagrammes animés (```animated, src/scripts/sequence.js) ---------- */
+
+/* Tailles en em : le plein écran agrandit tout en changeant font-size */
+.seq {
+  --dur: 0.7s;
+  font-size: 0.9375rem;
+  text-align: left;
+  padding: 24px 20px 16px;
+}
+
+.seq [hidden] {
+  display: none !important;
+}
+
+.seq-src {
+  margin: 0;
+  font: 12px/1.5 var(--font-mono);
+  white-space: pre-wrap;
+}
+
+.seq-actors,
+.seq-row,
+.seq-lifelines {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
+
+.seq-actor {
+  justify-self: center;
+  padding: 0.45em 0.9em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--node-text);
+  background: var(--node-fill);
+  border: 1.25px solid var(--node-stroke);
+  border-radius: 6px;
+  box-shadow: 0 2px 0 var(--node-shadow);
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+}
+
+/* Destinataire du message en cours */
+.seq-actor.active {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+  box-shadow: 0 2px 0 var(--accent-shadow);
+}
+
+.seq-rows {
+  position: relative;
+  min-height: 2em;
+  padding: 0.4em 0;
+}
+
+.seq-lifelines {
+  position: absolute;
+  inset: 0;
+}
+
+.seq-lifelines i {
+  margin-left: 50%;
+  border-left: 1px dashed var(--cluster-stroke);
+}
+
+.seq-row {
+  position: relative;
+  z-index: 1;
+  padding: 0.3em 0;
+}
+
+/* La flèche va du milieu d'une colonne au milieu de l'autre */
+.seq-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+  margin-inline: calc(100% / (2 * var(--span)));
+}
+
+.seq-label {
+  max-width: 100%;
+  padding: 0.05em 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 var(--pill-shadow);
+}
+
+.seq-track {
+  position: relative;
+  align-self: stretch;
+  height: 10px;
+}
+
+.seq-line {
+  position: absolute;
+  inset: 4px 0 auto;
+  border-top: 1.5px solid var(--link);
+}
+
+.dashed .seq-line {
+  border-top-style: dashed;
+}
+
+/* Pointe de flèche */
+.seq-line::after {
+  content: "";
+  position: absolute;
+  top: -5.75px;
+  right: -1px;
+  border: 5px solid transparent;
+  border-left: 8px solid var(--link);
+  border-right: 0;
+}
+
+.rtl .seq-line::after {
+  right: auto;
+  left: -1px;
+  border-left: 0;
+  border-right: 8px solid var(--link);
+}
+
+.seq-dot {
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+}
+
+.seq-self {
+  justify-self: center;
+}
+
+.seq-self .seq-label {
+  display: inline-block;
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+/* Bloc loop : aucune marge horizontale nette, les colonnes restent alignées */
+.seq-loop {
+  margin: 0.3em -0.6em;
+  padding: 0 calc(0.6em - 1px) 0.2em;
+  border: 1px dashed var(--cluster-stroke);
+  border-radius: 6px;
+  background: var(--cluster-fill);
+}
+
+.seq-loop-label {
+  display: inline-block;
+  margin-top: 0.4em;
+  padding: 0 0.5em;
+  font: 500 0.7em/1.6 var(--font-mono);
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: 4px;
+}
+
+/* Disposition loop : étoile, positions en % posées par sequence.js */
+.seq-stage {
+  position: relative;
+  height: 20em;
+  margin-top: 0.5em;
+}
+
+.seq-edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.seq-edges line {
+  stroke: var(--cluster-stroke);
+  stroke-width: 1.5px;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 0.3s;
+}
+
+.seq-edges line.on {
+  stroke: var(--accent-stroke);
+  stroke-dasharray: none;
+}
+
+.seq-stage .seq-actor {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.seq-stage .seq-dot {
+  z-index: 2;
+  margin-top: -5px;
+}
+
+.seq-stage-label {
+  position: absolute;
+  z-index: 3;
+  max-width: 16em;
+  transform: translate(-50%, -50%);
+}
+
+.seq-stage-label.self {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+.seq-turn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.seq-turn .seq-loop-label {
+  margin: 0;
+  transition:
+    color 0.3s,
+    background 0.3s,
+    border-color 0.3s;
+}
+
+.seq-turn .seq-loop-label.on {
+  color: var(--accent-text);
+  background: var(--accent-fill);
+  border-color: var(--accent-stroke);
+}
+
+.seq-turn-n {
+  font: 600 0.75em var(--font-mono);
+  color: var(--heading);
+}
+
+/* Étape en cours : le trait se trace, le point voyage, l'étiquette apparaît */
+.current .seq-line {
+  animation: seq-draw var(--dur) ease-in-out both;
+}
+
+.current .rtl .seq-line {
+  animation-name: seq-draw-rtl;
+}
+
+.current .seq-dot {
+  animation: seq-travel var(--dur) ease-in-out;
+}
+
+.current .rtl .seq-dot {
+  animation-name: seq-travel-rtl;
+}
+
+.current .seq-label {
+  animation: seq-fade 0.35s ease-out 0.1s both;
+}
+
+@keyframes seq-draw {
+  from {
+    clip-path: inset(-8px 100% -8px 0);
+  }
+  to {
+    clip-path: inset(-8px 0 -8px 0);
+  }
+}
+
+@keyframes seq-draw-rtl {
+  from {
+    clip-path: inset(-8px 0 -8px 100%);
+  }
+  to {
+    clip-path: inset(-8px 0 -8px 0);
+  }
+}
+
+@keyframes seq-travel {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  to {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes seq-travel-rtl {
+  from {
+    left: 100%;
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  to {
+    left: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes seq-fade {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+.seq-note {
+  min-height: 3.4em;
+  margin: 0.6em 0 0;
+  font-size: 0.93em;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* Contexte : une barre empilée par rôle, 100 % = contexte à la dernière étape */
+.seq-ctx {
+  margin-top: 0.4em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--border);
+}
+
+.seq-ctx-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4em;
+  font: 500 0.75em var(--font-mono);
+  color: var(--text-muted);
+}
+
+.seq-bar-wrap {
+  position: relative;
+}
+
+/* Repère du budget de contexte (%% budget:) */
+.seq-budget {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--accent-stroke);
+}
+
+.seq-bar {
+  display: flex;
+  height: 0.9em;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.seg {
+  flex: none;
+  width: 0;
+  background: var(--c, var(--border-strong));
+  box-shadow: inset -1px 0 0 var(--bg-surface);
+  transition: width 0.5s ease 0.5s;
+}
+
+.seg.new {
+  animation: seq-pulse 1.2s ease-out 0.5s;
+}
+
+@keyframes seq-pulse {
+  0%,
+  40% {
+    filter: brightness(1.35) saturate(1.2);
+  }
+}
+
+[data-role="system"] {
+  --c: var(--ctx-system);
+}
+[data-role="tools"] {
+  --c: var(--ctx-tools);
+}
+[data-role="user"] {
+  --c: var(--ctx-user);
+}
+[data-role="assistant"] {
+  --c: var(--ctx-assistant);
+}
+[data-role="tool"] {
+  --c: var(--ctx-tool);
+}
+[data-role="summary"] {
+  --c: var(--ctx-summary);
+}
+[data-role="docs"] {
+  --c: var(--ctx-tool);
+}
+
+.seq-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em 1.2em;
+  margin: 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+  font: 0.75em var(--font-mono);
+  color: var(--text-muted);
+}
+
+.seq-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+}
+
+.seq-legend i {
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 2px;
+  background: var(--c, var(--border-strong));
+}
+
+.seq-legend b {
+  font-weight: 500;
+  color: var(--heading);
+}
+
+.seq .diagram-caption {
+  font-size: 0.85em;
+}
+
+.seq-controls {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.seq-btn {
+  font-size: 0.83em;
+}
+
+.seq-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.seq-play {
+  min-width: 5.5em;
+  justify-content: center;
+}
+
+.seq-count {
+  min-width: 3.5em;
+  font: 0.75em var(--font-mono);
+  white-space: nowrap;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.seq:fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  margin: 0;
+  padding: 4vh 6vw;
+  font-size: clamp(16px, min(1.5vw, 2.2vh), 28px);
+  overflow: hidden;
+}
+
+/* Un long diagramme défile dans sa vue, la barre de contexte et les contrôles restent visibles */
+.seq:fullscreen > * {
+  flex-shrink: 0;
+}
+
+.seq:fullscreen > .seq-view {
+  flex-shrink: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.seq:fullscreen .seq-actors {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding-bottom: 0.3em;
+  background: var(--bg-canvas);
+}
+
+/* Version texte sous le diagramme animé */
+.seq-text {
+  margin-top: 12px;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.seq-text summary {
+  width: fit-content;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.seq-text summary:hover {
+  color: var(--heading);
+}
+
+.seq-text summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.seq-text p {
+  margin: 10px 0 6px;
+}
+
+.seq-text ol {
+  margin: 8px 0 0;
+}
+
+.seq-text li {
+  margin-bottom: 8px;
+}
+
+.seq-text-meta,
+.seq-text-note {
+  display: block;
+  color: var(--text-muted);
+}
+
+.seq-text-meta {
+  font: 0.75rem/1.6 var(--font-mono);
+}
+
+.seq:fullscreen .seq-text {
+  display: none;
+}
+
+@media print {
+  .seq-text {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .seq {
+    padding: 16px 10px 12px;
+    font-size: 0.8125rem;
+  }
+  /* Tailles fixes : les tailles en em du diagramme tombaient sous 10px sur téléphone */
+  .seq .seq-btn,
+  .seq .seq-count,
+  .seq .diagram-caption {
+    font-size: 0.8125rem;
+  }
+  .seq .seq-label,
+  .seq .seq-loop-label,
+  .seq-ctx-head,
+  .seq-legend {
+    font-size: 0.75rem;
+  }
+  .seq .diagram-bar {
+    flex-wrap: wrap;
+  }
+  /* Cibles tactiles de 44px */
+  .seq .seq-btn {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seq *,
+  .seq *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* À l'impression, toutes les étapes */
+@media print {
+  .seq .seq-row[hidden] {
+    display: grid !important;
+  }
+  .seq .seq-loop[hidden] {
+    display: block !important;
+  }
+  .seq-controls {
+    display: none;
+  }
+}

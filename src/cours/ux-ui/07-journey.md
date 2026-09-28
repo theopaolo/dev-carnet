@@ -2,16 +2,12 @@
 title: 'Le parcours utilisateur'
 order: 7
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # Le parcours utilisateur
 
-C'est l'étape 5 du projet.
-
-Le parcours utilisateur, ou _user journey_, est l'histoire d'une personne qui veut atteindre un but. Il décrit les étapes qu'elle traverse, ce qu'elle fait, ce qu'elle pense et ce qu'elle ressent. Il commence souvent avant votre site et se termine après.
-
-La carte du parcours, ou _journey map_, est le schéma qui raconte cette histoire. Le parcours est ce que vit la personne. La carte est le document que l'équipe dessine pour le voir d'un coup d'œil.
+Le parcours utilisateur, ou _user journey_, suit une personne vers un but. Il décrit ce qu'elle fait, pense et ressent à chaque étape, souvent avant et après sa visite du site. La _journey map_ est la carte que l'équipe dessine pour visualiser ce parcours.
 
 ## Trois mots proches
 
@@ -40,7 +36,7 @@ En haut de la carte, notez le persona, son but et ses attentes. La ligne des ém
 1. Choisissez un persona et un but. Une carte suit une seule personne.
 2. Fixez le début et la fin du parcours, par exemple de « j'ai faim » à « j'ai mangé ».
 3. Découpez le parcours en 4 à 6 étapes. Nommez chaque étape avec un verbe : découvrir, choisir, commander.
-4. Remplissez les lignes pour chaque étape. Chaque case vient de vos entretiens. Si elle vient de votre imagination, marquez-la « à vérifier ».
+4. Remplissez les lignes pour chaque étape à partir de vos entretiens. Marquez « à vérifier » les cases que vous avez imaginées.
 5. Tracez la courbe des émotions et repérez le point le plus bas.
 6. Écrivez une piste pour chaque blocage. Le point le plus bas passe en premier.
 
@@ -77,18 +73,13 @@ Le point le plus bas est la commande. Inès doute que sa commande soit partie. U
 
 ## L'activité
 
-En équipe, 40 minutes.
+En équipe, 25 minutes.
 
-1. Dessinez le journey de votre persona, de « j'entends parler de l'atelier » à « je viens à la séance ».
-2. Prévoyez 4 à 6 étapes. Pour chaque étape : ce qu'il fait, ce qu'il pense, ce qu'il ressent, ce qui coince.
-3. Appuyez-vous sur vos entretiens. Si une case vient de votre imagination, marquez-la « à vérifier ».
-4. Entourez le moment le plus difficile. Proposez ce que le site peut améliorer et ce qui demande une action de la MJC, par exemple à l'accueil de la séance.
+Dessinez le parcours de votre persona, de la découverte de l'atelier à sa première séance. Pour chaque étape, notez ce qu'il fait, ce qu'il ressent et ce qui peut le bloquer.
 
-Si vous avez le temps, ajoutez les lignes « point de contact » et « piste », comme dans l'exemple.
+Repérez le principal blocage et proposez une amélioration. Marquez « à vérifier » ce que vous supposez.
 
-Dans Figma, une grille de rectangles avec du texte suffit : une colonne par étape, une ligne par question. Vous pouvez aussi utiliser [draw.io](https://app.diagrams.net/), ou dessiner sur papier et coller une photo.
-
-Rendu : le journey, dans la section « 5. Journey ».
+Rendu : un schéma dans votre fichier d'équipe. Un dessin sur papier pris en photo convient.
 
 ## À lire
 

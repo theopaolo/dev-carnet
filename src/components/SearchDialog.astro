@@ -1,0 +1,26 @@
+---
+import { base } from "../lib/urls";
+interface Props {
+  courseUrl?: string;
+}
+const { courseUrl } = Astro.props;
+---
+
+<dialog
+  class="search panel-dialog"
+  aria-label="Rechercher dans les cours"
+  data-index={`${base}/search.json`}
+  data-course={courseUrl}
+>
+  <input
+    type="search"
+    placeholder="Rechercher dans les cours"
+    aria-label="Rechercher"
+    autocomplete="off"
+  />
+  <p class="search-status" role="status"></p>
+  <ul class="search-results"></ul>
+</dialog>
+<script>
+  import "../scripts/search.js";
+</script>

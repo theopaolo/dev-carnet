@@ -1,21 +1,20 @@
 ---
+import { pageUrl } from "../lib/urls";
 import Lesson from "../layouts/Lesson.astro";
 import Pocket from "../components/Pocket.astro";
 import { getCourses, intro } from "../lib/courses";
 
 const { courses, sheets } = await getCourses();
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const href = (id: string) => `${base}/${id}/`;
 const lede = "Notes, fiches et petits cours.";
 
-// Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plusÏ
+// Toutes les pages, pour le lien Reprendre : un id lu dans localStorage qui n'y est plus
 // (page renommée ou supprimée) n'affiche rien
 const pages = Object.fromEntries([
   ...courses.flatMap(({ course, chapters }) => [
     [
       course.id,
       {
-        url: href(course.id),
+        url: pageUrl(course.id),
         title: course.data.title,
         where: "Présentation du cours",
       },
@@ -23,7 +22,7 @@ const pages = Object.fromEntries([
     ...chapters.map((c, i) => [
       c.id,
       {
-        url: href(c.id),
+        url: pageUrl(c.id),
         title: c.data.title,
         where: `${course.data.title}, chapitre ${i + 1} sur ${chapters.length}`,
       },
@@ -31,7 +30,7 @@ const pages = Object.fromEntries([
   ]),
   ...sheets.map(({ course }) => [
     course.id,
-    { url: href(course.id), title: course.data.title, where: "Fiche" },
+    { url: pageUrl(course.id), title: course.data.title, where: "Fiche" },
   ]),
 ]);
 ---
@@ -127,8 +126,7 @@ const pages = Object.fromEntries([
               </span>
             </li>
             <li class="guide-keys">
-              <kbd>/</kbd> recherche, <kbd>P</kbd> précédent, <kbd>S</kbd>{" "}
-              suivant
+              <kbd>/</kbd> recherche, <kbd>P</kbd> précédent, <kbd>S</kbd> suivant
             </li>
           </ul>
         </div>
@@ -143,20 +141,17 @@ const pages = Object.fromEntries([
         <li class="course">
           <div class="course-head">
             <h3>
-              <a href={href(course.id)}>{course.data.title}</a>
+              <a href={pageUrl(course.id)}>{course.data.title}</a>
             </h3>
             <p>{intro(course.body)}</p>
             <span class="count">
               {chapters.length} {chapters.length > 1 ? "chapitres" : "chapitre"}
             </span>
           </div>
-          <ol
-            class="chapter-list"
-            aria-label={`Chapitres : ${course.data.title}`}
-          >
+          <ol class="chapter-list" aria-label={`Chapitres : ${course.data.title}`}>
             {chapters.map((c, i) => (
               <li>
-                <a href={href(c.id)}>
+                <a href={pageUrl(c.id)}>
                   <span class="n" aria-hidden="true">
                     {i + 1}
                   </span>
@@ -178,7 +173,7 @@ const pages = Object.fromEntries([
         return (
           <li>
             <h3>
-              <a href={href(course.id)}>{course.data.title}</a>
+              <a href={pageUrl(course.id)}>{course.data.title}</a>
             </h3>
             {text && <p>{text}</p>}
           </li>
@@ -192,319 +187,318 @@ const pages = Object.fromEntries([
   // Reprendre : Lesson.astro retient la dernière page lue et sa section. Rien à la première visite
   const card = document.querySelector<HTMLAnchorElement>(".resume");
   try {
-    const { id, slug, section } =
-      JSON.parse(localStorage.getItem("resume")) ?? {};
+    const { id, slug, section } = JSON.parse(localStorage.getItem("resume")) ?? {};
     const page = JSON.parse(card.dataset.pages)[id];
     if (page?.url) {
       card.href = page.url + (slug ? `#${encodeURIComponent(slug)}` : "");
       card.querySelector(".resume-title").textContent = page.title;
       card.querySelector(".resume-where").textContent = page.where;
-      if (section)
-        card.querySelector(".resume-section").textContent =
-          `Section : ${section}`;
+      if (section) card.querySelector(".resume-section").textContent = `Section : ${section}`;
       card.hidden = false;
     }
   } catch {}
 </script>
 
 <style>
-  /* Sous le titre et la recherche : Reprendre, la Pochette et le mode d'emploi, côte à côte */
-  .hero-grid {
-    display: grid;
-    gap: 40px;
-  }
+  @layer components {
+    /* Sous le titre et la recherche : Reprendre, la Pochette et le mode d'emploi, côte à côte */
+    .hero-grid {
+      display: grid;
+      gap: 40px;
+    }
 
-  .hero-side {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-    align-items: start;
-    gap: 20px 24px;
-  }
+    .hero-side {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+      align-items: start;
+      gap: 20px 24px;
+    }
 
-  /* Même carte que « Suivant » en fin de chapitre : accent de l'acteur actif des diagrammes */
-  .resume {
-    display: grid;
-    gap: 2px;
-    padding: 12px 16px;
-    color: var(--accent-text);
-    text-decoration: none;
-    background: var(--accent-fill);
-    border: 1.25px solid var(--accent-stroke);
-    border-radius: 6px;
-    box-shadow: 0 2px 0 var(--accent-shadow);
-    transition:
-      transform 0.15s ease,
-      box-shadow 0.15s ease;
-  }
+    /* Même carte que « Suivant » en fin de chapitre : accent de l'acteur actif des diagrammes */
+    .resume {
+      display: grid;
+      gap: 2px;
+      padding: 12px 16px;
+      color: var(--accent-text);
+      text-decoration: none;
+      background: var(--accent-fill);
+      border: 1.25px solid var(--accent-stroke);
+      border-radius: 6px;
+      box-shadow: 0 2px 0 var(--accent-shadow);
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+    }
 
-  .resume[hidden] {
-    display: none;
-  }
-
-  .resume:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 0 var(--accent-shadow);
-  }
-
-  .resume:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  .guide {
-    padding: 12px 16px 14px;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border: 1px dashed var(--border-strong);
-    border-radius: 8px;
-  }
-
-  .guide-title {
-    margin: 0 0 8px;
-    font-weight: 600;
-    color: var(--heading);
-  }
-
-  .guide svg {
-    flex: none;
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .guide ul {
-    display: grid;
-    gap: 6px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    color: var(--text-muted);
-  }
-
-  .guide li {
-    display: flex;
-    gap: 10px;
-    margin: 0;
-  }
-
-  /* Icône alignée sur la première ligne, dans la couleur des rubans */
-  .guide li svg {
-    margin-top: 0.15rem;
-    color: var(--accent-stroke);
-  }
-
-  .guide strong {
-    font-weight: 600;
-    color: var(--heading);
-  }
-
-  .guide .guide-keys {
-    display: block;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-
-  /* Au doigt, pas de clavier : pas de raccourcis */
-  @media (pointer: coarse) {
-    .guide .guide-keys {
+    .resume[hidden] {
       display: none;
     }
-  }
 
-  .guide kbd {
-    padding: 0 4px;
-    font:
-      0.75rem "Roboto Mono",
-      monospace;
-    color: var(--pill-text);
-    border: 1px solid var(--pill-border);
-    border-radius: 3px;
-  }
-
-  .resume-label,
-  .resume-where {
-    font-size: 0.8125rem;
-    line-height: 1.45;
-    color: var(--accent-sub);
-  }
-
-  .resume-section:empty {
-    display: none;
-  }
-
-  .resume-title {
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .index {
-    padding-top: 56px;
-  }
-
-  .index h2 {
-    margin: 0 0 16px;
-    font-size: 1.5rem;
-  }
-
-  .courses,
-  .sheets,
-  .chapter-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .courses > li,
-  .sheets > li,
-  .chapter-list > li {
-    margin: 0;
-  }
-
-  /* Un cours par ligne : présentation à gauche, sommaire des chapitres à droite */
-  .course {
-    display: grid;
-    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
-    gap: 20px 64px;
-    padding: 32px 0 36px;
-    border-top: 1px solid var(--border);
-  }
-
-  .course h3,
-  .sheets h3 {
-    margin: 0 0 8px;
-    line-height: 1.25;
-  }
-
-  .course h3 {
-    font-size: 1.375rem;
-  }
-
-  .sheets h3 {
-    font-size: 1.125rem;
-  }
-
-  .course h3 a,
-  .sheets h3 a {
-    text-decoration: none;
-  }
-
-  .course h3 a:hover,
-  .sheets h3 a:hover,
-  .chapter-list a:hover .t {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-
-  .course h3 a:focus-visible,
-  .sheets h3 a:focus-visible,
-  .chapter-list a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  .course-head p,
-  .sheets p {
-    margin: 0;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--text-muted);
-  }
-
-  .course-head p {
-    margin-bottom: 16px;
-  }
-
-  /* Même étiquette que « Fig. 1 » sous les diagrammes */
-  .count {
-    font-family: "Roboto Mono", monospace;
-    font-size: 0.75rem;
-    color: var(--pill-text);
-    background: var(--pill-bg);
-    border: 1px solid var(--pill-border);
-    border-radius: 4px;
-    padding: 1px 6px;
-  }
-
-  /* Chapitres en deux colonnes quand la place le permet, numérotés comme dans « Chapitre 3 sur 13 » */
-  .chapter-list {
-    columns: 2 15rem;
-    column-gap: 40px;
-    padding-top: 4px;
-    font-size: 0.9375rem;
-  }
-
-  .chapter-list li {
-    break-inside: avoid;
-  }
-
-  .chapter-list a {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 5px 0;
-    line-height: 1.4;
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .chapter-list .n {
-    flex: none;
-    min-width: 1.25rem;
-    font:
-      0.8125rem "Roboto Mono",
-      monospace;
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-    color: var(--text-muted);
-  }
-
-  .chapter-list a:hover {
-    color: var(--heading);
-  }
-
-  .chapter-list a:hover .n {
-    color: var(--accent);
-  }
-
-  /* Fiches d'une page : deux par ligne */
-  .sheets {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 64px;
-  }
-
-  .sheets > li {
-    padding: 24px 0 28px;
-    border-top: 1px solid var(--border);
-  }
-
-  @media (max-width: 900px) {
-    .course {
-      grid-template-columns: minmax(0, 1fr);
+    .resume:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 0 var(--accent-shadow);
     }
-  }
 
-  @media (max-width: 760px) {
+    .resume:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .guide {
+      padding: 12px 16px 14px;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      border: 1px dashed var(--border-strong);
+      border-radius: 8px;
+    }
+
+    .guide-title {
+      margin: 0 0 8px;
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    .guide svg {
+      flex: none;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .guide ul {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--text-muted);
+    }
+
+    .guide li {
+      display: flex;
+      gap: 10px;
+      margin: 0;
+    }
+
+    /* Icône alignée sur la première ligne, dans la couleur des rubans */
+    .guide li svg {
+      margin-top: 0.15rem;
+      color: var(--accent-stroke);
+    }
+
+    .guide strong {
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    .guide .guide-keys {
+      display: block;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Au doigt, pas de clavier : pas de raccourcis */
+    @media (pointer: coarse) {
+      .guide .guide-keys {
+        display: none;
+      }
+    }
+
+    .guide kbd {
+      padding: 0 4px;
+      font:
+        0.75rem "Roboto Mono",
+        monospace;
+      color: var(--pill-text);
+      border: 1px solid var(--pill-border);
+      border-radius: 3px;
+    }
+
+    .resume-label,
+    .resume-where {
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--accent-sub);
+    }
+
+    .resume-section:empty {
+      display: none;
+    }
+
+    .resume-title {
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
     .index {
-      padding-top: 40px;
+      padding-top: 56px;
     }
-    .course {
-      gap: 16px;
-      padding: 24px 0 28px;
-    }
-    .chapter-list a {
-      padding: 7px 0;
-    }
-    .sheets {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .resume {
-      transition: none;
+    .index h2 {
+      margin: 0 0 16px;
+      font-size: 1.5rem;
+    }
+
+    .courses,
+    .sheets,
+    .chapter-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .courses > li,
+    .sheets > li,
+    .chapter-list > li {
+      margin: 0;
+    }
+
+    /* Un cours par ligne : présentation à gauche, sommaire des chapitres à droite */
+    .course {
+      display: grid;
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+      gap: 20px 64px;
+      padding: 32px 0 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    .course h3,
+    .sheets h3 {
+      margin: 0 0 8px;
+      line-height: 1.25;
+    }
+
+    .course h3 {
+      font-size: 1.375rem;
+    }
+
+    .sheets h3 {
+      font-size: 1.125rem;
+    }
+
+    .course h3 a,
+    .sheets h3 a {
+      text-decoration: none;
+    }
+
+    .course h3 a:hover,
+    .sheets h3 a:hover,
+    .chapter-list a:hover .t {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .course h3 a:focus-visible,
+    .sheets h3 a:focus-visible,
+    .chapter-list a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    .course-head p,
+    .sheets p {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .course-head p {
+      margin-bottom: 16px;
+    }
+
+    /* Même étiquette que « Fig. 1 » sous les diagrammes */
+    .count {
+      font-family: "Roboto Mono", monospace;
+      font-size: 0.75rem;
+      color: var(--pill-text);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      border-radius: 4px;
+      padding: 1px 6px;
+    }
+
+    /* Chapitres en deux colonnes quand la place le permet, numérotés comme dans « Chapitre 3 sur 13 » */
+    .chapter-list {
+      columns: 2 15rem;
+      column-gap: 40px;
+      padding-top: 4px;
+      font-size: 0.9375rem;
+    }
+
+    .chapter-list li {
+      break-inside: avoid;
+    }
+
+    .chapter-list a {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 5px 0;
+      line-height: 1.4;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .chapter-list .n {
+      flex: none;
+      min-width: 1.25rem;
+      font:
+        0.8125rem "Roboto Mono",
+        monospace;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: var(--text-muted);
+    }
+
+    .chapter-list a:hover {
+      color: var(--heading);
+    }
+
+    .chapter-list a:hover .n {
+      color: var(--accent);
+    }
+
+    /* Fiches d'une page : deux par ligne */
+    .sheets {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 64px;
+    }
+
+    .sheets > li {
+      padding: 24px 0 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .course {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .index {
+        padding-top: 40px;
+      }
+      .course {
+        gap: 16px;
+        padding: 24px 0 28px;
+      }
+      .chapter-list a {
+        padding: 7px 0;
+      }
+      .sheets {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .resume {
+        transition: none;
+      }
     }
   }
 </style>

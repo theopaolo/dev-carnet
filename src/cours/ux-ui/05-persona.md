@@ -2,7 +2,7 @@
 title: 'Le persona'
 order: 5
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-27"
+updatedAt: "2026-09-28"
 ---
 
 # Le persona
@@ -73,17 +73,11 @@ Ces vérifications concernent la fiche de l'atelier, le formulaire et sa confirm
 
 ## L'activité
 
-En équipe, 45 minutes.
+En équipe, 20 minutes.
 
-1. Relisez vos notes d'entretien. Surlignez les besoins et les freins qui reviennent.
-2. Repérez deux profils qui ont des besoins différents pour choisir un atelier ou s'y inscrire. Avec seulement deux entretiens, ces profils restent des hypothèses à vérifier.
-3. Remplissez une fiche par persona. Son objectif concerne l'inscription à une séance d'essai de la MJC, et ses freins décrivent ce qui pourrait l'empêcher de venir.
-4. À côté de chaque information, notez sa source : entretien, brief, ou « à vérifier » si vous l'avez imaginée.
-5. Pour chaque fiche, écrivez une décision à tester sur votre page : une information à montrer, un obstacle à lever ou une manière de naviguer à prendre en compte.
+Reprenez le cadre « 1–2. Préparer la réservation ». Créez un seul profil à partir du brief et du récit entendu : son objectif et ses principaux freins. Signalez ce que vous supposez avec « à vérifier ». Notez ce que ce profil vous conduit à prévoir sur la page.
 
-Rendu : 2 personas, dans la section « 3. Persona », avec une décision à tester pour chacun.
-
-Vous pouvez utiliser l'IA pour rédiger la fiche. Vérifiez chaque information dans vos entretiens ou le brief.
+Rendu : une fiche persona dans votre fichier d'équipe.
 
 ## Pensez à tout le monde
 

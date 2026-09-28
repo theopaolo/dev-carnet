@@ -1,0 +1,70 @@
+---
+import type { CourseGroup } from "../lib/courses";
+import { base, pageUrl } from "../lib/urls";
+import Pocket from "./Pocket.astro";
+interface Props {
+  id: string;
+  group?: CourseGroup;
+  sheets: CourseGroup[];
+  navLabel: string;
+}
+const { id, group, sheets, navLabel } = Astro.props;
+---
+
+<nav class="sidebar stack" data-space="none" id="chapitres" aria-label="Cours">
+  {group ? (
+    <>
+      <p class="nav-title">{group.course.data.title}</p>
+      <ul class="nav-chapters">
+        <li>
+          <a
+            href={pageUrl(group.course.id)}
+            aria-current={group.course.id === id ? "page" : undefined}
+          >
+            Présentation
+          </a>
+        </li>
+        {group.chapters.map((c) => (
+          <li>
+            <a href={pageUrl(c.id)} aria-current={c.id === id ? "page" : undefined}>
+              {c.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  ) : (
+    <>
+      <p class="nav-section">Fiches</p>
+      <ul>
+        {sheets.map(({ course }) => (
+          <li>
+            <a
+              class="nav-title"
+              href={pageUrl(course.id)}
+              aria-current={course.id === id ? "page" : undefined}
+            >
+              {course.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+  <Pocket />
+</nav>
+
+<!-- Téléphone : le bouton Chapitres ouvre une copie de la barre latérale -->
+<dialog class="chapters panel-dialog" aria-labelledby="chapters-title">
+  <div class="chapters-head cluster" data-justify="between">
+    <p class="chapters-title" id="chapters-title">
+      {navLabel}
+    </p>
+    <button type="button" class="button" data-close>
+      Fermer
+    </button>
+  </div>
+</dialog>
+<script>
+  import "../scripts/chapters.js";
+</script>

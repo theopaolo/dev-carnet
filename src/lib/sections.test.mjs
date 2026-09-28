@@ -20,7 +20,11 @@ test("une section par titre, titres de code ignorés, diagrammes exclus", () => 
   const s = splitSections(md, ["titre", "boucle", "fin"]);
   assert.deepEqual(
     s.map((x) => [x.slug, x.title]),
-    [["titre", "Titre"], ["boucle", "Boucle"], ["fin", "Fin"]],
+    [
+      ["titre", "Titre"],
+      ["boucle", "Boucle"],
+      ["fin", "Fin"],
+    ],
   );
   assert.equal(s[0].text, "Intro avec gras et un lien.");
   assert.equal(s[1].text, "# Injection directe tool_call");
