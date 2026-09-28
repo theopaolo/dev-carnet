@@ -11,7 +11,11 @@ Vous assemblez vos styles et vos composants sur les wireframes, puis vous reliez
 
 ## De la maquette au prototype
 
-La maquette applique le style guide et les composants aux wireframes. Elle garde leurs contenus et leur ordre. Le prototype est la maquette rendue cliquable : on passe d'un écran à l'autre comme sur le vrai site.
+La maquette graphique, aussi appelée *mockup*, applique le style guide et les composants aux wireframes. Elle reprend leurs contenus et leur organisation, que l'on peut ajuster si la mise en page ou un test révèle un problème.
+
+Le prototype simule les réactions aux actions : on passe d'un écran à l'autre et on voit le résultat d'une réservation. On peut déjà prototyper avec des wireframes en gris, comme expliqué dans [Le zoning et les wireframes](/ux-ui/09-zoning-et-wireframes/#le-prototype). Ici, vous utiliserez les maquettes avec leurs styles.
+
+Le formulaire peut afficher une confirmation sans enregistrer de réservation ni envoyer d'e-mail. Annoncez cette simulation à la personne qui teste. Ce test ne vérifie donc pas que ces opérations fonctionnent réellement.
 
 Pour relier les écrans dans Figma :
 
