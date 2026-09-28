@@ -29,7 +29,7 @@ Une carte peut montrer le parcours actuel ou celui que l'on veut concevoir. La M
 | Ce qui coince | Qu'est-ce qui la ralentit ou la fait hésiter ? |
 | La piste | Que pourrait-on changer pour l'aider ? |
 
-En haut de la carte, notez le persona, son but et ses attentes. La ligne des émotions se dessine souvent comme une courbe. Ses creux montrent où l'équipe doit agir.
+En haut de la carte, notez le persona, son but et ses attentes. La ligne des émotions se dessine souvent comme une courbe. Ses creux signalent des difficultés à examiner. Si l'émotion est supposée, notez-la comme une hypothèse.
 
 ## Comment faire une journey map
 
@@ -71,15 +71,13 @@ journey
 
 Le point le plus bas est la commande. Inès doute que sa commande soit partie. Une confirmation visible répondrait à cette question : c'est la première chose que l'écran de paiement doit régler.
 
-## L'activité
-
-En équipe, 25 minutes.
+## Atelier : dessiner le parcours du persona
 
 Dessinez le parcours de votre persona, de la découverte de l'atelier à sa première séance. Pour chaque étape, notez ce qu'il fait, ce qu'il ressent et ce qui peut le bloquer.
 
 Repérez le principal blocage et proposez une amélioration. Marquez « à vérifier » ce que vous supposez.
 
-Rendu : un schéma dans votre fichier d'équipe. Un dessin sur papier pris en photo convient.
+Rendu : un schéma dans votre fichier de projet. Un dessin sur papier pris en photo convient.
 
 ## À lire
 

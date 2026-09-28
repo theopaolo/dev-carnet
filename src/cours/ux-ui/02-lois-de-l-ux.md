@@ -84,8 +84,8 @@ Fiches Laws of UX : [loi de proximité](https://lawsofux.com/fr/loi-de-proximit
 
 - [Les lois de l'UX par Maze](https://maze.co/collections/ux-ui-design/ux-laws/), avec des captures d'interfaces réelles. En anglais.
 - [Concevez un produit simple](https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4088981-concevez-un-produit-simple), OpenClassrooms.
-- [Pourquoi le web est devenu si moche ?](https://www.youtube.com/watch?v=dPi-o1rsHpI), vidéo de Basti UI, 17 minutes, sur les sites qui se ressemblent tous aujourd'hui. Regardez-la avec la loi de Jakob en tête.
-- [The UX Psychology Behind Apps People Can't Stop Using](https://www.youtube.com/watch?v=2TlIg3VokY8), vidéo d'uxpeak, 12 minutes. Six principes de psychologie, chacun avec un écran avant et après, dont une barre de progression qui ne part pas de zéro. En anglais, avec des sous-titres automatiques.
+- [Pourquoi le web est devenu si moche ?](https://www.youtube.com/watch?v=dPi-o1rsHpI), vidéo de Basti UI sur la ressemblance entre les sites web. Regardez-la avec la loi de Jakob en tête.
+- [The UX Psychology Behind Apps People Can't Stop Using](https://www.youtube.com/watch?v=2TlIg3VokY8), vidéo d'uxpeak. Six principes de psychologie, chacun avec un écran avant et après, dont une barre de progression qui ne part pas de zéro. En anglais, avec des sous-titres automatiques.
 
 ## Repérer un principe UX
 

@@ -11,7 +11,7 @@ Un persona est un personnage fictif qui regroupe des besoins, des objectifs et d
 
 ## Pourquoi en créer ?
 
-Un persona aide à décider. Si les entretiens montrent que les jeunes hésitent à réserver sans connaître le matériel nécessaire, la fiche garde ce frein visible. L'équipe peut alors afficher le matériel sur la fiche de l'atelier, avant le bouton de réservation.
+Si les entretiens montrent que les jeunes hésitent à réserver sans connaître le matériel nécessaire, la fiche garde ce frein visible. L'équipe peut alors afficher le matériel sur la fiche de l'atelier, avant le bouton de réservation.
 
 Il sert aussi à vérifier les suppositions de l'équipe. « Les jeunes veulent tous réserver sur téléphone » est une hypothèse tant que personne ne l'a confirmé. Notez-la comme telle, puis confrontez-la aux entretiens et aux tests.
 
@@ -30,7 +30,7 @@ Gardez les détails qui peuvent changer une décision de conception. Une profess
 
 ## Deux exemples illustrés
 
-Ces profils viennent des slides du cours. Ils montrent qu'un objectif et un frein dépendent du projet : on ne reprend pas la même fiche pour une boutique, une application sur les plantes et la MJC.
+Ces deux profils illustrent des besoins différents : acheter en ligne et trouver des conseils sur les plantes. Leur fiche dépend du projet, comme celle que vous créez pour la MJC.
 
 <div class="persona-examples">
   <figure>
@@ -62,7 +62,7 @@ Cette fiche conduit à des choix précis : montrer les prix avant la commande e
 
 ## Un persona et l'accessibilité
 
-Les slides d'accessibilité présentent Pierre, développeur aveugle qui utilise un lecteur d'écran. Sur un formulaire, une image sans texte alternatif ou un bouton sans nom lui cache une information ou une action.
+Pierre est un développeur aveugle qui utilise un lecteur d'écran. Sur un formulaire, une image sans texte alternatif ou un bouton sans nom lui cache une information ou une action.
 
 | Situation | Ce que l'équipe peut vérifier pour la MJC |
 | --- | --- |
@@ -71,17 +71,15 @@ Les slides d'accessibilité présentent Pierre, développeur aveugle qui utilise
 
 Ces vérifications concernent la fiche de l'atelier, le formulaire et sa confirmation. Un persona rend un obstacle concret, mais ne couvre pas à lui seul tous les besoins d'accessibilité. Les [cinq personas d'Orange](https://a11y-guidelines.orange.com/fr/persona/) montrent d'autres situations à examiner.
 
-## L'activité
-
-En équipe, 20 minutes.
+## Atelier : créer un persona
 
 Reprenez le cadre « 1–2. Préparer la réservation ». Créez un seul profil à partir du brief et du récit entendu : son objectif et ses principaux freins. Signalez ce que vous supposez avec « à vérifier ». Notez ce que ce profil vous conduit à prévoir sur la page.
 
-Rendu : une fiche persona dans votre fichier d'équipe.
+Rendu : une fiche persona dans votre fichier de projet.
 
 ## Pensez à tout le monde
 
-Vos entretiens ne couvrent pas tous les besoins. Pensez aussi aux personnes qui lisent difficilement, distinguent mal les couleurs ou utilisent seulement le clavier. Si vous ajoutez un besoin que personne n'a exprimé, marquez-le « à vérifier ». Mercredi, vous testerez l'accessibilité de votre page.
+Vos entretiens ne couvrent pas tous les besoins. Pensez aussi aux personnes qui lisent difficilement, distinguent mal les couleurs ou utilisent seulement le clavier. Si vous ajoutez un besoin que personne n'a exprimé, marquez-le « à vérifier ». Vérifiez aussi ces besoins sur votre page codée.
 
 ## À lire
 

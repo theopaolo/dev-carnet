@@ -140,7 +140,7 @@ Certains états donnent lieu à un message, comme « Ta commande est prête »
 
 ## Pour aller plus loin
 
-Si vous avez fini vos wireframes, dessinez en équipe le user flow de la réservation d'une séance d'essai, sur papier, avec Mermaid, avec [draw.io](https://app.diagrams.net/) ou en wireflow avec vos wireframes. Ajoutez un losange pour chaque cas prévu par le brief. Chaque branche doit mener à un de vos écrans.
+Cet atelier est facultatif. Dessinez le user flow de la réservation d'une séance d'essai, sur papier, avec Mermaid, avec [draw.io](https://app.diagrams.net/) ou en wireflow avec vos wireframes. Ajoutez un losange pour chaque cas prévu par le brief. Chaque branche doit mener à un de vos écrans.
 
 Rendu, si vous le faites : le user flow, dans la section « 7. Zoning et wireframes ».
 
@@ -154,5 +154,5 @@ Rendu, si vous le faites : le user flow, dans la section « 7. Zoning et wiref
 
 ## Pour la discussion
 
-- Quel schéma aurait aidé votre équipe à dessiner ses wireframes ?
+- Quel schéma vous aiderait à dessiner vos wireframes ?
 - Quel schéma un développeur back-end voudrait-il recevoir ?

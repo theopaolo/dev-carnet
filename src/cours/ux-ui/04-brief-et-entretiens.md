@@ -11,7 +11,7 @@ updatedAt: "2026-09-28"
 
 La MJC des Tilleuls est une maison des jeunes et de la culture fictive. Elle propose des ateliers pour les 15–25 ans : photo, escalade, musique, théâtre, graff, jeu de rôle… La séance d'essai est gratuite et sans engagement.
 
-Vous concevez le parcours qui permet de choisir un atelier, de réserver une séance d'essai et d'obtenir une confirmation. Gardez ce même projet pour la suite de la semaine.
+Vous concevez le parcours qui permet de choisir un atelier, de réserver une séance d'essai et d'obtenir une confirmation. Ce projet relie tous les ateliers du cours.
 
 ### Les règles du projet
 
@@ -28,10 +28,8 @@ Choisissez une date, un horaire et un lieu fictifs pour votre séance. Si une au
 
 ## Préparer votre parcours de réservation
 
-**En équipe, 30 minutes.**
-
 1. Choisissez une activité pour votre MJC : photo, escalade, musique…
-2. Une personne du groupe raconte une inscription à une activité qu'elle a réellement vécue. Les autres l'écoutent, posent les questions ci-dessous et prennent quelques notes.
+2. Interrogez une personne sur une inscription à une activité qu'elle a réellement vécue. Utilisez les questions ci-dessous et notez les difficultés qu'elle décrit.
 3. À partir de ce récit et du brief, notez ce que votre futur site devra permettre de comprendre et de faire.
 
 ### Les questions à poser
@@ -40,13 +38,11 @@ Choisissez une date, un horaire et un lieu fictifs pour votre séance. Si une au
 - « Comment as-tu choisi et trouvé les informations nécessaires ? »
 - « Qu'est-ce qui t'a compliqué la tâche ou fait hésiter ? »
 
-Vous pouvez utiliser ces questions telles quelles. Une personne raconte, les autres écoutent. Un seul récit suffit pour l'exercice, sans changement de rôles. Les groupes travaillent en parallèle.
+Pour préciser une réponse, demandez un exemple : « À quel endroit as-tu cherché cette information ? » ou « Qu'as-tu fait quand tu n'as pas trouvé ? » Un récit suffit pour cet exercice.
 
-Le formateur passe pour vous aider à préciser vos idées. Par exemple : « Qu'est-ce qui vous fait dire ça ? » ou « Où cette information doit-elle apparaître ? »
+### Rendu
 
-### Un seul rendu
-
-Dans votre fichier Figma ou Penpot, créez un cadre **« 1–2. Préparer la réservation »** avec :
+Dans votre fichier Figma ou Penpot, créez un cadre « 1–2. Préparer la réservation » avec :
 
 - L'activité choisie.
 - Deux ou trois besoins ou difficultés entendus dans le récit.

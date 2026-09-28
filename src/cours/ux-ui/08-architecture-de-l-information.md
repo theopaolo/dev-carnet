@@ -91,15 +91,13 @@ La navigation relie les pages entre elles. Un site combine en général plusieur
 | Linéaire | Guide étape par étape vers un but | Panier, puis adresse, puis paiement |
 | Fil d'Ariane | Montre où l'on est et permet de remonter | Accueil › Menu › Plats › Tacos poulet |
 
-## L'activité
-
-En équipe, 30 minutes.
+## Atelier : organiser les pages du site
 
 Dessinez l'arbre des pages de votre site. Donnez-leur des noms clairs et indiquez où se trouvent les informations nécessaires à l'inscription.
 
 Vérifiez que votre persona peut trouver un atelier et réserver. Distinguez les pages de leur contenu : une confirmation peut être un état du formulaire.
 
-Rendu : le sitemap dans votre fichier d'équipe. Un schéma simple suffit.
+Rendu : le sitemap dans votre fichier de projet. Un schéma simple suffit.
 
 ## À lire
 

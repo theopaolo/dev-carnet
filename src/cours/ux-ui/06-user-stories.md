@@ -38,7 +38,7 @@ Les équipes vérifient leurs stories avec six critères, résumés par le mot a
 | S | Petite (_small_) | Peut-on la terminer sans la découper davantage ? |
 | T | Testable | Des critères d'acceptation permettent-ils de vérifier qu'elle est finie ? |
 
-Une story décrit un besoin, le pourquoi. Une spécification technique décrit une solution, le comment.
+Une story décrit un besoin. Une spécification technique décrit comment réaliser la solution.
 
 | Spécification technique | User story |
 | --- | --- |
@@ -69,7 +69,7 @@ Chaque carte décrit ce que fait l'utilisateur. On écrit « Payer par carte �
 
 Une ligne horizontale sépare la première version du reste. Au-dessus de la ligne, l'équipe place ce qu'elle livre d'abord. Cette première version doit permettre de faire tout le parcours, même simplement. On l'appelle le produit minimum viable, ou MVP (_minimum viable product_).
 
-Dans votre projet, la première version est la page que vous coderez mercredi.
+Dans votre projet, la première version est la page de réservation à coder.
 
 ### Un exemple
 
@@ -99,15 +99,16 @@ La première version permet à Inès de commander et de payer, sans photos ni po
 
 La journey map suit la personne : ce qu'elle fait, pense et ressent, sur tous les canaux. La story map suit le produit : ce que l'équipe va construire, et dans quel ordre. Les étapes d'un journey peuvent servir de départ aux étapes d'une story map.
 
-## L'activité
+## Atelier : écrire les besoins du persona
 
-En équipe, 30 minutes.
-
-Écrivez trois user stories pour choisir un atelier, réserver un créneau et connaître le résultat de la réservation. Utilisez la forme « En tant que…, je veux… afin de… ».
+1. Reprenez le brief MJC et votre persona. En haut de la carte, notez l'activité « Réserver une séance d'essai ». Placez les étapes de gauche à droite : choisir un atelier, réserver un créneau, connaître le résultat.
+2. Sous chaque étape, placez les actions précises de la personne, une par carte. Rangez les plus importantes en haut. Prévoyez aussi ce qui se passe si la séance est complète ou si la personne est mineure.
+3. Tracez une ligne entre la première version et les améliorations futures. Vérifiez qu'avec les cartes au-dessus de la ligne, la personne peut aller du choix de l'atelier au résultat de sa réservation. Les règles du brief doivent être respectées dès cette version, y compris la liste d'attente et le message sur l'autorisation parentale.
+4. À partir des cartes de cette première version, écrivez trois user stories : une pour choisir un atelier, une pour réserver un créneau et une pour connaître le résultat. Utilisez la forme « En tant que…, je veux… afin de… ».
 
 Pour la réservation, ajoutez deux critères qui permettront de vérifier qu'elle fonctionne. Gardez en tête la séance complète et l'accord parental.
 
-Rendu : trois stories et deux critères dans votre fichier d'équipe.
+Rendu : la story map avec sa ligne de version, trois stories et deux critères dans le cadre « 4. Story map et user stories » de votre fichier de projet.
 
 ## Pour aller plus loin
 

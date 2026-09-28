@@ -7,18 +7,22 @@ updatedAt: "2026-09-28"
 
 # Le zoning et les wireframes
 
-Mardi matin, vous dessinez les écrans de la MJC, du zoning aux wireframes.
+Le zoning place les grandes zones d'un écran. Le wireframe précise ce qu'elles contiennent. Vous allez dessiner la liste des ateliers de la MJC, la fiche d'un atelier et le formulaire de réservation.
 
 ## Du zoning au prototype
 
 Vous passerez par quatre niveaux, des grandes zones à la maquette cliquable. Modifier l'ordre des zones sur un zoning demande moins de travail que de reprendre une page déjà codée.
 
-| Niveau | Ce qu'il montre | Avec quoi | Quand |
-| --- | --- | --- | --- |
-| Zoning | Les grandes zones de l'écran, avec leur nom | Papier, ou rectangles dans Figma | Mardi matin |
-| Wireframe | Le contenu de chaque zone, en gris : titres, textes, champs, boutons | Figma | Mardi matin |
-| Maquette | L'écran final, avec les couleurs, les polices et les images | Figma, avec le style guide | Mardi après-midi |
-| Prototype | La maquette rendue cliquable, pour tester le parcours | Figma, onglet Prototype | Mardi après-midi |
+| Niveau | Ce qu'il montre | Avec quoi |
+| --- | --- | --- |
+| Zoning | Les grandes zones de l'écran, avec leur nom | Papier, ou rectangles dans Figma |
+| Wireframe | Le contenu de chaque zone, en gris : titres, textes, champs, boutons | Figma |
+| Maquette | L'écran final, avec les couleurs, les polices et les images | Figma, avec le style guide |
+| Prototype | La maquette rendue cliquable, pour tester le parcours | Figma, onglet Prototype |
+
+Avant le zoning, un croquis au crayon suffit souvent pour essayer une idée. Voici le croquis, le zoning et le wireframe de la page d'une voiture électrique :
+
+<img src="/ressources/ux-ui/croquis-zoning-wireframe.webp" alt="Trois versions d'une même page. Le croquis au crayon montre un en-tête, un titre, une voiture, un prix et trois encarts. Le zoning remplace ces éléments par des rectangles gris nommés : en-tête et navigation, titre, contenu de niveau 1, appel à l'action, trois encarts de niveau 2. Le wireframe ajoute les vrais textes, les onglets et les boutons." width="1200" height="382" loading="lazy">
 
 ## Le zoning
 
@@ -41,6 +45,10 @@ block-beta
 ```
 
 Chaque zone vient du journey d'Inès. La liste affiche les prix, parce qu'Inès cherchait le prix du menu étudiant.
+
+Un autre exemple montre une page d'accueil en zoning, en wireframe puis en prototype. Les zones restent à la même place d'un niveau à l'autre. Le wireframe ajoute les textes, et le prototype marque en bleu les éléments cliquables.
+
+<img src="/ressources/ux-ui/zoning-wireframe-prototype.webp" alt="Trois écrans côte à côte. Le zoning n'a que des blocs gris et des cercles. Le wireframe ajoute des lignes de texte dans les mêmes blocs. Le prototype colore en bleu les liens et les boutons." width="960" height="600" loading="lazy">
 
 ## Le wireframe
 
@@ -65,11 +73,29 @@ Voici le wireframe de la même page :
 
 Un rectangle barré d'une croix, ici `[X]`, remplace une image.
 
+Un wireframe peut aussi se dessiner à la main. Sur ces deux écrans d'une appli de commandes, les croix marquent les images et des vagues remplacent les paragraphes. Les titres et les boutons gardent leurs vrais mots : « Cancel », « Accept ».
+
+<img src="/ressources/ux-ui/wireframe-papier.webp" alt="Deux écrans de téléphone dessinés à la main. La liste des commandes montre des images barrées, des noms et des prix. La fiche d'une commande montre une grande image, un prix, les boutons Cancel et Accept et des lignes ondulées à la place du texte." width="768" height="604" loading="lazy">
+
+### Basse et haute fidélité
+
+La fidélité dit à quel point un écran ressemble au produit final.
+
+| Niveau | Ce qu'il montre |
+| --- | --- |
+| Basse fidélité | La structure en gris, avec des images barrées et des textes courts |
+| Haute fidélité | Les vrais contenus, les logos et les tailles de texte, avec peu de couleurs |
+| Design final | Le style guide appliqué : couleurs, polices, icônes |
+
+<img src="/ressources/ux-ui/basse-haute-fidelite.webp" alt="Le même écran d'envoi de colis en trois versions. En basse fidélité, les logos des transporteurs sont des rectangles barrés. En haute fidélité, les vrais logos et prix apparaissent. Le design final ajoute la couleur bleue de la marque et des étiquettes colorées." width="1200" height="304" loading="lazy">
+
+Pour cet atelier, restez en basse fidélité. Les couleurs, les polices et les images se travaillent dans la [maquette](/ux-ui/14-maquette-et-test/).
+
 ### Pourquoi faire des wireframes
 
-- Pour tester la structure vite, avant de choisir les couleurs.
+- Pour vérifier l'ordre des contenus avant de choisir les couleurs.
 - Pour discuter avec le client et les développeurs à partir d'un même dessin.
-- Pour changer d'avis sans perdre de travail.
+- Pour déplacer un champ ou une section sans reprendre les styles d'une maquette détaillée.
 
 ### Ce qu'on évite
 
@@ -88,23 +114,42 @@ Un rectangle barré d'une croix, ici `[X]`, remplace une image.
 | Composant | Ctrl + Alt + K, ou Cmd + Option + K sur Mac | Réutiliser un élément, comme un bouton ou une carte |
 | Section | Maj + S | Ranger les écrans par étape |
 
-## L'activité
+## Ateliers : dessiner les écrans de la MJC
 
 ### Le zoning
 
-En équipe, 20 minutes.
-
 Dessinez les grandes zones de la fiche atelier. Placez en premier ce dont votre persona a besoin pour décider de réserver. Des rectangles avec un nom suffisent.
+
+### Prendre en main Figma
+
+1. Ouvrez votre fichier de projet dans Figma. Si vous n'en avez pas, créez un fichier de design nommé « MJC des Tilleuls ».
+2. Avec l'outil Frame (`F`), créez un écran au format téléphone. Nommez-le « Fiche atelier ».
+3. Avec Rectangle (`R`) et Texte (`T`), reproduisez les zones de votre zoning. Ajoutez le nom de l'atelier, une description et le texte « Réserver une séance d'essai ».
+4. Sélectionnez le texte du bouton et appliquez l'auto layout (`Maj + A`). Ajoutez un fond gris et de l'espace autour du texte.
+5. Changez le libellé du bouton : son cadre doit s'adapter au texte. Renommez vos éléments dans le panneau des calques pour les retrouver.
+
+Rendu : une fiche atelier en gris, avec un bouton qui s'adapte à son libellé. Utilisez ce fichier pour les wireframes.
 
 ### Les wireframes
 
-En équipe, 1 heure.
+Dessinez trois écrans en gris, avec les vrais titres, libellés et boutons :
 
-Dessinez en gris la liste des ateliers, la fiche d'un atelier et la réservation, avec les vrais textes et boutons. Répartissez-vous le travail comme vous voulez.
+| Écran | Contenu à prévoir |
+| --- | --- |
+| Liste des ateliers | Nom et description des activités, public concerné, accès à chaque fiche |
+| Fiche atelier | Activité, âge accepté, matériel, lieu, créneaux et accès à la réservation |
+| Réservation | Séance choisie, prénom, nom, âge, e-mail et bouton de validation |
 
-Prévoyez la confirmation, une erreur de saisie et une séance complète avec liste d'attente. Faites apparaître les contraintes du brief, dont l'âge minimum, le matériel et l'accord parental.
+Ajoutez les états du parcours :
 
-Rendu : le zoning et les trois écrans avec leurs états, dans votre fichier d'équipe. Ils serviront de base à [la maquette UI](/ux-ui/11-ui-et-maquette/).
+- Une confirmation avec l'atelier, la date, l'heure, le lieu et le matériel à prévoir.
+- Une erreur de saisie qui indique quel champ corriger et comment.
+- Une séance complète avec accès à la liste d'attente.
+- Un message qui demande aux moins de 18 ans d'apporter une autorisation parentale.
+
+Vérifiez qu'on peut suivre le parcours depuis la liste des ateliers jusqu'au résultat de la réservation.
+
+Rendu : le zoning et les trois écrans avec leurs états, dans votre fichier de projet. Ils serviront de base à [la maquette UI](/ux-ui/14-maquette-et-test/).
 
 ## À lire
 

@@ -276,6 +276,22 @@ dialog.zoom {
   outline: none;
 }
 
+/* Image du contenu : un clic l'ouvre dans le même dialogue */
+.image-zoom {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.zoom-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .zoom-body,
 .zoom-body svg {
   width: 100% !important;
@@ -322,6 +338,11 @@ dialog.zoom {
   .zoom-body svg {
     width: calc(var(--w, 800) * 1px) !important;
     height: auto !important;
+  }
+  .zoom-body img {
+    width: auto;
+    max-width: none;
+    height: auto;
   }
 }
 

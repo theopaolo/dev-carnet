@@ -7,13 +7,13 @@ updatedAt: "2026-09-28"
 
 # L'audit UX
 
-**Travail individuel, 30 minutes.**
+Un audit UX repère ce qui aide ou gêne une personne lorsqu'elle utilise une interface.
 
 1. Choisissez un site ci-dessous et faites la tâche proposée.
 2. Notez ce qui vous aide ou vous gêne, en vous appuyant sur les lois UX vues en cours.
 3. Ajoutez une capture pour illustrer vos remarques et proposez une amélioration.
 
-Déposez le tout dans un cadre à votre prénom, dans la section « Audit UX » de votre fichier Figma ou Penpot.
+Déposez le tout dans la section « Audit UX » de votre fichier Figma ou Penpot.
 
 ## Les sites au choix
 
@@ -52,7 +52,7 @@ Notez ce que vous avez vu ou fait. « C'est mal fait » ne décrit aucun probl
 - Un débutant et un habitué rencontrent-ils les mêmes difficultés sur Photopea ?
 - Un site qui tient compte des cinq lois est-il forcément facile à utiliser ?
 
-## Si vous avez fini
+## Pour approfondir
 
 - Choisissez une autre loi sur [Laws of UX](https://lawsofux.com/fr/) et cherchez un exemple sur votre site.
 - Lisez les [10 heuristiques de Nielsen](https://www.nngroup.com/articles/ten-usability-heuristics/), une autre grille d'audit très utilisée. En anglais.

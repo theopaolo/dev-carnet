@@ -45,11 +45,11 @@ Le designer Jesse James Garrett découpe un produit en cinq plans, du plus abstr
 
 | Plan | La question | Dans le projet |
 | --- | --- | --- |
-| 1. Stratégie (_strategy_) | Que veulent les utilisateurs et le client ? | Brief, entretiens et persona, lundi |
-| 2. Périmètre (_scope_) | Quelles fonctions et quels contenus ? | User stories, lundi |
-| 3. Structure | Comment ranger les pages et enchaîner les étapes ? | Journey et sitemap, lundi |
-| 4. Squelette (_skeleton_) | Où placer chaque élément sur l'écran ? | Zoning et wireframes, mardi |
-| 5. Surface | À quoi ressemble l'écran : couleurs, polices, images ? | Style guide et maquette, mardi |
+| 1. Stratégie (_strategy_) | Que veulent les utilisateurs et le client ? | Brief, entretiens et persona |
+| 2. Périmètre (_scope_) | Quelles fonctions et quels contenus ? | User stories |
+| 3. Structure | Comment ranger les pages et enchaîner les étapes ? | Journey et sitemap |
+| 4. Squelette (_skeleton_) | Où placer chaque élément sur l'écran ? | Zoning et wireframes |
+| 5. Surface | À quoi ressemble l'écran : couleurs, polices, images ? | Style guide et maquette |
 
 L'UX travaille surtout les trois premiers plans. L'UI travaille surtout les deux derniers.
 
@@ -81,11 +81,11 @@ flowchart TD
 
 | Étape | Dans le projet |
 | --- | --- |
-| 1. Empathie | Entretiens et persona, lundi |
-| 2. Définition | User stories et journey, lundi |
-| 3. Idéation | Sitemap lundi, zoning mardi |
-| 4. Prototypage | Wireframes et maquette, mardi |
-| 5. Test | Test de la maquette mardi, tests d'accessibilité mercredi |
+| 1. Empathie | Entretiens et persona |
+| 2. Définition | User stories et journey |
+| 3. Idéation | Sitemap et zoning |
+| 4. Prototypage | Wireframes et maquette |
+| 5. Test | Test de la maquette et tests d'accessibilité |
 
 ## À lire et à regarder
 
@@ -94,9 +94,9 @@ flowchart TD
 - [Faites la différence entre UX et UI](https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4088746-faites-la-difference-entre-ux-et-ui) et [Familiarisez-vous avec la notion d'usabilité](https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4088821-familiarisez-vous-avec-la-notion-d-usabilite), deux chapitres du cours gratuit d'OpenClassrooms.
 - [Comprenez le principe d'affordance](https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4053056-comprenez-le-principe-d-affordance), OpenClassrooms.
 - [It's not you. Bad doors are everywhere.](https://www.youtube.com/watch?v=yY96hTb8WgI), vidéo de Vox sur les portes qu'on pousse au lieu de les tirer. En anglais, activez les sous-titres.
-- [Dopamine](https://www.arte-campus.fr/serie/dopamine-tous-les-episodes), série d'ARTE en épisodes de 10 minutes. Chaque épisode montre comment une appli connue est conçue pour qu'on y revienne.
-- [Comment le web vous arnaque ? (Les dark patterns)](https://www.youtube.com/watch?v=fx5VZFdkuf4), vidéo de Basti UI, 9 minutes. Un dark pattern est une interface conçue pour piéger l'utilisateur, par exemple un désabonnement caché.
-- [Whatnot : le nouveau sponsor YouTube qui te met en danger](https://www.youtube.com/watch?v=IQP_2wnEgoY), enquête de Basti UI, 33 minutes. Une appli d'enchères en direct reprend des mécanismes des casinos pour qu'on y reste.
+- [Dopamine](https://www.arte-campus.fr/serie/dopamine-tous-les-episodes), série d'ARTE. Chaque épisode montre comment une appli connue est conçue pour qu'on y revienne.
+- [Comment le web vous arnaque ? (Les dark patterns)](https://www.youtube.com/watch?v=fx5VZFdkuf4), vidéo de Basti UI. Un dark pattern est une interface conçue pour piéger l'utilisateur, par exemple un désabonnement caché.
+- [Whatnot : le nouveau sponsor YouTube qui te met en danger](https://www.youtube.com/watch?v=IQP_2wnEgoY), enquête de Basti UI. Une appli d'enchères en direct reprend des mécanismes des casinos pour qu'on y reste.
 
 ## Pour la discussion
 
@@ -106,12 +106,12 @@ flowchart TD
 
 ## Le roasting
 
-En équipe, 20 minutes.
+Un roasting consiste ici à examiner une interface et à expliquer ce qui aide ou gêne son utilisation.
 
 Choisissez un site de MJC ou de centre socioculturel. Cherchez une activité pour un jeune de 17 ans et comment s'y inscrire.
 
-Gardez une idée à reprendre et un problème à éviter dans votre projet, avec une capture. Déposez vos remarques dans votre fichier d'équipe.
+Gardez une idée à reprendre et un problème à éviter dans votre projet, avec une capture. Déposez vos remarques dans votre fichier de projet.
 
 Arrêtez-vous avant tout envoi de formulaire. Ne créez pas de compte et ne payez rien.
 
-Critiquez l'interface, pas la personne qui l'a faite. Pas de contenu choquant. « C'est nul » ne compte pas : dites quel élément gêne et ce qu'il empêche de faire.
+Appuyez vos critiques sur un élément de l'interface et son effet sur la tâche. Par exemple : « Le bouton d'inscription est caché sous la photo, je ne l'ai pas trouvé. » Respectez les personnes qui ont conçu le site et choisissez des captures adaptées à un cours.
