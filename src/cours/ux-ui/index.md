@@ -11,7 +11,7 @@ updatedAt: "2026-09-28"
 
 Vous concevez le parcours d'inscription à une séance d'essai gratuite à la MJC des Tilleuls : choix d'un atelier, réservation et confirmation. Le [brief](/ux-ui/04-brief-et-entretiens/) précise les contraintes.
 
-Les exemples expliquent les méthodes avec Inès et l'appli d'un snack. Les ateliers les appliquent à la MJC : comprendre les besoins, organiser les pages, dessiner les écrans et tester l'inscription.
+Les exemples suivent Inès, qui commande dans l'appli d'un snack. Dans les ateliers, vous appliquez ces méthodes au site de la MJC, depuis les premiers entretiens jusqu'au test de réservation.
 
 Liens de travail :
 

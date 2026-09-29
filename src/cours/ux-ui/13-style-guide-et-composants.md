@@ -19,17 +19,17 @@ Pour ce projet, rassemblez vos choix sur une planche :
 | Couleurs | Des couleurs nommées selon leur rôle : texte, fond, action principale, erreur, confirmation |
 | Espacements | Quelques valeurs régulières, par exemple 8, 16, 24 et 32 px |
 
-Les tailles des textes viennent de votre [échelle typographique](/ux-ui/12-typographie-et-couleurs/#lechelle-typographique). Les espacements multiples de 8 se divisent facilement et s'alignent entre eux : 8 px entre un libellé et son champ, 16 px entre deux champs, 32 px entre deux sections.
+Les tailles des textes viennent de votre [échelle typographique](/ux-ui/12-typographie-et-couleurs/#lechelle-typographique). Pour les espacements, répétez les mêmes valeurs selon la relation entre les éléments : 8 px entre un libellé et son champ, 16 px entre deux champs, 32 px entre deux sections.
 
 Vérifiez ces choix avec les vrais contenus. Un titre d'atelier long et un message d'erreur doivent tenir sans se chevaucher.
 
-Dans Figma, enregistrez les couleurs et les espacements comme variables, et les textes comme styles de texte. Modifier une variable met à jour les propriétés qui lui sont liées.
+Dans Figma, enregistrez les couleurs et les espacements comme variables. Créez des styles de texte pour conserver la police, la taille, la graisse et l'interligne de chaque niveau. Modifier une variable met à jour les propriétés qui lui sont liées.
 
 ## Du style guide au CSS
 
 Reprenez ces choix dans le code avec des propriétés personnalisées CSS. Donnez-leur des noms qui correspondent aux variables Figma : `color.action.primary` devient `--color-action-primary`.
 
-Voici le style guide du snack, écrit en CSS :
+Voici les couleurs et les espacements du snack en CSS. Avec une taille de texte racine de 16 px, les espacements de 0,5, 1 et 2 rem correspondent à 8, 16 et 32 px.
 
 ```css
 :root {
@@ -38,9 +38,9 @@ Voici le style guide du snack, écrit en CSS :
   --color-action-primary: #c2410c;
   --color-error: #b91c1c;
   --color-success: #15803d;
-  --space-s: 0.5rem; /* 8 px */
-  --space-m: 1rem; /* 16 px */
-  --space-l: 2rem; /* 32 px */
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
 }
 
 .bouton {
@@ -59,19 +59,21 @@ Des noms correspondants dans Figma et dans le CSS permettent de retrouver le rô
 3. Choisissez vos valeurs d'espacement et appliquez-les à une carte d'atelier.
 4. Mesurez le contraste du texte et vérifiez que le nom de l'atelier tient dans la carte.
 
-Rendu : vos styles dans votre fichier de projet.
+Rendu : une planche de styles et une carte d'atelier qui les utilise, dans votre fichier de projet.
 
 ## Les composants
 
-Un composant Figma est un élément que l'on réutilise. Chaque copie posée sur un écran est une instance. Modifier le composant principal met à jour les propriétés liées de ses instances. Chaque instance peut garder un contenu différent, comme son libellé. Des variantes décrivent ses différents états.
+Un composant Figma est un modèle réutilisable, par exemple un bouton. Les exemplaires placés sur les écrans sont ses instances. Ils partagent les propriétés du composant principal, tout en pouvant afficher des contenus différents.
 
-Le principe est le même qu'en code. Un bouton écrit en dur à 50 endroits demande 50 corrections quand sa couleur change. Une classe `.bouton` se corrige une fois.
+Si vous modifiez la couleur du composant principal, ses instances reprennent ce changement, sauf si vous avez remplacé cette couleur sur une instance. Les variantes permettent de préparer plusieurs versions du composant, par exemple un bouton normal et un bouton désactivé.
+
+En CSS, une classe `.bouton` répond au même besoin de réutilisation : changer sa couleur modifie les boutons qui utilisent cette classe, sans les reprendre un par un.
 
 | Ce qu'on voit dans Figma | Ce que ça donne |
 | --- | --- |
 | Un composant, trois instances | Le même bouton affiche « Réserver », « Voir la fiche » ou « S'inscrire ». Le texte change, le style reste. |
 | Les variantes d'un bouton | Normal, focus, désactivé |
-| Les variantes d'un champ | Normal. Erreur, avec le message « Indiquez votre âge. » sous le champ |
+| Les variantes d'un champ | Un état normal et un état d'erreur, avec « Indiquez votre âge. » sous le champ |
 
 Pour le snack, une carte de menu garde sa structure quand le nom, le prix ou la disponibilité changent. Le formulaire réutilise le même champ pour plusieurs informations, avec un état normal et un état d'erreur.
 
@@ -81,7 +83,7 @@ Le designer Brad Frost range les composants en niveaux, du plus petit au plus gr
 
 | Niveau | Ce que c'est | Pour le snack |
 | --- | --- | --- |
-| Atome | La plus petite brique | Un bouton, un champ, un libellé, un prix |
+| Atome | Un élément de base de l'interface | Un bouton, un champ, un libellé, un prix |
 | Molécule | Quelques atomes assemblés | Une barre de recherche : un champ et un bouton |
 | Organisme | Des molécules assemblées en une partie de page | L'en-tête : le logo, la recherche et le panier |
 
@@ -90,7 +92,7 @@ Pour cet atelier, créez les atomes et les molécules nécessaires à la réserv
 ### Créer un composant dans Figma
 
 1. Dessinez l'élément avec du texte et des formes.
-2. Ajoutez l'auto layout avec Maj + A. L'élément s'adapte alors à la longueur de son texte.
+2. Ajoutez l'auto layout avec `Maj + A`. Pour un bouton qui s'adapte à son libellé, réglez la largeur sur Hug et définissez le padding.
 3. Créez le composant : sélectionnez l'élément, puis Ctrl + Alt + K, ou Cmd + Option + K sur Mac.
 4. Ajoutez des variantes pour les états.
 5. Nommez le composant et ses variantes clairement, par exemple « Bouton » avec une propriété « État » : normal, focus, désactivé.
@@ -101,8 +103,8 @@ Pour cet atelier, créez les atomes et les molécules nécessaires à la réserv
 | État | Ce qu'il montre | À vérifier |
 | --- | --- | --- |
 | Normal | L'élément au repos | Il se reconnaît comme cliquable ou comme champ. |
-| Survol | La souris passe dessus | Le changement est visible, sans tout bouleverser. |
-| Focus | L'élément est atteint au clavier | Un contour épais et contrasté. Sans lui, une personne qui navigue au clavier ne sait pas où elle se trouve. |
+| Survol | Le pointeur de la souris passe dessus | Le changement se voit et ne déplace pas les éléments voisins. |
+| Focus | L'élément peut recevoir une action au clavier | Un contour épais et contrasté permet de repérer quel élément est actif. |
 | Sélectionné | Un choix est fait, par exemple un créneau | Le texte ou une coche l'indique, pas la couleur seule. |
 | Désactivé | L'action n'est pas possible pour l'instant | La raison est expliquée à côté. |
 | Erreur | La saisie pose problème | Le message dit quoi corriger, près du champ concerné. |
@@ -125,7 +127,7 @@ Chaque partie de votre inscription réutilise vos composants de base : le bouton
 3. Placez des instances sur un écran. Changez un libellé et le nom de l'atelier pour vérifier que les éléments s'adaptent.
 4. Vérifiez que le focus est visible et que le message d'erreur explique quoi corriger.
 
-Rendu : les composants dans votre fichier de projet.
+Rendu : les trois composants, leurs variantes et des instances avec des contenus différents dans votre fichier de projet.
 
 ## À lire
 
@@ -136,5 +138,5 @@ Rendu : les composants dans votre fichier de projet.
 ## Pour la discussion
 
 - Quel composant avez-vous réutilisé le plus souvent ?
-- Qu'est-ce qui a cassé quand vous avez testé un texte plus long ?
+- Avec un texte plus long, quel élément déborde ou change de taille ?
 - Votre focus se voit-il sur toutes vos couleurs de fond ?

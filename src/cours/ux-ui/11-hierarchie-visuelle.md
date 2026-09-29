@@ -7,7 +7,7 @@ updatedAt: "2026-09-28"
 
 # La hiérarchie visuelle
 
-L'UI design définit l'apparence et les états des éléments d'une interface. La taille, le contraste, la position et l'espacement indiquent ce qu'il faut lire ou utiliser en priorité. Sur la fiche d'un atelier, le bouton « Réserver » doit se distinguer des liens secondaires.
+L'UI design définit l'apparence des éléments d'une interface et de leurs états : un bouton au repos, un créneau sélectionné ou un champ en erreur. La taille, le contraste, la position et l'espacement aident à repérer les informations et les actions. Sur la fiche d'un atelier, le bouton « Réserver » doit se distinguer des liens secondaires.
 
 ## Du wireframe au design
 
@@ -26,16 +26,18 @@ Une couleur seule ne suffit pas à expliquer un état. Écrivez « Indisponible 
 
 ## Où regarder en premier
 
-La hiérarchie visuelle range les éléments d'un écran par ordre d'importance. Elle indique à l'œil par où commencer. En 2006, une équipe de chercheurs dirigée par Gitte Lindgaard a montré que les participants jugeaient l'aspect d'une page web après 50 millisecondes d'affichage.
+La hiérarchie visuelle fait ressortir certains éléments avant les autres. Un titre doit permettre d'identifier la page, puis les styles du texte aident à distinguer la description, les informations pratiques et les actions.
+
+Dans une étude publiée en 2006, Gitte Lindgaard et son équipe ont recueilli des jugements sur l'attrait visuel de pages web après 50 millisecondes d'affichage. Cette première impression porte sur l'apparence de la page. Elle ne dit pas si la personne saura y réserver une séance.
 
 Si le titre, la description et les mentions secondaires ont le même traitement, leur ordre d'importance est difficile à repérer.
 
-Un article de blog montre une hiérarchie simple :
+Dans un article de blog, on peut distinguer quatre niveaux :
 
-1. Le titre se voit en premier. Il est le plus grand.
-2. Le chapeau donne le contexte. Il a une taille intermédiaire.
-3. Le texte courant sert à lire. Il a la taille standard.
-4. Les notes sont secondaires. Elles sont plus petites.
+1. Le titre annonce le sujet dans la plus grande taille.
+2. Le chapeau présente le contenu avec une taille intermédiaire.
+3. Le texte courant développe le sujet dans une taille adaptée à la lecture de paragraphes.
+4. Les notes apportent des précisions dans une taille plus petite, qui doit rester lisible.
 
 ## Les quatre leviers
 
@@ -43,12 +45,12 @@ Un article de blog montre une hiérarchie simple :
 | --- | --- | --- |
 | Taille | Plus c'est grand, plus ça paraît important. | Le titre de page, le prix d'un produit |
 | Contraste | Ce qui se distingue du reste attire l'œil. | Le seul bouton en couleur vive sur un écran neutre |
-| Position | Le haut et le centre de l'écran sont regardés en premier. | L'information clé en haut, les mentions légales en bas |
-| Espacement | Des éléments proches semblent liés. L'espace autour d'un élément le met en valeur. | Un libellé collé à son champ, de l'air entre deux sections |
+| Position | La place d'un élément détermine à quel moment on le rencontre en parcourant la page. | Le titre en haut de la fiche, le bouton de réservation après les créneaux |
+| Espacement | Des éléments proches semblent liés. L'espace autour d'un élément le distingue de ses voisins. | Un libellé près de son champ, un espace plus grand entre deux sections |
 
 ### La taille
 
-La taille est le levier le plus direct. Les journaux impriment leurs titres importants en très grand. Dans cette comparaison, la même baleine agrandie devient le centre de l'image, alors qu'elle se perdait dans le décor.
+Agrandir un élément le rend plus visible par rapport à ses voisins. Les journaux le font avec leurs titres. Dans cette comparaison, la baleine agrandie occupe presque toute l'image, alors qu'elle se distinguait peu du décor dans la première version.
 
 <img src="/ressources/ux-ui/baleine-taille.webp" alt="Avant et après : à gauche, une petite baleine à côté d'un plongeur se perd dans le fond. À droite, la baleine agrandie occupe l'image." width="1200" height="620" loading="lazy">
 
@@ -72,26 +74,22 @@ Réservez la couleur d'accent à l'action principale et aux messages importants.
 
 ### La position
 
-Sur un écran, certaines zones sont regardées plus que d'autres :
+La partie visible à l'ouverture doit permettre de comprendre sur quelle page on se trouve. Placez ensuite les informations dans l'ordre où la personne en a besoin. Sur une fiche atelier, elle doit pouvoir lire les horaires avant de choisir un créneau.
 
-- Le haut de la page est vu en premier. On y place le logo, la navigation et le message principal.
-- Le centre attire le regard.
-- Le bas reçoit moins d'attention. On y range le pied de page et les informations secondaires.
+En français, le sens de lecture va de gauche à droite. Le regard dépend aussi de la tâche, du contenu et de sa mise en page. Les parcours en F et en Z donnent des repères, sans imposer un trajet à chaque personne.
 
-En français, on lit de gauche à droite et de haut en bas. Deux parcours du regard reviennent souvent :
-
-| Parcours | Sur quelles pages | Ce que l'œil fait | Ce qu'on en tire |
+| Parcours | Sur quelles pages | Trajet décrit | Comment s'en servir |
 | --- | --- | --- | --- |
-| En F | Pages avec beaucoup de texte : articles, résultats de recherche | Il lit les premières lignes, puis descend en ne lisant que le début des lignes. | Placez les mots importants au début des titres et des lignes. |
-| En Z | Pages avec peu de texte : accueil, affiche | Il va du haut à gauche au haut à droite, traverse en diagonale, puis finit en bas à droite. | Placez le logo au départ du Z et l'action à la fin. |
+| En F | Observé notamment sur des pages riches en texte | Le regard parcourt le haut du texte, puis descend en se concentrant sur la gauche. | Commencez les titres et les paragraphes par les mots qui permettent d'en comprendre le sujet. |
+| En Z | Schéma de composition pour des pages peu chargées | Le trajet relie le haut gauche au haut droit, puis le bas gauche au bas droit. | Sur une page courte, essayez cette disposition pour relier un titre, un visuel et une action. Vérifiez ensuite ce que la personne repère. |
 
-Ne placez pas l'information la plus importante tout en bas, dans un coin.
+Une information nécessaire pour choisir un atelier, comme l'âge minimum, doit rester près de sa description. La placer uniquement dans le pied de page oblige la personne à la chercher ailleurs.
 
 ### L'espacement
 
 L'espacement groupe et sépare. C'est la loi de proximité de la [Gestalt](/ux-ui/02-lois-de-l-ux/#les-principes-de-la-gestalt) : un libellé proche de son champ se lit avec lui. Si le libellé est aussi loin de son champ que du champ voisin, leur association devient ambiguë.
 
-L'espace vide, ou _white space_, met aussi en valeur. Un élément entouré d'air paraît plus important qu'un élément serré entre d'autres.
+L'espace vide, ou _white space_, aide à isoler un élément. Un bouton séparé du paragraphe voisin est plus facile à repérer comme une action distincte.
 
 Ces deux versions d'un formulaire de paiement contiennent les mêmes champs. La première aligne tous les champs en trois colonnes serrées. La seconde les regroupe par sujet, avec le titre de chaque groupe à gauche et une ligne de séparation entre les groupes. Les coordonnées et les informations de paiement forment ainsi des blocs distincts.
 
@@ -103,7 +101,7 @@ Gardez moins d'espace entre un libellé et son champ qu'entre deux champs. Sépa
 
 ## Vérifier la hiérarchie
 
-Plissez les yeux devant votre écran, ou floutez une capture. Ce qui reste visible doit être ce que votre persona doit voir en premier. Si c'est un élément secondaire, revoyez la taille, le contraste ou la place.
+Plissez les yeux devant votre écran, ou floutez une capture, pour repérer les éléments qui dominent la page. Si une décoration ressort davantage que le titre ou l'action principale, revoyez sa taille, son contraste ou sa place. Vérifiez ensuite la lisibilité des textes sans le flou.
 
 Essayez sur ces trois pages. Pour chacune, qu'est-ce que vous voyez en premier ? Quel levier produit cet effet ?
 
@@ -131,9 +129,9 @@ Quelques mesures sur fond blanc :
 | --- | --- | --- |
 | Gris `#aaaaaa` | 2,32:1 | Trop clair |
 | Gris `#767676` | 4,54:1 | Tout juste suffisant |
-| Presque noir `#1a1a1a` | 17,4:1 | Très lisible |
+| Presque noir `#1a1a1a` | 17,4:1 | Contraste supérieur au seuil |
 
-Dans cet exemple, un texte rose sur un fond rose pâle obtient 1,49:1 : il échoue à tous les niveaux.
+Dans cet exemple, un texte rose sur un fond rose pâle obtient 1,49:1. Ce rapport est insuffisant pour le texte courant comme pour le grand texte.
 
 <img src="/ressources/ux-ui/contraste-plugin-figma.webp" alt="Plugin Color contrast dans Figma : rapport de 1,49 entre un texte rose et un fond rose pâle, échec aux niveaux AA et AAA." width="240" height="476" loading="lazy">
 
@@ -141,6 +139,7 @@ Mesurez vos couleurs avec un plugin de contraste dans Figma ou avec le [Contrast
 
 ## À lire
 
+- [Attention web designers: You have 50 milliseconds to make a good first impression!](https://www.makinggood.ac.nz/media/1265/lindegaardetal_2006_attention.pdf), Gitte Lindgaard et son équipe, 2006. L'étude sur les premières impressions visuelles. PDF en anglais.
 - [Visual Hierarchy in UX: Definition](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), Nielsen Norman Group, sur la taille, la couleur, le contraste et l'espacement. En anglais.
 - [F-Shaped Pattern of Reading on the Web](https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/), Nielsen Norman Group, sur le parcours en F. En anglais.
 - [Effet Von Restorff](https://lawsofux.com/fr/effet-von-restorff/), Laws of UX.

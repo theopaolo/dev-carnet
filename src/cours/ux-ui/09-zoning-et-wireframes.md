@@ -7,13 +7,13 @@ updatedAt: "2026-09-28"
 
 # Le zoning et les wireframes
 
-Inès ouvre l'appli du snack pour trouver un repas à moins de 7 €. Avant de dessiner cette appli, plusieurs décisions sont à prendre : où afficher les plats, quelles informations donner, comment rendre les prix lisibles et ce qui se passe quand elle choisit un menu.
+Inès ouvre l'appli du snack pour trouver un repas à moins de 7 €. Pour concevoir cet écran, il faut choisir où placer les plats et leurs prix, quelles informations afficher et comment passer une commande.
 
-Le zoning, le wireframe, le mockup et le prototype aident à travailler ces décisions. Dans ce chapitre, vous apprendrez à les distinguer, puis vous dessinerez le zoning et les wireframes de votre projet MJC.
+Le zoning, le wireframe, le mockup et le prototype permettent d'examiner ces choix à différents niveaux de détail. Vous allez les distinguer, puis dessiner le zoning et les wireframes de votre projet MJC.
 
 ## Du zoning au prototype
 
-Ces quatre mots désignent des représentations de l'interface, aussi appelées *livrables*. Chacune permet de discuter d'une question précise.
+Ces représentations de l'interface sont des livrables : des dessins ou des fichiers que l'on partage pour discuter des choix de conception.
 
 | Livrable | Ce qu'on représente | La question à vérifier |
 | --- | --- | --- |
@@ -22,11 +22,9 @@ Ces quatre mots désignent des représentations de l'interface, aussi appelées 
 | Mockup, ou maquette graphique | L'apparence prévue : couleurs, typographie, images | Les éléments sont-ils lisibles et reconnaissables ? |
 | Prototype | Les réactions aux actions, simulées sur un parcours | La personne arrive-t-elle à accomplir sa tâche ? |
 
-Cette distinction est aussi présentée dans [l'article de Blog UX sur les quatre livrables](https://blog-ux.com/quelle-est-la-difference-entre-le-zoning-wireframe-mockup-et-prototype/).
-
 Dans ce cours, « maquette » désigne la maquette graphique. Le mot peut avoir un sens plus large dans une équipe : précisez si vous attendez un dessin en gris, un écran avec ses styles ou un parcours à essayer.
 
-On peut relier des wireframes pour les tester avant de travailler les couleurs. Un test peut aussi conduire à revoir le zoning. Ces livrables accompagnent les corrections tout au long du projet.
+On peut relier des wireframes pour les tester avant de travailler les couleurs. Si le test révèle qu'une information arrive trop tard, on peut revenir au zoning pour changer sa place.
 
 Avant le zoning, un croquis au crayon suffit souvent pour essayer une idée. Voici le croquis, le zoning et le wireframe de la page d'une voiture électrique :
 
@@ -34,7 +32,7 @@ Avant le zoning, un croquis au crayon suffit souvent pour essayer une idée. Voi
 
 ## Le zoning
 
-Le zoning découpe un écran en grandes zones, avant le wireframe. Chaque zone a un nom et une place. On décide ce qui va où, sans dessiner les détails.
+Le zoning fixe la place des grandes zones d'un écran. On dessine des blocs nommés, avant de détailler leur contenu dans le wireframe.
 
 1. Placez d'abord les informations nécessaires au choix de l'atelier.
 2. Organisez les zones autour des besoins du persona.
@@ -52,7 +50,7 @@ block-beta
   e["Bouton Commander"]
 ```
 
-Chaque zone vient du journey d'Inès. La liste affiche les prix, parce qu'Inès cherchait le prix du menu étudiant.
+Le parcours d'Inès a montré qu'elle cherchait le prix du menu étudiant. On prévoit donc de l'afficher dans la liste des plats.
 
 Imaginez deux zonings : dans le premier, une grande présentation du snack repousse la liste des plats en bas. Dans le second, la liste apparaît juste après les catégories. Pour Inès, qui doit choisir pendant sa pause, le second donne plus tôt accès aux prix. Vous pouvez comparer ces deux organisations avec quelques rectangles.
 
@@ -68,22 +66,19 @@ Un wireframe, ou « maquette fil de fer », détaille le contenu des zones : tit
 
 Voici le wireframe de la même page :
 
-```text
-┌────────────────────────────┐
-│ Snack du coin       Panier │
-├────────────────────────────┤
-│ [ Chercher un plat       ] │
-│ (Kebab)  (Tacos)  (Soda)   │
-│                            │
-│ [X]  Menu étudiant  6,50 € │
-│ [X]  Tacos poulet      7 € │
-│ [X]  Assiette falafel  8 € │
-│                            │
-│ [        Commander       ] │
-└────────────────────────────┘
-```
+<div class="diagram">
+<div class="wf" role="img" aria-label="Wireframe de la page menu : en-tête Snack du coin avec le lien Panier, champ de recherche, trois catégories, trois plats avec image, nom et prix, bouton Commander.">
+<div class="wf-bar"><strong>Snack du coin</strong><span>Panier</span></div>
+<div class="wf-field">Chercher un plat</div>
+<div class="wf-chips"><span>Kebab</span><span>Tacos</span><span>Soda</span></div>
+<div class="wf-row"><i></i><span>Menu étudiant</span><b>6,50 €</b></div>
+<div class="wf-row"><i></i><span>Tacos poulet</span><b>7 €</b></div>
+<div class="wf-row"><i></i><span>Assiette falafel</span><b>8 €</b></div>
+<div class="wf-btn">Commander</div>
+</div>
+</div>
 
-Un rectangle barré d'une croix, ici `[X]`, remplace une image.
+Un rectangle barré d'une croix remplace une image.
 
 Le zoning disait « Liste des plats, avec les prix ». Le wireframe écrit « Menu étudiant, 6,50 € ». Inès peut maintenant comparer ce prix à son budget. Le libellé « Commander » indique l'action proposée.
 
@@ -125,7 +120,7 @@ Pour cet atelier, restez en basse fidélité, avec de vrais libellés. Les style
 
 Le mockup montre l'apparence prévue de l'écran. On applique le [style guide](/ux-ui/13-style-guide-et-composants/) aux contenus du wireframe : typographie, couleurs, espacements, images et icônes.
 
-Sur la page du snack, les rectangles barrés deviennent des photos de plats. Le prix de 6,50 € reçoit une taille et un contraste qui permettent de le lire. Le bouton « Commander » reprend le style des actions principales.
+Sur la page du snack, les rectangles barrés deviennent des photos de plats. On règle la taille et le contraste du prix de 6,50 € pour qu'il soit lisible sur téléphone. Le bouton « Commander » reprend le style des actions principales.
 
 Examinez la maquette à la taille d'un téléphone : le prix se distingue-t-il de la description ? Un nom de plat long reste-t-il lisible ? Le bouton se reconnaît-il comme une action ? Si un texte ne tient pas, adaptez la mise en page. Le wireframe reste une base que l'on peut corriger.
 
@@ -154,7 +149,7 @@ Si la personne cherche comment retirer le menu du panier, ajoutez ou clarifiez c
 
 ## Quel livrable choisir ?
 
-Partez de ce que vous voulez apprendre. Dessinez seulement ce qui permet de l'examiner.
+Choisissez le livrable selon la question à résoudre.
 
 | Situation dans le projet MJC | Travail utile maintenant |
 | --- | --- |
@@ -175,48 +170,87 @@ Pour chaque cas, nommez le livrable et dites ce qu'il permet de vérifier :
 <details>
 <summary>Voir le corrigé</summary>
 
-1. **Zoning** : on examine l'ordre des grandes zones de la fiche.
-2. **Wireframe** : on vérifie les informations nécessaires pour remplir et corriger le champ.
-3. **Mockup** : on examine la présentation visuelle de la fiche.
-4. **Prototype à partir de wireframes** : on essaie le parcours de réservation. L'absence de couleurs ne l'empêche pas d'être un prototype.
+1. Le zoning permet d'examiner l'ordre des grandes zones de la fiche.
+2. Le wireframe montre les informations nécessaires pour remplir le champ et corriger la saisie.
+3. Le mockup montre l'apparence prévue de la fiche.
+4. Le prototype réalisé avec des wireframes permet d'essayer la réservation, même si les écrans sont encore en gris.
 
 </details>
 
 ## Les outils de Figma
 
-Figma s'utilise dans le navigateur, sans installation. Plusieurs personnes peuvent travailler dans le même fichier en même temps. La façon de construire le fichier compte autant que le rendu : des calques nommés, des composants réutilisés et des styles définis aident aussi la personne qui codera la page.
+Figma permet de dessiner et de relier des écrans dans le navigateur. Plusieurs personnes peuvent modifier le même fichier en même temps. Nommez les calques et réutilisez les styles et les composants : vous retrouverez plus facilement un élément à corriger ou à reproduire en code.
+
+### L'interface
+
+<img src="/ressources/ux-ui/figma-interface.webp" alt="L'interface de Figma avec cinq repères numérotés : 1 le panneau des pages et des calques à gauche, 2 le canevas au centre avec une frame vide, 3 la barre d'outils en bas, 4 le panneau de droite, 5 le bouton Share en haut à droite." width="1200" height="753" loading="lazy">
+
+1. À gauche, le panneau Pages et calques permet de changer de page et de sélectionner ses éléments.
+2. Au centre, le canevas est l'espace où vous dessinez vos écrans.
+3. En bas, la barre d'outils permet de créer des frames, des formes et du texte.
+4. À droite, le panneau affiche les réglages de l'élément sélectionné : dimensions, disposition et couleurs.
+5. En haut à droite, Share permet de partager le fichier. Le bouton de présentation, en forme de triangle, lance le prototype.
+
+### La barre d'outils
+
+La barre d'outils est en bas de l'écran. Survolez un outil : Figma affiche son nom et son raccourci. À droite de la barre, gardez le mode Design sélectionné.
+
+<img src="/ressources/ux-ui/figma-barre-outils.webp" alt="La barre d'outils de Figma avec ses raccourcis : Déplacer V, Frame F, Formes R, Plume P, Texte T, Commentaire C, Actions Cmd + K ou Ctrl + K, puis les modes." width="1200" height="303" loading="lazy">
+
+Pour trouver une commande, un plugin ou un composant, ouvrez le menu Actions avec `Ctrl + K`, ou `Cmd + K` sur Mac, et tapez ce que vous cherchez : « auto layout », « Contrast »…
 
 ### Les pages et les frames
 
-Une frame est un écran. Avec l'outil Frame (`F`), choisissez un format dans le panneau de droite : un iPhone 14 mesure 390 × 844 px. Renommez la frame dès sa création, par exemple « Fiche atelier ».
+<img src="/ressources/ux-ui/figma-calques.webp" alt="Le panneau de gauche de Figma : le fichier UIUX-semaine, trois pages nommées Composants, Zoning-wireframing et Hi-fi, le message All 3 free pages used, puis les calques de la page ouverte." width="280" height="355" loading="lazy">
 
-Une page regroupe plusieurs frames, par exemple une page pour les wireframes et une autre pour les composants. Le panneau des calques, à gauche, montre les frames de la page ouverte et leur contenu.
+Une frame est un cadre qui contient des éléments. Elle peut représenter un écran entier, mais aussi un bouton ou une carte. Avec l'outil Frame (`F`), choisissez un format dans le panneau de droite. Le préréglage iPhone 14 fait 390 × 844 px. Nommez ce cadre « Fiche atelier ».
+
+Une page regroupe plusieurs frames. Le fichier de la capture utilise ses trois pages disponibles pour les composants, les wireframes et la maquette. Une section (`Maj + S`) permet de regrouper les écrans d'une même étape au sein d'une page.
+
+Chaque élément a son calque dans le panneau de gauche. Nommez-le « Bouton réserver » plutôt que « Rectangle 12 ».
 
 ### La grille
 
-Une grille de colonnes aide à aligner les éléments. Sur téléphone, prenez 4 colonnes, 24 px de marge à gauche et à droite et 16 px entre les colonnes. Ne placez ni texte ni bouton dans les marges. Ajoutez la grille depuis le panneau de droite de la frame, puis enregistrez-la comme style pour la réutiliser sur les autres écrans.
+Une grille de colonnes donne des repères pour aligner les éléments. Pour l'exercice sur téléphone, partez de 4 colonnes, avec 24 px de marge de chaque côté et 16 px entre les colonnes. Alignez les textes et les boutons à l'intérieur de ces marges. Ajoutez la grille depuis le panneau de droite de la frame, puis enregistrez-la comme style pour la réutiliser sur les autres écrans.
 
 ### L'auto layout
 
-Un bouton fait d'un texte posé sur un rectangle ne s'adapte pas : si le libellé s'allonge, il déborde. Avec l'auto layout (`Maj + A`), le cadre suit son contenu.
+Si vous posez un texte sur un rectangle, allonger le libellé ne redimensionne pas le fond du bouton. L'auto layout (`Maj + A`) organise les éléments dans un cadre. Avec une largeur réglée sur Hug, ce cadre s'adapte au texte et conserve l'espace prévu autour.
 
-<img src="/ressources/ux-ui/figma-bouton-auto-layout.webp" alt="À gauche, un bouton fait d'un texte sur un rectangle, avec un espace intérieur approximatif. À droite, le même bouton en auto layout, dont le cadre indique Hug × 44." width="1200" height="283" loading="lazy">
+<img src="/ressources/ux-ui/figma-bouton-auto-layout.webp" alt="Deux boutons « Réserver une séance d'essai ». Sans auto layout, le libellé dépasse du rectangle orange. Avec l'auto layout, le fond orange entoure tout le texte et le cadre indique Hug × 44." width="1200" height="295" loading="lazy">
 
-Le panneau de l'auto layout règle la direction, l'espacement entre les éléments, le padding (l'espace intérieur) et l'alignement.
+Les réglages sont dans la section Layout du panneau de droite.
 
-<img src="/ressources/ux-ui/figma-auto-layout-reglages.webp" alt="Le panneau Auto layout de Figma, annoté : la direction verticale ou horizontale, l'espacement entre les éléments, le padding horizontal et vertical, l'alignement, le padding de chaque côté et les réglages avancés." width="1200" height="381" loading="lazy">
+<img src="/ressources/ux-ui/figma-auto-layout-reglages.webp" alt="Le panneau de droite de Figma avec quatre repères : 1 le bouton d'auto layout en haut de la section Layout, 2 les choix de Flow, 3 le champ de largeur W, 4 le bouton pour créer un composant en haut du panneau." width="300" height="636" loading="lazy">
 
-La largeur et la hauteur de chaque élément ont trois réglages :
+1. Le bouton en haut de Layout ajoute l'auto layout, comme le raccourci `Maj + A`.
+2. Flow règle la disposition : en colonne, en ligne ou en grille. Le premier choix revient au placement libre, sans auto layout.
+3. Les menus W (largeur) et H (hauteur) règlent les dimensions. Les options Fixed, Hug et Fill sont expliquées ci-dessous.
+4. Ce bouton crée un composant réutilisable. Son raccourci est `Ctrl + Alt + K`, ou `Cmd + Option + K` sur Mac.
+
+Une fois l'auto layout ajouté, de nouveaux champs apparaissent : l'espacement entre les éléments, le padding (l'espace intérieur) et l'alignement.
+
+### Fixed, Hug, Fill
+
+La largeur et la hauteur se règlent séparément. Les options disponibles dépendent de l'élément sélectionné et du cadre qui le contient.
+
+<img src="/ressources/ux-ui/figma-fixed-hug-fill.webp" alt="Trois cartes avec les boutons Réserver et Voir la fiche. En Fixed, les deux boutons ont la même largeur. En Hug, chaque bouton suit son libellé. En Fill, les boutons prennent toute la largeur de la carte." width="1200" height="260" loading="lazy">
 
 | Réglage | Ce que fait l'élément | Exemple |
 | --- | --- | --- |
-| Fixed | Il garde sa taille. | Un écran de 390 px de large |
-| Hug | Il s'ajuste à son contenu. | Un bouton qui suit la longueur de son libellé |
-| Fill | Il occupe toute la place disponible. | Un bouton sur toute la largeur de l'écran |
+| Fixed | Il garde la dimension choisie. | Un écran de 390 px de large |
+| Hug | Le cadre en auto layout s'ajuste à son contenu et à son padding. | Un bouton qui s'élargit avec son libellé |
+| Fill | Il occupe l'espace disponible dans le cadre parent en auto layout. | Un bouton qui remplit la largeur intérieure d'une carte |
 
-Réglez les espacements au chiffre près, avec des multiples de 8 : 8, 16, 24, 32 px. Pour un bouton, mettez deux fois plus de padding sur les côtés qu'en haut et en bas, par exemple 12 px et 24 px. Une hauteur d'environ 44 px rend le bouton facile à toucher au doigt.
+### Des espacements réguliers
 
-Les auto layouts s'emboîtent comme les `div` en HTML : les boutons forment une ligne, la ligne se range dans une section, la section dans l'écran.
+Utilisez quelques valeurs d'espacement et répétez-les sur les écrans. Pour commencer : 8 px entre un libellé et son champ, 16 px entre deux champs, 24 px autour du contenu d'une carte et 32 px entre deux sections.
+
+<img src="/ressources/ux-ui/figma-padding-bouton.webp" alt="Un bouton Réserver avec 12 px de padding en haut et en bas et 24 px à gauche et à droite." width="351" height="139" loading="lazy">
+
+Pour ce bouton, essayez 12 px de padding en haut et en bas, et 24 px sur les côtés. Visez une hauteur d'au moins 44 px pour offrir une zone facile à toucher, puis vérifiez le résultat à la taille d'un téléphone.
+
+Les cadres en auto layout peuvent s'emboîter, comme les `div` en HTML : un cadre pour le bouton, un autre pour la ligne de boutons, puis un pour la section qui les contient.
 
 ### Le défi de l'auto layout
 
@@ -227,9 +261,17 @@ Combien d'auto layouts contient cet écran ? 1, 7, 10 ou 23 ?
 <details>
 <summary>Voir la réponse</summary>
 
-Il y en a 23. Chaque pointillé entoure un auto layout : l'en-tête, chaque bouton, chaque ligne de tailles, la grille, la section des tailles, la barre du bas et l'écran entier.
+Cette version en contient 23. Les pointillés montrent les cadres et leur emboîtement dans les différentes parties de l'écran :
+
+1. L'en-tête : le retour, la recherche et le panier.
+2. La photo, puis le nom et le prix.
+3. Chaque taille, chaque ligne de tailles, la grille.
+4. La barre du bas : le favori et le panier.
+5. L'écran entier, qui contient tout le reste.
 
 <img src="/ressources/ux-ui/figma-defi-auto-layout-reponse.webp" alt="Le même écran avec des pointillés de couleur autour de chaque auto layout, emboîtés les uns dans les autres." width="300" height="644" loading="lazy">
+
+Pour construire le vôtre, réglez d'abord un bouton. Placez-le ensuite dans une carte, puis la carte dans l'écran.
 
 </details>
 
@@ -243,6 +285,7 @@ Il y en a 23. Chaque pointillé entoure un auto layout : l'en-tête, chaque bout
 | Auto layout | Maj + A | Empiler des éléments avec un espace régulier |
 | Composant | Ctrl + Alt + K, ou Cmd + Option + K sur Mac | Réutiliser un élément, comme un bouton ou une carte |
 | Section | Maj + S | Ranger les écrans par étape |
+| Actions | Ctrl + K, ou Cmd + K sur Mac | Chercher une commande, un plugin ou un composant |
 
 ## Ateliers : dessiner les écrans de la MJC
 
@@ -257,7 +300,7 @@ Essayez deux ordres différents pour la description et les informations pratique
 1. Ouvrez votre fichier de projet dans Figma. Si vous n'en avez pas, créez un fichier de design nommé « MJC des Tilleuls ».
 2. Avec l'outil Frame (`F`), créez un écran au format téléphone. Nommez-le « Fiche atelier ».
 3. Avec Rectangle (`R`) et Texte (`T`), reproduisez les zones de votre zoning. Ajoutez le nom de l'atelier, une description et le texte « Réserver une séance d'essai ».
-4. Sélectionnez le texte du bouton et appliquez l'auto layout (`Maj + A`). Ajoutez un fond gris et de l'espace autour du texte.
+4. Sélectionnez le texte du bouton et appliquez l'auto layout (`Maj + A`). Réglez la largeur sur Hug. Ajoutez un fond gris et du padding autour du texte.
 5. Changez le libellé du bouton : son cadre doit s'adapter au texte. Renommez vos éléments dans le panneau des calques pour les retrouver.
 
 Rendu : une fiche atelier en gris, avec un bouton qui s'adapte à son libellé. Utilisez ce fichier pour les wireframes.

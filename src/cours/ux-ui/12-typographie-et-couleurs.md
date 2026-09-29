@@ -13,14 +13,14 @@ Les polices et les couleurs aident à distinguer les titres, les contenus et les
 
 <img src="/ressources/ux-ui/familles-polices.webp" alt="Le même mot écrit en serif, sans-serif, chasse fixe, script et display." width="370" height="412" loading="lazy">
 
-| Famille | Comment la reconnaître | Ce qu'elle évoque | Quand l'utiliser | Exemples |
-| --- | --- | --- | --- | --- |
-| Serif | Des empattements : de petits traits au bout des lettres | Tradition, sérieux, élégance | Presse, sites institutionnels, marques de luxe | Times New Roman, Garamond, Merriweather |
-| Sans-serif | Pas d'empattements, des formes simples | Modernité, clarté | La norme sur écran, pour le texte courant et l'interface | Helvetica, Arial, Inter, Roboto |
-| Display | Dessinée pour être vue en grand | Impact, créativité | Les titres seulement, pas les paragraphes | Bebas Neue, Anton |
-| Décorative | Très stylisée : manuscrite, graffiti, futuriste | Une personnalité forte | Un logo, un mot mis en avant | Lobster, Pacifico |
+| Famille | Comment la reconnaître | Usages possibles | Exemples |
+| --- | --- | --- | --- |
+| Serif | Des empattements : de petits traits au bout des lettres | Titres ou texte courant, selon le dessin de la police | Times New Roman, Garamond, Merriweather |
+| Sans-serif | Des lettres sans empattements | Titres, paragraphes et libellés d'interface | Helvetica, Arial, Inter, Roboto |
+| Display | Un dessin prévu pour les grandes tailles | Titres courts et affiches | Bebas Neue, Anton |
+| Décorative | Des formes stylisées, par exemple des lettres manuscrites | Logo ou mot isolé, après vérification de la lisibilité | Lobster, Pacifico |
 
-Une police display peut devenir difficile à lire en petit. Testez la police à la taille du texte courant, avec un paragraphe complet et des caractères accentués.
+Ces catégories ne suffisent pas à choisir une police. Une display peut devenir difficile à lire en petit. Pour les paragraphes, testez un texte complet à la taille prévue, avec des caractères accentués.
 
 ### Associer deux polices
 
@@ -61,44 +61,45 @@ Le site [Typescale](https://typescale.com/) calcule l'échelle à partir de la b
 
 ### Un texte courant lisible
 
-- Prenez 16 px comme point de départ pour le texte courant, puis vérifiez la lisibilité avec votre police.
-- Un interligne d'environ 1,5 fois la taille du texte. Les exemples ci-dessous montrent l'effet de l'interligne, de la longueur des lignes et de la séparation des paragraphes.
+- Partez de 16 px pour le texte courant, puis vérifiez la lisibilité avec votre police.
+- Essayez un interligne de 1,5 fois la taille du texte, soit 24 px pour un texte de 16 px.
+- Visez 45 à 75 caractères par ligne lorsque la largeur de l'écran le permet. Des lignes trop longues rendent le retour à la ligne suivante plus difficile.
+- Mesurez le contraste avec le fond en vous appuyant sur [les seuils de contraste](/ux-ui/11-hierarchie-visuelle/#le-contraste-et-la-lisibilite).
+
+Comparez ces deux versions du même texte. La seconde augmente l'interligne, raccourcit les lignes et sépare les paragraphes.
 
 <img src="/ressources/ux-ui/texte-serre.webp" alt="À éviter : un paragraphe à l'interligne serré dans un bloc trop large." width="1200" height="738" loading="lazy">
 
 <img src="/ressources/ux-ui/texte-aere.webp" alt="À faire : le même texte avec un interligne plus grand, des lignes plus courtes et un paragraphe de plus." width="1200" height="738" loading="lazy">
-
-- Des lignes de 45 à 75 caractères. Au-delà, l'œil se perd en revenant à la ligne suivante.
-- Un contraste suffisant avec le fond. Revoyez [les seuils](/ux-ui/11-hierarchie-visuelle/#le-contraste-et-la-lisibilite).
 
 ## Où trouver des polices
 
 | Site | Ce qu'on y trouve |
 | --- | --- |
 | [Google Fonts](https://fonts.google.com/) | Un grand catalogue de polices libres, prêtes pour le web |
-| [Fontshare](https://www.fontshare.com/) | Des polices professionnelles gratuites, de l'Indian Type Foundry |
+| [Fontshare](https://www.fontshare.com/) | Des polices gratuites proposées par l'Indian Type Foundry |
 | [Collletivo](https://www.collletivo.it/) | Une sélection de polices libres |
 | [Velvetyne](https://velvetyne.fr/) | Une fonderie française de polices libres, plus expérimentales |
 | [Use & Modify](https://usemodify.com/) | Des polices libres que l'on peut modifier |
 | [Tunera](https://www.tunera.xyz/) | Une collection indépendante de polices libres |
 
-Vérifiez toujours la licence : certaines polices gratuites sont réservées à un usage personnel. Pour le projet, choisissez une police utilisable sur le web. Utilisez cette même police dans la maquette et dans la page codée.
+Vérifiez que la licence autorise l'usage prévu sur le web : certaines polices gratuites sont réservées à un usage personnel. Utilisez la même police dans la maquette et dans la page codée.
 
 ## La roue chromatique
 
-La roue chromatique range les couleurs en cercle. Les trois primaires, rouge, jaune et bleu, forment un triangle. Les secondaires, orange, vert et violet, sont entre elles. Les tertiaires, comme le bleu-vert, complètent le cercle.
+La roue chromatique range les couleurs en cercle. Dans le modèle illustré ici, les trois primaires sont le rouge, le jaune et le bleu. Les secondaires, orange, vert et violet, se placent entre elles. Les tertiaires, comme le bleu-vert, complètent le cercle.
 
 <img src="/ressources/ux-ui/roue-chromatique.webp" alt="Roue chromatique à douze couleurs, avec un triangle qui relie les primaires rouge, jaune et bleu." width="1054" height="709" loading="lazy">
 
 Les harmonies sont des façons de combiner des couleurs d'après leur place sur la roue.
 
-| Harmonie | Comment la construire | L'effet | Un usage |
-| --- | --- | --- | --- |
-| Monochromatique | Une seule teinte, plus ou moins claire ou saturée | Cohérent et calme, parfois monotone | Un site minimaliste |
-| Analogue | Trois couleurs voisines, par exemple bleu, bleu-vert et vert | Harmonieux, peu contrasté | Une ambiance douce |
-| Complémentaire | Deux couleurs opposées sur la roue, à 180°, comme bleu et orange | Des teintes qui se distinguent | Un bouton d'action qui doit se voir |
-| Triadique | Trois couleurs espacées de 120° | Équilibré et vivant, plus difficile à doser | Une palette avec plusieurs accents |
-| Split-complémentaire | Une couleur et les deux voisines de sa complémentaire | Trois teintes autour de deux pôles de la roue | Une alternative au complémentaire |
+| Harmonie | Comment la construire | Un usage possible |
+| --- | --- | --- |
+| Monochromatique | Une seule teinte, plus ou moins claire ou saturée | Décliner les fonds et les accents à partir d'une couleur |
+| Analogue | Trois couleurs voisines, par exemple bleu, bleu-vert et vert | Composer une palette de teintes proches |
+| Complémentaire | Deux couleurs opposées sur la roue, à 180°, comme bleu et orange | Distinguer une couleur dominante et une couleur d'accent |
+| Triadique | Trois couleurs espacées de 120° | Prévoir plusieurs accents, en réservant un rôle à chacun |
+| Split-complémentaire | Une couleur et les deux voisines de sa complémentaire | Essayer deux accents autour de la teinte opposée |
 
 Ces six pages, tirées de Designspiration, montrent chacune une palette réduite : une ou deux couleurs dominantes et un accent.
 
@@ -108,25 +109,25 @@ Avec deux couleurs complémentaires, utilisez l'une sur les grandes surfaces et 
 
 ## Des couleurs qui ont un rôle
 
-Dans une interface, chaque couleur a une fonction. Nommez-la selon son rôle plutôt que sa teinte : `color.action.primary` reste juste si l'orange devient bleu, `color.orange` ne l'est plus.
+Pour les couleurs de l'interface, choisissez des noms qui décrivent leur rôle. `color.action.primary` désigne l'action principale, que le bouton soit orange ou bleu.
 
 | Rôle | Où elle sert |
 | --- | --- |
 | Texte | Titres et texte courant |
 | Fond | L'arrière-plan des pages et des cartes |
-| Action principale | Le bouton qu'on veut voir cliquer, les liens |
+| Action principale | Le bouton qui permet de poursuivre la tâche, comme « Réserver » |
 | Erreur | Les messages d'erreur et le contour d'un champ mal rempli |
 | Confirmation | Les messages de réussite |
 
-Le rouge pour l'erreur et le vert pour la confirmation sont des conventions. Écrivez toujours le message : une personne qui distingue mal ces deux couleurs doit comprendre l'état.
+Le rouge pour l'erreur et le vert pour la confirmation sont des conventions. Accompagnez-les d'un message explicite, pour que l'état reste compréhensible si la personne distingue mal ces couleurs.
 
 Pour extraire une palette d'une image, utilisez [Adobe Color](https://color.adobe.com/fr/create/image) ou [Coolors](https://coolors.co/). Dans Figma, la pipette (raccourci I) prélève une couleur sur une image.
 
 ## Le moodboard
 
-Le moodboard est un collage d'images qui montre l'ambiance visuelle d'un projet. On le fait avant de maquetter, pour se mettre d'accord sur la direction.
+Le moodboard rassemble des références visuelles avant de dessiner la maquette. Il permet de discuter des types d'images, des couleurs et des polices que l'on souhaite utiliser.
 
-Il permet par exemple de comparer une piste avec des photos d'activités et une autre avec des illustrations, avant de dessiner les écrans.
+Pour la MJC, comparez par exemple une piste avec des photos d'activités et une autre avec des illustrations.
 
 Ce qu'on y met :
 
@@ -144,7 +145,7 @@ Quelques styles visuels à reconnaître :
 | Minimal, épuré | Beaucoup d'espace, peu de couleurs |
 | Flat design | Des aplats de couleur, sans ombre ni relief |
 | Skeuomorphisme | L'imitation de matières réelles : cuir, bois, métal |
-| Brutalisme | Brut, typographie forte, parfois volontairement « moche » |
+| Brutalisme | Blocs apparents, contrastes marqués, typographie imposante |
 | Glassmorphism | Des surfaces floues et transparentes, comme du verre dépoli |
 | 3D et isométrique | Des illustrations en volume |
 | Illustration, _playful_ | Des dessins, des couleurs vives, un ton léger |
@@ -161,7 +162,7 @@ Cet atelier est facultatif.
 
 Rassemblez 6 à 8 images qui évoquent l'ambiance de votre atelier de la MJC, sur une page « Moodboard » de votre fichier. Tirez-en 3 à 5 couleurs. Proposez deux polices et testez-les avec le nom de votre atelier.
 
-Rendu : le moodboard dans votre fichier de projet. Il vous aidera à [choisir les styles](/ux-ui/13-style-guide-et-composants/#choisir-les-styles).
+Rendu : le moodboard dans votre fichier de projet. Indiquez ce que vous retenez des références pour [choisir les styles](/ux-ui/13-style-guide-et-composants/#choisir-les-styles) : une couleur, un traitement des photos ou une association de polices.
 
 ## À lire
 

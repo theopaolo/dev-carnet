@@ -7,15 +7,15 @@ updatedAt: "2026-09-28"
 
 # La maquette et le test
 
-Vous assemblez vos styles et vos composants sur les wireframes, puis vous reliez les écrans pour obtenir un prototype. Une personne extérieure essaie ensuite de réserver une séance, et vous corrigez ce qui la bloque.
+Appliquez vos styles et vos composants aux wireframes, puis reliez les écrans pour obtenir un prototype. Faites essayer la réservation à une personne qui n'a pas conçu les écrans. Ses hésitations vous aideront à repérer ce qu'il faut corriger.
 
 ## De la maquette au prototype
 
-La maquette graphique, aussi appelée *mockup*, applique le style guide et les composants aux wireframes. Elle reprend leurs contenus et leur organisation, que l'on peut ajuster si la mise en page ou un test révèle un problème.
+La maquette graphique, aussi appelée *mockup*, reprend les contenus des wireframes avec les styles et les composants choisis. Si un titre déborde ou si une information passe inaperçue, ajustez la mise en page.
 
-Le prototype simule les réactions aux actions : on passe d'un écran à l'autre et on voit le résultat d'une réservation. On peut déjà prototyper avec des wireframes en gris, comme expliqué dans [Le zoning et les wireframes](/ux-ui/09-zoning-et-wireframes/#le-prototype). Ici, vous utiliserez les maquettes avec leurs styles.
+Le prototype permet d'essayer le parcours : choisir une séance, passer au formulaire et afficher une confirmation. On peut le construire à partir de [wireframes en gris](/ux-ui/09-zoning-et-wireframes/#le-prototype). Ici, vous utiliserez les maquettes avec leurs styles.
 
-Le formulaire peut afficher une confirmation sans enregistrer de réservation ni envoyer d'e-mail. Annoncez cette simulation à la personne qui teste. Ce test ne vérifie donc pas que ces opérations fonctionnent réellement.
+Le formulaire simule une réservation : il affiche une confirmation, sans enregistrer de place ni envoyer d'e-mail. Précisez-le à la personne qui teste.
 
 Pour relier les écrans dans Figma :
 
@@ -26,13 +26,13 @@ Pour relier les écrans dans Figma :
 
 Penpot a un mode Prototype qui fonctionne de la même façon.
 
-Un prototype n'a pas besoin de tout relier. Reliez le chemin de la réservation, et les écrans d'erreur, de séance complète et de confirmation.
+Pour ce test, reliez les étapes de la réservation et prévoyez les cas à essayer : erreur de saisie, séance complète et confirmation.
 
 ### Avant de faire tester
 
-- Les textes sont les vrais : noms d'ateliers, libellés, messages.
-- Les états prévus existent : erreur, confirmation, séance complète, accord parental.
-- Les critères de votre story de réservation sont visibles sur les écrans.
+- Les écrans affichent les noms d'ateliers, les libellés et les messages prévus pour le site.
+- Les cas d'erreur, de confirmation, de séance complète et d'accord parental ont chacun un écran ou un message.
+- Le parcours permet de vérifier les critères de votre story de réservation.
 - Le texte courant atteint le contraste minimal de 4,5:1.
 - Un titre d'atelier long tient dans sa carte.
 
@@ -44,22 +44,22 @@ Appliquez vos styles et composants aux trois wireframes. Gardez une copie de la 
 
 Conservez les états prévus : erreur, confirmation, séance complète et accord parental. Vérifiez les critères de votre story de réservation.
 
-Rendu : la maquette cliquable dans votre fichier de projet, avec les styles et composants utilisés.
+Rendu : le prototype dans votre fichier de projet, avec les styles et les composants utilisés.
 
 ## Le test d'utilisabilité
 
-Un test d'utilisabilité consiste à regarder une vraie personne utiliser la maquette pour faire une tâche. On note où elle hésite et où elle bloque.
+Pendant un test d'utilisabilité, une personne essaie d'accomplir une tâche avec le prototype. Vous observez ses actions et notez ce qu'elle comprend, cherche ou ne trouve pas.
 
 | Étape | Ce que vous faites |
 | --- | --- |
 | 1. Donner une tâche | « Choisis un atelier pour ton âge, puis réserve une séance d'essai. » |
-| 2. Laisser faire | La personne dit à voix haute ce qu'elle pense et où elle cliquerait. |
-| 3. Se taire | Pas d'aide, pas d'explication. Si elle pose une question, répondez « Que ferais-tu ? ». |
-| 4. Noter | Où elle hésite, où elle bloque, si elle réussit. |
+| 2. Demander de penser à voix haute | Invitez la personne à dire ce qu'elle cherche et ce qu'elle s'attend à obtenir en cliquant. |
+| 3. Observer sans guider | Laissez-la choisir ses actions. Si elle demande où cliquer, demandez-lui ce qu'elle essaierait. |
+| 4. Prendre des notes | Relevez les hésitations, les blocages et le résultat de la tâche. |
 
 Quand la personne bloque, notez ce qu'elle cherchait et ce que l'interface lui montrait. Examinez ce qui peut être corrigé sans attribuer le blocage à un manque d'attention.
 
-Donnez une tâche, pas un mode d'emploi. « Clique sur Réserver » donne la réponse. « Réserve une séance » vérifie que la personne trouve le bouton seule.
+La consigne « Réserve une séance » permet de vérifier si la personne trouve comment faire. « Clique sur Réserver » lui indique déjà où agir.
 
 Un essai peut révéler une difficulté, sans couvrir tous les problèmes du parcours. Corrigez le blocage observé, puis faites réessayer pour vérifier l'effet de la correction.
 
@@ -73,7 +73,7 @@ Corrigez le principal problème, puis faites réessayer. Vérifiez aussi que les
 
 Rendu : quelques notes sur le problème observé, votre correction et le résultat du nouvel essai.
 
-Le prototype sert à vérifier la compréhension et le parcours. Le clavier et le fonctionnement réel du formulaire seront testés sur la page codée.
+Ce test porte sur la compréhension des écrans et du parcours. Vérifiez ensuite la navigation au clavier et le fonctionnement réel du formulaire sur la page codée.
 
 ## À lire
 

@@ -262,3 +262,85 @@ blockquote p:last-child {
     display: none;
   }
 }
+
+/* Wireframe HTML : écran de téléphone en gris, images barrées d'une croix */
+.wf {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--bg-surface);
+  border: 2px solid var(--node-stroke);
+  border-radius: 8px;
+}
+
+.wf > * {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-canvas);
+  padding: 0 12px;
+}
+
+.wf > .wf-bar {
+  justify-content: space-between;
+  min-height: 44px;
+  background: var(--node-fill);
+  border-color: var(--node-stroke);
+}
+
+.wf-field {
+  color: var(--text-muted);
+  background: var(--bg-surface);
+}
+
+.wf > .wf-chips {
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.wf-chips span {
+  padding: 6px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--bg-canvas);
+}
+
+.wf > .wf-row {
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 12px;
+}
+
+.wf-row span {
+  flex: 1;
+}
+
+.wf-row i {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(to top right, transparent calc(50% - 0.5px), var(--border-strong) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom right, transparent calc(50% - 0.5px), var(--border-strong) 50%, transparent calc(50% + 0.5px)),
+    var(--bg-surface);
+}
+
+.wf > .wf-btn {
+  justify-content: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--bg-surface);
+  background: var(--node-stroke);
+  border-color: var(--node-stroke);
+}
