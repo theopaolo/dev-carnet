@@ -2,12 +2,14 @@
 title: 'La typographie et les couleurs'
 order: 12
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-29"
 ---
 
 # La typographie et les couleurs
 
 Les polices et les couleurs aident à distinguer les titres, les contenus et les actions. Elles donnent aussi un ton à l'interface. Pour la MJC, testez vos choix sur le nom d'un atelier, sa description et le bouton de réservation.
+
+Pour l’atelier, utilisez la police de la charte et les quatre styles ci-dessous. Les familles de polices, les harmonies et le moodboard restent des ressources complémentaires.
 
 ## Les familles de polices
 
@@ -36,28 +38,26 @@ Ces deux sites montrent l'effet d'un choix de police. Le Dansk Byplanlaboratoriu
 
 ## L'échelle typographique
 
-Une échelle typographique, ou _type scale_, calcule les tailles de texte à partir d'une base et d'un ratio. Chaque niveau multiplie le précédent par ce ratio. Vous obtenez des écarts réguliers entre le texte courant et les titres.
+Une échelle typographique, ou _type scale_, définit les tailles de texte de l'interface. Pour construire une échelle modulaire, on part d'une taille de base et on la multiplie par un même ratio à chaque niveau.
 
-Avec une base de 16 px et un ratio de 1,25 :
+Avec une base de 16 px et un ratio de 1,25, on obtient 16, 20, 25, 31,25 et 39,06 px. Arrondissez et ajustez ces tailles selon la charte, puis testez leur lisibilité avec votre police et vos vrais textes.
 
-| Style | Calcul | Taille arrondie |
-| --- | --- | --- |
-| Petit texte, légende | 16 ÷ 1,25 | 13 px |
-| Texte courant | La base | 16 px |
-| Titre de niveau 4 | 16 × 1,25 | 20 px |
-| Titre de niveau 3 | 20 × 1,25 | 25 px |
-| Titre de niveau 2 | 25 × 1,25 | 31 px |
-| Titre de niveau 1 | 31 × 1,25 | 39 px |
+Le site [Typescale](https://typescale.com/) permet de comparer ces échelles. Aucun plugin n'est nécessaire pour l'exercice.
 
-| Ratio | L'effet | Pour quoi |
-| --- | --- | --- |
-| 1,125 | Des écarts faibles | Un site avec beaucoup de texte |
-| 1,25 | Des écarts modérés | Le texte courant et les titres du projet |
-| 1,333 | Des écarts plus marqués | Une interface où les titres doivent se distinguer davantage |
-| 1,5 | Des écarts très forts | Une page d'accueil, une affiche |
-| 1,618 | Le nombre d'or, des écarts très grands | Peu de niveaux de titres |
+### Quatre styles pour la MJC
 
-Le site [Typescale](https://typescale.com/) calcule l'échelle à partir de la base et du ratio. Des plugins Figma font la même chose.
+Utilisez cette proposition si votre projet n'a pas encore de styles validés. Elle reprend quelques tailles de l'échelle, avec Arial normal ou gras.
+
+| Style Figma | Taille / interligne | Graisse | Usage |
+| --- | --- | --- | --- |
+| `text/page-title` | 32 / 40 px | Gras | Nom de l'atelier en titre de page |
+| `text/section-title` | 24 / 32 px | Gras | « Choisir une séance » |
+| `text/body` | 16 / 24 px | Normal | Informations pratiques et messages |
+| `text/label` | 16 / 24 px | Gras | Libellés des champs et boutons |
+
+Dans le code, choisissez les balises `h1`, `h2` et suivantes selon le niveau du titre dans le document, puis appliquez le style. La taille du texte ne détermine pas la balise.
+
+Dans Figma, enregistrez chaque style dans **Typography** et appliquez-le à plusieurs textes. Changez temporairement sa taille : tous les textes liés doivent suivre. Testez les accents et le libellé « Réserver une séance d'essai » sur un écran étroit. Sur le site codé, vérifiez aussi le zoom et le redimensionnement du texte.
 
 ### Un texte courant lisible
 
@@ -158,9 +158,9 @@ Où chercher : [Pinterest](https://www.pinterest.fr/), [Dribbble](https://dribbb
 
 ### Le moodboard de votre atelier
 
-Cet atelier est facultatif.
+Cet atelier est facultatif, en dehors des 3 h 30 de l'après-midi. Le moodboard aide à choisir un style visuel. Le référentiel DWWM RNCP37674 demande de respecter la charte graphique, sans citer le moodboard comme livrable exigé. [Référentiel officiel, compétence 2](https://www.francecompetences.fr/wp-json/api/v1/activity/export/24208/465344).
 
-Rassemblez 6 à 8 images qui évoquent l'ambiance de votre atelier de la MJC, sur une page « Moodboard » de votre fichier. Tirez-en 3 à 5 couleurs. Proposez deux polices et testez-les avec le nom de votre atelier.
+Rassemblez 6 à 8 images qui évoquent l'ambiance de votre atelier de la MJC, sur une page « Moodboard » de votre fichier. Tirez-en 3 à 5 couleurs. Testez la police de votre charte avec le nom de votre atelier.
 
 Rendu : le moodboard dans votre fichier de projet. Indiquez ce que vous retenez des références pour [choisir les styles](/ux-ui/13-style-guide-et-composants/#choisir-les-styles) : une couleur, un traitement des photos ou une association de polices.
 

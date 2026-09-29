@@ -2,7 +2,7 @@
 title: 'Design UX et UI'
 order: 2
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-29"
 ---
 
 # Design UX et UI
@@ -36,6 +36,14 @@ Les pages [UX et UI](/ux-ui/01-ux-et-ui/) et [Lois de l'UX](/ux-ui/02-lois-de-l-
 
 ## Les ateliers UI
 
+Travaillez dans un fichier personnel nommé « MJC des Tilleuls, votre prénom » et partagez-le avec le formateur. Indiquez l'origine des éléments UX repris d'un travail de groupe. Créez vos propres écrans et composants, puis faites vos corrections.
+
+### Cet après-midi dans Figma
+
+À partir de vos wireframes, préparez les styles et les variables, créez les composants, puis assemblez et testez la maquette. Adaptez au moins la fiche atelier au mobile et au desktop. Une pause est prévue au milieu, et le quiz après l'atelier.
+
+Le moodboard et les harmonies colorées sont facultatifs, à explorer hors de ce créneau. Pour l'atelier, vous pouvez utiliser la mini-charte du cours.
+
 Gardez le brief, le persona et les user stories à portée de main. Chaque écran doit répondre à un besoin identifié dans ces documents.
 
 | Atelier | Ce que vous faites | Rendu |
@@ -43,13 +51,12 @@ Gardez le brief, le persona et les user stories à portée de main. Chaque écra
 | [Zoning](/ux-ui/09-zoning-et-wireframes/#le-zoning-1) | Placer les grandes zones de la fiche atelier selon les besoins du persona | Des rectangles nommés |
 | [Prise en main de Figma](/ux-ui/09-zoning-et-wireframes/#prendre-en-main-figma) | Créer un écran, ajouter des formes et du texte, essayer l'auto layout | Une fiche atelier en gris et un bouton qui s'adapte au texte |
 | [Wireframes](/ux-ui/09-zoning-et-wireframes/#les-wireframes) | Dessiner la liste des ateliers, la fiche et la réservation | Trois écrans et leurs états : confirmation, erreur, accord parental, séance complète |
-| [Moodboard, facultatif](/ux-ui/12-typographie-et-couleurs/#le-moodboard-de-votre-atelier) | Rassembler des références visuelles pour l'activité choisie | Un collage, une palette et des essais de polices |
-| [Styles](/ux-ui/13-style-guide-et-composants/#choisir-les-styles) | Définir la typographie, les couleurs et les espacements | Une planche de styles appliqués à une carte d'atelier |
-| [Composants](/ux-ui/13-style-guide-et-composants/#creer-les-composants) | Créer un bouton, un champ et une carte réutilisables | Les composants avec leurs variantes et des instances |
-| [Maquette](/ux-ui/14-maquette-et-test/#assembler-la-maquette) | Appliquer les styles aux wireframes et relier les écrans | Un prototype qui permet d'essayer la réservation |
+| [Styles et variables](/ux-ui/13-style-guide-et-composants/#choisir-les-styles) | Appliquer la charte, nommer les tokens et vérifier que les éléments liés se mettent à jour | Quatre styles de texte, des variables et une carte d'atelier |
+| [Composants](/ux-ui/13-style-guide-et-composants/#creer-les-composants) | Créer un bouton et un champ, puis une carte si vous avez terminé | Les états, deux instances et une note d’utilisation |
+| [Maquette](/ux-ui/14-maquette-et-test/#assembler-la-maquette) | Appliquer les styles, faire la fiche en mobile et en desktop, relier les écrans | Le prototype, son schéma d'enchaînement et les notes pour le code |
 | [Test et correction](/ux-ui/14-maquette-et-test/#tester-linscription) | Observer une personne utiliser le prototype, puis corriger un blocage | Les observations, la correction et le résultat du nouvel essai |
 
-Les pages [Hiérarchie visuelle](/ux-ui/11-hierarchie-visuelle/) et [Typographie et couleurs](/ux-ui/12-typographie-et-couleurs/) expliquent les choix à faire pour la maquette. La page [User flow, séquence et UML](/ux-ui/10-user-flow-sequence-uml/) propose un atelier complémentaire pour vérifier les branches du parcours.
+Consultez [Hiérarchie visuelle](/ux-ui/11-hierarchie-visuelle/) et [Typographie et couleurs](/ux-ui/12-typographie-et-couleurs/) pour choisir les styles. La page [User flow, séquence et UML](/ux-ui/10-user-flow-sequence-uml/) explique le schéma d'enchaînement à rendre avec la maquette. Les diagrammes de séquence et d'états sont facultatifs.
 
 ## Coder et présenter le projet
 
@@ -59,35 +66,48 @@ Les pages [Hiérarchie visuelle](/ux-ui/11-hierarchie-visuelle/) et [Typographie
 | 11. Référencer | Écrire le `title` et la meta description, mesurer avec Lighthouse | `seo.md` avec les mesures et les modifications |
 | [12. Présenter](/ux-ui/#presenter-le-projet) | Expliquer un choix de conception et montrer la page publiée | Une démonstration appuyée sur le prototype et les tests |
 
-## Où rendre votre travail
+## Le dossier à rendre
 
-Gardez vos travaux dans un seul fichier Figma ou Penpot et partagez son lien avec le formateur. Pour les schémas sur papier, ajoutez une photo au fichier.
+Rassemblez les rendus dans un dossier « Semaine UX/UI, accessibilité et SEO », dans l'ordre ci-dessous.
 
-Nommez les sections pour retrouver les rendus :
+### Introduction
 
-- « Roasting »
-- « Audit UX »
-- « 1–2. Préparer la réservation »
-- « 3. Persona »
-- « 4. Story map et user stories »
-- « 5. Journey »
-- « 6. Sitemap »
-- « 7. Zoning et wireframes »
-- « 8. UI et maquette »
-- « 9. Test »
+- Contexte et objectif du projet, à partir du [brief](/ux-ui/04-brief-et-entretiens/).
+
+### UX
+
+1. [Audit UX](/ux-ui/03-audit-ux/) du site existant : captures annotées, [lois UX](/ux-ui/02-lois-de-l-ux/) et principes de la Gestalt mobilisés
+2. Deux fiches [persona](/ux-ui/05-persona/) : besoins, motivations et difficultés
+3. [User journey](/ux-ui/07-journey/) : reprendre et adapter celui de tldraw ou en créer un. Indiquez s'il décrit le parcours actuel ou le parcours proposé
+4. [User stories](/ux-ui/06-user-stories/) : « En tant que…, je veux…, afin de… »
+5. [Sitemap](/ux-ui/08-architecture-de-l-information/) du site de la MJC des Tilleuls
+6. [Story mapping](/ux-ui/06-user-stories/) du parcours d'inscription : organiser les étapes et prioriser les fonctionnalités
+
+### UI
+
+1. [Zoning](/ux-ui/09-zoning-et-wireframes/#le-zoning-1)
+2. [Wireframes](/ux-ui/09-zoning-et-wireframes/#les-wireframes) des écrans du parcours choisi
+3. [Style guide](/ux-ui/13-style-guide-et-composants/) : échelle typographique et palette de couleurs
+4. [Composants](/ux-ui/13-style-guide-et-composants/#creer-les-composants) réutilisables et leurs principaux états
+5. [Maquettes](/ux-ui/14-maquette-et-test/#assembler-la-maquette) en couleur
+6. [Prototype](/ux-ui/14-maquette-et-test/) cliquable à partir des wireframes ou des maquettes
 
 ## Présenter le projet
 
 Montrez un problème rencontré, votre solution et une correction issue d'un test. Appuyez-vous sur votre prototype et la page publiée.
 
-Indiquez combien de personnes ont participé au test. Distinguez un objectif fixé au départ d'un résultat observé : n'annoncez pas de gain chiffré que vous n'avez pas mesuré.
-
 ## Le barème
+
+Ce barème s'applique à chaque personne. Il ne constitue pas la grille officielle du jury RNCP.
 
 | Évaluation | Points | Ce qui est vérifié |
 | --- | --- | --- |
 | UX | 25 | Persona, story map, stories et journey tirés des entretiens et du brief |
-| UI | 10 | Maquette lisible, composants réutilisés, mêmes couleurs dans Figma et dans le CSS |
+| UI | 10 | Maquette adaptée au mobile, schéma, tokens appliqués, composants et états expliqués. Correspondance avec le CSS vérifiée lors de la séance de code |
 | Accessibilité | 30 | HTML correct, formulaire utilisable au clavier, `audit.md` rempli avec l'avant et l'après |
 | SEO | 15 | `title` et description utiles, mesure Lighthouse avant et après |
 | Compréhension | 20 | Épreuve et réponses pendant la démonstration |
+
+## Le lien avec le titre DWWM
+
+Ce module vous prépare à la compétence de maquettage du [titre professionnel DWWM, niveau 5, RNCP37674](https://www.francecompetences.fr/recherche/rncp/37674/). Les maquettes doivent répondre au besoin, respecter la charte, prendre en compte l'accessibilité et le mobile et s'accompagner d'un schéma d'enchaînement. La sécurité, les données personnelles ([RGPD](https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence)) et l'éco-conception ([RGESN](https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/)) font aussi partie des points à prendre en compte.

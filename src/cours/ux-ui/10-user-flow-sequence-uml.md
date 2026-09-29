@@ -2,7 +2,7 @@
 title: 'User flow, séquence et UML'
 order: 10
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-29"
 ---
 
 # User flow, séquence et UML
@@ -138,11 +138,21 @@ stateDiagram-v2
 
 Certains états donnent lieu à un message, comme « Ta commande est prête ». Le système garde aussi une trace de l'état de la commande.
 
-## Pour aller plus loin
+## Atelier : le schéma d'enchaînement
 
-Cet atelier est facultatif. Dessinez le user flow de la réservation d'une séance d'essai, sur papier, avec Mermaid, avec [draw.io](https://app.diagrams.net/) ou en wireflow avec vos wireframes. Ajoutez un losange pour chaque cas prévu par le brief. Chaque branche doit mener à un de vos écrans.
+Ce schéma montre les étapes et les choix possibles pendant la réservation. Il fait partie du rendu individuel, avec la maquette. Le sitemap décrit, lui, l'organisation des pages du site.
 
-Rendu, si vous le faites : le user flow, dans la section « 7. Zoning et wireframes ».
+Dans Figma, reliez des copies réduites de vos écrans ou des rectangles nommés. Indiquez l'action sur chaque flèche. Montrez au moins :
+
+- Le choix d'un atelier, puis d'une séance disponible.
+- Le formulaire, la correction d'une saisie et la confirmation.
+- Une séance complète, puis l'inscription sur liste d'attente avec un résultat distinct.
+
+Le message d'autorisation parentale apparaît dans le parcours d'une personne mineure. Il ne bloque pas sa réservation. Nommez les écrans et les états comme dans votre maquette.
+
+Placez le schéma dans « 8. UI et maquette », à côté du prototype. Vous pouvez aussi le dessiner sur papier et le photographier, ou utiliser draw.io. Vérifiez le schéma, puis les connexions de l'onglet Prototype : les flèches dessinées ne rendent pas les écrans cliquables.
+
+Les diagrammes de séquence et d'états sont facultatifs. Ils peuvent vous aider à préparer le code.
 
 ## À lire
 

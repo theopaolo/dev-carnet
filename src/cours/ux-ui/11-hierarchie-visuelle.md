@@ -2,12 +2,14 @@
 title: 'La hiérarchie visuelle'
 order: 11
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-29"
 ---
 
 # La hiérarchie visuelle
 
-L'UI design définit l'apparence des éléments d'une interface et de leurs états : un bouton au repos, un créneau sélectionné ou un champ en erreur. La taille, le contraste, la position et l'espacement aident à repérer les informations et les actions. Sur la fiche d'un atelier, le bouton « Réserver » doit se distinguer des liens secondaires.
+L'UI design définit l'apparence d'une interface : ses boutons, ses champs et leurs états, comme une erreur ou une sélection. La taille, le contraste, la position et l'espacement guident la lecture. Sur la fiche d'un atelier, le bouton « Réserver » doit se distinguer des liens secondaires.
+
+Pour l'atelier, vérifiez l'ordre de lecture, l'association entre les champs et leurs libellés, et les contrastes. Les états doivent rester compréhensibles sans la couleur. Les exemples de composition permettent d'aller plus loin.
 
 ## Du wireframe au design
 

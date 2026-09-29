@@ -2,7 +2,7 @@
 title: 'Le zoning et les wireframes'
 order: 9
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-29"
 ---
 
 # Le zoning et les wireframes
@@ -54,7 +54,7 @@ Le parcours d'Inès a montré qu'elle cherchait le prix du menu étudiant. On pr
 
 Imaginez deux zonings : dans le premier, une grande présentation du snack repousse la liste des plats en bas. Dans le second, la liste apparaît juste après les catégories. Pour Inès, qui doit choisir pendant sa pause, le second donne plus tôt accès aux prix. Vous pouvez comparer ces deux organisations avec quelques rectangles.
 
-Avant de détailler l'écran, faites expliquer votre zoning à un binôme. Il doit pouvoir situer la liste des plats et l'accès à la commande. Si une zone manque ou semble mal placée, déplacez-la maintenant.
+Avant de détailler l'écran, demandez à une autre personne de repérer la liste des plats et l'accès à la commande sur votre zoning. Si une zone manque ou semble mal placée, déplacez-la maintenant.
 
 Un autre exemple montre une page d'accueil en zoning, en wireframe puis en prototype. Le bleu repère ici les éléments prévus pour être cliquables. Cette image fixe ne permet pas d'essayer leurs réactions : il faut ouvrir le prototype pour cela.
 
@@ -143,7 +143,7 @@ Dans ce prototype d'exercice, aucun paiement n'est encaissé et aucune commande 
 
 ### Tester dès les wireframes
 
-Vous pouvez faire ce premier essai avec des écrans en gris reliés dans Figma ou Penpot. Sur papier, le binôme pointe une commande du doigt et vous présentez la feuille correspondant au résultat. Dans les deux cas, vous observez ses choix avant de finaliser les styles.
+Vous pouvez faire ce premier essai avec des écrans en gris reliés dans Figma ou Penpot. Sur papier, la personne qui teste pointe une commande du doigt et vous présentez la feuille correspondant au résultat. Dans les deux cas, vous observez ses choix avant de finaliser les styles.
 
 Si la personne cherche comment retirer le menu du panier, ajoutez ou clarifiez cette action et refaites l'essai. Les étapes pour relier les écrans et conduire le test sont détaillées dans [La maquette et le test](/ux-ui/14-maquette-et-test/).
 
@@ -289,6 +289,8 @@ Pour construire le vôtre, réglez d'abord un bouton. Placez-le ensuite dans une
 
 ## Ateliers : dessiner les écrans de la MJC
 
+Travaillez dans votre fichier Figma ou Penpot. Si vous reprenez des documents UX réalisés en groupe, copiez-les et indiquez leur origine. Concevez vos propres écrans. Un camarade peut les tester.
+
 ### Le zoning
 
 Dessinez les grandes zones de la fiche atelier. Placez en premier ce dont votre persona a besoin pour décider de réserver. Des rectangles avec un nom suffisent.
@@ -297,7 +299,7 @@ Essayez deux ordres différents pour la description et les informations pratique
 
 ### Prendre en main Figma
 
-1. Ouvrez votre fichier de projet dans Figma. Si vous n'en avez pas, créez un fichier de design nommé « MJC des Tilleuls ».
+1. Ouvrez votre fichier de projet dans Figma. Si vous n'en avez pas, créez un fichier de design nommé « MJC des Tilleuls, votre prénom ».
 2. Avec l'outil Frame (`F`), créez un écran au format téléphone. Nommez-le « Fiche atelier ».
 3. Avec Rectangle (`R`) et Texte (`T`), reproduisez les zones de votre zoning. Ajoutez le nom de l'atelier, une description et le texte « Réserver une séance d'essai ».
 4. Sélectionnez le texte du bouton et appliquez l'auto layout (`Maj + A`). Réglez la largeur sur Hug. Ajoutez un fond gris et du padding autour du texte.
@@ -324,7 +326,7 @@ Ajoutez les états du parcours :
 
 Vérifiez qu'on peut suivre le parcours depuis la liste des ateliers jusqu'au résultat de la réservation.
 
-Faites une première lecture avec un binôme. Sans lui indiquer où regarder, demandez-lui de trouver un atelier adapté à son âge, de choisir une séance et d'indiquer ce qu'il doit apporter. Il peut pointer les actions pendant que vous lui montrez l'écran suivant.
+Demandez à une autre personne de trouver un atelier adapté à son âge, de choisir une séance et d'indiquer ce qu'elle doit apporter. Laissez-la chercher sans la guider. Elle peut pointer les actions pendant que vous lui montrez l'écran suivant.
 
 Avant de rendre, vérifiez que :
 
