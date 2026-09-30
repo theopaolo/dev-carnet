@@ -206,5 +206,5 @@ Posez-vous la question pour chaque règle : doit-elle être chargée tout le tem
 ## Sources
 
 - [Agent Skills, spécification du format](https://agentskills.io/)
-- [Anthropic, « Equipping agents for the real world with Agent Skills »](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+- [Anthropic, "Equipping agents for the real world with Agent Skills"](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
 - [Claude Code, documentation des skills](https://code.claude.com/docs/en/skills)

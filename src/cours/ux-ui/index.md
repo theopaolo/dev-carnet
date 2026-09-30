@@ -2,7 +2,7 @@
 title: 'Design UX et UI'
 order: 2
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # Design UX et UI
@@ -28,7 +28,7 @@ Les pages [UX et UI](/ux-ui/01-ux-et-ui/) et [Lois de l'UX](/ux-ui/02-lois-de-l-
 | --- | --- | --- |
 | [Roasting](/ux-ui/01-ux-et-ui/#le-roasting) | Examiner l'inscription sur un site de MJC ou de centre socioculturel | Une idée à reprendre, un problème à éviter et une capture |
 | [Audit UX](/ux-ui/03-audit-ux/) | Réaliser une tâche et repérer ce qui aide ou gêne | Des observations reliées aux lois UX, une capture et une amélioration |
-| [1–2. Préparer la réservation](/ux-ui/04-brief-et-entretiens/) | Choisir une activité, recueillir un récit d'inscription et en tirer les besoins | Un cadre avec l'activité, les difficultés et les réponses prévues dans le site |
+| [1–2. Préparer la réservation](/ux-ui/04-brief-et-entretiens/) | Choisir une activité, recueillir un récit d'inscription et en tirer les besoins | Une frame avec l'activité, les difficultés et les réponses prévues dans le site |
 | [3. Persona](/ux-ui/05-persona/) | Décrire un profil à partir du récit et du brief | Un persona et ses besoins pour l'inscription |
 | [4. Story map et user stories](/ux-ui/06-user-stories/) | Organiser les actions du persona et définir la première version | La story map, trois stories et deux critères pour la réservation |
 | [5. Journey](/ux-ui/07-journey/) | Dessiner le parcours, de la découverte de l'atelier à la séance | Le parcours, ses blocages et une amélioration |
@@ -36,7 +36,7 @@ Les pages [UX et UI](/ux-ui/01-ux-et-ui/) et [Lois de l'UX](/ux-ui/02-lois-de-l-
 
 ## Les ateliers UI
 
-Travaillez dans un fichier personnel nommé « MJC des Tilleuls, votre prénom » et partagez-le avec le formateur. Indiquez l'origine des éléments UX repris d'un travail de groupe. Créez vos propres écrans et composants, puis faites vos corrections.
+Travaillez dans un fichier personnel nommé "MJC des Tilleuls, votre prénom" et partagez-le avec le formateur. Indiquez l'origine des éléments UX repris d'un travail de groupe. Créez vos propres écrans et composants, puis faites vos corrections.
 
 ### Cet après-midi dans Figma
 
@@ -58,17 +58,25 @@ Gardez le brief, le persona et les user stories à portée de main. Chaque écra
 
 Consultez [Hiérarchie visuelle](/ux-ui/11-hierarchie-visuelle/) et [Typographie et couleurs](/ux-ui/12-typographie-et-couleurs/) pour choisir les styles. La page [User flow, séquence et UML](/ux-ui/10-user-flow-sequence-uml/) explique le schéma d'enchaînement à rendre avec la maquette. Les diagrammes de séquence et d'états sont facultatifs.
 
+## Accessibilité
+
+Apprenez à repérer une barrière, à la tester et à vérifier la correction. Vous appliquerez ces tests à votre projet MJC et ajouterez les résultats au dossier.
+
+- [HTML, accessibilité et ARIA](/ux-ui/15-accessibilite-html-et-aria/)
+- [Tester et documenter l’accessibilité](/ux-ui/16-tester-et-auditer/)
+- [Atelier : tester et corriger une page](/ux-ui/17-atelier-accessibilite/)
+
 ## Coder et présenter le projet
 
 | Atelier | Ce que vous faites | Rendu |
 | --- | --- | --- |
-| 10. Coder et rendre accessible | Adapter la page `site/`, tester son accessibilité et corriger les problèmes | La page publiée et `audit.md` avec les observations avant et après correction |
+| 10. Coder et rendre accessible | Adapter la page `site/`, tester son accessibilité et corriger les problèmes | La page publiée et, dans le dossier, les observations avant et après correction |
 | 11. Référencer | Écrire le `title` et la meta description, mesurer avec Lighthouse | `seo.md` avec les mesures et les modifications |
 | [12. Présenter](/ux-ui/#presenter-le-projet) | Expliquer un choix de conception et montrer la page publiée | Une démonstration appuyée sur le prototype et les tests |
 
 ## Le dossier à rendre
 
-Rassemblez les rendus dans un dossier « Semaine UX/UI, accessibilité et SEO », dans l'ordre ci-dessous.
+Rassemblez les rendus dans un dossier "Semaine UX/UI, accessibilité et SEO", dans l'ordre ci-dessous.
 
 ### Introduction
 
@@ -76,10 +84,10 @@ Rassemblez les rendus dans un dossier « Semaine UX/UI, accessibilité et SEO »
 
 ### UX
 
-1. [Audit UX](/ux-ui/03-audit-ux/) du site existant : captures annotées, [lois UX](/ux-ui/02-lois-de-l-ux/) et principes de la Gestalt mobilisés
+1. [Audit UX](/ux-ui/03-audit-ux/) du site existant : captures annotées, [lois UX](/ux-ui/02-lois-de-l-ux/) et principes de la Gestalt utilisés
 2. Deux fiches [persona](/ux-ui/05-persona/) : besoins, motivations et difficultés
 3. [User journey](/ux-ui/07-journey/) : reprendre et adapter celui de tldraw ou en créer un. Indiquez s'il décrit le parcours actuel ou le parcours proposé
-4. [User stories](/ux-ui/06-user-stories/) : « En tant que…, je veux…, afin de… »
+4. [User stories](/ux-ui/06-user-stories/) : "En tant que…, je veux…, afin de…"
 5. [Sitemap](/ux-ui/08-architecture-de-l-information/) du site de la MJC des Tilleuls
 6. [Story mapping](/ux-ui/06-user-stories/) du parcours d'inscription : organiser les étapes et prioriser les fonctionnalités
 
@@ -91,6 +99,14 @@ Rassemblez les rendus dans un dossier « Semaine UX/UI, accessibilité et SEO »
 4. [Composants](/ux-ui/13-style-guide-et-composants/#creer-les-composants) réutilisables et leurs principaux états
 5. [Maquettes](/ux-ui/14-maquette-et-test/#assembler-la-maquette) en couleur
 6. [Prototype](/ux-ui/14-maquette-et-test/) cliquable à partir des wireframes ou des maquettes
+
+### Accessibilité
+
+1. Les problèmes trouvés sur `a-corriger.html` et sur un site existant : où, qui est gêné, quelle correction.
+2. Trois corrections, avec le test avant et après.
+3. Votre fichier `corrige.html`.
+
+Les [consignes de l’atelier](/ux-ui/17-atelier-accessibilite/) détaillent chaque étape.
 
 ## Présenter le projet
 
@@ -104,10 +120,10 @@ Ce barème s'applique à chaque personne. Il ne constitue pas la grille officiel
 | --- | --- | --- |
 | UX | 25 | Persona, story map, stories et journey tirés des entretiens et du brief |
 | UI | 10 | Maquette adaptée au mobile, schéma, tokens appliqués, composants et états expliqués. Correspondance avec le CSS vérifiée lors de la séance de code |
-| Accessibilité | 30 | HTML correct, formulaire utilisable au clavier, `audit.md` rempli avec l'avant et l'après |
+| Accessibilité | 30 | HTML correct, formulaire utilisable au clavier, problèmes et corrections notés dans le dossier avec l'avant et l'après |
 | SEO | 15 | `title` et description utiles, mesure Lighthouse avant et après |
 | Compréhension | 20 | Épreuve et réponses pendant la démonstration |
 
 ## Le lien avec le titre DWWM
 
-Ce module vous prépare à la compétence de maquettage du [titre professionnel DWWM, niveau 5, RNCP37674](https://www.francecompetences.fr/recherche/rncp/37674/). Les maquettes doivent répondre au besoin, respecter la charte, prendre en compte l'accessibilité et le mobile et s'accompagner d'un schéma d'enchaînement. La sécurité, les données personnelles ([RGPD](https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence)) et l'éco-conception ([RGESN](https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/)) font aussi partie des points à prendre en compte.
+Ce module vous prépare à la compétence de maquettage du [titre professionnel DWWM, niveau 5, RNCP37674](https://www.francecompetences.fr/recherche/rncp/37674/). Les maquettes doivent répondre au besoin, respecter la charte et prévoir l'accessibilité et l'affichage mobile. Joignez un schéma d'enchaînement des écrans. La sécurité, les données personnelles ([RGPD](https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence)) et l'éco-conception ([RGESN](https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/)) font aussi partie des points à prendre en compte.

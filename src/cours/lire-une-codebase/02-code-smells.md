@@ -7,7 +7,7 @@ updatedAt: "2026-09-24"
 
 # Smells
 
-Tufano et al. ont étudié l'historique de 200 projets open source, soit environ 500 000 commits ([« When and Why Your Code Starts to Smell Bad »](https://doi.org/10.1109/ICSE.2015.59), ICSE 2015). La plupart des smells sont présents **dès la création du fichier**. Ils n'apparaissent pas peu à peu. Le smell que tu trouves dans ton code vient souvent d'une décision de design prise le premier jour.
+Tufano et al. ont étudié l'historique de 200 projets open source, soit environ 500 000 commits (["When and Why Your Code Starts to Smell Bad"](https://doi.org/10.1109/ICSE.2015.59), ICSE 2015). La plupart des smells sont présents **dès la création du fichier**. Ils n'apparaissent pas peu à peu. Le smell que tu trouves dans ton code vient souvent d'une décision de design prise le premier jour.
 
 Une bonne partie des smells apparaît aussi **juste avant une échéance**. Le code écrit en fin de sprint, dans l'urgence, en accumule le plus.
 

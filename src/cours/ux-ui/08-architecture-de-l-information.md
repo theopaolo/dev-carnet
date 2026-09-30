@@ -2,12 +2,12 @@
 title: "L'architecture de l'information"
 order: 8
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # L'architecture de l'information
 
-L'architecture de l'information, ou IA, organise et nomme les contenus pour aider les personnes à trouver ce qu'elles cherchent. Dans le projet MJC, elle relie les besoins du persona au parcours d'inscription.
+L'architecture de l'information organise et nomme les contenus pour aider les personnes à les trouver. Son abréviation anglaise, IA pour *information architecture*, apparaît dans le schéma ci-dessous. Elle ne désigne pas ici l'intelligence artificielle.
 
 ## Trois cercles
 
@@ -39,9 +39,9 @@ Pour passer du contenu aux écrans, vous utiliserez trois documents :
 
 | Livrable | La question | Où l'apprendre |
 | --- | --- | --- |
-| Le sitemap | Quelles pages, et rangées comment ? | Sur cette page |
+| Le sitemap | Quelles pages prévoir et comment les organiser ? | Sur cette page |
 | Les wireframes | Que contient chaque page, et dans quel ordre ? | [Le zoning et les wireframes](/ux-ui/09-zoning-et-wireframes/) |
-| Le plan de navigation | Comment passe-t-on d'une page à l'autre ? | [User flow, séquence et UML](/ux-ui/10-user-flow-sequence-uml/) |
+| Le user flow | Comment passe-t-on d'une page à l'autre ? | [User flow, séquence et UML](/ux-ui/10-user-flow-sequence-uml/) |
 
 ## Le sitemap
 
@@ -87,7 +87,7 @@ La navigation relie les pages entre elles. Un site combine en général plusieur
 | --- | --- | --- |
 | Globale | Mène aux grandes rubriques depuis n'importe quelle page | Le menu en haut de l'écran |
 | Locale | Mène aux pages d'une même rubrique | Le sous-menu d'une rubrique |
-| Contextuelle | Mène à un contenu lié à ce qu'on lit | Un lien « Voir aussi » dans un article |
+| Contextuelle | Mène à un contenu lié à ce qu'on lit | Un lien "Voir aussi" dans un article |
 | Linéaire | Guide étape par étape vers un but | Panier, puis adresse, puis paiement |
 | Fil d'Ariane | Montre où l'on est et permet de remonter | Accueil › Menu › Plats › Tacos poulet |
 
@@ -101,7 +101,7 @@ Rendu : le sitemap dans votre fichier de projet. Un schéma simple suffit.
 
 ## À lire
 
-- [What is information architecture?](https://www.figma.com/resource-library/what-is-information-architecture/), Figma : les trois cercles, les systèmes de rangement, de nommage, de navigation et de recherche, et les huit principes de Dan Brown. En anglais.
+- [What is information architecture?](https://www.figma.com/resource-library/what-is-information-architecture/), Figma : les trois cercles, les systèmes d'organisation, de nommage (*labeling*), de navigation et de recherche, et les huit principes de Dan Brown. En anglais.
 - [Breadcrumbs: 11 Design Guidelines](https://www.nngroup.com/articles/breadcrumbs/), Nielsen Norman Group, sur le fil d'Ariane. En anglais.
 
 ## Pour la discussion

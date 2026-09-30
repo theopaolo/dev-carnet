@@ -2,7 +2,7 @@
 title: 'User flow, séquence et UML'
 order: 10
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # User flow, séquence et UML
@@ -21,7 +21,7 @@ Le journey raconte ce que vit une personne. Pour concevoir puis coder, il faut a
 
 ## Le user flow
 
-Un user flow montre le chemin typique d'un utilisateur dans un produit pour accomplir une tâche courante. Il décrit les actions de l'utilisateur et les réponses du produit : les écrans, les messages, les choix. Il laisse de côté les pensées et les émotions.
+Un user flow représente les actions et les écrans nécessaires pour accomplir une tâche dans le produit. Il montre aussi les choix, les erreurs et les réponses de l'interface. Les pensées et les émotions figurent dans la journey map.
 
 Nielsen Norman Group compare le journey et le user flow :
 
@@ -31,10 +31,10 @@ Nielsen Norman Group compare le journey et le user flow :
 | Où | Sur plusieurs canaux : affiche, appli, comptoir | Dans un seul produit : l'appli |
 | Le moment | Avant, pendant et après l'usage du produit | Pendant l'usage du produit |
 | Ce qu'on note | Les actions, les pensées, les émotions | Les actions de l'utilisateur, les réponses du produit |
-| Le schéma | Une journey map | Un organigramme ou un wireflow |
+| Le schéma | Une journey map | Un flowchart ou un wireflow |
 | D'où viennent les infos | Des entretiens et de l'observation | Du brief, des besoins recueillis et des tests |
 
-Un user flow zoome sur une étape du journey. Celui-ci détaille l'étape « Commander » du [journey d'Inès](/ux-ui/07-journey/#un-exemple).
+Un user flow détaille une étape du parcours utilisateur. Celui-ci détaille l'étape "Commander" du [journey d'Inès](/ux-ui/07-journey/#un-exemple).
 
 Les rectangles sont des écrans. Les losanges sont des questions qui ont plusieurs réponses. Les flèches portent l'action de l'utilisateur.
 
@@ -55,7 +55,7 @@ flowchart TD
     J -->|Réessaie| G
 ```
 
-Chaque branche du flow doit apparaître dans les wireframes. Ici, il faut prévoir la connexion et le message d'erreur, en plus du parcours sans problème.
+Chaque branche du flow doit apparaître dans les wireframes. Ici, il faut prévoir la connexion et le message d'erreur, en plus du parcours sans problème (*happy path*).
 
 Nielsen Norman Group dessine aussi le user flow en _wireflow_ : les wireframes des écrans, posés en ligne et reliés par des flèches. Chaque flèche part de l'élément sur lequel l'utilisateur clique ou appuie. Dans Figma, reliez vos wireframes avec l'outil flèche (Maj + L).
 
@@ -75,7 +75,7 @@ sequenceDiagram
     actor I as Inès
     participant A as Appli
     participant S as Serveur
-    I->>A: Appuie sur « Payer »
+    I->>A: Appuie sur "Payer"
     A->>S: Envoie la commande
     alt Paiement accepté
         S->>S: Enregistre la commande
@@ -95,7 +95,7 @@ Ce schéma est écrit en texte, avec [Mermaid](https://mermaid.js.org/syntax/seq
 sequenceDiagram
     actor I as Inès
     participant A as Appli
-    I->>A: Appuie sur « Payer »
+    I->>A: Appuie sur "Payer"
 ```
 
 GitHub affiche les schémas Mermaid dans un README ou une issue. Vous pouvez donc garder vos schémas à côté de votre code.
@@ -136,11 +136,11 @@ stateDiagram-v2
     Annulee --> [*]
 ```
 
-Certains états donnent lieu à un message, comme « Ta commande est prête ». Le système garde aussi une trace de l'état de la commande.
+Certains états donnent lieu à un message, comme "Ta commande est prête". Le système garde aussi une trace de l'état de la commande.
 
 ## Atelier : le schéma d'enchaînement
 
-Ce schéma montre les étapes et les choix possibles pendant la réservation. Il fait partie du rendu individuel, avec la maquette. Le sitemap décrit, lui, l'organisation des pages du site.
+Le titre DWWM demande un schéma d'enchaînement des maquettes. C'est le user flow de votre réservation : ses étapes et ses choix possibles. Il fait partie du rendu individuel, avec la maquette. Le sitemap décrit, lui, l'organisation des pages du site.
 
 Dans Figma, reliez des copies réduites de vos écrans ou des rectangles nommés. Indiquez l'action sur chaque flèche. Montrez au moins :
 
@@ -150,7 +150,7 @@ Dans Figma, reliez des copies réduites de vos écrans ou des rectangles nommés
 
 Le message d'autorisation parentale apparaît dans le parcours d'une personne mineure. Il ne bloque pas sa réservation. Nommez les écrans et les états comme dans votre maquette.
 
-Placez le schéma dans « 8. UI et maquette », à côté du prototype. Vous pouvez aussi le dessiner sur papier et le photographier, ou utiliser draw.io. Vérifiez le schéma, puis les connexions de l'onglet Prototype : les flèches dessinées ne rendent pas les écrans cliquables.
+Placez le schéma dans "8. UI et maquette", à côté du prototype. Vous pouvez aussi le dessiner sur papier et le photographier, ou utiliser draw.io. Vérifiez le schéma, puis les connexions de l'onglet Prototype : les flèches dessinées ne rendent pas les écrans cliquables.
 
 Les diagrammes de séquence et d'états sont facultatifs. Ils peuvent vous aider à préparer le code.
 

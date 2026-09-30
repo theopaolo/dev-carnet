@@ -155,7 +155,7 @@ Chaque donnée a une durée de conservation.
 | Paiement | Historique | Contrat + obligation légale | 10 ans |
 | Newsletter | Email | Consentement | Jusqu’au retrait du consentement |
 
-Aucune donnée ne se conserve « pour toujours » sans justification.
+Aucune donnée ne se conserve "pour toujours" sans justification.
 
 
 **Références**
@@ -231,7 +231,7 @@ Avec les réponses à ces questions, vous pouvez produire :
 | subscriptions | started_at | ⚠️ Oui | Historique | Abonnement |
 | invoices | billing_address | ✅   | Facturation | Paiement |
 
-## Quand l’utilisateur clique sur « Supprimer mon compte »
+## Quand l’utilisateur clique sur "Supprimer mon compte"
 
 | **Élément** | **Action** |
 | --- | --- |

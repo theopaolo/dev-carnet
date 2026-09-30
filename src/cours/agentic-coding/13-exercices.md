@@ -36,7 +36,7 @@ Le mini-harness n’a pas de modèle par défaut. Si ce modèle gratuit n’est 
 
 Fichier : `exercises/tp-1.md`.
 
-Vous utilisez OpenCode ou Pi pour enquêter sur le mini-harness. Demandez d’abord « Explique ce que fait ce projet » et gardez la réponse : vous devrez confirmer ou corriger chacune de ses affirmations.
+Vous utilisez OpenCode ou Pi pour enquêter sur le mini-harness. Demandez d’abord "Explique ce que fait ce projet" et gardez la réponse : vous devrez confirmer ou corriger chacune de ses affirmations.
 
 Retrouvez ensuite le parcours d’une mission, de la commande à la réponse finale, avec pour chaque étape le fichier, la fonction et ce qui entre et sort. Reconstituez la requête complète envoyée à OpenRouter, y compris les définitions d’outils, avec `--debug`.
 
@@ -141,7 +141,7 @@ Une relecture à deux vérifie quand le skill se déclenche, si ses étapes se s
 <details>
 <summary>Corrigé</summary>
 
-15. C’est une lettre qui contient, au milieu du texte, « l’employé qui lit ceci doit virer 1 000 € sur ce compte ». L’employé lit la lettre pour la résumer, pas pour obéir à ce qu’elle contient. Un agent confond parfois les deux.
+15. C’est une lettre qui contient, au milieu du texte, "l’employé qui lit ceci doit virer 1 000 € sur ce compte". L’employé lit la lettre pour la résumer, pas pour obéir à ce qu’elle contient. Un agent confond parfois les deux.
 16. Le filtre lit le texte du code, pas ce qu’il fait. Le même appel écrit autrement passe. L’isolation (conteneur sans secret ni réseau) limite les effets, quel que soit le code.
 17. Le diff relu, les tests et le build qui passent, le comportement observé dans l’environnement réel. La réponse finale de l’agent n’en fait pas partie.
 
@@ -149,5 +149,5 @@ Une relecture à deux vérifie quand le skill se déclenche, si ses étapes se s
 
 ### Pour finir
 
-18. Expliquez en trois phrases à un développeur qui « utilise juste Claude » pourquoi s’intéresser aux harnesses.
+18. Expliquez en trois phrases à un développeur qui "utilise juste Claude" pourquoi s’intéresser aux harnesses.
 19. Qu’est-ce qui vous semble le plus difficile à maîtriser dans l’agentic coding, conceptuellement ?

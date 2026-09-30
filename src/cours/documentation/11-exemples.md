@@ -11,9 +11,9 @@ Compare ton travail avec ces exemples et corrigés. Ils concernent Réserve ta p
 
 ## 1. Une réponse utile au support
 
-Question : « Alice a annulé, il reste une place, pourquoi ne peut-elle pas réserver ? »
+Question : "Alice a annulé, il reste une place, pourquoi ne peut-elle pas réserver ?"
 
-Réponse : « L’annulation libère la place, mais conserve sa réservation. Le service refuse une nouvelle création pour la même personne et la même séance. Une autre personne peut prendre la place. »
+Réponse : "L’annulation libère la place, mais conserve sa réservation. Le service refuse une nouvelle création pour la même personne et la même séance. Une autre personne peut prendre la place."
 
 Retrouve l’exemple refusé dans les scénarios, puis sa raison dans l’ADR. Si la réponse n’est pas acceptable pour le métier, note une demande d’évolution.
 
@@ -30,7 +30,7 @@ Le classement porte sur l’intention de la page. Une FAQ mêlant toutes ces int
 
 ## 3. Une règle précise
 
-Remplace « les annulations sont bien gérées » par « une annulation conserve la réservation et libère sa place. Répéter l’annulation conserve le statut annulé. »
+Remplace "les annulations sont bien gérées" par "une annulation conserve la réservation et libère sa place. Répéter l’annulation conserve le statut annulé."
 
 Pour vérifier la seconde phrase, ajoute un test qui appelle deux fois `annuler` sur la même réservation.
 

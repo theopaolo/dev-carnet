@@ -137,6 +137,6 @@ Documenter en priorité les points d’entrée utilisés par d’autres personne
 
 Choisis une fonction dont le contrat manque de précision. Écris le commentaire, puis utilise la fonction depuis un second fichier.
 
-Vérifier que le survol explique le résultat et les effets. Passer volontairement une valeur du mauvais type et lire le diagnostic. Corriger l’appel, puis expliquer une contrainte que le type ne peut pas garantir, par exemple « capacité entière et positive ou nulle ».
+Vérifier que le survol explique le résultat et les effets. Passer volontairement une valeur du mauvais type et lire le diagnostic. Corriger l’appel, puis expliquer une contrainte que le type ne peut pas garantir, par exemple "capacité entière et positive ou nulle".
 
 Si rien ne s’affiche, vérifier le mode de langage du fichier, le réglage editor.hover.enabled et l’activation de la prise en charge intégrée JavaScript/TypeScript. Le commentaire doit être attaché à la déclaration ou à la propriété concernée. Un générateur HTML installé ne répare pas à lui seul un service de langage désactivé.

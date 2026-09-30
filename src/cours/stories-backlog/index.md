@@ -94,7 +94,7 @@ Le scénario suffit quand vous partez de zéro sur un produit neuf et voulez ali
 
 Le user journey se fait avant le backlog, idéalement à partir d'entretiens utilisateurs réels. On peut le construire dans un outil collaboratif (Figma, Miro) ou avec des post-its.
 
-Les deux formes partent d'un persona précis et d'un objectif précis. Un user journey « pour tous les utilisateurs » est aussi inutile qu'un scénario sans prénom.
+Les deux formes partent d'un persona précis et d'un objectif précis. Un user journey "pour tous les utilisateurs" est aussi inutile qu'un scénario sans prénom.
 
 ### Sur votre projet
 
@@ -116,7 +116,7 @@ Les deux formes partent d'un persona précis et d'un objectif précis. Un user j
 
 ## Le backlog
 
-Le backlog est la liste ordonnée de toutes vos stories. Une seule story occupe la position 1. Un backlog avec quinze items « urgents » n'a plus d'ordre, c'est une liste de courses.
+Le backlog est la liste ordonnée de toutes vos stories. Une seule story occupe la position 1. Un backlog avec quinze items "urgents" n'a plus d'ordre, c'est une liste de courses.
 
 Faites un premier tri avec MoSCoW :
 
@@ -139,7 +139,7 @@ Le backlog évolue et demande de l'entretien. Une story qui reste en bas depuis 
 
 1.  Posez toutes vos stories (celles de l'exercice 2 plus celles qui vous viennent maintenant) et classez-les en MoSCoW. Visez au moins 2 items en Won't : si vous n'en avez aucun, vous n'avez pas fait de choix.
 2.  Ordonnez les **Must**. Justifiez la position 1 en une phrase : valeur ou risque ?
-3.  Revue croisée avec une autre équipe. L'équipe qui écoute pose deux questions imposées : « pourquoi celle-là en premier ? » et « qu'avez-vous mis en Won't, et pourquoi ? »
+3.  Revue croisée avec une autre équipe. L'équipe qui écoute pose deux questions imposées : "pourquoi celle-là en premier ?" et "qu'avez-vous mis en Won't, et pourquoi ?"
 
 ---
 
@@ -163,7 +163,7 @@ Le vocabulaire de Scrum, que vous croiserez sans doute en entreprise :
 - **Sprint** : itération de durée fixe (souvent 2 semaines) avec un objectif livrable.
 - **Sprint planning** : on choisit les stories du sprint depuis le haut du backlog.
 - **Daily** : point quotidien de 15 min, debout (hier, aujourd'hui, blocages).
-- **Sprint review** : démo de ce qui est fini au sens strict, pas « presque fini ».
+- **Sprint review** : démo de ce qui est fini au sens strict, pas "presque fini".
 - **Rétrospective** : qu'est-ce qu'on change dans notre façon de travailler ?
 - **Rôles** : Product Owner (responsable du backlog), Scrum Master (responsable du processus), équipe de dev.
 

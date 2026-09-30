@@ -52,7 +52,7 @@ Reprenez chaque justification et classez ses affirmations.
 
 | Décision argumentée | Préférence assumée | Choix par défaut non réexaminé |
 | --- | --- | --- |
-| des critères, un contexte et des conséquences existent | « j'aime bien », « j'avais envie d'apprendre » | copié d'un tutoriel, installé par réflexe |
+| des critères, un contexte et des conséquences existent | "j'aime bien", "j'avais envie d'apprendre" | copié d'un tutoriel, installé par réflexe |
 
 Puis séparez les informations utilisées pour décider.
 
@@ -78,11 +78,11 @@ Réponse attendue :
 Mesure :
 ```
 
-Une mesure comme « moins de 300 ms » doit venir d'un besoin ou d'une expérience. Si elle n'est pas encore validée, marquez-la comme hypothèse et indiquez qui doit la confirmer.
+Une mesure comme "moins de 300 ms" doit venir d'un besoin ou d'une expérience. Si elle n'est pas encore validée, marquez-la comme hypothèse et indiquez qui doit la confirmer.
 
 ## 5\. Comparer les options
 
-Retirez d'abord les options qui ne respectent pas les contraintes. Comparez ensuite au moins deux options sur les mêmes critères. Pour chaque note ou appréciation, ajoutez une source ou le statut « hypothèse ».
+Retirez d'abord les options qui ne respectent pas les contraintes. Comparez ensuite au moins deux options sur les mêmes critères. Pour chaque note ou appréciation, ajoutez une source ou le statut "hypothèse".
 
 Si une migration est proposée, décomposez son estimation : conversion des données, adaptation du code, tests, déploiement et retour arrière. Un essai limité peut remplacer une estimation fondée uniquement sur l'intuition.
 

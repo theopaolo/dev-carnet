@@ -9,7 +9,7 @@ updatedAt: "2026-09-25"
 
 Guide pratique pour les développeurs qui construisent un produit avec de l'IA ou des données personnelles : ce que disent les textes, les dates, les chiffres et ce que cela change dans le code.
 
->Ce guide sert à poser les bonnes questions. Il ne remplace pas l'avis d'un juriste ou du DPO sur un projet réel. Les numéros d'articles renvoient au règlement IA (RIA) sauf mention « RGPD ».
+>Ce guide sert à poser les bonnes questions. Il ne remplace pas l'avis d'un juriste ou du DPO sur un projet réel. Les numéros d'articles renvoient au règlement IA (RIA) sauf mention "RGPD".
 
 ## L'essentiel en dix points
 
@@ -275,7 +275,7 @@ L'analyse d'impact est obligatoire si le traitement figure sur la liste publiée
 
 ### Les transferts hors de l'UE RGPD, chapitre V
 
-Appeler l'API d'un fournisseur américain transfère les données du prompt hors de l'UE. Vérifiez sur quoi le transfert repose : certification du fournisseur au Data Privacy Framework UE-États-Unis, clauses contractuelles types, ou traitement en région UE garanti par contrat. Un paramètre « zéro conservation » dans l'API ne dit rien du lieu de traitement.
+Appeler l'API d'un fournisseur américain transfère les données du prompt hors de l'UE. Vérifiez sur quoi le transfert repose : certification du fournisseur au Data Privacy Framework UE-États-Unis, clauses contractuelles types, ou traitement en région UE garanti par contrat. Un paramètre "zéro conservation" dans l'API ne dit rien du lieu de traitement.
 
 ## Les chiffres
 
@@ -308,7 +308,7 @@ Une liste à relire avant la mise en production d'un produit qui utilise un mod�
 <div>
 <h3>Côté RIA</h3>
 <ul class="check">
-<li>Mention visible « réponse générée par une IA » dans l'interface.</li>
+<li>Mention visible "réponse générée par une IA" dans l'interface.</li>
 <li>Marquage lisible par machine des sorties : attribut HTML ou en-tête pour du texte, manifeste C2PA ou filigrane pour une image.</li>
 <li>Note datée dans le dépôt : niveau de risque retenu, articles lus, raisons. Relue à chaque nouvelle fonction.</li>
 <li>Revue du backlog contre l'article 5 et l'annexe III avant d'ajouter un score, une évaluation ou une détection d'état émotionnel.</li>
@@ -352,7 +352,7 @@ Ouvrez le texte officiel quand une décision en dépend. Les articles de blog et
 
 ### Suivre les changements
 
-- Créez un compte « Mon EUR-Lex » et une alerte sur le numéro CELEX 32024R1689. Chaque modification et chaque acte délégué y apparaîtra.
+- Créez un compte "Mon EUR-Lex" et une alerte sur le numéro CELEX 32024R1689. Chaque modification et chaque acte délégué y apparaîtra.
 - L'article 7 permet à la Commission d'ajouter ou de modifier des usages de l'annexe III par acte délégué, sans nouveau règlement.
 - L'article 6.5 prévoit des lignes directrices avec des exemples d'usages classés à haut risque ou non. Elles aident plus que le texte pour qualifier un produit.
 - Les normes harmonisées préparées par le CEN et le CENELEC donneront la façon technique de prouver la conformité d'un système à haut risque.

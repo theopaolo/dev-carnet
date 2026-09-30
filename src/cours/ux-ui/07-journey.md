@@ -2,12 +2,12 @@
 title: 'Le parcours utilisateur'
 order: 7
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # Le parcours utilisateur
 
-Le parcours utilisateur, ou _user journey_, suit une personne vers un but. Il décrit ce qu'elle fait, pense et ressent à chaque étape, souvent avant et après sa visite du site. La _journey map_ est la carte que l'équipe dessine pour visualiser ce parcours.
+Le parcours utilisateur, ou *user journey*, décrit les étapes suivies par une personne pour atteindre un objectif. Il inclut ses actions, ses pensées et ses émotions, y compris avant et après la visite du site. La *journey map* représente ce parcours sous forme de carte.
 
 ## Trois mots proches
 
@@ -23,7 +23,7 @@ Une carte peut montrer le parcours actuel ou celui que l'on veut concevoir. La M
 | --- | --- |
 | Les étapes | Quelles grandes étapes traverse la personne, dans l'ordre ? |
 | Ce qu'elle fait | Quelles actions à chaque étape ? |
-| Le point de contact | Où se passe l'étape : affiche, réseau social, site, téléphone, accueil ? |
+| Le point de contact (*touchpoint*) | Où se passe l'étape : affiche, réseau social, site, téléphone, accueil ? |
 | Ce qu'elle pense | Quelles questions se pose-t-elle ? |
 | Ce qu'elle ressent | Quelle émotion, positive ou négative ? |
 | Ce qui coince | Qu'est-ce qui la ralentit ou la fait hésiter ? |
@@ -34,9 +34,9 @@ En haut de la carte, notez le persona, son but et ses attentes. La ligne des ém
 ## Comment faire une journey map
 
 1. Choisissez un persona et un but. Une carte suit une seule personne.
-2. Fixez le début et la fin du parcours, par exemple de « j'ai faim » à « j'ai mangé ».
+2. Fixez le début et la fin du parcours, par exemple de "j'ai faim" à "j'ai mangé".
 3. Découpez le parcours en 4 à 6 étapes. Nommez chaque étape avec un verbe : découvrir, choisir, commander.
-4. Remplissez les lignes pour chaque étape à partir de vos entretiens. Marquez « à vérifier » les cases que vous avez imaginées.
+4. Remplissez les lignes pour chaque étape à partir de vos entretiens. Marquez "à vérifier" les cases que vous avez imaginées.
 5. Tracez la courbe des émotions et repérez le point le plus bas.
 6. Écrivez une piste pour chaque blocage. Le point le plus bas passe en premier.
 
@@ -48,7 +48,7 @@ Inès, 17 ans, commande au snack pour sa pause de midi. Son but : manger en moi
 | --- | --- | --- | --- | --- |
 | Ce qu'elle fait | Voit l'affiche du snack devant le lycée | Ouvre l'appli et lit le menu | Choisit un menu et paie en ligne | Passe au comptoir à 12 h 10 |
 | Le point de contact | L'affiche, avec un QR code | L'appli, écran du menu | L'appli, écran de paiement | Le comptoir |
-| Ce qu'elle pense | « Ils ont une appli ? » | « Combien coûte le menu étudiant ? » | « Ma commande est bien partie ? » | « Laquelle est la mienne ? » |
+| Ce qu'elle pense | "Ils ont une appli ?" | "Combien coûte le menu étudiant ?" | "Ma commande est bien partie ?" | "Laquelle est la mienne ?" |
 | Ce qu'elle ressent | Curieuse | Hésitante | Inquiète | Soulagée |
 | Ce qui coince | Le QR code est trop petit | Le prix étudiant n'est pas affiché | Pas de message de confirmation | Une seule file pour tout le monde |
 | La piste | Un QR code plus grand | Le prix sur chaque plat | Un écran de confirmation avec un numéro | Les commandes prêtes rangées par numéro |
@@ -69,13 +69,13 @@ journey
       Reçoit son menu: 4: Inès
 ```
 
-Le point le plus bas est la commande. Inès doute que sa commande soit partie. Une confirmation visible répondrait à cette question : c'est la première chose que l'écran de paiement doit régler.
+Inès est surtout inquiète après le paiement : elle ne sait pas si sa commande a été reçue. L'écran doit lui donner une confirmation visible.
 
 ## Atelier : dessiner le parcours du persona
 
 Dessinez le parcours de votre persona, de la découverte de l'atelier à sa première séance. Pour chaque étape, notez ce qu'il fait, ce qu'il ressent et ce qui peut le bloquer.
 
-Repérez le principal blocage et proposez une amélioration. Marquez « à vérifier » ce que vous supposez.
+Repérez le principal blocage et proposez une amélioration. Marquez "à vérifier" ce que vous supposez.
 
 Rendu : un schéma dans votre fichier de projet. Un dessin sur papier pris en photo convient.
 

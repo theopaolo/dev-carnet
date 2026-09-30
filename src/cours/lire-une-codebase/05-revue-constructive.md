@@ -45,7 +45,7 @@ Appuie-toi aussi sur le [Top 10 de l'OWASP](https://owasp.org/Top10/2025/), sur 
 
 ### Rédiger une bonne review
 
-Évite les formules comme « tu aurais dû », « c'est pas top », « ce n'est pas propre ». Préfère des phrases qui décrivent ce que tu observes ou ce que tu proposes :
+Évite les formules comme "tu aurais dû", "c'est pas top", "ce n'est pas propre". Préfère des phrases qui décrivent ce que tu observes ou ce que tu proposes :
 
 - Je ne comprends pas ce que représente cette variable.
 - Peut-on utiliser le vocabulaire métier ici ?
@@ -56,7 +56,7 @@ Appuie-toi aussi sur le [Top 10 de l'OWASP](https://owasp.org/Top10/2025/), sur 
 
 **Donner du contexte.** Au lieu d'écrire _renomme cette variable_, explique : `data` _semble représenter une liste de commandes en attente. Un nom plus précis aiderait les prochains lecteurs._
 
-**Féliciter aussi.** « J'aime bien l'extraction de cette fonction », « Le nom est beaucoup plus clair », « Bonne gestion des erreurs ».
+**Féliciter aussi.** "J'aime bien l'extraction de cette fonction", "Le nom est beaucoup plus clair", "Bonne gestion des erreurs".
 
 ## Conventional Comments
 
@@ -75,7 +75,7 @@ Les [Conventional Comments](https://conventionalcomments.org/) répondent à ce 
 - **label** : le type de commentaire (obligatoire)
 - **decorations** : des précisions entre parenthèses, séparées par des virgules (optionnel)
 - **subject** : le message principal
-- **discussion** : le contexte, la justification, le « pourquoi » (optionnel)
+- **discussion** : le contexte, la justification, le "pourquoi" (optionnel)
 
 ### Les principaux labels
 
@@ -127,7 +127,7 @@ Les deux se combinent, par exemple `issue (security, blocking)`. Au-delà de deu
 
 ### Pourquoi ce format
 
-Un commentaire comme _« ce n'est pas formulé correctement »_ laisse l'auteur·rice deviner s'il s'agit d'un point bloquant, d'une préférence ou d'une vraie erreur. Le label et le sujet sont obligatoires. Ils obligent à trancher l'intention avant d'écrire, ce qui réduit les allers-retours et les malentendus. Le format se cherche aussi avec `grep` : un script peut extraire tous les `issue (blocking)` d'une review ([Aaron Bos](https://aaronbos.dev/posts/case-for-conventional-comments)).
+Un commentaire comme _"ce n'est pas formulé correctement"_ laisse l'auteur·rice deviner s'il s'agit d'un point bloquant, d'une préférence ou d'une vraie erreur. Le label et le sujet sont obligatoires. Ils obligent à trancher l'intention avant d'écrire, ce qui réduit les allers-retours et les malentendus. Le format se cherche aussi avec `grep` : un script peut extraire tous les `issue (blocking)` d'une review ([Aaron Bos](https://aaronbos.dev/posts/case-for-conventional-comments)).
 
 ### Grille de review
 

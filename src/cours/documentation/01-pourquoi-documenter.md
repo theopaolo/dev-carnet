@@ -34,17 +34,17 @@ Si tu ne connais plus la raison d'une règle, indique-le. Tu peux décrire le co
 | Responsable du service | Comprendre pourquoi le serveur ne démarre pas | Où lire les messages d'erreur et vérifier la configuration |
 | Auteur du projet | Reprendre le travail après une interruption | Pourquoi le stockage ou l'hébergement a été choisi |
 
-Avant d'écrire une page, formule son objectif : « Cette page aide un développeur à lancer le projet sur son ordinateur. » Indique les connaissances et les accès nécessaires pour la suivre.
+Avant d'écrire une page, formule son objectif : "Cette page aide un développeur à lancer le projet sur son ordinateur." Indique les connaissances et les accès nécessaires pour la suivre.
 
 ## Décrire ce qui a été vérifié
 
-« L'application est sauvegardée » signifie qu'une sauvegarde existe. Le fait que l'hébergeur propose cette option ne prouve pas qu'elle est activée.
+"L'application est sauvegardée" signifie qu'une sauvegarde existe. Le fait que l'hébergeur propose cette option ne prouve pas qu'elle est activée.
 
 Si aucune sauvegarde n'est configurée, écris :
 
 > Les données sont stockées dans la base du serveur. Aucune sauvegarde automatique n'est configurée. La restauration n'a pas été testée.
 
-Applique la même précision aux autres vérifications. « Le formulaire a été testé au clavier » décrit un contrôle précis. « L'application est accessible » affirme beaucoup plus.
+Applique la même précision aux autres vérifications. "Le formulaire a été testé au clavier" décrit un contrôle précis. "L'application est accessible" affirme beaucoup plus.
 
 ## Choisir quoi documenter en premier
 
@@ -52,7 +52,7 @@ Commence par une information dont l'absence bloque quelqu'un : la commande de la
 
 Vérifie ta réponse dans le projet. Les scripts indiquent les commandes disponibles. La configuration indique les services utilisés. Les tests montrent les cas contrôlés. Une note de décision peut expliquer pourquoi une solution a été choisie.
 
-Décris le fonctionnement actuel. Place les améliorations souhaitées dans une section distincte, avec un titre comme « Changements prévus ».
+Décris le fonctionnement actuel. Place les améliorations souhaitées dans une section distincte, avec un titre comme "Changements prévus".
 
 ## Exemple : répondre à trois collègues
 
@@ -75,7 +75,7 @@ flowchart LR
 ```
 
 
-Une réponse utilisable par le support serait : « Après une annulation, la place est disponible pour une autre personne. Une nouvelle réservation de la personne qui a annulé reste refusée pour cette séance. » Ajoute le lien vers les exemples validés et le nom du rôle qui peut confirmer une évolution de cette règle.
+Une réponse utilisable par le support serait : "Après une annulation, la place est disponible pour une autre personne. Une nouvelle réservation de la personne qui a annulé reste refusée pour cette séance." Ajoute le lien vers les exemples validés et le nom du rôle qui peut confirmer une évolution de cette règle.
 
 Vérifie cette réponse dans le [scénario exécutable](https://github.com/theopaolo/cours-documentation-web/blob/main/demo/features/reservations.feature). Le [chapitre 9](/documentation/09-documentation-vivante/) explique comment faire travailler ensemble les lecteurs métier et les développeurs.
 
@@ -84,7 +84,7 @@ Pour ton projet, choisis une question souvent posée. Écris sa réponse en troi
 ## Exercice : répondre à une question sans aide orale
 
 1. Note cinq questions qu'une personne te poserait pour reprendre ton projet.
-2. Pour chacune, indique où trouver la réponse ou écris « pas encore documenté ».
+2. Pour chacune, indique où trouver la réponse ou écris "pas encore documenté".
 3. Choisis la question qui bloque le plus le démarrage ou la compréhension du projet.
 4. Rédige une réponse à partir des informations vérifiées.
 5. Demande à quelqu'un de la reformuler. Précise les passages qu'il a mal compris.

@@ -15,7 +15,7 @@ Tu peux travailler sur ton projet ou sur la démonstration fournie. Prépare un 
 
 **Réserve ta place** est une application fictive pour une association qui organise des ateliers de poterie. L'organisateur publie les dates et le nombre de places. Les participants choisissent un atelier et réservent une place.
 
-Un « atelier » désigne une séance à une date précise. Une « réservation » relie une personne à cette séance.
+Un "atelier" désigne une séance à une date précise. Une "réservation" relie une personne à cette séance.
 
 Le [kit de démonstration](/documentation/10-demonstration/) fournit les règles de réservation en JavaScript, des tests et des scénarios BDD. Il fonctionne en mémoire. L’interface web, PostgreSQL et l’envoi de courriels des exemples d’architecture restent fictifs. Les commandes du kit sont exécutables depuis la racine de ce dossier. Les exemples concernant ton application sont à adapter.
 

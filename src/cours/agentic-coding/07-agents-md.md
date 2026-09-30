@@ -38,9 +38,9 @@ Gardez les informations vraies pour presque toutes les tâches :
 | La documentation technique détaillée | `docs/`, avec un lien depuis `AGENTS.md` |
 | Ce que le linter ou le formateur vérifie déjà | Nulle part, la configuration suffit |
 | Une règle qui concerne moins d’une tâche sur deux | Un skill ou un `AGENTS.md` de sous-dossier |
-| Une règle générique comme « écris du code propre » | Nulle part |
+| Une règle générique comme "écris du code propre" | Nulle part |
 
-Chaque règle doit pouvoir changer une décision de l’agent. « Écris du bon code » ne change rien. « Les montants sont stockés en centimes, en entiers, jamais en flottants » change la façon d’écrire une fonction de prix.
+Chaque règle doit pouvoir changer une décision de l’agent. "Écris du bon code" ne change rien. "Les montants sont stockés en centimes, en entiers, jamais en flottants" change la façon d’écrire une fonction de prix.
 
 ## Un fichier court
 
@@ -114,7 +114,7 @@ Notez une différence que vous pouvez relier à une règle précise du fichier.
 
 ## Une règle n’est pas une garantie
 
-`AGENTS.md` guide le modèle. Il n’empêche rien. « Ne jamais lancer `git push --force` » reste une phrase que le modèle peut ignorer. Ce qui doit être imposé passe par du code :
+`AGENTS.md` guide le modèle. Il n’empêche rien. "Ne jamais lancer `git push --force`" reste une phrase que le modèle peut ignorer. Ce qui doit être imposé passe par du code :
 
 | Besoin | Mécanisme |
 | --- | --- |
@@ -123,7 +123,7 @@ Notez une différence que vous pouvez relier à une règle précise du fichier.
 | Protéger un fichier | Permission en écriture, isolation |
 | Vérifier une convention | Test ou règle de linter |
 
-Une vérification exécutable vaut mieux qu’un rappel textuel. `npm run lint` dans la CI est plus fiable que « n’oublie pas de lancer le lint ».
+Une vérification exécutable vaut mieux qu’un rappel textuel. `npm run lint` dans la CI est plus fiable que "n’oublie pas de lancer le lint".
 
 ## Faire relire
 

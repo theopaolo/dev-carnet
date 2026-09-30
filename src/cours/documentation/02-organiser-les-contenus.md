@@ -38,7 +38,7 @@ Le lecteur doit interrompre l'installation pour lire une explication sur l'authe
 - le nom du paramètre et sa valeur autorisée vont dans la référence de configuration,
 - les raisons du choix vont dans une page sur l'authentification.
 
-Ajoute un lien si l'explication peut aider pendant l'installation. Nomme sa destination : « Comprendre la durée de validité des sessions » indique ce que le lecteur trouvera.
+Ajoute un lien si l'explication peut aider pendant l'installation. Nomme sa destination : "Comprendre la durée de validité des sessions" indique ce que le lecteur trouvera.
 
 ## Choisir où publier
 
@@ -84,9 +84,9 @@ flowchart TB
 ```
 
 
-Dans le kit, « Réaliser sa première réservation pas à pas » serait un tutoriel. « Rejouer les scénarios BDD » est un guide pratique. La liste des paramètres de reserver est une référence. « Pourquoi conserver les annulations » est une explication appuyée sur un ADR.
+Dans le kit, "Réaliser sa première réservation pas à pas" serait un tutoriel. "Rejouer les scénarios BDD" est un guide pratique. La liste des paramètres de reserver est une référence. "Pourquoi conserver les annulations" est une explication appuyée sur un ADR.
 
-Un rapport de tests peut alimenter la référence des règles. Il ne remplace pas le tutoriel qui accompagne une première utilisation. Évite de transformer le menu en liste d’outils : un collègue cherchera « Pourquoi la demande est refusée ? » avant de chercher « Cucumber ».
+Un rapport de tests peut alimenter la référence des règles. Il ne remplace pas le tutoriel qui accompagne une première utilisation. Évite de transformer le menu en liste d’outils : un collègue cherchera "Pourquoi la demande est refusée ?" avant de chercher "Cucumber".
 
 Pour un produit réel, crée des entrées selon les tâches des lecteurs : réserver, gérer les ateliers, intégrer l’API, intervenir en cas d’incident.
 

@@ -7,7 +7,7 @@ updatedAt: "2026-09-24"
 
 # Vocabulaire
 
-**Beacon** (balise) : un élément du programme, souvent un nom, qui aide à comprendre ce que fait le code. Il sert à confirmer ou infirmer une hypothèse sur le code. La notion est plus précise que « cherche les noms explicites ».
+**Beacon** (balise) : un élément du programme, souvent un nom, qui aide à comprendre ce que fait le code. Il sert à confirmer ou infirmer une hypothèse sur le code. La notion est plus précise que "cherche les noms explicites".
 
 **Refactoring** : modifier le code pour l'améliorer sans changer son comportement. L'appli doit fonctionner pareil avant et après chaque modification.
 
@@ -45,7 +45,7 @@ _Traduit et adapté de [Refactoring.Guru](https://refactoring.guru/refactoring/t
 
 Presque personne n'écrit du code sale exprès. Le code propre se dégrade pourtant, pour des raisons listées plus bas.
 
-La métaphore de la « dette technique » appliquée au code sale a été proposée à l'origine par _Ward Cunningham_.
+La métaphore de la "dette technique" appliquée au code sale a été proposée à l'origine par _Ward Cunningham_.
 
 Un prêt bancaire permet d'acheter plus tôt. En échange, tu rembourses le capital et des intérêts. Les intérêts peuvent s'accumuler au point de dépasser tes revenus et rendre le remboursement impossible.
 
@@ -57,7 +57,7 @@ Le code fonctionne pareil. Tu peux aller plus vite un temps en n'écrivant pas d
 Le contexte commercial force parfois à déployer des fonctionnalités inachevées. Des rustines apparaissent alors dans le code pour masquer les parties manquantes.
 
 **Manque de compréhension des conséquences de la dette technique**  
-La direction ne voit pas toujours que la dette technique produit des « intérêts » : elle ralentit le développement à mesure qu'elle s'accumule. Obtenir du temps pour refactoriser devient alors difficile.
+La direction ne voit pas toujours que la dette technique produit des "intérêts" : elle ralentit le développement à mesure qu'elle s'accumule. Obtenir du temps pour refactoriser devient alors difficile.
 
 **Couplage fort entre les composants**  
 Le projet forme un bloc au lieu d'être découpé en modules. Toute modification d'une partie touche les autres. Le travail en équipe devient difficile, car on ne peut plus isoler le travail de chaque personne.

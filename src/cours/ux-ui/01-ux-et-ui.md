@@ -2,7 +2,7 @@
 title: "L'UX et l'UI"
 order: 1
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # L'UX et l'UI
@@ -36,12 +36,12 @@ Pour une appli de commande dans un snack, l'UX organise le parcours et l'UI dess
 | | UX | UI |
 | --- | --- | --- |
 | La question | De quoi le client a-t-il besoin pour commander vite ? | À quoi ressemble l'écran de commande ? |
-| La décision | Commander en trois écrans et voir le temps d'attente | Un grand bouton « Commander » en bas de l'écran |
+| La décision | Commander en trois écrans et voir le temps d'attente | Un grand bouton "Commander" en bas de l'écran |
 | La vérification | Un client commande seul, sans aide, en moins d'une minute | Le bouton se voit et se lit sur un petit écran |
 
 ## Les cinq plans
 
-Le designer Jesse James Garrett découpe un produit en cinq plans, du plus abstrait au plus concret. Chaque plan s'appuie sur le précédent. On commence par la stratégie et on finit par la surface.
+Jesse James Garrett décrit cinq plans de conception, de la stratégie à l'apparence des écrans. Chaque plan s'appuie sur les décisions du précédent.
 
 | Plan | La question | Dans le projet |
 | --- | --- | --- |
@@ -63,7 +63,7 @@ La norme ISO 9241-11 mesure l'utilisabilité avec trois questions, pour des util
 - L'efficience : combien de temps et d'efforts lui a-t-il fallu ?
 - La satisfaction : comment l'a-t-elle vécu ?
 
-L'affordance désigne les indices qui suggèrent comment utiliser un objet. Une poignée invite à tirer, un interrupteur à appuyer. Sur le web, un bouton doit être reconnaissable comme tel et un champ doit inviter à saisir du texte.
+Une **affordance** est une possibilité d'action offerte par un objet à une personne. Une poignée permet par exemple de saisir une porte. Les indices qui font comprendre cette possibilité sont des **signifiants** (*signifiers*) : la forme de la poignée, le libellé d'un bouton ou le soulignement d'un lien. Sur le web, ces indices doivent correspondre à ce que l'élément permet de faire. [Don Norman explique cette distinction](https://jnd.org/signifiers-not-affordances/).
 
 ## Le design thinking
 
@@ -114,4 +114,4 @@ Gardez une idée à reprendre et un problème à éviter dans votre projet, avec
 
 Arrêtez-vous avant tout envoi de formulaire. Ne créez pas de compte et ne payez rien.
 
-Appuyez vos critiques sur un élément de l'interface et son effet sur la tâche. Par exemple : « Le bouton d'inscription est caché sous la photo, je ne l'ai pas trouvé. » Respectez les personnes qui ont conçu le site et choisissez des captures adaptées à un cours.
+Appuyez vos critiques sur un élément de l'interface et son effet sur la tâche. Par exemple : "Le bouton d'inscription est caché sous la photo, je ne l'ai pas trouvé." Respectez les personnes qui ont conçu le site et choisissez des captures adaptées à un cours.

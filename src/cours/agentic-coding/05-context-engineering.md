@@ -43,7 +43,7 @@ Près de 30 000 tokens sont occupés avant que l’agent ait lu une ligne du pro
 
 ### Le contexte se dégrade avant d’être plein
 
-[Chroma Research a testé 18 modèles](https://www.trychroma.com/research/context-rot) en juillet 2025. Leurs performances baissent de façon irrégulière à mesure que le contexte grandit, y compris sur des tâches simples et bien avant la limite annoncée. L’étude [« Lost in the Middle »](https://arxiv.org/abs/2307.03172) (Liu et al., 2023) montre qu’une information placée au milieu d’un long contexte est moins bien retrouvée qu’au début ou à la fin.
+[Chroma Research a testé 18 modèles](https://www.trychroma.com/research/context-rot) en juillet 2025. Leurs performances baissent de façon irrégulière à mesure que le contexte grandit, y compris sur des tâches simples et bien avant la limite annoncée. L’étude ["Lost in the Middle"](https://arxiv.org/abs/2307.03172) (Liu et al., 2023) montre qu’une information placée au milieu d’un long contexte est moins bien retrouvée qu’au début ou à la fin.
 
 Le mécanisme d’attention répartit sa capacité sur tous les tokens. Plus il y en a, moins chacun reçoit d’attention. On parle de **budget d’attention**.
 
@@ -138,7 +138,7 @@ sequenceDiagram
   %% ctx: assistant 25 read_file("src/router.ts")
 ```
 
-La compaction a un défaut connu : le **summarization drift**. Chaque résumé élimine des détails rares. Après trois ou quatre passes, une consigne comme « ne jamais appeler la base de production » peut avoir disparu. Le résumé doit donc garder explicitement les décisions, les contraintes actives, les erreurs rencontrées et les tâches restantes. Pour un travail long, écrivez aussi ces éléments dans un fichier ([chapitre 6](../06-memoire/)).
+La compaction a un défaut connu : le **summarization drift**. Chaque résumé élimine des détails rares. Après trois ou quatre passes, une consigne comme "ne jamais appeler la base de production" peut avoir disparu. Le résumé doit donc garder explicitement les décisions, les contraintes actives, les erreurs rencontrées et les tâches restantes. Pour un travail long, écrivez aussi ces éléments dans un fichier ([chapitre 6](../06-memoire/)).
 
 ### Notes structurées
 
@@ -199,7 +199,7 @@ La mission et l’erreur récente sont nécessaires. La règle, le chemin et la 
 
 ## Sources
 
-- [Anthropic, « Effective context engineering for AI agents »](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
-- [Chroma Research, « Context Rot »](https://www.trychroma.com/research/context-rot), juillet 2025
+- [Anthropic, "Effective context engineering for AI agents"](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- [Chroma Research, "Context Rot"](https://www.trychroma.com/research/context-rot), juillet 2025
 - Liu et al., [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172), 2023
-- [Anthropic, « Managing context on the Claude Developer Platform »](https://claude.com/blog/context-management)
+- [Anthropic, "Managing context on the Claude Developer Platform"](https://claude.com/blog/context-management)

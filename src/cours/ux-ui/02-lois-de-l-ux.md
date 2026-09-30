@@ -2,7 +2,7 @@
 title: "Les lois de l'UX"
 order: 2
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # Les lois de l'UX
@@ -25,7 +25,7 @@ Paul Fitts a publié sa formule en 1954 : T = a + b × log₂(2D / L). T est le
 
 ## La loi de Hick
 
-Plus il y a de choix, plus on met de temps à décider. Le temps augmente avec le nombre et la complexité des choix.
+Le temps de décision augmente avec le nombre et la complexité des choix.
 
 Dans une interface :
 
@@ -55,27 +55,27 @@ Plus on se rapproche d'un but, plus on fait d'efforts pour l'atteindre. En angla
 
 Dans une interface :
 
-- Une barre de progression montre ce qui reste à faire, par exemple « Étape 2 sur 3 ».
+- Une barre de progression montre ce qui reste à faire, par exemple "Étape 2 sur 3".
 - Un long formulaire est découpé en étapes, et chaque étape finie fait avancer la barre.
 - Un avantage réel déjà obtenu apparaît dès le départ, comme deux tampons offerts sur une carte de fidélité.
 
 En 2006, les chercheurs Joseph Nunes et Xavier Drèze ont distribué des cartes de fidélité dans une station de lavage. La première carte demandait 8 tampons. La seconde en demandait 10, dont 2 déjà offerts. Il fallait donc 8 lavages dans les deux cas. 19 % des clients ont rempli la première carte, et 34 % la seconde.
 
-Montrez une progression vraie. Une barre qui ment sur ce qu'il reste à faire, pour retenir l'utilisateur, devient un dark pattern.
+La progression affichée doit correspondre aux étapes restantes. Une barre trompeuse conçue pour retenir l'utilisateur est un dark pattern.
 
 [Fiche Laws of UX : effet de gradation du but](https://lawsofux.com/fr/effet-de-gradation-du-but/)
 
 ## Les principes de la Gestalt
 
-Au début du XXe siècle, des psychologues ont étudié comment nous regroupons les formes que nous voyons. Leurs principes, dits de la Gestalt (« forme » en allemand), aident à organiser un écran.
+Au début du XXe siècle, des psychologues ont étudié comment nous regroupons les formes que nous voyons. Leurs principes, dits de la Gestalt (*forme* en allemand), aident à organiser un écran.
 
 | Principe | Ce qu'il dit | Un exemple |
 | --- | --- | --- |
 | Proximité | Des éléments proches semblent aller ensemble. | Sur Netflix, le titre d'une rangée est collé à ses films. |
-| Similarité | Des éléments qui se ressemblent semblent avoir le même rôle. | Sur GitHub, les étiquettes ont toutes la même forme, et chaque statut a sa couleur. |
+| Similarité | Des éléments qui se ressemblent semblent avoir le même rôle. | Sur GitHub, les labels ont tous la même forme, et chaque statut a sa couleur. |
 | Continuité | L'œil suit les lignes et les alignements, même interrompus. | Le chemin de progression de Duolingo, la barre d'étapes d'un formulaire. |
 | Clôture | Le cerveau complète une forme incomplète. | Le panda du logo du WWF n'a pas de contour complet, et on le voit quand même. |
-| Figure-fond | On sépare ce qui est devant de ce qui est derrière. | Une fenêtre de connexion au-dessus d'une page assombrie. |
+| Figure-fond | On sépare ce qui est devant de ce qui est derrière. | Une modale de connexion au-dessus d'une page assombrie. |
 | Destin commun | Des éléments qui bougent ensemble semblent aller ensemble. | Les films d'un carrousel qui défilent ensemble. |
 
 Fiches Laws of UX : [loi de proximité](https://lawsofux.com/fr/loi-de-proximit%C3%A9/), [loi de similarité](https://lawsofux.com/fr/loi-de-similarit%C3%A9/).

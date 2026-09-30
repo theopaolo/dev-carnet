@@ -10,14 +10,14 @@ Une bonne story respecte les critères `INVEST` :
 
 | Critère | Signification | Question test |
 | --- | --- | --- |
-| **I**ndépendante | Livrable sans attendre une autre story | « Je peux la coder seule ? » |
-| **N**égociable | Le _comment_ reste ouvert | « Est-ce que je décris une solution ou un besoin ? » |
-| **V**alorisable | Apporte quelque chose à l'utilisateur | « Qui s'en rend compte ? » |
-| **E**stimable | On peut évaluer l'effort | « Je sais à peu près combien de temps ? » |
-| **S**mall | Quelques jours max | « Livrable cette semaine ? » |
-| **T**estable | On peut prouver qu'elle est finie | « Comment je démontre que c'est fait ? » |
+| **I**ndépendante | Livrable sans attendre une autre story | "Je peux la coder seule ?" |
+| **N**égociable | Le _comment_ reste ouvert | "Est-ce que je décris une solution ou un besoin ?" |
+| **V**alorisable | Apporte quelque chose à l'utilisateur | "Qui s'en rend compte ?" |
+| **E**stimable | On peut évaluer l'effort | "Je sais à peu près combien de temps ?" |
+| **S**mall | Quelques jours max | "Livrable cette semaine ?" |
+| **T**estable | On peut prouver qu'elle est finie | "Comment je démontre que c'est fait ?" |
 
-Le critère Testable élimine le plus de mauvaises stories. Une story dont personne ne peut démontrer la fin reste « presque finie » pendant des semaines.
+Le critère Testable élimine le plus de mauvaises stories. Une story dont personne ne peut démontrer la fin reste "presque finie" pendant des semaines.
 
 D'où les critères d'acceptation, au format [**Gherkin**](https://cucumber.io/docs/gherkin/reference) :
 

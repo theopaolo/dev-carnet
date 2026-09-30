@@ -138,6 +138,6 @@ Les modèles progressent plus vite que l’orchestration. En 2024, un agent pouv
 
 ## Sources
 
-- [OpenAI, « Harness engineering: leveraging Codex in an agent-first world »](https://openai.com/index/harness-engineering/)
-- [Anthropic, « Building effective agents »](https://www.anthropic.com/engineering/building-effective-agents)
-- [Anthropic, « Writing effective tools for agents »](https://www.anthropic.com/engineering/writing-tools-for-agents)
+- [OpenAI, "Harness engineering: leveraging Codex in an agent-first world"](https://openai.com/index/harness-engineering/)
+- [Anthropic, "Building effective agents"](https://www.anthropic.com/engineering/building-effective-agents)
+- [Anthropic, "Writing effective tools for agents"](https://www.anthropic.com/engineering/writing-tools-for-agents)

@@ -112,6 +112,6 @@ Pour un projet d’équipe, un SDK fournit une partie des briques : [Vercel AI S
 
 ## Sources
 
-- [Anthropic, « Trustworthy agents in practice »](https://www.anthropic.com/research/trustworthy-agents)
+- [Anthropic, "Trustworthy agents in practice"](https://www.anthropic.com/research/trustworthy-agents)
 - [Liste d’agents harnesses maintenue par la communauté](https://github.com/RyanAlberts/best-of-Agent-Harnesses)
 - [Learn Claude Code, ShareAI Lab](https://learn.shareai.run/en/)

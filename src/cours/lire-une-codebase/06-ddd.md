@@ -19,7 +19,7 @@ L'approche aligne le modèle d'un logiciel sur le métier qu'il sert. On ne con�
 
 Le **langage ubiquitaire** est un vocabulaire structuré autour du modèle du domaine. Toute l'équipe l'utilise : développeurs, experts métier, designers, PO. On le retrouve dans le code, les tests et la documentation, comme dans les discussions, les tickets, les diagrammes et les commits.
 
-Pour aller plus loin : [The Coding Machine, « Ubiquitous language »](https://thecodingmachine.com/ubiquitous-language-concept-cle/).
+Pour aller plus loin : [The Coding Machine, "Ubiquitous language"](https://thecodingmachine.com/ubiquitous-language-concept-cle/).
 
 #### Exemple : un projet de fret
 
@@ -35,7 +35,7 @@ routeSpecification
 itinerary
 ```
 
-Les noms « après » viennent du métier du fret : une cargaison, une spécification d'itinéraire, un itinéraire. Les noms « avant » décrivent des structures techniques.
+Les noms "après" viennent du métier du fret : une cargaison, une spécification d'itinéraire, un itinéraire. Les noms "avant" décrivent des structures techniques.
 
 Le métier parle en termes de besoins. Les devs traduisent en tables, services, booléens, payloads, endpoints. D'autres devs retraduisent ensuite. À chaque traduction, le sens se déforme.
 

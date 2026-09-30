@@ -2,7 +2,7 @@
 title: 'La maquette et le test'
 order: 14
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # La maquette et le test
@@ -21,18 +21,18 @@ Pour relier les écrans dans Figma :
 
 1. Ouvrez l'onglet Prototype, dans le panneau de droite.
 2. Sélectionnez le bouton, puis tirez la flèche vers l'écran qui doit s'afficher.
-3. Gardez l'interaction « Au clic » et l'action « Naviguer vers ».
+3. Gardez le déclencheur "On click" et l'action "Navigate to".
 4. Lancez le prototype avec le bouton de présentation, en haut à droite.
 
 Penpot a un mode Prototype qui fonctionne de la même façon.
 
 ## Une page en mobile et en desktop
 
-Créez le parcours mobile dans un cadre (frame) de 390 px de large. Adaptez ensuite la fiche atelier à un cadre de 1280 px pour l'ordinateur. Si vous avez le temps, essayez-la aussi à 320 px. Ces largeurs servent à tester la mise en page. Elles n'imposent pas les seuils de changement de disposition dans le code.
+Créez le parcours mobile dans une frame de 390 px de large. Adaptez ensuite la fiche atelier à une frame de 1280 px pour l'ordinateur. Si vous avez le temps, essayez-la aussi à 320 px. Ces largeurs servent à tester la mise en page. Dans le code, les *breakpoints* sont les largeurs auxquelles la disposition change. Choisissez-les selon l'espace nécessaire au contenu.
 
 Vérifiez les titres longs, les boutons, les messages d'erreur et l'ordre des informations. Sur grand écran, limitez la largeur du texte. Sur petit écran, empilez les éléments et laissez le texte passer à la ligne.
 
-Notez deux règles pour le code, par exemple : « les cartes passent en une colonne quand elles ne tiennent plus » et « le bouton occupe la largeur disponible sur téléphone ». Adaptez la disposition au lieu de réduire une capture. Vous vérifierez ces règles dans le navigateur une fois la page codée.
+Notez deux règles pour le code, par exemple : "les cartes passent en une colonne quand elles ne tiennent plus" et "le bouton occupe la largeur disponible sur téléphone". Adaptez la disposition au lieu de réduire une capture. Vous vérifierez ces règles dans le navigateur une fois la page codée.
 
 ## Les informations utiles pour coder
 
@@ -43,7 +43,7 @@ Près de votre maquette, indiquez :
 - Les réactions attendues au clavier et les messages à annoncer.
 - Le [schéma d'enchaînement](/ux-ui/10-user-flow-sequence-uml/#atelier--le-schema-denchainement) et les règles d'adaptation aux largeurs.
 
-Décrivez aussi un composant en deux phrases simples en anglais. Exemple : « The button label describes the action. Keyboard focus is shown with a visible outline. » Vous vous entraînez ainsi à expliquer votre travail en anglais.
+Décrivez aussi un composant en deux phrases simples en anglais. Exemple : "The button label describes the action. Keyboard focus is shown with a visible outline." Vous vous entraînez ainsi à expliquer votre travail en anglais.
 
 ### Données, sécurité et éco-conception
 
@@ -54,6 +54,19 @@ Notez les contrôles à faire côté serveur : saisies, âges autorisés et plac
 Expliquez un choix d'éco-conception : utiliser une police système, réduire la taille des images ou éviter les vidéos automatiques pour limiter les téléchargements. Vous mesurerez le poids des pages et le nombre de requêtes sur le site codé. [Référentiel général d'écoconception des services numériques](https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/).
 
 ### Avant de faire tester
+
+Comparez chaque règle du [brief MJC](/ux-ui/04-brief-et-entretiens/#les-regles-du-projet) avec un contenu ou un état de votre maquette. Cette vérification relie les critères d'acceptation des stories aux écrans à développer.
+
+| Règle du brief | Ce que les écrans doivent permettre de vérifier |
+| --- | --- |
+| Essai gratuit, sans engagement, pour les 15–25 ans, débutants compris | Ces informations sont accessibles avant de réserver. Aucun paiement n'est demandé. |
+| Matériel fourni | La fiche et le récapitulatif précisent quoi apporter : tenue adaptée pour le sport, téléphone suffisant pour la photo. |
+| Prénom, nom, âge, e-mail et séance | Le formulaire comporte ces informations avec leurs libellés et les messages de correction utiles. |
+| Réservation autorisée aux mineurs | Une personne de 17 ans peut réserver. Un message lui demande d'apporter une autorisation parentale le jour de la séance. |
+| Dix places par séance | Une séance complète propose la liste d'attente. Son résultat annonce l'attente et le contact par e-mail si une place se libère, sans annoncer de place réservée. |
+| Confirmation | Le récapitulatif donne l'atelier, la date, l'heure, le lieu et ce qu'il faut apporter. |
+
+Le prototype simule ces résultats. Le code devra ensuite appliquer et tester les règles, notamment les âges autorisés et le nombre de places.
 
 - Les écrans affichent les noms d'ateliers, les libellés et les messages prévus pour le site.
 - Les cas d'erreur, de confirmation, de séance complète et d'accord parental ont chacun un écran ou un message.
@@ -66,11 +79,11 @@ Expliquez un choix d'éco-conception : utiliser une police système, réduire la
 Après la démonstration, travaillez dans votre fichier de projet.
 
 1. Gardez une copie de vos trois wireframes en gris.
-2. Choisissez les contenus à partir du brief et du cadre « 1–2. Préparer la réservation ».
+2. Choisissez les contenus à partir du brief et de la frame "1–2. Préparer la réservation".
 3. Appliquez vos styles et composants, puis reliez les écrans.
-4. Vérifiez les points de la liste « Avant de faire tester ».
+4. Vérifiez les points de la liste "Avant de faire tester".
 
-Rendez le prototype avec les trois écrans et les états du brief, son schéma d'enchaînement, la fiche atelier en mobile et en desktop, les règles pour le code et une note sur les données et l'éco-conception.
+Rendez le prototype avec ses trois écrans, les états du brief et le schéma d'enchaînement. Joignez la fiche atelier en mobile et en desktop, les règles pour le code et une note sur les données et l'éco-conception.
 
 Si vous manquez de temps, terminez d'abord la fiche dans les deux formats, le formulaire et la confirmation. La liste peut rester en wireframe. Dessinez les messages d'erreur et de liste d'attente. Signalez les interactions manquantes : elles restent à terminer et à tester.
 
@@ -80,14 +93,14 @@ Un test d'utilisabilité consiste à observer une personne qui essaie d'accompli
 
 | Étape | Ce que vous faites |
 | --- | --- |
-| 1. Donner une tâche | « Choisis un atelier pour ton âge, puis réserve une séance d'essai. » |
-| 2. Demander de penser à voix haute | Invitez la personne à dire ce qu'elle cherche et ce qu'elle s'attend à obtenir en cliquant. |
+| 1. Donner une tâche | "Choisis un atelier pour ton âge, puis réserve une séance d'essai." |
+| 2. Demander de penser à voix haute (*think aloud*) | Invitez la personne à dire ce qu'elle cherche et ce qu'elle s'attend à obtenir en cliquant. |
 | 3. Observer sans guider | Laissez-la choisir ses actions. Si elle demande où cliquer, demandez-lui ce qu'elle essaierait. |
 | 4. Prendre des notes | Relevez les hésitations, les blocages et le résultat de la tâche. |
 
 En cas de blocage, notez ce que la personne cherchait et ce que l'écran affichait. Cherchez ce qui peut être amélioré dans l'interface.
 
-La consigne « Réserve une séance » permet de vérifier si la personne trouve comment faire. « Clique sur Réserver » lui indique déjà où agir.
+La consigne "Réserve une séance" permet de vérifier si la personne trouve comment faire. "Clique sur Réserver" lui indique déjà où agir.
 
 Un seul essai peut révéler une difficulté, mais ne suffit pas à repérer tous les problèmes.
 
@@ -99,7 +112,7 @@ Faites tester votre prototype par un camarade ou le formateur, qui n'a pas parti
 
 Corrigez le principal problème, puis faites réessayer. Vérifiez aussi que les messages de séance complète et d'accord parental sont compréhensibles.
 
-Notez dans votre rendu la tâche donnée, une action ou une hésitation observée, votre correction et le résultat du nouvel essai. Si vous n'avez pas pu refaire l'essai, indiquez « à retester » et le résultat attendu. Sans test, indiquez « non testé » et préparez la tâche à donner. N'inventez pas de retour utilisateur.
+Notez dans votre rendu la tâche donnée, une action ou une hésitation observée, votre correction et le résultat du nouvel essai. Si vous n'avez pas pu refaire l'essai, indiquez "à retester" et le résultat attendu. Sans test, indiquez "non testé" et préparez la tâche à donner. N'inventez pas de retour utilisateur.
 
 Ce test porte sur la compréhension des écrans et du parcours. Vérifiez ensuite la navigation au clavier et le fonctionnement réel du formulaire sur la page codée.
 

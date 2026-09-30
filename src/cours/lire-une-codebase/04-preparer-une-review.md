@@ -15,11 +15,11 @@ updatedAt: "2026-09-24"
 
 Si tu ne peux pas résumer ta PR en une phrase, elle fait plusieurs choses : découpe-la. C'est le même test de la phrase que pour une fonction.
 
-Une PR qui mélange « je corrige un bug », « je renomme trois variables » et « j'ajoute une feature » est impossible à relire proprement : le·la relecteur·rice ne sait plus ce qui est le cœur du changement et ce qui est du bruit. Un diff qu'on peut tenir en tête d'un coup se relit bien. Un diff de 800 lignes se relit mal, ou pas du tout. Si ta PR dépasse ce que tu peux relire toi-même en une passe, elle est trop grosse.
+Une PR qui mélange "je corrige un bug", "je renomme trois variables" et "j'ajoute une feature" est impossible à relire proprement : le·la relecteur·rice ne sait plus ce qui est le cœur du changement et ce qui est du bruit. Un diff qu'on peut tenir en tête d'un coup se relit bien. Un diff de 800 lignes se relit mal, ou pas du tout. Si ta PR dépasse ce que tu peux relire toi-même en une passe, elle est trop grosse.
 
 ### Se relire avant de faire relire
 
-Avant de demander une review, lis ton propre diff comme si c'était celui de quelqu'un d'autre. Tu attraperas la moitié des `nitpick` toi-même : le `console.log` oublié, la variable `tmp` jamais renommée, le commentaire mort. C'est l'exercice de « relire son vieux code », mais à chaud.
+Avant de demander une review, lis ton propre diff comme si c'était celui de quelqu'un d'autre. Tu attraperas la moitié des `nitpick` toi-même : le `console.log` oublié, la variable `tmp` jamais renommée, le commentaire mort. C'est l'exercice de "relire son vieux code", mais à chaud.
 
 Tu respectes ainsi le temps de l'autre, et la review ne porte pas un travail que tu pouvais faire seul·e.
 
@@ -63,7 +63,7 @@ Tu diriges l'attention là où elle sert et tu réduis les allers-retours : le·
 
 ### Le code n'est pas toi
 
-C'est le pendant de « on parle du code, pas de la personne », dans l'autre sens : une remarque sur ton code n'est pas une remarque sur toi. La review sert à rendre le code plus clair et plus sûr, pas à établir qui a raison.
+C'est le pendant de "on parle du code, pas de la personne", dans l'autre sens : une remarque sur ton code n'est pas une remarque sur toi. La review sert à rendre le code plus clair et plus sûr, pas à établir qui a raison.
 
 Si une remarque te pique, il y a souvent quelque chose à regarder, parfois dans le code, parfois dans sa formulation. Relis-la à froid avant de répondre.
 
@@ -83,4 +83,4 @@ Le format conventional comments te dit quoi faire de chaque remarque :
 
 Une remarque traitée se clôt : un commit qui répond, ou une réponse argumentée si tu déclines. Ne laisse pas un fil ouvert sans réponse : c'est ce qui fait traîner une review pendant des jours.
 
-Décliner une suggestion est légitime : « je garde comme ça parce que X » est une réponse valable.
+Décliner une suggestion est légitime : "je garde comme ça parce que X" est une réponse valable.

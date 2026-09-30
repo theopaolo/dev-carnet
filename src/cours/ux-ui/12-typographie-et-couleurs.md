@@ -2,7 +2,7 @@
 title: 'La typographie et les couleurs'
 order: 12
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # La typographie et les couleurs
@@ -28,7 +28,7 @@ Ces catégories ne suffisent pas à choisir une police. Une display peut devenir
 
 Une seule police suffit souvent, avec plusieurs graisses. Si vous en prenez deux, cherchez un contraste net : une serif ou une display pour les titres, une sans-serif neutre pour le texte.
 
-Testez-les avec du vrai texte. « Menu étudiant à 6,50 € » en titre, suivi d'une phrase de description, en dit plus qu'un mot « Typography » écrit en 60 px.
+Testez-les avec du vrai texte. "Menu étudiant à 6,50 €" en titre, suivi d'une phrase de description, en dit plus qu'un mot "Typography" écrit en 60 px.
 
 Ces deux sites montrent l'effet d'un choix de police. Le Dansk Byplanlaboratorium utilise une seule sans-serif, en plusieurs tailles. Daisy associe des titres en serif à un texte en chasse fixe, ce qui distingue les titres des autres textes.
 
@@ -44,6 +44,10 @@ Avec une base de 16 px et un ratio de 1,25, on obtient 16, 20, 25, 31,25 et 39,0
 
 Le site [Typescale](https://typescale.com/) permet de comparer ces échelles. Aucun plugin n'est nécessaire pour l'exercice.
 
+À titre d'exemple, l'échelle de Material Design 3 nomme les styles par rôle (Display, Headline, Title, Label, Body) et propose trois tailles pour chacun (L, M, S), en version standard (*baseline*) et accentuée (*emphasized*).
+
+<img src="/ressources/ux-ui/typescale.webp" alt="Échelle typographique de Material Design 3 : les rôles Display, Headline, Title, Label et Body en tailles L, M et S, en version standard (baseline) à gauche et accentuée (emphasized) à droite." width="1353" height="968" loading="lazy">
+
 ### Quatre styles pour la MJC
 
 Utilisez cette proposition si votre projet n'a pas encore de styles validés. Elle reprend quelques tailles de l'échelle, avec Arial normal ou gras.
@@ -51,13 +55,13 @@ Utilisez cette proposition si votre projet n'a pas encore de styles validés. El
 | Style Figma | Taille / interligne | Graisse | Usage |
 | --- | --- | --- | --- |
 | `text/page-title` | 32 / 40 px | Gras | Nom de l'atelier en titre de page |
-| `text/section-title` | 24 / 32 px | Gras | « Choisir une séance » |
+| `text/section-title` | 24 / 32 px | Gras | "Choisir une séance" |
 | `text/body` | 16 / 24 px | Normal | Informations pratiques et messages |
 | `text/label` | 16 / 24 px | Gras | Libellés des champs et boutons |
 
 Dans le code, choisissez les balises `h1`, `h2` et suivantes selon le niveau du titre dans le document, puis appliquez le style. La taille du texte ne détermine pas la balise.
 
-Dans Figma, enregistrez chaque style dans **Typography** et appliquez-le à plusieurs textes. Changez temporairement sa taille : tous les textes liés doivent suivre. Testez les accents et le libellé « Réserver une séance d'essai » sur un écran étroit. Sur le site codé, vérifiez aussi le zoom et le redimensionnement du texte.
+Dans Figma, enregistrez chaque style dans **Typography** et appliquez-le à plusieurs textes. Changez temporairement sa taille : tous les textes liés doivent suivre. Testez les accents et le libellé "Réserver une séance d'essai" sur un écran étroit. Sur le site codé, vérifiez aussi le zoom et le redimensionnement du texte.
 
 ### Un texte courant lisible
 
@@ -99,7 +103,7 @@ Les harmonies sont des façons de combiner des couleurs d'après leur place sur 
 | Analogue | Trois couleurs voisines, par exemple bleu, bleu-vert et vert | Composer une palette de teintes proches |
 | Complémentaire | Deux couleurs opposées sur la roue, à 180°, comme bleu et orange | Distinguer une couleur dominante et une couleur d'accent |
 | Triadique | Trois couleurs espacées de 120° | Prévoir plusieurs accents, en réservant un rôle à chacun |
-| Split-complémentaire | Une couleur et les deux voisines de sa complémentaire | Essayer deux accents autour de la teinte opposée |
+| Complémentaire adjacente (*split-complementary*) | Une couleur et les deux voisines de sa complémentaire | Essayer deux accents autour de la teinte opposée |
 
 Ces six pages, tirées de Designspiration, montrent chacune une palette réduite : une ou deux couleurs dominantes et un accent.
 
@@ -115,7 +119,7 @@ Pour les couleurs de l'interface, choisissez des noms qui décrivent leur rôle.
 | --- | --- |
 | Texte | Titres et texte courant |
 | Fond | L'arrière-plan des pages et des cartes |
-| Action principale | Le bouton qui permet de poursuivre la tâche, comme « Réserver » |
+| Action principale | Le bouton qui permet de poursuivre la tâche, comme "Réserver" |
 | Erreur | Les messages d'erreur et le contour d'un champ mal rempli |
 | Confirmation | Les messages de réussite |
 
@@ -125,7 +129,7 @@ Pour extraire une palette d'une image, utilisez [Adobe Color](https://color.adob
 
 ## Le moodboard
 
-Le moodboard rassemble des références visuelles avant de dessiner la maquette. Il permet de discuter des types d'images, des couleurs et des polices que l'on souhaite utiliser.
+Le moodboard, ou planche d'inspiration, rassemble des images, des couleurs et des polices pour choisir une direction visuelle avant de dessiner la maquette.
 
 Pour la MJC, comparez par exemple une piste avec des photos d'activités et une autre avec des illustrations.
 
@@ -160,7 +164,7 @@ Où chercher : [Pinterest](https://www.pinterest.fr/), [Dribbble](https://dribbb
 
 Cet atelier est facultatif, en dehors des 3 h 30 de l'après-midi. Le moodboard aide à choisir un style visuel. Le référentiel DWWM RNCP37674 demande de respecter la charte graphique, sans citer le moodboard comme livrable exigé. [Référentiel officiel, compétence 2](https://www.francecompetences.fr/wp-json/api/v1/activity/export/24208/465344).
 
-Rassemblez 6 à 8 images qui évoquent l'ambiance de votre atelier de la MJC, sur une page « Moodboard » de votre fichier. Tirez-en 3 à 5 couleurs. Testez la police de votre charte avec le nom de votre atelier.
+Rassemblez 6 à 8 images qui évoquent l'ambiance de votre atelier de la MJC, sur une page "Moodboard" de votre fichier. Tirez-en 3 à 5 couleurs. Testez la police de votre charte avec le nom de votre atelier.
 
 Rendu : le moodboard dans votre fichier de projet. Indiquez ce que vous retenez des références pour [choisir les styles](/ux-ui/13-style-guide-et-composants/#choisir-les-styles) : une couleur, un traitement des photos ou une association de polices.
 

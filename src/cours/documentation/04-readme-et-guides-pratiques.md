@@ -70,7 +70,7 @@ Si le guide d'installation est déjà dans une autre page, ajoute un lien dans l
 
 ## Rédiger un guide pour une tâche précise
 
-Choisis un titre qui annonce le résultat, par exemple « Exporter les réservations confirmées ». Indique la situation de départ, puis les étapes et le résultat à contrôler. C'est l'objectif d'un [guide pratique dans Diátaxis](https://diataxis.fr/how-to-guides/).
+Choisis un titre qui annonce le résultat, par exemple "Exporter les réservations confirmées". Indique la situation de départ, puis les étapes et le résultat à contrôler. C'est l'objectif d'un [guide pratique dans Diátaxis](https://diataxis.fr/how-to-guides/).
 
 Voici un exemple fondé sur une interface fictive de Réserve ta place.
 

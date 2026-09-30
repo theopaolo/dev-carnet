@@ -49,7 +49,7 @@ BDD signifie *Behaviour-Driven Development*, ou développement guidé par le com
 
 Le [processus décrit par Cucumber](https://cucumber.io/docs/bdd/) articule la découverte du besoin, la formulation d’exemples et leur automatisation. Commence par la conversation. Installer Cucumber ne remplace pas cette étape.
 
-Pour Réserve ta place, pose une question précise : « Que se passe-t-il quand une personne annule puis veut revenir ? » Plusieurs réponses sont possibles : créer une seconde réservation, réactiver la précédente ou refuser. Le cours retient le refus d’une nouvelle création et ne propose pas de réactivation dans sa démonstration.
+Pour Réserve ta place, pose une question précise : "Que se passe-t-il quand une personne annule puis veut revenir ?" Plusieurs réponses sont possibles : créer une seconde réservation, réactiver la précédente ou refuser. Le cours retient le refus d’une nouvelle création et ne propose pas de réactivation dans sa démonstration.
 
 ### Organiser les exemples
 
@@ -77,7 +77,7 @@ flowchart TB
 ```
 
 
-Classe les contributions. « Il reste une place, Alice réserve » est un exemple. « Ne pas dépasser la capacité » est une règle. « Une annulation permet-elle de revenir ? » est une question à résoudre.
+Classe les contributions. "Il reste une place, Alice réserve" est un exemple. "Ne pas dépasser la capacité" est une règle. "Une annulation permet-elle de revenir ?" est une question à résoudre.
 
 ![Notes regroupées sur un mur lors d’un atelier consacré aux besoins de recherche.](./visuels/sources/atelier-notes.jpg)
 
@@ -85,7 +85,7 @@ Cette photo montre une collecte de besoins au WikiMuc, pas une séance BDD. Elle
 
 ## Formuler un scénario lisible
 
-Gherkin est un langage structuré pour écrire des exemples. Les mots-clés existent en français. Dans ce scénario, « Étant donné » décrit la situation de départ, « Quand » l’action et « Alors » le résultat attendu.
+Gherkin est un langage structuré pour écrire des exemples. Les mots-clés existent en français. Dans ce scénario, "Étant donné" décrit la situation de départ, "Quand" l’action et "Alors" le résultat attendu.
 
 ~~~gherkin
 # language: fr
@@ -194,7 +194,7 @@ Avant une extraction, choisis le public et les sources. Un fichier de configurat
 
 La *documentation-driven design* consiste à rédiger un usage, une explication ou un contrat avant de l’implémenter, puis à le faire relire. L’effort d’explication fait apparaître les ambiguïtés. Cette idée figure dans les [principes de Write the Docs](https://www.writethedocs.org/guide/writing/docs-principles/).
 
-Avant de coder une réactivation, écris : « Une personne peut réactiver sa réservation annulée si une place est disponible. » La phrase ouvre déjà plusieurs questions : garde-t-on le même identifiant ? Qui peut réactiver ? Que répondre si l’atelier est complet ?
+Avant de coder une réactivation, écris : "Une personne peut réactiver sa réservation annulée si une place est disponible." La phrase ouvre déjà plusieurs questions : garde-t-on le même identifiant ? Qui peut réactiver ? Que répondre si l’atelier est complet ?
 
 Discute ces questions, écris deux exemples et indique que le comportement est proposé. Implémente ensuite les exemples convenus et mets le statut de la documentation à jour.
 

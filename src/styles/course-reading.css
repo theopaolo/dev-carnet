@@ -1,0 +1,124 @@
+/* Compléments de lecture, activés uniquement par les classes du contenu. */
+.course-note {
+  margin: 24px 0;
+  padding: 18px 22px;
+  color: var(--accent-text);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-shadow);
+  border-radius: var(--radius);
+}
+
+.course-note a {
+  color: inherit;
+}
+
+.course-note > :first-child {
+  margin-bottom: 8px;
+}
+
+.course-note > :last-child,
+.course-details > :last-child,
+.course-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.course-details {
+  margin: 16px 0;
+  padding: 0 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-surface);
+}
+
+.course-details > summary {
+  padding: 16px 0;
+  color: var(--heading);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.course-details > summary::marker {
+  color: var(--accent-stroke);
+}
+
+.course-details > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.course-details > summary:focus-visible {
+  outline: 2px solid var(--accent-stroke);
+  outline-offset: 4px;
+}
+
+.course-details[open] {
+  padding-bottom: 20px;
+}
+
+.course-details[open] > summary {
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.course-intro,
+.course-media {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr;
+  align-items: center;
+  gap: 24px;
+  margin: 28px 0 36px;
+}
+
+.course-intro > img {
+  width: 100%;
+  max-height: 210px;
+  object-fit: contain;
+}
+
+.course-intro strong,
+.course-media strong {
+  color: var(--heading);
+}
+
+.course-media img {
+  width: 100%;
+}
+
+.course-media figcaption,
+.course-figure figcaption {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.course-figure {
+  margin: 24px 0;
+}
+
+.course-figure img {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  .course-media {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .course-media img {
+    max-width: 320px;
+  }
+  .course-intro {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .course-intro > img {
+    width: 150px;
+    justify-self: center;
+  }
+  .course-note,
+  .course-details {
+    padding-inline: 16px;
+  }
+}

@@ -2,18 +2,18 @@
 title: 'Le persona'
 order: 5
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # Le persona
 
-Un persona est un personnage fictif qui regroupe des besoins, des objectifs et des difficultés observés. Il donne à l'équipe un point de repère quand elle choisit le contenu, les fonctions et l'ordre des écrans. Sa fiche part du brief et des entretiens : elle ne remplace pas les personnes interrogées.
+Un persona est un profil fictif construit à partir de besoins, d'objectifs et de difficultés observés. L'équipe s'y réfère pour choisir les contenus, les fonctionnalités et l'ordre des écrans. Sa fiche résume le brief et les entretiens, sans remplacer les échanges avec les utilisateurs.
 
 ## Pourquoi en créer ?
 
-Si les entretiens montrent que les jeunes hésitent à réserver sans connaître le matériel nécessaire, la fiche garde ce frein visible. L'équipe peut alors afficher le matériel sur la fiche de l'atelier, avant le bouton de réservation.
+Si les personnes interrogées hésitent à réserver sans connaître le matériel nécessaire, notez ce frein dans le persona. L'équipe peut alors afficher le matériel avant le bouton de réservation.
 
-Il sert aussi à vérifier les suppositions de l'équipe. « Les jeunes veulent tous réserver sur téléphone » est une hypothèse tant que personne ne l'a confirmé. Notez-la comme telle, puis confrontez-la aux entretiens et aux tests.
+Il sert aussi à vérifier les suppositions de l'équipe. "Les jeunes veulent tous réserver sur téléphone" est une hypothèse tant que personne ne l'a confirmé. Notez-la comme telle, puis confrontez-la aux entretiens et aux tests.
 
 ## Ce que contient la fiche
 
@@ -22,7 +22,7 @@ Il sert aussi à vérifier les suppositions de l'équipe. « Les jeunes veulent
 | Prénom, âge et situation | Qui est-ce ? L'âge compte-t-il pour accéder à l'atelier ou obtenir un accord parental ? |
 | Objectif | Que veut faire cette personne, dans ce projet précis ? |
 | Motivation et freins | Pourquoi veut-elle venir ? Qu'est-ce qui pourrait l'en empêcher ? |
-| Usage | Sur quel appareil agit-elle ? Utilise-t-elle une aide technique ou une autre manière de naviguer, si vous le savez ? |
+| Usage | Sur quel appareil agit-elle ? Utilise-t-elle une technologie d'assistance, comme un lecteur d'écran, ou une autre manière de naviguer, si vous le savez ? |
 | Sa phrase | Quels mots a-t-elle employés en entretien ? N'inventez pas de citation. |
 | Source | Qu'est-ce qui vient d'un entretien, du brief ou d'une hypothèse à vérifier ? |
 
@@ -56,9 +56,9 @@ Inès est le persona de l'appli d'un snack de quartier. Le snack veut éviter la
 | Objectif | Manger en moins de 20 minutes pendant sa pause, sans dépasser 7 € |
 | Frustrations | La queue à midi. Les prix qui ne sont pas affichés. Ne pas savoir si sa commande est prête. |
 | Appareil | Son téléphone, uniquement |
-| Sa phrase | « Le midi, j'ai une heure, et j'en passe la moitié à attendre. » |
+| Sa phrase | "Le midi, j'ai une heure, et j'en passe la moitié à attendre." |
 
-Cette fiche conduit à des choix précis : montrer les prix avant la commande et confirmer quand elle est prête. Vous retrouverez Inès dans les [user stories](/ux-ui/06-user-stories/) et le [parcours utilisateur](/ux-ui/07-journey/). Cette fiche est un exemple fictif du cours. Dans votre projet, la phrase et les freins doivent venir de vos entretiens.
+Cet exemple fictif conduit à afficher les prix avant la commande et à prévenir Inès quand sa commande est prête. Vous retrouverez Inès dans les [user stories](/ux-ui/06-user-stories/) et le [parcours utilisateur](/ux-ui/07-journey/). Pour votre persona, utilisez les propos et les difficultés recueillis en entretien.
 
 ## Un persona et l'accessibilité
 
@@ -73,13 +73,13 @@ Ces vérifications concernent la fiche de l'atelier, le formulaire et sa confirm
 
 ## Atelier : créer un persona
 
-Reprenez le cadre « 1–2. Préparer la réservation ». Créez un seul profil à partir du brief et du récit entendu : son objectif et ses principaux freins. Signalez ce que vous supposez avec « à vérifier ». Notez ce que ce profil vous conduit à prévoir sur la page.
+Reprenez la frame "1–2. Préparer la réservation". Créez un seul profil à partir du brief et du récit entendu : son objectif et ses principaux freins. Signalez ce que vous supposez avec "à vérifier". Notez ce que ce profil vous conduit à prévoir sur la page.
 
 Rendu : une fiche persona dans votre fichier de projet.
 
 ## Pensez à tout le monde
 
-Vos entretiens ne couvrent pas tous les besoins. Pensez aussi aux personnes qui lisent difficilement, distinguent mal les couleurs ou utilisent seulement le clavier. Si vous ajoutez un besoin que personne n'a exprimé, marquez-le « à vérifier ». Vérifiez aussi ces besoins sur votre page codée.
+Vos entretiens ne couvrent pas tous les besoins. Pensez aussi aux personnes qui lisent difficilement, distinguent mal les couleurs ou utilisent seulement le clavier. Si vous ajoutez un besoin que personne n'a exprimé, marquez-le "à vérifier". Vérifiez aussi ces besoins sur votre page codée.
 
 ## À lire
 

@@ -25,7 +25,7 @@ Pour tester une installation, utilise si possible une nouvelle copie du dépôt 
 
 Conserve le travail existant et utilise des données fictives. Transmets les accès confidentiels par le moyen prévu dans le projet, sans les publier dans le guide.
 
-Si tu peux seulement relire la procédure sur ta machine, indique cette limite : « Procédure relue, lancement depuis une nouvelle installation non testé. »
+Si tu peux seulement relire la procédure sur ta machine, indique cette limite : "Procédure relue, lancement depuis une nouvelle installation non testé."
 
 ## Noter les résultats
 
@@ -34,7 +34,7 @@ Note la date, la version du projet, l'environnement de test et les observations 
 | Tâche | Résultat attendu | Problème observé | Correction | Nouvel essai |
 | --- | --- | --- | --- | --- |
 | Lancer l'application | La page d'accueil s'affiche | Une variable de connexion n'est pas expliquée | Ajouter son rôle et la façon d'obtenir sa valeur de test | À effectuer |
-| Comprendre une réservation | Identifier où elle est enregistrée | La flèche vers la base n'a pas de libellé | Ajouter « Enregistre la réservation » | À effectuer |
+| Comprendre une réservation | Identifier où elle est enregistrée | La flèche vers la base n'a pas de libellé | Ajouter "Enregistre la réservation" | À effectuer |
 
 Après l'essai, inscris le résultat dans la dernière colonne. Note séparément les erreurs du logiciel à corriger.
 
@@ -64,7 +64,7 @@ Garde les explications qui complètent ces fichiers. Une migration peut ajouter 
 
 Une page de maintenance doit indiquer où lire les journaux du serveur, comment vérifier que le service répond, où trouver la procédure de déploiement et quelles sauvegardes sont configurées.
 
-Pour la restauration, indique le résultat du dernier essai ou « Restauration non testée ».
+Pour la restauration, indique le résultat du dernier essai ou "Restauration non testée".
 
 ## Une chaîne de vérification fournie
 
@@ -101,7 +101,7 @@ Associe une version du code et une date d’exécution au rapport que tu partage
 npm run demo:regression
 ~~~
 
-Cette démonstration prépare une copie temporaire du code, remplace le contrôle de capacité « supérieur ou égal » par « strictement supérieur » et exécute les tests. Deux tests doivent échouer dans la copie. Le script confirme ensuite que le défaut préparé a été détecté et termine avec succès. Le code de travail reste intact.
+Cette démonstration prépare une copie temporaire du code, remplace le contrôle de capacité "supérieur ou égal" par "strictement supérieur" et exécute les tests. Deux tests doivent échouer dans la copie. Le script confirme ensuite que le défaut préparé a été détecté et termine avec succès. Le code de travail reste intact.
 
 Quelle phrase de la documentation devient fausse ? Une demande peut désormais dépasser la capacité. Un test qui vérifie uniquement la création de la première réservation ne détecterait pas ce défaut.
 

@@ -29,7 +29,7 @@ Au démarrage, les mêmes questions reviennent : par où commencer ? quand fait-
 3.  Quelle situation ou quel problème vous pousse à refondre ce produit ?
 4.  Qu'aimeriez-vous que ce projet change pour vous ou vos utilisateurs ?
 5.  Quels sont vos trois objectifs prioritaires (expérience utilisateur, adhérents, etc.) ?
-6.  À quoi ressemblerait, pour vous, un projet « réussi » dans six mois ?
+6.  À quoi ressemblerait, pour vous, un projet "réussi" dans six mois ?
 
 ## 2. Public et parcours utilisatrices
 
@@ -132,7 +132,7 @@ _Quand_ **_\[situation déclenchante\]_**_, je veux pouvoir_ **_\[action\]_**_, 
 
 Exemple : _Quand je dois rendre compte à mes financeurs, je veux générer un rapport structuré en quelques clics, pour ne pas y passer trois heures chaque trimestre._
 
-Cette phrase sert de filtre. Une fonctionnalité qui n'y répond pas part dans une liste « plus tard » (le cimetière 🦴).
+Cette phrase sert de filtre. Une fonctionnalité qui n'y répond pas part dans une liste "plus tard" (le cimetière 🦴).
 
 **Étape 3. Prototype basse fidélité, testé sur 2 ou 3 personnes**
 
@@ -177,7 +177,7 @@ Deux questions, dans l'ordre :
 
 **Étape 2. Fixer un budget temps**
 
-Shape Up appelle ce budget l'« appétit ».
+Shape Up appelle ce budget l'"appétit".
 
 - **1 à 3 jours** → prototype jetable, preuve de concept
 - **1 à 2 semaines** → version bêta minimale utilisable
@@ -205,7 +205,7 @@ Un document d'une page :
 
 - Planifier pendant des semaines sans rien livrer
 - Un périmètre qui gonfle sans fin (feature creep)
-- Attendre que le projet soit « assez prêt » pour commencer
+- Attendre que le projet soit "assez prêt" pour commencer
 
 ---
 
@@ -223,7 +223,7 @@ Avant de concevoir quoi que ce soit, formulez l'expérience que vous voulez cré
 
 ### Une note sur la légitimité
 
-Partir d'un désir demande autant de rigueur qu'un autre projet. Le critère change : on se demande si le projet « résonne », pas s'il résout quelque chose. Une sensibilité forte et une vision esthétique claire sont des compétences de design.
+Partir d'un désir demande autant de rigueur qu'un autre projet. Le critère change : on se demande si le projet "résonne", pas s'il résout quelque chose. Une sensibilité forte et une vision esthétique claire sont des compétences de design.
 
 ### Étapes
 
@@ -239,7 +239,7 @@ Ce récit est votre référence. Chaque choix de conception se juge avec une que
 
 **Étape 2. Explorer l'existant par sensation, pas par catégorie**
 
-Ne faites pas d'étude de marché sur « les applis de sons d'ambiance ». Rassemblez des objets, des interfaces, des lieux, des morceaux qui produisent _la même sensation_, même dans des domaines très différents.
+Ne faites pas d'étude de marché sur "les applis de sons d'ambiance". Rassemblez des objets, des interfaces, des lieux, des morceaux qui produisent _la même sensation_, même dans des domaines très différents.
 
 Pour chaque référence, notez :
 
@@ -253,7 +253,7 @@ Cette collection remplace l'analyse concurrentielle. Elle vous donne un vocabula
 
 Les personae classiques décrivent qui a un problème. Les personae lifestyle décrivent comment quelqu'un veut _vivre, se voir, et être vu·e_.
 
-Évitez les listes de goûts (« aime le yoga, valeurs écolos, Spotify Premium »). Partez de comportements réels :
+Évitez les listes de goûts ("aime le yoga, valeurs écolos, Spotify Premium"). Partez de comportements réels :
 
 - Comment cette personne passe-t-elle son temps libre ?
 - Pour quoi paie-t-elle volontiers, et pour quoi refuse-t-elle de payer ?
@@ -267,7 +267,7 @@ Avant les écrans, construisez une _ambiance_. Un moodboard sert à prendre des 
 
 Il peut contenir :
 
-- une palette de couleurs, avec pour chaque couleur l'effet recherché (« c'est joli » ne suffit pas)
+- une palette de couleurs, avec pour chaque couleur l'effet recherché ("c'est joli" ne suffit pas)
 - des typographies et leur rapport à la sensation cible
 - des interactions de référence (un geste dans une autre appli, une transition dans un film)
 - un mot interdit : ce à quoi votre projet ne doit pas ressembler.
@@ -287,7 +287,7 @@ Ces réponses sont votre critère de validation, à la place du taux de complét
 ### Ce que cette approche évite
 
 - Construire quelque chose de fonctionnel mais sans âme
-- Devoir justifier l'absence d'un « problème à résoudre »
+- Devoir justifier l'absence d'un "problème à résoudre"
 - Traiter l'esthétique comme une couche de finition
 
 ### Sur l'esthétique

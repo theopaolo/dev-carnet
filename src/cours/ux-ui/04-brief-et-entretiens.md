@@ -2,7 +2,7 @@
 title: 'Préparer la réservation'
 order: 4
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # Préparer la réservation
@@ -30,19 +30,19 @@ Choisissez une date, un horaire et un lieu fictifs pour votre séance. Si une au
 
 1. Choisissez une activité pour votre MJC : photo, escalade, musique…
 2. Interrogez une personne sur une inscription à une activité qu'elle a réellement vécue. Utilisez les questions ci-dessous et notez les difficultés qu'elle décrit.
-3. À partir de ce récit et du brief, notez ce que votre futur site devra permettre de comprendre et de faire.
+3. À partir de ce récit et du brief, notez les informations à afficher et les actions à permettre.
 
 ### Les questions à poser
 
-- « Raconte la dernière fois que tu t'es inscrit à une activité. »
-- « Comment as-tu choisi et trouvé les informations nécessaires ? »
-- « Qu'est-ce qui t'a compliqué la tâche ou fait hésiter ? »
+- "Raconte la dernière fois que tu t'es inscrit à une activité."
+- "Comment as-tu choisi et trouvé les informations nécessaires ?"
+- "Qu'est-ce qui t'a compliqué la tâche ou fait hésiter ?"
 
-Pour préciser une réponse, demandez un exemple : « À quel endroit as-tu cherché cette information ? » ou « Qu'as-tu fait quand tu n'as pas trouvé ? » Un récit suffit pour cet exercice.
+Pour préciser une réponse, demandez un exemple : "À quel endroit as-tu cherché cette information ?" ou "Qu'as-tu fait quand tu n'as pas trouvé ?" Un récit suffit pour cet exercice.
 
 ### Rendu
 
-Dans votre fichier Figma ou Penpot, créez un cadre « 1–2. Préparer la réservation » avec :
+Dans votre fichier Figma ou Penpot, créez une frame "1–2. Préparer la réservation" avec :
 
 - L'activité choisie.
 - Deux ou trois besoins ou difficultés entendus dans le récit.
@@ -53,9 +53,9 @@ Exemple fictif :
 | Ce que vous notez | Exemple |
 | --- | --- |
 | Activité choisie | Initiation à la photo |
-| Difficulté racontée | « Je ne savais pas si les débutants étaient acceptés. » |
-| Réponse prévue dans le site | Afficher « accessible aux débutants » sur la fiche, avant la réservation. |
+| Difficulté racontée | "Je ne savais pas si les débutants étaient acceptés." |
+| Réponse prévue dans le site | Afficher "accessible aux débutants" sur la fiche, avant la réservation. |
 
-Séparez ce que la personne a raconté de ce que vous supposez. Marquez vos suppositions « à vérifier ». Notez seulement un prénom ou une initiale pour identifier le récit, sans coordonnées personnelles. Ce témoignage ne représente pas tous les utilisateurs.
+Séparez ce que la personne a raconté de ce que vous supposez. Marquez vos suppositions "à vérifier". Notez seulement un prénom ou une initiale pour identifier le récit, sans coordonnées personnelles. Ce témoignage ne représente pas tous les utilisateurs.
 
-Gardez ce cadre pour construire ensuite votre persona et vos user stories.
+Gardez cette frame pour construire ensuite votre persona et vos user stories.

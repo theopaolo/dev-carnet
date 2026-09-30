@@ -28,7 +28,7 @@ Pour **Réserve ta place**, l'application fictive de réservation d'ateliers de 
 - l'organisateur l'utilise pour publier un atelier et consulter les réservations,
 - l'application demande à un service externe d'envoyer les courriels de confirmation.
 
-Relie ces éléments avec des flèches nommées : « Réserve une place », « Publie un atelier », « Demande l'envoi d'une confirmation ». La base de données et le serveur seront détaillés dans la vue suivante.
+Relie ces éléments avec des flèches nommées : "Réserve une place", "Publie un atelier", "Demande l'envoi d'une confirmation". La base de données et le serveur seront détaillés dans la vue suivante.
 
 ## Montrer les applications et les stockages
 
@@ -59,7 +59,7 @@ Pour une règle courte, un lien vers la fonction et quelques phrases peuvent suf
 
 Dans Excalidraw, crée un cadre par vue.
 
-1. Donne un titre qui précise l'application, la vue et l'état représenté, par exemple « Réserve ta place : conteneurs, état actuel ».
+1. Donne un titre qui précise l'application, la vue et l'état représenté, par exemple "Réserve ta place : conteneurs, état actuel".
 2. Nomme chaque élément et décris son rôle. Ajoute sa technologie dans la vue des conteneurs.
 3. Oriente les flèches et nomme les échanges.
 4. Dessine les frontières et nomme les services externes. La couleur seule ne suffit pas à les distinguer.

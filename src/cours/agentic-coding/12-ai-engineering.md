@@ -21,7 +21,7 @@ Un agent de code est un LLM augmenté dont les outils agissent sur un dépôt. L
 
 ## Workflows et agents
 
-Tous les systèmes n’ont pas besoin d’une boucle autonome. Dans [« Building effective agents »](https://www.anthropic.com/engineering/building-effective-agents), Anthropic sépare les **workflows**, dont le chemin est écrit dans le code, des **agents**, où le modèle choisit la prochaine étape.
+Tous les systèmes n’ont pas besoin d’une boucle autonome. Dans ["Building effective agents"](https://www.anthropic.com/engineering/building-effective-agents), Anthropic sépare les **workflows**, dont le chemin est écrit dans le code, des **agents**, où le modèle choisit la prochaine étape.
 
 | Motif | Principe | Exemple |
 | --- | --- | --- |
@@ -53,7 +53,7 @@ routeur
 
 Les **modèles de raisonnement** consacrent plus de calcul à un problème avant de répondre. Ils aident à analyser une erreur ou à comparer des stratégies, avec plus de latence et de coût. Plus de raisonnement ne corrige pas un mauvais contexte ou des outils mal définis.
 
-Beaucoup de grands modèles utilisent une architecture **Mixture of Experts** : un routeur interne n’active qu’une partie des paramètres pour chaque token. Le modèle gagne en capacité sans que chaque calcul utilise tous ses paramètres. Les « experts » sont une organisation interne du réseau, pas des spécialistes du JavaScript ou du droit.
+Beaucoup de grands modèles utilisent une architecture **Mixture of Experts** : un routeur interne n’active qu’une partie des paramètres pour chaque token. Le modèle gagne en capacité sans que chaque calcul utilise tous ses paramètres. Les "experts" sont une organisation interne du réseau, pas des spécialistes du JavaScript ou du droit.
 
 ## Embeddings
 
@@ -63,7 +63,7 @@ Un modèle d’**embedding** ne produit pas de texte. Il transforme un texte en 
 "annuler une réservation"  →  [0.14, -0.82, 0.31, 0.07, …]   1 024 dimensions
 ```
 
-Deux textes de sens proche donnent des vecteurs proches, même sans mot commun : « annuler une réservation » et « se faire rembourser un séjour ». La proximité se mesure souvent par la similarité cosinus. Les embeddings servent à la recherche sémantique, au regroupement de documents, à la détection de doublons et au RAG.
+Deux textes de sens proche donnent des vecteurs proches, même sans mot commun : "annuler une réservation" et "se faire rembourser un séjour". La proximité se mesure souvent par la similarité cosinus. Les embeddings servent à la recherche sémantique, au regroupement de documents, à la détection de doublons et au RAG.
 
 ## RAG
 
@@ -76,7 +76,7 @@ L’indexation se fait une fois, puis à chaque mise à jour des documents. Chaq
 La **segmentation** (*chunking*) découpe chaque document en morceaux. C’est l’étape qui décide le plus de la qualité des réponses :
 
 - des segments trop longs mélangent plusieurs sujets et diluent la similarité
-- des segments trop courts perdent le contexte : « il faut prévenir 48 h avant » ne dit plus de quoi il s’agit
+- des segments trop courts perdent le contexte : "il faut prévenir 48 h avant" ne dit plus de quoi il s’agit
 - un chevauchement de quelques phrases entre segments évite de couper une idée en deux
 - un découpage qui suit la structure (titres, paragraphes, fonctions pour du code) vaut mieux qu’un découpage tous les 500 caractères
 - les métadonnées (titre, source, date) permettent de filtrer et de citer.
@@ -158,7 +158,7 @@ Construisez d’abord la version minimale : un modèle, une boucle, quelques out
 ## Sources
 
 - Chip Huyen, [AI Engineering: Building Applications with Foundation Models](https://www.oreilly.com/library/view/ai-engineering/9781098166298/), O’Reilly, 2025
-- [Anthropic, « Building effective agents »](https://www.anthropic.com/engineering/building-effective-agents)
-- [Anthropic, « Introducing Contextual Retrieval »](https://www.anthropic.com/news/contextual-retrieval)
+- [Anthropic, "Building effective agents"](https://www.anthropic.com/engineering/building-effective-agents)
+- [Anthropic, "Introducing Contextual Retrieval"](https://www.anthropic.com/news/contextual-retrieval)
 - Lewis et al., [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401), 2020
 - Geoffrey Huntley, [Ralph Wiggum as a software engineer](https://ghuntley.com/ralph/)

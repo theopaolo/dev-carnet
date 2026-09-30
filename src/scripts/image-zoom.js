@@ -11,7 +11,7 @@ zoom.addEventListener("click", (event) => {
 });
 
 document.querySelectorAll(".content img").forEach((img) => {
-  if (img.closest("a, button")) return;
+  if (img.getAttribute("alt") === "" || img.closest("a, button")) return;
   const button = document.createElement("button");
   button.type = "button";
   button.className = "image-zoom";

@@ -15,7 +15,7 @@ Ce chapitre suit cette boucle message par message, puis la retrouve dans le code
 
 ## Deux tours de function calling
 
-Prenez la demande « Lis `README.md` et résume le projet ». Le harness a besoin de deux appels au modèle. Le premier renvoie une demande d’outil. Le second renvoie la réponse finale, une fois le fichier lu. Avancez pas à pas et arrêtez-vous avant le résultat de l’outil : que sait le modèle à cet instant ?
+Prenez la demande "Lis `README.md` et résume le projet". Le harness a besoin de deux appels au modèle. Le premier renvoie une demande d’outil. Le second renvoie la réponse finale, une fois le fichier lu. Avancez pas à pas et arrêtez-vous avant le résultat de l’outil : que sait le modèle à cet instant ?
 
 ```animated
 sequenceDiagram
@@ -215,11 +215,11 @@ Le mini-harness fixe 15 tours, 120 secondes par appel au modèle et 60 secondes 
 [ReAct](https://arxiv.org/abs/2210.03629) (Yao et al., 2022) décrit cette alternance entre raisonnement, action et observation :
 
 ```text
-Tour 1 : raisonnement → « Je dois lire ce fichier »
+Tour 1 : raisonnement → "Je dois lire ce fichier"
          action       → read_file("README.md")
-         observation  → « # Mini harness… »
+         observation  → "# Mini harness…"
 
-Tour 2 : raisonnement → « J’ai ce qu’il faut »
+Tour 2 : raisonnement → "J’ai ce qu’il faut"
          réponse finale
 ```
 
@@ -258,5 +258,5 @@ bun run index.ts --debug "Lis README.md et résume le projet"
 ## Sources
 
 - Yao et al., [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629), 2022
-- [Anthropic, « Building effective agents »](https://www.anthropic.com/engineering/building-effective-agents)
+- [Anthropic, "Building effective agents"](https://www.anthropic.com/engineering/building-effective-agents)
 - [OpenAI, guide du function calling](https://developers.openai.com/api/docs/guides/function-calling)

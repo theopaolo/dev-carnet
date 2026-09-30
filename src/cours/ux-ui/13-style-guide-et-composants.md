@@ -2,7 +2,7 @@
 title: 'Style guide, tokens et composants'
 order: 13
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # Style guide, tokens et composants
@@ -12,6 +12,8 @@ Dans Figma, vous allez définir les couleurs, les styles de texte et les espacem
 ## Le style guide
 
 Le style guide documente les règles visuelles de l'interface : polices, couleurs, espacements et exemples d'utilisation. Il traduit la charte graphique du projet pour les écrans.
+
+Ces règles donnent les mêmes repères d'un écran à l'autre : présentation des boutons, libellés et erreurs. Le **focus** indique quel élément reçoit les actions du clavier. Vérifiez que vos choix permettent d'accomplir les tâches des user stories et respectent le brief.
 
 | Notion | Ce qu'elle contient | Exemple pour la MJC |
 | --- | --- | --- |
@@ -26,7 +28,7 @@ Un token peut se retrouver dans une variable Figma et une variable CSS. Les vari
 
 ## Les design tokens
 
-Un token donne un nom à une valeur. Par exemple, `color.action.primary` désigne la couleur de l'action principale, même si cette couleur change.
+Un design token est une valeur de design associée à un nom : couleur, espacement ou taille de texte. Par exemple, `color.action.primary` nomme la couleur de l'action principale. Le nom reste le même quand vous changez la couleur.
 
 | Token | Valeur de départ | Usage |
 | --- | --- | --- |
@@ -43,9 +45,9 @@ Un token donne un nom à une valeur. Par exemple, `color.action.primary` désign
 
 Ces valeurs et les [quatre styles de texte](/ux-ui/12-typographie-et-couleurs/#quatre-styles-pour-la-mjc) forment la mini-charte de l'exercice. Si vous avez déjà une charte, conservez-la et vérifiez ses contrastes.
 
-### Valeur de base, rôle et alias
+### Token primitif, token sémantique et alias
 
-Un token de base nomme une valeur, par exemple `color.orange.700 = #c2410c`. Un token sémantique nomme son usage, par exemple `color.action.primary`. Un **alias** fait référence à un autre token au lieu de recopier sa valeur.
+Un token primitif nomme une valeur, par exemple `color.orange.700 = #c2410c`. Un token sémantique nomme son usage, par exemple `color.action.primary`. Un **alias** fait référence à un autre token au lieu de recopier sa valeur.
 
 ```text
 color.orange.700 = #c2410c
@@ -67,13 +69,19 @@ Une variable contient une valeur d'un type donné, par exemple une couleur ou un
 2. Créez une collection nommée `MJC`. Ajoutez les couleurs avec le type **Color** et les espacements avec le type **Number**.
 3. Dans Figma, utilisez `/` pour regrouper les noms : `color/action/primary`, `space/m`. La notation avec des points dans ce cours désigne le même choix.
 4. Sélectionnez le fond du bouton. Dans **Fill**, ouvrez le sélecteur des styles et variables et choisissez `color/action/primary`.
-5. Dans le padding ou le gap d'un auto layout, utilisez **Apply variable** pour choisir `space/m`. Selon le champ, l'option apparaît au survol ou dans son menu contextuel.
+5. Dans le padding (espace intérieur) ou le gap (espace entre les éléments) d'un auto layout, utilisez **Apply variable** pour choisir `space/m`. Selon le champ, l'option apparaît au survol ou dans son menu contextuel.
 
 Modifier la valeur d'une variable met à jour les propriétés qui lui sont liées. Taper la même couleur hexadécimale à deux endroits ne crée aucun lien. [Créer des variables](https://help.figma.com/hc/en-us/articles/15145852043927-Create-and-manage-variables-and-collections) et [les appliquer](https://help.figma.com/hc/en-us/articles/15343107263511-Apply-variables-to-designs), aide officielle de Figma.
 
 ### Enregistrer les styles de texte
 
 Sélectionnez un texte, réglez sa police, sa taille, sa graisse et son interligne. Ouvrez le sélecteur de styles de **Typography**, puis créez un style. Nommez les styles `text/page-title`, `text/section-title`, `text/body` et `text/label`. Appliquez-les aux textes de votre écran.
+
+### Pourquoi réutiliser les styles
+
+Si les libellés de dix champs sont réglés séparément, corriger leur interligne demande dix modifications et peut laisser des écarts entre les écrans. Un style partagé permet de corriger ce réglage pour les textes qui lui restent liés. Les variables jouent le même rôle pour leurs valeurs, comme une couleur ou un espacement.
+
+Un style partagé reproduit aussi ses défauts, comme un contraste insuffisant. Testez-le sur la fiche, le formulaire et la confirmation, puis reportez les corrections dans le code.
 
 ### Vérifier que le lien fonctionne
 
@@ -83,7 +91,7 @@ Faites le même essai avec `space/m`, de 16 à 20, puis revenez à 16. Le paddin
 
 ## Du style guide au CSS
 
-Pour nommer la variable CSS, remplacez les points ou les `/` par des tirets et ajoutez `--` au début.
+Dans cet exercice, nous nommons les propriétés personnalisées CSS (souvent appelées variables CSS) en remplaçant les points ou les `/` par des tirets, avec `--` au début.
 
 | Token | Variable Figma | Propriété CSS |
 | --- | --- | --- |
@@ -118,20 +126,20 @@ Reportez les valeurs de Figma dans le CSS. Leur synchronisation nécessite un ou
 3. Mesurez le contraste du texte sur le fond et du texte sur le bouton. Notez les deux couples de couleurs et leurs rapports.
 4. Faites l'essai de modification d'une couleur et d'un espacement sur deux éléments liés, puis rétablissez la charte.
 
-Rendu : votre planche de styles, les variables et une carte qui les utilise, dans la section « 8. UI et maquette » de votre fichier personnel.
+Rendu : votre planche de styles, les variables et une carte qui les utilise, dans la section "8. UI et maquette" de votre fichier personnel.
 
 ## Les composants
 
-Un composant Figma est un modèle réutilisable. Les exemplaires placés sur les écrans sont ses **instances**, qui conservent un lien avec le composant principal.
+Un composant Figma est un modèle réutilisable. Les exemplaires placés sur les écrans sont ses **instances**, qui conservent un lien avec le composant principal (*main component*).
 
 | Décision | Dans Figma | Dans le code |
 | --- | --- | --- |
-| Une structure commune | Un composant principal « Bouton » | Un élément HTML stylé ou un composant de l'application |
-| Du contenu variable | Une propriété texte « Libellé » | Le texte ou une propriété du composant |
+| Une structure commune | Un composant principal "Bouton" | Un élément HTML stylé ou un composant de l'application |
+| Du contenu variable | Une propriété texte "Libellé" | Le texte ou une propriété du composant |
 | Un état prévu | Des variantes normal, focus, désactivé | `:focus-visible`, `disabled` ou l'état de l'application |
 | Plusieurs utilisations | Des instances | Plusieurs boutons construits avec les mêmes règles |
 
-« Réserver » et « Rejoindre la liste d'attente » peuvent utiliser le même composant avec des libellés différents. La logique métier décide quelle action déclencher. Créer un composant Figma ne génère pas cette logique.
+"Réserver" et "Rejoindre la liste d'attente" peuvent utiliser le même composant avec des libellés différents. La logique métier décide quelle action déclencher. Créer un composant Figma ne génère pas cette logique.
 
 ### Propriétés, variantes et surcharges
 
@@ -156,7 +164,7 @@ Un bouton en **Hug** s'adapte à son contenu. **Fill** lui fait occuper la large
 | État | Ce qu'il montre | À vérifier |
 | --- | --- | --- |
 | Normal | L'élément au repos | Son rôle reste reconnaissable. |
-| Survol | Le pointeur passe dessus | Le changement ne déplace pas les éléments voisins. |
+| Survol (*hover*) | Le pointeur passe dessus | Le changement ne déplace pas les éléments voisins. |
 | Focus | L'élément reçoit les actions du clavier | Un contour visible permet de le repérer. |
 | Sélectionné | La personne a fait un choix | Un texte ou une coche accompagne la couleur. |
 | Désactivé | Une action est indisponible | La raison et la suite possible sont compréhensibles. |

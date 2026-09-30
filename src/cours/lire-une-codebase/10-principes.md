@@ -31,7 +31,7 @@ Quelques indicateurs qu’un code est peut-être trop complexe :
 
 N’implémente pas aujourd’hui des fonctionnalités dont tu pourrais avoir besoin demain. Développe ce qui répond au besoin actuel.
 
-Le « au cas où » ajoute de la complexité, augmente le coût de maintenance et ralentit le développement, sans garantie que ce code serve un jour.
+Le "au cas où" ajoute de la complexité, augmente le coût de maintenance et ralentit le développement, sans garantie que ce code serve un jour.
 
 YAGNI n’interdit pas de penser à l’évolution du logiciel. Il demande de **concevoir un code facile à faire évoluer** au lieu de développer des fonctionnalités hypothétiques.
 
@@ -54,7 +54,7 @@ Quand une unité de code remplit plusieurs rôles, une modification pour l’un 
 | I   | Interface Segregation | Mieux vaut plusieurs interfaces spécifiques qu'une seule interface fourre-tout. |
 | D   | Dependency Inversion | Le code métier dépend d'abstractions, pas d'implémentations concrètes. |
 
-_Source : Robert C. Martin, « Design Principles and Design Patterns » (2000)._
+_Source : Robert C. Martin, "Design Principles and Design Patterns" (2000)._
 
 ---
 
@@ -64,4 +64,4 @@ _Source : Robert C. Martin, « Design Principles and Design Patterns » (2000)._
 - Martin Fowler, Kent Beck, _Refactoring_ (1999, rééd. 2018) : règle de trois, catalogue de refactorings.
 - Robert C. Martin, _Design Principles and Design Patterns_ (2000) : les cinq principes SOLID.
 - Kent Beck, _Extreme Programming Explained_ (1999) : YAGNI, simplicité incrémentale.
-- Martin Fowler, [article « Yagni »](https://martinfowler.com/bliki/Yagni.html).
+- Martin Fowler, [article "Yagni"](https://martinfowler.com/bliki/Yagni.html).

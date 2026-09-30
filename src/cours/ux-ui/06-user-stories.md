@@ -2,20 +2,20 @@
 title: 'Les user stories'
 order: 6
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # Les user stories
 
-Une user story formule une action que votre persona veut accomplir et la raison pour laquelle elle compte.
+Une user story décrit ce qu'une personne veut faire et dans quel but.
 
 ## Écrire une story
 
 > En tant que [persona], je veux [action] afin de [but].
 
-Par exemple : « En tant qu'Inès, lycéenne, je veux voir les menus et leurs prix afin de choisir un repas à moins de 7 €. »
+Par exemple : "En tant qu'Inès, lycéenne, je veux voir les menus et leurs prix afin de choisir un repas à moins de 7 €."
 
-Décrivez ce que la personne veut faire. « Je veux un bouton vert » décrit déjà une solution.
+Décrivez ce que la personne veut faire. "Je veux un bouton vert" décrit déjà une solution.
 
 ## Vérifier la story
 
@@ -42,7 +42,7 @@ Une story décrit un besoin. Une spécification technique décrit comment réali
 
 | Spécification technique | User story |
 | --- | --- |
-| « Créer une table SQL des commandes. » | « En tant que cliente du snack, je veux retrouver mes commandes passées afin de recommander mon menu habituel. » |
+| "Créer une table SQL des commandes." | "En tant que cliente du snack, je veux retrouver mes commandes passées afin de recommander mon menu habituel." |
 
 ## La story map
 
@@ -52,22 +52,22 @@ Une équipe agile peut livrer un produit par petites versions, recueillir des re
 
 ### À quoi elle sert
 
-- Voir le produit en entier. Dans un backlog, les stories forment une simple liste et on perd le fil du parcours.
+- Voir le parcours complet, là où le backlog présente une liste de travaux à réaliser.
 - Repérer les trous, par exemple une étape sans aucune story.
 - Choisir ce qui entre dans la première version, et ce qui attend.
 - Parler du produit avec toute l'équipe : design, développement, client.
 
 ### Les trois niveaux
 
-- Les activités sont les grandes tâches de l'utilisateur, par exemple « Commander un repas ».
+- Les activités sont les grandes tâches de l'utilisateur, par exemple "Commander un repas".
 - Les étapes découpent chaque activité, dans l'ordre, de gauche à droite.
 - Les détails sont les actions précises de chaque étape. Ils s'empilent sous leur étape, le plus important en haut.
 
-Chaque carte décrit ce que fait l'utilisateur. On écrit « Payer par carte », pas « Appeler l'API de paiement ». Chaque détail devient ensuite une story, avec ses critères d'acceptation. Dans le backlog, une étape devient souvent une _epic_, une grande story découpée en plusieurs petites.
+Chaque carte décrit ce que fait l'utilisateur. On écrit "Payer par carte", pas "Appeler l'API de paiement". Chaque détail devient ensuite une story, avec ses critères d'acceptation. Dans le backlog, une étape peut correspondre à une *epic*, un ensemble de besoins à découper en plusieurs stories.
 
 ### La ligne de version
 
-Une ligne horizontale sépare la première version du reste. Au-dessus de la ligne, l'équipe place ce qu'elle livre d'abord. Cette première version doit permettre de faire tout le parcours, même simplement. On l'appelle le produit minimum viable, ou MVP (_minimum viable product_).
+Une ligne horizontale, la *release line*, sépare la première version du reste. Au-dessus de la ligne, l'équipe place ce qu'elle livre d'abord. Cette première version doit permettre de faire tout le parcours, même simplement. On l'appelle le produit minimum viable, ou MVP (_minimum viable product_).
 
 Dans votre projet, la première version est la page de réservation à coder.
 
@@ -101,14 +101,14 @@ La journey map suit la personne : ce qu'elle fait, pense et ressent, sur tous l
 
 ## Atelier : écrire les besoins du persona
 
-1. Reprenez le brief MJC et votre persona. En haut de la carte, notez l'activité « Réserver une séance d'essai ». Placez les étapes de gauche à droite : choisir un atelier, réserver un créneau, connaître le résultat.
+1. Reprenez le brief MJC et votre persona. En haut de la carte, notez l'activité "Réserver une séance d'essai". Placez les étapes de gauche à droite : choisir un atelier, réserver un créneau, connaître le résultat.
 2. Sous chaque étape, placez les actions précises de la personne, une par carte. Rangez les plus importantes en haut. Prévoyez aussi ce qui se passe si la séance est complète ou si la personne est mineure.
 3. Tracez une ligne entre la première version et les améliorations futures. Vérifiez qu'avec les cartes au-dessus de la ligne, la personne peut aller du choix de l'atelier au résultat de sa réservation. Les règles du brief doivent être respectées dès cette version, y compris la liste d'attente et le message sur l'autorisation parentale.
-4. À partir des cartes de cette première version, écrivez trois user stories : une pour choisir un atelier, une pour réserver un créneau et une pour connaître le résultat. Utilisez la forme « En tant que…, je veux… afin de… ».
+4. À partir des cartes de cette première version, écrivez trois user stories : une pour choisir un atelier, une pour réserver un créneau et une pour connaître le résultat. Utilisez la forme "En tant que…, je veux… afin de…".
 
 Pour la réservation, ajoutez deux critères qui permettront de vérifier qu'elle fonctionne. Gardez en tête la séance complète et l'accord parental.
 
-Rendu : la story map avec sa ligne de version, trois stories et deux critères dans le cadre « 4. Story map et user stories » de votre fichier de projet.
+Rendu : la story map avec sa ligne de version, trois stories et deux critères dans la frame "4. Story map et user stories" de votre fichier de projet.
 
 ## Pour aller plus loin
 

@@ -27,7 +27,7 @@ L'application fictive **Réserve ta place** stocke les réservations d'ateliers 
 >
 > L'équipe réutilise ainsi un service qu'elle administre déjà. Le développement local demande une base de test accessible. La configuration des sauvegardes et le test de restauration restent à vérifier.
 
-Le service existant explique le choix. « PostgreSQL est performant » ne donnerait pas cette information.
+Le service existant explique le choix. "PostgreSQL est performant" ne donnerait pas cette information.
 
 ## Modèle de note à adapter
 
@@ -63,7 +63,7 @@ Ajoute les liens vers le code, la configuration ou les échanges conservés.
 Indique les informations que tu n'as pas pu retrouver.
 ```
 
-Sépare les raisons confirmées des hypothèses. « Je connaissais cet outil et le délai était court » suffit si c'est la raison réelle du choix.
+Sépare les raisons confirmées des hypothèses. "Je connaissais cet outil et le délai était court" suffit si c'est la raison réelle du choix.
 
 Quand le choix change, conserve la note précédente, marque-la comme remplacée et ajoute un lien vers la nouvelle décision.
 
@@ -136,7 +136,7 @@ Ouvre ensuite le commit identifié avec `git show` suivi de son identifiant. Le 
 
 Pour la référence du code, lance npm run docs:api après installation. [reserver et annuler](https://github.com/theopaolo/cours-documentation-web/blob/main/demo/src/reservations.mjs) comportent des annotations JSDoc sur les paramètres, effets et erreurs. La génération extrait ces informations. Les tests vérifient les comportements couverts.
 
-Exercice : explique pourquoi le message « Réservation déjà existante » peut arriver alors qu’il reste une place. Le doublon est contrôlé indépendamment de la capacité et inclut les réservations annulées. Si ce choix ne convient plus au métier, propose une évolution de la règle et de l’ADR.
+Exercice : explique pourquoi le message "Réservation déjà existante" peut arriver alors qu’il reste une place. Le doublon est contrôlé indépendamment de la capacité et inclut les réservations annulées. Si ce choix ne convient plus au métier, propose une évolution de la règle et de l’ADR.
 
 ## Exercice : documenter un choix et une règle
 

@@ -7,7 +7,7 @@ updatedAt: "2026-09-23"
 
 # Formuler une tâche
 
-Un agent fonctionne mieux quand il connaît le résultat attendu et la preuve qui le valide. « Améliore cette application » l’oblige à deviner. Il devinera avec assurance, et vous lirez « Done! » à propos de quelque chose que vous n’aviez pas demandé.
+Un agent fonctionne mieux quand il connaît le résultat attendu et la preuve qui le valide. "Améliore cette application" l’oblige à deviner. Il devinera avec assurance, et vous lirez "Done!" à propos de quelque chose que vous n’aviez pas demandé.
 
 ## Les quatre éléments
 
@@ -47,7 +47,7 @@ src/forms/. La tâche est terminée quand :
 
 ## Définir la fin avant de commencer
 
-Pour une tâche simple, deux phrases suffisent. Pour une fonctionnalité, écrivez les critères d’acceptation avant de lancer l’agent. Quand le résultat ne correspond pas à l’attente, la cause est souvent que personne n’avait défini ce que « terminé » voulait dire.
+Pour une tâche simple, deux phrases suffisent. Pour une fonctionnalité, écrivez les critères d’acceptation avant de lancer l’agent. Quand le résultat ne correspond pas à l’attente, la cause est souvent que personne n’avait défini ce que "terminé" voulait dire.
 
 Des critères observables :
 
@@ -83,13 +83,13 @@ Sans modifier les fichiers, explique comment tu ajouterais un outil
 list_files(path). Cite les fichiers concernés et les vérifications à faire.
 ```
 
-Relisez le plan avant de dire « vas-y ». Corriger un plan coûte moins que corriger un diff de 400 lignes. Pour trois lignes de CSS, sautez cette étape.
+Relisez le plan avant de dire "vas-y". Corriger un plan coûte moins que corriger un diff de 400 lignes. Pour trois lignes de CSS, sautez cette étape.
 
-Vous pouvez aussi demander à l’agent de vous interroger avant de commencer : « Pose-moi les questions nécessaires pour lever les ambiguïtés, une à la fois. » C’est utile quand vous avez une idée floue de ce que vous voulez.
+Vous pouvez aussi demander à l’agent de vous interroger avant de commencer : "Pose-moi les questions nécessaires pour lever les ambiguïtés, une à la fois." C’est utile quand vous avez une idée floue de ce que vous voulez.
 
 ## Garder une portée limitée
 
-Une tâche bornée est plus facile à exécuter, à tester, à relire et à annuler. « Corrige le comportement du formulaire de connexion » vaut mieux que « refactorise tout le frontend ». Découpez une tâche énorme, sans découper artificiellement ce que l’agent peut comprendre en une fois.
+Une tâche bornée est plus facile à exécuter, à tester, à relire et à annuler. "Corrige le comportement du formulaire de connexion" vaut mieux que "refactorise tout le frontend". Découpez une tâche énorme, sans découper artificiellement ce que l’agent peut comprendre en une fois.
 
 ## Travailler dans Git
 
@@ -97,7 +97,7 @@ L’agent doit pouvoir modifier librement sans détruire votre travail. Travaill
 
 ## Vérifier dans l’environnement réel
 
-« L’implémentation devrait maintenant fonctionner » n’est pas une preuve. Les signaux utiles sont un build réussi, des types et un lint sans erreur, des tests verts, l’application lancée et l’interface regardée. Un agent capable de lancer les tests doit les lancer. Demandez-lui aussi ce qu’il n’a pas pu vérifier :
+"L’implémentation devrait maintenant fonctionner" n’est pas une preuve. Les signaux utiles sont un build réussi, des types et un lint sans erreur, des tests verts, l’application lancée et l’interface regardée. Un agent capable de lancer les tests doit les lancer. Demandez-lui aussi ce qu’il n’a pas pu vérifier :
 
 ```text
 Termine par la liste des vérifications que tu n’as pas pu faire.
@@ -107,11 +107,11 @@ Termine par la liste des vérifications que tu n’as pas pu faire.
 
 L’agent écrit du code, des tests, lance les tests et commente une pull request. Les vérifications déterministes restent déterministes. L’agent ouvre une pull request, la CI lance le build, la vérification des types, le lint, les tests et l’analyse de sécurité, puis une personne relit avant la fusion.
 
-Ne remplacez pas `npm test` par « demande au modèle s’il pense que les tests passeraient ».
+Ne remplacez pas `npm test` par "demande au modèle s’il pense que les tests passeraient".
 
 ## Juger le résultat, pas le discours
 
-Les modèles écrivent des phrases convaincantes. « J’ai soigneusement vérifié l’implémentation » ne dit rien du code. Évaluez le diff, le comportement, les tests, le rendu et les logs. Le test vert ne remplace pas la lecture du diff, et la réponse finale de l’agent ne remplace ni l’un ni l’autre.
+Les modèles écrivent des phrases convaincantes. "J’ai soigneusement vérifié l’implémentation" ne dit rien du code. Évaluez le diff, le comportement, les tests, le rendu et les logs. Le test vert ne remplace pas la lecture du diff, et la réponse finale de l’agent ne remplace ni l’un ni l’autre.
 
 ## Quand ça part dans la mauvaise direction
 
@@ -122,9 +122,9 @@ Les modèles écrivent des phrases convaincantes. « J’ai soigneusement vérif
 
 ## Exercice
 
-Réécrivez « Améliore mon code » pour votre projet avec les quatre éléments. Faites relire la demande à une autre personne : peut-elle dire, sans vous poser de question, quand la tâche sera terminée ?
+Réécrivez "Améliore mon code" pour votre projet avec les quatre éléments. Faites relire la demande à une autre personne : peut-elle dire, sans vous poser de question, quand la tâche sera terminée ?
 
 ## Sources
 
 - [OpenAI, guide de prompting pour Codex](https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide)
-- [Anthropic, « Claude Code best practices »](https://www.anthropic.com/engineering/claude-code-best-practices)
+- [Anthropic, "Claude Code best practices"](https://www.anthropic.com/engineering/claude-code-best-practices)

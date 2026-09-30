@@ -7,7 +7,7 @@ updatedAt: "2026-09-24"
 
 # Lire du code
 
-Les développeur·ses passent près de 60 % de leur temps à comprendre du code, et bien moins à en écrire (Xia et al., « Measuring Program Comprehension », _IEEE Transactions on Software Engineering_, 2018).
+Les développeur·ses passent près de 60 % de leur temps à comprendre du code, et bien moins à en écrire (Xia et al., "Measuring Program Comprehension", _IEEE Transactions on Software Engineering_, 2018).
 
 Dans _The Programmer's Brain_ (2021), Felienne Hermans distingue trois sources de confusion quand on lit du code :
 
@@ -39,7 +39,7 @@ Ordre de lecture : **arborescence** → **README** → **package.json et imports
 
 ### Repérer les beacons
 
-_Les « beacons » (balises) sont des identifiants, noms de fonctions, de variables ou de classes, qui signalent l'intention du code. Ce sont les premières prises de sens dans une codebase inconnue._
+_Les "beacons" (balises) sont des identifiants, noms de fonctions, de variables ou de classes, qui signalent l'intention du code. Ce sont les premières prises de sens dans une codebase inconnue._
 
 Cherche les fonctions et variables dont le nom dit clairement ce qu'elles font. Ce sont tes points d'appui. Note ce que tu crois comprendre, tu vérifieras ensuite.
 

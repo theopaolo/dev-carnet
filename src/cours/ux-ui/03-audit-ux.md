@@ -2,7 +2,7 @@
 title: "L'audit UX"
 order: 3
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-28"
+updatedAt: "2026-09-30"
 ---
 
 # L'audit UX
@@ -13,14 +13,14 @@ Un audit UX repère ce qui aide ou gêne une personne lorsqu'elle utilise une in
 2. Notez ce qui vous aide ou vous gêne, en vous appuyant sur les lois UX vues en cours.
 3. Ajoutez une capture pour illustrer vos remarques et proposez une amélioration.
 
-Déposez le tout dans la section « Audit UX » de votre fichier Figma ou Penpot.
+Déposez le tout dans la section "Audit UX" de votre fichier Figma ou Penpot.
 
 ## Les sites au choix
 
 | Site | La tâche |
 | --- | --- |
 | [Hacker News](https://news.ycombinator.com/) | Ouvrir les commentaires du troisième article qui en a, sans ouvrir l'article. |
-| [Wikipédia](https://www.wikipedia.org/) | Trouver l'article « volcan » en français depuis le portail. |
+| [Wikipédia](https://www.wikipedia.org/) | Trouver l'article "volcan" en français depuis le portail. |
 | [Photopea](https://www.photopea.com/) | Entrer dans l'éditeur, puis trouver comment démarrer un projet vide. |
 
 Ne créez pas de compte et ne publiez rien.
@@ -41,9 +41,9 @@ Exemple pour l'appli d'un snack imaginaire :
 
 | Loi | Effet sur la tâche | Ce que j'ai vu | Ce que je changerais |
 | --- | --- | --- | --- |
-| Fitts | Gêne la commande | Le bouton « Commander » fait la taille d'un mot et touche le lien « Annuler ». J'ai appuyé deux fois sur « Annuler » par erreur. | Un bouton sur toute la largeur de l'écran, éloigné de « Annuler ». |
+| Fitts | Gêne la commande | Le bouton "Commander" fait la taille d'un mot et touche le lien "Annuler". J'ai appuyé deux fois sur "Annuler" par erreur. | Un bouton sur toute la largeur de l'écran, éloigné de "Annuler". |
 
-Notez ce que vous avez vu ou fait. « C'est mal fait » ne décrit aucun problème.
+Décrivez l'action et l'obstacle observés : "J'ai appuyé sur Annuler en voulant commander" permet de comprendre le problème.
 
 ## Pour la discussion
 

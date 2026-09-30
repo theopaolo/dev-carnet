@@ -6,6 +6,7 @@
 @import "piloti/compositions.css" layer(compositions);
 @import "./controls.css" layer(components);
 @import "./prose.css" layer(components);
+@import "./course-reading.css" layer(components);
 @import "./diagrams.css" layer(components);
 @import "./sequence.css" layer(components);
 @import "./notebook.css" layer(components);

@@ -2,12 +2,12 @@
 title: 'La hiérarchie visuelle'
 order: 11
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # La hiérarchie visuelle
 
-L'UI design définit l'apparence d'une interface : ses boutons, ses champs et leurs états, comme une erreur ou une sélection. La taille, le contraste, la position et l'espacement guident la lecture. Sur la fiche d'un atelier, le bouton « Réserver » doit se distinguer des liens secondaires.
+L'UI design définit l'apparence d'une interface : ses boutons, ses champs et leurs états, comme une erreur ou une sélection. La taille, le contraste, la position et l'espacement guident la lecture. Sur la fiche d'un atelier, le bouton "Réserver" doit se distinguer des liens secondaires.
 
 Pour l'atelier, vérifiez l'ordre de lecture, l'association entre les champs et leurs libellés, et les contrastes. Les états doivent rester compréhensibles sans la couleur. Les exemples de composition permettent d'aller plus loin.
 
@@ -20,15 +20,15 @@ Dans l'appli du snack, Inès cherche un repas à moins de 7 €. Les choix visue
 | Élément | Choix UI | Ce qu'Inès doit comprendre |
 | --- | --- | --- |
 | Carte d'un menu | Nom et prix lisibles, même place sur chaque carte | Ce qu'elle peut commander avec son budget |
-| Bouton « Commander » | Action principale visible, distincte du lien de retour | Comment valider son choix |
+| Bouton "Commander" | Action principale visible, distincte du lien de retour | Comment valider son choix |
 | Champ du formulaire | Libellé visible et message près du champ concerné | Quelle information saisir ou corriger |
 | Confirmation | Message explicite et récapitulatif de la commande | Que la commande est reçue et ce qui se passe ensuite |
 
-Une couleur seule ne suffit pas à expliquer un état. Écrivez « Indisponible » ou « Commande confirmée » et gardez le texte lisible sur son fond.
+Une couleur seule ne suffit pas à expliquer un état. Écrivez "Indisponible" ou "Commande confirmée" et gardez le texte lisible sur son fond.
 
 ## Où regarder en premier
 
-La hiérarchie visuelle fait ressortir certains éléments avant les autres. Un titre doit permettre d'identifier la page, puis les styles du texte aident à distinguer la description, les informations pratiques et les actions.
+La hiérarchie visuelle indique quoi lire en premier. Le titre identifie la page. Les autres styles distinguent la description, les informations pratiques et les actions.
 
 Dans une étude publiée en 2006, Gitte Lindgaard et son équipe ont recueilli des jugements sur l'attrait visuel de pages web après 50 millisecondes d'affichage. Cette première impression porte sur l'apparence de la page. Elle ne dit pas si la personne saura y réserver une séance.
 
@@ -76,9 +76,9 @@ Réservez la couleur d'accent à l'action principale et aux messages importants.
 
 ### La position
 
-La partie visible à l'ouverture doit permettre de comprendre sur quelle page on se trouve. Placez ensuite les informations dans l'ordre où la personne en a besoin. Sur une fiche atelier, elle doit pouvoir lire les horaires avant de choisir un créneau.
+La partie visible sans défiler, au-dessus de la ligne de flottaison (*above the fold*), doit permettre de comprendre sur quelle page on se trouve. Placez ensuite les informations dans l'ordre où la personne en a besoin. Sur une fiche atelier, elle doit pouvoir lire les horaires avant de choisir un créneau.
 
-En français, le sens de lecture va de gauche à droite. Le regard dépend aussi de la tâche, du contenu et de sa mise en page. Les parcours en F et en Z donnent des repères, sans imposer un trajet à chaque personne.
+En français, le sens de lecture va de gauche à droite. Le regard dépend aussi de la tâche, du contenu et de sa mise en page. Les parcours en F et en Z (*F-pattern*, *Z-pattern*) donnent des repères, sans imposer un trajet à chaque personne.
 
 | Parcours | Sur quelles pages | Trajet décrit | Comment s'en servir |
 | --- | --- | --- | --- |
@@ -89,7 +89,7 @@ Une information nécessaire pour choisir un atelier, comme l'âge minimum, doit 
 
 ### L'espacement
 
-L'espacement groupe et sépare. C'est la loi de proximité de la [Gestalt](/ux-ui/02-lois-de-l-ux/#les-principes-de-la-gestalt) : un libellé proche de son champ se lit avec lui. Si le libellé est aussi loin de son champ que du champ voisin, leur association devient ambiguë.
+Placez chaque libellé plus près de son champ que du champ voisin. La personne comprend alors à quelle saisie il correspond. C'est la loi de proximité de la [Gestalt](/ux-ui/02-lois-de-l-ux/#les-principes-de-la-gestalt).
 
 L'espace vide, ou _white space_, aide à isoler un élément. Un bouton séparé du paragraphe voisin est plus facile à repérer comme une action distincte.
 
@@ -103,7 +103,7 @@ Gardez moins d'espace entre un libellé et son champ qu'entre deux champs. Sépa
 
 ## Vérifier la hiérarchie
 
-Plissez les yeux devant votre écran, ou floutez une capture, pour repérer les éléments qui dominent la page. Si une décoration ressort davantage que le titre ou l'action principale, revoyez sa taille, son contraste ou sa place. Vérifiez ensuite la lisibilité des textes sans le flou.
+Plissez les yeux devant votre écran (le *squint test*), ou floutez une capture, pour repérer les éléments qui dominent la page. Si une décoration ressort davantage que le titre ou l'action principale, revoyez sa taille, son contraste ou sa place. Vérifiez ensuite la lisibilité des textes sans le flou.
 
 Essayez sur ces trois pages. Pour chacune, qu'est-ce que vous voyez en premier ? Quel levier produit cet effet ?
 

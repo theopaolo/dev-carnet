@@ -37,7 +37,7 @@ La quatrième règle empêche de créer une nouvelle réservation après annulat
 
 ## Construire le MCD et lire les cardinalités
 
-Une entité représente un type d'objet, comme Personne, Atelier ou Réservation. Ses propriétés décrivent cet objet : un atelier possède un titre, une date et une capacité. Une association relie les entités, par exemple « Personne effectue Réservation ».
+Une entité représente un type d'objet, comme Personne, Atelier ou Réservation. Ses propriétés décrivent cet objet : un atelier possède un titre, une date et une capacité. Une association relie les entités, par exemple "Personne effectue Réservation".
 
 Une cardinalité indique le nombre minimal et maximal de participations d'un objet à une association. `0,N` signifie zéro à plusieurs. `1,1` signifie exactement une.
 
@@ -130,7 +130,7 @@ La ressource [Bibi d’objets](https://docmost.ludique.dev/share/gcbrd7j46z/p/bi
 
 À partir de ces données, écris deux emprunts successifs du même objet par le même adhérent. Un emprunt doit pouvoir être distingué du précédent, par exemple par son identifiant. Une contrainte unique sur le seul couple adhérent-objet empêcherait ces deux occurrences. La règle d’unicité de Réserve ta place ne se transpose donc pas automatiquement.
 
-Précise aussi si « date de retour » est la date prévue ou le retour effectivement constaté. Si les deux sont utiles, nomme-les séparément. Demande si un objet peut appartenir à plusieurs catégories avant de choisir la cardinalité. Ces réponses sont des décisions du métier, aucune génération de SQL ne les invente.
+Précise aussi si "date de retour" est la date prévue ou le retour effectivement constaté. Si les deux sont utiles, nomme-les séparément. Demande si un objet peut appartenir à plusieurs catégories avant de choisir la cardinalité. Ces réponses sont des décisions du métier, aucune génération de SQL ne les invente.
 
 Pour reproduire les schémas, utilise les commandes du [kit](/documentation/10-demonstration/). Mocodo génère depuis un modèle textuel. SchemaSpy inspecte une base existante. Leurs entrées et leurs questions sont différentes.
 

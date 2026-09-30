@@ -2,7 +2,7 @@
 title: 'Le zoning et les wireframes'
 order: 9
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-29"
+updatedAt: "2026-09-30"
 ---
 
 # Le zoning et les wireframes
@@ -11,6 +11,30 @@ Inès ouvre l'appli du snack pour trouver un repas à moins de 7 €. Pour conce
 
 Le zoning, le wireframe, le mockup et le prototype permettent d'examiner ces choix à différents niveaux de détail. Vous allez les distinguer, puis dessiner le zoning et les wireframes de votre projet MJC.
 
+## Du besoin UX aux écrans de la MJC
+
+Reprenez le [brief](/ux-ui/04-brief-et-entretiens/), le [persona](/ux-ui/05-persona/) et les [user stories](/ux-ui/06-user-stories/). Ils précisent les règles du service, les besoins à traiter et les résultats à vérifier.
+
+Exemple : Yanis, 17 ans, veut réserver une séance d'essai et savoir quoi apporter. Ce profil fictif permet d'illustrer les règles du brief, sans remplacer vos entretiens.
+
+| Étape | Pourquoi la faire | Application à la MJC |
+| --- | --- | --- |
+| Sitemap | Organiser les pages et les rubriques pour retrouver les contenus | Prévoir la liste des ateliers, les fiches et l'accès à la réservation |
+| Zoning | Comparer rapidement l'ordre des grandes zones d'un écran | Placer l'âge accepté, les horaires et les disponibilités avant une longue présentation |
+| Wireframe | Vérifier les contenus, les éléments interactifs et les états avant de détailler l'apparence | Prévoir les champs du brief, l'accès à la liste d'attente et le message pour les mineurs |
+| Maquette graphique | Vérifier la lisibilité et le repérage des actions avec la charte, sur les appareils visés | Rendre "Réserver" identifiable et les consignes lisibles sur téléphone |
+| Style guide | Documenter les règles communes aux écrans | Donner le même traitement aux libellés, aux actions et aux erreurs |
+| Design tokens | Nommer les valeurs partagées pour les appliquer et les modifier de façon cohérente | Relier les boutons à `color.action.primary` dans le dessin puis dans le CSS |
+| Composants réutilisables | Partager une structure et ses états entre plusieurs usages | Réutiliser un champ avec son libellé, son focus et son message d'erreur |
+| Design system | Relier ces règles et composants à leur code, leurs usages et leur maintenance | Documenter quand utiliser chaque composant et comment reporter ses changements |
+| Prototype et test | Observer si une personne peut accomplir la tâche et comprendre le résultat | Faire essayer une réservation, puis vérifier la compréhension de la confirmation ou de l'attente |
+
+Distinguez une page et ses états : la confirmation peut s'afficher dans le formulaire, sans créer une page dans le sitemap. Le [schéma d'enchaînement](/ux-ui/10-user-flow-sequence-uml/) montre comment passer d'un écran ou d'un état à l'autre.
+
+Pour la story "En tant que mineur, je veux réserver une séance afin de découvrir une activité", le brief impose de permettre la réservation dès 15 ans et d'indiquer l'autorisation parentale à apporter. Le wireframe prévoit ce message, la maquette le rend lisible et le test vérifie qu'il est compris. Un besoin du persona guide la présentation, sans supprimer une règle du brief.
+
+Un test peut vous amener à revoir le contenu ou l'ordre des écrans. Le [style guide et les composants](/ux-ui/13-style-guide-et-composants/) vous aideront ensuite à appliquer les mêmes choix dans le code.
+
 ## Du zoning au prototype
 
 Ces représentations de l'interface sont des livrables : des dessins ou des fichiers que l'on partage pour discuter des choix de conception.
@@ -18,11 +42,11 @@ Ces représentations de l'interface sont des livrables : des dessins ou des fich
 | Livrable | Ce qu'on représente | La question à vérifier |
 | --- | --- | --- |
 | Zoning | Les grandes zones, avec leur nom et leur place | Où mettre les informations prioritaires ? |
-| Wireframe | Les contenus et les commandes de chaque zone | Que faut-il lire, choisir ou remplir ? |
+| Wireframe | Les contenus et les éléments interactifs de chaque zone | Que faut-il lire, choisir ou remplir ? |
 | Mockup, ou maquette graphique | L'apparence prévue : couleurs, typographie, images | Les éléments sont-ils lisibles et reconnaissables ? |
 | Prototype | Les réactions aux actions, simulées sur un parcours | La personne arrive-t-elle à accomplir sa tâche ? |
 
-Dans ce cours, « maquette » désigne la maquette graphique. Le mot peut avoir un sens plus large dans une équipe : précisez si vous attendez un dessin en gris, un écran avec ses styles ou un parcours à essayer.
+Dans ce cours, *maquette* désigne la maquette graphique. Le mot peut avoir un sens plus large dans une équipe : précisez si vous attendez un dessin en gris, un écran avec ses styles ou un parcours à essayer.
 
 On peut relier des wireframes pour les tester avant de travailler les couleurs. Si le test révèle qu'une information arrive trop tard, on peut revenir au zoning pour changer sa place.
 
@@ -62,7 +86,9 @@ Un autre exemple montre une page d'accueil en zoning, en wireframe puis en proto
 
 ## Le wireframe
 
-Un wireframe, ou « maquette fil de fer », détaille le contenu des zones : titres, textes, champs et boutons. Dans cet atelier, il reste en gris pour concentrer la discussion sur ce que la personne comprend et peut faire.
+Un wireframe, ou *maquette fil de fer*, détaille le contenu des zones : titres, textes, champs et boutons. Dans cet atelier, il reste en gris pour concentrer la discussion sur ce que la personne comprend et peut faire.
+
+Vérifiez d'abord si les horaires sont faciles à trouver, les libellés compris et les actions complètes. Le gris aide à concentrer ce premier échange sur l'organisation. Il n'est pas obligatoire pour tous les wireframes et ne garantit pas leur accessibilité : vérifiez aussi les contrastes et les états.
 
 Voici le wireframe de la même page :
 
@@ -80,17 +106,17 @@ Voici le wireframe de la même page :
 
 Un rectangle barré d'une croix remplace une image.
 
-Le zoning disait « Liste des plats, avec les prix ». Le wireframe écrit « Menu étudiant, 6,50 € ». Inès peut maintenant comparer ce prix à son budget. Le libellé « Commander » indique l'action proposée.
+Le zoning disait "Liste des plats, avec les prix". Le wireframe écrit "Menu étudiant, 6,50 €". Inès peut maintenant comparer ce prix à son budget. Le libellé "Commander" indique l'action proposée.
 
-Le dessin laisse toutefois une décision ouverte : comment sélectionner un plat avant de commander ? Ajoutez un bouton « Ajouter » sur chaque ligne ou prévoyez une fiche qui permet de choisir. Annotez le comportement retenu. Un bouton dessiné indique une action possible, mais ne la fait pas encore fonctionner.
+Le dessin laisse toutefois une décision ouverte : comment sélectionner un plat avant de commander ? Ajoutez un bouton "Ajouter" sur chaque ligne ou prévoyez une fiche qui permet de choisir. Annotez le comportement retenu. Un bouton dessiné indique une action possible, mais ne la fait pas encore fonctionner.
 
-Un wireframe peut aussi se dessiner à la main. Sur ces deux écrans d'une appli de commandes, les croix marquent les images et des vagues remplacent les paragraphes. Les titres et les boutons gardent leurs vrais mots : « Cancel », « Accept ».
+Un wireframe peut aussi se dessiner à la main. Sur ces deux écrans d'une appli de commandes, les croix marquent les images et des vagues remplacent les paragraphes. Les titres et les boutons gardent leurs vrais mots : "Cancel", "Accept".
 
 <img src="/ressources/ux-ui/wireframe-papier.webp" alt="Deux écrans de téléphone dessinés à la main. La liste des commandes montre des images barrées, des noms et des prix. La fiche d'une commande montre une grande image, un prix, les boutons Cancel et Accept et des lignes ondulées à la place du texte." width="768" height="604" loading="lazy">
 
 ### Basse et haute fidélité
 
-La fidélité décrit la proximité avec le produit envisagé. On peut préciser l'apparence, les contenus et les interactions séparément. Des textes réalistes peuvent donc figurer sur un croquis très simple.
+La fidélité désigne le degré de ressemblance avec le produit prévu. L'apparence, les contenus et les interactions peuvent avoir des niveaux de détail différents. Un croquis simple peut ainsi contenir des textes réalistes.
 
 | Représentation | Ce qu'elle permet d'examiner |
 | --- | --- |
@@ -100,7 +126,7 @@ La fidélité décrit la proximité avec le produit envisagé. On peut préciser
 
 <img src="/ressources/ux-ui/basse-haute-fidelite.webp" alt="Le même écran d'envoi de colis en trois versions. En basse fidélité, les logos des transporteurs sont des rectangles barrés. En haute fidélité, les vrais logos et prix apparaissent. Le design final ajoute la couleur bleue de la marque et des étiquettes colorées." width="1200" height="304" loading="lazy">
 
-Dans cette illustration, « haute fidélité » désigne le wireframe plus détaillé du milieu. Le niveau de détail visuel ne dit pas si un écran est interactif : une image très soignée peut être statique, et un croquis peut servir à tester un parcours. [Nielsen Norman Group distingue ces dimensions de la fidélité](https://www.nngroup.com/articles/ux-prototype-hi-lo-fidelity/).
+Dans cette illustration, *haute fidélité* désigne le wireframe plus détaillé du milieu. Le niveau de détail visuel ne dit pas si un écran est interactif : une image très soignée peut être statique, et un croquis peut servir à tester un parcours. [Nielsen Norman Group distingue ces dimensions de la fidélité](https://www.nngroup.com/articles/ux-prototype-hi-lo-fidelity/).
 
 Pour cet atelier, restez en basse fidélité, avec de vrais libellés. Les styles se travaillent dans la [maquette](/ux-ui/14-maquette-et-test/).
 
@@ -113,14 +139,20 @@ Pour cet atelier, restez en basse fidélité, avec de vrais libellés. Les style
 ### Ce qu'on évite
 
 - Les couleurs, les polices décoratives et les photos. On les choisit à l'étape de la maquette.
-- Le faux texte « lorem ipsum » dans les titres et les boutons. Écrivez les vrais libellés : « Commander » dit ce que fait le bouton.
-- Les détails : ombres, arrondis, icônes.
+- Le faux texte *lorem ipsum* dans les titres et les boutons. Écrivez les vrais libellés : "Commander" dit ce que fait le bouton.
+- Les détails : ombres, arrondis, icônes.
+
+### Pourquoi utiliser du vrai texte
+
+*Lorem ipsum* remplit une surface, mais ne permet pas de vérifier si une personne comprend quoi faire. "Rejoindre la liste d'attente" indique une autre action que "Réserver". Le message sur l'autorisation parentale permet de vérifier si un mineur comprend ce qu'il doit apporter.
+
+Les vrais libellés révèlent aussi les problèmes de longueur : un nom d'atelier peut prendre deux lignes, un bouton peut déborder. Utilisez-les dès le wireframe, avec les règles du brief. Les noms, dates et coordonnées peuvent être fictifs. Signalez les textes provisoires et gardez une longueur réaliste.
 
 ## Le mockup, ou maquette graphique
 
 Le mockup montre l'apparence prévue de l'écran. On applique le [style guide](/ux-ui/13-style-guide-et-composants/) aux contenus du wireframe : typographie, couleurs, espacements, images et icônes.
 
-Sur la page du snack, les rectangles barrés deviennent des photos de plats. On règle la taille et le contraste du prix de 6,50 € pour qu'il soit lisible sur téléphone. Le bouton « Commander » reprend le style des actions principales.
+Sur la page du snack, les rectangles barrés deviennent des photos de plats. On règle la taille et le contraste du prix de 6,50 € pour qu'il soit lisible sur téléphone. Le bouton "Commander" reprend le style des actions principales.
 
 Examinez la maquette à la taille d'un téléphone : le prix se distingue-t-il de la description ? Un nom de plat long reste-t-il lisible ? Le bouton se reconnaît-il comme une action ? Si un texte ne tient pas, adaptez la mise en page. Le wireframe reste une base que l'on peut corriger.
 
@@ -132,18 +164,18 @@ Un prototype permet d'essayer une partie du fonctionnement prévu. On prépare l
 
 Pour le snack, reliez uniquement les écrans nécessaires au scénario :
 
-1. Sur la liste des plats, « Ajouter » place le menu étudiant dans un panier simulé.
-2. Le panier affiche le menu, sa quantité et le total. « Retirer » permet de revenir à un panier vide.
-3. « Commander » ouvre le récapitulatif et les étapes prévues pour valider la commande.
+1. Sur la liste des plats, "Ajouter" place le menu étudiant dans un panier simulé.
+2. Le panier affiche le menu, sa quantité et le total. "Retirer" permet de revenir à un panier vide.
+3. "Commander" ouvre le récapitulatif et les étapes prévues pour valider la commande.
 4. Une confirmation donne le numéro de commande et l'heure de retrait.
 
-Faites essayer ce parcours avec la consigne : « Tu as 7 € et vingt minutes pour déjeuner. Commande un repas, puis indique quand tu pourras le récupérer. » Notez si la personne trouve le prix, comprend le total et repère l'heure de retrait.
+Faites essayer ce parcours avec la consigne : "Tu as 7 € et vingt minutes pour déjeuner. Commande un repas, puis indique quand tu pourras le récupérer." Notez si la personne trouve le prix, comprend le total et repère l'heure de retrait.
 
 Dans ce prototype d'exercice, aucun paiement n'est encaissé et aucune commande n'est envoyée au snack. Les écrans simulent ces résultats. Si une action n'a pas été préparée, notez cette limite au lieu de conclure que la personne ne sait pas utiliser l'interface.
 
 ### Tester dès les wireframes
 
-Vous pouvez faire ce premier essai avec des écrans en gris reliés dans Figma ou Penpot. Sur papier, la personne qui teste pointe une commande du doigt et vous présentez la feuille correspondant au résultat. Dans les deux cas, vous observez ses choix avant de finaliser les styles.
+Vous pouvez faire ce premier essai avec des écrans en gris reliés dans Figma ou Penpot. Sur papier, la personne qui teste pointe un bouton ou un lien du doigt et vous présentez la feuille correspondant au résultat. Dans les deux cas, vous observez ses choix avant de finaliser les styles.
 
 Si la personne cherche comment retirer le menu du panier, ajoutez ou clarifiez cette action et refaites l'essai. Les étapes pour relier les écrans et conduire le test sont détaillées dans [La maquette et le test](/ux-ui/14-maquette-et-test/).
 
@@ -162,10 +194,10 @@ Choisissez le livrable selon la question à résoudre.
 
 Pour chaque cas, nommez le livrable et dites ce qu'il permet de vérifier :
 
-1. Une feuille contient quatre rectangles : « En-tête », « Atelier », « Créneaux », « Réservation ».
-2. Un écran gris montre le champ « E-mail », un exemple de saisie et un message d'erreur.
+1. Une feuille contient quatre rectangles : "En-tête", "Atelier", "Créneaux", "Réservation".
+2. Un écran gris montre le champ "E-mail", un exemple de saisie et un message d'erreur.
 3. Une image de la fiche atelier présente les photos, les couleurs et les polices retenues. On ne peut pas agir dessus.
-4. Trois écrans en gris sont reliés. Un clic sur « Réserver » ouvre le formulaire, puis la confirmation.
+4. Trois écrans en gris sont reliés. Un clic sur "Réserver" ouvre le formulaire, puis la confirmation.
 
 <details>
 <summary>Voir le corrigé</summary>
@@ -183,41 +215,41 @@ Figma permet de dessiner et de relier des écrans dans le navigateur. Plusieurs 
 
 ### L'interface
 
-<img src="/ressources/ux-ui/figma-interface.webp" alt="L'interface de Figma avec cinq repères numérotés : 1 le panneau des pages et des calques à gauche, 2 le canevas au centre avec une frame vide, 3 la barre d'outils en bas, 4 le panneau de droite, 5 le bouton Share en haut à droite." width="1200" height="753" loading="lazy">
+<img src="/ressources/ux-ui/figma-interface.webp" alt="L'interface de Figma avec cinq repères numérotés : 1 le panneau des pages et des calques à gauche, 2 le canvas au centre avec une frame vide, 3 la barre d'outils en bas, 4 le panneau de droite, 5 le bouton Share en haut à droite." width="1200" height="753" loading="lazy">
 
-1. À gauche, le panneau Pages et calques permet de changer de page et de sélectionner ses éléments.
-2. Au centre, le canevas est l'espace où vous dessinez vos écrans.
+1. À gauche, le panneau des pages et des calques (*Layers*) permet de changer de page et de sélectionner ses éléments.
+2. Au centre, le canvas est l'espace où vous dessinez vos écrans.
 3. En bas, la barre d'outils permet de créer des frames, des formes et du texte.
 4. À droite, le panneau affiche les réglages de l'élément sélectionné : dimensions, disposition et couleurs.
 5. En haut à droite, Share permet de partager le fichier. Le bouton de présentation, en forme de triangle, lance le prototype.
 
 ### La barre d'outils
 
-La barre d'outils est en bas de l'écran. Survolez un outil : Figma affiche son nom et son raccourci. À droite de la barre, gardez le mode Design sélectionné.
+Survolez un outil pour afficher son nom et son raccourci. À droite de la barre, gardez le mode Design sélectionné.
 
 <img src="/ressources/ux-ui/figma-barre-outils.webp" alt="La barre d'outils de Figma avec ses raccourcis : Déplacer V, Frame F, Formes R, Plume P, Texte T, Commentaire C, Actions Cmd + K ou Ctrl + K, puis les modes." width="1200" height="303" loading="lazy">
 
-Pour trouver une commande, un plugin ou un composant, ouvrez le menu Actions avec `Ctrl + K`, ou `Cmd + K` sur Mac, et tapez ce que vous cherchez : « auto layout », « Contrast »…
+Pour trouver une commande, un plugin ou un composant, ouvrez le menu Actions avec `Ctrl + K`, ou `Cmd + K` sur Mac, et tapez ce que vous cherchez : "auto layout", "Contrast"…
 
 ### Les pages et les frames
 
 <img src="/ressources/ux-ui/figma-calques.webp" alt="Le panneau de gauche de Figma : le fichier UIUX-semaine, trois pages nommées Composants, Zoning-wireframing et Hi-fi, le message All 3 free pages used, puis les calques de la page ouverte." width="280" height="355" loading="lazy">
 
-Une frame est un cadre qui contient des éléments. Elle peut représenter un écran entier, mais aussi un bouton ou une carte. Avec l'outil Frame (`F`), choisissez un format dans le panneau de droite. Le préréglage iPhone 14 fait 390 × 844 px. Nommez ce cadre « Fiche atelier ».
+Une frame est un cadre qui contient des éléments. Elle peut représenter un écran entier, mais aussi un bouton ou une carte. Avec l'outil Frame (`F`), choisissez un format dans le panneau de droite. Le préréglage iPhone 14 fait 390 × 844 px. Nommez cette frame "Fiche atelier".
 
 Une page regroupe plusieurs frames. Le fichier de la capture utilise ses trois pages disponibles pour les composants, les wireframes et la maquette. Une section (`Maj + S`) permet de regrouper les écrans d'une même étape au sein d'une page.
 
-Chaque élément a son calque dans le panneau de gauche. Nommez-le « Bouton réserver » plutôt que « Rectangle 12 ».
+Chaque élément a son calque dans le panneau de gauche. Nommez-le "Bouton réserver" plutôt que "Rectangle 12".
 
 ### La grille
 
-Une grille de colonnes donne des repères pour aligner les éléments. Pour l'exercice sur téléphone, partez de 4 colonnes, avec 24 px de marge de chaque côté et 16 px entre les colonnes. Alignez les textes et les boutons à l'intérieur de ces marges. Ajoutez la grille depuis le panneau de droite de la frame, puis enregistrez-la comme style pour la réutiliser sur les autres écrans.
+Une grille de colonnes donne des repères pour aligner les éléments. Pour l'exercice sur téléphone, partez de 4 colonnes, avec 24 px de marge de chaque côté et 16 px de gouttière (*gutter*) entre les colonnes. Alignez les textes et les boutons à l'intérieur de ces marges. Ajoutez la grille depuis le panneau de droite de la frame, puis enregistrez-la comme style pour la réutiliser sur les autres écrans.
 
 ### L'auto layout
 
-Si vous posez un texte sur un rectangle, allonger le libellé ne redimensionne pas le fond du bouton. L'auto layout (`Maj + A`) organise les éléments dans un cadre. Avec une largeur réglée sur Hug, ce cadre s'adapte au texte et conserve l'espace prévu autour.
+Si vous posez un texte sur un rectangle, allonger le libellé ne redimensionne pas le fond du bouton. L'auto layout (`Maj + A`) organise les éléments dans une frame. Avec une largeur réglée sur Hug, cette frame s'adapte au texte et conserve l'espace prévu autour.
 
-<img src="/ressources/ux-ui/figma-bouton-auto-layout.webp" alt="Deux boutons « Réserver une séance d'essai ». Sans auto layout, le libellé dépasse du rectangle orange. Avec l'auto layout, le fond orange entoure tout le texte et le cadre indique Hug × 44." width="1200" height="295" loading="lazy">
+<img src="/ressources/ux-ui/figma-bouton-auto-layout.webp" alt="Deux boutons &quot;Réserver une séance d'essai&quot;. Sans auto layout, le libellé dépasse du rectangle orange. Avec l'auto layout, le fond orange entoure tout le texte et la frame indique Hug × 44." width="1200" height="295" loading="lazy">
 
 Les réglages sont dans la section Layout du panneau de droite.
 
@@ -228,19 +260,19 @@ Les réglages sont dans la section Layout du panneau de droite.
 3. Les menus W (largeur) et H (hauteur) règlent les dimensions. Les options Fixed, Hug et Fill sont expliquées ci-dessous.
 4. Ce bouton crée un composant réutilisable. Son raccourci est `Ctrl + Alt + K`, ou `Cmd + Option + K` sur Mac.
 
-Une fois l'auto layout ajouté, de nouveaux champs apparaissent : l'espacement entre les éléments, le padding (l'espace intérieur) et l'alignement.
+Une fois l'auto layout ajouté, de nouveaux champs apparaissent : l'espacement entre les éléments (*gap*), le padding (l'espace intérieur) et l'alignement.
 
 ### Fixed, Hug, Fill
 
-La largeur et la hauteur se règlent séparément. Les options disponibles dépendent de l'élément sélectionné et du cadre qui le contient.
+La largeur et la hauteur se règlent séparément. Les options disponibles dépendent de l'élément sélectionné et de la frame qui le contient.
 
 <img src="/ressources/ux-ui/figma-fixed-hug-fill.webp" alt="Trois cartes avec les boutons Réserver et Voir la fiche. En Fixed, les deux boutons ont la même largeur. En Hug, chaque bouton suit son libellé. En Fill, les boutons prennent toute la largeur de la carte." width="1200" height="260" loading="lazy">
 
 | Réglage | Ce que fait l'élément | Exemple |
 | --- | --- | --- |
 | Fixed | Il garde la dimension choisie. | Un écran de 390 px de large |
-| Hug | Le cadre en auto layout s'ajuste à son contenu et à son padding. | Un bouton qui s'élargit avec son libellé |
-| Fill | Il occupe l'espace disponible dans le cadre parent en auto layout. | Un bouton qui remplit la largeur intérieure d'une carte |
+| Hug | La frame en auto layout s'ajuste à son contenu et à son padding. | Un bouton qui s'élargit avec son libellé |
+| Fill | Il occupe l'espace disponible dans la frame parente en auto layout. | Un bouton qui remplit la largeur intérieure d'une carte |
 
 ### Des espacements réguliers
 
@@ -250,7 +282,7 @@ Utilisez quelques valeurs d'espacement et répétez-les sur les écrans. Pour co
 
 Pour ce bouton, essayez 12 px de padding en haut et en bas, et 24 px sur les côtés. Visez une hauteur d'au moins 44 px pour offrir une zone facile à toucher, puis vérifiez le résultat à la taille d'un téléphone.
 
-Les cadres en auto layout peuvent s'emboîter, comme les `div` en HTML : un cadre pour le bouton, un autre pour la ligne de boutons, puis un pour la section qui les contient.
+Les frames en auto layout peuvent s'emboîter, comme les `div` en HTML : une frame pour le bouton, une autre pour la ligne de boutons, puis une pour la section qui les contient.
 
 ### Le défi de l'auto layout
 
@@ -261,7 +293,7 @@ Combien d'auto layouts contient cet écran ? 1, 7, 10 ou 23 ?
 <details>
 <summary>Voir la réponse</summary>
 
-Cette version en contient 23. Les pointillés montrent les cadres et leur emboîtement dans les différentes parties de l'écran :
+Cette version en contient 23. Les pointillés montrent les frames et leur emboîtement dans les différentes parties de l'écran :
 
 1. L'en-tête : le retour, la recherche et le panier.
 2. La photo, puis le nom et le prix.
@@ -299,11 +331,11 @@ Essayez deux ordres différents pour la description et les informations pratique
 
 ### Prendre en main Figma
 
-1. Ouvrez votre fichier de projet dans Figma. Si vous n'en avez pas, créez un fichier de design nommé « MJC des Tilleuls, votre prénom ».
-2. Avec l'outil Frame (`F`), créez un écran au format téléphone. Nommez-le « Fiche atelier ».
-3. Avec Rectangle (`R`) et Texte (`T`), reproduisez les zones de votre zoning. Ajoutez le nom de l'atelier, une description et le texte « Réserver une séance d'essai ».
+1. Ouvrez votre fichier de projet dans Figma. Si vous n'en avez pas, créez un fichier de design nommé "MJC des Tilleuls, votre prénom".
+2. Avec l'outil Frame (`F`), créez un écran au format téléphone. Nommez-le "Fiche atelier".
+3. Avec Rectangle (`R`) et Texte (`T`), reproduisez les zones de votre zoning. Ajoutez le nom de l'atelier, une description et le texte "Réserver une séance d'essai".
 4. Sélectionnez le texte du bouton et appliquez l'auto layout (`Maj + A`). Réglez la largeur sur Hug. Ajoutez un fond gris et du padding autour du texte.
-5. Changez le libellé du bouton : son cadre doit s'adapter au texte. Renommez vos éléments dans le panneau des calques pour les retrouver.
+5. Changez le libellé du bouton : sa frame doit s'adapter au texte. Renommez vos éléments dans le panneau des calques pour les retrouver.
 
 Rendu : une fiche atelier en gris, avec un bouton qui s'adapte à son libellé. Utilisez ce fichier pour les wireframes.
 

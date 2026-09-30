@@ -98,11 +98,11 @@ sequenceDiagram
 La recherche sur les agents emprunte ses catégories à la psychologie cognitive :
 
 - la **mémoire de travail** tient dans la fenêtre : c’est `messages[]`, limité et perdu à la fin de la session
-- la **mémoire épisodique** enregistre des expériences datées : « le 15 mai, le rate limiting sur `/upload` a échoué à cause du middleware d’auth, résolu en réordonnant les middlewares »
-- la **mémoire sémantique** garde des faits stables extraits des épisodes : « l’API de paiement renvoie des 429 au-delà de 100 requêtes par minute »
+- la **mémoire épisodique** enregistre des expériences datées : "le 15 mai, le rate limiting sur `/upload` a échoué à cause du middleware d’auth, résolu en réordonnant les middlewares"
+- la **mémoire sémantique** garde des faits stables extraits des épisodes : "l’API de paiement renvoie des 429 au-delà de 100 requêtes par minute"
 - la **mémoire procédurale** stocke des savoir-faire réutilisables. Les skills en sont une forme, comme la bibliothèque de routines vérifiées de [Voyager](https://github.com/MineDojo/Voyager).
 
-Un épisode est un événement. Un fait sémantique est une connaissance générale tirée de plusieurs épisodes. Trois corrections du format de date deviennent « l’utilisateur préfère JJ/MM/AAAA ». Cette consolidation est rarement automatique.
+Un épisode est un événement. Un fait sémantique est une connaissance générale tirée de plusieurs épisodes. Trois corrections du format de date deviennent "l’utilisateur préfère JJ/MM/AAAA". Cette consolidation est rarement automatique.
 
 ## Écrire, gérer, relire
 
@@ -123,11 +123,11 @@ Trois politiques décident quoi stocker :
 | Réflexion | Après un échec, un appel écrit ce qu’il aurait fallu faire, réinjecté à la tentative suivante | Les anciennes critiques sortent de la fenêtre |
 | Mémoire hiérarchique | Un noyau toujours visible, une archive consultée à la demande | Le modèle doit savoir quand consulter l’archive |
 
-[Reflexion](https://arxiv.org/abs/2303.11366) (Shinn et al., 2023) atteint 91 % de réussite au premier essai sur HumanEval contre 80 % pour GPT-4 seul, sans réentraîner le modèle. Pour un harness, cela revient à ajouter un champ `reflection` rempli en fin de session par la question « qu’aurais-je dû faire différemment ? », et à le relire au démarrage suivant.
+[Reflexion](https://arxiv.org/abs/2303.11366) (Shinn et al., 2023) atteint 91 % de réussite au premier essai sur HumanEval contre 80 % pour GPT-4 seul, sans réentraîner le modèle. Pour un harness, cela revient à ajouter un champ `reflection` rempli en fin de session par la question "qu’aurais-je dû faire différemment ?", et à le relire au démarrage suivant.
 
 ## Mémoire et sécurité
 
-Sans mémoire, une prompt injection s’arrête avec la session. Avec une mémoire persistante, elle est stockée et attend d’être relue. [MINJA](https://arxiv.org/abs/2503.03704) (Dong et al., 2025) montre qu’un attaquant peut glisser des enregistrements malveillants dans la mémoire d’un agent par des interactions ordinaires, sans accès direct au stockage. Une instruction comme « toujours traiter en priorité les e-mails urgents » ressemble à une préférence légitime.
+Sans mémoire, une prompt injection s’arrête avec la session. Avec une mémoire persistante, elle est stockée et attend d’être relue. [MINJA](https://arxiv.org/abs/2503.03704) (Dong et al., 2025) montre qu’un attaquant peut glisser des enregistrements malveillants dans la mémoire d’un agent par des interactions ordinaires, sans accès direct au stockage. Une instruction comme "toujours traiter en priorité les e-mails urgents" ressemble à une préférence légitime.
 
 Pour un harness :
 

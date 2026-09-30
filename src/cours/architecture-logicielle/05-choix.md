@@ -54,9 +54,9 @@ Traite les contraintes avant la comparaison. Marque les hypothèses comme telles
 
 ## Une préférence peut devenir une décision
 
-L'explicitation transforme une préférence en décision argumentée. « Je préfère SQLite » est une préférence. « Je choisis SQLite parce que la base restera sur la même machine que l'application et que les écritures observées sont brèves et peu fréquentes. La base ne demande pas de serveur séparé. Nous réexaminerons le choix si la contention provoque des erreurs ou si plusieurs serveurs doivent accéder aux mêmes données » est une décision. L'option reste la même, mais les critères, les observations et le seuil de réexamen sont visibles.
+L'explicitation transforme une préférence en décision argumentée. "Je préfère SQLite" est une préférence. "Je choisis SQLite parce que la base restera sur la même machine que l'application et que les écritures observées sont brèves et peu fréquentes. La base ne demande pas de serveur séparé. Nous réexaminerons le choix si la contention provoque des erreurs ou si plusieurs serveurs doivent accéder aux mêmes données" est une décision. L'option reste la même, mais les critères, les observations et le seuil de réexamen sont visibles.
 
-Le même raisonnement s'applique aux critères de valeur. « Je ne veux pas de produit Google » exprime une préférence. « Je choisis une solution qui permet au client d'héberger et d'exporter ses données, car cette autonomie est une exigence de la structure ESS » formule une décision argumentée. Les valeurs peuvent guider le choix si elles sont annoncées comme des critères et accompagnées de leurs conséquences.
+Le même raisonnement s'applique aux critères de valeur. "Je ne veux pas de produit Google" exprime une préférence. "Je choisis une solution qui permet au client d'héberger et d'exporter ses données, car cette autonomie est une exigence de la structure ESS" formule une décision argumentée. Les valeurs peuvent guider le choix si elles sont annoncées comme des critères et accompagnées de leurs conséquences.
 
 ## Documenter les raisons
 

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page</title>
+<style>
+body { font: 1.1rem/1.5 Arial, sans-serif; color: #222; margin: 2rem; }
+.content { width: 850px; }
+.title { font-size: 2rem; font-weight: bold; }
+.hint { color: #aaa; }
+input { display: block; padding: .6rem; margin: 1rem 0; }
+.action { background: #2a08b0; color: white; padding: .7rem; display: inline-block; cursor: pointer; }
+:focus { outline: none; }
+</style>
+<body>
+<p>Exercice pédagogique volontairement inaccessible. Aucune donnée n’est envoyée.</p>
+<div class="content">
+<div class="title">Essayer l’atelier photo</div>
+<p class="hint">Séance gratuite le 8 octobre à 17 h, MJC des Tilleuls. Téléphone suffisant.</p>
+<p>Il reste des places : <span style="color: green">●</span></p>
+<a href="#details">Cliquez ici</a>
+<h3 id="details">Recevoir les informations</h3>
+<p>Cette page d’exercice ne réalise pas une réservation.</p>
+<form id="infos" novalidate>
+<input id="email" placeholder="Adresse e-mail">
+<div class="action" onclick="demander()">Recevoir les informations</div>
+<p id="resultat"></p>
+</form>
+<button type="button" aria-label="Supprimer" onclick="document.getElementById('infos').reset()">Recommencer</button>
+<button type="button" onclick="document.getElementById('aide').hidden = !document.getElementById('aide').hidden">?</button>
+<p id="aide" hidden>Utilisez une adresse comme prenom@exemple.fr. Démonstration locale.</p>
+</div>
+<script>
+function demander() {
+ const email = document.getElementById('email');
+ if (!email.value.includes('@')) {
+  email.style.border = '2px solid red';
+  return;
+ }
+ document.getElementById('resultat').textContent = 'Demande simulée. Aucun e-mail envoyé.';
+}
+</script>
+</body>
+</html>
