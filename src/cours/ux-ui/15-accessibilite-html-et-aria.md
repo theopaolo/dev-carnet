@@ -66,13 +66,11 @@ Les infographies "12 millions" ou "80 % invisibles" ne suffisent donc pas à ell
 
 ---
 
-## WCAG et RGAA
+## Le RGAA
 
-Les **WCAG** (*Web Content Accessibility Guidelines*) sont les recommandations du W3C pour l’accessibilité des contenus web. Elles reposent sur quatre principes : perceptible, utilisable, compréhensible et robuste.
+Le **RGAA**, Référentiel général d’amélioration de l’accessibilité, est le référentiel officiel français. Sa version **4.1.2** comprend 106 critères répartis en 13 thématiques, des images à la consultation. Chaque critère se vérifie par des tests, avec une méthodologie et des cas particuliers. Dans ce cours, chaque exigence renvoie à un critère RGAA, par exemple [critère 3.2](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#3.2) pour le contraste du texte.
 
-Les niveaux A, AA et AAA regroupent des exigences. Pour atteindre AA, il faut aussi satisfaire celles du niveau A. Un score Lighthouse ne mesure pas ces niveaux.
-
-Le **RGAA**, Référentiel général d’amélioration de l’accessibilité, fournit la méthode française de contrôle. Sa version **4.1.2** comprend 106 critères répartis en 13 thèmes, avec leurs tests et cas particuliers. Elle s’appuie sur WCAG 2.1 A et AA. WCAG 2.2 existe, mais ses nouveaux critères ne deviennent pas automatiquement des critères RGAA 4.1.2. Au 30 septembre 2026, RGAA 5 est annoncé pour fin 2026. [Référentiel officiel](https://accessibilite.numerique.gouv.fr/).
+Le RGAA transpose les niveaux A et AA des WCAG 2.1, les recommandations internationales du W3C. Un score Lighthouse ne mesure pas la conformité au RGAA. Au 1er octobre 2026, le site officiel annonce RGAA 5 pour fin 2026. [Référentiel officiel](https://accessibilite.numerique.gouv.fr/).
 
 <details class="course-details">
 <summary>Cadre légal : à quels services les obligations s’appliquent-elles ?</summary>
@@ -85,12 +83,12 @@ Consultez le [champ d’application RGAA](https://accessibilite.numerique.gouv.f
 
 </details>
 
-| Principe | Question à poser sur la réservation |
+| Critères RGAA | Question à poser sur la réservation |
 | --- | --- |
-| Perceptible | Les places disponibles sont-elles indiquées autrement que par la couleur ? |
-| Utilisable | Puis-je choisir et réserver sans souris ? |
-| Compréhensible | Le formulaire explique-t-il comment corriger mon erreur ? |
-| Robuste | Le champ et le bouton exposent-ils un nom, un rôle et les états attendus ? |
+| 3.1, couleur | Les places disponibles sont-elles indiquées autrement que par la couleur ? |
+| 7.3 et 12.8, clavier | Puis-je choisir et réserver sans souris ? |
+| 11.10 et 11.11, erreurs de saisie | Le formulaire explique-t-il comment corriger mon erreur ? |
+| 11.1, 11.9 et 7.1, noms et états | Le champ et le bouton exposent-ils un nom, un rôle et les états attendus ? |
 
 <aside class="course-note">
 
@@ -135,14 +133,14 @@ Un lien s’active avec Entrée. Un bouton natif s’active avec Entrée ou Espa
 <div role="button" tabindex="0" onclick="reserver()">Réserver</div>
 ```
 
-Le paragraphe ne figure pas dans la liste des titres. Le `div` reçoit le focus et expose un rôle, mais son gestionnaire de clic seul ne lui donne pas le comportement clavier d’un bouton. Un `h1` et un `button` répondent à ces besoins. Le bouton doit ensuite déclencher la bonne action et restituer son résultat.
+Le paragraphe ne figure pas dans la liste des titres. Le `div` reçoit le focus et expose un rôle, mais son gestionnaire de clic seul ne lui donne pas le comportement clavier d’un bouton. Un `h1` et un `button` répondent à ces besoins. Le bouton doit ensuite déclencher la bonne action et restituer son résultat. Le RGAA vérifie le titre avec le test 9.1.3 et le bouton avec le test 7.3.1 : un élément scripté doit être atteignable avec Tab et activable avec Entrée.
 
 ```html
 <h1>Réserver un atelier</h1>
 <button type="submit">Réserver</button>
 ```
 
-Ce bouton `submit` appartient au formulaire de réservation. Si l’action n’envoie pas un formulaire, choisissez `type="button"`. [W3C, hiérarchie des titres](https://www.w3.org/WAI/tutorials/page-structure/headings/).
+Ce bouton `submit` appartient au formulaire de réservation. Si l’action n’envoie pas un formulaire, choisissez `type="button"`. [RGAA, critère 9.1](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#9.1) et [critère 7.3](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.3).
 
 </details>
 
@@ -150,7 +148,7 @@ Ce bouton `submit` appartient au formulaire de réservation. Si l’action n’e
 
 ## Nom, rôle, état
 
-Pour utiliser un contrôle, une personne doit pouvoir connaître son **nom** (*accessible name*), son **rôle** et les **états** utiles. Les WCAG en font le critère 4.1.2, *Name, Role, Value*. Avec `<button aria-expanded="false">Afficher l’aide</button>`, le lecteur d’écran peut annoncer "Afficher l’aide, bouton, réduit". Les mots et leur ordre varient selon le lecteur d’écran et ses réglages.
+Pour utiliser un contrôle, une personne doit pouvoir connaître son **nom** (*accessible name*), son **rôle** et les **états** utiles. Pour un composant piloté par JavaScript, le RGAA le vérifie avec le [critère 7.1](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.1) : le test 7.1.1 demande que le nom, le rôle, la valeur et les changements d’état soient transmis aux technologies d’assistance. Sa méthodologie cite justement le bouton qui affiche ou masque une zone de contenu. Avec `<button aria-expanded="false">Afficher l’aide</button>`, le lecteur d’écran peut annoncer "Afficher l’aide, bouton, réduit". Les mots et leur ordre varient selon le lecteur d’écran et ses réglages.
 
 - Le nom "Afficher l’aide" vient du texte visible.
 - Le rôle "bouton" vient de la balise `button`.
@@ -189,7 +187,7 @@ Si une image est le seul contenu du bouton et qu’aucun attribut ARIA ne rempla
 <details class="course-details">
 <summary>Afficher la réponse et la correction</summary>
 
-Le nom annoncé est "Supprimer", alors que l’écran affiche "Recommencer". La personne qui commande à la voix utilise les mots visibles. Corrigez en supprimant cet attribut et en conservant le texte du bouton. Le nom accessible doit contenir le libellé visible. [Label in Name, W3C](https://www.w3.org/WAI/WCAG22/Understanding/label-in-name).
+Le nom annoncé est "Supprimer", alors que l’écran affiche "Recommencer". La personne qui commande à la voix utilise les mots visibles. Corrigez en supprimant cet attribut et en conservant le texte du bouton. Le nom accessible doit contenir au moins l’intitulé visible. Le RGAA le vérifie avec le [test 11.9.2](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#11.9.2) pour un bouton de formulaire et le [test 7.1.3](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.1.3) pour un composant piloté par JavaScript.
 
 
 ```html
@@ -254,7 +252,7 @@ bouton.addEventListener('click', () => {
 });
 ```
 
-`aria-expanded` doit toujours correspondre à ce qui est affiché. `aria-controls` pointe vers l’identifiant du panneau. `hidden` cache le panneau à tout le monde. Sans JavaScript, `<details>` et `<summary>` gèrent cet état à votre place. [Motif disclosure, W3C](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
+`aria-expanded` doit toujours correspondre à ce qui est affiché. `aria-controls` pointe vers l’identifiant du panneau. `hidden` cache le panneau à tout le monde. Sans JavaScript, `<details>` et `<summary>` gèrent cet état à votre place. [RGAA, critère 7.1](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.1), [motif disclosure, W3C](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
 
 ## Images, couleurs et zoom
 
@@ -265,15 +263,15 @@ Le **texte alternatif** (*alt text*), porté par l’attribut `alt`, dépend du 
 - Une image seule dans un lien ou un bouton doit en décrire la destination ou l’action.
 - Un graphique demande souvent une description détaillée ou un tableau en complément.
 
-La même photo peut être informative dans une page et décorative dans une autre. Vérifiez le sens de son alternative, pas seulement sa présence. [Images, W3C](https://www.w3.org/WAI/tutorials/images/).
+La même photo peut être informative dans une page et décorative dans une autre. Vérifiez le sens de son alternative, pas seulement sa présence. Le RGAA vérifie l’alternative d’une image porteuse d’information (1.1), l’image décorative ignorée (1.2), la pertinence de l’alternative (1.3) et la description détaillée (1.6). Pour une image seule dans un lien, voyez le test 6.1.2. [RGAA, thématique Images](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#1).
 
-Mesurez le contraste : au moins 4,5:1 pour le texte courant et 3:1 pour le grand texte, soit au moins 24 px CSS, ou environ 18,7 px en gras. Les composants et informations graphiques nécessaires ont aussi des exigences de contraste, généralement 3:1. La couleur seule ne doit pas porter une information nécessaire. Les exceptions se lisent dans le critère. [Contraste du texte](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html), [RGAA, thème 3](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#3).
+Mesurez le contraste du texte (critère 3.2) : au moins 4,5:1 pour le texte courant et 3:1 pour le grand texte, soit au moins 24 px, ou 18,5 px en gras. Les composants d’interface et les éléments graphiques porteurs d’information demandent au moins 3:1 (critère 3.3). L’information ne doit pas être donnée uniquement par la couleur (critère 3.1). Les cas particuliers se lisent dans chaque critère. [RGAA, thématique Couleurs](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#3).
 
-Faites deux tests : agrandissez le texte à 200 %, puis réduisez la largeur d’affichage à 320 px CSS. Le contenu doit se réorganiser sans perte d’information ni défilement à la fois horizontal et vertical. Certains contenus, comme les tableaux, peuvent nécessiter deux directions de défilement.
+Faites deux tests : agrandissez le texte à 200 % (critère 10.4), puis réduisez la largeur de la fenêtre à 320 px CSS (critère 10.11). Le contenu doit se réorganiser sans perte d’information ni défilement horizontal. Les tableaux de données, les images et les graphiques font partie des cas particuliers qui peuvent défiler dans les deux directions.
 
-Cette réorganisation s’appelle le *reflow*. Vous pouvez aussi la tester avec un zoom navigateur à 400 % sur une fenêtre de 1280 px. [Reflow, W3C](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html).
+Cette réorganisation s’appelle le *reflow*. Un zoom navigateur à 400 % sur une fenêtre de 1280 px donne la même largeur de 320 px. [RGAA, critère 10.11](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#10.11).
 
-44 × 44 px est un objectif de confort pour nos boutons. Ce n’est pas le minimum universel de RGAA 4.1.2. WCAG 2.2 AA fixe une taille de cible (*target size*) de 24 × 24 px, ou certaines alternatives, avec exceptions. [Taille des cibles, W3C](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html).
+44 × 44 px est un objectif de confort pour nos boutons. RGAA 4.1.2 ne fixe pas de taille minimale pour les cibles cliquables.
 
 <details class="course-details">
 <summary>Écrire un alt selon la fonction de l’image</summary>
@@ -288,7 +286,7 @@ Cette réorganisation s’appelle le *reflow*. Vous pouvez aussi la tester avec 
 </a>
 ```
 
-Pour un graphique, donnez une alternative courte qui identifie son sujet, puis les valeurs et la conclusion utile dans le texte ou un tableau. Une capture de code ne remplace pas un bloc de code sélectionnable. L’absence de `alt` et `alt=""` n’expriment pas la même intention. [W3C, choisir l’alternative d’une image](https://www.w3.org/WAI/tutorials/images/decision-tree/).
+Pour un graphique, donnez une alternative courte qui identifie son sujet, puis les valeurs et la conclusion utile dans le texte ou un tableau. Une capture de code ne remplace pas un bloc de code sélectionnable. L’absence de `alt` et `alt=""` n’expriment pas la même intention. [RGAA, critères 1.6 et 1.8](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#1.6).
 
 </details>
 
@@ -307,11 +305,11 @@ Un contour rouge seul ne suffit pas. Associez l’erreur au champ, signalez l’
 <p id="email-err">Il manque le @. Exemple : prenom@exemple.fr</p>
 ```
 
-En arrivant sur le champ, vérifiez que le lecteur d’écran restitue "Adresse e-mail", l’état invalide et le message. L’ordre et les mots employés peuvent varier selon l’outil. `autocomplete="email"` permet le remplissage automatique. [RGAA, critères 11.1, 11.10 et 11.11](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#11).
+En arrivant sur le champ, vérifiez que le lecteur d’écran restitue "Adresse e-mail", l’état invalide et le message. L’ordre et les mots employés peuvent varier selon l’outil. [RGAA, critères 11.1, 11.10 et 11.11](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#11). `autocomplete="email"` permet le remplissage automatique, demandé par le [critère 11.13](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#11.13) pour les champs qui concernent l’utilisateur.
 
 Pour une confirmation ajoutée sans recharger la page, prévoyez une zone `role="status"` avant d’y insérer le message. C’est une **région live** (*live region*) : ses mises à jour peuvent être annoncées sans déplacer le focus. Avec ce rôle, l’annonce attend généralement que le lecteur d’écran ait fini de parler (`polite`).
 
-Réservez `role="alert"` aux messages urgents, susceptibles d’interrompre la lecture (`assertive`). Évitez une annonce à chaque frappe. `aria-live="off"` désactive ce mode d’annonce automatique, sans masquer le contenu au lecteur d’écran. [Messages de statut](https://www.w3.org/WAI/WCAG21/Understanding/status-messages.html), [Erreurs de formulaire](https://www.w3.org/WAI/tutorials/forms/notifications/).
+Pour un message qui signale une erreur ou propose une suggestion sans déplacer le focus, le RGAA demande `role="alert"`. Son annonce peut interrompre la lecture (`assertive`). Évitez une annonce à chaque frappe. `aria-live="off"` désactive ce mode d’annonce automatique, sans masquer le contenu au lecteur d’écran. [RGAA, critère 7.5](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.5).
 
 Pour un disclosure, un bouton qui affiche et masque un contenu, commencez par `<details><summary>…</summary>…</details>`. Pour une boîte de dialogue (*dialog*, ou modale), étudiez `<dialog>` avant de réinventer un composant. ARIA renseigne la sémantique, il ne crée pas les interactions. [Principes ARIA](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/).
 
@@ -326,7 +324,7 @@ Pour un disclosure, un bouton qui affiche et masque un contenu, commencez par `<
 </fieldset>
 ```
 
-`legend` décrit le groupe. Chaque choix a aussi son libellé. L’attribut `name="seance"` commun aux deux boutons radio permet un choix unique. Les flèches du clavier changent le choix dans le groupe natif. [W3C, regrouper les contrôles](https://www.w3.org/WAI/tutorials/forms/grouping/).
+`legend` décrit le groupe. Chaque choix a aussi son libellé. L’attribut `name="seance"` commun aux deux boutons radio permet un choix unique. Les flèches du clavier changent le choix dans le groupe natif. [RGAA, critères 11.5 et 11.6](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#11.5).
 
 </details>
 
@@ -346,9 +344,9 @@ Le navigateur gère l’ouverture, la fermeture et l’état exposé. Testez ave
 
 ## Médias, mouvement et compréhension
 
-Une vidéo de cours doit pouvoir être comprise sans entendre sa bande-son. Les sous-titres (*captions*) restituent la parole et les sons utiles. Une transcription (*transcript*) permet de relire le contenu. Si une information nécessaire n’existe qu’à l’image, décrivez-la à l’oral ou prévoyez l’alternative adaptée au média. Les exigences précises dépendent du type de média, du direct ou du préenregistré et des exceptions. [W3C, rendre les médias accessibles](https://www.w3.org/WAI/media/av/).
+Une vidéo de cours doit pouvoir être comprise sans entendre sa bande-son. Les sous-titres (*captions*) restituent la parole et les sons utiles. Une transcription (*transcript*) permet de relire le contenu. Si une information nécessaire n’existe qu’à l’image, décrivez-la à l’oral ou prévoyez l’alternative adaptée au média. Les exigences précises dépendent du type de média et des cas particuliers. Le RGAA demande par exemple des sous-titres synchronisés (critère 4.3) et une transcription textuelle ou une audiodescription (critère 4.1). [RGAA, thématique Multimédia](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4).
 
-Évitez les animations automatiques qui concurrencent la lecture. Quand un contenu défile ou se met à jour, vérifiez les moyens de l’arrêter et les exigences du [thème 13 du RGAA](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#13). Respecter `prefers-reduced-motion` est utile, mais ne suffit pas à vérifier tous les critères liés au mouvement.
+Évitez les animations automatiques qui concurrencent la lecture. Quand un contenu bouge ou clignote, vérifiez que l’utilisateur peut l’arrêter, selon le [critère 13.8 du RGAA](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#13.8). Respecter `prefers-reduced-motion` est utile, mais ne suffit pas à vérifier tous les critères liés au mouvement.
 
 Pour réduire l’effort de compréhension, donnez une consigne par étape, utilisez des libellés stables et écrivez des erreurs qui indiquent quoi corriger. Gardez les consignes indispensables visibles. Réservez les disclosures aux explications complémentaires.
 

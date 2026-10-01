@@ -22,7 +22,7 @@ Un constat d’accessibilité doit permettre à quelqu’un de reproduire le pro
 | Exemple | Ce que vous examinez | Ce que vous pouvez conclure |
 | --- | --- | --- |
 | [Ara](https://ara.numerique.gouv.fr/) et sa [déclaration](https://ara.numerique.gouv.fr/accessibilite) | Liens d’évitement (*skip links*), titres, navigation, formulaire de connexion sans envoyer de données | Déclaration à 100 % RGAA 4.1.2, mise à jour le 9 octobre 2025, consultée le 30 septembre 2026. Lire le périmètre et l’environnement de l’audit |
-| [W3C, site avant correction](https://www.w3.org/WAI/demos/bad/before/home.html) et [après correction](https://www.w3.org/WAI/demos/bad/after/home.html) | Même contenu, structure et alternatives différentes. Comparer aussi les formulaires Survey | Démonstration pédagogique historique WCAG 2.0, pas certificat RGAA 2026 |
+| [W3C, site avant correction](https://www.w3.org/WAI/demos/bad/before/home.html) et [après correction](https://www.w3.org/WAI/demos/bad/after/home.html) | Même contenu, structure et alternatives différentes. Comparer aussi les formulaires Survey | Démonstration pédagogique ancienne du W3C. Elle n’a pas fait l’objet d’un audit RGAA |
 | [Grenoble Alpes Métropole](https://www.grenoblealpesmetropole.fr/635-un-site-web-accessible.htm) | Lire la déclaration et le défaut restant | 98,55 % annoncés lors de la consultation du 30 septembre 2026, avec des PDF non conformes. L’ancien taux de 100 % ne décrit plus le résultat actuel |
 | [Ada Tech School](https://adatechschool.fr/) | Choisir une tâche et deux pages, observer réellement | Aucun verdict préétabli. Retenir seulement les résultats que vous avez reproduits |
 
@@ -159,9 +159,11 @@ Utilisez ces repères pour trouver le critère, puis lisez son test avant de con
 | Liens explicites | 6.1 |
 | Composants pilotés par JavaScript | 7.1 et 7.3 |
 | Messages de statut (*status messages*) | 7.5 |
-| Langue et titre de la page | 8.3 et 8.5 |
+| Langue de la page, présente puis pertinente | 8.3 et 8.4 |
+| Titre de la page, présent puis pertinent | 8.5 et 8.6 |
 | Hiérarchie des titres | 9.1 |
-| Texte agrandi et focus visible | 10.4 et 10.7 |
+| Texte agrandi à 200 % et affichage à 320 px | 10.4 et 10.11 |
+| Focus visible | 10.7 |
 | Étiquettes des champs (*labels*) | 11.1 et 11.2 |
 | Intitulés des boutons | 11.9 |
 | Erreurs de saisie | 11.10 et 11.11 |

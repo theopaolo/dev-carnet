@@ -69,7 +69,7 @@ const dateFormat = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZon
 
 <script>
   // Raccourcis P et S : chapitre précédent et suivant. Seulement quand le focus est sur la page,
-  // pas sur un lien, un bouton ou un champ (WCAG 2.1.4), sans modificateur ni dialog ouvert
+  // pas sur un lien, un bouton ou un champ (RGAA 12.10), sans modificateur ni dialog ouvert
   document.addEventListener("keydown", (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
     const onPage = [document.body, document.getElementById("contenu"), null].includes(
