@@ -18,7 +18,7 @@ const pages = glob({
   generateId: ({ entry }) => entry.replace(/\.md$/, "").replace(/\/index$/, ""),
 });
 
-// Une ligne « <!-- include stories-backlog/_user-stories.md --> » est remplacée par ce fichier
+// Une ligne "<!-- include stories-backlog/_user-stories.md -->" est remplacée par ce fichier
 // (chemin depuis src/cours) avant le rendu. Les fichiers en _ ne sont pas des pages.
 const root = join(process.cwd(), "src/cours");
 const tag = (file: string) => `<!-- include ${file} -->`;

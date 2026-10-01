@@ -1,0 +1,1518 @@
+{
+  "http://bram.us/": {
+    "title": "Bram.us – A rather geeky/technical weblog, est. 2001, by Bramus",
+    "description": ""
+  },
+  "http://cyber.gouv.fr/": {
+    "title": "Au cœur d'un collectif, pour une nation cyber-résiliente",
+    "description": "Les actualités Aucun article trouvé. Voir tous les articles La directive NIS 2 Alors que la menace cyber augmente et […]"
+  },
+  "http://nerdy.dev/": {
+    "title": "Adam Argyle",
+    "description": "Website for Adam Argyle: Teacher, Speaker, CSSWG member, and creator of Open Props and VisBug."
+  },
+  "http://next.ink/": {
+    "title": "Actualités informatiques et numériques au quotidien",
+    "description": "Actualités informatiques et numériques au quotidien. Articles de fond, nouvelles du quotidien, dossiers, dessins, débats, venez vous affûter sur Next"
+  },
+  "http://reflets.info/": {
+    "title": "Journal d'investigation en ligne | Reflets.info",
+    "description": "Reflets.info, journal d'investigation en ligne"
+  },
+  "http://sidebar.io/": {
+    "title": "Sidebar",
+    "description": "The five best design links, every weekday."
+  },
+  "https://a11y-guidelines.orange.com/fr/persona/": {
+    "title": "Quelques personas - Recommandations accessibilité numérique Orange",
+    "description": "Des actions simples pour l’inclusion de tous"
+  },
+  "https://aaronbos.dev/posts/case-for-conventional-comments": {
+    "title": "My Case for Conventional Comments",
+    "description": "In this post, I'll present my case for using conventional comments in code reviews. I've been an advocate of conventional comments for about a year and have enjoyed using them. I'm hoping to share the benefits so others can adopt their own standards for code review. Let's dive in!"
+  },
+  "https://access42.net/arcom-autorite-controle-accessibilite-numerique-missions-controles-sanctions/": {
+    "title": "L’Arcom et l’accessibilité numérique : quelles missions ?",
+    "description": "Sanctions pour défaut de publication et pour non-conformité au RGAA, méthodologies de contrôle… Détail des missions et de l’approche de l’Arcom."
+  },
+  "https://access42.net/blog/": {
+    "title": "Blog accessibilité numérique – Access42",
+    "description": "Articles de fond sur l’accessibilité numérique, écrits par des expert·es en activité, et en français."
+  },
+  "https://access42.net/developper-un-composant-accessible-pour-afficher-masquer-une-zone/": {
+    "title": "Développer un composant accessible pour afficher/masquer une zone – Access42",
+    "description": "Technique 1 : modifier l’intitulé du bouton Il s’agit de la technique la plus ancienne et la plus rudimentaire. L’implémentation consiste à simplement modifier l’intitulé du bouton « Afficher le contenu » par « Masquer le contenu ». Il s’agit d’informer textuellement l’utilisateur du changement d’état. Vous trouverez d"
+  },
+  "https://accessibilite.numerique.gouv.fr/": {
+    "title": "Référentiel général d’amélioration de l’accessibilité - RGAA",
+    "description": "L’accessibilité numérique consiste à rendre les contenus et services numériques compréhensibles et utilisables par les personnes en situation de handicap."
+  },
+  "https://accessibilite.numerique.gouv.fr/methode/": {
+    "title": "Méthode technique - RGAA",
+    "description": "La méthode technique du RGAA propose un cadre opérationnel de vérification de la conformité aux exigences d’accessibilité"
+  },
+  "https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/": {
+    "title": "Critères et tests - RGAA",
+    "description": "Les 13 thématiques, les 106 critères, les tests et leur méthodologie du référentiel technique d’accessibilité numérique"
+  },
+  "https://accessibilite.numerique.gouv.fr/obligations/": {
+    "title": "Obligations légales - RGAA",
+    "description": "Qui est concerné par le RGAA ? Quelles sont les obligations légales à respecter ?"
+  },
+  "https://adatechschool.fr/": {
+    "title": "École d’informatique | Ada Tech School",
+    "description": "Lancez votre carrière dans la Tech avec notre école d'informatique à la pédagogie unique, à Paris, Lyon ou Nantes."
+  },
+  "https://agents.md/": {
+    "title": "AGENTS.md",
+    "description": "AGENTS.md is a simple, open format for guiding coding agents. Think of it as a README for agents."
+  },
+  "https://agentskills.io/": {
+    "title": "Agent Skills Overview - Agent Skills",
+    "description": "A standardized way to give AI agents new capabilities and expertise."
+  },
+  "https://ai-sdk.dev/": {
+    "title": "AI SDK",
+    "description": "A unified TypeScript SDK for building AI apps with modern streaming, fallbacks, and multi-model support—powered by Vercel."
+  },
+  "https://alexzhang13.github.io/blog/2025/rlm/": {
+    "title": "Alex L. Zhang | Recursive Language Models",
+    "description": "We propose Recursive Language Models (RLMs), an inference strategy where language models can decompose and recursively interact with input context of unbounded length through REPL environments."
+  },
+  "https://alistapart.com/": {
+    "title": "A List Apart",
+    "description": "For people who make websites"
+  },
+  "https://angular.dev/guide/ssr": {
+    "title": "Server-side and hybrid-rendering • Angular",
+    "description": "The web development framework for building modern apps."
+  },
+  "https://antigravity.google/": {
+    "title": "Google Antigravity",
+    "description": "Experience liftoff with the next-gen agent platform"
+  },
+  "https://app.diagrams.net/": {
+    "title": "Flowchart Maker & Online Diagram Software",
+    "description": "draw.io is free online diagram software for making flowcharts, process diagrams, org charts, UML, ER and network diagrams"
+  },
+  "https://app.notion.com/p/theogoedert/Ressources-3283324cc3d78060a867e0b2727fc150?source=copy_link": {
+    "title": "Notion | Where teams and agents work together",
+    "description": "A collaborative AI workspace, built on your company context. Build and orchestrate agents right alongside your team's projects, meetings, and connected apps."
+  },
+  "https://app.notion.com/p/theogoedert/Toolbox-CI-outils-d-analyse-3283324cc3d780b08dead90f02e7a24c?source=copy_link": {
+    "title": "Notion | Where teams and agents work together",
+    "description": "A collaborative AI workspace, built on your company context. Build and orchestrate agents right alongside your team's projects, meetings, and connected apps."
+  },
+  "https://ara.numerique.gouv.fr/": {
+    "title": "Réaliser des audits d’accessibilité - Ara",
+    "description": ""
+  },
+  "https://ara.numerique.gouv.fr/accessibilite": {
+    "title": "Réaliser des audits d’accessibilité - Ara",
+    "description": ""
+  },
+  "https://arxiv.org/abs/2005.11401": {
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "description": "Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance "
+  },
+  "https://arxiv.org/abs/2210.03629": {
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "description": "While large language models (LLMs) have demonstrated impressive capabilities across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain-of-thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics. In this paper, we "
+  },
+  "https://arxiv.org/abs/2303.11366": {
+    "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+    "description": "Large language models (LLMs) have been increasingly used to interact with external environments (e.g., games, compilers, APIs) as goal-driven agents. However, it remains challenging for these language agents to quickly and efficiently learn from trial-and-error as traditional reinforcement learning methods require exte"
+  },
+  "https://arxiv.org/abs/2304.03442": {
+    "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+    "description": "Believable proxies of human behavior can empower interactive applications ranging from immersive environments to rehearsal spaces for interpersonal communication to prototyping tools. In this paper, we introduce generative agents--computational software agents that simulate believable human behavior. Generative agents "
+  },
+  "https://arxiv.org/abs/2307.03172": {
+    "title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "description": "While recent language models have the ability to take long contexts as input, relatively little is known about how well they use longer context. We analyze the performance of language models on two tasks that require identifying relevant information in their input contexts: multi-document question answering and key-val"
+  },
+  "https://arxiv.org/abs/2310.08560": {
+    "title": "MemGPT: Towards LLMs as Operating Systems",
+    "description": "Large language models (LLMs) have revolutionized AI, but are constrained by limited context windows, hindering their utility in tasks like extended conversations and document analysis. To enable using context beyond limited context windows, we propose virtual context management, a technique drawing inspiration from hie"
+  },
+  "https://arxiv.org/abs/2503.03704": {
+    "title": "Memory Injection Attacks on LLM Agents via Query-Only Interaction",
+    "description": "Agents powered by large language models (LLMs) have demonstrated strong capabilities in a wide range of complex, real-world applications. However, LLM agents with a compromised memory bank may easily produce harmful outputs when the past records retrieved for demonstration are malicious. In this paper, we propose a nov"
+  },
+  "https://arxiv.org/abs/2603.07670": {
+    "title": "Memory for Autonomous LLM Agents:Mechanisms, Evaluation, and Emerging Frontiers",
+    "description": "Large language model (LLM) agents increasingly operate in settings where a single context window is far too small to capture what has happened, what was learned, and what should not be repeated. Memory -- the ability to persist, organize, and selectively recall information across interactions -- is what turns a statele"
+  },
+  "https://astro.build/": {
+    "title": "Astro",
+    "description": "Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between."
+  },
+  "https://atomicdesign.bradfrost.com/chapter-2/": {
+    "title": "Atomic Design Methodology | Atomic Design by Brad Frost",
+    "description": "Learn how to create and maintain digital design systems, allowing your team to roll out higher quality, more consistent UIs faster than ever before."
+  },
+  "https://basecamp.com/shapeup": {
+    "title": "Shape Up: Stop Running in Circles and Ship Work that Matters",
+    "description": "Shape Up will help you break free of “best practices” that aren’t really working, think deeper about the right problems, and start shipping meaningful projects your team can celebrate."
+  },
+  "https://blog-ux.com/quelle-est-la-difference-entre-le-zoning-wireframe-mockup-et-prototype/": {
+    "title": "Différence entre le Zoning, Wireframe, Mockup et Prototype ?",
+    "description": "Les termes : zoning, wireframe, mockup et prototype ont trait à l'ergonomie et la conception d'interface. Quelles sont leur définition ?"
+  },
+  "https://blog-ux.com/quest-ce-que-le-parcours-utilisateur/": {
+    "title": "Qu’est-ce que le parcours utilisateur UX ou Experience Map ?",
+    "description": "Le parcours utilisateur UX représente visuellement l’expérience de l’utilisateur d’un produit, d’un service, voire d’un écosystème."
+  },
+  "https://blog-ux.com/quest-ce-quun-persona/": {
+    "title": "Qu'est-ce qu'un persona UX ? Définition, exemples et templates",
+    "description": "Qu’est-ce qu’un persona UX, ses types, son rôle clé en design et comment le créer pour optimiser l'expérience utilisateur sur votre site web."
+  },
+  "https://blog-ux.com/un-wireframe-cest-quoi/": {
+    "title": "Un wireframe, c’est quoi ? - Définition wireframe",
+    "description": "Le wireframe, appelé \"maquette fil-de-fer\", est une représentation schématique de la structure et des fonctionnalités d'une applic mobile ou web."
+  },
+  "https://blog.bytebytego.com/": {
+    "title": "ByteByteGo Newsletter | Alex Xu | Substack",
+    "description": "Explain complex systems with simple terms, from the authors of the best-selling system design book series. Join over 1,000,000 friendly readers. Click to read ByteByteGo Newsletter, a Substack publication."
+  },
+  "https://brittanyellich.com/blog/": {
+    "title": "Blog",
+    "description": "Software Engineer at Bluesky specializing in developer productivity, AI-assisted development, and accessibility. Creator of The Balanced Engineer newsletter and co-host of the Overcommitted podcast."
+  },
+  "https://business.google.com/": {
+    "title": "Mettre à jour votre navigateur pour gérer votre fiche d'établissement - Aide Fiche d'établissement Google",
+    "description": "Vous avez été redirigé vers cette page, car votre navigateur n'est pas compatible avec votre fiche d'établissement. Si vous n'utilisez pas la dernière version de votre navigateur, votre fiche d'établi"
+  },
+  "https://business.ladn.eu/experts-metiers/marketing-communication/digital/solutions-digitales/developpement-web/customer-journey-map-cartographier-parcours-client/": {
+    "title": "Customer journey map, un outil pour mieux connaître le parcours client",
+    "description": "Vous souhaitez identifier les frustrations de vos clients, trouver les opportunités d’améliorations de votre parcours ? Votre première mission sera de construire votre Customer Journey Map afin de cartographier l’expérience de vos clients."
+  },
+  "https://c4model.com/abstractions/component": {
+    "title": "Component",
+    "description": "The C4 model for visualising software architecture (official website)"
+  },
+  "https://c4model.com/abstractions/container": {
+    "title": "Container",
+    "description": "The C4 model for visualising software architecture (official website)"
+  },
+  "https://c4model.com/diagrams": {
+    "title": "Diagrams",
+    "description": "The C4 model for visualising software architecture (official website)"
+  },
+  "https://cassidoo.co/blog/": {
+    "title": "Cassidy Williams",
+    "description": "I'm Cassidy Williams, a software engineer, mom, and overall nerd in Chicago. I write about tech, projects, and whatever else I'm thinking about!"
+  },
+  "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html": {
+    "title": "Password Storage - OWASP Cheat Sheet Series",
+    "description": "Website with the collection of all the cheat sheets of the project."
+  },
+  "https://claude.com/blog/context-management": {
+    "title": "Managing context on the Claude Developer Platform | Claude by Anthropic",
+    "description": "New context editing and memory tools enable Claude agents to handle long-running tasks without hitting context limits."
+  },
+  "https://cline.bot/": {
+    "title": "Cline - AI Coding, Open Source and Open Choice",
+    "description": "Open-source AI coding agent with Plan/Act modes, MCP integration, and terminal-first workflows. Trusted by 11M+ developers worldwide."
+  },
+  "https://code.claude.com/docs/en/memory": {
+    "title": "How Claude remembers your project - Claude Code Docs",
+    "description": "Give Claude persistent instructions with CLAUDE.md or AGENTS.md files, and let Claude accumulate learnings automatically with auto memory."
+  },
+  "https://code.claude.com/docs/en/skills": {
+    "title": "Extend Claude with skills - Claude Code Docs",
+    "description": "Create, manage, and share skills to extend Claude's capabilities in Claude Code. Includes custom commands and bundled skills."
+  },
+  "https://code.visualstudio.com/docs/languages/javascript": {
+    "title": "JavaScript in Visual Studio Code",
+    "description": "Get the best out of Visual Studio Code for JavaScript development"
+  },
+  "https://code.visualstudio.com/docs/typescript/typescript-tutorial": {
+    "title": "TypeScript tutorial in Visual Studio Code",
+    "description": "TypeScript tutorial with Visual Studio Code."
+  },
+  "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions": {
+    "title": "Documenting Architecture Decisions",
+    "description": ""
+  },
+  "https://color.adobe.com/fr/create/color-wheel": {
+    "title": "Générateur de palettes de couleurs – Outil de cercle chromatique | Adobe Express",
+    "description": "Utilisez le générateur de palette de couleurs pour créer des schémas harmonieux avec le cercle chromatique interactif. Choisissez une couleur de base, appliquez une harmonie et créez en toute confiance dans Adobe Express."
+  },
+  "https://color.adobe.com/fr/create/image": {
+    "title": "Générateur de palette de couleurs depuis une image | Adobe Express​",
+    "description": "Générez une palette de couleurs à partir de n’importe quelle image en quelques secondes. Chargez une photo, extrayez les couleurs, ajustez les nuanciers et utilisez immédiatement votre palette dans Adobe Express.​"
+  },
+  "https://commons.wikimedia.org/wiki/File:Pottery_workshop_at_Odisha_Crafts_Museum_08.jpg": {
+    "title": "File:Pottery workshop at Odisha Crafts Museum 08.jpg - Wikimedia Commons",
+    "description": ""
+  },
+  "https://commons.wikimedia.org/wiki/File:TechnicalWishlist_Workshop_Search_16-18_Munich_StickyNotesWall1.jpg": {
+    "title": "File:TechnicalWishlist Workshop Search 16-18 Munich StickyNotesWall1.jpg - Wikimedia Commons",
+    "description": ""
+  },
+  "https://contentsquare.com/fr-fr/blog/actualite-digitale-novembre-2023/": {
+    "title": "Newsletter novembre 2023 : la Lettre de l'Expérience Digitale",
+    "description": "Les fêtes de fin d’année approchent à grands pas et apportent avec elles les plans pour 2024. Expérience client, accessiblité..."
+  },
+  "https://conventionalcomments.org/": {
+    "title": "Conventional Comments",
+    "description": "Comments that are easy to grok and grep"
+  },
+  "https://coolors.co/": {
+    "title": "Coolors - The super fast color palettes generator!",
+    "description": "Generate or browse beautiful color combinations for your designs."
+  },
+  "https://creativecommons.org/licenses/by-sa/4.0/": {
+    "title": "Deed - Attribution-ShareAlike 4.0 International - Creative Commons",
+    "description": ""
+  },
+  "https://creativecommons.org/licenses/by/4.0/": {
+    "title": "Deed - Attribution 4.0 International - Creative Commons",
+    "description": ""
+  },
+  "https://css-tricks.com/": {
+    "title": "CSS-Tricks - Learning for front-end designers and developers",
+    "description": "CSS-Tricks is where folks around the world come to learn about front-end code and everything related to it, including HTML, CSS, and yes, CSS."
+  },
+  "https://cucumber.io/docs/bdd/": {
+    "title": "Behaviour-Driven Development | Cucumber",
+    "description": "Behaviour-Driven Development (BDD) is the software development process that Cucumber was built to support."
+  },
+  "https://cucumber.io/docs/bdd/example-mapping/": {
+    "title": "Example Mapping | Cucumber",
+    "description": "Before you pull a user story into development, it’s crucial to have a conversation to clarify and confirm the acceptance criteria."
+  },
+  "https://cucumber.io/docs/gherkin/reference": {
+    "title": "Reference | Cucumber",
+    "description": "Gherkin uses a set of special keywords to give structure and meaning to"
+  },
+  "https://cucumber.io/docs/gherkin/reference/": {
+    "title": "Reference | Cucumber",
+    "description": "Gherkin uses a set of special keywords to give structure and meaning to"
+  },
+  "https://cursor.com/": {
+    "title": "AI Coding Agent for Building Ambitious Software | Cursor",
+    "description": "Construits pour décupler votre productivité, les agents transforment vos idées en code. Accélérez le développement en confiant des tâches à Cursor."
+  },
+  "https://developer.mozilla.org/en-US/docs/Glossary/SPA": {
+    "title": "SPA (Single-page application) - Glossary | MDN",
+    "description": "An SPA (Single-page application) is a web app implementation that loads only a single web document, and then updates the body content of that single document via JavaScript APIs such as Fetch when different content is to be shown."
+  },
+  "https://developer.mozilla.org/en-US/docs/Glossary/SSR": {
+    "title": "Server-side rendering (SSR) - Glossary | MDN",
+    "description": "Server-side rendering (SSR) refers to the practice of generating HTML content on the server and sending it to the client. SSR is opposed to client-side rendering, where the client generates the HTML content using JavaScript. Both techniques are not mutually exclusive and can be used together in the same application."
+  },
+  "https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag": {
+    "title": "Google n'utilise pas la balise Meta \"keywords\" dans les classements Web | Google Search Central Blog | Google for Developers",
+    "description": ""
+  },
+  "https://developers.google.com/search/docs/appearance/ai-features?hl=fr": {
+    "title": "Fonctionnalités d'IA et votre site Web | Google Search Central | Documentation | Google for Developers",
+    "description": "Les fonctionnalités d'IA de la recherche Google peuvent aider les utilisateurs à trouver votre site Web. Découvrez comment fonctionnent les fonctionnalités d'IA dans la recherche et comment inclure vos contenus dans ces expériences."
+  },
+  "https://developers.google.com/search/docs/appearance/core-web-vitals?hl=fr": {
+    "title": "Comprendre les signaux Web essentiels et les résultats de recherche Google | Google Search Central | Documentation | Google for Developers",
+    "description": "Les métriques \"Signaux Web essentiels\" sont un ensemble de mesures qui évaluent l'expérience utilisateur réelle. En savoir plus sur la recherche Google et les signaux Web essentiels"
+  },
+  "https://developers.google.com/search/docs/appearance/snippet?hl=fr": {
+    "title": "Comment rédiger des meta descriptions | Google Search Central | Documentation | Google for Developers",
+    "description": "En suivant ces bonnes pratiques, découvrez comment écrire une balise meta description de qualité pouvant être affichée pour votre page dans les résultats de recherche Google."
+  },
+  "https://developers.google.com/search/docs/appearance/title-link?hl=fr": {
+    "title": "Influencer les liens de titre dans la recherche Google | Google Search Central | Documentation | Google for Developers",
+    "description": "Découvrez comment créer des titres optimisés pour le SEO pour les pages de votre site Web et la recherche Google grâce à ces bonnes pratiques."
+  },
+  "https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=fr": {
+    "title": "Bonnes pratiques de SEO concernant les liens pour Google | Google Search Central | Documentation | Google for Developers",
+    "description": "Les liens nous permettent de déterminer la pertinence des pages et d'en identifier de nouvelles à explorer. Découvrez comment permettre l'exploration de vos liens et améliorer le texte d'ancrage."
+  },
+  "https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=fr": {
+    "title": "Présentation du fichier robots.txt et guide | Google Search Central | Documentation | Google for Developers",
+    "description": "Le fichier robots.txt permet de gérer le trafic du robot d'exploration. Pour découvrir ce en quoi ce fichier consiste et comment l'utiliser, consultez ce guide d'introduction."
+  },
+  "https://developers.google.com/search/docs/essentials/spam-policies?hl=fr": {
+    "title": "Règles concernant le spam dans la Recherche sur le Web Google | Google Search Central | Documentation | Google for Developers",
+    "description": "Les règles concernant le spam détaillent les comportements et tactiques qui peuvent entraîner la rétrogradation d'une page ou d'un site entier dans les résultats de recherche Google, voire sa suppression complète du classement."
+  },
+  "https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=fr": {
+    "title": "Créer des contenus utiles, fiables et people-first | Google Search Central | Documentation | Google for Developers",
+    "description": "Les systèmes de classement de Google sont conçus pour présenter des informations utiles et fiables créées pour aider les internautes. Découvrez comment évaluer votre propre contenu à l'aide d'une liste de questions."
+  },
+  "https://developers.google.com/search/docs/fundamentals/how-search-works?hl=fr": {
+    "title": "Guide détaillé de la recherche Google | Google Search Central | Documentation | Google for Developers",
+    "description": "Obtenez des informations détaillées sur le fonctionnement de la recherche Google et améliorez votre site en vue de son exploration, de son indexation et de son classement par Google."
+  },
+  "https://developers.google.com/style/abbreviations": {
+    "title": "Abbreviations | Google developer documentation style guide | Google for Developers",
+    "description": ""
+  },
+  "https://developers.google.com/tech-writing/one": {
+    "title": "Technical Writing One introduction | Google for Developers",
+    "description": ""
+  },
+  "https://developers.google.com/tech-writing/one/clear-sentences": {
+    "title": "Clear sentences | Technical Writing | Google for Developers",
+    "description": ""
+  },
+  "https://developers.openai.com/api/docs/bots": {
+    "title": "Overview of OpenAI Crawlers",
+    "description": ""
+  },
+  "https://developers.openai.com/api/docs/guides/function-calling": {
+    "title": "Function calling | OpenAI API",
+    "description": "Learn how function calling enables large language models to connect to external data and systems."
+  },
+  "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide": {
+    "title": "Codex Prompting Guide",
+    "description": "Codex models advance the frontier of intelligence and efficiency and our recommended agentic coding model. Follow this guide closely to ensu"
+  },
+  "https://diataxis.fr/how-to-guides/": {
+    "title": "How-to guides - Diátaxis",
+    "description": ""
+  },
+  "https://diataxis.fr/start-here/": {
+    "title": "Start here - Diátaxis in five minutes - Diátaxis",
+    "description": "The best way to get started with Diátaxis is by applying it to documentation problems."
+  },
+  "https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations": {
+    "title": "Guidelines on transparency obligations for providers and deployers of certain AI systems",
+    "description": "These guidelines help providers and deployers of AI systems and competent authorities in ensuring compliance with the transparency obligations under Article 50 of the AI Act."
+  },
+  "https://discord.gg/Nq42Qxg2K": {
+    "title": "Rejoins le serveur Discord Semaine UXUI !",
+    "description": "Découvre la communauté Semaine UXUI sur Discord - discute avec 23 autres membres et profite du chat vocal et textuel gratuit."
+  },
+  "https://docmost.ludique.dev/share/gcbrd7j46z/p/bibi-d-objets-5Sn6BRDnSM": {
+    "title": "Bibi d'objets",
+    "description": ""
+  },
+  "https://docs.astro.build/en/concepts/islands/": {
+    "title": "Islands architecture",
+    "description": "Learn about how Astro's islands architecture helps keep sites fast."
+  },
+  "https://docs.astro.build/en/getting-started/": {
+    "title": "Getting started",
+    "description": "Guides, resources, and API references to help you build with Astro — the web framework for content-driven websites."
+  },
+  "https://docs.astro.build/en/guides/content-collections/": {
+    "title": "Content collections",
+    "description": "Manage your content with type safety."
+  },
+  "https://docs.claude.com/en/docs/agent-sdk/overview": {
+    "title": "Agent SDK overview - Claude Code Docs",
+    "description": "Build production AI agents with Claude Code as a library"
+  },
+  "https://docs.continue.dev/": {
+    "title": "What is Continue? | Continue Docs",
+    "description": "Open source AI code assistant for VS Code and JetBrains"
+  },
+  "https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/": {
+    "title": "Set, use, and manage variables in a Compose file with interpolation",
+    "description": "How to set, use, and manage variables in your Compose file with interpolation"
+  },
+  "https://docs.docker.com/compose/how-tos/networking/": {
+    "title": "Networking in Compose",
+    "description": "How Docker Compose sets up networking between containers"
+  },
+  "https://docs.docker.com/engine/storage/bind-mounts/": {
+    "title": "Bind mounts",
+    "description": "Using bind mounts"
+  },
+  "https://docs.docker.com/reference/compose-file/build/": {
+    "title": "Compose Build Specification",
+    "description": "Learn about the Compose Build Specification"
+  },
+  "https://docs.docker.com/reference/compose-file/networks/": {
+    "title": "Define and manage networks in Docker Compose",
+    "description": "Learn how to configure and control networks using the top-level networks element in Docker Compose."
+  },
+  "https://docs.docker.com/reference/compose-file/secrets/": {
+    "title": "Secrets",
+    "description": "Explore all the attributes the secrets top-level element can have."
+  },
+  "https://docs.docker.com/reference/compose-file/version-and-name/": {
+    "title": "Version and name top-level elements",
+    "description": "Understand when and if to set the version and name top-level element"
+  },
+  "https://docs.github.com/en/actions/tutorials/store-and-share-data": {
+    "title": "Store and share data with workflow artifacts - GitHub Docs",
+    "description": "Use artifacts to share data between jobs in a workflow and store data once that workflow has completed."
+  },
+  "https://docs.github.com/en/pages": {
+    "title": "GitHub Pages documentation - GitHub Docs",
+    "description": "GitHub Pages turns any GitHub repository into a live website—no separate hosting required."
+  },
+  "https://docs.github.com/fr/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams": {
+    "title": "Création de diagrammes - Documentation GitHub",
+    "description": "Créer des diagrammes pour transmettre des informations par le biais de diagrammes et de graphiques"
+  },
+  "https://docs.structurizr.com/dsl": {
+    "title": "DSL",
+    "description": "Documentation for the Structurizr tooling."
+  },
+  "https://dotnetcore.show/episode-96-the-programmers-brain-with-felienne-hermans/": {
+    "title": "Episode 96 - The Programmer's Brain with Felienne Hermans",
+    "description": "In this episode we talked with Dr. Felienne Hermans about her book The Programmer's Brain. We also discussed things like code reading clubs, and strategies for learning a new code base on a deeper level."
+  },
+  "https://download.nvaccess.org/documentation/fr/userGuide.html": {
+    "title": "Guide de l'utilisateur de NVDA 2026.2",
+    "description": ""
+  },
+  "https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/": {
+    "title": "Référentiel général d'écoconception de services numériques (RGESN) - 2024 - Numérique écoresponsable",
+    "description": "Référentiel d'Écoconception des Services Numériques."
+  },
+  "https://en.wikipedia.org/wiki/Code_smell": {
+    "title": "Code smell - Wikipedia",
+    "description": ""
+  },
+  "https://fonts.google.com/": {
+    "title": "Browse Fonts - Google Fonts",
+    "description": "Making the web more beautiful, fast, and open through great typography"
+  },
+  "https://fonts.google.com/knowledge": {
+    "title": "Fonts Knowledge - Google Fonts",
+    "description": "Making the web more beautiful, fast, and open through great typography"
+  },
+  "https://fr.wikipedia.org/wiki/G%C3%A9n%C3%A9rateur_de_site_statique": {
+    "title": "Générateur de site statique — Wikipédia",
+    "description": ""
+  },
+  "https://framablog.org/": {
+    "title": "Framablog",
+    "description": "La route est longue mais la voie est libre…"
+  },
+  "https://frontendfoc.us/": {
+    "title": "Frontend Focus",
+    "description": "The week in front-end, hand-picked. CSS, browser tech, JavaScript, and the things shaping how the web actually gets built."
+  },
+  "https://genai.owasp.org/llmrisk/llm01-prompt-injection/": {
+    "title": "LLM01:2025 Prompt Injection",
+    "description": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways. These inputs can affect the model even if they are imperceptible to humans, therefore prompt injections do not need to be human-visible/readable, as long as the content is parsed by the model. Prompt Injecti"
+  },
+  "https://ghuntley.com/ralph/": {
+    "title": "Ralph Wiggum as a \"software engineer\"",
+    "description": "How Ralph Wiggum went from 'The Simpsons' to the biggest name in AI right now - Venture Beat 😎Here's a cool little field report from a Y Combinator hackathon event where they put Ralph Wiggum to the test. \"We Put a Coding Agent in a While Loop and It Shipped"
+  },
+  "https://git-scm.com/docs/git-blame": {
+    "title": "Git - git-blame Documentation",
+    "description": ""
+  },
+  "https://github.com/GouvernementFR/dsfr": {
+    "title": "GitHub - GouvernementFR/dsfr: 🇫🇷 Official french government's design system (Système de Design de l'État)",
+    "description": "🇫🇷 Official french government's design system (Système de Design de l'État) - GouvernementFR/dsfr"
+  },
+  "https://github.com/MineDojo/Voyager": {
+    "title": "GitHub - MineDojo/Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "description": "An Open-Ended Embodied Agent with Large Language Models - MineDojo/Voyager"
+  },
+  "https://github.com/QwenLM/qwen-code": {
+    "title": "GitHub - QwenLM/qwen-code: An open-source AI coding agent that lives in your terminal.",
+    "description": "An open-source AI coding agent that lives in your terminal. - QwenLM/qwen-code"
+  },
+  "https://github.com/RyanAlberts/best-of-Agent-Harnesses": {
+    "title": "GitHub - RyanAlberts/best-of-Agent-Harnesses: 🏆 Ranked list of 167 AI agent harnesses, plus copy-paste templates (AGENTS.md, safe Claude Code settings, a minim",
+    "description": "🏆 Ranked list of 167 AI agent harnesses, plus copy-paste templates (AGENTS.md, safe Claude Code settings, a minimal harness) and step-by-step playbooks. MCP server, llms.txt &amp; JSON. Rescored we..."
+  },
+  "https://github.com/aaif-goose/goose": {
+    "title": "GitHub - aaif-goose/goose: an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM",
+    "description": "an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM - aaif-goose/goose"
+  },
+  "https://github.com/architecture-decision-record/architecture-decision-record/tree/main/locales/fr/mod%C3%A8les": {
+    "title": "architecture-decision-record/locales/fr/modèles at main · architecture-decision-record/architecture-decision-record",
+    "description": "Architecture decision record (ADR) examples for software planning, IT leadership, and template documentation - architecture-decision-record/architecture-decision-record"
+  },
+  "https://github.com/laowantong/mocodo": {
+    "title": "GitHub - laowantong/mocodo: Modélisation Conceptuelle de Données. Nickel. Ni souris.",
+    "description": "Modélisation Conceptuelle de Données. Nickel. Ni souris. - laowantong/mocodo"
+  },
+  "https://github.com/modelcontextprotocol/inspector": {
+    "title": "GitHub - modelcontextprotocol/inspector: Visual testing tool for MCP servers",
+    "description": "Visual testing tool for MCP servers. Contribute to modelcontextprotocol/inspector development by creating an account on GitHub."
+  },
+  "https://github.com/modelcontextprotocol/servers": {
+    "title": "GitHub - modelcontextprotocol/servers: Model Context Protocol Servers",
+    "description": "Model Context Protocol Servers. Contribute to modelcontextprotocol/servers development by creating an account on GitHub."
+  },
+  "https://github.com/openai/codex": {
+    "title": "GitHub - openai/codex: Lightweight coding agent that runs in your terminal",
+    "description": "Lightweight coding agent that runs in your terminal - openai/codex"
+  },
+  "https://github.com/pbakaus/impeccable": {
+    "title": "GitHub - pbakaus/impeccable: The design language that makes your AI harness better at design.",
+    "description": "The design language that makes your AI harness better at design. - pbakaus/impeccable"
+  },
+  "https://github.com/sverweij/dependency-cruiser": {
+    "title": "GitHub - sverweij/dependency-cruiser: Validate and visualize dependencies. Your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD.",
+    "description": "Validate and visualize dependencies. Your rules. JavaScript, TypeScript, CoffeeScript. ES6, CommonJS, AMD. - sverweij/dependency-cruiser"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/adr-annulation.mmd": {
+    "title": "cours-documentation-web/cours-documentation/visuels/adr-annulation.mmd at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/c4-conteneurs.mmd": {
+    "title": "cours-documentation-web/cours-documentation/visuels/c4-conteneurs.mmd at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/c4-conteneurs.svg": {
+    "title": "cours-documentation-web/cours-documentation/visuels/c4-conteneurs.svg at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/c4-contexte.mmd": {
+    "title": "cours-documentation-web/cours-documentation/visuels/c4-contexte.mmd at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/c4-contexte.svg": {
+    "title": "cours-documentation-web/cours-documentation/visuels/c4-contexte.svg at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/dependances.svg": {
+    "title": "cours-documentation-web/cours-documentation/visuels/dependances.svg at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/reservation-sequence.mmd": {
+    "title": "cours-documentation-web/cours-documentation/visuels/reservation-sequence.mmd at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/reservations-erd.mmd": {
+    "title": "cours-documentation-web/cours-documentation/visuels/reservations-erd.mmd at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/reservations.mcd": {
+    "title": "cours-documentation-web/cours-documentation/visuels/reservations.mcd at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/sources/atelier-notes.jpg": {
+    "title": "cours-documentation-web/cours-documentation/visuels/sources/atelier-notes.jpg at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/sources/atelier-poterie.jpg": {
+    "title": "cours-documentation-web/cours-documentation/visuels/sources/atelier-poterie.jpg at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/sources/slide-adr-mermaid.png": {
+    "title": "cours-documentation-web/cours-documentation/visuels/sources/slide-adr-mermaid.png at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/sources/slide-bdd.png": {
+    "title": "cours-documentation-web/cours-documentation/visuels/sources/slide-bdd.png at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/cours-documentation/visuels/sources/slide-documentation-publiee.png": {
+    "title": "cours-documentation-web/cours-documentation/visuels/sources/slide-documentation-publiee.png at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/editeur/capacite.ts": {
+    "title": "cours-documentation-web/demo/editeur/capacite.ts at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/editeur/survol.js": {
+    "title": "cours-documentation-web/demo/editeur/survol.js at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/editeur/tsconfig.json": {
+    "title": "cours-documentation-web/demo/editeur/tsconfig.json at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/features/reservations.feature": {
+    "title": "cours-documentation-web/demo/features/reservations.feature at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/features/steps/reservations.mjs": {
+    "title": "cours-documentation-web/demo/features/steps/reservations.mjs at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/src/reservations.mjs": {
+    "title": "cours-documentation-web/demo/src/reservations.mjs at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/demo/tests/reservations.test.mjs": {
+    "title": "cours-documentation-web/demo/tests/reservations.test.mjs at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/scripts/documentation-workflow.yml": {
+    "title": "cours-documentation-web/scripts/documentation-workflow.yml at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://github.com/theopaolo/cours-documentation-web/blob/main/scripts/mkdocs_hook.py": {
+    "title": "cours-documentation-web/scripts/mkdocs_hook.py at main · theopaolo/cours-documentation-web",
+    "description": "Cours pratique sur la documentation de projets web, avec exemples exécutables et documentation vivante. - theopaolo/cours-documentation-web"
+  },
+  "https://happytodev.substack.com/": {
+    "title": "Quoi de neuf les devs ? | HappyToDev | Substack",
+    "description": "Cette newsletter habite désormais à sa nouvelle adresse : https://quoi-de-neuf-les-devs.happyto.dev Si vous souhaitez vous abonner c'est là-bas que cela se passe désormais 😉 Les anciens numéros restent consultables ici par contre. A bientôt Fred. Click to read \"Quoi de neuf les devs ?\", by HappyToDev, a Substack publi"
+  },
+  "https://help.figma.com/hc/en-us/articles/15145852043927-Create-and-manage-variables-and-collections": {
+    "title": "Create and manage variables and collections",
+    "description": "The entry point for variables has moved! Click the Variables tab from the navigation bar on the left to access variables view. No more deselecting everything on the canvas to access your variables...."
+  },
+  "https://help.figma.com/hc/en-us/articles/15343107263511-Apply-variables-to-designs": {
+    "title": "Apply variables to designs",
+    "description": "Before you Start Who can use this feature Anyone on any plan can use variables Anyone with access to a file can use variables from that file Looking for more resources on variables? Check ou..."
+  },
+  "https://help.figma.com/hc/en-us/articles/15871097384471-The-difference-between-variables-and-styles": {
+    "title": "The difference between variables and styles",
+    "description": "As Figma extends its feature set with variables, you might be wondering: What is the difference between variables and styles? When should I choose one over the other? Are styles becoming obsolete? ..."
+  },
+  "https://help.figma.com/hc/fr/articles/360038662654-Guide-des-composants-dans-Figma": {
+    "title": "Guide des composants dans Figma",
+    "description": "Avant de commencer Qui peut utiliser cette fonctionnalité Utilisateurs de tous les forfaits Les utilisateurs disposant d'un accès éditeur à un fichier peuvent créer et modifier des composan..."
+  },
+  "https://help.figma.com/hc/fr/articles/360040314193-Guide-de-prototypage-dans-Figma": {
+    "title": "Guide de prototypage dans Figma",
+    "description": "Avant de commencer Qui peut utiliser cette fonctionnalité S'applique à toutes les équipes ou tous les forfaits. Toute personne disposant d'un accès éditeur peut créer des prototypes. To..."
+  },
+  "https://help.figma.com/hc/fr/articles/360040451373-Guide-de-l-auto-layout": {
+    "title": "Guide de disposition automatique",
+    "description": "Avant de commencer Qui peut utiliser cette fonctionnalité Disponible sur tous les forfaits Disponible dans Figma Design et Figma Sites. Vous pouvez également accéder à la disposition automat..."
+  },
+  "https://imfusio.com/fr/bibliotheque/carte-du-parcours-utilisateur": {
+    "title": "Imfusio | La carte du parcours utilisateur",
+    "description": "Se mettre dans les pas de l’utilisateur pour cerner son besoin"
+  },
+  "https://inclusive.microsoft.design/": {
+    "title": "Microsoft Inclusive Design",
+    "description": "Microsoft Inclusive Design is a practice that anyone who creates and manages products and services can use to build more inclusive experiences for everyone. Get the principles, guidebooks, workshop tools, videos, and many more free resources."
+  },
+  "https://ishadeed.com/": {
+    "title": "Home - Ahmad Shadeed",
+    "description": "Deep-dive CSS articles, modern CSS and visual CSS explanations."
+  },
+  "https://javascriptweekly.com/": {
+    "title": "JavaScript Weekly",
+    "description": "A newsletter of JavaScript articles, news and cool projects."
+  },
+  "https://jnd.org/signifiers-not-affordances/": {
+    "title": "Signifiers, not affordances",
+    "description": "Note: This was published in ACM Interactions, volume 15, issue 6. It is time for a review. As time and technologies change, as we have moved from individual to group, social, and even cultural comp…"
+  },
+  "https://jsdoc.app/": {
+    "title": "Use JSDoc: Index",
+    "description": "Official documentation for JSDoc."
+  },
+  "https://jvns.ca/": {
+    "title": "Julia Evans",
+    "description": "Julia Evans"
+  },
+  "https://kilo.ai/": {
+    "title": "Kilo – Open Source AI Coding Agent in IDE, CLI and Cloud",
+    "description": "Kilo is the open source AI coding agent for VS Code, JetBrains, CLI, and Cloud. Access 500+ models, bring your own keys at zero markup, and keep code private with local models."
+  },
+  "https://la-cascade.io/": {
+    "title": "La Cascade",
+    "description": "Page d'accueil de La Cascade, un site de traduction en français d'articles sur HTML, CSS, SVG, JavaScript"
+  },
+  "https://lawsofux.com/fr/": {
+    "title": "Home | Laws of UX",
+    "description": "Laws of UX est un ensemble de bonnes pratiques qui peuvent servir de repère aux designers dans leur conception."
+  },
+  "https://lawsofux.com/fr/effet-de-gradation-du-but/": {
+    "title": "Effet De Gradation Du But | Laws of UX",
+    "description": "La tendance à s'approcher d'un objectif augmente avec la proximité de l'objectif."
+  },
+  "https://lawsofux.com/fr/effet-von-restorff/": {
+    "title": "Effet Von Restorff | Laws of UX",
+    "description": "L'effet Von Restorff, également connu sous le nom d'effet d'isolement, prédit que lorsque plusieurs objets similaires sont présents, celui qui diffère des autres est le plus susceptible d'être mémorisé."
+  },
+  "https://lawsofux.com/fr/loi-de-fitts/": {
+    "title": "Loi De Fitts | Laws of UX",
+    "description": "Le temps nécessaire pour atteindre une cible est dépendant de la distance et de la taille de cette cible."
+  },
+  "https://lawsofux.com/fr/loi-de-hick/": {
+    "title": "Loi De Hick | Laws of UX",
+    "description": "Le temps nécessaire pour prendre une décision augmente avec le nombre et la complexité des choix."
+  },
+  "https://lawsofux.com/fr/loi-de-jakob/": {
+    "title": "Loi De Jakob | Laws of UX",
+    "description": "Les utilisateurs passent la plupart de leur temps sur d'autres sites. Cela signifie qu'ils préfèrent que votre site fonctionne de la même manière que tous les autres sites qu'ils connaissent déjà."
+  },
+  "https://lawsofux.com/fr/loi-de-proximit%C3%A9/": {
+    "title": "Loi De Proximité | Laws of UX",
+    "description": "Les objets qui sont proches les uns des autres ont tendance à être percus comme des groupes."
+  },
+  "https://lawsofux.com/fr/loi-de-similarit%C3%A9/": {
+    "title": "Loi De Similarité | Laws of UX",
+    "description": "L'œil humain a tendance à percevoir les éléments similaires d'un dessin comme une image, forme ou groupe complet, même si ces éléments sont séparés."
+  },
+  "https://lea.verou.me/": {
+    "title": "Home • Lea Verou",
+    "description": ""
+  },
+  "https://learn.shareai.run/en/": {
+    "title": "Learn Claude Code",
+    "description": "Build a nano Claude Code-like agent from 0 to 1, one mechanism at a time"
+  },
+  "https://likec4.dev/": {
+    "title": "LikeC4",
+    "description": "Architecture-as-a-code and toolchain for your architecture diagrams"
+  },
+  "https://livewire.laravel.com/docs/4.x/quickstart": {
+    "title": "Quickstart | Laravel",
+    "description": "A full-stack framework for Laravel that takes the pain out of building dynamic UIs."
+  },
+  "https://maggieappleton.com/": {
+    "title": "Maggie Appleton",
+    "description": "Maggie Appleton's digital garden of visual essays, notes, and patterns about programming, design, anthropology, and software."
+  },
+  "https://maggieappleton.com/garden": {
+    "title": "The Garden of Maggie Appleton",
+    "description": "A growing collection of essays, notes, talks, podcasts, and half-baked explorations, gathered and tended over time."
+  },
+  "https://martinfowler.com/": {
+    "title": "martinfowler.com",
+    "description": "A website on building software effectively"
+  },
+  "https://martinfowler.com/bliki/ArchitectureDecisionRecord.html": {
+    "title": "bliki: Architecture Decision Record",
+    "description": "A short document that captures a single decision, structured into a log to provide a history"
+  },
+  "https://martinfowler.com/bliki/Yagni.html": {
+    "title": "bliki: Yagni",
+    "description": "Yagni (\"You Aren't Gonna Need It\") is the principle that we should not build presumptive features. It should not be used as a justification for neglecting internal quality."
+  },
+  "https://maze.co/collections/ux-ui-design/ux-laws/": {
+    "title": "The 21 Main UX Laws Every Designer Must Follow + Examples",
+    "description": "Here are the 21 UX laws that every designer needs to know, including examples from real-life products."
+  },
+  "https://memento-dev.fr/docs/merise": {
+    "title": "Introduction à Merise",
+    "description": "Explorons un peu le monde fascinant de Merise, la célèbre méthodologie française utilisée pour concevoir des bases de données."
+  },
+  "https://mermaid.js.org/": {
+    "title": "Mermaid",
+    "description": "Create diagrams and visualizations using text and code."
+  },
+  "https://mermaid.js.org/syntax/c4.html": {
+    "title": "Mermaid",
+    "description": "Create diagrams and visualizations using text and code."
+  },
+  "https://mermaid.js.org/syntax/sequenceDiagram.html": {
+    "title": "Mermaid",
+    "description": "Create diagrams and visualizations using text and code."
+  },
+  "https://mkdocstrings.github.io/": {
+    "title": "Overview - mkdocstrings",
+    "description": "Automatic documentation from sources, for MkDocs."
+  },
+  "https://mobbin.com/": {
+    "title": "Mobbin — UI & UX design inspiration for mobile & web apps",
+    "description": "Save hours of UI & UX research with our library of 400,000+ fully searchable mobile & web app screenshots."
+  },
+  "https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices": {
+    "title": "Security Best Practices - Model Context Protocol",
+    "description": "Security considerations, attack vectors, and best practices for MCP implementations"
+  },
+  "https://modelcontextprotocol.io/docs/learn/architecture": {
+    "title": "Architecture overview - Model Context Protocol",
+    "description": ""
+  },
+  "https://modelcontextprotocol.io/specification/2025-11-25": {
+    "title": "Specification - Model Context Protocol",
+    "description": ""
+  },
+  "https://modelcontextprotocol.io/specification/2026-07-28/changelog": {
+    "title": "Key Changes - Model Context Protocol",
+    "description": ""
+  },
+  "https://moderncss.dev/": {
+    "title": "Modern CSS Solutions",
+    "description": "A series examining modern CSS solutions to problems Stephanie Eckles (@5t3ph), a seasoned frontend developer, has been solving for 15+ years."
+  },
+  "https://mouton-numerique.org/": {
+    "title": "Le Mouton Numérique - Collectif de réflexion technocritique",
+    "description": "Le Mouton numérique est un collectif de réflexion technocritique sur les enjeux que posent les technologies à nos sociétés."
+  },
+  "https://nerdy.dev/": {
+    "title": "Adam Argyle",
+    "description": "Website for Adam Argyle: Teacher, Speaker, CSSWG member, and creator of Open Props and VisBug."
+  },
+  "https://news.ycombinator.com/": {
+    "title": "Hacker News",
+    "description": ""
+  },
+  "https://newsletter.pragmaticengineer.com/": {
+    "title": "The Pragmatic Engineer | Gergely Orosz | Substack",
+    "description": "Big Tech and startups, from the inside. Highly relevant for software engineers, AI engineers and engineering leaders, useful for those working in tech. Click to read The Pragmatic Engineer, a Substack publication with millions of subscribers."
+  },
+  "https://nextjs.org/learn/dashboard-app/static-and-dynamic-rendering": {
+    "title": "App Router: Static and Dynamic Rendering | Next.js",
+    "description": "Understand how rendering works in Next.js, and make your dashboard app dynamic."
+  },
+  "https://nuxt.com/docs/3.x/guide/concepts/rendering": {
+    "title": "Rendering Modes · Nuxt Concepts v3",
+    "description": "Learn about the different rendering modes available in Nuxt."
+  },
+  "https://ollama.com/": {
+    "title": "Ollama",
+    "description": "Ollama is the easiest way to automate your work using open models, while keeping your data safe."
+  },
+  "https://openai.github.io/openai-agents-python/": {
+    "title": "OpenAI Agents SDK",
+    "description": ""
+  },
+  "https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4041901-appliquez-les-bonnes-pratiques-de-prototypage": {
+    "title": "Appliquez les bonnes pratiques de prototypage",
+    "description": ""
+  },
+  "https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4053056-comprenez-le-principe-d-affordance": {
+    "title": "Comprenez le principe d'affordance",
+    "description": ""
+  },
+  "https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4088746-faites-la-difference-entre-ux-et-ui": {
+    "title": "Faites la différence entre UX et UI",
+    "description": ""
+  },
+  "https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4088821-familiarisez-vous-avec-la-notion-d-usabilite": {
+    "title": "Familiarisez-vous avec la notion d'usabilité",
+    "description": ""
+  },
+  "https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4088981-concevez-un-produit-simple": {
+    "title": "Concevez un produit simple",
+    "description": ""
+  },
+  "https://openclassrooms.com/fr/courses/3013856-decouvrez-les-fondamentaux-de-l-ux-design/4089011-definissez-un-persona": {
+    "title": "Définissez un persona",
+    "description": ""
+  },
+  "https://opencode.ai/": {
+    "title": "OpenCode | L'agent de code IA open source",
+    "description": "OpenCode - L'agent de code open source."
+  },
+  "https://opencode.ai/docs/rules/": {
+    "title": "Règles",
+    "description": "Définissez des instructions personnalisées pour opencode."
+  },
+  "https://openrouter.ai/": {
+    "title": "OpenRouter",
+    "description": "The unified interface for every model. Find the best models & prices for your prompts"
+  },
+  "https://opentelemetry.io/": {
+    "title": "OpenTelemetry",
+    "description": "The open standard for telemetry"
+  },
+  "https://owasp.org/": {
+    "title": "OWASP Foundation - The Open Source Foundation for Application Security",
+    "description": "OWASP is the nonprofit behind the Top 10, ASVS, ZAP, and hundreds more free application security projects. Explore our tools, standards, local chapters, global events, and news from a community of 250+ chapters worldwide."
+  },
+  "https://owasp.org/Top10/2025/": {
+    "title": "OWASP Top 10:2025",
+    "description": "OWASP Top 10:2025"
+  },
+  "https://penpot.app/": {
+    "title": "Penpot: The open-source design platform for teams.",
+    "description": "Penpot is the open-source design platform for teams building digital products at scale, enabling deeper collaboration across design, code, and AI workflows."
+  },
+  "https://penpot.app/blog/what-is-a-wireframe-and-how-to-make-one/": {
+    "title": "What is a wireframe and how to make one",
+    "description": "Wireframing is a popular tool for UX design professionals to show how users will interact with the page. Learn how to get started, why it’s best for ideation, and why you won’t want to keep your wireframes to yourself."
+  },
+  "https://pi.dev/": {
+    "title": "Pi Coding Agent",
+    "description": "A terminal-based coding agent"
+  },
+  "https://react.dev/reference/react-dom/server": {
+    "title": "Server React DOM APIs – React",
+    "description": "The library for web and native user interfaces"
+  },
+  "https://refactoring.guru/refactoring": {
+    "title": "Refactoring: clean your code",
+    "description": "Refactoring is the controllable process of systematically improving your code without writing new functionality. The goal of refactoring is to pay off technical debt. The mantra of refactoring is clean code and simple design."
+  },
+  "https://refactoring.guru/refactoring/technical-debt": {
+    "title": "Technical debt",
+    "description": ""
+  },
+  "https://refactoring.guru/refactoring/what-is-refactoring": {
+    "title": "Clean code",
+    "description": ""
+  },
+  "https://refactoring.guru/refactoring/when": {
+    "title": "When to refactor",
+    "description": ""
+  },
+  "https://registry.modelcontextprotocol.io/": {
+    "title": "Official MCP Registry",
+    "description": ""
+  },
+  "https://schema.org/": {
+    "title": "Schema.org - Schema.org",
+    "description": "Schema.org is a set of extensible schemas that enables webmasters to embed structured data on their web pages for use by search engines and other applications."
+  },
+  "https://schemaspy.org/": {
+    "title": "SchemaSpy • Database Documentation Built Easy.",
+    "description": ""
+  },
+  "https://search.google.com/search-console": {
+    "title": "Google Search Console",
+    "description": ""
+  },
+  "https://search.google.com/test/rich-results": {
+    "title": "Test des résultats enrichis — Search Console Google",
+    "description": ""
+  },
+  "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/": {
+    "title": "The lethal trifecta for AI agents: private data, untrusted content, and external communication",
+    "description": "If you are a user of LLM systems that use tools (you can call them “AI agents” if you like) it is critically important that you understand the risk of …"
+  },
+  "https://solar.lowtechmagazine.com/": {
+    "title": "LOW←TECH MAGAZINE",
+    "description": "This is a solar-powered website, which means it sometimes goes offline"
+  },
+  "https://spec.openapis.org/oas/latest.html": {
+    "title": "OpenAPI Specification v3.2.1",
+    "description": "The OpenAPI Specification (OAS) defines a standard, programming language-agnostic interface description for HTTP APIs."
+  },
+  "https://standblog.org/blog/": {
+    "title": "Standblog",
+    "description": "Tristan Nitot sur la technologie, l'Internet, l'IA, les limites planétaires et les libertés numériques"
+  },
+  "https://stephaniewalter.design/blog/": {
+    "title": "The UX Research and Design Blog by Stéphanie Walter.",
+    "description": "Articles, resources and tools on user centered design, user research and testing, product design, mobile strategy, usability and technology"
+  },
+  "https://support.apple.com/fr-fr/guide/voiceover/vo2682/mac": {
+    "title": "Activer ou désactiver VoiceOver sur Mac",
+    "description": "Sur votre Mac, activez ou désactivez VoiceOver, interrompez temporairement la parole VoiceOver ou désactivez-la complètement."
+  },
+  "https://support.google.com/google-ads/answer/1722122?hl=fr": {
+    "title": "À propos du classement des annonces - Aide Google Ads",
+    "description": "Le classement de l'annonce correspond à un ensemble de valeurs permettant de déterminer si vos annonces peuvent être diffusées et, le cas échéant, de déterminer leur emplacement de diffusion su"
+  },
+  "https://svelte.dev/docs/kit/page-options": {
+    "title": "Page options • SvelteKit Docs",
+    "description": "Page options • SvelteKit documentation"
+  },
+  "https://svelte.dev/docs/kit/single-page-apps": {
+    "title": "Single-page apps • SvelteKit Docs",
+    "description": "Single-page apps • SvelteKit documentation"
+  },
+  "https://syndicode.com/blog/how-to-choose-tech-stack/": {
+    "title": "What to focus on when choosing a tech stack? Detailed guide",
+    "description": "How to select the right tech stack for mobile and web application development projects and a comparison of stacks used by famous companies."
+  },
+  "https://tallstack.dev/": {
+    "title": "Livewire | Laravel",
+    "description": "A full-stack framework for Laravel that takes the pain out of building dynamic UIs."
+  },
+  "https://techcafe.fr/": {
+    "title": "Tech Café",
+    "description": "Tech Café — podcast tech, vidéos et newsletter par Guillaume Vendé"
+  },
+  "https://thecodingmachine.com/ubiquitous-language-concept-cle/": {
+    "title": "Ubiquitous Language : Définition et usage en projet tech",
+    "description": "L'Ubiquitous Language est une méthode clé. Établissez un vocabulaire partagé pour assurer la compréhension mutuelle et éviter les malentendus."
+  },
+  "https://thehtml.review/": {
+    "title": "the html review 05",
+    "description": "the html review is an annual journal of literature made to exist on the web"
+  },
+  "https://ts.sdk.modelcontextprotocol.io/": {
+    "title": "MCP TypeScript SDK | MCP TypeScript SDK (v1)",
+    "description": "Documentation for v1.x of the MCP TypeScript SDK."
+  },
+  "https://tsdoc.org/": {
+    "title": "What is TSDoc? | TSDoc",
+    "description": "TSDoc is a proposal to standardize the doc comments used in TypeScript code, so that different tools can extract content without getting confused by each other's markup. The TSDoc notation looks pretty familiar:"
+  },
+  "https://typedoc.org/": {
+    "title": "TypeDoc",
+    "description": "Documentation for TypeDoc"
+  },
+  "https://typedoc.org/documents/Doc_Comments.html": {
+    "title": "Doc Comments | TypeDoc",
+    "description": "Documentation for TypeDoc"
+  },
+  "https://typescale.com/": {
+    "title": "Typescale - Create stunning typography, generate CSS, and find inspiration.",
+    "description": ""
+  },
+  "https://use-the-index-luke.com/": {
+    "title": "SQL Indexing and Tuning e-Book for developers: Use The Index, Luke covers Oracle, MySQL, PostgreSQL, SQL Server, ...",
+    "description": "SQL indexing and tuning tutorial for developers. No unnecessary database details—just what developers need to know. Covers all major SQL databases."
+  },
+  "https://usemodify.com/": {
+    "title": "Home - Use & Modify",
+    "description": ""
+  },
+  "https://validator.schema.org/": {
+    "title": "Outil de validation du balisage Schema",
+    "description": ""
+  },
+  "https://velvetyne.fr/": {
+    "title": "Velvetyne",
+    "description": "Libre fonts for everyone"
+  },
+  "https://vuejs.org/guide/scaling-up/ssr": {
+    "title": "Vue.js",
+    "description": "Vue.js - The Progressive JavaScript Framework"
+  },
+  "https://web.dev/articles/rendering-on-the-web": {
+    "title": "Rendu sur le Web | Articles | web.dev",
+    "description": "Recommandations pour implémenter la logique et l'affichage dans les applications."
+  },
+  "https://webaim.org/projects/million/": {
+    "title": "WebAIM: The WebAIM Million - The 2026 report on the accessibility of the top 1,000,000 home pages",
+    "description": ""
+  },
+  "https://webaim.org/resources/contrastchecker/": {
+    "title": "WebAIM: Contrast Checker",
+    "description": ""
+  },
+  "https://www.11ty.dev/": {
+    "title": "Eleventy is a simpler static site generator",
+    "description": "Eleventy is a simpler static site generator."
+  },
+  "https://www.11ty.dev/docs/": {
+    "title": "Getting Started",
+    "description": "A docs page for Eleventy, a simpler static site generator."
+  },
+  "https://www.11ty.dev/docs/data-cascade/": {
+    "title": "Data Cascade",
+    "description": "A docs page for Eleventy, a simpler static site generator."
+  },
+  "https://www.anthropic.com/engineering/building-effective-agents": {
+    "title": "Building Effective AI Agents",
+    "description": "Discover how Anthropic approaches the development of reliable AI agents. Learn about our research on agent capabilities, safety considerations, and technical framework for building trustworthy AI."
+  },
+  "https://www.anthropic.com/engineering/claude-code-best-practices": {
+    "title": "Best practices for Claude Code - Claude Code Docs",
+    "description": "Tips and patterns for getting the most out of Claude Code, from configuring your environment to scaling across parallel sessions."
+  },
+  "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents": {
+    "title": "Effective context engineering for AI agents",
+    "description": "Anthropic is an AI safety and research company that's working to build reliable, interpretable, and steerable AI systems."
+  },
+  "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills": {
+    "title": "Equipping agents for the real world with Agent Skills",
+    "description": "Discover how Anthropic builds AI agents with practical capabilities through modular skills, enabling them to handle complex real-world tasks more effectively and reliably."
+  },
+  "https://www.anthropic.com/engineering/writing-tools-for-agents": {
+    "title": "Writing effective tools for AI agents—using AI agents",
+    "description": "Writing effective tools for AI agents—using AI agents"
+  },
+  "https://www.anthropic.com/news/contextual-retrieval": {
+    "title": "Contextual Retrieval in AI Systems",
+    "description": "Explore how Anthropic enhances AI systems through advanced contextual retrieval methods. Learn about our approach to improving information access and relevance in large language models."
+  },
+  "https://www.anthropic.com/research/trustworthy-agents": {
+    "title": "Trustworthy agents in practice",
+    "description": "Five principles for building AI agents that balance autonomy with safety, with defenses spanning the model, harness, tools, and environment."
+  },
+  "https://www.arquen.fr/blog/maquettage-ux-wireframe-maquette-ou-prototype/": {
+    "title": "Maquettage UX Design : wireframe, maquette ou prototype ?",
+    "description": "Les 3 étapes de maquettage sont souvent confondues. Retrouvez dans cet article tout ce qu’il faut savoir sur les wireframes, maquettes et prototypes."
+  },
+  "https://www.arte-campus.fr/serie/dopamine-tous-les-episodes": {
+    "title": "Dopamine | ARTE Campus",
+    "description": "Tu es accro à tes applis ? Tous les matins après Twitter, tu checkes tes flammes sur Tinder. Pas de métro sans YouTube ou Candy Crush. Instagram est irrésistibl"
+  },
+  "https://www.awwwards.com/": {
+    "title": "Awwwards - Website Awards - Best Web Design Trends",
+    "description": "Awwwards are the Website Awards that recognize and promote the talent and effort of the best developers, designers and web agencies in the world."
+  },
+  "https://www.canirun.ai/": {
+    "title": "Can I run AI locally? Best models for your GPU",
+    "description": "Detect your GPU or Mac and see which open LLMs, coding, image and video models you can run locally. VRAM requirements, speed estimates and grades."
+  },
+  "https://www.cert.ssi.gouv.fr/": {
+    "title": "CERT-FR – Cert national et gouvernemental français",
+    "description": ""
+  },
+  "https://www.cnil.fr/": {
+    "title": "Particulier | CNIL",
+    "description": ""
+  },
+  "https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence": {
+    "title": "Conformité RGPD : comment informer les personnes et assurer la transparence ?",
+    "description": "Ce contenu a été mis à jour le 26 juillet 2019"
+  },
+  "https://www.cnil.fr/fr/cookies-et-autres-traceurs": {
+    "title": "Site web, cookies et autres traceurs",
+    "description": "Dans le cadre de son plan d’action sur le ciblage publicitaire, la CNIL publie des lignes directrices modificatives ainsi qu’une recommandation explicitant les règles applicables à l’usage de cookies et autres traceurs."
+  },
+  "https://www.cnil.fr/fr/definition/donnee-personnelle": {
+    "title": "Donnée personnelle",
+    "description": "Une donnée personnelle est toute information se rapportant à une personne physique identifiée ou identifiable. Mais, parce qu’elles concernent des personnes, celles-ci doivent en conserver la maîtrise. Une personne physique peut être identifiée :"
+  },
+  "https://www.cnil.fr/fr/entree-en-vigueur-du-reglement-europeen-sur-lia-les-premieres-questions-reponses-de-la-cnil": {
+    "title": "Entrée en vigueur du règlement européen sur l’IA : les premières questions-réponses de la CNIL",
+    "description": "Mise à jour le 17 août 2026 pour intégrer les modifications opérées par l’omnibus IA entré en vigueur le 27 juillet 2026."
+  },
+  "https://www.cnil.fr/fr/ia-et-rgpd-la-cnil-publie-ses-nouvelles-recommandations-pour-accompagner-une-innovation-responsable": {
+    "title": "IA et RGPD : la CNIL publie ses nouvelles recommandations pour accompagner une innovation responsable",
+    "description": "Le RGPD permet une IA innovante et respectueuse des données personnelles Le Sommet pour l’action sur l’intelligence artificielle, organisé par la France du 6 au 11 février 2025, accueillera de"
+  },
+  "https://www.cnil.fr/fr/les-bases-legales": {
+    "title": "Les bases légales",
+    "description": "La CNIL propose des fiches pratiques à destination des professionnels qui peuvent les aider à comprendre les bases légales et à choisir celles qui seront les plus adaptées à leurs traitements de données."
+  },
+  "https://www.cnil.fr/fr/les-bases-legales/consentement": {
+    "title": "Conformité RGPD : comment recueillir le consentement des personnes ?",
+    "description": "Le consentement était déjà inscrit dans la loi Informatique et Libertés. Il est renforcé par le RGPD et les conditions de son recueil sont précisées. Il assure aux personnes concernées un contrôle fort sur leurs données, en leur permettant :"
+  },
+  "https://www.cnil.fr/fr/les-bases-legales/contrat": {
+    "title": "Le contrat : dans quels cas fonder un traitement sur cette base légale ?",
+    "description": "Le contrat peut valablement fonder un traitement sous réserve que celui-ci soit objectivement nécessaire à l’exécution de ce contrat : il ne suffit pas que le traitement de données soit mentionné dans des clauses contractuelles ou dans des conditions générales d’utilisation."
+  },
+  "https://www.cnil.fr/fr/les-questions-reponses-de-la-cnil-sur-lutilisation-dun-systeme-dia-generative": {
+    "title": "Les questions-réponses de la CNIL sur l’utilisation d’un système d’IA générative",
+    "description": "L'intelligence artificielle « générative » désigne la classe des systèmes capables de créer des contenus (texte, code informatique, images, musique, audio, vidéos, etc.). Ces systèmes sont qualifiables de systèmes d’IA à usage général lorsqu’ils permettent de réaliser tout un ensemble de tâches : c’est le cas notamment"
+  },
+  "https://www.cnil.fr/fr/liste-traitements-aipd-requise": {
+    "title": "Analyse d’impact relative à la protection des données : publication d’une liste des traitements pour lesquels une analyse est requise",
+    "description": "L’analyse d’impact relative à la protection des données (AIPD) est un des éléments centraux du RGPD. La CNIL propose déjà de nombreux outils permettant aux professionnels de mieux comprendre leurs obligations et de les mettre en œuvre en pratique : guides pratiques, logiciel PIA, étude de cas, questions-réponses, etc. "
+  },
+  "https://www.cnil.fr/fr/minimiser-les-donnees-collectees": {
+    "title": "Minimiser les données collectées",
+    "description": "Avant la collecte, pensez aux différents types de données que vous devez collecter et essayez de restreindre votre collecte au strict nécessaire Réfléchissez aux différents types de données qui devront être collectées avant la mise en place d'une application et documentez cette réflexion. Si des données spécifiques ne "
+  },
+  "https://www.cnil.fr/fr/passer-laction/les-durees-de-conservation-des-donnees": {
+    "title": "Les durées de conservation des données",
+    "description": "Le cycle de vie de la donnée Pour un même traitement, les données personnelles poursuivent des phases successives. On parle de « cycle de vie » de la donnée personnelle. Ce cycle connaît trois phases :"
+  },
+  "https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre1": {
+    "title": "CHAPITRE I - Dispositions générales",
+    "description": ""
+  },
+  "https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre2": {
+    "title": "CHAPITRE II - Principes",
+    "description": "Modifié par Rectificatif au règlement (UE) 2016/679 JOUE L127 2 du 23/05/2018"
+  },
+  "https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre3": {
+    "title": "CHAPITRE III - Droits de la personne concernée",
+    "description": "Section 1 - Transparence et modalités"
+  },
+  "https://www.cnil.fr/fr/respecter-les-droits-des-personnes/repondre-aux-demandes-dexercice-des-droits": {
+    "title": "Répondre aux demandes d'exercice des droits",
+    "description": "Les personnes disposent de droits sur leurs données personnelles : vous devez leur permettre de les exercer. La CNIL vous aide à y répondre."
+  },
+  "https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions": {
+    "title": "Documenting Architecture Decisions",
+    "description": ""
+  },
+  "https://www.contentsquare-foundation.org/fr/presse/etude-l-exclusion-numerique-dans-le-e-commerce": {
+    "title": "Étude 2025 : L'Exclusion Numérique dans le e-commerce 94 % des parcours d’achat inaccessibles — des millions de ventes perdues en Europe",
+    "description": "Étude 2025 : L'Exclusion Numérique dans le e-commerce 94 % des parcours d’achat inaccessibles — des millions de ventes perdues en Europe"
+  },
+  "https://www.densediscovery.com/": {
+    "title": "Dense Discovery – One email worth opening, every week",
+    "description": "Thoughtful links across design, tech, culture and art – handpicked weekly to inspire reflection, not reaction."
+  },
+  "https://www.designspiration.com/": {
+    "title": "Designspiration - Design Inspiration | Inspirational Art, Photography & Typography Images",
+    "description": "Create an account or log in to Designspiration - An image &amp; color search engine for creating mood boards and finding art, design, logos, photography, app &amp; ui inspiration."
+  },
+  "https://www.domainlanguage.com/ddd/reference/": {
+    "title": "DDD Reference - Domain Language",
+    "description": "A summary of the patterns and definitions of DDD. This document is meant as a convenient reference for those who know the principles of Domain-Driven Design (DDD). It does not contain full explanations of DDD or even of the terms and patterns covered. It is intended to be used as a complement to books and..."
+  },
+  "https://www.drees.solidarites-sante.gouv.fr/publications-communique-de-presse-documents-de-reference/panoramas-de-la-drees/241128_Panorama_Handicap2024": {
+    "title": "Le handicap en chiffres - édition 2024 | Direction de la recherche, des études, de l'évaluation et des statistiques",
+    "description": ""
+  },
+  "https://www.entreprises.gouv.fr/priorites-et-actions/transition-numerique/soutenir-le-developpement-de-lia-au-service-de-0": {
+    "title": "Les autorités compétentes pour la mise en œuvre du règlement européen sur l’intelligence artificielle | Direction générale des Entreprises",
+    "description": "Une nouvelle réglementation encadre la mise en service, la mise sur le marché et l’utilisation de certains usages de l’intelligence artificielle susceptibles de présenter des risques pour la santé, la sécurité ou les droits fondamentaux."
+  },
+  "https://www.figma.com/resource-library/design-tokens/": {
+    "title": "Design Tokens: How to Sync Design and Code in Figma | Figma",
+    "description": "Design tokens are the shared language your team needs to scale. Learn how to build a resilient hierarchy in Figma and bridge the gap between design and code."
+  },
+  "https://www.figma.com/resource-library/user-journey-map/": {
+    "title": "User Journey Mapping: What is it & How to do it | Figma",
+    "description": "Learn the ins and outs of user journey mapping, including when to use a user journey map, how to craft it, and how it will transform your user experience."
+  },
+  "https://www.figma.com/resource-library/what-is-a-sequence-diagram/": {
+    "title": "What Is a Sequence Diagram? | Figma",
+    "description": "Learn what a sequence diagram is, common symbols and components, and how to make your own, plus examples using FigJam templates."
+  },
+  "https://www.figma.com/resource-library/what-is-a-uml-diagram/": {
+    "title": "What Is a UML Diagram? 14 Types | Figma",
+    "description": "Curious about what a UML diagram is? Learn how Unified Modeling Language diagrams represent systems, processes, and workflows to simplify complex ideas."
+  },
+  "https://www.figma.com/resource-library/what-is-information-architecture/": {
+    "title": "What Is Information Architecture? | Figma",
+    "description": "Learn what information architecture is, why it’s important, and how to build information architecture faster with FigJam templates."
+  },
+  "https://www.figma.com/signup": {
+    "title": "Sign Up for Figma",
+    "description": ""
+  },
+  "https://www.fontshare.com/": {
+    "title": "Fontshare: Quality Fonts. Free.",
+    "description": "Fontshare is a free fonts service from the Indian Type Foundry (ITF), making quality fonts accessible to all."
+  },
+  "https://www.francecompetences.fr/recherche/rncp/37674/": {
+    "title": "Rechercher une certification - France compétences",
+    "description": ""
+  },
+  "https://www.francenum.gouv.fr/formations/rgpd-quest-ce-quune-donnee-personnelle": {
+    "title": "RGPD : Qu'est-ce qu'une donnée personnelle ? - francenum.gouv.fr",
+    "description": "Découvrez ce qu'est une donnée personnelle, selon le règlement général de protection des données (RGPD), ce texte qui encadre l'utilisation des données personnelles."
+  },
+  "https://www.google.com/search/howsearchworks/how-search-works/ranking-results/": {
+    "title": "Comment Google détermine le classement des résultats – Recherche Google",
+    "description": "Découvrez comment les facteurs clés comme la signification, la pertinence et la qualité servent à déterminer le classement des sites Web sur Google."
+  },
+  "https://www.grenoblealpesmetropole.fr/635-un-site-web-accessible.htm": {
+    "title": "Accessibilité du site grenoblealpesmetropole.fr",
+    "description": "Grenoble Alpes Métropole s'est engagé dans une démarche exigeante en faveur de l'accessibilité de son site www.grenoblealpesmetropole.fr. L'objectif [...]"
+  },
+  "https://www.ifttd.io/": {
+    "title": "IFTTD - If This Then Dev - le podcast pour les devs par des devs avec des devs",
+    "description": "If This Then Dev c’est le podcast D.E.V. : Différent, Extraordinaire et Visionnaire, où on décode les sujets et tendances du dev."
+  },
+  "https://www.informit.com/store/living-documentation-continuous-knowledge-sharing-by-9780134689326": {
+    "title": "Living Documentation: Continuous Knowledge Sharing by Design | InformIT",
+    "description": "Use an Approach Inspired by Domain-Driven Design to Build Documentation That Evolves to Maximize Value Throughout Your Development Lifecycle Software documentation can come to life, stay dynamic, and actually help you build better software. Writing for developers, coding architects, and other software professionals, Li"
+  },
+  "https://www.joshwcomeau.com/": {
+    "title": "Josh W. Comeau",
+    "description": "Friendly articles and tutorials for front-end web developers. ❤️"
+  },
+  "https://www.langchain.com/": {
+    "title": "LangChain: the open agent platform to own your intelligence",
+    "description": "LangChain enables every company to own their intelligence. Control, govern, and compound intelligence with an open agent engineering platform. Trusted by 7k+ organizations."
+  },
+  "https://www.laquadrature.net/": {
+    "title": "La Quadrature du Net",
+    "description": "La Quadrature du Net promeut et défend les libertés fondamentales remises en question par certains usages des outils informatiques. L’association lutte par exemple contre la censure et la surveillance, que celles-ci viennent des États ou des entreprises privées. Elle questionne la façon dont le numé"
+  },
+  "https://www.letta.com/": {
+    "title": "Letta",
+    "description": "Making machines that learn. Create stateful agents that remember everything, learn continuously, and improve themselves over time."
+  },
+  "https://www.manning.com/books/the-programmers-brain": {
+    "title": "The Programmer's Brain - Felienne Hermans",
+    "description": "With this unique book learn how to optimize your brain’s natural cognitive processes to read code more easily, write code faster, and pick up new languages in much less time."
+  },
+  "https://www.mkdocs.org/": {
+    "title": "MkDocs",
+    "description": "Project documentation with Markdown."
+  },
+  "https://www.mkdocs.org/dev-guide/plugins/": {
+    "title": "Plugins - MkDocs",
+    "description": ""
+  },
+  "https://www.mkdocs.org/user-guide/configuration/": {
+    "title": "Configuration - MkDocs",
+    "description": ""
+  },
+  "https://www.mongodb.com/resources/languages/mean-stack": {
+    "title": "What Is The MEAN Stack? Introduction & Examples",
+    "description": "MEAN stack is an Angular JS framework to build web applications. Here's our introduction to MEAN stack architecture."
+  },
+  "https://www.nngroup.com/articles/breadcrumbs/": {
+    "title": "Breadcrumbs: 11 Design Guidelines for Desktop and Mobile",
+    "description": "Support wayfinding by including breadcrumbs that reflect your site's information hierarchy. On mobile, avoid using breadcrumbs that are too tiny or wrap."
+  },
+  "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/": {
+    "title": "F-Shaped Pattern of Reading: Misunderstood, But Still Relevant",
+    "description": "Eleven years after discovering the F-shaped reading pattern, we revisit what it means today."
+  },
+  "https://www.nngroup.com/articles/journey-mapping-101/": {
+    "title": "Journey Mapping 101",
+    "description": "A journey map is a visualization of the process that a person goes through in order to accomplish a goal."
+  },
+  "https://www.nngroup.com/articles/ten-usability-heuristics/": {
+    "title": "10 Usability Heuristics for User Interface Design",
+    "description": "Jakob Nielsen's 10 principles for interaction design. They are called \"heuristics\" because they are broad rules of thumb and not specific usability guidelines."
+  },
+  "https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/": {
+    "title": "Thinking Aloud: The #1 Usability Tool",
+    "description": "Simple usability tests where users think out loud are cheap, robust, flexible, and easy to learn. Thinking aloud should be the first tool in your UX toolbox, even though it entails some risks and doesn't solve all problems."
+  },
+  "https://www.nngroup.com/articles/user-journeys-vs-user-flows/": {
+    "title": "User Journeys vs. User Flows",
+    "description": "User journeys and user flows both describe processes users go through in order to accomplish their goals, but they differ in scope, purpose, and format."
+  },
+  "https://www.nngroup.com/articles/user-story-mapping/": {
+    "title": "Mapping User Stories in Agile",
+    "description": "User-story maps help Agile teams define what to build and maintain visibility for how it all fits together. They enable user-centered conversations, collaboration, and feature prioritization to align and guide iterative product development."
+  },
+  "https://www.nngroup.com/articles/ux-prototype-hi-lo-fidelity/": {
+    "title": "UX Prototypes: Low Fidelity vs. High Fidelity",
+    "description": "No matter which prototyping tools you use, the same tips apply to preparing a user interface prototype for the most effective user research."
+  },
+  "https://www.nngroup.com/articles/visual-hierarchy-ux-definition/": {
+    "title": "Visual Hierarchy in UX: Definition",
+    "description": "A clear visual hierarchy guides the eye to the most important elements on the page. It can be created through variations in color and contrast, scale, and grouping."
+  },
+  "https://www.nngroup.com/articles/wireflows/": {
+    "title": "Wireflows: A UX Deliverable for Workflows and Apps",
+    "description": "Wireflows are a combination of wireframes and flowcharts. They can document workflow and screen designs when there are few pages that change dynamically."
+  },
+  "https://www.nolimitsecu.fr/": {
+    "title": "NoLimitSecu",
+    "description": "Podcast dédié à la cyber sécurité"
+  },
+  "https://www.openhands.dev/": {
+    "title": "OpenHands | The Open Platform for Cloud Coding Agents",
+    "description": "Meet OpenHands, the open-source, model-agnostic platform for cloud coding agents. Automate real engineering work securely and transparently. Build faster with full control."
+  },
+  "https://www.photopea.com/": {
+    "title": "Photopea | Online Photo Editor",
+    "description": "Photopea Online Photo Editor lets you edit photos, apply effects, filters, add text, crop or resize pictures. Do Online Photo Editing in your browser for free!"
+  },
+  "https://www.pinterest.fr/": {
+    "title": "Pinterest",
+    "description": "Trouvez des inspirations et idées pratiques pour tous vos projets au quotidien sur Pinterest."
+  },
+  "https://www.postgresql.org/docs/current/ddl-constraints.html": {
+    "title": "5.5. Constraints",
+    "description": "5.5.&nbsp;Constraints # 5.5.1. Check Constraints 5.5.2. Not-Null Constraints 5.5.3. Unique Constraints 5.5.4. Primary Keys 5.5.5. Foreign Keys 5.5.6. Exclusion Constraints …"
+  },
+  "https://www.schneier.com/": {
+    "title": "Schneier on Security",
+    "description": ""
+  },
+  "https://www.slideshare.net/slideshow/living-documentation/238968322": {
+    "title": "Living documentation",
+    "description": "The document discusses the importance and principles of effective living documentation, emphasizing its role in facilitating understanding among project members and stakeholders. It highlights the need for clear, concise, and up-to-date documentation that reduces technical debt and aids in onboarding new engineers. The"
+  },
+  "https://www.smashingmagazine.com/": {
+    "title": "Smashing Magazine — For Web Designers And Developers",
+    "description": "Magazine on CSS, JavaScript, front-end, accessibility, UX and design. For developers, designers and front-end engineers."
+  },
+  "https://www.sqlite.org/whentouse.html": {
+    "title": "Appropriate Uses For SQLite",
+    "description": ""
+  },
+  "https://www.techtrash.fr/": {
+    "title": "TechTrash",
+    "description": "La newsletter tech bête et méchante. Chaque semaine, recevez un condensé d'infos espiègles sur la tech (et c'est gratuit !)"
+  },
+  "https://www.tldraw.com/f/Z7UQceeqciIkih4lfWoN8?d=v0.0.1496.933.page": {
+    "title": "tldraw",
+    "description": "A free and instant collaborative whiteboarding tool."
+  },
+  "https://www.trychroma.com/research/context-rot": {
+    "title": "Context Rot: How Increasing Input Tokens Impacts LLM Performance",
+    "description": "Large Language Models (LLMs) are typically presumed to process context uniformly—that is, the model should handle the 10,000th token just as reliably as the 100th. However, in practice, this assumption does not hold. We observe that model performance varies significantly as input length changes, even on simple tasks. I"
+  },
+  "https://www.tunera.xyz/": {
+    "title": "Home - Tunera Type Foundry",
+    "description": ""
+  },
+  "https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html": {
+    "title": "Documentation - JS Projects Utilizing TypeScript",
+    "description": "How to add type checking to JavaScript files using TypeScript"
+  },
+  "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html": {
+    "title": "Documentation - JSDoc Reference",
+    "description": "What JSDoc does TypeScript-powered JavaScript support?"
+  },
+  "https://www.usabilis.com/persona-ux-design/": {
+    "title": "Persona en UX Design : à quoi sert-il et comment le créer ?",
+    "description": "La méthode des personas permet de créer un archétype d’un groupe d’utilisateurs de l’interface. Découvrez comment créer un persona..."
+  },
+  "https://www.w3.org/WAI/ARIA/apg/patterns/button/": {
+    "title": "Button Pattern",
+    "description": "Accessibility resources free online from the international standards organization: W3C Web Accessibility Initiative (WAI)."
+  },
+  "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/": {
+    "title": "Disclosure (Show/Hide) Pattern",
+    "description": "Accessibility resources free online from the international standards organization: W3C Web Accessibility Initiative (WAI)."
+  },
+  "https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/": {
+    "title": "Providing Accessible Names and Descriptions",
+    "description": "Accessibility resources free online from the international standards organization: W3C Web Accessibility Initiative (WAI)."
+  },
+  "https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/": {
+    "title": "Read Me First",
+    "description": "Accessibility resources free online from the international standards organization: W3C Web Accessibility Initiative (WAI)."
+  },
+  "https://www.w3.org/WAI/demos/bad/after/home.html": {
+    "title": "Welcome to CityLights! [Accessible Home Page]",
+    "description": ""
+  },
+  "https://www.w3.org/WAI/demos/bad/before/home.html": {
+    "title": "Welcome to CityLights! [Inaccessible Home Page]",
+    "description": ""
+  },
+  "https://www.w3.org/WAI/people-use-web/tools-techniques/": {
+    "title": "Tools and Techniques",
+    "description": "Introduces some of the techniques and tools that people with disabilities use to interact with digital technology — browser settings, text-to-speech, speech recognition, and many more."
+  },
+  "https://www.w3.org/WAI/perspective-videos/fr": {
+    "title": "L’accessibilité Web illustrée : explorez ses effets et ses bénéfices pour tous",
+    "description": "Courtes vidéos montrant en quoi l’accessibilité Web est essentielle pour les personnes en situation de handicap et utile pour tous dans diverses situations."
+  },
+  "https://www.w3.org/WAI/perspective-videos/keyboard/fr": {
+    "title": "Compatibilité avec le clavier",
+    "description": "Courte vidéo à propos de la compatibilité du clavier pour l’accessibilité Web - de quoi s’agit-il, qui en bénéficie, et comment mettre cela en pratique."
+  },
+  "https://www.w3.org/WAI/perspective-videos/speech/fr": {
+    "title": "La synthèse vocale",
+    "description": "Courte vidéo à propos de la synthèse vocale pour l’accessibilité Web - de quoi s’agit-il, qui en bénéficie, et comment mettre cela en pratique."
+  },
+  "https://www.w3.org/WAI/test-evaluate/": {
+    "title": "Evaluating Web Accessibility Overview",
+    "description": "Accessibility resources free online from the international standards organization: W3C Web Accessibility Initiative (WAI)."
+  },
+  "https://www.who.int/news-room/fact-sheets/detail/disability-and-health": {
+    "title": "Disability",
+    "description": "WHO fact sheet on disability and health provides key facts and information on unmet needs for health care, secondary conditions, how lives of disabled people affected, barriers to health care and WHO response."
+  },
+  "https://www.wikipedia.org/": {
+    "title": "Wikipedia, the free encyclopedia",
+    "description": "Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation."
+  },
+  "https://www.writethedocs.org/guide/docs-as-code/": {
+    "title": "Docs as Code",
+    "description": "author, Eric Holscher& the Write the Docs community,. Documentation as Code ( Docs as Code) refers to a philosophy that you should be writing documentation with the same tools as code: Issue Tr..."
+  },
+  "https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/": {
+    "title": "How to write software documentation",
+    "description": "As a software developer or engineer, there is a magical feeling that comes from releasing open-source code. The feeling is a mix of terror and excitement. You’re eager to tell the world about your ..."
+  },
+  "https://www.writethedocs.org/guide/writing/docs-principles/": {
+    "title": "Documentation principles",
+    "description": "Software development benefits from philosophies and principles such as DRY, KISS, code reuse, and more. Developers use these commonly understood standards to produce high-quality code. These princi..."
+  },
+  "https://www.youtube.com/watch?v=2TlIg3VokY8": {
+    "title": "The UX Psychology Behind Apps People Can’t Stop Using",
+    "description": "💎 Try Mobbin for free and get 20% off: https://mobbin.com/uxpeak🚀 Start learning advanced UX/UI design with our uxpeak+ platform → https://www.uxpeak.comMo..."
+  },
+  "https://www.youtube.com/watch?v=IQP_2wnEgoY": {
+    "title": "Whatnot : Le nouveau Sponsor YouTube qui te met en DANGER",
+    "description": "Est-ce que vous tomberez dans les pièges de cette applications ? Est-ce que les vendeurs arnaquent votre cerveau ?🔴 Tester Mammouth pour accéder aux meilleu..."
+  },
+  "https://www.youtube.com/watch?v=dPi-o1rsHpI": {
+    "title": "Pourquoi le Web est devenu si MOCHE ?",
+    "description": "Êtes-vous prêt à prendre votre dose de nostalgie ? 🐬🫧Pour activer la facturation électronique gratuitement avec Abby : https://c3po.link/nncExqMfpD — Et pr..."
+  },
+  "https://www.youtube.com/watch?v=eBbUNs8odVA": {
+    "title": "L'UX Design c'est quoi ?",
+    "description": "Découvre ma définition de l'UX et l'UI design avec des exemples simples et concrets !Chapitres00:00 introduction 00:14 Définition UX Design00:25 Exemple UX a..."
+  },
+  "https://www.youtube.com/watch?v=fx5VZFdkuf4": {
+    "title": "Comment le WEB vous arnaque ? (Les Darks Patterns)",
+    "description": "Avant hier j’ai décidé de me désinscrire d’un site d’abonnement mensuel de box et je me suis retrouvé face à une expérience utilisateur dont il fallait absol..."
+  },
+  "https://www.youtube.com/watch?v=g57_0gejMig": {
+    "title": "L'UX - 60 secondes pour comprendre",
+    "description": "60 secondes pour comprendre l’UX : Les Anglo-Saxons parlent de « user experience » ou de « UX », deux vocables qui sont aussi utilisés en français… Mais vous..."
+  },
+  "https://www.youtube.com/watch?v=hjjuhiCwgf0": {
+    "title": "“Living documentation”. Quand notre définition produit, nos tests automatisés... - Samuel ROZÉ",
+    "description": "Titre complet : “Living documentation”. Quand notre définition produit, nos tests automatisés et notre documentation sont la même chose.Forum PHP 2020 - édit..."
+  },
+  "https://www.youtube.com/watch?v=x2-rSnhpw0g": {
+    "title": "Visualising software architecture with the C4 model - Simon Brown, Agile on the Beach 2019",
+    "description": "In Simon Brown's talk at AOTB 2019 he explores the visual communication of software architecture based upon a decade of Simon’s experiences working with soft..."
+  },
+  "https://www.youtube.com/watch?v=yY96hTb8WgI": {
+    "title": "It's not you. Bad doors are everywhere.",
+    "description": "This video is about doors. Joe Posner investigates, with some help from 99% invisible, a wonderful podcast. Check them out here: http://www.99pi.orgSubscrib..."
+  },
+  "https://x.com/karpathy/status/1886192184808149383": {
+    "title": "Andrej Karpathy (@karpathy) sur X",
+    "description": "There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good. Also I just talk to Composer with SuperWhisper so I barely even t…"
+  },
+  "https://yoan-thirion.gitbook.io/knowledge-base/software-craftsmanship/the-programmers-brain": {
+    "title": "The Programmer's Brain | Knowledge-base",
+    "description": "by Felienne Hermans"
+  }
+}

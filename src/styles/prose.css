@@ -183,7 +183,7 @@ blockquote p:last-child {
   margin-bottom: 0;
 }
 
-/* Lien de section sur les titres (src/scripts/reading.js) : « # » au survol, « Lien copié » au clic */
+/* Lien de section sur les titres (src/scripts/reading.js) : "#" au survol, "Lien copié" au clic */
 .heading-link {
   color: inherit;
   text-decoration: none;

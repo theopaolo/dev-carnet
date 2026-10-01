@@ -26,6 +26,12 @@ npm run check    # format, tests, build, dates et cours Three.js
 npm run format   # formater le code du site
 ```
 
+Les liens du contenu affichent un aperçu au survol ou au focus clavier. Les résumés
+externes sont conservés dans `src/data/link-previews.json`, sans requête vers les
+sites liés pendant la lecture. Après ajout de liens, lancer `npm run build` puis
+`npm run previews` pour actualiser ce fichier et le versionner. Le build suivant
+publie les aperçus. Les sites inaccessibles gardent leur ancien résumé, s'il existe.
+
 ## Organisation du site
 
 Les composants Astro rendent le HTML. Leurs petits blocs `<script>` importent les

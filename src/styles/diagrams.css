@@ -16,7 +16,7 @@
 }
 
 /* Un diagramme plus large que la colonne défile sur le côté. Ombre au bord qui
-   cache encore du contenu : les bandes « local » suivent le défilement et couvrent
+   cache encore du contenu : les bandes "local" suivent le défilement et couvrent
    l'ombre une fois le bord atteint */
 div.mermaid {
   overflow-x: auto;

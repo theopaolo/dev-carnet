@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Accueil</title>
+<meta name="robots" content="noindex">
+<meta name="keywords" content="escalade, escalade lyon, salle escalade lyon, bloc lyon, escalade pas cher">
+<style>
+body { font: 1rem/1.5 Arial, sans-serif; color: #222; margin: 0; }
+.exo { background: #fff3cd; padding: .5rem 1rem; margin: 0; font-size: .9rem; }
+.page { width: 960px; margin: 0 auto; padding: 1rem; }
+.menu { display: flex; align-items: center; gap: 1.5rem; }
+.menu span { color: #1a4fd6; text-decoration: underline; cursor: pointer; }
+.gros { font-size: 2.4rem; font-weight: bold; margin: 1.5rem 0 .5rem; }
+.cache { color: #fff; font-size: 2px; }
+button { font: inherit; padding: .5rem 1rem; }
+</style>
+</head>
+<body>
+<p class="exo">Exercice de référencement : cette page contient des erreurs volontaires. Prise d'Air est une salle fictive.</p>
+<div class="page">
+<div class="menu">
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAxMjAgNDAiPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHJ4PSI2IiBmaWxsPSIjMWYyOTM3Ii8+PHRleHQgeD0iNjAiIHk9IjI2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZGU2OGEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlByaXNlIGQnQWlyPC90ZXh0Pjwvc3ZnPg==" width="120" height="40">
+<span onclick="location.href='seance-decouverte.html'">Séance découverte</span>
+<span onclick="location.href='tarifs.html'">Tarifs</span>
+<span onclick="location.href='blog.html'">Blog</span>
+</div>
+<div class="gros">Bienvenue !</div>
+<h4>Le meilleur endroit pour grimper</h4>
+<p>Venez découvrir notre salle, une expérience unique pour tous les niveaux. Notre équipe passionnée vous attend dans un cadre exceptionnel.</p>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MjAiIGhlaWdodD0iMTcwIiB2aWV3Qm94PSIwIDAgNTIwIDE3MCI+PHJlY3Qgd2lkdGg9IjUyMCIgaGVpZ2h0PSIxNzAiIGZpbGw9IiNmZGU2OGEiLz48dGV4dCBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiMxZjI5MzciPjx0c3BhbiB4PSIyNCIgeT0iNDAiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiPkhvcmFpcmVzPC90c3Bhbj48dHNwYW4geD0iMjQiIHk9IjcyIiBmb250LXNpemU9IjE3Ij5MdW5kaSBhdSB2ZW5kcmVkaSA6IDEyIGggLSAyMyBoPC90c3Bhbj48dHNwYW4geD0iMjQiIHk9Ijk4IiBmb250LXNpemU9IjE3Ij5TYW1lZGkgZXQgZGltYW5jaGUgOiAxMCBoIC0gMjAgaDwvdHNwYW4+PHRzcGFuIHg9IjI0IiB5PSIxMzgiIGZvbnQtc2l6ZT0iMTciPjEyIHJ1ZSBJbWFnaW5haXJlLCA2OTAwNyBMeW9uLiBNw6l0cm8gQiwgYXJyw6p0IEplYW4gTWFjw6k8L3RzcGFuPjwvdGV4dD48L3N2Zz4=" width="520" height="170">
+<h2>Tarifs</h2>
+<p>Retrouvez nos tarifs 2023 <a href="tarifs-2023.pdf">ici</a>.</p>
+<h2>Infos pratiques</h2>
+<button type="button" onclick="afficherInfos()">Afficher les infos</button>
+<div id="infos"></div>
+<p class="cache">escalade lyon salle escalade lyon bloc lyon escalade pas cher lyon meilleure salle escalade lyon escalade lyon</p>
+<p><a href="#">Réserver</a></p>
+<p>© Prise d'Air</p>
+</div>
+<script>
+function afficherInfos() {
+  document.getElementById('infos').innerHTML =
+    '<p>Séance découverte : 1 h 30, 18 €, chaussons compris. Dès 8 ans, avec un adulte jusqu’à 14 ans.</p>' +
+    '<p>En semaine, venez sans réserver. Le week-end, réservez votre créneau.</p>';
+}
+</script>
+</body>
+</html>

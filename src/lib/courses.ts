@@ -5,7 +5,7 @@ export interface CourseGroup {
   chapters: CollectionEntry<"cours">[];
 }
 
-// Un cours = son index.md (id sans « / ») et ses chapitres, triés par `order`.
+// Un cours = son index.md (id sans "/") et ses chapitres, triés par `order`.
 // Un cours sans chapitre est une fiche d'une page.
 export async function getCourses() {
   const all = (await getCollection("cours", (c) => !c.data.hidden)).sort(
@@ -22,7 +22,7 @@ export async function getCourses() {
 }
 
 // Présentation d'une page : premier paragraphe de texte, sans balisage Markdown. Sert à l'accueil
-// et aux aperçus de lien (meta description). Un paragraphe qui finit par « : » annonce une liste
+// et aux aperçus de lien (meta description). Un paragraphe qui finit par ":" annonce une liste
 // et ne se lit pas seul, un paragraphe en italique est une citation ou une source
 export const intro = (body = "") => {
   const para = body

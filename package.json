@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "previews": "node scripts/update-link-previews.mjs",
     "test": "node --test src/lib/*.test.mjs",
     "check": "npm run format:check && npm test && npm run build && node scripts/check-layout.mjs && node scripts/check-publication-dates.mjs && node scripts/check-private-courses.mjs && node scripts/check-threejs.mjs",
     "format": "prettier --write \"src/{components,layouts,pages,scripts,styles,lib}/**/*.{astro,js,mjs,ts,css}\"",
@@ -19,6 +20,7 @@
     "piloti": "2.0.0"
   },
   "devDependencies": {
+    "parse5": "7.3.0",
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0"
   }

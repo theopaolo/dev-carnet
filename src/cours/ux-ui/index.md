@@ -114,8 +114,7 @@ Montrez un problème rencontré, votre solution et une correction issue d'un tes
 
 ## Le barème
 
-Ce barème s'applique à chaque personne. Il ne constitue pas la grille officielle du jury RNCP.
-
+Ce barème s'applique à chaque personne.
 | Évaluation | Points | Ce qui est vérifié |
 | --- | --- | --- |
 | UX | 25 | Persona, story map, stories et journey tirés des entretiens et du brief |
@@ -126,4 +125,4 @@ Ce barème s'applique à chaque personne. Il ne constitue pas la grille officiel
 
 ## Le lien avec le titre DWWM
 
-Ce module vous prépare à la compétence de maquettage du [titre professionnel DWWM, niveau 5, RNCP37674](https://www.francecompetences.fr/recherche/rncp/37674/). Les maquettes doivent répondre au besoin, respecter la charte et prévoir l'accessibilité et l'affichage mobile. Joignez un schéma d'enchaînement des écrans. La sécurité, les données personnelles ([RGPD](https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence)) et l'éco-conception ([RGESN](https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/)) font aussi partie des points à prendre en compte.
+Ce module vous prépare à la compétence de maquettage du [titre professionnel DWWM, niveau 5, RNCP37674](https://www.francecompetences.fr/recherche/rncp/37674/). Les maquettes doivent répondre au besoin, respecter la charte et prévoir l'accessibilité et l'affichage mobile. Joignez un schéma d'enchaînement des écrans.

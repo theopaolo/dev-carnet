@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from "astro";
 import { getCourses, intro } from "../lib/courses";
 import { pageUrl } from "../lib/urls";
+import { readGlossary } from "../lib/glossary.mjs";
 import PageHead from "../components/PageHead.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SearchDialog from "../components/SearchDialog.astro";
@@ -21,6 +22,8 @@ const { all, courses, sheets } = await getCourses();
 const page = all.find((entry) => entry.id === id);
 const course = all.find((entry) => entry.id === id.split("/")[0]);
 const group = courses.find((group) => group.course === course);
+const glossary = group?.chapters.find((entry) => /(?:lexique|glossaire)$/.test(entry.id));
+const definitions = glossary && glossary.id !== id ? await readGlossary(glossary.body ?? "") : [];
 const navLabel = group ? "Chapitres" : "Fiches";
 const toc = headings.filter((heading) => heading.depth <= 2);
 const text = description ?? (intro(page?.body) || intro(course?.body));
@@ -53,6 +56,13 @@ const summary = text.length > 200 ? text.slice(0, cutoff > 0 ? cutoff : 199) + "
         </main>
         {toc.length > 0 && <TableOfContents headings={toc} />}
       </div>
+    </div>
+    <div hidden>
+      {definitions.map((entry, i) => (
+        <span id={`definition-${i}`} data-glossary-terms={JSON.stringify(entry.terms)}>
+          {entry.definition}
+        </span>
+      ))}
     </div>
     <script>
       import "../scripts/lesson.js";

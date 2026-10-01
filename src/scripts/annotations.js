@@ -5,7 +5,7 @@ export function initAnnotations({ content, page, title, course, hidden, renderPo
   if (!content || !page || hidden) return;
 
   // Texte de la page vu par les notes : sans l'interface ajoutée (boutons, sommaire, diagrammes)
-  const SKIP = "button, svg, .diagram, .toc-inline, .pager, .note-card";
+  const SKIP = "button:not(.glossary-term), svg, .diagram, .toc-inline, .pager, .note-card";
 
   function textIndex() {
     const nodes = [];
@@ -139,7 +139,7 @@ export function initAnnotations({ content, page, title, course, hidden, renderPo
     showCard(note);
   }
   save("notes", notes);
-  // Lien « voir dans la page » de la Pochette : la note n'existait pas encore au chargement
+  // Lien "voir dans la page" de la Pochette : la note n'existait pas encore au chargement
   if (location.hash.startsWith("#note-"))
     document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "center" });
 

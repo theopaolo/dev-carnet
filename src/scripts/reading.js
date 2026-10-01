@@ -23,7 +23,7 @@ for (const code of document.querySelectorAll(".content pre.astro-code")) {
 }
 
 // Titres de section : le titre devient un lien vers sa section, et le clic copie l'adresse
-// à envoyer aux élèves. Le lien enveloppe le texte : un lecteur d'écran lit le titre, sans « # »
+// à envoyer aux élèves. Le lien enveloppe le texte : un lecteur d'écran lit le titre, sans "#"
 for (const heading of document.querySelectorAll(".content > h2[id], .content > h3[id]")) {
   if (heading.querySelector("a")) continue;
   const link = document.createElement("a");

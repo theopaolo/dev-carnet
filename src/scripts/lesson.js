@@ -1,5 +1,6 @@
 import "./reading.js";
 import "./reading-progress.js";
+import "./link-previews.js";
 import { initNotebook } from "./notebook.js";
 
 initNotebook();
