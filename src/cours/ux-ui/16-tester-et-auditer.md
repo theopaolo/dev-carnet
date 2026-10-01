@@ -83,7 +83,7 @@ Testez le parcours jusqu’à son résultat, y compris le panier, les erreurs et
 
 ## Tester en cinq étapes
 
-Avant de commencer, fixez le périmètre : une tâche, deux pages et les états à tester. Notez les URL, la date, le navigateur et les outils. Suivez ensuite ces étapes dans l’ordre.
+Avant de commencer, fixez le périmètre : une tâche, les pages concernées et les états à tester. Pour l’exercice local, la page fournie suffit. Notez les URL, la date, le navigateur et les outils. Suivez ensuite ces étapes dans l’ordre.
 
 1. Réalisez la tâche **au clavier**. Tab avance et Maj+Tab revient entre les éléments interactifs. Entrée active un lien ou un bouton. Espace active un bouton ou une case à cocher. Vérifiez l’ordre de tabulation (*tab order*), le focus visible et les menus. Repérez les pièges au clavier (*keyboard trap*, souvent appelé *focus trap*), où le focus reste bloqué. Dans une boîte de dialogue ouverte, garder le focus à l’intérieur est voulu, tant qu’Échap ou un bouton permet d’en sortir. Tab ne parcourt pas les paragraphes.
 2. Testez avec un **lecteur d’écran** (*screen reader*). Repérez un titre, un champ et un bouton. Vérifiez les noms, les rôles, les états et les messages annoncés. Inspectez aussi le HTML et l’arbre d’accessibilité (*accessibility tree*) : titres, noms des liens, libellés, langue et alternatives des images.
@@ -104,14 +104,14 @@ Les outils ne jugent pas la pertinence de tous les textes et ne vérifient pas q
 
 **Une première tâche courte**
 
-Trouvez le titre de la page, puis le champ e-mail, le bouton d’aide et le bouton d’envoi. Dites ce que vous attendez avant d’activer chaque contrôle. Comparez ensuite avec ce que vous entendez.
+Ouvrez [la page d’exercice](/ressources/ux-ui/a11y/a-corriger.html). Trouvez le titre de la page, puis le champ e-mail, le bouton d’aide et le bouton d’envoi. Notez ce que vous attendez avant d’activer chaque contrôle. Comparez ensuite avec ce que vous entendez.
 
 </aside>
 
 <details class="course-details">
 <summary>Sur Mac : commandes de VoiceOver</summary>
 
-Préparez VoiceOver avec le formateur. Dans les raccourcis suivants, **VO** désigne la combinaison Contrôle + Option par défaut.
+Ouvrez la page à tester, puis activez VoiceOver avec Commande + F5. Le même raccourci permet de le désactiver. Utilisez les commandes ci-dessous pour parcourir la page. Dans ces raccourcis, **VO** désigne la combinaison Contrôle + Option par défaut.
 
 | Action | Raccourci |
 | --- | --- |
@@ -128,7 +128,7 @@ Le **rotor** permet de parcourir la page par type d’élément. Choisissez par 
 <details class="course-details">
 <summary>Sur Windows : commandes de NVDA</summary>
 
-Dans les raccourcis suivants, **NVDA** désigne la touche Inser ou Verr. maj., selon votre configuration.
+Si NVDA n’est pas installé, suivez la rubrique d’installation du [guide NVDA](https://download.nvaccess.org/documentation/fr/userGuide.html). Lancez NVDA, puis ouvrez la page à tester dans votre navigateur. Dans les raccourcis suivants, **NVDA** désigne la touche Inser ou Verr. maj., selon votre configuration.
 
 | Action | Raccourci |
 | --- | --- |
@@ -144,7 +144,7 @@ Le mode navigation (*browse mode*) sert à parcourir le contenu. Le mode formula
 
 Avant de déclarer un défaut clavier sur Mac, vérifiez que la navigation clavier de macOS et du navigateur permet d’atteindre tous les contrôles. Safari et Helium peuvent avoir des réglages différents. Notez le système, le navigateur et le lecteur d’écran utilisés. Ce premier essai ne couvre pas toutes les combinaisons à vérifier pour un audit.
 
-Testez sur une page locale, avec des données fictives. Notez ce qui est réellement annoncé. L’arbre d’accessibilité aide à diagnostiquer, mais ne remplace pas la restitution du lecteur d’écran. Si le lecteur ne fonctionne pas, indiquez "non testé" et demandez une démonstration accompagnée.
+Testez sur une page locale, avec des données fictives. Notez ce qui est réellement annoncé. L’arbre d’accessibilité aide à diagnostiquer, mais ne remplace pas la restitution du lecteur d’écran. Si le lecteur ne fonctionne pas, indiquez "non testé" et notez le blocage. Consultez le guide correspondant ci-dessus pour vérifier son activation et ses réglages, puis refaites l’essai. Vous pouvez poursuivre les autres tests en conservant cette limite dans vos notes.
 
 ## Lire un critère RGAA
 
@@ -185,7 +185,7 @@ Dans un audit complet, le taux dépend des critères applicables à l’échanti
 
 Une capture montre l’affichage à un instant donné. Pour expliquer le parcours du focus, ajoutez les touches utilisées et le résultat observé. Distinguez les corrections proposées sur un site externe de celles réalisées dans votre code.
 
-Notez vos constats dans votre dossier. Ce diagnostic limité ne produit pas de taux de conformité. Un audit RGAA complet exige un échantillon et l’ensemble des critères applicables, avec la méthode prévue. [Méthode officielle](https://accessibilite.numerique.gouv.fr/methode/).
+Notez vos constats dans votre dossier. Vous pouvez copier le [modèle de diagnostic](/ressources/ux-ui/a11y/audit.md) pour structurer vos notes. Ce diagnostic limité ne produit pas de taux de conformité. Un audit RGAA complet exige un échantillon et l’ensemble des critères applicables, avec la méthode prévue. [Méthode officielle](https://accessibilite.numerique.gouv.fr/methode/).
 
 <details class="course-details">
 <summary>Modèle : un ticket que quelqu’un peut reprendre</summary>
@@ -215,4 +215,3 @@ Notez vos constats dans votre dossier. Ce diagnostic limité ne produit pas de t
 Traitez d’abord ce qui bloque la tâche, puis les difficultés qui la rendent pénible ou ambiguë. Indiquez aussi la fréquence et le périmètre. La priorité de correction et le statut de conformité sont deux informations distinctes.
 
 </aside>
-

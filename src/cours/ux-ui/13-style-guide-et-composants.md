@@ -2,7 +2,7 @@
 title: 'Style guide, tokens et composants'
 order: 13
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-30"
+updatedAt: "2026-10-01"
 ---
 
 # Style guide, tokens et composants
@@ -57,7 +57,7 @@ color.banner.background = référence à color.orange.700
 
 Si les boutons doivent devenir bleus et la bannière rester orange, changez seulement la référence de `color.action.primary`. Deux rôles peuvent partager une couleur aujourd'hui et évoluer séparément demain.
 
-Pour cet après-midi, donnez directement une valeur à chaque token de rôle. Les alias et les modes clair ou sombre sont facultatifs.
+Pour cet exercice, donnez directement une valeur à chaque token de rôle. Les alias et les modes clair ou sombre sont facultatifs.
 
 ## Les variables et les styles dans Figma
 

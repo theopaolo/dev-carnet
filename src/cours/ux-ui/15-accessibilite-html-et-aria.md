@@ -32,7 +32,7 @@ Repérer ce qui empêche une personne d’utiliser la page, choisir le HTML adap
 
 Un élément a le **focus** lorsqu’il reçoit les actions du clavier. Son contour visible permet de le repérer. Un **contacteur** (*switch*) est un dispositif qui permet de commander l’interface avec un geste adapté.
 
-Ces situations peuvent se combiner. Un simulateur montre un effet visuel, sans reproduire l’expérience complète d’une personne. Observez les obstacles du produit sans demander aux camarades de révéler un handicap. [Exemples d’usages, W3C](https://www.w3.org/WAI/perspective-videos/fr).
+Ces situations peuvent se combiner. Un simulateur montre un effet visuel, sans reproduire l’expérience complète d’une personne. Lors d’un test utilisateur, observez les obstacles du produit sans demander aux participants de révéler un handicap. [Exemples d’usages, W3C](https://www.w3.org/WAI/perspective-videos/fr).
 
 > "Je passe parfois 1 heure à remplir un questionnaire et, arrivée à la fin, je ne peux pas cocher la case de consentement qui n’est pas accessible au clavier."
 >
@@ -359,4 +359,3 @@ Pour réduire l’effort de compréhension, donnez une consigne par étape, util
 Pourquoi un bouton natif ? D’où vient son nom ? Comment tester son état ? Quelle personne rencontre une barrière si le contrôle est mal construit ? Passez ensuite à la [méthode de test](/ux-ui/16-tester-et-auditer/).
 
 </aside>
-

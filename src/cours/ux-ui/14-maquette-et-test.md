@@ -2,7 +2,7 @@
 title: 'La maquette et le test'
 order: 14
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-30"
+updatedAt: "2026-10-01"
 ---
 
 # La maquette et le test
@@ -106,7 +106,7 @@ Un seul essai peut révéler une difficulté, mais ne suffit pas à repérer tou
 
 ## Tester l'inscription
 
-Faites tester votre prototype par un camarade ou le formateur, qui n'a pas participé à sa conception. Si vous travaillez à deux, échangez les rôles. Donnez cette tâche, puis observez sans guider :
+Faites tester votre prototype par une personne qui n'a pas participé à sa conception. Donnez cette tâche, puis observez sans guider :
 
 > Tu veux essayer une activité à la MJC des Tilleuls. Choisis un atelier qui correspond à ton âge et à tes disponibilités, puis réserve une séance d'essai. À la fin, dis ce que tu as réservé et ce qu'il te reste à faire avant de venir.
 
@@ -118,7 +118,7 @@ Ce test porte sur la compréhension des écrans et du parcours. Vérifiez ensuit
 
 ## Vérifier votre rendu individuel
 
-À la fin de l'atelier, ouvrez votre fichier et montrez :
+Ouvrez votre fichier et vérifiez qu'il contient :
 
 - Une variable appliquée et sa correspondance CSS.
 - Un composant, deux instances et leurs états.

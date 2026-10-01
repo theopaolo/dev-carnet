@@ -2,7 +2,7 @@
 title: 'La typographie et les couleurs'
 order: 12
 publishedAt: "2026-09-28"
-updatedAt: "2026-09-30"
+updatedAt: "2026-10-01"
 ---
 
 # La typographie et les couleurs
@@ -162,7 +162,7 @@ Où chercher : [Pinterest](https://www.pinterest.fr/), [Dribbble](https://dribbb
 
 ### Le moodboard de votre atelier
 
-Cet atelier est facultatif, en dehors des 3 h 30 de l'après-midi. Le moodboard aide à choisir un style visuel. Le référentiel DWWM RNCP37674 demande de respecter la charte graphique, sans citer le moodboard comme livrable exigé. [Référentiel officiel, compétence 2](https://www.francecompetences.fr/wp-json/api/v1/activity/export/24208/465344).
+Cet atelier est facultatif. Le moodboard aide à choisir un style visuel. Le référentiel DWWM RNCP37674 demande de respecter la charte graphique, sans citer le moodboard comme livrable exigé. [Référentiel officiel, compétence 2](https://www.francecompetences.fr/wp-json/api/v1/activity/export/24208/465344).
 
 Rassemblez 6 à 8 images qui évoquent l'ambiance de votre atelier de la MJC, sur une page "Moodboard" de votre fichier. Tirez-en 3 à 5 couleurs. Testez la police de votre charte avec le nom de votre atelier.
 

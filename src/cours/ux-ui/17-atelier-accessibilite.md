@@ -7,17 +7,19 @@ updatedAt: "2026-10-01"
 
 # Atelier : tester et corriger une page
 
-Vous testez une page qui pose des problèmes d’accessibilité, vous la corrigez, puis vous testez un vrai site. Vous travaillez seul et vous notez tout dans votre dossier.
+Vous testez une page qui pose des problèmes d’accessibilité, vous la corrigez, puis vous testez un site existant. Conservez vos observations et vos corrections dans un dossier de travail.
+
+Pour cet atelier, préparez un navigateur, un éditeur de code et un lecteur d’écran. Les pages [HTML et ARIA](/ux-ui/15-accessibilite-html-et-aria/) et [méthode de test](/ux-ui/16-tester-et-auditer/) expliquent les notions et les manipulations utilisées. La page à corriger est fournie : vous pouvez suivre l’atelier sans avoir réalisé le projet MJC.
 
 <div class="course-intro">
 <img src="/ressources/ux-ui/a11y/atelier.webp" alt="" width="609" height="563">
 <div>
 
-**Ce que vous allez montrer**
+**Ce que vos notes doivent permettre de vérifier**
 
 "Voici ce qui bloque, voici qui est gêné, voici ma correction et le test qui le prouve."
 
-Vous pouvez vous entraider pour tester. Chacun garde ses propres notes.
+Décrivez les manipulations et leurs résultats pour pouvoir reproduire chaque test.
 
 </div>
 </div>
@@ -30,13 +32,13 @@ Faites les [cinq étapes du test](/ux-ui/16-tester-et-auditer/#tester-en-cinq-et
 
 Pour chaque problème, notez dans votre dossier :
 
-- où il se trouve ;
-- qui est gêné ;
+- où il se trouve et comment le reproduire,
+- qui est gêné et ce que cela empêche de faire,
 - comment le corriger.
 
 Exemple : "Le bouton Recevoir les informations est un `div`. Tab le saute. Une personne au clavier ne peut pas envoyer sa demande. Il faut un `<button>`."
 
-Montrez votre premier problème au formateur avant midi.
+Comparez vos observations avec la liste ci-dessous après votre premier passage. Pour chaque problème que vous n’aviez pas repéré, revenez à la page et essayez de le reproduire.
 
 <details class="course-details">
 <summary>Vérifier votre liste : les problèmes de la page</summary>
@@ -71,16 +73,37 @@ Ne remplissez aucun formulaire réel.
 
 ## L’IA
 
-L’IA peut vous proposer du code. Les tests, c’est vous qui les faites. Le formateur peut vous demander de refaire un test devant lui.
+Vous pouvez utiliser l’IA pour proposer une correction. Vérifiez chaque proposition dans votre page avec les mêmes tests qu’avant la modification. Gardez uniquement le code dont vous comprenez le rôle et dont vous avez vérifié le résultat.
 
-## À rendre
+## Vérifier votre travail
 
-Dans votre dossier, une section Accessibilité avec :
+Votre dossier doit contenir une section Accessibilité avec :
 
 1. Les problèmes trouvés sur `a-corriger.html` et sur le site testé.
 2. Trois corrections, avec le test avant et après.
 3. Votre fichier `corrige.html`.
 
-En fin d’après-midi, un quiz individuel, sans IA. Si vous avez fini avant, appliquez une correction à votre propre page MJC.
+Pour chacune des trois corrections, vérifiez que vos notes indiquent les manipulations, le résultat avant modification et le résultat après. Signalez les points non testés ou encore à corriger. Le [modèle de diagnostic](/ressources/ux-ui/a11y/audit.md) peut vous servir de support.
+
+## Vérifier votre compréhension
+
+Répondez sans consulter le cours ni utiliser l’IA, puis comparez avec les réponses.
+
+1. Pourquoi `role="button"` ne suffit-il pas à rendre un `div` utilisable au clavier ?
+2. Un bouton affiche "Recommencer" mais porte `aria-label="Supprimer"`. Quel problème cela pose-t-il et comment le corriger ?
+3. Une erreur de saisie est signalée uniquement en rouge. Que faut-il ajouter ?
+4. Un score de 100 à un outil automatique prouve-t-il que le parcours est accessible ?
+
+<details class="course-details">
+<summary>Comparer avec les réponses</summary>
+
+1. Le rôle décrit l’élément aux technologies d’assistance. Il n’ajoute ni le focus ni les interactions clavier. Utilisez un bouton HTML natif, puis vérifiez qu’il déclenche l’action attendue.
+2. Le nom accessible diffère du texte visible, ce qui peut gêner la compréhension et la commande vocale. Supprimez cet `aria-label` pour que le texte "Recommencer" fournisse le nom.
+3. Ajoutez un message qui explique comment corriger la saisie et associez-le au champ avec `aria-describedby`. Signalez l’état invalide avec `aria-invalid`, puis retirez cet état après correction. Vérifiez le résultat avec un lecteur d’écran.
+4. Non. Il faut aussi tester le clavier, la restitution du lecteur d’écran, l’affichage et la réalisation de la tâche. Notez les limites de vos vérifications.
+
+</details>
+
+Pour prolonger l’exercice, appliquez une correction à votre propre page MJC ou à une autre page dont vous pouvez modifier le code. Documentez le test avant et après.
 
 [Sources et crédits des illustrations](/ressources/ux-ui/a11y/sources.md).

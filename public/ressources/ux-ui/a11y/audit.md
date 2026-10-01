@@ -2,7 +2,7 @@
 
 Prénom :
 Date :
-Site et deux URL :
+Site et URL des pages testées :
 Tâche choisie :
 Navigateur et version :
 Système, lecteur d’écran et version :
@@ -57,7 +57,7 @@ Exemple : le "bouton" Recevoir les informations est un `div` avec `onclick`. Apr
 - Pourquoi `aria-label` est utile ici, ou pourquoi je ne l’utilise pas :
 - Touches utilisées et comportement attendu :
 - États à annoncer :
-- Résultat du test par un camarade :
+- Manipulations et résultat du test :
 
 ## Limites et usage de l’IA
 

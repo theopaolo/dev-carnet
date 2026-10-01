@@ -2,7 +2,7 @@
 title: 'Design UX et UI'
 order: 2
 publishedAt: "2026-09-27"
-updatedAt: "2026-09-30"
+updatedAt: "2026-10-01"
 ---
 
 # Design UX et UI
@@ -36,13 +36,13 @@ Les pages [UX et UI](/ux-ui/01-ux-et-ui/) et [Lois de l'UX](/ux-ui/02-lois-de-l-
 
 ## Les ateliers UI
 
-Travaillez dans un fichier personnel nommé "MJC des Tilleuls, votre prénom" et partagez-le avec le formateur. Indiquez l'origine des éléments UX repris d'un travail de groupe. Créez vos propres écrans et composants, puis faites vos corrections.
+Travaillez dans un fichier personnel nommé "MJC des Tilleuls, votre prénom". Indiquez l'origine des éléments UX repris d'un travail de groupe. Créez vos propres écrans et composants, puis faites vos corrections.
 
-### Cet après-midi dans Figma
+### Construire la maquette dans Figma
 
-À partir de vos wireframes, préparez les styles et les variables, créez les composants, puis assemblez et testez la maquette. Adaptez au moins la fiche atelier au mobile et au desktop. Une pause est prévue au milieu, et le quiz après l'atelier.
+À partir de vos wireframes, préparez les styles et les variables, créez les composants, puis assemblez et testez la maquette. Adaptez au moins la fiche atelier au mobile et au desktop.
 
-Le moodboard et les harmonies colorées sont facultatifs, à explorer hors de ce créneau. Pour l'atelier, vous pouvez utiliser la mini-charte du cours.
+Le moodboard et les harmonies colorées sont des approfondissements facultatifs. Pour l'atelier, vous pouvez utiliser la mini-charte du cours.
 
 Gardez le brief, le persona et les user stories à portée de main. Chaque écran doit répondre à un besoin identifié dans ces documents.
 
@@ -76,7 +76,7 @@ Apprenez à repérer une barrière, à la tester et à vérifier la correction. 
 
 ## Le dossier à rendre
 
-Rassemblez les rendus dans un dossier "Semaine UX/UI, accessibilité et SEO", dans l'ordre ci-dessous.
+Rassemblez les rendus dans un dossier "Projet UX/UI, accessibilité et SEO", dans l'ordre ci-dessous.
 
 ### Introduction
 
@@ -119,7 +119,7 @@ Ce barème s'applique à chaque personne. Il ne constitue pas la grille officiel
 | Évaluation | Points | Ce qui est vérifié |
 | --- | --- | --- |
 | UX | 25 | Persona, story map, stories et journey tirés des entretiens et du brief |
-| UI | 10 | Maquette adaptée au mobile, schéma, tokens appliqués, composants et états expliqués. Correspondance avec le CSS vérifiée lors de la séance de code |
+| UI | 10 | Maquette adaptée au mobile, schéma, tokens appliqués, composants et états expliqués. Correspondance avec le CSS vérifiée dans la page codée |
 | Accessibilité | 30 | HTML correct, formulaire utilisable au clavier, problèmes et corrections notés dans le dossier avec l'avant et l'après |
 | SEO | 15 | `title` et description utiles, mesure Lighthouse avant et après |
 | Compréhension | 20 | Épreuve et réponses pendant la démonstration |
