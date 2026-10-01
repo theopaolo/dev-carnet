@@ -252,7 +252,9 @@ bouton.addEventListener('click', () => {
 });
 ```
 
-`aria-expanded` doit toujours correspondre à ce qui est affiché. `aria-controls` pointe vers l’identifiant du panneau. `hidden` cache le panneau à tout le monde. Sans JavaScript, `<details>` et `<summary>` gèrent cet état à votre place. [RGAA, critère 7.1](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.1), [motif disclosure, W3C](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
+`aria-expanded` doit toujours correspondre à ce qui est affiché. `aria-controls` pointe vers l’identifiant du panneau. `hidden` cache le panneau à tout le monde. Sans JavaScript, `<details>` et `<summary>` gèrent cet état à votre place.
+
+Gardez un intitulé neutre, comme "Aide sur l’adresse e-mail". Changer aussi le texte du bouton n’est pas une non-conformité, mais le lecteur d’écran peut annoncer "Masquer l’aide, développé", ce qui est redondant. [Access42, afficher et masquer une zone](https://access42.net/developper-un-composant-accessible-pour-afficher-masquer-une-zone/), [RGAA, critère 7.1](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#7.1), [motif disclosure, W3C](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
 
 ## Images, couleurs et zoom
 
