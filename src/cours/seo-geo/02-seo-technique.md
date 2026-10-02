@@ -28,7 +28,7 @@ Le `head` contient notamment le titre de l'onglet et une description que Google 
 </head>
 ```
 
-Donnez à chaque page un `title` précis, comme "Tarifs de l'escalade de bloc à Lyon | Prise d'Air", qui renseigne davantage le visiteur que "Tarifs" seul. Complétez-le par une **meta description** qui résume le contenu en une ou deux phrases.
+Donnez à chaque page un `title` unique, descriptif et concis, comme "Tarifs de l'escalade de bloc à Lyon | Prise d'Air", qui renseigne davantage le visiteur que "Tarifs" seul. Complétez-le par une **meta description** propre à cette page, qui résume le contenu en une ou deux phrases.
 
 Dans cet exemple, `lang="fr"` indique la langue du document, tandis que la balise `viewport` permet un affichage adapté au téléphone. Si le même contenu existe à plusieurs **URL**, le lien `canonical` en indique l'adresse de référence.
 
@@ -37,6 +37,28 @@ Google peut reprendre le titre et la description ou choisir d'autres textes dans
 <figure class="course-figure">
 <img src="/ressources/seo-geo/du-code-au-resultat.svg" width="720" height="470" loading="lazy" alt="Un résultat Google pour Prise d'Air et les éléments du code associés : favicon, données du site, URL, title et meta description.">
 </figure>
+
+### Choisir une URL canonique cohérente
+
+Si `/seance-decouverte` et `/seance-decouverte?utm_source=lettre` affichent le même contenu, leur `canonical` peut désigner `https://prisedair.example/seance-decouverte`. Cette adresse doit aussi être celle utilisée dans les liens internes et le sitemap. Une page sans doublon peut indiquer sa propre URL.
+
+Le `canonical` est un signal, pas une obligation pour Google. Les redirections et le sitemap contribuent aussi à son choix. Ne faites pas pointer toutes les pages vers l'accueil : la page de référence doit proposer un contenu identique ou très proche. [Google, choix d'une URL canonique](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=fr).
+
+### Préparer les aperçus de partage
+
+Les balises **Open Graph** décrivent le titre, le texte et l'image proposés lorsqu'un lien est partagé sur un service compatible. Ajoutez-les dans le `head` si vous voulez maîtriser cet aperçu. Les cartes X, encore appelées Twitter Cards, utilisent notamment `twitter:card`.
+
+```html
+<meta property="og:type" content="website">
+<meta property="og:title" content="Séance découverte de bloc à Lyon | Prise d'Air">
+<meta property="og:description" content="1 h 30 de bloc à Lyon 7e, 18 €, chaussons compris. Consultez les conditions et les créneaux.">
+<meta property="og:url" content="https://prisedair.example/seance-decouverte">
+<meta property="og:image" content="https://prisedair.example/images/seance-decouverte.jpg">
+<meta property="og:image:alt" content="Le mur de bloc de la salle Prise d'Air">
+<meta name="twitter:card" content="summary_large_image">
+```
+
+Remplacez les adresses fictives par celles de la page et d'une image publique réellement disponible. Ces balises servent à la présentation du partage, sans garantir un gain de classement dans Google. Elles complètent le `title` et la meta description. [Protocole Open Graph](https://ogp.me/).
 
 ## Organiser le contenu avec des balises HTML
 
@@ -57,13 +79,15 @@ Agrandir le texte d'un `div` ne suffit pas à en faire un titre dans la structur
 <p>Séance découverte : 1 h 30, 18 €, chaussons compris.</p>
 ```
 
+Utilisez aussi `header`, `nav`, `main` et `footer` pour identifier les zones de la page, et `article` si le contenu forme un ensemble autonome. Les niveaux `h1`, `h2` et `h3` décrivent une hiérarchie, leur apparence se règle en CSS. Pour ce cours, utilisez un `h1` principal. Le nombre de `h1` ne suffit pas à juger la qualité du référencement : vérifiez surtout que la structure aide à comprendre la page.
+
 Google découvre les autres pages grâce aux liens `<a href>`, dont le texte doit annoncer la destination : "Voir les tarifs" plutôt que "ici". Sa documentation sur les [liens explorables](https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=fr) détaille ces recommandations.
 
 Écrivez les prix, les horaires et l'adresse en texte HTML pour qu'ils soient accessibles sans dépendre d'une image ou d'un clic. Les images informatives doivent aussi avoir un `alt` qui transmet l'information utile, tandis que les images décoratives reçoivent un `alt=""`.
 
 ### Choisir des adresses lisibles
 
-Préférez `/seance-decouverte` à une adresse difficile à comprendre comme `/index.php?id=42&cat=7`. Utilisez des minuscules et des tirets entre les mots.
+Préférez `/seance-decouverte` à une adresse difficile à comprendre comme `/index.php?id=42&cat=7`. Utilisez des minuscules et des tirets entre les mots. Gardez les URL stables : ne renommez pas une page déjà publiée pour y ajouter quelques mots-clés.
 
 ## Comprendre les réponses du serveur
 
@@ -122,6 +146,8 @@ Une page bloquée dans `robots.txt` peut encore apparaître dans Google si d'aut
 <meta name="robots" content="noindex">
 ```
 
+Le serveur peut aussi envoyer une instruction `noindex` dans l'en-tête HTTP `X-Robots-Tag`. Vérifiez cet en-tête dans l'onglet Réseau des DevTools, même si aucune balise `noindex` n'apparaît dans le HTML. [Google, directives robots](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag?hl=fr).
+
 Comme le rappelle Google dans sa [présentation de robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=fr), ce fichier ne protège pas les données privées : un espace membre doit exiger une connexion pour en contrôler l'accès.
 
 <aside class="course-note">
@@ -174,7 +200,21 @@ Privilégiez les formats WebP ou AVIF, qui permettent souvent de réduire le poi
      alt="Les vestiaires">
 ```
 
+Choisissez des noms de fichiers descriptifs, comme `mur-bloc-lyon.webp` plutôt que `IMG_8392.webp`. Le `alt` décrit l'information utile dans le contexte de la page, sans accumuler des mots-clés. Servez une image adaptée à sa taille d'affichage, avec `srcset` et `sizes` si plusieurs tailles sont disponibles. [Google, bonnes pratiques pour les images](https://developers.google.com/search/docs/appearance/google-images?hl=fr).
+
 Les **Core Web Vitals** mesurent la vitesse d'affichage du contenu principal (**LCP**), la réactivité (**INP**) et la stabilité de la mise en page (**CLS**). Ces mesures, décrites dans la [documentation de Google](https://developers.google.com/search/docs/appearance/core-web-vitals?hl=fr), vous aideront dans l'atelier à repérer une image lourde, du JavaScript qui ralentit la page ou des éléments qui se déplacent pendant le chargement.
+
+| Mesure | Seuil considéré comme bon |
+| --- | --- |
+| LCP, affichage du contenu principal | ≤ 2,5 s |
+| INP, délai de réponse aux interactions | ≤ 200 ms |
+| CLS, décalages de mise en page | ≤ 0,1 |
+
+Ces seuils s'évaluent au **75e percentile** des visites, séparément sur mobile et ordinateur : au moins 75 % des mesures doivent atteindre le seuil. Un test Lighthouse au chargement ne mesure pas l'INP des visiteurs, car il ne reproduit pas leurs interactions. Consultez les données de terrain de PageSpeed Insights ou de Search Console lorsqu'elles sont disponibles. [web.dev, Core Web Vitals](https://web.dev/articles/vitals).
+
+Commencez par les ressources qui ralentissent réellement la page : réduisez le JavaScript et les scripts tiers inutiles, limitez les polices et leurs variantes, et évitez de bloquer le premier affichage avec du CSS superflu. Configurez le cache HTTP des fichiers statiques. Un CDN, qui distribue les fichiers depuis plusieurs serveurs, peut aider si la distance avec les visiteurs ralentit leur chargement. Les [conseils de web.dev](https://web.dev/articles/top-cwv) permettent de choisir les corrections à partir des mesures.
+
+Ces indicateurs participent à l'expérience de page prise en compte par Google. De bons scores ne garantissent pas une bonne position et ne remplacent pas un contenu pertinent. [Google, Core Web Vitals et recherche](https://developers.google.com/search/docs/appearance/core-web-vitals?hl=fr).
 
 <span id="decouvrir-les-donnees-structurees"></span>
 
@@ -215,6 +255,8 @@ Vérifiez ce bloc avec le [validateur schema.org](https://validator.schema.org/)
 
 </details>
 
+Le type dépend de ce que décrit la page : `Organization` pour une organisation, `Article` pour un article, `Event` pour un événement, `Product` pour un produit ou `BreadcrumbList` pour un fil d'Ariane. Un type valide dans schema.org n'est pas forcément pris en charge comme résultat enrichi par Google. Choisissez le balisage adapté au contenu, sans attendre une hausse automatique du classement.
+
 ## Contrôler une page avec Lighthouse et suivre le site avec Search Console
 
 **Lighthouse**, dans les DevTools, effectue des contrôles automatiques de performance, d'accessibilité et de SEO, y compris sur une page servie en local. Ses résultats donnent des pistes, mais ne remplacent pas un audit d'accessibilité : même un score de 100 en accessibilité ne garantit pas que la page soit utilisable au clavier ou avec un lecteur d'écran. Il faut aussi vérifier les parcours et le contenu à la main. [Chrome, score d'accessibilité Lighthouse](https://developer.chrome.com/docs/lighthouse/accessibility/scoring/).
@@ -224,3 +266,13 @@ Ses mesures de performance viennent d'un test réalisé dans des conditions simu
 Un bon score SEO ne garantit pas non plus une bonne place dans Google : Lighthouse ne juge pas si le texte répond aux recherches des visiteurs.
 
 **[Search Console](https://search.google.com/search-console)** sert à suivre un site publié : pages indexées, erreurs, recherches et clics. Il faut prouver que vous gérez le site pour accéder à ses rapports.
+
+Pour un site que vous gérez, suivez ces étapes après publication :
+
+1. Ajoutez le site dans Search Console et validez sa propriété, par exemple avec un enregistrement DNS pour une propriété de type Domaine.
+2. Envoyez l'adresse de `sitemap.xml` dans le rapport Sitemaps et vérifiez qu'il est lisible. Listez les URL canoniques des pages à indexer, sans pages supprimées ni pages `noindex`.
+3. Inspectez l'URL d'une page importante. Vérifiez l'état d'indexation et l'URL canonique choisie par Google. Le test en direct vérifie l'accès actuel, sans prouver que la page est déjà indexée.
+4. Consultez les rapports d'indexation, les Core Web Vitals et les rapports de résultats enrichis disponibles pour le site. Un petit site peut manquer de données de terrain.
+5. Suivez les requêtes, impressions, clics et CTR dans le rapport Performances, détaillé au [chapitre sur le contenu](/seo-geo/03-contenu/#suivre-les-resultats-dans-search-console).
+
+Search Console et l'envoi du sitemap ne sont pas obligatoires pour apparaître dans Google. Ils facilitent le diagnostic et le suivi. [Google, démarrer avec Search Console](https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=fr).

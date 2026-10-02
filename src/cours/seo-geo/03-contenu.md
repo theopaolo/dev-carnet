@@ -22,6 +22,15 @@ L'**intention de recherche** est ce que la personne cherche à faire : comprendr
 
 Tapez la recherche dans Google et observez les résultats. Des articles explicatifs, une carte ou des pages de réservation vous donnent des indices sur le besoin que le moteur a retenu.
 
+Avant de rédiger, associez chaque page à une intention principale. Plusieurs formulations proches peuvent mener à la même page : inutile de créer une page par variante de mot-clé.
+
+| URL de Prise d'Air | Intention principale |
+| --- | --- |
+| `/` | Trouver une salle de bloc à Lyon 7e |
+| `/seance-decouverte` | Préparer et réserver une première séance |
+| `/tarifs` | Connaître les prix des séances et abonnements |
+| `/conseils/premiere-seance` | Savoir quoi apporter et comment se déroule la découverte |
+
 ## Employer les mots des visiteurs
 
 Les professionnels et les visiteurs n'emploient pas toujours les mêmes mots : la salle peut parler de "séance d'initiation", alors qu'un débutant tape "première fois escalade". En vous limitant au vocabulaire de la salle, vous risquez de moins bien répondre à cette recherche et de ne pas y apparaître. Reprenez donc aussi les formulations des visiteurs dans vos textes.
@@ -47,6 +56,16 @@ Choisissez un sujet principal par page, annoncez-le dans le `title` et le `h1`, 
 Un moteur ou une IA peut aussi reprendre ces informations dans un extrait.
 
 Pour un conseil technique, indiquez qui l'a écrit et sur quelle expérience il s'appuie. Un article signé par une monitrice, accompagné de photos de la salle et d'explications concrètes, donne au lecteur des éléments pour évaluer sa fiabilité. Cette démarche rejoint les [recommandations de Google sur le contenu utile et fiable](https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=fr).
+
+Le sujet peut apparaître naturellement dans le `title`, le `h1` et le texte. Il n'y a ni densité de mots-clés à atteindre ni nombre de mots idéal : arrêtez-vous lorsque la page répond au besoin.
+
+### Identifier l'auteur et montrer son expérience
+
+Les repères **E-E-A-T** désignent l'expérience, l'expertise, l'autorité et la fiabilité. Google précise qu'ils ne constituent pas un facteur de classement unique. Pour le lecteur, ils se traduisent par des éléments vérifiables : qui écrit, sur quelle expérience, avec quelles sources ? [Google, contenu utile et E-E-A-T](https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=fr).
+
+Pour Prise d'Air, une page « L'équipe » peut présenter les moniteurs, leurs qualifications réelles et un moyen de contact. Un article peut renvoyer vers la personne qui l'a rédigé. Un compte rendu d'atelier peut préciser le public accueilli, l'objectif, le déroulement, les difficultés observées et les enseignements, avec des photos autorisées. Ces détails apportent davantage au lecteur qu'une galerie sans explication.
+
+Des articles comme « Que faut-il apporter pour sa première séance ? » ou « Comment se déroule une initiation au bloc ? » répondent aux questions de l'accueil. Rédigez-les à partir de l'expérience de l'équipe et vérifiez les conseils avant publication.
 
 ## Faire des liens entre les pages utiles
 

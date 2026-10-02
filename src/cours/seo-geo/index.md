@@ -43,6 +43,6 @@ La salle souhaite accueillir davantage de débutants, dont les questions guidero
 5. [Distinguer référencement et publicité](/seo-geo/05-sea-et-gea/) : reconnaître une annonce et préparer la page qu'elle ouvre.
 6. [Corriger la page de Prise d'Air](/seo-geo/06-atelier/) : observer, repérer les problèmes et vérifier les corrections.
 
-Le [lexique](/seo-geo/07-lexique/) explique les termes techniques.
+En annexe, le [lexique](/seo-geo/07-lexique/) explique les termes techniques et la [cheat-sheet SEO](/seo-geo/08-cheat-sheet-seo/) rassemble les vérifications avant et après publication.
 
 Ce travail rejoint le titre professionnel [Développeur web et web mobile, RNCP37674](https://www.francecompetences.fr/recherche/rncp/37674/), qui prévoit de publier des sites et de les rendre visibles sur les moteurs de recherche.

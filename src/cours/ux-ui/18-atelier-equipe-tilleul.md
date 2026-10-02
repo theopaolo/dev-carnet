@@ -59,7 +59,7 @@ Chaque membre de l’équipe explique au moins un choix ou une correction qu’i
 
 Pour chaque équipe présentée, remplissez cette grille individuellement.
 
-Votre prénom : …
+**Votre prénom : …
 
 Équipe observée : …
 
@@ -82,6 +82,6 @@ Pour chaque ligne, choisissez un avis et ajoutez un exemple court :
 Terminez par :
 
 - Un point réussi, avec un exemple.
-- Une amélioration prioritaire, son intérêt pour l’utilisateur et une proposition concrète.
+- Une amélioration prioritaire, son intérêt pour l’utilisateur et une proposition concrète.**
 
 Exemple : « Les horaires et les tarifs sont faciles à trouver sur la fiche. Le bouton d’inscription est difficile à repérer. Augmenter son contraste aiderait les visiteurs à poursuivre leur inscription. »
