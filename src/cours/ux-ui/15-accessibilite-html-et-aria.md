@@ -2,7 +2,7 @@
 title: 'Accessibilité, HTML et ARIA'
 order: 15
 publishedAt: "2026-10-01"
-updatedAt: "2026-10-01"
+updatedAt: "2026-10-02"
 ---
 
 # Accessibilité, HTML et ARIA
@@ -97,6 +97,12 @@ Consultez le [champ d’application RGAA](https://accessibilite.numerique.gouv.f
 Utilisez d’abord les éléments HTML adaptés : bouton, lien, champ. Le navigateur fournit leur comportement **natif**, c’est-à-dire intégré. CSS règle leur apparence. Les attributs **ARIA** complètent, si nécessaire, les informations transmises aux technologies d’assistance. Ils n’ajoutent pas de comportement.
 
 </aside>
+
+> <span lang="en">“No ARIA is better than Bad ARIA.”</span>
+>
+> « Mieux vaut ne pas utiliser ARIA que de l’utiliser incorrectement. »
+
+Avant d’utiliser ARIA, lisez [W3C, Read Me First (en anglais)](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/). La [page MDN « ARIA » (en français)](https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA#avant_dutiliser_laria) reprend ce principe et fournit la formulation française citée ici.
 
 ## Commencer par le HTML
 

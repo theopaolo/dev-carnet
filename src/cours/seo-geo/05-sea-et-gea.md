@@ -35,18 +35,16 @@ Une source citée fournit des informations pour la réponse. Une annonce est un 
 
 <figure class="course-figure">
 <img src="/ressources/seo-geo/chatgpt-annonce.webp" width="698" height="215" loading="lazy" alt="Sous une réponse de ChatGPT, une carte publicitaire de Bakino propose un devis pour une application. Elle porte l'étiquette Pub et est séparée de la réponse par un trait.">
-<figcaption>Annonce dans ChatGPT, capturée par un apprenant le 1er octobre 2026. La carte porte l'étiquette "Pub". La conversation concernait une application et l'annonce propose un devis. Capture de ChatGPT.</figcaption>
+<figcaption>Annonce dans ChatGPT, capturée par un apprenant. La carte porte l'étiquette "Pub". La conversation concernait une application et l'annonce propose un devis. Capture de ChatGPT.</figcaption>
 </figure>
 
 OpenAI indique que les annonces de ChatGPT sont séparées des réponses et ne les influencent pas. Elles peuvent apparaître sous une réponse. Leur disponibilité dépend notamment du pays et du compte. [OpenAI, annonces dans ChatGPT](https://help.openai.com/en/articles/20001047-ads-in-chatgpt).
-
-Les formats et les offres changent selon les plateformes. Pour ce cours, retenez comment reconnaître une publicité et la distinguer du texte généré.
 
 ## Préparer la page vers laquelle mène l'annonce
 
 La **page d'arrivée**, ou *landing page*, doit répondre à la promesse de l'annonce. Si celle-ci propose une séance pour débutants, affichez le prix, les conditions et un lien de réservation compréhensible. Vérifiez aussi le chargement et l'affichage sur téléphone.
 
-L'annonceur cherche généralement une **conversion** : une réservation, une inscription ou un achat. Un clic sans réservation n'est pas le même résultat qu'une séance vendue.
+L'annonceur cherche généralement une **conversion** : une réservation, une inscription ou un achat.
 
 Les plateformes peuvent fournir des scripts pour mesurer ces actions. Les **traceurs publicitaires** nécessitent le consentement préalable du visiteur. Refuser doit être aussi simple qu'accepter. Le cours [RGPD](/rgpd/) détaille ce fonctionnement. [CNIL, cookies et autres traceurs](https://www.cnil.fr/fr/cookies-et-autres-traceurs).
 
@@ -59,6 +57,6 @@ La publicité peut amener des visiteurs, mais elle ne corrige pas une page confu
 <details class="course-details">
 <summary>Exercice complémentaire : vérifier la promesse d'une annonce</summary>
 
-Imaginez une annonce pour une séance découverte à 18 €. Quelles informations et quel bouton faudrait-il voir sur la page ouverte par le clic ? Faites un croquis ou une courte liste.
+Pour une annonce "Séance découverte à 18 €", esquissez la page d'arrivée avec ses informations et son bouton de réservation.
 
 </details>

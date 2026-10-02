@@ -42,6 +42,7 @@ a.arrow-prev:is(:hover, :focus-visible)::before {
   padding: 5px 10px;
   font: 500 0.8125rem var(--font-sans);
   color: var(--pill-text);
+  text-decoration: none;
   background: var(--pill-bg);
   border: 1px solid var(--pill-border);
   border-radius: 6px;

@@ -303,6 +303,10 @@
     "title": "Server-side rendering (SSR) - Glossary | MDN",
     "description": "Server-side rendering (SSR) refers to the practice of generating HTML content on the server and sending it to the client. SSR is opposed to client-side rendering, where the client generates the HTML content using JavaScript. Both techniques are not mutually exclusive and can be used together in the same application."
   },
+  "https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA": {
+    "title": "ARIA - Accessibilité | MDN",
+    "description": "Accessible Rich Internet Applications (ARIA) (qu'on peut traduire par « applications internet riches et accessibles ») est un ensemble de rôles et d'attributs qui définissent comment rendre le contenu et les applications web accessibles (notamment ceux développés avec JavaScript) pour les personnes avec des handicaps."
+  },
   "https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag": {
     "title": "Google n'utilise pas la balise Meta \"keywords\" dans les classements Web | Google Search Central Blog | Google for Developers",
     "description": ""
