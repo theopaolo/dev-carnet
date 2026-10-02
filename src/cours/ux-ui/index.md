@@ -2,7 +2,7 @@
 title: 'Design UX et UI'
 order: 2
 publishedAt: "2026-09-27"
-updatedAt: "2026-10-01"
+updatedAt: "2026-10-02"
 ---
 
 # Design UX et UI
@@ -70,7 +70,7 @@ Apprenez à repérer une barrière, à la tester et à vérifier la correction. 
 
 | Atelier | Ce que vous faites | Rendu |
 | --- | --- | --- |
-| 10. Coder et rendre accessible | Adapter la page `site/`, tester son accessibilité et corriger les problèmes | La page publiée et, dans le dossier, les observations avant et après correction |
+| [10. Atelier en équipe : MJC Tilleul](/ux-ui/18-atelier-equipe-tilleul/) | Coder un parcours d’inscription simulée, tester son accessibilité et présenter le résultat | Les cinq pages reliées, les tests et les grilles d’appréciation individuelles |
 | 11. Référencer | Écrire le `title` et la meta description, mesurer avec Lighthouse | `seo.md` avec les mesures et les modifications |
 | [12. Présenter](/ux-ui/#presenter-le-projet) | Expliquer un choix de conception et montrer la page publiée | Une démonstration appuyée sur le prototype et les tests |
 
