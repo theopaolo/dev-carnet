@@ -78,8 +78,10 @@ pre.astro-code {
   color: var(--shiki-light);
 }
 
-[data-theme="dark"] .astro-code span {
-  color: var(--shiki-dark);
+@media screen {
+  [data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark);
+  }
 }
 
 /* Images du contenu (schémas SVG) : jamais plus larges que la colonne */

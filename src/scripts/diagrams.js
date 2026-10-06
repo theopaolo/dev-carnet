@@ -7,6 +7,9 @@ const common = {
   startOnLoad: false,
   theme: "base",
   look: "classic",
+  // id numérotés : avec Date.now(), deux diagrammes rendus dans la même milliseconde
+  // (page d'impression d'un cours) partagent leurs id, leurs marqueurs et leurs styles
+  deterministicIds: true,
   flowchart: { htmlLabels: true, padding: 16, nodeSpacing: 48, rankSpacing: 56, curve: "basis" },
   sequence: { actorMargin: 60, messageMargin: 40, mirrorActors: false },
 };

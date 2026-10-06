@@ -16,6 +16,7 @@
 @import "./search.css" layer(components);
 @import "./hero.css" layer(components);
 @import "./legal-guide.css" layer(components);
+@import "./print.css" layer(utilities);
 
 /* Mermaid uses the same class on SVG groups. Compositions apply to HTML. */
 @layer compositions {

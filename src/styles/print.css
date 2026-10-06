@@ -1,0 +1,89 @@
+/* Impression et export PDF : la feuille seule, sans barres ni outils. Couleurs claires
+   quel que soit le thème (settings.css). Couche utilities : passe devant les composants */
+@page {
+  size: A4;
+  margin: 16mm 16mm 18mm;
+
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font:
+      8pt "Inclusive Sans",
+      sans-serif;
+    color: #56637a;
+  }
+}
+
+@media print {
+  html {
+    font-size: 10pt;
+    line-height: 1.5;
+    background: none;
+    /* Fonds des blocs de code, des notes et des diagrammes imprimés comme à l'écran */
+    print-color-adjust: exact;
+  }
+
+  .skip-link,
+  .topbar,
+  .sidebar,
+  .toc,
+  .toc-inline,
+  .pager,
+  .heading-ribbon,
+  .annot-tool {
+    display: none;
+  }
+
+  .shell,
+  .page {
+    display: block;
+  }
+
+  .page {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  pre,
+  figure,
+  img,
+  blockquote,
+  tr,
+  .diagram,
+  .course-note,
+  .wf {
+    break-inside: avoid;
+  }
+
+  /* La page imprimée fait moins de 760px : la règle téléphone de prose.css ferait défiler
+     le tableau et couperait ses colonnes */
+  table {
+    display: table;
+  }
+
+  th,
+  td {
+    min-width: 0;
+  }
+
+  /* Pas de défilement sur papier : les longues lignes de code passent à la ligne */
+  pre.astro-code {
+    overflow: visible;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}

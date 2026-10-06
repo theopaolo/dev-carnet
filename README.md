@@ -12,6 +12,8 @@ déploiement GitHub Pages n’est nécessaire.
   `node scripts/import-documentation.mjs` (ne pas éditer ces fichiers à la main).
 - `src/layouts/Lesson.astro` : assemblage de la page et données du cours.
 - `src/components/` : en-tête, navigation du cours, recherche, sommaire et Pochette.
+- `src/pages/[course]/imprimer.astro` : le cours entier sur une page, sommaire en tête, pour
+  l'imprimer ou l'enregistrer en PDF (`/ux-ui/imprimer/`). Règles d'impression : `src/styles/print.css`.
 - `src/styles/theme.css` : ordre des couches et imports CSS. Les couleurs et polices
   sont dans `settings.css`, les styles sont répartis par fonction.
 - `src/scripts/diagrams.js` : rendu Mermaid, légende `accTitle` / `accDescr`, lecture pas à pas des flowcharts et zoom plein écran.

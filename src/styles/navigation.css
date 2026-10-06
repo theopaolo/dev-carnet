@@ -172,8 +172,8 @@ dialog.chapters .sidebar a {
   color: var(--text-muted);
 }
 
-/* Retour à la liste de tous les cours, au-dessus du cours affiché */
-.nav-back {
+/* Version imprimable du cours, sous la liste des chapitres */
+.nav-print {
   display: block;
   margin: 0 0 20px;
   padding: 5px 10px;
@@ -239,7 +239,7 @@ dialog.chapters .sidebar a {
 }
 
 /* Survol : un cran plus foncé que le panneau, dans les deux thèmes */
-.nav-back:hover,
+.nav-print:hover,
 .sidebar ul a:hover {
   color: var(--heading);
   background: color-mix(in srgb, var(--border) 70%, transparent);

@@ -22,12 +22,14 @@
   font-size: 0.85rem;
 }
 
-[data-theme="dark"] .legal-guide {
-  --legal-ban: #ed7770;
-  --legal-high: #f0a15c;
-  --legal-transparency: #e4be48;
-  --legal-minimal: #83c6d5;
-  --legal-model: #a9b1bf;
+@media screen {
+  [data-theme="dark"] .legal-guide {
+    --legal-ban: #ed7770;
+    --legal-high: #f0a15c;
+    --legal-transparency: #e4be48;
+    --legal-minimal: #83c6d5;
+    --legal-model: #a9b1bf;
+  }
 }
 
 .legal-guide .quadrant {

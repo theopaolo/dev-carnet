@@ -1,0 +1,219 @@
+---
+import { render } from "astro:content";
+import { getCourses, intro } from "../../lib/courses";
+import { pageUrl } from "../../lib/urls";
+import PageHead from "../../components/PageHead.astro";
+import "../../styles/theme.css";
+
+// Un cours entier sur une page, pour l'imprimer ou l'enregistrer en PDF : le sommaire en
+// première page, puis la présentation et chaque chapitre à partir d'une nouvelle page
+export async function getStaticPaths() {
+  const { courses } = await getCourses();
+  return courses.map((group) => ({ params: { course: group.course.id }, props: { group } }));
+}
+
+const { group } = Astro.props;
+const { course, chapters } = group;
+const pages = await Promise.all(
+  [course, ...chapters].map(async (entry) => ({
+    entry,
+    url: pageUrl(entry.id),
+    anchor: entry.id.split("/")[1] ?? "presentation",
+    ...(await render(entry)),
+  })),
+);
+// Les rubriques présentes dans plusieurs chapitres ("À lire", "Pour la discussion")
+// ne disent rien du contenu : le sommaire garde les autres titres de niveau 2
+const titles = pages
+  .flatMap((page) => page.headings.filter((h) => h.depth === 2))
+  .map((h) => h.text);
+const recurring = new Set(titles.filter((text, i) => titles.indexOf(text) !== i));
+const topics = (page: (typeof pages)[number]) =>
+  page.headings.filter((h) => h.depth === 2 && !recurring.has(h.text));
+const updated = [course, ...chapters]
+  .map((entry) => entry.data.updatedAt)
+  .sort()
+  .at(-1)!;
+const dateFormat = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" });
+const title = course.data.title;
+const summary = intro(course.body);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <PageHead title={title} pageTitle={`${title} | Carnet`} summary="" />
+    <!-- Copie des chapitres publiés : seules leurs pages sont indexées -->
+    <meta name="robots" content="noindex" />
+    <!-- Thème clair : Mermaid calcule les couleurs des diagrammes au rendu, pas à l'impression -->
+    <script is:inline>
+      document.documentElement.dataset.theme = "light";
+    </script>
+  </head>
+  <body>
+    <p class="print-bar cluster">
+      <a href={pageUrl(course.id)}>Retour au cours</a>
+      <button type="button" class="button" data-print>
+        Imprimer ou enregistrer en PDF
+      </button>
+    </p>
+    <main class="content print-course" id="contenu">
+      <section class="print-cover" aria-labelledby="titre-cours">
+        <p class="print-kicker">Carnet, support de cours</p>
+        <h1 id="titre-cours">{title}</h1>
+        <p class="print-meta">
+          {chapters.length} chapitres. Mis à jour le{" "}
+          <time datetime={updated}>{dateFormat.format(new Date(updated))}</time>.
+        </p>
+        {summary && <p>{summary}</p>}
+        <h2>Sommaire</h2>
+        <p class="print-toc-intro">
+          <a href="#presentation">Présentation</a>
+        </p>
+        <ol class="print-toc">
+          {pages.slice(1).map((page) => (
+            <li>
+              <a class="print-toc-chapter" href={`#${page.anchor}`}>
+                {page.entry.data.title}
+              </a>
+              {topics(page).length > 0 && (
+                <span class="print-topics">
+                  {topics(page).map((h, i) => (
+                    <>
+                      {i > 0 && ", "}
+                      <a href={`#${page.anchor}--${h.slug}`}>{h.text}</a>
+                    </>
+                  ))}
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+      {pages.map(({ anchor, url, Content }) => (
+        <section class="print-chapter" id={anchor} data-url={url}>
+          <Content />
+        </section>
+      ))}
+    </main>
+
+    <!-- Avant le rendu des diagrammes, qui posent leurs propres id -->
+    <script is:inline>
+      {
+        // Chaque chapitre préfixe ses id par son ancre : deux chapitres ont souvent les mêmes
+        // titres. Un lien vers une page du cours mène à sa section dans ce document
+        const sections = [...document.querySelectorAll(".print-chapter")];
+        const anchors = new Map(sections.map((section) => [section.dataset.url, section.id]));
+        for (const section of sections) {
+          for (const element of section.querySelectorAll("[id]"))
+            element.id = `${section.id}--${element.id}`;
+          for (const link of section.querySelectorAll("a[href]")) {
+            const url = new URL(link.href);
+            const path = url.pathname.replace(/\/?$/, "/");
+            const anchor = path === location.pathname ? section.id : anchors.get(path);
+            if (url.origin !== location.origin || !anchor) continue;
+            const hash = decodeURIComponent(url.hash.slice(1));
+            link.setAttribute("href", `#${hash ? `${anchor}--${hash}` : anchor}`);
+          }
+        }
+        // Sur papier, tout est visible : réponses dépliées, images chargées avant l'impression
+        document.querySelectorAll("details").forEach((details) => (details.open = true));
+        document.querySelectorAll("img[loading=lazy]").forEach((img) => (img.loading = "eager"));
+      }
+    </script>
+    <script>
+      document.querySelector("[data-print]")?.addEventListener("click", () => print());
+      if (document.querySelector("div.mermaid")) import("../../scripts/diagrams.js");
+      if (document.querySelector(".diagram.seq")) import("../../scripts/sequence.js");
+    </script>
+  </body>
+</html>
+
+<style>
+  @layer components {
+    .print-bar {
+      flex-wrap: wrap;
+      --cluster-space: 8px 24px;
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+    }
+
+    .print-course {
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 24px 20px 96px;
+    }
+
+    html {
+      background: var(--bg-page);
+    }
+
+    .print-kicker,
+    .print-meta {
+      margin: 0 0 8px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .print-cover h1 {
+      margin-top: 0;
+    }
+
+    .print-cover h2 {
+      margin: 24px 0 8px;
+    }
+
+    .print-toc-intro {
+      margin-bottom: 8px;
+    }
+
+    .print-toc li {
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .print-toc-chapter {
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* Les sections suivent le titre du chapitre : le sommaire tient sur la première page */
+    .print-topics {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .print-topics::before {
+      content: " : ";
+    }
+
+    .print-chapter {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px dashed var(--border-strong);
+    }
+
+    @media print {
+      .print-bar {
+        display: none;
+      }
+
+      .print-course {
+        max-width: none;
+        padding: 0;
+      }
+
+      .print-chapter {
+        break-before: page;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .print-toc a {
+        text-decoration: none;
+      }
+    }
+  }
+</style>

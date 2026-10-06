@@ -32,6 +32,9 @@ const { id, group, sheets, navLabel } = Astro.props;
           </li>
         ))}
       </ul>
+      <a class="nav-print" href={pageUrl(`${group.course.id}/imprimer`)}>
+        Imprimer le cours (PDF)
+      </a>
     </>
   ) : (
     <>
