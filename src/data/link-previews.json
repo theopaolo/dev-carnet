@@ -175,6 +175,14 @@
     "title": "ByteByteGo Newsletter | Alex Xu | Substack",
     "description": "Explain complex systems with simple terms, from the authors of the best-selling system design book series. Join over 1,000,000 friendly readers. Click to read ByteByteGo Newsletter, a Substack publication."
   },
+  "https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html": {
+    "title": "Clean Coder Blog",
+    "description": ""
+  },
+  "https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html": {
+    "title": "Clean Coder Blog",
+    "description": ""
+  },
   "https://brittanyellich.com/blog/": {
     "title": "Blog",
     "description": "Software Engineer at Bluesky specializing in developer productivity, AI-assisted development, and accessibility. Creator of The Balanced Engineer newsletter and co-host of the Overcommitted podcast."
@@ -302,6 +310,14 @@
   "https://developer.mozilla.org/en-US/docs/Glossary/SSR": {
     "title": "Server-side rendering (SSR) - Glossary | MDN",
     "description": "Server-side rendering (SSR) refers to the practice of generating HTML content on the server and sending it to the client. SSR is opposed to client-side rendering, where the client generates the HTML content using JavaScript. Both techniques are not mutually exclusive and can be used together in the same application."
+  },
+  "https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener": {
+    "title": "EventTarget : méthode addEventListener() - Les API Web | MDN",
+    "description": "La méthode addEventListener() de l'interface EventTarget permet de définir une fonction qui est appelée chaque fois que l'évènement défini est envoyé à la cible."
+  },
+  "https://developer.mozilla.org/fr/docs/Web/API/EventTarget/removeEventListener": {
+    "title": "EventTarget : méthode removeEventListener() - Les API Web | MDN",
+    "description": "La méthode removeEventListener() de l'interface EventTarget permet de supprimer un écouteur d'événement précédemment enregistré avec EventTarget.addEventListener() sur la cible. L'écouteur à supprimer est identifié par une combinaison du type d'événement, de la fonction d'écoute elle-même, et de diverses options qui pe"
   },
   "https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA": {
     "title": "ARIA - Accessibilité | MDN",
@@ -767,13 +783,29 @@
     "title": "martinfowler.com",
     "description": "A website on building software effectively"
   },
+  "https://martinfowler.com/articles/injection.html": {
+    "title": "Inversion of Control Containers and the Dependency Injection pattern",
+    "description": "Explaining the Dependency Injection pattern, by contrasting it with Service Locator. The choice between them is less important than the principle of separating configuration from use."
+  },
   "https://martinfowler.com/bliki/ArchitectureDecisionRecord.html": {
     "title": "bliki: Architecture Decision Record",
     "description": "A short document that captures a single decision, structured into a log to provide a history"
   },
+  "https://martinfowler.com/bliki/InversionOfControl.html": {
+    "title": "bliki: Inversion Of Control",
+    "description": "a bliki entry for Inversion Of Control"
+  },
   "https://martinfowler.com/bliki/Yagni.html": {
     "title": "bliki: Yagni",
     "description": "Yagni (\"You Aren't Gonna Need It\") is the principle that we should not build presumptive features. It should not be used as a justification for neglecting internal quality."
+  },
+  "https://martinfowler.com/books/eaa.html": {
+    "title": "P of EAA",
+    "description": ""
+  },
+  "https://martinfowler.com/eaaCatalog/repository.html": {
+    "title": "Repository",
+    "description": "Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects."
   },
   "https://maze.co/collections/ux-ui-design/ux-laws/": {
     "title": "The 21 Main UX Laws Every Designer Must Follow + Examples",
@@ -842,6 +874,10 @@
   "https://nextjs.org/learn/dashboard-app/static-and-dynamic-rendering": {
     "title": "App Router: Static and Dynamic Rendering | Next.js",
     "description": "Understand how rendering works in Next.js, and make your dashboard app dynamic."
+  },
+  "https://nodejs.org/docs/latest-v24.x/api/typescript.html": {
+    "title": "Modules: TypeScript | Node.js v24.22.0 Documentation",
+    "description": ""
   },
   "https://nuxt.com/docs/3.x/guide/concepts/rendering": {
     "title": "Rendering Modes · Nuxt Concepts v3",
@@ -915,9 +951,41 @@
     "title": "Pi Coding Agent",
     "description": "A terminal-based coding agent"
   },
+  "https://react.dev/learn/render-and-commit": {
+    "title": "Render and Commit – React",
+    "description": "The library for web and native user interfaces"
+  },
   "https://react.dev/reference/react-dom/server": {
     "title": "Server React DOM APIs – React",
     "description": "The library for web and native user interfaces"
+  },
+  "https://refactoring.guru/fr/design-patterns/abstract-factory": {
+    "title": "Fabrique abstraite / Abstract Factory",
+    "description": "Fabrique abstraite est un patron de conception qui permet de créer des familles d’objets apparentés sans préciser leur classe concrète."
+  },
+  "https://refactoring.guru/fr/design-patterns/adapter": {
+    "title": "Adaptateur / Adapter",
+    "description": "L’Adaptateur est un patron de conception structurel qui permet de faire collaborer des objets ayant des interfaces normalement incompatibles."
+  },
+  "https://refactoring.guru/fr/design-patterns/decorator": {
+    "title": "Décorateur / Decorator",
+    "description": "Décorateur est un patron de conception structurel qui permet d’affecter dynamiquement de nouveaux comportements à des objets en les plaçant dans des emballeurs qui implémentent ces comportements."
+  },
+  "https://refactoring.guru/fr/design-patterns/factory-comparison": {
+    "title": "Comparaison des fabriques",
+    "description": ""
+  },
+  "https://refactoring.guru/fr/design-patterns/factory-method": {
+    "title": "Fabrique / Factory Method",
+    "description": "Fabrique est un patron de conception de création qui définit une interface pour créer des objets dans une classe mère, mais délègue le choix des types d’objets à créer aux sous-classes."
+  },
+  "https://refactoring.guru/fr/design-patterns/observer": {
+    "title": "Observateur / Observer",
+    "description": "L’Observateur est un patron de conception comportemental qui permet de mettre en place un mécanisme de souscription pour envoyer des notifications à plusieurs objets, au sujet d’événements concernant les objets qu’ils observent."
+  },
+  "https://refactoring.guru/fr/design-patterns/strategy": {
+    "title": "Stratégie / Strategy",
+    "description": "Stratégie est un patron de conception comportemental qui permet de définir une famille d’algorithmes, de les mettre dans des classes séparées et de rendre leurs objets interchangeables."
   },
   "https://refactoring.guru/refactoring": {
     "title": "Refactoring: clean your code",
@@ -1355,6 +1423,10 @@
     "title": "OpenHands | The Open Platform for Cloud Coding Agents",
     "description": "Meet OpenHands, the open-source, model-agnostic platform for cloud coding agents. Automate real engineering work securely and transparently. Build faster with full control."
   },
+  "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480": {
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "description": ""
+  },
   "https://www.photopea.com/": {
     "title": "Photopea | Online Photo Editor",
     "description": "Photopea Online Photo Editor lets you edit photos, apply effects, filters, add text, crop or resize pictures. Do Online Photo Editing in your browser for free!"
@@ -1399,6 +1471,10 @@
     "title": "Home - Tunera Type Foundry",
     "description": ""
   },
+  "https://www.typescriptlang.org/docs/handbook/2/classes.html": {
+    "title": "Documentation - Classes",
+    "description": "How classes work in TypeScript"
+  },
   "https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html": {
     "title": "Documentation - JS Projects Utilizing TypeScript",
     "description": "How to add type checking to JavaScript files using TypeScript"
@@ -1406,6 +1482,10 @@
   "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html": {
     "title": "Documentation - JSDoc Reference",
     "description": "What JSDoc does TypeScript-powered JavaScript support?"
+  },
+  "https://www.typescriptlang.org/docs/handbook/type-compatibility.html": {
+    "title": "Documentation - Type Compatibility",
+    "description": "How type-checking works in TypeScript"
   },
   "https://www.usabilis.com/persona-ux-design/": {
     "title": "Persona en UX Design : à quoi sert-il et comment le créer ?",

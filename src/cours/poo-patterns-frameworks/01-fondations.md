@@ -7,50 +7,89 @@ updatedAt: "2026-10-15"
 
 # POO, SOLID et responsabilités
 
-La programmation orientée objet associe des données et des comportements. Une instance possède un état. Une classe décrit ses instances. L'encapsulation protège les règles qui rendent cet état valide. Par exemple, réserver passe par une opération qui contrôle la capacité, plutôt que modifier un compteur depuis chaque écran.
+## Objets, classes et encapsulation
 
-Une interface TypeScript décrit un contrat vérifié pendant le développement. Elle ne valide pas une réponse reçue du réseau. Une fonction ou un objet suffit à beaucoup d'exemples du module, sans classe supplémentaire.
+Un objet possède un état et expose des opérations. Une classe décrit comment créer des objets de même structure. Chaque objet créé est une instance, avec son propre état. JavaScript permet aussi de créer des objets sans classe.
 
-## Responsabilités et dépendances
+L'encapsulation réserve la modification de l'état à des opérations qui préservent ses règles. Une créature possède entre 0 et 100 points d'énergie. Se déplacer coûte 10 points. Se reposer en rend 20, sans dépasser 100.
 
-Une responsabilité regroupe une connaissance qui évolue pour une même raison. Le tarif change avec les règles commerciales, le format JSON avec le fournisseur, l'affichage avec l'interface. La cohésion mesure si les éléments d'un module travaillent au même rôle. Le couplage décrit ce qu'un module doit connaître des autres.
+```ts
+class Creature {
+  #energie = 100;
+
+  get energie(): number {
+    return this.#energie;
+  }
+
+  avancer(): boolean {
+    if (this.#energie < 10) return false;
+    this.#energie -= 10;
+    return true;
+  }
+
+  seReposer(): void {
+    this.#energie = Math.min(100, this.#energie + 20);
+  }
+}
+
+const grenouille = new Creature();
+grenouille.avancer();
+console.log(grenouille.energie); // 90
+```
+
+Le champ `#energie` est privé à l'exécution. Le getter donne accès à sa valeur sans autoriser une affectation directe. `private energie` en TypeScript limite l'accès lors de la vérification des types, mais n'apporte pas la même confidentialité à l'exécution. Le [manuel TypeScript sur les classes](https://www.typescriptlang.org/docs/handbook/2/classes.html) détaille cette distinction.
+
+Le code appelant connaît `avancer()` et son résultat, sans devoir reproduire le contrôle d'énergie. L'invariant, ici l'intervalle de 0 à 100, reste sous la responsabilité de l'objet. Cacher un champ sans contrôler les modifications ne suffit pas à protéger cet invariant.
+
+## Contrats et polymorphisme
+
+Une interface décrit les opérations attendues d'un objet. Elle n'impose pas une classe particulière. TypeScript utilise un typage structurel, donc un objet convient s'il possède la structure requise.
+
+```ts
+interface Nageur {
+  nager(): string;
+}
+const canard = { nager: () => "Le canard nage.", voler: () => "Il vole." };
+const poisson = { nager: () => "Le poisson nage." };
+const decrire = (animal: Nageur) => animal.nager();
+console.log(decrire(canard), decrire(poisson));
+```
+
+Le polymorphisme permet à `decrire` d'utiliser le même contrat avec des comportements différents. Le canard possède une capacité supplémentaire que cette fonction n'a pas besoin de connaître. Une interface TypeScript disparaît à l'exécution. Elle ne valide donc pas les données reçues du réseau.
+
+## Cohésion, couplage et responsabilités
+
+Un module cohésif regroupe des éléments qui contribuent au même rôle. Le couplage décrit les connaissances et dépendances entre modules. Si chaque écran connaît les champs propres à un fournisseur, changer ce fournisseur oblige à modifier plusieurs écrans.
 
 ```mermaid
 flowchart LR
-  accTitle: Responsabilités d'une réservation
-  accDescr: L'interface appelle le métier. Le métier utilise un contrat de stockage dont le fournisseur fournit une implémentation.
-  UI[Interface] -->|réserver| Metier[Métier et règles]
-  Metier -->|utilise| Contrat[Contrat de stockage]
-  API[Fournisseur externe] -.->|implémente| Contrat
+  accTitle: Dépendances d'une réservation
+  accDescr: L'interface utilise les règles métier. Les règles dépendent d'un contrat de réservations que le stockage implémente.
+  UI[Interface] -->|appelle| Metier[Règles métier]
+  Metier -->|utilise| Contrat[Contrat des réservations]
+  Stockage[Stockage] -.->|implémente| Contrat
 ```
 
-Une flèche signifie ici « connaît et utilise ». Le sens d'une dépendance dans le code peut différer du trajet des données. N'ajoute une frontière que si elle protège une règle ou facilite un changement observé.
+Les flèches représentent des dépendances de code. Les données peuvent circuler dans les deux sens. Une séparation par responsabilités cherche à contenir un changement, par exemple celui du format du fournisseur, sans multiplier les modules sans raison.
 
-## Les cinq principes SOLID
+## Les principes SOLID
 
-| Principe | Question concrète dans notre application |
+Les cinq principes [SOLID](https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html) concernent les responsabilités et les dépendances du code.
+
+| Principe | Sens et exemple |
 | --- | --- |
-| S, responsabilité unique | Un changement de courriel oblige-t-il à modifier le calcul du tarif ? Séparer ces raisons d'évoluer. |
-| O, ouvert à l'extension, fermé à la modification | Peut-on ajouter un tarif solidaire sans toucher à la validation des places ? Une fonction de prix interchangeable peut suffire. |
-| L, substitution de Liskov | Le stockage de remplacement tient-il les mêmes promesses ? Un objet qui perd silencieusement une réservation ne remplace pas un stockage qui confirme sa sauvegarde. |
-| I, ségrégation des interfaces | Une vue qui consulte les places a-t-elle besoin des méthodes d'administration ? Lui donner seulement ce qu'elle utilise. |
-| D, inversion des dépendances | Le métier peut-il dépendre d'un contrat « enregistrer une réservation » plutôt que du SDK d'un fournisseur précis ? |
+| S, responsabilité unique | Un module regroupe ce qui change pour un même acteur ou une même raison métier. La politique tarifaire et le format d'un courriel peuvent évoluer séparément. |
+| O, ouvert à l'extension, fermé à la modification | Une variation prévue peut s'ajouter derrière un contrat stable. Ajouter un tarif ne demande plus de modifier la validation des places. Cela ne signifie pas interdire toute modification du code. |
+| L, substitution de Liskov | Un sous-type respecte les promesses du type remplacé. Il ne réclame pas davantage de préconditions et ne réduit pas les garanties du résultat. Une opération annoncée comme disponible ne peut pas disparaître dans un sous-type. |
+| I, ségrégation des interfaces | Chaque client dépend des opérations dont il a besoin. Une vue de consultation peut recevoir un contrat de lecture sans méthodes d'administration. |
+| D, inversion des dépendances | Les règles de haut niveau et les détails techniques dépendent d'abstractions adaptées au métier. Les règles de réservation dépendent d'un contrat de stockage, pas du SDK d'un fournisseur. |
 
-SOLID aide à poser des questions. Appliquer chaque lettre en créant systématiquement une interface ajoute du travail sans garantir une meilleure conception.
+Robert C. Martin relie la [responsabilité unique](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html) aux acteurs à l'origine des changements. Une classe peut contenir plusieurs méthodes cohérentes. Le nombre de méthodes ne mesure pas ses responsabilités.
 
-## Composition ou héritage
+## Composition et héritage
 
-L'héritage exprime une relation de sous-type et engage à respecter le contrat du parent. Une `ReservationNonAnnulable` qui hérite d'une réservation promettant `annuler()`, mais refuse toujours cette opération, pose un problème de substitution.
+L'héritage crée une relation de sous-type. Il convient si les instances respectent le contrat du parent. Une réservation non annulable ne peut pas remplacer un type qui promet une annulation sans condition.
 
-La composition assemble des comportements. Pour varier le tarif, une réservation peut recevoir une fonction de prix.
+La composition confie une partie du travail à un autre objet ou à une fonction. Une commande reçoit une règle de réduction, sans devenir une sous-classe `CommandeAvecReductionEtCourriel`. Le choix et l'assemblage de ces dépendances restent à organiser.
 
-```ts
-type Tarif = (prixCentimes: number) => number;
-const solidaire: Tarif = prix => Math.round(prix / 2);
-const montant = (prix: number, tarif: Tarif) => tarif(prix);
-console.log(montant(2000, solidaire)); // 1000
-```
-
-La composition évite une hiérarchie `AtelierSolidaireAvecEmail`. Elle impose tout de même de choisir où assembler les fonctions. L'héritage reste pertinent si plusieurs types partagent réellement un contrat stable et substituable.
-
-Pour les principes de simplicité, consulter [DRY, KISS et YAGNI](/lire-une-codebase/10-principes/). Pour modifier la structure sans changer le comportement, consulter [Refactoriser](/lire-une-codebase/03-refactoriser/).
+[Strategy](/poo-patterns-frameworks/02-strategy/) illustre cette composition. [DRY, KISS et YAGNI](/lire-une-codebase/10-principes/) aident à juger son coût. Le [refactoring](/lire-une-codebase/03-refactoriser/) change la structure tout en préservant le comportement observé.

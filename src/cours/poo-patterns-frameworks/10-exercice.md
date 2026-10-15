@@ -1,13 +1,13 @@
 ---
-title: "Départ de l'exercice TypeScript"
+title: "Faire évoluer une application TypeScript"
 order: 10
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Départ de l'exercice TypeScript
+# Faire évoluer une application TypeScript
 
-Le programme gère des ateliers, leurs réservations, une capacité, un tarif unique et une annulation. Les notifications sont des messages en mémoire. Le code regroupe volontairement plusieurs responsabilités dans les opérations de réservation. Il fonctionne avant le refactoring.
+Le programme gère des ateliers, les réservations, la capacité, un tarif unique et les annulations. L'exercice consiste à identifier ses responsabilités puis à modifier leur organisation selon un changement de contrainte.
 
 ## Exécuter le point de départ
 
@@ -19,9 +19,9 @@ Le programme gère des ateliers, leurs réservations, une capacité, un tarif un
 node ateliers.ts
 ```
 
-Le fichier n'installe aucune dépendance et n'utilise pas le réseau. Node retire les annotations TypeScript pour exécuter le code. Il ne vérifie pas les types.
+Le fichier fonctionne sans dépendance ni réseau. Node.js retire les annotations TypeScript. Cette exécution [ne vérifie pas les types](https://nodejs.org/docs/latest-v24.x/api/typescript.html).
 
-Le résultat attendu est le suivant.
+Le programme affiche exactement les quatre lignes suivantes si ses assertions réussissent.
 
 ```text
 Vérifications réussies.
@@ -30,16 +30,33 @@ Réservations actives : 2
 Notifications en mémoire : 4
 ```
 
-Une assertion qui échoue arrête le programme avec une erreur. Les vérifications couvrent notamment la capacité, les doublons, les entrées invalides, le montant et l'annulation.
+Ces nombres résultent des opérations exécutées par les assertions. Une assertion qui échoue arrête le programme.
 
-## Cartographier avant de modifier
+## Lire les règles avant de changer la structure
 
-Repérez les données puis dessinez le trajet d'une réservation. Où vérifie-t-on les places ? Où calcule-t-on le montant ? Quand ajoute-t-on la notification ? Choisissez ensuite la [première situation](/poo-patterns-frameworks/09-situations/#situation-1-des-tarifs-qui-varient).
+Repérez le catalogue, les réservations et les notifications. Suivez ensuite `reserver` depuis la recherche de l'atelier jusqu'au message de confirmation. Un schéma peut séparer la validation de l'adresse, la règle de capacité, le montant et l'enregistrement.
 
-Conservez les assertions et relancez le fichier après chaque modification. Lors d'un refactoring, les montants et erreurs attendus restent identiques. Quand une contrainte ajoute une fonctionnalité, ajoutez d'abord un cas qui montre le nouveau comportement attendu.
+Les critères suivants décrivent le comportement à préserver.
 
-## Contrats et limites
+- Une réservation refusée n'ajoute ni réservation ni notification.
+- Une adresse normalisée ne permet pas de réserver deux fois le même atelier.
+- La capacité n'est pas dépassée dans cette simulation séquentielle.
+- Un montant enregistré reste inchangé après une modification du prix au catalogue.
+- Une annulation libère une place et produit une notification.
+- Les identifiants ne sont pas réutilisés après une annulation.
 
-Une réservation refusée n'ajoute ni réservation ni notification. Une annulation libère une place et produit une seule notification. Un montant déjà enregistré reste inchangé. Les identifiants ne sont pas réutilisés après annulation.
+Les assertions rendent ces comportements observables avant et après refactoring.
 
-Le fichier est une simulation sur un seul processus. Il perd les données à chaque exécution, ne traite ni concurrence ni paiement et effectue seulement une vérification de forme minimale de l'adresse courriel. Ces limites fournissent des questions pour la situation 2. Elles ne demandent pas de construire un backend pendant le cours.
+## Introduire une variation
+
+Commencez par l'[étude des tarifs](/poo-patterns-frameworks/09-situations/#situation-1-des-tarifs-qui-varient). Dessinez une condition locale et une règle fournie à la réservation. Notez ce qui change dans les appels, les données enregistrées et les vérifications.
+
+Ajoutez un cas qui attend 1 001 centimes pour un prix de 2 001 centimes au tarif solidaire. Modifiez ensuite le calcul pour satisfaire ce cas sans casser les précédents. Le montant final reste enregistré dans la réservation.
+
+Les autres [études de cas](/poo-patterns-frameworks/09-situations/) se traitent avec des réponses et pannes simulées. Un mini ADR conserve la décision.
+
+## Limites de la simulation
+
+Les données disparaissent à chaque exécution. Les notifications sont des chaînes stockées en mémoire, aucun courriel n'est envoyé. La vérification d'adresse contrôle une forme minimale, pas l'existence de la boîte. Le programme ne gère ni paiement, ni appels concurrents, ni transactions distribuées.
+
+Le succès des assertions confirme les comportements couverts dans ce processus. Il ne démontre pas qu'un stockage distant préserverait les mêmes garanties. Cette différence fait partie de l'analyse d'architecture.

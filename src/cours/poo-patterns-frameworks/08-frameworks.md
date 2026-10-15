@@ -7,45 +7,68 @@ updatedAt: "2026-10-15"
 
 # Frameworks et inversion de contrôle
 
-Une bibliothèque fournit des fonctions que ton application appelle. Un framework organise une partie de l'exécution et appelle le code que tu lui confies. Cette inversion de contrôle, ou IoC, concerne le cycle d'exécution. La distinction est utile, même si un outil peut combiner les deux rôles.
+## Qui appelle le code de l'application ?
 
-L'injection de dépendances consiste à fournir une dépendance au lieu de la construire sur place. Elle peut aider à organiser un framework, mais elle ne désigne pas toute l'inversion de contrôle.
+Une bibliothèque fournit des opérations que l'application appelle. Un framework organise une partie de l'exécution et appelle les fonctions que l'application lui fournit. Il fixe des points d'entrée et des moments d'exécution, par exemple le montage d'une vue ou le traitement d'une requête.
 
-## Un micro-framework pour comprendre
+Cette inversion de contrôle, ou IoC, existe aussi à plus petite échelle. Après l'inscription d'un écouteur DOM, le navigateur appelle cette fonction quand l'événement survient. L'application ne contient pas une boucle qui surveille elle-même tous les clics. Martin Fowler décrit l'[inversion de contrôle](https://martinfowler.com/bliki/InversionOfControl.html) comme une différence dans la conduite de l'exécution.
 
-Notre cible pédagogique affiche le nombre de places et un bouton de réservation. Un clic déclenche une action. L'action modifie l'état, puis l'interface reflète cet état. Le framework décide quand appeler la fonction de rendu fournie par l'application.
+La frontière entre bibliothèque et framework dépend du périmètre observé. React se présente comme une bibliothèque. Son moteur de rendu appelle pourtant les composants au cours du cycle de [rendu et de commit](https://react.dev/learn/render-and-commit). L'application peut contrôler d'autres choix, comme son routage.
+
+## Le cycle d'une interface
+
+Une vue affiche le nombre de places et propose une réservation. Son fonctionnement distingue les responsabilités suivantes.
+
+| Élément | Responsabilité |
+| --- | --- |
+| Événement DOM | Signaler le clic de la personne. |
+| Action | Demander une réservation et traiter son résultat. |
+| Métier | Vérifier les règles, notamment la capacité. |
+| État de l'interface | Conserver les informations nécessaires à l'affichage. |
+| Notifications | Prévenir les vues abonnées d'un changement d'état. |
+| Rendu | Calculer puis appliquer l'affichage correspondant à l'état. |
 
 ```mermaid
 flowchart LR
-  accTitle: Cycle d'une action utilisateur
-  accDescr: Un événement DOM appelle une action qui met à jour l'état. Les abonnés reçoivent le nouvel état et le rendu actualise le DOM.
-  DOM[Événement DOM] -->|clic| Action[Action réserver]
-  Action -->|setState| Etat[État]
-  Etat -->|notification| Abonnes[Abonnés]
-  Abonnes -->|appel du rendu| Vue[Vue]
-  Vue -->|actualise| DOM
+  accTitle: Du clic au nouvel affichage
+  accDescr: Le clic déclenche une action. Le métier accepte ou refuse la réservation. Le résultat met à jour l'état, qui notifie les abonnés et déclenche le rendu dans le DOM.
+  Clic[Clic DOM] --> Action[Action réserver]
+  Action --> Metier[Règles de réservation]
+  Metier -->|résultat| Etat[État de l'interface]
+  Etat -->|notification| Vue[Rendu de la vue]
+  Vue -->|actualise| DOM[DOM]
 ```
 
-Le premier rendu a lieu au montage, avant tout clic. Une notification d'état ne doit pas simuler un nouveau clic. Sans cette distinction, le schéma peut masquer une boucle infinie.
+Le rendu ne déclenche pas une nouvelle réservation. Il décrit l'état obtenu. Désactiver le bouton quand l'atelier est complet améliore l'interface, mais la règle de capacité reste dans le métier. Un autre appelant pourrait demander une réservation sans utiliser ce bouton.
 
-## API proposée à discuter
+## Un contrat minimal d'état et de montage
+
+Le contrat suivant rend visibles les échanges nécessaires. Son implémentation peut utiliser des fonctions et des écouteurs, sans hiérarchie de classes.
 
 ```ts
-type Etat = { places: number };
-type Store = {
-  getState(): Readonly<Etat>;
+type Etat = Readonly<{ places: number; message: string }>;
+interface Store {
+  getState(): Etat;
   setState(suivant: Etat): void;
-  subscribe(fn: (etat: Readonly<Etat>) => void): () => void;
-};
-type Monter = (racine: HTMLElement, store: Store) => () => void;
+  subscribe(fn: (etat: Etat) => void): () => void;
+}
+type MonterVue = (
+  racine: HTMLElement,
+  store: Store,
+  reserver: () => void
+) => () => void;
 ```
 
-Ce contrat est une proposition, pas un exercice de mémorisation. Le groupe peut retenir des noms ou une organisation différents. `Readonly` protège les écritures directes au typage, pas l'objet à l'exécution.
+`getState` fournit l'état courant. `setState` remplace cet état et prévient les abonnés. `subscribe` renvoie une fonction de désabonnement. Le contrat doit préciser si deux états égaux produisent une notification. `Readonly` interdit les affectations au typage, il ne fige pas l'objet à l'exécution.
 
-Au montage, créer les éléments DOM, brancher le clic avec `addEventListener`, s'abonner au store et effectuer le premier rendu. Le rendu actualise le texte et l'état du bouton. Au démontage, appeler le désabonnement et retirer l'écouteur DOM avec la même fonction. Le métier garde le contrôle de la capacité, même si le bouton est désactivé.
+Au montage, la vue crée ses éléments, branche le clic et s'abonne au store. Elle effectue aussi un premier rendu, sans attendre un changement. L'action `reserver` lui est fournie par l'application.
 
-## Tester le schéma avant de coder
+Au démontage, la vue appelle le désabonnement et retire son écouteur DOM. Le [retrait d'un écouteur](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/removeEventListener) exige la même fonction et la même valeur de capture qu'à l'inscription. La fonction renvoyée par `MonterVue` regroupe ce nettoyage. Une vue retirée ne doit plus recevoir les changements.
 
-Suivez une réservation réussie puis une réservation refusée. Précisez qui produit le message d'erreur et si l'état change. Retirez ensuite la vue. Elle ne doit plus recevoir de notification. Une panne de notification ne signifie pas automatiquement que la réservation a échoué.
+## Injection de dépendances et choix d'architecture
 
-Codez éventuellement le store ou le montage d'une vue, puis simulez le reste sur papier. Pas de DOM virtuel, de routeur ni de système de plugins. Le résultat explique un mécanisme de framework, sans prétendre remplacer un framework de production. [Observer](/poo-patterns-frameworks/03-observer/) aide à discuter les abonnements.
+L'injection de dépendances fournit un collaborateur depuis l'extérieur au lieu de le construire dans le code qui l'utilise. Un constructeur peut recevoir un service de notification. Ici, le montage reçoit le store et l'action. Aucun conteneur d'injection n'est nécessaire pour réaliser ce mécanisme.
+
+L'[article de Fowler sur l'injection](https://martinfowler.com/articles/injection.html) détaille ces possibilités. L'injection décrit l'assemblage des collaborateurs. Le principe d'inversion des dépendances décrit les dépendances entre règles et détails techniques. [Strategy](/poo-patterns-frameworks/02-strategy/) décrit une variation d'algorithme. Fournir un objet au constructeur ne démontre pas, à lui seul, les deux autres notions.
+
+Pour examiner un framework concret, repérez le propriétaire de l'état, le mécanisme qui programme le rendu et le nettoyage au démontage. La politique d'erreur des abonnés complète ce cycle d'exécution.
