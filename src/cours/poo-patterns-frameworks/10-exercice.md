@@ -11,7 +11,7 @@ Le programme gère des ateliers, leurs réservations, une capacité, un tarif un
 
 ## Exécuter le point de départ
 
-1. Télécharger [ateliers.ts](/ressources/poo-patterns-frameworks/ateliers.ts) dans un dossier de travail.
+1. Télécharger <a href="/ressources/poo-patterns-frameworks/ateliers.ts" download="ateliers.ts">ateliers.ts</a> dans un dossier de travail.
 2. Ouvrir un terminal dans ce dossier avec Node.js 24 disponible.
 3. Exécuter le fichier.
 
