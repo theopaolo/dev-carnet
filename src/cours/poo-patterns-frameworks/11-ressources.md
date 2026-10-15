@@ -38,6 +38,12 @@ Les textes de Fowler sur l'[inversion de contrôle](https://martinfowler.com/bli
 
 La documentation React décrit les étapes de [rendu et de commit](https://react.dev/learn/render-and-commit). MDN détaille l'[inscription](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener) et le [retrait](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/removeEventListener) d'écouteurs DOM.
 
+## Repères visuels
+
+[Murmur](https://www.murmur.living/), projet de oio et mattering, représente des écosystèmes vivants. Sa vue forestière Plot illustre les notions d'état, d'interaction et d'événement dans les [fondations](/poo-patterns-frameworks/01-fondations/).
+
+La [capture de Smalltalk](https://d2w9rnfcy7mm78.cloudfront.net/21819379/original_c5b90a6c29d416c2df7866f97b563b44.png) montre un navigateur de classes et de méthodes. Dans [*Personal Distributed Computing: The Alto and Ethernet Software*](https://www.microsoft.com/en-us/research/wp-content/uploads/1988/01/ACM-Alto-software-paper.pdf#page=23), Butler W. Lampson décrit Smalltalk et présente son environnement à la figure 1.
+
 ## Trois livres pour approfondir
 
 - Erich Gamma, Richard Helm, Ralph Johnson et John Vlissides, [*Design Patterns: Elements of Reusable Object-Oriented Software*](https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480), Addison-Wesley Professional. Publication en 1994, copyright 1995. C'est le catalogue GoF de 23 patterns orientés objet. À consulter pour les intentions, les rôles et les conséquences des structures classiques.

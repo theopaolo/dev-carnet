@@ -13,7 +13,10 @@ La programmation orientée objet organise le code autour d'objets qui associent 
 
 Les exemples utilisent TypeScript. Savoir lire des fonctions, des objets et des tableaux suffit pour commencer. Les fondations expliquent les classes et les interfaces.
 
-<img src="/ressources/poo-patterns-frameworks/visuels/composition.webp" alt="" width="1200" height="500">
+<figure class="course-media">
+<img src="/ressources/poo-patterns-frameworks/visuels/smalltalk.webp" width="786" height="924" loading="lazy" alt="Interface Smalltalk en noir et blanc, avec un navigateur de classes, une liste de méthodes et du code.">
+<figcaption>Le navigateur Smalltalk affiche les classes et leurs méthodes. <a href="https://d2w9rnfcy7mm78.cloudfront.net/21819379/original_c5b90a6c29d416c2df7866f97b563b44.png">Voir la capture d'origine</a>. Le <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/1988/01/ACM-Alto-software-paper.pdf#page=23">texte de Butler W. Lampson sur le logiciel de l'Alto</a> donne le contexte historique de cet environnement.</figcaption>
+</figure>
 
 ## Un parcours de lecture
 

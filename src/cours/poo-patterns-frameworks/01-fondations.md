@@ -13,8 +13,6 @@ Un objet possède un état et expose des opérations. Une classe décrit comment
 
 L'encapsulation réserve la modification de l'état à des opérations qui préservent ses règles. Une créature possède entre 0 et 100 points d'énergie. Se déplacer coûte 10 points. Se reposer en rend 20, sans dépasser 100.
 
-<img src="/ressources/poo-patterns-frameworks/visuels/grenouille.webp" alt="" width="360" height="180" loading="lazy">
-
 ```ts
 class Creature {
   #energie = 100;
@@ -42,6 +40,15 @@ console.log(grenouille.energie); // 90
 Le champ `#energie` est privé à l'exécution. Le getter donne accès à sa valeur sans autoriser une affectation directe. `private energie` en TypeScript limite l'accès lors de la vérification des types, mais n'apporte pas la même confidentialité à l'exécution. Le [manuel TypeScript sur les classes](https://www.typescriptlang.org/docs/handbook/2/classes.html) détaille cette distinction.
 
 Le code appelant connaît `avancer()` et son résultat, sans devoir reproduire le contrôle d'énergie. L'invariant, ici l'intervalle de 0 à 100, reste sous la responsabilité de l'objet. Cacher un champ sans contrôler les modifications ne suffit pas à protéger cet invariant.
+
+## Modéliser un écosystème
+
+Murmur représente des mondes vivants, dont l'écosystème forestier Plot. Un modèle pédagogique de mare, nommé `Pond`, peut distinguer l'état des créatures, la météo et les événements. Chaque créature protège ses règles d'énergie. Le monde coordonne leurs interactions, et un journal affiche les événements observables. Ce découpage est un exemple de conception, indépendant de l'architecture interne de Murmur.
+
+<figure class="course-figure">
+<img src="/ressources/poo-patterns-frameworks/visuels/murmur-plot.webp" width="1300" height="1200" loading="lazy" alt="L'écosystème forestier Plot de Murmur, avec des créatures, les conditions météo et un journal d'événements.">
+<figcaption>Plot, un écosystème de <a href="https://www.murmur.living/">Murmur</a>, projet de oio et mattering.</figcaption>
+</figure>
 
 ## Contrats et polymorphisme
 
