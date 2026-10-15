@@ -17,9 +17,20 @@ Robert C. Martin précise le lien entre [responsabilité unique et acteurs du ch
 
 ## Structures des patterns
 
-Les fiches françaises de Refactoring.Guru présentent [Strategy](https://refactoring.guru/fr/design-patterns/strategy), [Observer](https://refactoring.guru/fr/design-patterns/observer), [Adapter](https://refactoring.guru/fr/design-patterns/adapter) et [Decorator](https://refactoring.guru/fr/design-patterns/decorator). Le [comparatif des fabriques](https://refactoring.guru/fr/design-patterns/factory-comparison) distingue le terme général, la fabrique simple et les patterns de création. Les schémas représentent les dépendances entre rôles.
+Le [catalogue de Refactoring.Guru](https://refactoring.guru/design-patterns) classe les patterns orientés objet par leur intention de création, de structure ou de comportement. Ses fiches françaises présentent [Strategy](https://refactoring.guru/fr/design-patterns/strategy), [Observer](https://refactoring.guru/fr/design-patterns/observer), [Adapter](https://refactoring.guru/fr/design-patterns/adapter) et [Decorator](https://refactoring.guru/fr/design-patterns/decorator). Le [comparatif des fabriques](https://refactoring.guru/fr/design-patterns/factory-comparison) distingue le terme général, la fabrique simple et les patterns de création.
 
 La [fiche Repository de Martin Fowler](https://martinfowler.com/eaaCatalog/repository.html) rattache ce pattern à une collection d'objets métier.
+
+## Patterns JavaScript et organisation des interfaces
+
+[Patterns.dev](https://www.patterns.dev/#patterns) couvre les mécanismes JavaScript, l'organisation des interfaces, le rendu et les performances. Ce périmètre dépasse celui des patterns orientés objet du GoF. Une fonction, un module ou une convention de composants peut répondre à un problème sans reproduire une hiérarchie de classes.
+
+- [Observer Pattern](https://www.patterns.dev/vanilla/observer-pattern/) détaille l'abonnement, le nettoyage et la distinction avec un bus de publication et d'abonnement.
+- [Factory Pattern](https://www.patterns.dev/vanilla/factory-pattern/) montre des fonctions de création et leur configuration.
+- [Module Pattern](https://www.patterns.dev/vanilla/module-pattern/) traite des opérations exportées et de l'état interne d'un module.
+- [Container/Presentational Pattern](https://www.patterns.dev/react/presentational-container-pattern/) sépare l'obtention des données et leur présentation, avec des exemples React.
+
+Le [guide des modules de MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules) complète ces lectures avec les mécanismes du langage. Les schémas de ce cours représentent ses propres exemples, avec leurs contrats et leurs limites.
 
 ## Frameworks et cycle d'exécution
 

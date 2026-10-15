@@ -15,6 +15,25 @@ Cette inversion de contrôle, ou IoC, existe aussi à plus petite échelle. Apr�
 
 La frontière entre bibliothèque et framework dépend du périmètre observé. React se présente comme une bibliothèque. Son moteur de rendu appelle pourtant les composants au cours du cycle de [rendu et de commit](https://react.dev/learn/render-and-commit). L'application peut contrôler d'autres choix, comme son routage.
 
+## Une frontière de module
+
+Un module JavaScript choisit ce qu'il exporte. Les autres fichiers importent ses opérations publiques, sans accéder directement aux variables qu'il garde dans sa portée. Cette frontière permet de modifier la représentation des réservations sans changer leurs appelants.
+
+```mermaid
+flowchart TB
+  accTitle: Les exports forment le contrat public d'un module
+  accDescr: L'interface importe les opérations publiques du module de réservation. Ces opérations utilisent des règles et un état internes, non exportés.
+  Interface[Interface] -->|importe| Public
+  subgraph Module[Module de réservation]
+    Public[Exports réserver et annuler] --> Regles[Règles internes]
+    Public --> Etat[État interne non exporté]
+  end
+```
+
+Exporter un objet mutable permet encore aux appelants de modifier cet objet. Le fichier ne protège que les accès qu'il ne donne pas. Un état défini au niveau du module est partagé par ses importateurs dans une même instance du module. Il ne crée pas un état neuf pour chaque vue.
+
+[Module Pattern sur Patterns.dev](https://www.patterns.dev/vanilla/module-pattern/) présente cette organisation. Le [guide des modules de MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules) décrit `import` et `export`.
+
 ## Le cycle d'une interface
 
 Une vue affiche le nombre de places et propose une réservation. Son fonctionnement distingue les responsabilités suivantes.
@@ -40,6 +59,22 @@ flowchart LR
 ```
 
 Le rendu ne déclenche pas une nouvelle réservation. Il décrit l'état obtenu. Désactiver le bouton quand l'atelier est complet améliore l'interface, mais la règle de capacité reste dans le métier. Un autre appelant pourrait demander une réservation sans utiliser ce bouton.
+
+## Présentation et orchestration
+
+Une vue reçoit des données à afficher et signale les actions demandées. L'orchestration appelle les services, traite leurs résultats et prépare les données de la vue. La présentation peut ainsi s'examiner avec des données connues, sans contacter le fournisseur.
+
+```mermaid
+flowchart TB
+  accTitle: La vue affiche des données et remonte une demande
+  accDescr: L'orchestration fournit les places et le message à la vue. La vue signale une demande de réservation. L'orchestration appelle le service métier, tandis que la vue actualise le DOM.
+  Orchestration[Action et état de données] -->|places et message| Vue[Présentation]
+  Vue -->|demande de réservation| Orchestration
+  Orchestration -->|appelle| Service[Service de réservation]
+  Vue -->|actualise| DOM[DOM]
+```
+
+Cette séparation de responsabilités n'impose pas deux composants ni deux classes. Un état local, comme le texte saisi dans un champ, peut rester dans la vue. Extraire une couche qui ne fait que transmettre les mêmes données ajoute une étape de lecture. [Container/Presentational sur Patterns.dev](https://www.patterns.dev/react/presentational-container-pattern/) illustre cette séparation avec React et discute ses limites.
 
 ## Un contrat minimal d'état et de montage
 

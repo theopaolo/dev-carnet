@@ -16,13 +16,21 @@ Le métier demande les places disponibles pour un identifiant numérique. Un par
 Le client connaît le contrat métier `Places`. Le service partenaire possède son propre contrat. L'adaptateur connaît les deux et réalise leur correspondance. Le renommer `Service` ne supprimerait pas cette dépendance au fournisseur.
 
 ```mermaid
-flowchart LR
+sequenceDiagram
   accTitle: Un adaptateur traduit les appels au partenaire
-  accDescr: Le métier appelle disponibles sur l'adaptateur. Celui-ci appelle getAvailability sur le partenaire puis valide et traduit sa réponse.
-  Metier[Métier] -->|disponibles avec un identifiant| Adaptateur[Adaptateur de places]
-  Adaptateur -->|getAvailability avec un code| API[Partenaire]
-  API -->|réponse inconnue| Adaptateur
-  Adaptateur -->|nombre de places validé| Metier
+  accDescr: Le métier demande les places de l'atelier 7. L'adaptateur traduit l'identifiant, reçoit une réponse inconnue et la valide. Il renvoie un nombre de places ou signale le format invalide.
+  participant Metier as Métier
+  participant Adaptateur
+  participant API as Partenaire
+  Metier->>Adaptateur: disponibles(7)
+  Adaptateur->>API: getAvailability("atelier-7")
+  API-->>Adaptateur: réponse de type unknown
+  Adaptateur->>Adaptateur: vérifier remaining_seats
+  alt Entier valide et positif ou nul
+    Adaptateur-->>Metier: nombre de places
+  else Format ou valeur invalide
+    Adaptateur-->>Metier: erreur
+  end
 ```
 
 ## Exemple TypeScript sans réseau

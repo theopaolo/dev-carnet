@@ -41,6 +41,39 @@ Des destinataires peu nombreux et stables favorisent les appels directs. Des ré
 
 L'interface conserve la réservation confirmée et signale séparément l'échec d'envoi. Le démontage d'une vue libère son abonnement. Une notification d'état provoque un rendu, pas une nouvelle réservation. Le [chapitre sur les frameworks](/poo-patterns-frameworks/08-frameworks/) détaille cette séparation.
 
+### Représenter les succès et les échecs séparément
+
+Cette séquence montre une option avec des appels directs. Elle distingue le résultat de l'enregistrement de celui du courriel. Elle ne choisit ni un mécanisme de reprise ni une transaction entre ces opérations.
+
+```mermaid
+sequenceDiagram
+  accTitle: Une sauvegarde réussie reste distincte de l'envoi du courriel
+  accDescr: L'interface demande une réservation. Si le stockage refuse l'enregistrement, le service ne demande aucun courriel et signale l'échec. Après une sauvegarde confirmée, le service demande le courriel. Son échec laisse la réservation confirmée et produit une indication séparée.
+  participant UI as Interface
+  participant Reservation as Service de réservation
+  participant Stockage
+  participant Courriel
+  UI->>Reservation: réserver une place
+  Reservation->>Stockage: enregistrer la réservation
+  alt Enregistrement refusé
+    Stockage-->>Reservation: refus
+    Reservation-->>UI: réservation non confirmée
+    Note over Reservation,Courriel: Aucun courriel demandé
+  else Sauvegarde confirmée par le stockage
+    Stockage-->>Reservation: réservation enregistrée
+    Reservation->>Courriel: envoyer la confirmation
+    alt Envoi accepté
+      Courriel-->>Reservation: accepté
+      Reservation-->>UI: réservation confirmée, envoi accepté
+    else Échec de l'envoi
+      Courriel-->>Reservation: erreur
+      Reservation-->>UI: réservation confirmée, courriel en échec
+    end
+  end
+```
+
+Un envoi accepté ne prouve pas la réception du message par son destinataire. Si le stockage ne répond pas, l'issue de la sauvegarde peut rester inconnue. Ce cas demande une vérification avant de relancer la même réservation.
+
 ## Garder la raison d'une décision avec un ADR
 
 Un ADR conserve le contexte, la décision et ses conséquences. Le [support consacré aux ADR](/architecture-logicielle/06-adr/#version-minimale) en donne une forme courte. Voici un exemple pour les tarifs.

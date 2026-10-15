@@ -22,6 +22,26 @@ Dans [Factory Method](https://refactoring.guru/fr/design-patterns/factory-method
 Ces patterns résolvent des problèmes de création différents. Ajouter une méthode nommée `create` ne suffit pas à reconnaître Factory Method.
 
 ```mermaid
+flowchart TB
+  accTitle: Trois organisations de la création
+  accDescr: Une fabrique simple choisit directement le produit. Dans Factory Method, une sous-classe redéfinit la création utilisée par une opération héritée. Une Abstract Factory crée plusieurs produits d'une même famille.
+  subgraph Simple[Fabrique simple]
+    Choix[Nom demandé] --> Fonction[Fonction de création]
+    Fonction --> Produit[Produit choisi]
+  end
+  subgraph Methode[Factory Method]
+    Operation[Opération du créateur] -->|appelle| Creation[Méthode de création]
+    SousClasse[Sous-classe] -.->|redéfinit| Creation
+  end
+  subgraph Famille[Abstract Factory]
+    Fabrique[Fabrique d'une famille] --> Bouton[Bouton de cette famille]
+    Fabrique --> Champ[Champ de cette famille]
+  end
+```
+
+## Le trajet d'une fabrique simple
+
+```mermaid
 flowchart LR
   accTitle: Une fabrique simple crée une règle de tarif
   accDescr: L'appelant transmet un nom à la fabrique. Elle renvoie un objet dont la méthode calculer respecte le contrat de tarif.
@@ -48,6 +68,8 @@ console.log(tarif.calculer(2001)); // 1001
 ```
 
 La fabrique choisit et crée l'objet. [Strategy](/poo-patterns-frameworks/02-strategy/) explique ensuite pourquoi plusieurs règles peuvent remplacer ce tarif. Une chaîne reçue d'un formulaire doit être validée avant de devenir le type union accepté ici.
+
+Une fonction de fabrique peut aussi capturer une configuration pour les objets qu'elle crée. Elle n'exige pas de classe. [Factory Pattern sur Patterns.dev](https://www.patterns.dev/vanilla/factory-pattern/) présente cette forme JavaScript, distincte du mécanisme d'héritage de Factory Method.
 
 ## Coût et pertinence
 

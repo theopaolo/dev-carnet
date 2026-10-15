@@ -13,6 +13,8 @@ Un objet possède un état et expose des opérations. Une classe décrit comment
 
 L'encapsulation réserve la modification de l'état à des opérations qui préservent ses règles. Une créature possède entre 0 et 100 points d'énergie. Se déplacer coûte 10 points. Se reposer en rend 20, sans dépasser 100.
 
+<img src="/ressources/poo-patterns-frameworks/visuels/grenouille.webp" alt="" width="360" height="180" loading="lazy">
+
 ```ts
 class Creature {
   #energie = 100;
@@ -91,5 +93,20 @@ Robert C. Martin relie la [responsabilité unique](https://blog.cleancoder.com/u
 L'héritage crée une relation de sous-type. Il convient si les instances respectent le contrat du parent. Une réservation non annulable ne peut pas remplacer un type qui promet une annulation sans condition.
 
 La composition confie une partie du travail à un autre objet ou à une fonction. Une commande reçoit une règle de réduction, sans devenir une sous-classe `CommandeAvecReductionEtCourriel`. Le choix et l'assemblage de ces dépendances restent à organiser.
+
+```mermaid
+flowchart TB
+  accTitle: Hériter d'un type ou composer des collaborateurs
+  accDescr: Dans l'héritage, une commande promotionnelle est un sous-type de commande et doit en respecter les promesses. Dans la composition, une commande appelle une réduction fournie séparément.
+  subgraph Heritage[Héritage]
+    Promotion[Commande promotionnelle] -.->|est un sous-type de| Parent[Commande]
+  end
+  subgraph Composition[Composition]
+    Commande[Commande] -->|appelle| Reduction[Règle de réduction]
+    Assemblage[Assemblage] -->|fournit la règle| Commande
+  end
+```
+
+Les flèches ne décrivent pas la même relation. L'héritage promet une substitution. La composition organise une collaboration. Partager quelques lignes de code ne suffit pas à justifier une relation de sous-type.
 
 [Strategy](/poo-patterns-frameworks/02-strategy/) illustre cette composition. [DRY, KISS et YAGNI](/lire-une-codebase/10-principes/) aident à juger son coût. Le [refactoring](/lire-une-codebase/03-refactoriser/) change la structure tout en préservant le comportement observé.

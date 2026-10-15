@@ -48,14 +48,40 @@ notifier({ id: 7, statut: "en préparation" }); // Aucun affichage
 
 Les fonctions jouent le rôle des objets observateurs du pattern orienté objet. La copie des abonnés fixe les destinataires de cette émission. Un abonnement retiré pendant un appel peut donc encore recevoir la notification en cours. La copie figée du changement protège ici ses champs, tous de type primitif.
 
+## La durée d'un abonnement
+
+```mermaid
+sequenceDiagram
+  accTitle: Une vue cesse de recevoir les changements après son retrait
+  accDescr: La cuisine et la vue s'abonnent au suivi. Les deux reçoivent le premier statut. La vue appelle sa fonction de désabonnement. Seule la cuisine reçoit ensuite le second statut.
+  participant Cuisine
+  participant Suivi as Suivi des commandes
+  participant Vue as Vue des commandes
+  Cuisine->>Suivi: abonner(préparer)
+  Suivi-->>Cuisine: fonction de désabonnement
+  Vue->>Suivi: abonner(afficher)
+  Suivi-->>Vue: fonction arrêter
+  Suivi->>Cuisine: commande 7 en préparation
+  Suivi->>Vue: commande 7 en préparation
+  Vue->>Suivi: arrêter()
+  Note over Vue: Vue retirée
+  Suivi->>Cuisine: commande 7 prête
+```
+
+Le sujet conserve des références vers les abonnés. Retirer une vue du DOM ne retire pas son abonnement. Son nettoyage doit donc appeler la fonction renvoyée par `abonner`. Le DOM propose déjà des abonnements avec [`addEventListener`](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener).
+
 ## Les décisions à rendre explicites
 
 Le sujet accueille de nouvelles réactions sans les nommer dans son code. Le trajet d'exécution devient cependant moins visible qu'une suite d'appels directs.
 
 L'exemple est synchrone. Un abonné qui lance une erreur interrompt les suivants. Un envoi de courriel demande de décider si l'erreur bloque les autres réactions et comment signaler un échec après une sauvegarde réussie. Observer ne fournit ni reprise, ni livraison garantie, ni détection des doublons.
 
-Une vue démontée doit se désabonner pour cesser de réagir et libérer les références conservées. Le DOM propose déjà des abonnements avec [`addEventListener`](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener).
+Pour un seul destinataire connu, un appel direct reste souvent plus lisible. Observer n'implique pas un WebSocket.
 
-Pour un seul destinataire connu, un appel direct reste souvent plus lisible. Observer n'implique pas un WebSocket. Un système de publication et d'abonnement avec un intermédiaire ajoute d'autres choix que cette relation directe entre sujet et abonnés.
+## Observer et publication avec abonnement
+
+Avec Observer, l'abonnement concerne un sujet qui conserve ses observateurs. Dans un système de publication avec abonnement, les émetteurs et les destinataires passent par un intermédiaire, souvent un bus. Celui-ci peut distribuer les messages par sujet nommé. Cette séparation ajoute des choix de routage et de traitement des erreurs. Un bus en mémoire ne garantit pas davantage la livraison qu'un Observer local.
+
+La [présentation de Patterns.dev](https://www.patterns.dev/vanilla/observer-pattern/) compare ces organisations et détaille le nettoyage des abonnements.
 
 La [présentation d'Observer](https://refactoring.guru/fr/design-patterns/observer) décrit sa structure orientée objet. Le [cycle d'une interface](/poo-patterns-frameworks/08-frameworks/) montre où placer l'abonnement et son retrait.

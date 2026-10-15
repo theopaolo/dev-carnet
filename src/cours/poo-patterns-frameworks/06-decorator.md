@@ -45,6 +45,25 @@ console.log(traces); // ["Atelier réservé 7"]
 
 L'exemple compose des fonctions plutôt que les objets de la structure GoF. L'opération interne est simulée, elle ne sauvegarde aucune réservation. Si elle lance une erreur, la trace de succès n'est pas ajoutée. Pour une opération asynchrone, l'enveloppe doit attendre la résolution de la promesse avant d'annoncer ce succès.
 
+```mermaid
+sequenceDiagram
+  accTitle: La trace suit le retour de l'opération décorée
+  accDescr: L'appelant invoque la fonction décorée. Celle-ci appelle la réservation interne. Si la réservation réussit, le décorateur ajoute une trace et renvoie le résultat. Si elle échoue, il propage l'erreur sans trace de succès.
+  participant Appelant
+  participant Trace as Avec trace
+  participant Reservation as Réservation interne
+  Appelant->>Trace: réserver(7)
+  Trace->>Reservation: réserver(7)
+  alt L'opération renvoie un résultat
+    Reservation-->>Trace: reservation-7
+    Trace->>Trace: ajouter la trace
+    Trace-->>Appelant: reservation-7
+  else L'opération lance une erreur
+    Reservation-->>Trace: erreur
+    Trace-->>Appelant: même erreur
+  end
+```
+
 ## Ordre, erreurs et contrat
 
 L'ordre des enveloppes change le comportement. Une mesure de durée placée autour d'une nouvelle tentative mesure toutes les tentatives. Placée à l'intérieur, elle mesure chaque tentative séparément.
