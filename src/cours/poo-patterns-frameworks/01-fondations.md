@@ -95,7 +95,7 @@ L'héritage crée une relation de sous-type. Il convient si les instances respec
 La composition confie une partie du travail à un autre objet ou à une fonction. Une commande reçoit une règle de réduction, sans devenir une sous-classe `CommandeAvecReductionEtCourriel`. Le choix et l'assemblage de ces dépendances restent à organiser.
 
 ```mermaid
-flowchart TB
+flowchart LR
   accTitle: Hériter d'un type ou composer des collaborateurs
   accDescr: Dans l'héritage, une commande promotionnelle est un sous-type de commande et doit en respecter les promesses. Dans la composition, une commande appelle une réduction fournie séparément.
   subgraph Heritage[Héritage]

@@ -22,7 +22,7 @@ Dans [Factory Method](https://refactoring.guru/fr/design-patterns/factory-method
 Ces patterns résolvent des problèmes de création différents. Ajouter une méthode nommée `create` ne suffit pas à reconnaître Factory Method.
 
 ```mermaid
-flowchart TB
+flowchart LR
   accTitle: Trois organisations de la création
   accDescr: Une fabrique simple choisit directement le produit. Dans Factory Method, une sous-classe redéfinit la création utilisée par une opération héritée. Une Abstract Factory crée plusieurs produits d'une même famille.
   subgraph Simple[Fabrique simple]

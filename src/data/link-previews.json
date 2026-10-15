@@ -323,6 +323,10 @@
     "title": "ARIA - Accessibilité | MDN",
     "description": "Accessible Rich Internet Applications (ARIA) (qu'on peut traduire par « applications internet riches et accessibles ») est un ensemble de rôles et d'attributs qui définissent comment rendre le contenu et les applications web accessibles (notamment ceux développés avec JavaScript) pour les personnes avec des handicaps."
   },
+  "https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules": {
+    "title": "Les modules JavaScript - JavaScript | MDN",
+    "description": "Ce guide aborde l'ensemble des notions vous permettant d'utiliser la syntaxe des modules en JavaScript."
+  },
   "https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag": {
     "title": "Google n'utilise pas la balise Meta \"keywords\" dans les classements Web | Google Search Central Blog | Google for Developers",
     "description": ""
@@ -959,6 +963,10 @@
     "title": "Server React DOM APIs – React",
     "description": "The library for web and native user interfaces"
   },
+  "https://refactoring.guru/design-patterns": {
+    "title": "Design Patterns",
+    "description": "Design Patterns are typical solutions to commonly occurring problems in software design. They are blueprints that you can customize to solve a particular design problem in your code."
+  },
   "https://refactoring.guru/fr/design-patterns/abstract-factory": {
     "title": "Fabrique abstraite / Abstract Factory",
     "description": "Fabrique abstraite est un patron de conception qui permet de créer des familles d’objets apparentés sans préciser leur classe concrète."
@@ -966,6 +974,10 @@
   "https://refactoring.guru/fr/design-patterns/adapter": {
     "title": "Adaptateur / Adapter",
     "description": "L’Adaptateur est un patron de conception structurel qui permet de faire collaborer des objets ayant des interfaces normalement incompatibles."
+  },
+  "https://refactoring.guru/fr/design-patterns/classification": {
+    "title": "Classification des patrons de conception",
+    "description": ""
   },
   "https://refactoring.guru/fr/design-patterns/decorator": {
     "title": "Décorateur / Decorator",
@@ -1422,6 +1434,26 @@
   "https://www.openhands.dev/": {
     "title": "OpenHands | The Open Platform for Cloud Coding Agents",
     "description": "Meet OpenHands, the open-source, model-agnostic platform for cloud coding agents. Automate real engineering work securely and transparently. Build faster with full control."
+  },
+  "https://www.patterns.dev/": {
+    "title": "Patterns.dev",
+    "description": "Learn JavaScript design and performance patterns for building more powerful web applications."
+  },
+  "https://www.patterns.dev/react/presentational-container-pattern/": {
+    "title": "Container/Presentational Pattern",
+    "description": "Enforce separation of concerns by separating the view from the application logic"
+  },
+  "https://www.patterns.dev/vanilla/factory-pattern/": {
+    "title": "Factory Pattern",
+    "description": "Use a factory function in order to create objects"
+  },
+  "https://www.patterns.dev/vanilla/module-pattern/": {
+    "title": "Module Pattern",
+    "description": "Split up your code into smaller, reusable pieces"
+  },
+  "https://www.patterns.dev/vanilla/observer-pattern/": {
+    "title": "Observer Pattern",
+    "description": "Use observables to notify subscribers when an event occurs"
   },
   "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009480": {
     "title": "Design Patterns: Elements of Reusable Object-Oriented Software",

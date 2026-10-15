@@ -48,7 +48,7 @@ Une vue affiche le nombre de places et propose une réservation. Son fonctionnem
 | Rendu | Calculer puis appliquer l'affichage correspondant à l'état. |
 
 ```mermaid
-flowchart LR
+flowchart TB
   accTitle: Du clic au nouvel affichage
   accDescr: Le clic déclenche une action. Le métier accepte ou refuse la réservation. Le résultat met à jour l'état, qui notifie les abonnés et déclenche le rendu dans le DOM.
   Clic[Clic DOM] --> Action[Action réserver]
