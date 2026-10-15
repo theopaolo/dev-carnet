@@ -1,3 +1,10 @@
+---
+title: "Grille d’évaluation Tilleul"
+publishedAt: "2026-10-02"
+updatedAt: "2026-10-15"
+hidden: true
+---
+
 Votre prénom : Theo
 
 Équipe observée : Grenouille Graphique
