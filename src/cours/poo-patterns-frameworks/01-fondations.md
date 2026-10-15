@@ -13,9 +13,21 @@ Un objet possède un état et expose des opérations. Une classe décrit comment
 
 L'encapsulation réserve la modification de l'état à des opérations qui préservent ses règles. Une créature possède entre 0 et 100 points d'énergie. Se déplacer coûte 10 points. Se reposer en rend 20, sans dépasser 100.
 
+```mermaid
+flowchart TB
+  accTitle: Une classe décrit plusieurs objets avec leur propre état
+  accDescr: Creature définit une variable de classe, une variable d'instance et deux méthodes. La grenouille et le poisson ont chacun leur énergie. Après avancer(), la grenouille est à 90. Le poisson reste à 100.
+  Classe["Classe Creature<br/>Variable de classe : energieMax = 100<br/>Variable d'instance : #energie<br/>Méthodes : avancer(), seReposer()"]
+  Classe -->|new Creature| Grenouille["Objet grenouille<br/>Instance de Creature<br/>Après avancer() : #energie = 90"]
+  Classe -->|new Creature| Poisson["Objet poisson<br/>Instance de Creature<br/>#energie = 100"]
+```
+
+Chaque objet possède ses variables d'instance. Les méthodes `avancer()` et `seReposer()` agissent sur l'objet qui les reçoit. La variable de classe, déclarée `static`, appartient à `Creature` et se consulte avec `Creature.energieMax`. Elle est ici `readonly`, donc TypeScript interdit de lui affecter une autre valeur.
+
 ```ts
 class Creature {
-  #energie = 100;
+  static readonly energieMax = 100;
+  #energie = Creature.energieMax;
 
   get energie(): number {
     return this.#energie;
@@ -28,7 +40,7 @@ class Creature {
   }
 
   seReposer(): void {
-    this.#energie = Math.min(100, this.#energie + 20);
+    this.#energie = Math.min(Creature.energieMax, this.#energie + 20);
   }
 }
 
@@ -43,7 +55,7 @@ Le code appelant connaît `avancer()` et son résultat, sans devoir reproduire l
 
 ## Modéliser un écosystème
 
-Murmur représente des mondes vivants, dont l'écosystème forestier Plot. Un modèle pédagogique de mare, nommé `Pond`, peut distinguer l'état des créatures, la météo et les événements. Chaque créature protège ses règles d'énergie. Le monde coordonne leurs interactions, et un journal affiche les événements observables. Ce découpage est un exemple de conception, indépendant de l'architecture interne de Murmur.
+Murmur simule des écosystèmes, dont la forêt Plot. Un modèle pédagogique de mare, nommé `Pond`, peut distinguer l'état des créatures, la météo et les événements. Chaque créature protège ses règles d'énergie. Le monde coordonne leurs interactions, et un journal affiche les événements observables. Ce découpage est un exemple de conception, indépendant de l'architecture interne de Murmur.
 
 <figure class="course-figure">
 <img src="/ressources/poo-patterns-frameworks/visuels/murmur-plot.webp" width="1300" height="1200" loading="lazy" alt="L'écosystème forestier Plot de Murmur, avec des créatures, les conditions météo et un journal d'événements.">
