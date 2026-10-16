@@ -1,13 +1,13 @@
 ---
-title: "Faire évoluer une application TypeScript"
-order: 10
+title: "Démarrer, lire une application qui fonctionne"
+order: 1
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Faire évoluer une application TypeScript
+# Démarrer, lire une application qui fonctionne
 
-Le programme gère des ateliers, les réservations, la capacité, un tarif unique et les annulations. L'exercice consiste à identifier ses responsabilités puis à modifier leur organisation selon un changement de contrainte.
+Vous allez exécuter un programme d'inscription à des ateliers, puis suivre une réservation dans son code. Ce fichier est le point de départ commun des séances. Il fonctionne avec un tarif unique, des données en mémoire et des notifications simulées.
 
 ## Exécuter le point de départ
 
@@ -19,8 +19,6 @@ Le programme gère des ateliers, les réservations, la capacité, un tarif uniqu
 node ateliers.ts
 ```
 
-Le fichier fonctionne sans dépendance ni réseau. Node.js retire les annotations TypeScript. Cette exécution [ne vérifie pas les types](https://nodejs.org/docs/latest-v24.x/api/typescript.html).
-
 Le programme affiche exactement les quatre lignes suivantes si ses assertions réussissent.
 
 ```text
@@ -30,13 +28,36 @@ Réservations actives : 2
 Notifications en mémoire : 4
 ```
 
-Ces nombres résultent des opérations exécutées par les assertions. Une assertion qui échoue arrête le programme.
+Ces nombres résultent des opérations exécutées par les assertions en fin de fichier. Une **assertion** compare un résultat à ce qui est attendu. Si elle échoue, le programme s'arrête.
+
+## Suivre une réservation dans le code
+
+Lire d'abord les données, puis les opérations qui les utilisent :
+
+| Élément du fichier | Ce qu'il représente |
+| --- | --- |
+| `ateliers` | Le catalogue, avec les capacités et les prix. |
+| `reservations` | Les inscriptions actives et leur montant enregistré. |
+| `notifications` | Des messages conservés en mémoire pour observer les confirmations et annulations. |
+| `reserver` | La recherche de l'atelier, les contrôles, puis l'ajout d'une réservation. |
+| `annuler` | Le retrait d'une réservation et l'ajout d'un message. |
+| `listerAteliers` | Le calcul du nombre de places encore disponibles. |
+
+Retrouver l'appel `reserver(1, " Lea@example.test ")`. Suivre la valeur de l'adresse jusqu'à son enregistrement. Repérer ensuite les lignes qui pourraient modifier une réservation ou une notification. Les refus arrivent avant ces modifications.
+
+Pour vérifier cette lecture, répondre aux questions suivantes avant de modifier le fichier :
+
+1. Pourquoi une seconde inscription avec `LEA@example.test` est-elle refusée ?
+2. Où trouve-t-on le nombre de places restantes ? Est-ce une donnée mémorisée ou un calcul ?
+3. Que devient le montant d'une ancienne réservation quand le prix de l'atelier change ?
+
+La normalisation de l'adresse permet de repérer le doublon. Les places se calculent dans `listerAteliers`. Le montant appartient à la réservation créée ; le programme ne le recalcule pas depuis le catalogue à chaque lecture.
 
 ## Lire les règles avant de changer la structure
 
 Repérez le catalogue, les réservations et les notifications. Suivez ensuite `reserver` depuis la recherche de l'atelier jusqu'au message de confirmation. Un schéma peut séparer la validation de l'adresse, la règle de capacité, le montant et l'enregistrement.
 
-Les critères suivants décrivent le comportement à préserver.
+Les critères suivants sont des **invariants**, des règles qui doivent rester vraies pendant les évolutions du programme.
 
 - Une réservation refusée n'ajoute ni réservation ni notification.
 - Une adresse normalisée ne permet pas de réserver deux fois le même atelier.
@@ -47,16 +68,20 @@ Les critères suivants décrivent le comportement à préserver.
 
 Les assertions rendent ces comportements observables avant et après refactoring.
 
+## Dessiner le modèle avant de le modifier
+
+Reprendre le [modèle UML d'ateliers et de réservations](/poo-patterns-frameworks/01-uml/#dessiner-son-premier-modele). Retrouver ses données dans le fichier TypeScript, puis tracer le lien entre un atelier et ses réservations. Ajouter les multiplicités et lire la relation dans les deux sens.
+
+Le fichier représente le participant par son adresse de courriel. Le modèle à trois classes du chapitre UML fait un autre choix pour discuter des relations. Représenter le programme tel qu'il est avant de proposer une nouvelle organisation. Le diagramme n'oblige pas à transformer tous ses objets en classes.
+
 ## Introduire une variation
 
-Commencez par l'[étude des tarifs](/poo-patterns-frameworks/09-situations/#situation-1-des-tarifs-qui-varient). Dessinez une condition locale et une règle fournie à la réservation. Notez ce qui change dans les appels, les données enregistrées et les vérifications.
+Lire les [trois demandes d'évolution](/poo-patterns-frameworks/09-situations/), puis commencer par [ajouter un tarif avec Strategy](/poo-patterns-frameworks/02-strategy/). La séance propose de comparer une condition et une règle fournie à la réservation.
 
-Ajoutez un cas qui attend 1 001 centimes pour un prix de 2 001 centimes au tarif solidaire. Modifiez ensuite le calcul pour satisfaire ce cas sans casser les précédents. Le montant final reste enregistré dans la réservation.
+Pour chaque demande, prévoir le résultat avant d'écrire le changement. Ajouter une vérification de ce résultat, modifier le code, puis relancer les assertions déjà présentes. Garder une copie du point de départ pour pouvoir comparer les deux versions.
 
-Les autres [études de cas](/poo-patterns-frameworks/09-situations/) se traitent avec des réponses et pannes simulées. Un mini ADR conserve la décision.
+Le travail attendu comprend le code modifié, ses vérifications, un schéma utile et une décision de quelques phrases. Le [carnet des situations](/poo-patterns-frameworks/09-situations/#garder-la-raison-dune-decision-avec-un-adr) aide à noter les raisons de cette décision.
 
 ## Limites de la simulation
 
-Les données disparaissent à chaque exécution. Les notifications sont des chaînes stockées en mémoire, aucun courriel n'est envoyé. La vérification d'adresse contrôle une forme minimale, pas l'existence de la boîte. Le programme ne gère ni paiement, ni appels concurrents, ni transactions distribuées.
-
-Le succès des assertions confirme les comportements couverts dans ce processus. Il ne démontre pas qu'un stockage distant préserverait les mêmes garanties. Cette différence fait partie de l'analyse d'architecture.
+Les données disparaissent à chaque exécution. Les notifications sont des chaînes stockées en mémoire, aucun courriel n'est envoyé.

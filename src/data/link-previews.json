@@ -175,6 +175,10 @@
     "title": "ByteByteGo Newsletter | Alex Xu | Substack",
     "description": "Explain complex systems with simple terms, from the authors of the best-selling system design book series. Join over 1,000,000 friendly readers. Click to read ByteByteGo Newsletter, a Substack publication."
   },
+  "https://blog.cleancoder.com/": {
+    "title": "Clean Coder Blog",
+    "description": "Le blog de Robert C. Martin, surnommé Uncle Bob, rassemble ses réflexions sur le code et la conception logicielle."
+  },
   "https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html": {
     "title": "Clean Coder Blog",
     "description": ""
@@ -323,9 +327,21 @@
     "title": "ARIA - Accessibilité | MDN",
     "description": "Accessible Rich Internet Applications (ARIA) (qu'on peut traduire par « applications internet riches et accessibles ») est un ensemble de rôles et d'attributs qui définissent comment rendre le contenu et les applications web accessibles (notamment ceux développés avec JavaScript) pour les personnes avec des handicaps."
   },
+  "https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Closures": {
+    "title": "Closures (Fermetures) - JavaScript | MDN",
+    "description": "Une fonction JavaScript peut conserver l'accès aux variables du contexte où elle a été créée. Le guide explique ce mécanisme avec des exemples de fermetures indépendantes et d'état privé."
+  },
   "https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules": {
     "title": "Les modules JavaScript - JavaScript | MDN",
     "description": "Ce guide aborde l'ensemble des notions vous permettant d'utiliser la syntaxe des modules en JavaScript."
+  },
+  "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes": {
+    "title": "Classes - JavaScript | MDN",
+    "description": "La référence présente les constructeurs, les méthodes, les champs privés et l'héritage des classes JavaScript."
+  },
+  "https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax": {
+    "title": "Syntaxe de décomposition - JavaScript | MDN",
+    "description": "La syntaxe de décomposition permet notamment de copier les propriétés d'un objet. La copie reste superficielle et conserve les références vers les objets imbriqués."
   },
   "https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag": {
     "title": "Google n'utilise pas la balise Meta \"keywords\" dans les classements Web | Google Search Central Blog | Google for Developers",
@@ -471,6 +487,14 @@
     "title": "Création de diagrammes - Documentation GitHub",
     "description": "Créer des diagrammes pour transmettre des informations par le biais de diagrammes et de graphiques"
   },
+  "https://docs.python.org/fr/3/glossary.html": {
+    "title": "Glossaire",
+    "description": "Le glossaire officiel Python définit notamment le duck typing et le vocabulaire du langage."
+  },
+  "https://docs.python.org/fr/3/tutorial/classes.html": {
+    "title": "9. Classes",
+    "description": "Le tutoriel officiel décrit les classes Python, les attributs, les méthodes et le mécanisme de renommage des membres commençant par deux caractères de soulignement."
+  },
   "https://docs.structurizr.com/dsl": {
     "title": "DSL",
     "description": "Documentation for the Structurizr tooling."
@@ -490,6 +514,10 @@
   "https://en.wikipedia.org/wiki/Code_smell": {
     "title": "Code smell - Wikipedia",
     "description": ""
+  },
+  "https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf": {
+    "title": "Principes avancés de conception objet, ENSICAEN",
+    "description": "Support en français sur les principes de conception objet. La section 2.3 présente un problème de substitution entre rectangle et carré, puis une correction par composition."
   },
   "https://fonts.google.com/": {
     "title": "Browse Fonts - Google Fonts",
@@ -667,6 +695,10 @@
     "title": "Quoi de neuf les devs ? | HappyToDev | Substack",
     "description": "Cette newsletter habite désormais à sa nouvelle adresse : https://quoi-de-neuf-les-devs.happyto.dev Si vous souhaitez vous abonner c'est là-bas que cela se passe désormais 😉 Les anciens numéros restent consultables ici par contre. A bientôt Fred. Click to read \"Quoi de neuf les devs ?\", by HappyToDev, a Substack publi"
   },
+  "https://hdd34.developpez.com/cours/artpoo/": {
+    "title": "Introduction à la Programmation Orientée Objet-",
+    "description": "Introduction à la Programmation Orientée Objet ."
+  },
   "https://help.figma.com/hc/en-us/articles/15145852043927-Create-and-manage-variables-and-collections": {
     "title": "Create and manage variables and collections",
     "description": "The entry point for variables has moved! Click the Variables tab from the navigation bar on the left to access variables view. No more deselecting everything on the canvas to access your variables...."
@@ -698,6 +730,10 @@
   "https://inclusive.microsoft.design/": {
     "title": "Microsoft Inclusive Design",
     "description": "Microsoft Inclusive Design is a practice that anyone who creates and manages products and services can use to build more inclusive experiences for everyone. Get the principles, guidebooks, workshop tools, videos, and many more free resources."
+  },
+  "https://info.blaisepascal.fr/nsi-programmation-orientee-objet/": {
+    "title": "Programmation Orientée Objet – l'Informatique, c'est fantastique !",
+    "description": "Un cours de NSI présente les objets, les classes et leurs membres avec des exemples Python, une notation UML et des activités de modélisation."
   },
   "https://ishadeed.com/": {
     "title": "Home - Ahmad Shadeed",
@@ -763,6 +799,10 @@
     "title": "Home • Lea Verou",
     "description": ""
   },
+  "https://leandeep.com/h%C3%A9ritage-vs-composition-en-programmation-orient%C3%A9e-objet/": {
+    "title": "Héritage vs Composition en programmation orientée objet :: Lean Deep Tech blog",
+    "description": "Des exemples Python et des dessins UML introduisent la différence entre une spécialisation par héritage et un assemblage par composition."
+  },
   "https://learn.shareai.run/en/": {
     "title": "Learn Claude Code",
     "description": "Build a nano Claude Code-like agent from 0 to 1, one mechanism at a time"
@@ -827,9 +867,17 @@
     "title": "Mermaid",
     "description": "Create diagrams and visualizations using text and code."
   },
+  "https://mermaid.js.org/syntax/classDiagram.html": {
+    "title": "Mermaid",
+    "description": "La documentation officielle explique comment dessiner des classes, des interfaces et leurs relations avec Mermaid, notamment les visibilités et les multiplicités."
+  },
   "https://mermaid.js.org/syntax/sequenceDiagram.html": {
     "title": "Mermaid",
     "description": "Create diagrams and visualizations using text and code."
+  },
+  "https://mermaid.live/": {
+    "title": "Online FlowChart & Diagrams Editor - Mermaid Live Editor",
+    "description": "Un éditeur en ligne pour écrire du texte Mermaid et voir le diagramme correspondant."
   },
   "https://mkdocstrings.github.io/": {
     "title": "Overview - mkdocstrings",
@@ -951,9 +999,21 @@
     "title": "What is a wireframe and how to make one",
     "description": "Wireframing is a popular tool for UX design professionals to show how users will interact with the page. Learn how to get started, why it’s best for ideation, and why you won’t want to keep your wireframes to yourself."
   },
+  "https://philippe.developpez.com/articles/SOLIDdotNet/": {
+    "title": "Bonnes pratiques objet .net : principes SOLID",
+    "description": "Philippe Vialatte explique la cohésion, le couplage et les cinq principes SOLID avec des exemples C#. Article de 2008 à lire pour les choix de conception."
+  },
   "https://pi.dev/": {
     "title": "Pi Coding Agent",
     "description": "A terminal-based coding agent"
+  },
+  "https://reachip.github.io/articles/fr/concevoir-du-code-solid.html": {
+    "title": "Concevoir du code SOLID",
+    "description": "Une présentation française de SOLID à lire avec les réserves du cours sur les responsabilités, la substitution et les dépendances."
+  },
+  "https://reachip.github.io/articles/fr/utliser-heritage-que-si-necessaire.html": {
+    "title": "N'utilisez l'héritage que si cela est nécessaire !",
+    "description": "Une réflexion sur les limites de l’héritage, à compléter par la vérification des contrats comportementaux."
   },
   "https://react.dev/learn/render-and-commit": {
     "title": "Render and Commit – React",
@@ -1279,6 +1339,18 @@
     "title": "Étude 2025 : L'Exclusion Numérique dans le e-commerce 94 % des parcours d’achat inaccessibles — des millions de ventes perdues en Europe",
     "description": "Étude 2025 : L'Exclusion Numérique dans le e-commerce 94 % des parcours d’achat inaccessibles — des millions de ventes perdues en Europe"
   },
+  "https://www.cs.cmu.edu/~svc/papers/view-publications-lw94.html": {
+    "title": "Specification and Verification Center: Papers",
+    "description": "Notice de l’article de Barbara Liskov et Jeannette Wing sur le sous-typage comportemental, publié en 1994."
+  },
+  "https://www.csail.mit.edu/person/barbara-liskov": {
+    "title": "Barbara Liskov | MIT CSAIL",
+    "description": "Présentation de Barbara Liskov au MIT et de ses travaux sur les langages, les systèmes et l’abstraction de données."
+  },
+  "https://www.data-transitionnumerique.com/encapsulation-poo/": {
+    "title": "L'encapsulation en orientée objet (poo) : Qu'est ce que c'est ?",
+    "description": "L'image d'une voiture utilisée comme boîte noire introduit l'encapsulation. Des exemples Java distinguent les attributs privés des opérations accessibles au reste du programme."
+  },
   "https://www.densediscovery.com/": {
     "title": "Dense Discovery – One email worth opening, every week",
     "description": "Thoughtful links across design, tech, culture and art – handpicked weekly to inspire reflection, not reaction."
@@ -1286,6 +1358,10 @@
   "https://www.designspiration.com/": {
     "title": "Designspiration - Design Inspiration | Inspirational Art, Photography & Typography Images",
     "description": "Create an account or log in to Designspiration - An image &amp; color search engine for creating mood boards and finding art, design, logos, photography, app &amp; ui inspiration."
+  },
+  "https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design-fr": {
+    "title": "SOLID : les 5 premiers principes de conception orientée objet | DigitalOcean",
+    "description": "Introduction française aux cinq principes SOLID avec des exemples PHP, dont une correction du type de résultat dans la partie Liskov."
   },
   "https://www.domainlanguage.com/ddd/reference/": {
     "title": "DDD Reference - Domain Language",
@@ -1346,6 +1422,10 @@
   "https://www.ifttd.io/": {
     "title": "IFTTD - If This Then Dev - le podcast pour les devs par des devs avec des devs",
     "description": "If This Then Dev c’est le podcast D.E.V. : Différent, Extraordinaire et Visionnaire, où on décode les sujets et tendances du dev."
+  },
+  "https://www.informit.com/store/clean-code-a-handbook-of-agile-software-craftsmanship-9780132639408": {
+    "title": "Clean Code: A Handbook of Agile Software Craftsmanship | InformIT",
+    "description": "Présentation éditoriale de la première édition de Clean Code, le livre de Robert C. Martin sur la lisibilité, les fonctions et les tests."
   },
   "https://www.informit.com/store/living-documentation-continuous-knowledge-sharing-by-9780134689326": {
     "title": "Living Documentation: Continuous Knowledge Sharing by Design | InformIT",
@@ -1434,6 +1514,10 @@
   "https://www.nolimitsecu.fr/": {
     "title": "NoLimitSecu",
     "description": "Podcast dédié à la cyber sécurité"
+  },
+  "https://www.omg.org/spec/UML/2.5.1/": {
+    "title": "About the Unified Modeling Language Specification Version 2.5.1",
+    "description": "La page officielle de la spécification UML 2.5.1 donne accès aux documents normatifs du langage de modélisation."
   },
   "https://www.openhands.dev/": {
     "title": "OpenHands | The Open Platform for Cloud Coding Agents",

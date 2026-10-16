@@ -1,55 +1,135 @@
 ---
-title: 'Strategy, varier une règle'
-order: 2
+title: 'Ajouter un tarif avec Strategy'
+order: 5
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Strategy, varier une règle
+# Ajouter un tarif avec Strategy
 
-Strategy rend plusieurs algorithmes interchangeables derrière un contrat commun. Le code qui utilise le résultat délègue le calcul à une stratégie. Il peut conserver son organisation lorsque la règle change.
+Ajoutons un tarif solidaire au programme des ateliers. Il coûte la moitié du prix normal, arrondie au centime le plus proche. Une réservation à 2 001 centimes coûte donc 1 001 centimes. Son montant reste figé après l'inscription. Un refus ne crée ni réservation ni notification.
 
-Une commande de restaurant additionne ses articles puis applique une réduction. Le calcul du sous-total reste identique, que la réduction soit absente, proportionnelle ou liée à un coupon. Répéter ces variantes dans le paiement et l'affichage crée plusieurs endroits à synchroniser.
+Travaillez dans une copie du [programme de départ `ateliers.ts`](/ressources/poo-patterns-frameworks/ateliers.ts). Le [démarrage de l'atelier](/poo-patterns-frameworks/10-exercice/) explique comment l'exécuter. Conservez ses assertions. Nous comparerons deux solutions qui répondent à la même demande.
 
-## Les rôles
+## Retrouver le calcul actuel
 
-Le contexte réalise l'opération qui a besoin du calcul. Le contrat définit les entrées et le résultat attendus. Chaque stratégie fournit une variante. Le code d'assemblage choisit laquelle fournir au contexte.
+Dans `reserver`, retrouvez `montantCentimes: atelier.prixCentimes`. Cette ligne copie le prix du catalogue dans la réservation. `listerAteliers` ne calcule aucun tarif. `annuler` libère une place sans modifier les montants des autres réservations.
 
-```mermaid
-flowchart LR
-  accTitle: Une commande délègue sa réduction
-  accDescr: La commande utilise un contrat de réduction. Les variantes sans réduction et coupon respectent ce contrat. L'appelant choisit la variante.
-  Appelant[Appelant] -->|choisit| Strategie[Réduction]
-  Commande[Commande] -->|délègue le calcul| Strategie
-  Aucune[Sans réduction] -.->|respecte| Strategie
-  Coupon[Coupon] -.->|respecte| Strategie
-```
+Avant de modifier le code, repérez les quatre refus de `reserver` et les deux écritures qui les suivent. Les appels à `reservations.push` et `notifications.push` doivent rester après les validations.
 
-## Une forme fonctionnelle du mécanisme
+## Ajouter d'abord une condition
+
+Remplacez seulement `reserver` par cette version. Le troisième paramètre choisit le tarif. Sa valeur par défaut conserve les appels à deux arguments.
 
 ```ts
-type Reduction = (totalCentimes: number) => number;
-const sansReduction: Reduction = total => total;
-const solidaire: Reduction = total => Math.round(total / 2);
-const coupon500: Reduction = total => Math.max(0, total - 500);
-
-function totalCommande(prix: readonly number[], reduction: Reduction): number {
-  const sousTotal = prix.reduce((total, montant) => total + montant, 0);
-  return reduction(sousTotal);
+function reserver(
+	atelierId: number,
+	email: string,
+	tarif: "normal" | "solidaire" = "normal",
+): Reservation {
+	const atelier = ateliers.find(a => a.id === atelierId);
+	if (!atelier) throw new Error("Atelier inconnu");
+	const adresse = email.trim().toLowerCase();
+	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adresse)) throw new Error("Courriel invalide");
+	if (reservations.some(r => r.atelierId === atelierId && r.email === adresse))
+		throw new Error("Déjà inscrit");
+	if (reservations.filter(r => r.atelierId === atelierId).length >= atelier.capacite)
+		throw new Error("Atelier complet");
+	const montantCentimes = tarif === "solidaire"
+		? Math.round(atelier.prixCentimes / 2)
+		: atelier.prixCentimes;
+	const reservation = {
+		id: prochainId++, atelierId, email: adresse, montantCentimes,
+	};
+	reservations.push(reservation);
+	notifications.push(`Confirmation ${reservation.id} pour ${adresse}`);
+	return { ...reservation };
 }
-
-console.log(totalCommande([1500, 501], solidaire)); // 1001
-console.log(totalCommande([300], coupon500)); // 0
 ```
 
-Les prix internes sont des entiers positifs ou nuls, en centimes. Chaque stratégie renvoie un montant dans la même unité. La règle solidaire précise son arrondi, tandis que le coupon évite un montant négatif. Ces promesses font partie du contrat, même si `number` ne les exprime pas.
+Ajoutez ces assertions après celles du fichier de départ. L'atelier Photo possède encore sa place libre à cet endroit.
 
-Le pattern orienté objet emploie généralement des objets partageant une interface. Une fonction suffit à cet exemple sans état propre. Un objet devient utile si une stratégie porte une configuration ou plusieurs opérations cohérentes.
+```ts
+ateliers[1].prixCentimes = 2001;
+const mia = reserver(2, "mia@example.test", "solidaire");
+assert.equal(mia.montantCentimes, 1001);
+ateliers[1].prixCentimes = 4000;
+assert.equal(reservations.find(r => r.id === mia.id)?.montantCentimes, 1001);
+const avantRefus = notifications.length;
+assert.throws(() => reserver(2, "noa@example.test"), /Atelier complet/);
+assert.equal(notifications.length, avantRefus);
+```
 
-## Ce que le choix change
+Le type `"normal" | "solidaire"` autorise ces deux valeurs pour `tarif`.
 
-Les variantes se testent séparément et le contexte ignore leur détail. En contrepartie, la sélection de la stratégie existe toujours quelque part. Si chaque appelant reproduit la même sélection, une [fabrique](/poo-patterns-frameworks/04-factory/) peut la regrouper.
+## Lire Strategy avec notre problème en tête
 
-Strategy convient à des règles qui changent séparément ou se réutilisent. Un `if` local lisible peut suffire pour deux cas stables. Extraire chaque branche sans besoin de variation disperse la lecture.
+Lisez les sections « Solution », « Structure » et « Avantages et inconvénients » de [Strategy sur Refactoring.Guru](https://refactoring.guru/fr/design-patterns/strategy). La source présente des objets et des classes. Dans notre variante, une fonction peut porter le calcul.
 
-L'injection fournit la règle au contexte. Strategy décrit pourquoi ces règles sont interchangeables. Ces notions se recoupent dans cet exemple, mais ne sont pas synonymes. La [fiche Strategy de Refactoring.Guru](https://refactoring.guru/fr/design-patterns/strategy) présente la structure orientée objet. L'[étude des tarifs](/poo-patterns-frameworks/09-situations/#situation-1-des-tarifs-qui-varient) compare son coût à celui d'une condition.
+Répondez avant d'extraire la règle.
+
+1. Quelle partie de `reserver` varie entre les deux tarifs ?
+2. Qui choisit le tarif si `reserver` reçoit une fonction ?
+3. Quel coût ajoute ce choix pour deux règles utilisées à un seul endroit ?
+
+Le **contexte** de la source correspond ici à `reserver`. Le **contrat** devient le type `Tarif`. Les stratégies concrètes sont `normal` et `solidaire`. Le client est l'appel qui fournit l'une de ces fonctions.
+
+## Comparer une fonction de tarif fournie à la réservation
+
+Dans une autre copie, ajoutez ces définitions au-dessus de `reserver`.
+
+```ts
+type Tarif = (prixCentimes: number) => number;
+const normal: Tarif = prix => prix;
+const solidaire: Tarif = prix => Math.round(prix / 2);
+
+assert.equal(solidaire(2001), 1001);
+assert.equal(solidaire(0), 0);
+assert.equal(normal(2001), 2001);
+```
+
+Ce contrat reçoit et renvoie des entiers en centimes, positifs ou nuls. Remplacez le troisième paramètre et le calcul de la première solution comme suit. Le reste de `reserver` conserve le même ordre.
+
+```diff
+-	tarif: "normal" | "solidaire" = "normal",
++	tarif: Tarif = normal,
+```
+
+```diff
+-const montantCentimes = tarif === "solidaire"
+-	? Math.round(atelier.prixCentimes / 2)
+-	: atelier.prixCentimes;
++const montantCentimes = tarif(atelier.prixCentimes);
++if (!Number.isSafeInteger(montantCentimes) || montantCentimes < 0)
++	throw new Error("Montant invalide");
+```
+
+La validation du résultat précède `prochainId++`, l'enregistrement et la notification. Une règle qui renvoie `NaN`, un montant négatif ou une fraction ne doit pas laisser une réservation partielle.
+
+Changez aussi l'appel de test en `reserver(2, "mia@example.test", solidaire)`. Les anciens appels à deux arguments utilisent encore `normal`. Fournir la fonction en paramètre est une **injection de dépendance**. Strategy décrit ici le choix entre plusieurs calculs interchangeables.
+
+## Vérifier les deux solutions
+
+Exécutez le programme après chaque variante. Les assertions initiales doivent toujours passer. Ajoutez les contrôles suivants.
+
+- Le tarif normal conserve le prix du catalogue. Le tarif solidaire transforme 2 001 en 1 001 et zéro en zéro.
+- Une modification du catalogue ne change pas un montant déjà enregistré.
+- Un atelier inconnu, un courriel invalide, un doublon et un atelier complet ne créent aucune notification.
+- Dans la variante injectée, un calcul invalide ne crée rien et ne consomme pas d'identifiant.
+
+Un montant enregistré est une valeur calculée au moment de réserver. Conserver seulement la fonction puis recalculer le prix à chaque lecture ne respecterait pas cette règle.
+
+## Comparer avec le corrigé
+
+Le [corrigé autonome `ateliers-tarifs.ts`](/ressources/poo-patterns-frameworks/ateliers-tarifs.ts) contient le programme complet avec la fonction `Tarif` injectée. Téléchargez-le puis exécutez `node ateliers-tarifs.ts`. Il conserve les contrôles du départ et ajoute ceux des tarifs.
+
+```text
+Vérifications réussies.
+Ateliers au catalogue : 2
+Réservations actives : 3
+Notifications en mémoire : 7
+```
+
+La condition regroupe les deux tarifs dans `reserver`. L’injection permet aux appelants de choisir des calculs différents et de les faire évoluer séparément.
+
+Dans le [carnet de décisions sur les tarifs](/poo-patterns-frameworks/09-situations/#situation-1-des-tarifs-qui-varient), justifiez votre choix avec le code modifié et un coût concret. Si la sélection se répète réellement, l'[aide Factory](/poo-patterns-frameworks/04-factory/) permet de l'examiner.

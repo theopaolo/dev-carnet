@@ -188,6 +188,11 @@ div.mermaid > svg {
   stroke: var(--link) !important;
 }
 
+.mermaid marker.extension path,
+.mermaid marker.aggregation path {
+  fill: var(--bg-canvas) !important;
+}
+
 /* Étiquette sur flèche : pastille bordée, lisible sur les traits.
    Les flèches sans texte ont une étiquette vide, cachée par diagrams.js. */
 .mermaid .edgeLabel .labelBkg {

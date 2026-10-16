@@ -1,87 +1,136 @@
 ---
-title: 'Observer, prévenir plusieurs abonnés'
-order: 3
+title: 'Faire réagir les vues avec Observer'
+order: 8
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Observer, prévenir plusieurs abonnés
+# Faire réagir les vues avec Observer
 
-Observer établit une relation entre un sujet et des abonnés. Quand un changement survient, le sujet prévient les abonnés par un contrat commun. Il n'a pas besoin de connaître le rôle de chacun.
+Une confirmation et une annulation alimentent un journal, un courriel et une vue des places. La vue peut disparaître. Un courriel en échec ne doit pas transformer une réservation enregistrée en réservation refusée.
 
-Une commande change de statut. La cuisine, le tableau d'affichage et l'imprimante peuvent réagir différemment à cette information. Dans un autre domaine, une météo peut prévenir plusieurs créatures, chacune choisissant ensuite son comportement.
+Dans une copie d'[`ateliers.ts`](/ressources/poo-patterns-frameworks/ateliers.ts), retrouvez les deux `notifications.push`. Ces lignes écrivent des textes dans un tableau. Le programme de départ n'envoie aucun courriel et n'affiche aucune interface.
 
-## Du sujet aux réactions
+Notre séance simule les réactions par des fonctions synchrones. Conservez les règles de `reserver`, celles d'`annuler`, et les assertions du départ.
 
-Le sujet gère les inscriptions et émet la notification. Les abonnés traitent l'information reçue. L'abonnement possède une durée de vie, par exemple celle d'un écran ouvert.
+## Commencer par des appels directs
 
-```mermaid
-flowchart LR
-  accTitle: Un statut de commande intéresse plusieurs abonnés
-  accDescr: Le suivi des commandes notifie la cuisine et l'affichage. Ces abonnés reçoivent le même contrat de changement.
-  Suivi[Suivi des commandes] -->|statut| Cuisine[Cuisine]
-  Suivi -->|statut| Affichage[Affichage]
-```
+Pour une première solution, appelez vos réactions après `reservations.push` dans `reserver`, puis après `reservations.splice` dans `annuler`. Donnez à chaque réaction le type de changement et une copie de la réservation concernée.
 
-## Une forme fonctionnelle du mécanisme
+Gardez l'échec du faux courriel dans une liste séparée. Un `try` autour de cet appel permet d'enregistrer son erreur, puis de poursuivre la mise à jour de la vue. Un `try` autour de toute la réservation brouillerait les deux résultats.
+
+Avec trois destinataires stables, ces appels directs sont une solution recevable. Nous allons maintenant comparer un mécanisme qui permet à une vue de s'inscrire puis de se retirer.
+
+## Lire les abonnements avec nos fonctions
+
+Lisez « Solution » et « Structure » dans la [présentation d'Observer de Refactoring.Guru](https://refactoring.guru/fr/design-patterns/observer). Dans [Observer sur Patterns.dev](https://www.patterns.dev/vanilla/observer-pattern/), suivez l'ajout d'un abonné, la notification et le retrait.
+
+1. Quel code décide qu'une réservation vient de changer ?
+2. Qui conserve les fonctions à prévenir ?
+3. Qui sait à quel moment une vue n'existe plus ?
+
+Dans notre variante, `reserver` et `annuler` déclenchent les événements. `abonner`, `notifier` et `abonnes` forment le mécanisme du sujet observé. Le type `Abonne` est le contrat commun des réactions. Le journal, le faux courriel et la vue jouent les observateurs concrets de la source.
+
+## Ajouter une inscription et son retrait
+
+Ajoutez ce mécanisme avant `reserver`. Un **événement** décrit un changement qui a déjà eu lieu. Il ne demande pas de refaire la réservation.
 
 ```ts
-type Changement = Readonly<{ id: number; statut: "en préparation" | "prête" }>;
-type Abonne = (changement: Changement) => void;
+type Evenement = Readonly<{
+	type: "confirmation" | "annulation";
+	reservation: Readonly<Reservation>;
+}>;
+type Abonne = (evenement: Evenement) => void;
 const abonnes = new Set<Abonne>();
+const erreursNotifications: { reservationId: number; erreur: unknown }[] = [];
 
 function abonner(fn: Abonne): () => void {
-  abonnes.add(fn);
-  return () => { abonnes.delete(fn); };
+	abonnes.add(fn);
+	return () => { abonnes.delete(fn); };
 }
 
-function notifier(changement: Changement): void {
-  const instantane = Object.freeze({ ...changement });
-  for (const fn of [...abonnes]) fn(instantane);
+function notifier(type: Evenement["type"], reservation: Reservation): void {
+	const evenement: Evenement = Object.freeze({
+		type,
+		reservation: Object.freeze({ ...reservation }),
+	});
+	for (const fn of [...abonnes]) {
+		try {
+			fn(evenement);
+		} catch (erreur) {
+			erreursNotifications.push({ reservationId: reservation.id, erreur });
+		}
+	}
 }
 
-const arreter = abonner(c => console.log(`Commande ${c.id} ${c.statut}`));
-notifier({ id: 7, statut: "prête" }); // Commande 7 prête
-arreter();
-notifier({ id: 7, statut: "en préparation" }); // Aucun affichage
+abonner(evenement => {
+	const reservation = evenement.reservation;
+	const libelle = evenement.type === "confirmation" ? "Confirmation" : "Annulation";
+	notifications.push(`${libelle} ${reservation.id} pour ${reservation.email}`);
+});
 ```
 
-Les fonctions jouent le rôle des objets observateurs du pattern orienté objet. La copie des abonnés fixe les destinataires de cette émission. Un abonnement retiré pendant un appel peut donc encore recevoir la notification en cours. La copie figée du changement protège ici ses champs, tous de type primitif.
+La copie des abonnés fixe les destinataires de l'émission en cours. Une fonction retirée pendant cette émission peut encore la recevoir. La copie figée de `reservation` protège ses champs, tous primitifs dans ce programme.
+
+Remplacez le `notifications.push` de `reserver` par `notifier("confirmation", reservation)`. Remplacez celui d'`annuler` par `notifier("annulation", reservation)`. Gardez ces appels après les modifications du tableau. L'abonné journal reproduit les textes d'origine, donc les assertions initiales restent valides.
 
 ## La durée d'un abonnement
 
 ```mermaid
 sequenceDiagram
-  accTitle: Une vue cesse de recevoir les changements après son retrait
-  accDescr: La cuisine et la vue s'abonnent au suivi. Les deux reçoivent le premier statut. La vue appelle sa fonction de désabonnement. Seule la cuisine reçoit ensuite le second statut.
-  participant Cuisine
-  participant Suivi as Suivi des commandes
-  participant Vue as Vue des commandes
-  Cuisine->>Suivi: abonner(préparer)
-  Suivi-->>Cuisine: fonction de désabonnement
-  Vue->>Suivi: abonner(afficher)
-  Suivi-->>Vue: fonction arrêter
-  Suivi->>Cuisine: commande 7 en préparation
-  Suivi->>Vue: commande 7 en préparation
-  Vue->>Suivi: arrêter()
-  Note over Vue: Vue retirée
-  Suivi->>Cuisine: commande 7 prête
+  accTitle: La vue reçoit les changements jusqu'à son désabonnement
+  accDescr: La vue s'abonne. La réservation est enregistrée avant la confirmation. Le notifier prévient la vue et conserve séparément l'erreur du faux courriel. Après le désabonnement de la vue, l'annulation ne la prévient plus.
+  participant Vue
+  participant Reservation as reserver et annuler
+  participant Sujet as Abonnements
+  participant Courriel as Faux courriel
+  Vue->>Sujet: abonner(afficher)
+  Sujet-->>Vue: arreterVue
+  Reservation->>Reservation: enregistrer la réservation
+  Reservation->>Sujet: notifier(confirmation, réservation)
+  Sujet->>Vue: confirmation
+  Sujet->>Courriel: confirmation
+  Courriel-->>Sujet: exception
+  Sujet->>Sujet: conserver l'erreur de réaction
+  Vue->>Sujet: arreterVue()
+  Reservation->>Reservation: retirer la réservation
+  Reservation->>Sujet: notifier(annulation, réservation)
+  Note over Vue: La vue ne reçoit plus l'annulation
 ```
 
-Le sujet conserve des références vers les abonnés. Retirer une vue du DOM ne retire pas son abonnement. Son nettoyage doit donc appeler la fonction renvoyée par `abonner`. Le DOM propose déjà des abonnements avec [`addEventListener`](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener).
+Ajoutez ces contrôles après les assertions du programme de départ. L'atelier Photo est encore libre à cet endroit.
 
-## Les décisions à rendre explicites
+```ts
+const changementsVue: string[] = [];
+const arreterVue = abonner(evenement => {
+	changementsVue.push(evenement.type);
+});
+const arreterCourriel = abonner(evenement => {
+	if (evenement.type === "confirmation") throw new Error("Courriel indisponible");
+});
+const mia = reserver(2, "mia@example.test");
+assert.ok(reservations.some(r => r.id === mia.id));
+assert.equal(erreursNotifications.length, 1);
+assert.deepEqual(changementsVue, ["confirmation"]);
 
-Le sujet accueille de nouvelles réactions sans les nommer dans son code. Le trajet d'exécution devient cependant moins visible qu'une suite d'appels directs.
+arreterVue();
+annuler(mia.id);
+assert.deepEqual(changementsVue, ["confirmation"]);
+assert.equal(erreursNotifications.length, 1);
+assert.equal(notifications.at(-1), `Annulation ${mia.id} pour mia@example.test`);
+arreterCourriel();
+```
 
-L'exemple est synchrone. Un abonné qui lance une erreur interrompt les suivants. Un envoi de courriel demande de décider si l'erreur bloque les autres réactions et comment signaler un échec après une sauvegarde réussie. Observer ne fournit ni reprise, ni livraison garantie, ni détection des doublons.
+La fonction renvoyée par `abonner` est le **désabonnement**. L'écran qui crée une vue garde cette fonction et l'appelle quand il retire la vue. Supprimer du HTML ne supprime pas la référence conservée dans `abonnes`. Le DOM possède déjà ses abonnements avec [`addEventListener`](https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener).
 
-Pour un seul destinataire connu, un appel direct reste souvent plus lisible. Observer n'implique pas un WebSocket.
+Pour voir les deux réactions, réservez puis annulez avant `arreterVue`. La vue doit alors recevoir `confirmation`, puis `annulation`. Vérifiez aussi qu'un refus de `reserver` ne produit aucun événement.
 
-## Observer et publication avec abonnement
+## Séparer le succès de la réservation et celui du courriel
 
-Avec Observer, l'abonnement concerne un sujet qui conserve ses observateurs. Dans un système de publication avec abonnement, les émetteurs et les destinataires passent par un intermédiaire, souvent un bus. Celui-ci peut distribuer les messages par sujet nommé. Cette séparation ajoute des choix de routage et de traitement des erreurs. Un bus en mémoire ne garantit pas davantage la livraison qu'un Observer local.
+Le faux courriel lance une exception synchrone. `notifier` conserve cette erreur, poursuit les autres réactions, puis `reserver` renvoie la réservation. L'appelant peut donc constater une réservation confirmée et une réaction en échec.
 
-La [présentation de Patterns.dev](https://www.patterns.dev/vanilla/observer-pattern/) compare ces organisations et détaille le nettoyage des abonnements.
+## Comparer au retour attendu
 
-La [présentation d'Observer](https://refactoring.guru/fr/design-patterns/observer) décrit sa structure orientée objet. Le [cycle d'une interface](/poo-patterns-frameworks/08-frameworks/) montre où placer l'abonnement et son retrait.
+Votre solution convient si les confirmations et les annulations atteignent les réactions actives, si le retrait d'une vue coupe les émissions suivantes, et si une erreur de courriel laisse la réservation enregistrée. Une solution avec appels directs et une fonction de nettoyage peut aussi répondre au besoin. Justifiez le coût des abonnements dans la [situation des réactions multiples](/poo-patterns-frameworks/09-situations/#situation-3-plusieurs-reactions-puis-une-interface).
+
+La [séance sur les frameworks](/poo-patterns-frameworks/08-frameworks/) rattache la durée d'abonnement à celle d'une vue.

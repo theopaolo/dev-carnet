@@ -1,80 +1,92 @@
 ---
-title: 'Factory, centraliser la création'
-order: 4
+title: 'Choisir une création avec Factory, aide facultative'
+order: 10
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Factory, centraliser la création
+# Choisir une création avec Factory, aide facultative
 
-Une fabrique regroupe la création d'objets ou de comportements. Les appelants demandent un résultat sans reproduire les choix nécessaires à sa construction. Le terme *factory* recouvre plusieurs organisations qu'il faut distinguer.
+Dans la [séance Strategy](/poo-patterns-frameworks/02-strategy/), un appel choisit `normal` ou `solidaire` et fournit cette fonction à `reserver`.
 
-Un formulaire et un import de réservations doivent sélectionner les mêmes tarifs. Si chacun construit ses propres variantes, une nouvelle règle demande plusieurs modifications. Une fabrique simple peut regrouper cette sélection.
+Cette aide illustre comment une fabrique peut regrouper une création répétée.
 
-## Trois sens à distinguer
+## Lire une fonction qui crée un objet
 
-Une fabrique simple est une fonction ou un objet qui crée le résultat demandé. Elle utilise souvent une condition ou une table de correspondance. Ce nom ne désigne pas un pattern du catalogue GoF.
+Commencez par cet exemple JavaScript, sans classe ni types TypeScript.
 
-Dans [Factory Method](https://refactoring.guru/fr/design-patterns/factory-method), une classe déclare une méthode de création que des sous-classes peuvent redéfinir. Les autres opérations de cette classe utilisent le produit par son contrat.
+```js
+function creerParticipant(nom) {
+	return {
+		nom: nom,
+		statut: "inscrit"
+	};
+}
 
-[Abstract Factory](https://refactoring.guru/fr/design-patterns/abstract-factory) fournit un contrat pour créer une famille de produits compatibles. Par exemple, une famille de composants graphiques peut regrouper boutons et champs de formulaire. Une famille différente fournit les mêmes rôles avec une autre réalisation.
-
-Ces patterns résolvent des problèmes de création différents. Ajouter une méthode nommée `create` ne suffit pas à reconnaître Factory Method.
-
-```mermaid
-flowchart LR
-  accTitle: Trois organisations de la création
-  accDescr: Une fabrique simple choisit directement le produit. Dans Factory Method, une sous-classe redéfinit la création utilisée par une opération héritée. Une Abstract Factory crée plusieurs produits d'une même famille.
-  subgraph Simple[Fabrique simple]
-    Choix[Nom demandé] --> Fonction[Fonction de création]
-    Fonction --> Produit[Produit choisi]
-  end
-  subgraph Methode[Factory Method]
-    Operation[Opération du créateur] -->|appelle| Creation[Méthode de création]
-    SousClasse[Sous-classe] -.->|redéfinit| Creation
-  end
-  subgraph Famille[Abstract Factory]
-    Fabrique[Fabrique d'une famille] --> Bouton[Bouton de cette famille]
-    Fabrique --> Champ[Champ de cette famille]
-  end
+const lina = creerParticipant("Lina");
+const sam = creerParticipant("Sam");
+console.log(lina.nom); // Lina
+console.log(sam.nom); // Sam
+console.log(lina === sam); // false
 ```
 
-## Le trajet d'une fabrique simple
+`nom` est le paramètre reçu par la fonction. Dans `nom: nom`, le mot de gauche nomme la propriété de l'objet. Celui de droite désigne la valeur du paramètre. `return` renvoie l'objet à l'appelant. Chaque appel crée un nouvel objet.
 
-```mermaid
-flowchart LR
-  accTitle: Une fabrique simple crée une règle de tarif
-  accDescr: L'appelant transmet un nom à la fabrique. Elle renvoie un objet dont la méthode calculer respecte le contrat de tarif.
-  Appelant[Appelant] -->|nom du tarif| Fabrique[Fabrique simple]
-  Fabrique -->|crée et renvoie| Tarif[Objet tarif]
-  Appelant -->|utilise calculer| Tarif
+On appelle cette fonction une **fabrique** parce qu'elle crée les objets.
+
+## Lire une fabrique qui garde une configuration
+
+```js
+function creerAccueil(prefixe) {
+	return {
+		saluer: function (nom) {
+			return prefixe + nom;
+		}
+	};
+}
+
+const accueil = creerAccueil("Bienvenue ");
+console.log(accueil.saluer("Lina")); // Bienvenue Lina
+console.log(accueil.saluer("Sam")); // Bienvenue Sam
 ```
 
-## Exemple de fabrique simple
+`creerAccueil("Bienvenue ")` crée l'objet une fois. Les deux appels à `saluer` utilisent le même préfixe. La méthode garde accès au paramètre après la fin de l'appel à `creerAccueil`. Ce mécanisme s'appelle une [fermeture, ou closure](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Closures).
+
+Dans [Factory Pattern sur Patterns.dev](https://www.patterns.dev/vanilla/factory-pattern/), suivez la configuration de `createLogger`, l'objet renvoyé, puis l'appel à `log.warn`.
+
+1. Quelle valeur appartient à chaque objet créé ?
+2. Quelle valeur `saluer` conserve-t-elle entre deux appels ?
+3. Notre programme des ateliers a-t-il déjà plusieurs créations identiques à synchroniser ?
+
+## Essayer une création liée aux tarifs
+
+Dans une copie du [corrigé des tarifs](/ressources/poo-patterns-frameworks/ateliers-tarifs.ts), une création directe peut s'écrire ainsi.
 
 ```ts
-interface Tarif {
-  calculer(prixCentimes: number): number;
-}
-function creerTarif(nom: "normal" | "solidaire"): Tarif {
-  if (nom === "solidaire") {
-    return { calculer: prix => Math.round(prix / 2) };
-  }
-  return { calculer: prix => prix };
-}
-
-const tarif = creerTarif("solidaire");
-console.log(tarif.calculer(2001)); // 1001
+const tarifConfigure = (prixCentimes: number) => Math.round(prixCentimes / 2);
+assert.equal(tarifConfigure(2001), 1001);
 ```
 
-La fabrique choisit et crée l'objet. [Strategy](/poo-patterns-frameworks/02-strategy/) explique ensuite pourquoi plusieurs règles peuvent remplacer ce tarif. Une chaîne reçue d'un formulaire doit être validée avant de devenir le type union accepté ici.
+Si plusieurs entrées doivent construire les mêmes règles, comparez cette fonction à une fabrique simple.
 
-Une fonction de fabrique peut aussi capturer une configuration pour les objets qu'elle crée. Elle n'exige pas de classe. [Factory Pattern sur Patterns.dev](https://www.patterns.dev/vanilla/factory-pattern/) présente cette forme JavaScript, distincte du mécanisme d'héritage de Factory Method.
+```ts
+function creerTarif(nom: "normal" | "solidaire"): Tarif {
+	if (nom === "solidaire") return prix => Math.round(prix / 2);
+	return prix => prix;
+}
 
-## Coût et pertinence
+const tarifImport = creerTarif("solidaire");
+assert.equal(tarifImport(2001), 1001);
+assert.equal(creerTarif("normal")(2001), 2001);
+assert.equal(creerTarif("solidaire")(0), 0);
+```
 
-La création possède un endroit identifié et les appelants ignorent ses détails. La fabrique doit néanmoins connaître les variantes qu'elle construit. Elle change quand de nouveaux choix apparaissent et peut accumuler trop de responsabilités.
+Dans cet exemple, le produit est une fonction respectant `Tarif`. `creerTarif` regroupe le choix et la création. L'appelant l'utilise avec `reserver(2, "mia@example.test", tarifImport)`, dans un scénario où Photo possède une place libre.
 
-Une construction évidente utilisée à un seul endroit ne justifie pas une fabrique. Factory Method engage une hiérarchie de classes. Abstract Factory engage une famille de contrats. Le besoin de sélectionner deux fonctions n'impose ni l'un ni l'autre.
+Comparez le code ajouté au besoin actuel. Les fonctions `normal` et `solidaire` existent déjà dans le corrigé. Les sélectionner directement évite de les recréer.
 
-Le [comparatif des fabriques de Refactoring.Guru](https://refactoring.guru/fr/design-patterns/factory-comparison) précise ces différences de vocabulaire et de structure.
+## Distinguer les noms des sources
+
+La fonction précédente est une fabrique simple. Factory Method fait redéfinir la création par des sous-classes ; Abstract Factory crée des familles de produits compatibles. Le [comparatif des fabriques](https://refactoring.guru/fr/design-patterns/factory-comparison) propose un approfondissement facultatif de ce vocabulaire.
+
+Pour justifier une fabrique, montrez les créations répétées qu'elle réunit et les valeurs qu'elle doit initialiser.

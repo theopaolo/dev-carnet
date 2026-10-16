@@ -56,19 +56,19 @@ function render() {
 }
 
 document.querySelector(".pocket").addEventListener("click", (event) => {
-  const ribbon = event.target.closest("[data-remove-ribbon]")?.dataset.removeRibbon;
-  const note = event.target.closest("[data-remove-note]")?.dataset.removeNote;
-  if (ribbon)
+  const slot = event.target.closest("[data-remove-ribbon]")?.dataset.removeRibbon;
+  const id = event.target.closest("[data-remove-note]")?.dataset.removeNote;
+  if (slot)
     save(
       "ribbons",
-      load("ribbons").filter((ribbon) => String(ribbon.slot) !== ribbon),
+      load("ribbons").filter((ribbon) => String(ribbon.slot) !== slot),
     );
-  if (note)
+  if (id)
     save(
       "notes",
-      load("notes").filter((note) => note.id !== note),
+      load("notes").filter((note) => note.id !== id),
     );
-  if (ribbon || note) render();
+  if (slot || id) render();
 });
 
 // Export : Markdown lisible, et les données brutes en commentaire pour le réimport

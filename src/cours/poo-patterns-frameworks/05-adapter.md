@@ -1,76 +1,109 @@
 ---
-title: 'Adapter, traduire un contrat externe'
-order: 5
+title: 'Lire les places du partenaire avec Adapter'
+order: 6
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Adapter, traduire un contrat externe
+# Lire les places du partenaire avec Adapter
 
-Adapter permet d'utiliser un service existant à travers le contrat attendu par son client. L'adaptateur expose ce contrat et délègue le travail au service en traduisant les appels et les résultats nécessaires.
+Un partenaire fournit le nombre de places sous le nom `remaining_seats`. Affichons cette information dans une liste des ateliers. Une réponse invalide ou une panne doit rester un échec visible. Elle ne doit devenir ni zéro place ni un succès inventé.
 
-Le métier demande les places disponibles pour un identifiant numérique. Un partenaire attend un code textuel et renvoie `remaining_seats`. Si les écrans utilisent directement cette API, ils apprennent son vocabulaire et ses formats.
+Cette séance utilise un **partenaire simulé**. Dans une copie d'[`ateliers.ts`](/ressources/poo-patterns-frameworks/ateliers.ts), retrouvez `listerAteliers` et le calcul local des places. Ce calcul repose sur `capacite` et `reservations`. Notre partenaire ne connaît pas ces réservations locales.
 
-## Le contrat attendu et le service adapté
+Ajoutez une fonction `listerAteliersPartenaire` à côté de la liste locale. Conservez `reserver`, `annuler` et les assertions de départ. Relier les réservations au partenaire demanderait un autre contrat, absent de sa réponse de disponibilité.
 
-Le client connaît le contrat métier `Places`. Le service partenaire possède son propre contrat. L'adaptateur connaît les deux et réalise leur correspondance. Le renommer `Service` ne supprimerait pas cette dépendance au fournisseur.
+## Essayer une traduction directe
 
-```mermaid
-sequenceDiagram
-  accTitle: Un adaptateur traduit les appels au partenaire
-  accDescr: Le métier demande les places de l'atelier 7. L'adaptateur traduit l'identifiant, reçoit une réponse inconnue et la valide. Il renvoie un nombre de places ou signale le format invalide.
-  participant Metier as Métier
-  participant Adaptateur
-  participant API as Partenaire
-  Metier->>Adaptateur: disponibles(7)
-  Adaptateur->>API: getAvailability("atelier-7")
-  API-->>Adaptateur: réponse de type unknown
-  Adaptateur->>Adaptateur: vérifier remaining_seats
-  alt Entier valide et positif ou nul
-    Adaptateur-->>Metier: nombre de places
-  else Format ou valeur invalide
-    Adaptateur-->>Metier: erreur
-  end
+Déclarez le contrat de notre faux fournisseur.
+
+```ts
+interface Partenaire {
+	getAvailability(code: string): Promise<unknown>;
+}
 ```
 
-## Exemple TypeScript sans réseau
+`Promise` annonce un résultat reçu plus tard. `unknown` signifie que nous devons vérifier sa forme avant d'en lire les valeurs. Écrire un type TypeScript ne valide pas une réponse externe.
+
+Pour une première solution, placez l'appel et sa validation dans `listerAteliersPartenaire`. Pour chaque élément de `ateliers`, demandez `getAvailability` avec le code `atelier-${atelier.id}`. Contrôlez que la réponse est un objet non nul avec un champ `remaining_seats`. Ce champ doit être un entier sûr, positif ou nul. Renvoyez l'atelier avec cette valeur dans `places`.
+
+Utilisez `Promise.all` pour attendre les réponses de la liste. Si une réponse échoue, laissez échouer la liste. N'ajoutez pas de `catch` qui renvoie un tableau vide.
+
+## Lire Adapter à partir de cet appel
+
+Lisez « Solution » et « Structure » dans la [fiche Adapter de Refactoring.Guru](https://refactoring.guru/fr/design-patterns/adapter).
+
+1. Quel nom le programme des ateliers veut-il utiliser pour demander des places ?
+2. Quels détails appartiennent seulement au partenaire ?
+3. Si `remaining_seats` change de nom, quelle fonction devra changer dans votre première solution ?
+
+Le client devient `listerAteliersPartenaire`. Le contrat attendu sera `Places`. Le service adapté est `Partenaire`. La fonction `adapterPlaces` construit l'objet qui traduit les appels entre les deux. Une simple lecture de champ n'est qu'une conversion de données. Ici, l'objet adapte aussi la façon d'appeler le service.
+
+## Extraire la traduction
+
+Comparez votre première solution à cette variante. Elle garde le vocabulaire du partenaire dans un endroit identifié.
 
 ```ts
 interface Places {
-  disponibles(atelierId: number): Promise<number>;
+	disponibles(atelierId: number): Promise<number>;
 }
-interface Partenaire {
-  getAvailability(code: string): Promise<unknown>;
-}
+
 function adapterPlaces(api: Partenaire): Places {
-  return {
-    async disponibles(id) {
-      const data = await api.getAvailability(`atelier-${id}`);
-      if (typeof data !== "object" || data === null ||
-          !("remaining_seats" in data)) throw new Error("Format invalide");
-      const places = data.remaining_seats;
-      if (typeof places !== "number" || !Number.isSafeInteger(places) || places < 0)
-        throw new Error("Places invalides");
-      return places;
-    }
-  };
+	return {
+		async disponibles(id) {
+			const data = await api.getAvailability(`atelier-${id}`);
+			if (typeof data !== "object" || data === null ||
+				!("remaining_seats" in data)) throw new Error("Format invalide");
+			const places = data.remaining_seats;
+			if (typeof places !== "number" || !Number.isSafeInteger(places) || places < 0)
+				throw new Error("Places invalides");
+			return places;
+		},
+	};
 }
-const partenaire: Partenaire = {
-  async getAvailability() { return { remaining_seats: 3 }; }
-};
-adapterPlaces(partenaire).disponibles(7).then(console.log); // 3
+
+async function listerAteliersPartenaire(places: Places) {
+	return Promise.all(ateliers.map(async atelier => ({
+		...atelier,
+		places: await places.disponibles(atelier.id),
+	})));
+}
 ```
 
-L'objet renvoyé adapte une interface de service. La lecture de `remaining_seats`, prise seule, serait une conversion de données. L'exemple simplifie l'Adapter orienté objet en créant un objet littéral plutôt qu'une classe dédiée.
+La correspondance entre l'identifiant `2` et le code `atelier-2` est une convention de notre simulation.
 
-La correspondance `7` vers `atelier-7` est une convention de ce partenaire fictif. Le résultat commence en `unknown` parce que l'annotation TypeScript ne valide pas une réponse externe. Les erreurs du service restent des erreurs, elles ne deviennent pas zéro place.
+## Vérifier les valeurs et les échecs
 
-## Ce que la frontière protège
+Ajoutez ces assertions à la fin de la copie du programme. `await` attend le résultat avant de poursuivre le contrôle.
 
-Le métier peut recevoir une autre implémentation de `Places` sans changer ses appels. Seul l'assemblage doit connaître le partenaire effectivement utilisé.
+```ts
+const codesDemandes: string[] = [];
+const partenaire: Partenaire = {
+	async getAvailability(code) {
+		codesDemandes.push(code);
+		return { remaining_seats: code === "atelier-1" ? 3 : 0 };
+	},
+};
+const listePartenaire = await listerAteliersPartenaire(adapterPlaces(partenaire));
+assert.deepEqual(listePartenaire.map(a => a.places), [3, 0]);
+assert.deepEqual(codesDemandes, ["atelier-1", "atelier-2"]);
 
-Les clients utilisent le vocabulaire métier et le fournisseur peut évoluer derrière l'adaptateur. Cette traduction coûte du code et peut perdre des informations. Deux services peuvent aussi donner des sens différents au mot « disponible ».
+for (const valeur of [null, {}, { remaining_seats: "3" },
+	{ remaining_seats: -1 }, { remaining_seats: 1.5 }, { remaining_seats: NaN },
+	{ remaining_seats: Infinity }, { remaining_seats: Number.MAX_SAFE_INTEGER + 1 }]) {
+	const invalide = adapterPlaces({ async getAvailability() { return valeur; } });
+	await assert.rejects(() => invalide.disponibles(1));
+}
+const indisponible = adapterPlaces({
+	async getAvailability() { throw new Error("Partenaire indisponible"); },
+});
+await assert.rejects(() => listerAteliersPartenaire(indisponible), /Partenaire indisponible/);
+```
 
-Si les contrats correspondent déjà, un appel direct suffit. Adapter ne rend pas une réservation atomique et ne résout pas les délais réseau. Les garanties du fournisseur doivent rester explicites, comme dans la [deuxième étude de cas](/poo-patterns-frameworks/09-situations/#situation-2-une-api-externe-et-un-enregistrement-qui-echoue).
+La liste obtenue contient trois places pour Dessin, même si notre catalogue local annonce une capacité de deux. Ce résultat est volontaire. Il révèle deux sources différentes, qui ne doivent pas être mélangées sans règle métier.
 
-La [fiche Adapter](https://refactoring.guru/fr/design-patterns/adapter) présente les variantes orientées objet de cette adaptation.
+## Retenir une frontière utile
+
+Les deux variantes peuvent convenir. Si cet appel est unique, sa traduction directe reste défendable avec la même validation. L'objet `Places` devient utile si plusieurs opérations demandent la même traduction ou si un autre partenaire doit le remplacer.
+
+Dans les deux cas, une disponibilité lue ne réserve aucune place. Elle peut changer avant une inscription. Notez cette limite dans la [situation du partenaire et de l'enregistrement](/poo-patterns-frameworks/09-situations/#situation-2-une-api-externe-et-un-enregistrement-qui-echoue). Le besoin de conserver les réservations au redémarrage est traité dans la [séance Repository](/poo-patterns-frameworks/07-repository/).

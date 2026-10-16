@@ -1,19 +1,23 @@
 ---
-title: 'Trois situations pour décider'
-order: 9
+title: 'Mise en situation'
+order: 4
 publishedAt: "2026-10-15"
 updatedAt: "2026-10-15"
 ---
 
-# Trois situations pour décider
+# Mise en situation
 
-Une application d'inscription propose un catalogue d'ateliers, une réservation et une annulation. Elle fonctionne avec un tarif unique et des données en mémoire. Ces études de cas examinent l'évolution de ses contraintes. Le [point de départ TypeScript](/poo-patterns-frameworks/10-exercice/) permet de vérifier les comportements, mais les choix se comparent aussi par des schémas.
+Une application d'inscription propose un catalogue d'ateliers, une réservation et une annulation. Elle fonctionne avec un tarif unique et des données en mémoire. L'[exemple TypeScript](/poo-patterns-frameworks/10-exercice/) permet de vérifier les comportements, mais les choix se comparent aussi par des schémas.
 
-Un schéma indique les responsabilités, nomme les appels et représente les erreurs. Une décision dépend des contraintes connues, pas du nombre de patterns représentés.
+Un schéma indique les responsabilités, nomme les appels et représente les erreurs.
+
+Ces trois demandes servent de carnet de décisions pendant les séances. Avant chaque lecture, proposer une modification directe du programme. Après la lecture, comparer cette proposition au pattern étudié.
 
 ## Situation 1, des tarifs qui varient
 
 Un tarif solidaire accorde une réduction de moitié. Les montants sont des entiers en centimes, arrondis au centime le plus proche. Le montant enregistré ne change plus après la réservation. D'autres réductions sont envisagées, sans besoin confirmé.
+
+Retrouver l'affectation de `montantCentimes` dans le programme. Écrire une assertion pour le prix impair et une autre pour le montant figé. La [séance Strategy](/poo-patterns-frameworks/02-strategy/) fait ensuite essayer les deux options suivantes.
 
 Une option conserve une fonction avec une condition sur le tarif. Les règles et leur sélection se lisent au même endroit. Une autre fournit une fonction de tarif à la réservation. Chaque règle peut évoluer séparément, mais le choix de cette fonction doit être organisé ailleurs.
 
@@ -25,15 +29,19 @@ L'arrondi appartient à la règle de calcul, avec un test commun aux appelants. 
 
 Un partenaire expose les ateliers avec le champ `remaining_seats`. Les réservations doivent survivre au redémarrage. Le service peut renvoyer un format invalide ou refuser un enregistrement. Une confirmation ne doit pas annoncer une sauvegarde qui a échoué.
 
+Séparer les deux besoins avant de dessiner. Quelles données faut-il traduire ? Quelles données faut-il retrouver après un redémarrage ? Les séances [Adapter](/poo-patterns-frameworks/05-adapter/) et [Repository](/poo-patterns-frameworks/07-repository/) travaillent ces questions dans des copies distinctes du programme.
+
 Une option place l'appel au fournisseur et sa traduction dans le service de réservation. Elle limite les contrats, mais mêle règles métier et formats externes. Une autre confie la traduction à un [Adapter](/poo-patterns-frameworks/05-adapter/) et la collection persistante à un [Repository](/poo-patterns-frameworks/07-repository/). Elle contient les changements du fournisseur, au prix de contrats et d'implémentations supplémentaires.
 
 Plusieurs opérations utilisant le fournisseur donnent davantage de raisons d'isoler sa traduction. Une intégration unique peut conserver une frontière plus directe, avec une validation de sa réponse.
 
-La confirmation suit le succès d'enregistrement défini par le contrat. Si la réponse se perd après sauvegarde, une nouvelle tentative peut créer un doublon. Le fournisseur doit permettre de retrouver ou de reconnaître la même demande. Deux réservations concurrentes pour la dernière place demandent une garantie du stockage, comme une opération atomique. Ni un schéma en couches ni le nom `Repository` n'apportent cette garantie.
+La confirmation suit le succès de l'enregistrement.
 
 ## Situation 3, plusieurs réactions puis une interface
 
 Une confirmation alimente un journal et un courriel. Une vue des places réagit aussi aux changements et peut être retirée. L'échec du courriel ne doit pas annuler une réservation déjà confirmée.
+
+Dessiner l'ordre des appels avec un courriel en échec. Indiquer à quel moment la réservation est confirmée et qui retire l'abonnement de la vue. La [séance Observer](/poo-patterns-frameworks/03-observer/) permet de vérifier ces choix avec des réactions simulées.
 
 Une option appelle explicitement chaque destinataire. L'ordre et les erreurs sont visibles, mais le service connaît chaque réaction. Une autre émet un événement reçu par des abonnés. [Observer](/poo-patterns-frameworks/03-observer/) permet d'ajouter une réaction sans modifier l'émetteur. Le trajet des appels devient moins visible et demande une politique d'erreur.
 
@@ -43,7 +51,7 @@ L'interface conserve la réservation confirmée et signale séparément l'échec
 
 ### Représenter les succès et les échecs séparément
 
-Cette séquence montre une option avec des appels directs. Elle distingue le résultat de l'enregistrement de celui du courriel. Elle ne choisit ni un mécanisme de reprise ni une transaction entre ces opérations.
+Cette séquence montre une option avec des appels directs. Elle distingue le résultat de l'enregistrement de celui du courriel.
 
 ```mermaid
 sequenceDiagram
@@ -72,7 +80,11 @@ sequenceDiagram
   end
 ```
 
-Un envoi accepté ne prouve pas la réception du message par son destinataire. Si le stockage ne répond pas, l'issue de la sauvegarde peut rester inconnue. Ce cas demande une vérification avant de relancer la même réservation.
+## Une dernière demande sans pattern indiqué
+
+Exporter les réservations actives avec leurs champs `id`, `atelierId`, `email` et `montantCentimes`. L'export ne modifie aucun enregistrement et n'émet aucune notification.
+
+Proposer une fonction, ses contrôles et un schéma seulement s'il aide à expliquer la solution. Aucun pattern n'est imposé. Vérifier les données exportées, puis l'absence de modification et de notification. Expliquer en quelques phrases ce qui justifie le découpage retenu.
 
 ## Garder la raison d'une décision avec un ADR
 
