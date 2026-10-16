@@ -159,7 +159,7 @@ Murmur simule des écosystèmes, dont la forêt Plot. Un modèle pédagogique de
 
 Un contrat précise ce que l'appelant peut demander et ce que l'objet garantit en retour. Il comprend les opérations disponibles, leurs conditions d'utilisation et leurs effets. Une interface TypeScript décrit la partie vérifiable par le système de types, comme les noms des méthodes et leurs types de retour.
 
-TypeScript utilise un **typage structurel**. Le compilateur compare les membres et leurs types pour vérifier leur compatibilité. Un objet peut donc satisfaire une interface sans déclarer qu'il l'implémente.
+TypeScript utilise un **typage structurel**. Le compilateur compare les membres et leurs types pour vérifier leur compatibilité. Une classe peut donc satisfaire une interface sans déclarer qu'elle l'implémente.
 
 ```ts
 import assert from "node:assert/strict";
@@ -167,15 +167,34 @@ import assert from "node:assert/strict";
 interface Nageur {
 	nager(): string;
 }
-const canard = { nager: () => "Le canard nage.", voler: () => "Il vole." };
-const poisson = { nager: () => "Le poisson nage." };
-const decrire = (animal: Nageur) => animal.nager();
 
-assert.equal(decrire(canard), "Le canard nage.");
-assert.equal(decrire(poisson), "Le poisson nage.");
+class Canard {
+	nager(): string {
+		return "Le canard nage.";
+	}
+
+	voler(): string {
+		return "Il vole.";
+	}
+}
+
+class Poisson {
+	nager(): string {
+		return "Le poisson nage.";
+	}
+}
+
+function decrire(animal: Nageur): string {
+	return animal.nager();
+}
+
+assert.equal(decrire(new Canard()), "Le canard nage.");
+assert.equal(decrire(new Poisson()), "Le poisson nage.");
 ```
 
-Le polymorphisme permet à `decrire` d'utiliser la même opération avec des implémentations différentes. Le canard possède une capacité supplémentaire que cette fonction n'a pas besoin de connaître.
+Ni `Canard` ni `Poisson` ne mentionnent `Nageur`. TypeScript accepte pourtant leurs instances, parce que chacune possède une méthode `nager()` qui renvoie du texte. La section [Lire extends, super et implements](#lire-extends-super-et-implements) montre comment déclarer ce lien explicitement.
+
+Le polymorphisme permet à `decrire` d'appeler la même opération sur des objets de classes différentes. La ligne `animal.nager()` exécute la méthode du canard ou celle du poisson, selon l'objet reçu. Le canard possède aussi une méthode `voler()` que cette fonction n'a pas besoin de connaître.
 
 ## Duck typing et typage structurel
 
@@ -319,20 +338,25 @@ class Poisson extends CreatureAquatique {
 	}
 }
 
+class Robot {
+	nager(): string {
+		return "Le robot avance à la surface.";
+	}
+}
+
 function observerNage(nageur: Nageur): string {
 	return nageur.nager();
 }
 
 const poisson = new Poisson("Mina");
-const robot = { nager: () => "Le robot avance à la surface." };
 assert.equal(poisson.sePresenter(), "Je m'appelle Mina.");
 assert.equal(observerNage(poisson), "Mina nage sous l'eau.");
-assert.equal(observerNage(robot), "Le robot avance à la surface.");
+assert.equal(observerNage(new Robot()), "Le robot avance à la surface.");
 ```
 
 `abstract class CreatureAquatique` fournit le constructeur, le champ et la présentation. La déclaration `abstract nager(): string` annonce une méthode sans corps. Puisque cette classe est abstraite, TypeScript interdit de créer directement une de ses instances. Une sous-classe concrète telle que `Poisson` doit fournir le code manquant avant de pouvoir être instanciée.
 
-`Poisson` hérite ici de la présentation sans la réécrire. Comme `Poisson` ne déclare pas de constructeur, son constructeur par défaut transmet le nom au constructeur de `CreatureAquatique`. À l'inverse, `robot` ne dépend d'aucune de ces classes. Il satisfait pourtant l'interface `Nageur`, donc `observerNage` l'accepte.
+`Poisson` hérite ici de la présentation sans la réécrire. Comme `Poisson` ne déclare pas de constructeur, son constructeur par défaut transmet le nom au constructeur de `CreatureAquatique`. À l'inverse, `Robot` n'hérite d'aucune de ces classes et ne déclare pas `implements Nageur`. Ses instances satisfont pourtant l'interface `Nageur`, donc `observerNage` les accepte.
 
 Une interface convient lorsque l'appelant a seulement besoin d'une capacité. Une classe abstraite peut convenir si plusieurs sous-classes ont réellement un état et du code communs à conserver. On ne crée pas une hiérarchie pour obliger tous les objets capables de nager à partager un ancêtre.
 

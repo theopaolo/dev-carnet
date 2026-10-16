@@ -2,7 +2,7 @@
 title: 'Mise en situation'
 order: 4
 publishedAt: "2026-10-15"
-updatedAt: "2026-10-15"
+updatedAt: "2026-10-16"
 ---
 
 # Mise en situation
@@ -19,7 +19,7 @@ Un tarif solidaire accorde une réduction de moitié. Les montants sont des enti
 
 Retrouver l'affectation de `montantCentimes` dans le programme. Écrire une assertion pour le prix impair et une autre pour le montant figé. La [séance Strategy](/poo-patterns-frameworks/02-strategy/) fait ensuite essayer les deux options suivantes.
 
-Une option conserve une fonction avec une condition sur le tarif. Les règles et leur sélection se lisent au même endroit. Une autre fournit une fonction de tarif à la réservation. Chaque règle peut évoluer séparément, mais le choix de cette fonction doit être organisé ailleurs.
+Une option conserve une fonction avec une condition sur le tarif. Les règles et leur sélection se lisent au même endroit. Une autre fournit un objet de tarif à la réservation. Chaque règle peut évoluer séparément dans sa classe, mais le choix de cet objet doit être organisé ailleurs.
 
 La première option convient à deux règles locales et stables. La seconde devient intéressante si les tarifs changent souvent ou sont réutilisés. Une [Strategy](/poo-patterns-frameworks/02-strategy/) isole alors le calcul. Une [fabrique](/poo-patterns-frameworks/04-factory/) peut regrouper une sélection répétée.
 

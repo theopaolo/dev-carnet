@@ -270,14 +270,14 @@ Un héritage ou une classe abstraite peut convenir quand les sous-classes doiven
 
 ### 5. Quand une condition suffit-elle pour un tarif ?
 
-Un programme calcule deux tarifs stables au même endroit et ne prévoit aucune règle fournie de l'extérieur. Peut-on conserver un `if` ? Dans quel cas passer une fonction de calcul à `reserver` deviendrait-il utile ?
+Un programme calcule deux tarifs stables au même endroit et ne prévoit aucune règle fournie de l'extérieur. Peut-on conserver un `if` ? Dans quel cas passer un objet de tarif à `reserver` deviendrait-il utile ?
 
 <details class="course-details">
 <summary>Lire l'explication</summary>
 
 Une condition peut suffire à ce besoin. Elle garde les deux cas près du calcul et reste facile à vérifier. La présence d'un `if` ne signale pas, à elle seule, un défaut de conception.
 
-Passer une fonction devient intéressant lorsque plusieurs règles doivent être choisies indépendamment de la réservation, comparées ou remplacées dans les tests. La [séance Strategy](/poo-patterns-frameworks/02-strategy/) étudie ce changement précis. On compare le coût du paramètre et des fonctions séparées au coût réel des modifications attendues, sans inventer une variation pour justifier le pattern.
+Passer un objet de tarif devient intéressant lorsque plusieurs règles doivent être choisies indépendamment de la réservation, comparées ou remplacées dans les tests. La [séance Strategy](/poo-patterns-frameworks/02-strategy/) étudie ce changement précis. On compare le coût du paramètre, de l'interface et des classes séparées au coût réel des modifications attendues, sans inventer une variation pour justifier le pattern.
 
 </details>
 
@@ -288,7 +288,7 @@ Une configuration indique quel fournisseur de notification utiliser. Ailleurs, u
 <details class="course-details">
 <summary>Lire l'explication</summary>
 
-Une fabrique peut regrouper la création et la configuration du fournisseur. L'appelant demande alors un objet prêt à utiliser sans reproduire les détails de sa construction. Une stratégie porte le calcul interchangeable, par exemple une fonction qui transforme un prix en montant.
+Une fabrique peut regrouper la création et la configuration du fournisseur. L'appelant demande alors un objet prêt à utiliser sans reproduire les détails de sa construction. Une stratégie porte le calcul interchangeable, par exemple un objet `TarifSolidaire` dont la méthode `appliquer` transforme un prix en montant.
 
 Si un seul fournisseur se construit en une ligne à un seul endroit, un appel direct peut suffire. Si deux choix se résolvent lisiblement dans une fonction avec une condition, cette fonction peut déjà jouer le rôle d'une fabrique. La [séance Factory](/poo-patterns-frameworks/04-factory/) distingue cette forme du Factory Method GoF. Aucune de ces décisions n'impose une hiérarchie de classes.
 

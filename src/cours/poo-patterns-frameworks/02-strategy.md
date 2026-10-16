@@ -2,7 +2,7 @@
 title: 'Ajouter un tarif avec Strategy'
 order: 5
 publishedAt: "2026-10-15"
-updatedAt: "2026-10-15"
+updatedAt: "2026-10-16"
 ---
 
 # Ajouter un tarif avec Strategy
@@ -64,49 +64,62 @@ Le type `"normal" | "solidaire"` autorise ces deux valeurs pour `tarif`.
 
 ## Lire Strategy avec notre problème en tête
 
-Lisez les sections « Solution », « Structure » et « Avantages et inconvénients » de [Strategy sur Refactoring.Guru](https://refactoring.guru/fr/design-patterns/strategy). La source présente des objets et des classes. Dans notre variante, une fonction peut porter le calcul.
+Lisez les sections « Solution », « Structure » et « Avantages et inconvénients » de [Strategy sur Refactoring.Guru](https://refactoring.guru/fr/design-patterns/strategy). La source présente des objets et des classes, et notre variante suit la même structure. Chaque tarif y devient une classe qui implémente une interface commune.
 
 Répondez avant d'extraire la règle.
 
 1. Quelle partie de `reserver` varie entre les deux tarifs ?
-2. Qui choisit le tarif si `reserver` reçoit une fonction ?
+2. Qui choisit le tarif si `reserver` reçoit un objet de tarif ?
 3. Quel coût ajoute ce choix pour deux règles utilisées à un seul endroit ?
 
-Le **contexte** de la source correspond ici à `reserver`. Le **contrat** devient le type `Tarif`. Les stratégies concrètes sont `normal` et `solidaire`. Le client est l'appel qui fournit l'une de ces fonctions.
+Le **contexte** de la source correspond ici à la fonction `reserver` du programme de départ. Le **contrat** devient l'interface `Tarif`. Les stratégies concrètes sont les classes `TarifNormal` et `TarifSolidaire`. Le client est l'appel qui crée l'un de ces objets et le transmet à `reserver`.
 
-## Comparer une fonction de tarif fournie à la réservation
+## Comparer un objet de tarif fourni à la réservation
 
 Dans une autre copie, ajoutez ces définitions au-dessus de `reserver`.
 
 ```ts
-type Tarif = (prixCentimes: number) => number;
-const normal: Tarif = prix => prix;
-const solidaire: Tarif = prix => Math.round(prix / 2);
+interface Tarif {
+	appliquer(prixCentimes: number): number;
+}
 
-assert.equal(solidaire(2001), 1001);
-assert.equal(solidaire(0), 0);
-assert.equal(normal(2001), 2001);
+class TarifNormal implements Tarif {
+	appliquer(prixCentimes: number): number {
+		return prixCentimes;
+	}
+}
+
+class TarifSolidaire implements Tarif {
+	appliquer(prixCentimes: number): number {
+		return Math.round(prixCentimes / 2);
+	}
+}
+
+const solidaire = new TarifSolidaire();
+assert.equal(solidaire.appliquer(2001), 1001);
+assert.equal(solidaire.appliquer(0), 0);
+assert.equal(new TarifNormal().appliquer(2001), 2001);
 ```
 
-Ce contrat reçoit et renvoie des entiers en centimes, positifs ou nuls. Remplacez le troisième paramètre et le calcul de la première solution comme suit. Le reste de `reserver` conserve le même ordre.
+Ce contrat prévoit que `appliquer` reçoit et renvoie des entiers en centimes, positifs ou nuls. Remplacez le troisième paramètre et le calcul de la première solution comme suit. Le reste de `reserver` conserve le même ordre.
 
 ```diff
 -	tarif: "normal" | "solidaire" = "normal",
-+	tarif: Tarif = normal,
++	tarif: Tarif = new TarifNormal(),
 ```
 
 ```diff
 -const montantCentimes = tarif === "solidaire"
 -	? Math.round(atelier.prixCentimes / 2)
 -	: atelier.prixCentimes;
-+const montantCentimes = tarif(atelier.prixCentimes);
++const montantCentimes = tarif.appliquer(atelier.prixCentimes);
 +if (!Number.isSafeInteger(montantCentimes) || montantCentimes < 0)
 +	throw new Error("Montant invalide");
 ```
 
 La validation du résultat précède `prochainId++`, l'enregistrement et la notification. Une règle qui renvoie `NaN`, un montant négatif ou une fraction ne doit pas laisser une réservation partielle.
 
-Changez aussi l'appel de test en `reserver(2, "mia@example.test", solidaire)`. Les anciens appels à deux arguments utilisent encore `normal`. Fournir la fonction en paramètre est une **injection de dépendance**. Strategy décrit ici le choix entre plusieurs calculs interchangeables.
+Changez aussi l'appel de test en `reserver(2, "mia@example.test", solidaire)`. Les anciens appels à deux arguments reçoivent la valeur par défaut, un nouvel objet `TarifNormal`. Dans `reserver`, la ligne `tarif.appliquer(atelier.prixCentimes)` exécute la méthode de l'objet reçu sans savoir de quelle classe il provient. Fournir cet objet en paramètre est une **injection de dépendance**. Strategy décrit ici le choix entre plusieurs calculs interchangeables.
 
 ## Vérifier les deux solutions
 
@@ -117,11 +130,11 @@ Exécutez le programme après chaque variante. Les assertions initiales doivent 
 - Un atelier inconnu, un courriel invalide, un doublon et un atelier complet ne créent aucune notification.
 - Dans la variante injectée, un calcul invalide ne crée rien et ne consomme pas d'identifiant.
 
-Un montant enregistré est une valeur calculée au moment de réserver. Conserver seulement la fonction puis recalculer le prix à chaque lecture ne respecterait pas cette règle.
+Un montant enregistré est une valeur calculée au moment de réserver. Conserver seulement l'objet de tarif puis recalculer le prix à chaque lecture ne respecterait pas cette règle.
 
 ## Comparer avec le corrigé
 
-Le [corrigé autonome `ateliers-tarifs.ts`](/ressources/poo-patterns-frameworks/ateliers-tarifs.ts) contient le programme complet avec la fonction `Tarif` injectée. Téléchargez-le puis exécutez `node ateliers-tarifs.ts`. Il conserve les contrôles du départ et ajoute ceux des tarifs.
+Le [corrigé autonome `ateliers-tarifs.ts`](/ressources/poo-patterns-frameworks/ateliers-tarifs.ts) contient le programme complet avec l'objet `Tarif` injecté. Ses tests utilisent aussi trois petites classes de tarif, qui imposent un montant invalide, simulent une panne ou comptent les appels. Téléchargez-le puis exécutez `node ateliers-tarifs.ts`. Il conserve les contrôles du départ et ajoute ceux des tarifs.
 
 ```text
 Vérifications réussies.

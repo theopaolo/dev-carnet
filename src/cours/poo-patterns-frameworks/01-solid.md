@@ -21,63 +21,89 @@ Dans le premier programme, ces deux demandes conduisent au même endroit. Le pro
 
 ### Avant, le calcul et la rédaction changent ensemble
 
-La fonction `preparerConfirmation` reçoit le prix, le choix du tarif solidaire et l'adresse du participant. Elle calcule le montant, puis l'insère dans une phrase. Elle renvoie cette phrase sans envoyer de courriel.
+La classe `Reservation` conserve l'adresse du participant, le prix et le choix du tarif solidaire. Sa méthode `preparerConfirmation` calcule le montant à partir de ces champs, puis l'insère dans une phrase. Elle renvoie cette phrase sans envoyer de courriel.
 
 ```ts
 import assert from "node:assert/strict";
 
-function preparerConfirmation(
-	prixCentimes: number,
-	solidaire: boolean,
-	email: string,
-): string {
-	const montantCentimes = solidaire
-		? Math.round(prixCentimes / 2)
-		: prixCentimes;
-	return `Réservation pour ${email} : ${montantCentimes} centimes.`;
+class Reservation {
+	readonly email: string;
+	readonly prixCentimes: number;
+	readonly solidaire: boolean;
+
+	constructor(email: string, prixCentimes: number, solidaire: boolean) {
+		this.email = email;
+		this.prixCentimes = prixCentimes;
+		this.solidaire = solidaire;
+	}
+
+	preparerConfirmation(): string {
+		const montantCentimes = this.solidaire
+			? Math.round(this.prixCentimes / 2)
+			: this.prixCentimes;
+		return `Réservation pour ${this.email} : ${montantCentimes} centimes.`;
+	}
 }
 
+const lea = new Reservation("lea@example.org", 2001, true);
 assert.equal(
-	preparerConfirmation(2001, true, "lea@example.org"),
+	lea.preparerConfirmation(),
 	"Réservation pour lea@example.org : 1001 centimes.",
 );
 ```
 
-Suivons l'appel de l'assertion. Le prix vaut `2001` centimes et `solidaire` vaut `true`. Le calcul divise donc `2001` par deux, puis `Math.round` arrondit `1000.5` à `1001`. Le `return` insère ensuite ce montant et l'adresse dans le message.
+Suivons l'appel de l'assertion. Le constructeur a rangé `2001` dans `this.prixCentimes` et `true` dans `this.solidaire`. La méthode divise donc `2001` par deux, puis `Math.round` arrondit `1000.5` à `1001`. Le `return` insère ensuite ce montant et `this.email` dans le message.
 
-L'assertion confirme que toute cette préparation fonctionne. Elle ne dit pas si le calcul et la rédaction ont de bonnes raisons de rester ensemble. Changer la formule de réduction ou remplacer la phrase oblige à modifier `preparerConfirmation`. Chaque intervention touche une fonction qui porte aussi la décision de l'autre équipe.
+L'assertion confirme que toute cette préparation fonctionne. Elle ne dit pas si le calcul et la rédaction ont de bonnes raisons de rester ensemble. Changer la formule de réduction ou remplacer la phrase oblige à modifier `preparerConfirmation`. Chaque intervention touche une méthode qui porte aussi la décision de l'autre équipe.
 
-### Après, chaque règle possède une fonction identifiable
+### Après, chaque règle appartient à une classe identifiable
 
-Gardons les mêmes étapes, mais donnons un nom à chacune. `calculerMontant` s'occupe de la règle tarifaire. `redigerConfirmation` compose le message à partir d'un montant déjà connu.
+Gardons les mêmes étapes, mais confions chacune à la classe qui la concerne. `Reservation` garde ses données et calcule son montant avec `montantCentimes()`. Une nouvelle classe, `Confirmation`, compose le message à partir de ce montant déjà connu.
 
 ```ts
 import assert from "node:assert/strict";
 
-function calculerMontant(prixCentimes: number, solidaire: boolean): number {
-	return solidaire ? Math.round(prixCentimes / 2) : prixCentimes;
+class Reservation {
+	readonly email: string;
+	readonly prixCentimes: number;
+	readonly solidaire: boolean;
+
+	constructor(email: string, prixCentimes: number, solidaire: boolean) {
+		this.email = email;
+		this.prixCentimes = prixCentimes;
+		this.solidaire = solidaire;
+	}
+
+	montantCentimes(): number {
+		return this.solidaire
+			? Math.round(this.prixCentimes / 2)
+			: this.prixCentimes;
+	}
 }
 
-function redigerConfirmation(email: string, montantCentimes: number): string {
-	return `Réservation pour ${email} : ${montantCentimes} centimes.`;
+class Confirmation {
+	rediger(reservation: Reservation): string {
+		const montant = reservation.montantCentimes();
+		return `Réservation pour ${reservation.email} : ${montant} centimes.`;
+	}
 }
 
-const montant = calculerMontant(2001, true);
-assert.equal(montant, 1001);
-assert.equal(calculerMontant(2001, false), 2001);
+const lea = new Reservation("lea@example.org", 2001, true);
+assert.equal(lea.montantCentimes(), 1001);
+assert.equal(new Reservation("sam@example.org", 2001, false).montantCentimes(), 2001);
 assert.equal(
-	redigerConfirmation("lea@example.org", montant),
+	new Confirmation().rediger(lea),
 	"Réservation pour lea@example.org : 1001 centimes.",
 );
 ```
 
-`calculerMontant(2001, true)` reçoit deux valeurs et renvoie le nombre `1001`. La variable `montant` conserve ce résultat. La fonction ne reçoit aucune adresse et ne connaît pas la phrase de confirmation.
+`lea.montantCentimes()` applique la règle tarifaire aux champs de `lea` et renvoie le nombre `1001`. Cette méthode ne contient aucune phrase, si bien que `Reservation` ne sait plus comment la confirmation est rédigée.
 
-L'appel `redigerConfirmation("lea@example.org", montant)` reçoit ensuite l'adresse et ce nombre. Il renvoie le même message que le premier programme. La rédaction n'a plus à savoir si le tarif était normal ou solidaire. Le calcul a déjà tranché cette question.
+L'appel `new Confirmation().rediger(lea)` reçoit ensuite la réservation entière. La méthode lit son adresse, demande son montant à `montantCentimes()`, puis renvoie le même message que le premier programme. La rédaction n'a plus à savoir si le tarif était normal ou solidaire, parce que la réservation a déjà tranché cette question.
 
-Les assertions peuvent maintenant vérifier le calcul sans passer par le message. Elles vérifient aussi que la rédaction utilise le montant transmis. Si le texte change, nous modifions `redigerConfirmation`. Si la réduction change, nous examinons `calculerMontant` et les résultats attendus de ses tests.
+Les assertions peuvent maintenant vérifier le calcul sans passer par le message. Elles vérifient aussi que la rédaction utilise le montant de la réservation. Si le texte change, nous modifions la classe `Confirmation`. Si la réduction change, nous examinons `montantCentimes()` et les résultats attendus de ses tests.
 
-Cette séparation illustre la responsabilité unique, ou *Single Responsibility Principle* (**SRP**). Une responsabilité correspond ici à une raison de changer liée à un besoin. Robert C. Martin précise cette idée en regardant les acteurs qui demandent les changements. Dans notre exemple, les équipes de tarification et de rédaction portent deux besoins indépendants.
+Cette séparation illustre la responsabilité unique, ou *Single Responsibility Principle* (**SRP**). Une responsabilité correspond ici à une raison de changer liée à un besoin. Robert C. Martin précise cette idée en regardant les acteurs qui demandent les changements. Dans notre exemple, les équipes de tarification et de rédaction portent deux besoins indépendants. `Reservation` répond donc désormais à la première, et `Confirmation` à la seconde.
 
 Une classe peut avoir plusieurs méthodes qui répondent au même besoin. Une responsabilité ne signifie donc ni une seule méthode par classe, ni un fichier pour chaque ligne. La séparation doit aider à comprendre et à modifier le programme. Elle ne prouve pas que tous les découpages plus fins seraient utiles. Les contrôles des saisies et l'envoi du message restent hors de cet exemple.
 
@@ -96,66 +122,112 @@ La question concerne la formule tarifaire. Les réservations, les places disponi
 ```ts
 import assert from "node:assert/strict";
 
-function calculerMontant(
-	prixCentimes: number,
-	tarif: "normal" | "solidaire",
-): number {
-	if (tarif === "solidaire") return Math.round(prixCentimes / 2);
-	return prixCentimes;
+class Reservation {
+	readonly prixCentimes: number;
+	readonly tarif: "normal" | "solidaire";
+
+	constructor(prixCentimes: number, tarif: "normal" | "solidaire") {
+		this.prixCentimes = prixCentimes;
+		this.tarif = tarif;
+	}
+
+	montantCentimes(): number {
+		if (this.tarif === "solidaire") return Math.round(this.prixCentimes / 2);
+		return this.prixCentimes;
+	}
 }
 
-assert.equal(calculerMontant(2001, "normal"), 2001);
-assert.equal(calculerMontant(2001, "solidaire"), 1001);
+assert.equal(new Reservation(2001, "normal").montantCentimes(), 2001);
+assert.equal(new Reservation(2001, "solidaire").montantCentimes(), 1001);
 ```
 
-Le deuxième argument est ici un nom de tarif. Avec `"solidaire"`, la condition est vraie et la fonction renvoie la moitié du prix arrondie. Avec `"normal"`, elle atteint le dernier `return` et renvoie le prix entier. Les assertions vérifient ces deux trajets pour `2001` centimes.
+Le constructeur reçoit ici un nom de tarif et le range dans `this.tarif`. Avec `"solidaire"`, la condition de `montantCentimes()` est vraie et la méthode renvoie la moitié du prix arrondie. Avec `"normal"`, elle atteint le dernier `return` et renvoie le prix entier. Les assertions vérifient ces deux trajets pour `2001` centimes.
 
-Le type du paramètre autorise seulement `"normal"` et `"solidaire"`. Pour ajouter le tarif adhérent, il faut modifier ce type, puis ajouter une condition et son calcul. Si les demandes tarifaires se répètent, chaque nouvelle formule nous oblige à reprendre la fonction commune.
+Le type du champ autorise seulement `"normal"` et `"solidaire"`. Pour ajouter le tarif adhérent, il faut modifier ce type, puis ajouter une condition et son calcul. Si les demandes tarifaires se répètent, chaque nouvelle formule nous oblige à rouvrir la classe `Reservation`.
 
-### Après, le calcul reçoit la règle qui varie
+### Après, la réservation reçoit la règle qui varie
 
-Nous pouvons transmettre la formule elle-même. La fonction commune garde le travail qui reste identique pour tous les tarifs. Elle vérifie le prix, exécute la formule reçue, puis vérifie le montant avant de le renvoyer.
+Nous pouvons transmettre la formule elle-même, sous la forme d'un objet. L'interface `Tarif` décrit ce que la réservation attend de cet objet, une méthode `appliquer` qui transforme un prix en montant. Chaque formule devient alors une classe qui implémente cette interface. `Reservation` garde le travail qui reste identique pour tous les tarifs. Son constructeur vérifie le prix, puis `montantCentimes()` exécute la formule reçue et vérifie le montant avant de le renvoyer.
 
 ```ts
 import assert from "node:assert/strict";
 
-type Tarif = (prixCentimes: number) => number;
-
-function calculerMontant(prixCentimes: number, tarif: Tarif): number {
-	if (!Number.isSafeInteger(prixCentimes) || prixCentimes < 0) {
-		throw new Error("Prix invalide.");
-	}
-	const montantCentimes = tarif(prixCentimes);
-	if (!Number.isSafeInteger(montantCentimes) || montantCentimes < 0) {
-		throw new Error("Montant invalide.");
-	}
-	return montantCentimes;
+interface Tarif {
+	appliquer(prixCentimes: number): number;
 }
 
-const normal: Tarif = (prix) => prix;
-const solidaire: Tarif = (prix) => Math.round(prix / 2);
-const adherent: Tarif = (prix) => Math.max(0, prix - 300);
+class TarifNormal implements Tarif {
+	appliquer(prixCentimes: number): number {
+		return prixCentimes;
+	}
+}
 
-assert.equal(calculerMontant(2001, normal), 2001);
-assert.equal(calculerMontant(2001, solidaire), 1001);
-assert.equal(calculerMontant(2001, adherent), 1701);
-assert.equal(calculerMontant(200, adherent), 0);
-assert.throws(() => calculerMontant(-1, normal), /Prix invalide/);
-assert.throws(() => calculerMontant(2001, () => -1), /Montant invalide/);
-assert.throws(() => calculerMontant(2001, () => 10.5), /Montant invalide/);
+class TarifSolidaire implements Tarif {
+	appliquer(prixCentimes: number): number {
+		return Math.round(prixCentimes / 2);
+	}
+}
+
+class TarifAdherent implements Tarif {
+	appliquer(prixCentimes: number): number {
+		return Math.max(0, prixCentimes - 300);
+	}
+}
+
+class TarifFixe implements Tarif {
+	#montantCentimes: number;
+
+	constructor(montantCentimes: number) {
+		this.#montantCentimes = montantCentimes;
+	}
+
+	appliquer(): number {
+		return this.#montantCentimes;
+	}
+}
+
+class Reservation {
+	#prixCentimes: number;
+	#tarif: Tarif;
+
+	constructor(prixCentimes: number, tarif: Tarif) {
+		if (!Number.isSafeInteger(prixCentimes) || prixCentimes < 0) {
+			throw new Error("Prix invalide.");
+		}
+		this.#prixCentimes = prixCentimes;
+		this.#tarif = tarif;
+	}
+
+	montantCentimes(): number {
+		const montant = this.#tarif.appliquer(this.#prixCentimes);
+		if (!Number.isSafeInteger(montant) || montant < 0) {
+			throw new Error("Montant invalide.");
+		}
+		return montant;
+	}
+}
+
+assert.equal(new Reservation(2001, new TarifNormal()).montantCentimes(), 2001);
+assert.equal(new Reservation(2001, new TarifSolidaire()).montantCentimes(), 1001);
+assert.equal(new Reservation(2001, new TarifAdherent()).montantCentimes(), 1701);
+assert.equal(new Reservation(200, new TarifAdherent()).montantCentimes(), 0);
+assert.equal(new Reservation(2001, new TarifFixe(1500)).montantCentimes(), 1500);
+assert.throws(() => new Reservation(-1, new TarifNormal()), /Prix invalide/);
+assert.throws(() => new Reservation(2001, new TarifFixe(-1)).montantCentimes(), /Montant invalide/);
+assert.throws(() => new Reservation(2001, new TarifFixe(10.5)).montantCentimes(), /Montant invalide/);
 ```
 
-`Tarif` décrit la forme attendue d'une formule. C'est une fonction qui reçoit un nombre de centimes et renvoie un nombre de centimes. `normal`, `solidaire` et `adherent` sont trois fonctions qui ont cette forme.
+`Tarif` décrit le contrat d'une formule. Toute classe qui l'implémente doit fournir `appliquer`, une méthode qui reçoit un nombre de centimes et renvoie un nombre de centimes. `TarifNormal`, `TarifSolidaire`, `TarifAdherent` et `TarifFixe` respectent ce contrat, chacune avec son propre calcul. `TarifFixe` ignore le prix et renvoie le montant reçu par son constructeur. Sa méthode `appliquer()` ne déclare donc aucun paramètre, ce que TypeScript accepte, car une méthode peut utiliser moins de paramètres que le contrat n'en prévoit.
 
-Dans `calculerMontant(2001, adherent)`, nous transmettons la fonction `adherent`, sans parenthèses après son nom. Écrire `adherent()` serait un appel immédiat de cette fonction, et il manquerait ici le prix attendu. Nous voulons que `calculerMontant` reçoive la règle, puis décide quand l'appeler.
+Dans `new Reservation(2001, new TarifAdherent())`, nous créons un objet `TarifAdherent` et le transmettons au constructeur, qui le range dans le champ privé `#tarif`. La réservation ne connaît pas la classe exacte de cet objet. Son champ est déclaré avec le type `Tarif`, donc elle sait seulement qu'il possède une méthode `appliquer`, et c'est elle qui décide quand l'appeler.
 
-Le premier contrôle accepte `2001`, car c'est un entier sûr, positif ou nul. La ligne `tarif(prixCentimes)` appelle alors la fonction reçue avec ce prix. Pour cet appel, `tarif` désigne `adherent`. Le calcul `2001 - 300` produit `1701`, et `Math.max(0, 1701)` conserve ce montant. Le second contrôle l'accepte, puis le dernier `return` le renvoie.
+Le contrôle du constructeur accepte `2001`, car c'est un entier sûr, positif ou nul. Quand l'assertion appelle `montantCentimes()`, la ligne `this.#tarif.appliquer(this.#prixCentimes)` exécute la méthode de l'objet reçu. Pour cette réservation, `#tarif` désigne un `TarifAdherent`, si bien que c'est sa version d'`appliquer` qui s'exécute. Le calcul `2001 - 300` produit `1701`, et `Math.max(0, 1701)` conserve ce montant. Le second contrôle l'accepte, puis le dernier `return` le renvoie. La même ligne produit donc un calcul différent selon l'objet transmis. Les bases POO appellent ce mécanisme le [polymorphisme](/poo-patterns-frameworks/01-fondations/#contrats-et-polymorphisme).
 
-Avec un prix de `200`, le retrait de `300` donnerait `-100`. `Math.max(0, -100)` choisit `0` et évite un montant négatif. Les dernières assertions vérifient aussi les refus. Un prix de `-1` échoue avant l'appel du tarif. Une formule qui renvoie `-1` ou `10.5` échoue au contrôle du résultat. Une signature TypeScript compatible ne garantit pas, à elle seule, un montant acceptable.
+Avec un prix de `200`, le retrait de `300` donnerait `-100`. `Math.max(0, -100)` choisit `0` et évite un montant négatif. Les dernières assertions vérifient aussi les refus. Un prix de `-1` échoue dès la construction de la réservation, avant tout appel du tarif. Un `TarifFixe` de `-1` ou de `10.5` respecte la signature de `Tarif`, mais son résultat échoue au contrôle du montant. Une signature TypeScript compatible ne garantit donc pas, à elle seule, un montant acceptable.
 
-Le principe ouvert-fermé, ou *Open-Closed Principle* (**OCP**), décrit l'objectif de cette correction. Nous pouvons ajouter une formule sans modifier le traitement commun qui l'utilise. Ici, ce traitement reste fermé aux modifications nécessaires pour ajouter un tarif, tout en restant ouvert à cette extension.
+Le principe ouvert-fermé, ou *Open-Closed Principle* (**OCP**), décrit l'objectif de cette correction. Nous pouvons ajouter une classe de tarif sans modifier `Reservation`, qui l'utilise. Ici, `Reservation` reste fermée aux modifications nécessaires pour ajouter un tarif, tout en restant ouverte à cette extension.
 
-Le code qui choisit le tarif change toujours quelque part. L'application doit savoir quand fournir `adherent` plutôt que `normal`. Le principe aide à concentrer ce changement. Il ne promet pas qu'une nouvelle demande n'aura aucun effet sur le programme.
+Le code qui choisit le tarif change toujours quelque part. L'application doit savoir quand fournir un `TarifAdherent` plutôt qu'un `TarifNormal`. Le principe aide à concentrer ce changement. Il ne promet pas qu'une nouvelle demande n'aura aucun effet sur le programme.
 
 Cette stabilité concerne une variation précise. Une nouvelle règle sur les places disponibles demanderait une autre modification. OCP n'interdit ni les `if` ni la correction d'un bogue dans le calcul commun. Si deux tarifs restent stables et que la condition initiale se lit bien, la conserver peut suffire. Les assertions vérifient les résultats choisis ici, mais elles ne décident pas quelle réduction l'association doit proposer.
 
@@ -224,7 +296,7 @@ Quand `annulerEtConfirmer` reçoit `ferme`, la même ligne `reservation.annuler(
 
 Le refus d'annuler une réservation ferme est une règle métier légitime. C'est le contrat annoncé par le type qui doit changer. Les deux réservations peuvent être consultées. Seule la réservation flexible peut être annulée.
 
-Le second extrait remplace le précédent. `ReservationConsultable` permet de lire l'état. `ReservationAnnulable` ajoute l'opération d'annulation. La réservation ferme est ici un objet qui expose seulement son état, sans hériter d'une méthode impossible à respecter.
+Le second extrait remplace le précédent. `ReservationConsultable` permet de lire l'état, et `ReservationAnnulable` y ajoute l'opération d'annulation. La classe `ReservationFerme` implémente donc seulement `ReservationConsultable`, si bien qu'elle expose son état, toujours confirmé, sans hériter d'une méthode impossible à respecter.
 
 ```ts
 import assert from "node:assert/strict";
@@ -249,6 +321,12 @@ class ReservationFlexible implements ReservationAnnulable {
 	}
 }
 
+class ReservationFerme implements ReservationConsultable {
+	get annulee(): boolean {
+		return false;
+	}
+}
+
 function consulter(reservation: ReservationConsultable): string {
 	return reservation.annulee ? "Annulée" : "Confirmée";
 }
@@ -259,7 +337,7 @@ function annulerEtConfirmer(reservation: ReservationAnnulable): string {
 }
 
 const flexible = new ReservationFlexible();
-const ferme: ReservationConsultable = { annulee: false };
+const ferme = new ReservationFerme();
 
 assert.equal(consulter(flexible), "Confirmée");
 assert.equal(consulter(ferme), "Confirmée");
@@ -276,7 +354,7 @@ assert.equal(consulter(flexible), "Annulée");
 
 `annulerEtConfirmer` attend désormais une `ReservationAnnulable`. Elle accepte `flexible`. Après son appel, `consulter(flexible)` renvoie « Annulée », tandis que `consulter(ferme)` renvoie toujours « Confirmée ». La dernière paire d'assertions vérifie qu'une seconde annulation réussit et laisse la réservation annulée.
 
-Écrire `annulerEtConfirmer(ferme)` provoque maintenant une erreur TypeScript, car cet objet ne possède pas `annuler()`. Nous n'avons pas besoin d'ajouter un `if` dans cette fonction pour reconnaître les réservations fermes. Elles ne sont plus présentées comme annulables.
+Écrire `annulerEtConfirmer(ferme)` provoque maintenant une erreur TypeScript, car la classe `ReservationFerme` ne possède pas `annuler()`. Nous n'avons pas besoin d'ajouter un `if` dans cette fonction pour reconnaître les réservations fermes. Elles ne sont plus présentées comme annulables.
 
 ### Vérifier les promesses du contrat
 
@@ -306,9 +384,9 @@ Le principe porte le nom de [Barbara Liskov, chercheuse au MIT](https://www.csai
 
 ## I, ségrégation des interfaces
 
-Imaginons un écran qui consulte une réservation pour afficher l'adresse du participant. Cet écran ne crée aucune réservation et ne peut pas en supprimer. Pourtant, la fonction qui prépare son affichage exige un objet capable de lire, d'enregistrer et de supprimer.
+Imaginons un écran qui consulte une réservation pour afficher l'adresse du participant. Cet écran ne crée aucune réservation et ne peut pas en supprimer. Pourtant, la classe qui prépare son affichage exige, dans son constructeur, un objet capable de lire, d'enregistrer et de supprimer.
 
-Cela devient gênant quand nous voulons lui fournir une source qui permet seulement la lecture. Le résultat à afficher ne demande aucune écriture, mais le contrat de la fonction en exige.
+Cela devient gênant quand nous voulons lui fournir une source qui permet seulement la lecture. Le résultat à afficher ne demande aucune écriture, mais le contrat demandé par l'écran en exige.
 
 ### Avant, consulter exige aussi le contrat d'administration
 
@@ -328,36 +406,56 @@ interface GestionReservations {
 	supprimer(id: number): void;
 }
 
-function afficherReservation(source: GestionReservations, id: number): string {
-	const reservation = source.lire(id);
-	return reservation ? reservation.email : "Réservation introuvable";
+class ReservationsEnMemoire implements GestionReservations {
+	#reservations = new Map<number, Reservation>();
+
+	lire(id: number): Reservation | undefined {
+		return this.#reservations.get(id);
+	}
+
+	enregistrer(reservation: Reservation): void {
+		this.#reservations.set(reservation.id, reservation);
+	}
+
+	supprimer(id: number): void {
+		this.#reservations.delete(id);
+	}
 }
 
-const reservations = new Map<number, Reservation>();
-const source: GestionReservations = {
-	lire: (id) => reservations.get(id),
-	enregistrer: (reservation) => { reservations.set(reservation.id, reservation); },
-	supprimer: (id) => { reservations.delete(id); },
-};
+class EcranReservation {
+	#source: GestionReservations;
+
+	constructor(source: GestionReservations) {
+		this.#source = source;
+	}
+
+	afficher(id: number): string {
+		const reservation = this.#source.lire(id);
+		return reservation ? reservation.email : "Réservation introuvable";
+	}
+}
+
+const source = new ReservationsEnMemoire();
 source.enregistrer({
 	id: 1, atelierId: 1, email: "lea@example.org", montantCentimes: 2000,
 });
+const ecran = new EcranReservation(source);
 
-assert.equal(afficherReservation(source, 1), "lea@example.org");
-assert.equal(afficherReservation(source, 999), "Réservation introuvable");
+assert.equal(ecran.afficher(1), "lea@example.org");
+assert.equal(ecran.afficher(999), "Réservation introuvable");
 ```
 
-La préparation de l'exemple crée une `Map`, une collection qui associe ici un identifiant à une réservation. Elle appelle ensuite `source.enregistrer` pour y placer la réservation `1`. Cette écriture fournit les données de départ. Elle ne fait pas partie du travail de `afficherReservation`.
+La classe `ReservationsEnMemoire` range les réservations dans une `Map`, une collection qui associe ici un identifiant à une réservation. La préparation de l'exemple crée une instance de cette classe, puis appelle `source.enregistrer` pour y placer la réservation `1`. Cette écriture fournit les données de départ. Elle ne fait pas partie du travail de l'écran, qui reçoit ensuite `source` dans son constructeur et la garde dans son champ privé `#source`.
 
-Quand nous appelons `afficherReservation(source, 1)`, la ligne `source.lire(id)` retrouve la réservation dans la `Map`. La fonction renvoie son adresse, `lea@example.org`. Avec l'identifiant `999`, `lire` renvoie `undefined`, car aucune réservation ne correspond. La fonction choisit alors le texte « Réservation introuvable ».
+Quand nous appelons `ecran.afficher(1)`, la ligne `this.#source.lire(id)` retrouve la réservation dans la `Map`. La méthode renvoie son adresse, `lea@example.org`. Avec l'identifiant `999`, `lire` renvoie `undefined`, car aucune réservation ne correspond. La méthode choisit alors le texte « Réservation introuvable ».
 
-Ces deux trajets utilisent seulement `lire`. Pourtant, le paramètre `source: GestionReservations` exige les trois méthodes de l'interface. TypeScript refuse donc de recevoir un objet qui propose uniquement `lire`. Les méthodes `enregistrer` et `supprimer` lui manquent, même si la fonction ne les appelle jamais.
+Ces deux trajets utilisent seulement `lire`. Pourtant, le paramètre du constructeur, `source: GestionReservations`, exige les trois méthodes de l'interface. TypeScript refuse donc de construire l'écran avec un objet qui propose uniquement `lire`. Les méthodes `enregistrer` et `supprimer` lui manquent, même si l'écran ne les appelle jamais.
 
-Dans ce contexte, le **client** est le code qui utilise l'objet. Il ne s'agit pas du participant à l'atelier. `afficherReservation` est le client de `source`, et son besoin se limite à lire une réservation.
+Dans ce contexte, le **client** est le code qui utilise l'objet. Il ne s'agit pas du participant à l'atelier. `EcranReservation` est le client de `source`, et son besoin se limite à lire une réservation.
 
 ### Après, l'écran annonce son besoin de lecture
 
-Changeons le contrat du paramètre pour annoncer ce besoin. `LectureReservations` exige seulement une méthode `lire`. La fonction d'affichage garde les mêmes instructions, car son travail ne change pas.
+Changeons le contrat demandé par le constructeur pour annoncer ce besoin. `LectureReservations` exige seulement une méthode `lire`. La méthode `afficher` garde les mêmes instructions, car son travail ne change pas. Pour le vérifier, nous fournissons cette fois une source en lecture seule, `ArchiveReservations`, qui ne sait ni enregistrer ni supprimer.
 
 ```ts
 import assert from "node:assert/strict";
@@ -373,30 +471,49 @@ interface LectureReservations {
 	lire(id: number): Reservation | undefined;
 }
 
-function afficherReservation(source: LectureReservations, id: number): string {
-	const reservation = source.lire(id);
-	return reservation ? reservation.email : "Réservation introuvable";
+class EcranReservation {
+	#source: LectureReservations;
+
+	constructor(source: LectureReservations) {
+		this.#source = source;
+	}
+
+	afficher(id: number): string {
+		const reservation = this.#source.lire(id);
+		return reservation ? reservation.email : "Réservation introuvable";
+	}
 }
 
-const reservation: Reservation = {
-	id: 1, atelierId: 1, email: "lea@example.org", montantCentimes: 2000,
-};
-const source: LectureReservations = {
-	lire: (id) => id === reservation.id ? { ...reservation } : undefined,
-};
+class ArchiveReservations implements LectureReservations {
+	#reservations: Reservation[];
 
-assert.equal(afficherReservation(source, 1), "lea@example.org");
-assert.equal(afficherReservation(source, 999), "Réservation introuvable");
-assert.equal(source.lire(1)?.montantCentimes, 2000);
+	constructor(reservations: Reservation[]) {
+		this.#reservations = reservations;
+	}
+
+	lire(id: number): Reservation | undefined {
+		const reservation = this.#reservations.find((r) => r.id === id);
+		return reservation ? { ...reservation } : undefined;
+	}
+}
+
+const archive = new ArchiveReservations([
+	{ id: 1, atelierId: 1, email: "lea@example.org", montantCentimes: 2000 },
+]);
+const ecran = new EcranReservation(archive);
+
+assert.equal(ecran.afficher(1), "lea@example.org");
+assert.equal(ecran.afficher(999), "Réservation introuvable");
+assert.equal(archive.lire(1)?.montantCentimes, 2000);
 ```
 
-La nouvelle source contient une seule méthode. Lors de `lire(1)`, elle compare l'identifiant demandé à celui de `reservation`. Ils correspondent, donc elle renvoie une copie de cette réservation. `afficherReservation` reçoit cette copie et renvoie la même adresse que précédemment.
+`ArchiveReservations` reçoit ses réservations dans son constructeur et ne propose qu'une méthode publique. Lors de `lire(1)`, `find` parcourt le tableau et retrouve la réservation dont l'identifiant vaut `1`. La méthode renvoie alors une copie de cette réservation. `afficher` reçoit cette copie et renvoie la même adresse que précédemment.
 
-Lors de `lire(999)`, les identifiants ne correspondent pas. La source renvoie `undefined`, puis la fonction produit le même message d'absence. Les premières assertions vérifient que le changement de contrat n'a pas changé ces résultats. La dernière retrouve le montant `2000` dans la réservation lue.
+Lors de `lire(999)`, `find` ne trouve aucune réservation et renvoie `undefined`. La source renvoie donc `undefined`, puis l'écran produit le même message d'absence. Les premières assertions vérifient que le changement de contrat n'a pas changé ces résultats. La dernière retrouve le montant `2000` dans la réservation lue.
 
-L'interface décrit ce que la fonction exige de l'objet reçu. Elle n'impose pas que cet objet possède uniquement ces méthodes. Grâce au [typage structurel](/poo-patterns-frameworks/01-fondations/#duck-typing-et-typage-structurel) de TypeScript, l'objet `source` du premier exemple pourrait aussi convenir. Il possède bien `lire`, même s'il sait également enregistrer et supprimer.
+L'interface décrit ce que l'écran exige de l'objet reçu. Elle n'impose pas que cet objet possède uniquement ces méthodes. Grâce au [typage structurel](/poo-patterns-frameworks/01-fondations/#duck-typing-et-typage-structurel) de TypeScript, une instance de `ReservationsEnMemoire`, la classe du premier exemple, pourrait aussi convenir sans déclarer `implements LectureReservations`. Elle possède bien `lire`, même si elle sait également enregistrer et supprimer.
 
-La ségrégation des interfaces, ou *Interface Segregation Principle* (**ISP**), consiste à adapter les contrats aux besoins de leurs clients. Ici, un contrat de consultation évite d'imposer les opérations d'administration à la fonction d'affichage.
+La ségrégation des interfaces, ou *Interface Segregation Principle* (**ISP**), consiste à adapter les contrats aux besoins de leurs clients. Ici, un contrat de consultation évite à l'écran d'exiger les opérations d'administration.
 
 Nous avons utilisé une seule méthode parce que cet écran n'en utilise qu'une. Si plusieurs opérations sont toujours nécessaires ensemble pour un même rôle, une interface peut les regrouper. Le principe ne demande pas une interface par méthode.
 
@@ -412,7 +529,7 @@ Pour une autre lecture en français, [l'article SOLID de DigitalOcean](https://w
 
 L'association veut réorganiser les données de son application. Aujourd'hui, les réservations se trouvent dans `stockage.tables.reservations`. Cette organisation pourrait changer sans que le besoin de consultation change. Nous voulons toujours obtenir le montant d'une réservation à partir de son identifiant.
 
-Faut-il alors réécrire la consultation du montant chaque fois que le stockage change de structure ? Le premier programme nous y oblige, car la fonction de consultation connaît le chemin exact vers les données.
+Faut-il alors réécrire la consultation du montant chaque fois que le stockage change de structure ? Le premier programme nous y oblige, car la classe de consultation connaît le chemin exact vers les données.
 
 ### Avant, le métier connaît l'organisation du stockage
 
@@ -435,25 +552,28 @@ const stockage = {
 	tables: { reservations: new Map([[reservation.id, reservation]]) },
 };
 
-function montantReserve(id: number): number {
-	const reservation = stockage.tables.reservations.get(id);
-	if (!reservation) throw new Error("Réservation introuvable.");
-	return reservation.montantCentimes;
+class ConsultationMontant {
+	montant(id: number): number {
+		const reservation = stockage.tables.reservations.get(id);
+		if (!reservation) throw new Error("Réservation introuvable.");
+		return reservation.montantCentimes;
+	}
 }
 
-assert.equal(montantReserve(1), 2000);
-assert.throws(() => montantReserve(999), /Réservation introuvable/);
+const consultation = new ConsultationMontant();
+assert.equal(consultation.montant(1), 2000);
+assert.throws(() => consultation.montant(999), /Réservation introuvable/);
 ```
 
-Suivons `montantReserve(1)`. La fonction part de l'objet `stockage`, lit sa propriété `tables`, puis accède à `reservations`. Elle appelle ensuite la méthode `get(1)` de cette `Map`. La réservation existe, donc le dernier `return` renvoie son montant, `2000` centimes.
+Suivons `consultation.montant(1)`. La méthode part de l'objet `stockage`, lit sa propriété `tables`, puis accède à `reservations`. Elle appelle ensuite la méthode `get(1)` de cette `Map`. La réservation existe, donc le dernier `return` renvoie son montant, `2000` centimes.
 
-Avec `montantReserve(999)`, la `Map` ne trouve aucune réservation et renvoie `undefined`. Le contrôle `if (!reservation)` provoque alors l'erreur annoncée par la seconde assertion. La fonction ne doit pas inventer un montant quand la réservation est absente.
+Avec `consultation.montant(999)`, la `Map` ne trouve aucune réservation et renvoie `undefined`. Le contrôle `if (!reservation)` provoque alors l'erreur annoncée par la seconde assertion. La méthode ne doit pas inventer un montant quand la réservation est absente.
 
-Cette fonction dépend de l'organisation du stockage. Une **dépendance** désigne ici une connaissance dont le code a besoin pour fonctionner. Nous devons connaître `tables`, `reservations` et la méthode `get` pour écrire cette consultation. Renommer ou déplacer une table oblige à revenir dans la fonction, alors que son besoin n'a pas changé.
+La classe `ConsultationMontant` dépend de l'organisation du stockage. Une **dépendance** désigne ici une connaissance dont le code a besoin pour fonctionner. Nous devons connaître `tables`, `reservations` et la méthode `get` pour écrire cette consultation. Renommer ou déplacer une table oblige à revenir dans la classe, alors que son besoin n'a pas changé.
 
 ### Après, le stockage satisfait le contrat demandé par le métier
 
-La consultation a besoin d'une opération plus précise que l'accès à toutes les tables. Elle veut trouver une réservation par son identifiant. Nous exprimons ce besoin avec `LectureReservations`, puis nous fournissons un objet qui réalise cette lecture.
+La consultation a besoin d'une opération plus précise que l'accès à toutes les tables. Elle veut trouver une réservation par son identifiant. Nous exprimons ce besoin avec l'interface `LectureReservations`, puis nous écrivons une classe qui réalise cette lecture et nous en donnons une instance à la consultation.
 
 ```ts
 import assert from "node:assert/strict";
@@ -469,10 +589,18 @@ interface LectureReservations {
 	trouverParId(id: number): Reservation | undefined;
 }
 
-function montantReserve(id: number, lecture: LectureReservations): number {
-	const reservation = lecture.trouverParId(id);
-	if (!reservation) throw new Error("Réservation introuvable.");
-	return reservation.montantCentimes;
+class ConsultationMontant {
+	#lecture: LectureReservations;
+
+	constructor(lecture: LectureReservations) {
+		this.#lecture = lecture;
+	}
+
+	montant(id: number): number {
+		const reservation = this.#lecture.trouverParId(id);
+		if (!reservation) throw new Error("Réservation introuvable.");
+		return reservation.montantCentimes;
+	}
 }
 
 const reservation: Reservation = {
@@ -481,24 +609,32 @@ const reservation: Reservation = {
 const stockage = {
 	tables: { reservations: new Map([[reservation.id, reservation]]) },
 };
-const lecture: LectureReservations = {
-	trouverParId: (id) => stockage.tables.reservations.get(id),
-};
 
-assert.equal(montantReserve(1, lecture), 2000);
-assert.throws(() => montantReserve(999, lecture), /Réservation introuvable/);
+class LectureEnMemoire implements LectureReservations {
+	trouverParId(id: number): Reservation | undefined {
+		return stockage.tables.reservations.get(id);
+	}
+}
 
-const stockageEnPanne: LectureReservations = {
-	trouverParId: () => { throw new Error("Stockage indisponible."); },
-};
-assert.throws(() => montantReserve(1, stockageEnPanne), /Stockage indisponible/);
+class StockageEnPanne implements LectureReservations {
+	trouverParId(): Reservation | undefined {
+		throw new Error("Stockage indisponible.");
+	}
+}
+
+const consultation = new ConsultationMontant(new LectureEnMemoire());
+assert.equal(consultation.montant(1), 2000);
+assert.throws(() => consultation.montant(999), /Réservation introuvable/);
+
+const enPanne = new ConsultationMontant(new StockageEnPanne());
+assert.throws(() => enPanne.montant(1), /Stockage indisponible/);
 ```
 
-L'appel `montantReserve(1, lecture)` fournit maintenant deux arguments. `1` est l'identifiant recherché. `lecture` est l'objet à qui la fonction demande de retrouver la réservation. À l'intérieur, `lecture.trouverParId(id)` remplace tout le chemin vers la `Map`.
+`ConsultationMontant` reçoit maintenant, dans son constructeur, l'objet à qui elle demandera de retrouver les réservations. Elle le garde dans son champ privé `#lecture`, si bien que l'appel `consultation.montant(1)` ne transmet plus que l'identifiant recherché. À l'intérieur, `this.#lecture.trouverParId(id)` remplace tout le chemin vers la `Map`.
 
-L'objet `lecture` fait le lien avec le stockage actuel. Sa méthode reçoit l'identifiant et exécute `stockage.tables.reservations.get(id)`. Pour `1`, elle renvoie la réservation, puis `montantReserve` renvoie `2000`. Pour `999`, elle renvoie `undefined` et la consultation conserve son erreur « Réservation introuvable ».
+La classe `LectureEnMemoire` fait le lien avec le stockage actuel. Sa méthode `trouverParId` reçoit l'identifiant et exécute `stockage.tables.reservations.get(id)`. Pour `1`, elle renvoie la réservation, puis `montant` renvoie `2000`. Pour `999`, elle renvoie `undefined` et la consultation conserve son erreur « Réservation introuvable ».
 
-Si nous réorganisons les tables, ce chemin se modifie dans l'objet `lecture`. La fonction `montantReserve` continue de demander une réservation par identifiant. Elle n'a plus besoin de connaître les noms des tables ou la `Map`.
+Si nous réorganisons les tables, ce chemin se modifie dans `LectureEnMemoire`. La classe `ConsultationMontant` continue de demander une réservation par identifiant. Elle n'a plus besoin de connaître les noms des tables ou la `Map`.
 
 Le principe d'inversion des dépendances, ou *Dependency Inversion Principle* (**DIP**), décrit cette direction de conception. La règle de **haut niveau** exprime le besoin utile à l'application, ici consulter le montant d'une réservation. Le **détail technique** est la manière de fournir les données, ici une `Map` rangée dans un objet `tables`. Ces termes distinguent des rôles dans le programme.
 
@@ -507,26 +643,26 @@ Le contrat `LectureReservations` exprime le besoin de la consultation. Dans une 
 ```mermaid
 flowchart LR
   accTitle: Le métier et le stockage dépendent du contrat de lecture
-  accDescr: La consultation du montant utilise LectureReservations. L'implémentation en mémoire satisfait ce contrat. Le code métier ne dépend pas de la Map qui contient les données.
-  Metier["Consultation du montant"] -->|utilise| Contrat["LectureReservations"]
-  Memoire["Implémentation en mémoire"] -.->|satisfait| Contrat
+  accDescr: ConsultationMontant utilise LectureReservations. LectureEnMemoire satisfait ce contrat. Le code métier ne dépend pas de la Map qui contient les données.
+  Metier["ConsultationMontant"] -->|utilise| Contrat["LectureReservations"]
+  Memoire["LectureEnMemoire"] -.->|satisfait| Contrat
 ```
 
-Ces flèches représentent les dépendances du code. Elles indiquent ce que chaque partie doit connaître. Elles ne montrent pas le trajet des appels pendant l'exécution. `montantReserve` appelle bien l'objet fourni par le stockage, puis cet objet accède à la `Map`. Le changement concerne les connaissances nécessaires pour écrire la consultation.
+Ces flèches représentent les dépendances du code. Elles indiquent ce que chaque partie doit connaître. Elles ne montrent pas le trajet des appels pendant l'exécution. `ConsultationMontant` appelle bien l'objet `LectureEnMemoire`, puis cet objet accède à la `Map`. Le changement concerne les connaissances nécessaires pour écrire la consultation.
 
-Le contrat distingue aussi une absence et une panne. `undefined` signifie que la lecture a réussi sans trouver cette réservation. L'objet `stockageEnPanne`, lui, lève une erreur dès qu'on lui demande une lecture. La dernière assertion vérifie que cette erreur traverse `montantReserve` et arrive jusqu'à son appelant.
+Le contrat distingue aussi une absence et une panne. `undefined` signifie que la lecture a réussi sans trouver cette réservation. La classe `StockageEnPanne`, elle, lève une erreur dès qu'on lui demande une lecture. La dernière assertion vérifie que cette erreur traverse `montant` et arrive jusqu'à son appelant. La même classe `ConsultationMontant` fonctionne ainsi avec deux implémentations du contrat, sans qu'on modifie une seule de ses lignes.
 
 Transformer cette panne en `undefined` ferait croire qu'aucune réservation ne correspond à l'identifiant. Cela masquerait l'échec de la lecture. Le contrat doit donc préciser les résultats attendus et les erreurs possibles. Le nom d'une interface ne suffit pas à garantir ce comportement.
 
-Le passage de `lecture` en paramètre est une **injection de dépendances**. Nous fournissons à la fonction l'objet dont elle a besoin, plutôt que de lui faire choisir ou construire son stockage. L'injection décrit cette manière de fournir un objet. DIP concerne ce que les différentes parties du programme connaissent et la direction de leurs dépendances. Passer directement l'objet `stockage` en paramètre serait aussi une injection, mais la fonction devrait encore connaître ses tables.
+Le passage de l'objet de lecture au constructeur est une **injection de dépendances**, plus précisément une injection par le constructeur. Nous fournissons à la classe l'objet dont elle a besoin, plutôt que de lui faire choisir ou construire son stockage avec `new`. L'injection décrit cette manière de fournir un objet. DIP concerne ce que les différentes parties du programme connaissent et la direction de leurs dépendances. Passer directement l'objet `stockage` au constructeur serait aussi une injection, mais la classe devrait encore connaître ses tables.
 
-L'**inversion de contrôle** désigne l'idée plus générale de confier à un autre code une partie du pilotage des appels. Un framework qui appelle votre gestionnaire lors d'un événement en est un exemple. Dans notre extrait, les appels restent visibles et nous fournissons nous-mêmes `lecture`. Aucun framework ni outil d'injection n'est nécessaire pour effectuer cette séparation.
+L'**inversion de contrôle** désigne l'idée plus générale de confier à un autre code une partie du pilotage des appels. Un framework qui appelle votre gestionnaire lors d'un événement en est un exemple. Dans notre extrait, les appels restent visibles et nous créons nous-mêmes `new LectureEnMemoire()`. Aucun framework ni outil d'injection n'est nécessaire pour effectuer cette séparation.
 
 La `Map` reste un stockage en mémoire. Elle perd ses données quand le processus s'arrête. Le contrat et les assertions n'apportent aucune garantie de persistance ou de résistance aux accès concurrents. Le chapitre [Repository](/poo-patterns-frameworks/07-repository/) poursuit la discussion sur les contrats de stockage.
 
 Pour approfondir en français, lire [le support ENSICAEN, section 2.5, pages 5 et 6](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=5). Il place des contrats de lecture et d'écriture entre la règle et les outils utilisés. Rechercher quel besoin chaque contrat exprime.
 
-En complément facultatif, [l'article de Martin Fowler sur l'injection de dépendances](https://martinfowler.com/articles/injection.html) est en anglais. Sa séparation entre la configuration des objets et leur utilisation aide à relire le rôle du code qui fournit `lecture`.
+En complément facultatif, [l'article de Martin Fowler sur l'injection de dépendances](https://martinfowler.com/articles/injection.html) est en anglais. Sa séparation entre la configuration des objets et leur utilisation aide à relire le rôle de la ligne `new ConsultationMontant(new LectureEnMemoire())`.
 
 ## Situer SOLID et Clean Code
 

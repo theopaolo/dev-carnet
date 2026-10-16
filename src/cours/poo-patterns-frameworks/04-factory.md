@@ -2,12 +2,12 @@
 title: 'Choisir une création avec Factory, aide facultative'
 order: 10
 publishedAt: "2026-10-15"
-updatedAt: "2026-10-15"
+updatedAt: "2026-10-16"
 ---
 
 # Choisir une création avec Factory, aide facultative
 
-Dans la [séance Strategy](/poo-patterns-frameworks/02-strategy/), un appel choisit `normal` ou `solidaire` et fournit cette fonction à `reserver`.
+Dans la [séance Strategy](/poo-patterns-frameworks/02-strategy/), un appel crée un `TarifNormal` ou un `TarifSolidaire` et fournit cet objet à `reserver`.
 
 Cette aide illustre comment une fabrique peut regrouper une création répétée.
 
@@ -63,27 +63,27 @@ Dans [Factory Pattern sur Patterns.dev](https://www.patterns.dev/vanilla/factory
 Dans une copie du [corrigé des tarifs](/ressources/poo-patterns-frameworks/ateliers-tarifs.ts), une création directe peut s'écrire ainsi.
 
 ```ts
-const tarifConfigure = (prixCentimes: number) => Math.round(prixCentimes / 2);
-assert.equal(tarifConfigure(2001), 1001);
+const tarifConfigure = new TarifSolidaire();
+assert.equal(tarifConfigure.appliquer(2001), 1001);
 ```
 
-Si plusieurs entrées doivent construire les mêmes règles, comparez cette fonction à une fabrique simple.
+Si plusieurs entrées doivent construire les mêmes règles à partir d'un nom, comparez cette création directe à une fabrique simple.
 
 ```ts
 function creerTarif(nom: "normal" | "solidaire"): Tarif {
-	if (nom === "solidaire") return prix => Math.round(prix / 2);
-	return prix => prix;
+	if (nom === "solidaire") return new TarifSolidaire();
+	return new TarifNormal();
 }
 
 const tarifImport = creerTarif("solidaire");
-assert.equal(tarifImport(2001), 1001);
-assert.equal(creerTarif("normal")(2001), 2001);
-assert.equal(creerTarif("solidaire")(0), 0);
+assert.equal(tarifImport.appliquer(2001), 1001);
+assert.equal(creerTarif("normal").appliquer(2001), 2001);
+assert.equal(creerTarif("solidaire").appliquer(0), 0);
 ```
 
-Dans cet exemple, le produit est une fonction respectant `Tarif`. `creerTarif` regroupe le choix et la création. L'appelant l'utilise avec `reserver(2, "mia@example.test", tarifImport)`, dans un scénario où Photo possède une place libre.
+Dans cet exemple, le produit est un objet qui implémente `Tarif`. `creerTarif` regroupe le choix de la classe et la création de l'objet. L'appelant connaît seulement le nom du tarif, par exemple lu dans un fichier d'import, et reçoit un objet prêt à transmettre avec `reserver(2, "mia@example.test", tarifImport)`, dans un scénario où Photo possède une place libre.
 
-Comparez le code ajouté au besoin actuel. Les fonctions `normal` et `solidaire` existent déjà dans le corrigé. Les sélectionner directement évite de les recréer.
+Comparez le code ajouté au besoin actuel. Les classes `TarifNormal` et `TarifSolidaire` existent déjà dans le corrigé. Tant qu'un seul appel choisit le tarif, écrire directement `new TarifSolidaire()` évite d'ajouter une fonction.
 
 ## Distinguer les noms des sources
 

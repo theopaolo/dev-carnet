@@ -118,7 +118,7 @@ Au démontage, la vue appelle le désabonnement et [retire son écouteur DOM](ht
 
 L'injection de dépendances fournit un collaborateur depuis l'extérieur au lieu de le construire dans le code qui l'utilise. Ici, le montage reçoit le store et l'action.
 
-L'[article de Fowler sur l'injection](https://martinfowler.com/articles/injection.html) approfondit ce mécanisme. La section sur l'[inversion des dépendances](/poo-patterns-frameworks/01-solid/#d-inversion-des-dependances) distingue ce principe de l'injection. La séance [Strategy](/poo-patterns-frameworks/02-strategy/) applique une fonction fournie par l'appelant à une variation de tarif.
+L'[article de Fowler sur l'injection](https://martinfowler.com/articles/injection.html) approfondit ce mécanisme. La section sur l'[inversion des dépendances](/poo-patterns-frameworks/01-solid/#d-inversion-des-dependances) distingue ce principe de l'injection. La séance [Strategy](/poo-patterns-frameworks/02-strategy/) applique ce mécanisme à une variation de tarif, avec un objet `Tarif` fourni par l'appelant.
 
 Pour examiner un framework concret, repérez le propriétaire de l'état, le mécanisme qui programme le rendu et le nettoyage au démontage. La politique d'erreur des abonnés complète ce cycle d'exécution.
 

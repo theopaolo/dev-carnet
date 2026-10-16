@@ -3,9 +3,21 @@ import assert from "node:assert/strict";
 type Atelier = { id: number; titre: string; capacite: number; prixCentimes: number };
 type Reservation = { id: number; atelierId: number; email: string; montantCentimes: number };
 
-type Tarif = (prixCentimes: number) => number;
-const normal: Tarif = prix => prix;
-const solidaire: Tarif = prix => Math.round(prix / 2);
+interface Tarif {
+  appliquer(prixCentimes: number): number;
+}
+
+class TarifNormal implements Tarif {
+  appliquer(prixCentimes: number): number {
+    return prixCentimes;
+  }
+}
+
+class TarifSolidaire implements Tarif {
+  appliquer(prixCentimes: number): number {
+    return Math.round(prixCentimes / 2);
+  }
+}
 
 const ateliers: Atelier[] = [
   { id: 1, titre: "Dessin", capacite: 2, prixCentimes: 2000 },
@@ -22,7 +34,11 @@ function listerAteliers() {
   }));
 }
 
-function reserver(atelierId: number, email: string, tarif: Tarif = normal): Reservation {
+function reserver(
+  atelierId: number,
+  email: string,
+  tarif: Tarif = new TarifNormal(),
+): Reservation {
   const atelier = ateliers.find(a => a.id === atelierId);
   if (!atelier) throw new Error("Atelier inconnu");
   const adresse = email.trim().toLowerCase();
@@ -31,7 +47,7 @@ function reserver(atelierId: number, email: string, tarif: Tarif = normal): Rese
     throw new Error("Déjà inscrit");
   if (reservations.filter(r => r.atelierId === atelierId).length >= atelier.capacite)
     throw new Error("Atelier complet");
-  const montantCentimes = tarif(atelier.prixCentimes);
+  const montantCentimes = tarif.appliquer(atelier.prixCentimes);
   if (!Number.isSafeInteger(montantCentimes) || montantCentimes < 0)
     throw new Error("Montant invalide");
   const reservation = {
@@ -81,16 +97,46 @@ assert.deepEqual(notifications, [
   "Confirmation 3 pour zoe@example.test",
 ]);
 
-ateliers[1].prixCentimes = 2001;
-assert.equal(solidaire(2001), 1001);
-assert.equal(solidaire(0), 0);
-assert.equal(normal(2001), 2001);
-for (const montant of [-1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1]) {
-  assert.throws(() => reserver(2, "mia@example.test", () => montant), /Montant invalide/);
+// Tarifs de test : un montant imposé, un calcul en panne, un compteur d'appels.
+class TarifFixe implements Tarif {
+  readonly montantCentimes: number;
+
+  constructor(montantCentimes: number) {
+    this.montantCentimes = montantCentimes;
+  }
+
+  appliquer(): number {
+    return this.montantCentimes;
+  }
 }
-assert.throws(() => reserver(2, "mia@example.test", () => {
-  throw new Error("Calcul indisponible");
-}), /Calcul indisponible/);
+
+class TarifIndisponible implements Tarif {
+  appliquer(): number {
+    throw new Error("Calcul indisponible");
+  }
+}
+
+class TarifCompte implements Tarif {
+  calculs = 0;
+
+  appliquer(prixCentimes: number): number {
+    this.calculs++;
+    return prixCentimes;
+  }
+}
+
+const solidaire = new TarifSolidaire();
+ateliers[1].prixCentimes = 2001;
+assert.equal(solidaire.appliquer(2001), 1001);
+assert.equal(solidaire.appliquer(0), 0);
+assert.equal(new TarifNormal().appliquer(2001), 2001);
+for (const montant of [-1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1]) {
+  assert.throws(() => reserver(2, "mia@example.test", new TarifFixe(montant)), /Montant invalide/);
+}
+assert.throws(
+  () => reserver(2, "mia@example.test", new TarifIndisponible()),
+  /Calcul indisponible/,
+);
 assert.equal(reservations.length, 2);
 assert.equal(notifications.length, 4);
 assert.equal(prochainId, 4);
@@ -101,13 +147,12 @@ assert.equal(mia.montantCentimes, 1001);
 ateliers[1].prixCentimes = 4000;
 assert.equal(reservations.find(r => r.id === mia.id)?.montantCentimes, 1001);
 
-let calculs = 0;
-const compter: Tarif = prix => { calculs++; return prix; };
+const compter = new TarifCompte();
 assert.throws(() => reserver(999, "inconnu@example.test", compter), /Atelier inconnu/);
 assert.throws(() => reserver(2, "sans-adresse", compter), /Courriel invalide/);
 assert.throws(() => reserver(2, "MIA@example.test", compter), /Déjà inscrit/);
 assert.throws(() => reserver(2, "noa@example.test", compter), /Atelier complet/);
-assert.equal(calculs, 0);
+assert.equal(compter.calculs, 0);
 assert.equal(notifications.length, 5);
 assert.equal(reservations.length, 3);
 assert.equal(prochainId, 5);

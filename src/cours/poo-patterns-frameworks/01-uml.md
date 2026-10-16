@@ -77,7 +77,7 @@ classDiagram
 
 ### Une collaboration peut passer par une interface
 
-Dans cette version objet de [Strategy](/poo-patterns-frameworks/02-strategy/), une commande utilise une réduction. Deux classes proposent des façons de la calculer.
+Dans cet exemple de [Strategy](/poo-patterns-frameworks/02-strategy/), une commande utilise une réduction. Deux classes proposent des façons de la calculer.
 
 ```mermaid
 classDiagram
@@ -98,7 +98,7 @@ classDiagram
   Reduction <|.. Coupon
 ```
 
-La flèche simple dit que la commande connaît sa réduction. Les triangles pointillés disent que les deux classes respectent son contrat. La commande n'hérite pas de la réduction. La fiche Strategy utilise des fonctions pour remplir les mêmes rôles ; ce diagramme présente une autre réalisation possible.
+La flèche simple dit que la commande connaît sa réduction. Les triangles pointillés disent que les deux classes respectent son contrat. La commande n'hérite pas de la réduction. La séance Strategy applique la même structure aux tarifs, avec l'interface `Tarif` et les classes `TarifNormal` et `TarifSolidaire`.
 
 ### Le losange plein indique une propriété forte
 
