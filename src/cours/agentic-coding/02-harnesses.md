@@ -1,17 +1,16 @@
 ---
-title: Les harnesses de code
+## title: Les harnesses de code
 order: 2
 publishedAt: "2026-09-23"
 updatedAt: "2026-09-25"
 ---
-
 # Les harnesses de code
 
-Claude Code, Cursor, OpenCode, Cline et Goose se présentent différemment, mais ils partagent la même architecture. Ce chapitre donne d’abord les couches communes, puis classe les outils selon l’endroit où ils vivent : une application graphique, un IDE ou un terminal.
+Claude Code, Cursor, OpenCode, Cline et Goose partagent tous la même architecture tout en existant dans des endroits  différents : une application graphique, un IDE ou dans un terminal.
 
-## Quatre couches
+## Les couches
 
-Le terme *harness* n’a pas encore de frontière unique. Dans ce cours, il désigne le programme qui prépare le contexte, appelle le modèle, interprète sa réponse, applique les règles d’accès, exécute les outils et conserve l’état de la boucle.
+Le terme *harness* peut désigner le programme qui pilote la boucle de l’agent. Il prépare le contexte, appelle le modèle et interprète sa réponse, puis exécute les outils en respectant les règles d’accès. Il conserve aussi l’état de la boucle d’un échange au suivant.
 
 [Anthropic distingue quatre couches](https://www.anthropic.com/research/trustworthy-agents) :
 
@@ -27,7 +26,7 @@ système agentique = modèle + harness + outils + environnement
 L’interface (chat, IDE, terminal) n’est pas une couche technique en plus. Elle permet de donner l’objectif et de suivre le travail. Le fournisseur d’API donne accès au modèle. Les règles de projet, les skills, MCP et la mémoire s’ajoutent au harness sans former une pile obligatoire.
 
 ```mermaid
-flowchart LR
+flowchart TB
   accTitle: Les couches d’un système agentique
   accDescr: L’interface transmet l’objectif au harness. Le harness appelle le modèle par un fournisseur et exécute les outils dans l’environnement.
   U[Personne] --> I[Interface]
@@ -55,38 +54,44 @@ Les outils ci-dessous ont été vérifiés au moment de rédiger ce guide, en se
 
 Un TUI (*terminal user interface*) est une interface plein écran dans le terminal. Le terminal expose directement les fichiers, Git, les commandes et les logs. C’est la forme la plus proche de la boucle étudiée dans ce cours.
 
-| Outil | Éditeur | Modèles | Particularité |
-| --- | --- | --- | --- |
-| [Claude Code](https://code.claude.com/) | Anthropic | Claude | Skills, sous-agents, hooks, MCP. Existe aussi en application de bureau et en extension d’IDE. |
-| [Codex CLI](https://github.com/openai/codex) | OpenAI | GPT | Exécution dans un bac à sable configurable. Existe aussi en application et dans le cloud. |
-| [OpenCode](https://opencode.ai/) | Anomaly, open source (MIT) | Plus de 75 fournisseurs | TUI, mode `opencode run` sans interface, application de bureau en bêta. Code TypeScript lisible. |
-| [Pi](https://pi.dev/) | Mario Zechner, open source (MIT) | Multi-fournisseurs | Quatre outils de base : `read`, `write`, `edit`, `bash`. Le reste s’ajoute par extensions TypeScript et skills. |
-| [Goose](https://github.com/aaif-goose/goose) | Agentic AI Foundation, open source (Apache 2.0) | Multi-fournisseurs, Ollama | CLI et application de bureau. Extensions par MCP. Conçu aussi pour des tâches hors code. |
-| [Qwen Code](https://github.com/QwenLM/qwen-code) | Alibaba | Qwen | Harness du laboratoire qui entraîne le modèle. |
+
+| Outil                                            | Éditeur                                         | Modèles                    | Particularité                                                                                                   |
+| ------------------------------------------------ | ----------------------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [Claude Code](https://code.claude.com/)          | Anthropic                                       | Claude                     | Skills, sous-agents, hooks, MCP. Existe aussi en application de bureau et en extension d’IDE.                   |
+| [Codex CLI](https://github.com/openai/codex)     | OpenAI                                          | GPT                        | Exécution dans un bac à sable configurable. Existe aussi en application et dans le cloud.                       |
+| [OpenCode](https://opencode.ai/)                 | Anomaly, open source (MIT)                      | Plus de 75 fournisseurs    | TUI, mode `opencode run` sans interface, application de bureau en bêta. Code TypeScript lisible.                |
+| [Pi](https://pi.dev/)                            | Mario Zechner, open source (MIT)                | Multi-fournisseurs         | Quatre outils de base : `read`, `write`, `edit`, `bash`. Le reste s’ajoute par extensions TypeScript et skills. |
+| [Goose](https://github.com/aaif-goose/goose)     | Agentic AI Foundation, open source (Apache 2.0) | Multi-fournisseurs, Ollama | CLI et application de bureau. Extensions par MCP. Conçu aussi pour des tâches hors code.                        |
+| [Qwen Code](https://github.com/QwenLM/qwen-code) | Alibaba                                         | Qwen                       | Harness du laboratoire qui entraîne le modèle.                                                                  |
+
 
 ### Dans l’IDE
 
 Un IDE agentique ou une extension gardent l’agent à côté de l’éditeur. Vous voyez les fichiers modifiés dans l’arborescence et relisez les diffs dans l’interface habituelle.
 
-| Outil | Forme | Modèles | Particularité |
-| --- | --- | --- | --- |
-| [Cursor](https://cursor.com/) | IDE, dérivé de VS Code | Multi-fournisseurs | Autocomplétion, agent dans l’éditeur, agents en arrière-plan, CLI. |
-| [Antigravity](https://antigravity.google/) | IDE | Gemini et autres | IDE de Google centré sur des agents qui travaillent en parallèle. |
-| [Cline](https://cline.bot/) | Extension VS Code et JetBrains, open source (Apache 2.0) | Votre clé d’API, modèles locaux | Validation humaine à chaque étape par défaut. CLI en préversion. |
-| [Kilo Code](https://kilo.ai/) | Extension VS Code, open source | Multi-fournisseurs, Ollama | Modes spécialisés, autocomplétion. |
-| [Continue](https://docs.continue.dev/) | Extension VS Code et JetBrains, open source | Multi-fournisseurs, Ollama | Chat et autocomplétion avec des modèles locaux. |
+
+| Outil                                      | Forme                                                    | Modèles                         | Particularité                                                      |
+| ------------------------------------------ | -------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------ |
+| [Cursor](https://cursor.com/)              | IDE, dérivé de VS Code                                   | Multi-fournisseurs              | Autocomplétion, agent dans l’éditeur, agents en arrière-plan, CLI. |
+| [Antigravity](https://antigravity.google/) | IDE                                                      | Gemini et autres                | IDE de Google centré sur des agents qui travaillent en parallèle.  |
+| [Cline](https://cline.bot/)                | Extension VS Code et JetBrains, open source (Apache 2.0) | Votre clé d’API, modèles locaux | Validation humaine à chaque étape par défaut. CLI en préversion.   |
+| [Kilo Code](https://kilo.ai/)              | Extension VS Code, open source                           | Multi-fournisseurs, Ollama      | Modes spécialisés, autocomplétion.                                 |
+| [Continue](https://docs.continue.dev/)     | Extension VS Code et JetBrains, open source              | Multi-fournisseurs, Ollama      | Chat et autocomplétion avec des modèles locaux.                    |
+
 
 ### Dans une application graphique
 
 Les applications de bureau et les interfaces web conviennent aux personnes qui ne veulent pas de terminal, ou qui lancent plusieurs tâches en parallèle et relisent les résultats plus tard.
 
-| Outil | Particularité |
-| --- | --- |
-| Claude (application de bureau et web) | Claude Code dans une fenêtre, sessions locales ou dans le cloud. |
-| ChatGPT et l’application Codex | Tâches lancées dans un environnement distant, résultat livré sous forme de diff ou de pull request. |
-| Goose Desktop | Même harness que le CLI Goose, avec une interface graphique. |
-| OpenCode Desktop | Même harness que le TUI, en bêta. |
-| [OpenHands](https://www.openhands.dev/) | Agent dans un environnement isolé, interface web. |
+
+| Outil                                   | Particularité                                                                                       |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Claude (application de bureau et web)   | Claude Code dans une fenêtre, sessions locales ou dans le cloud.                                    |
+| ChatGPT et l’application Codex          | Tâches lancées dans un environnement distant, résultat livré sous forme de diff ou de pull request. |
+| Goose Desktop                           | Même harness que le CLI Goose, avec une interface graphique.                                        |
+| OpenCode Desktop                        | Même harness que le TUI, en bêta.                                                                   |
+| [OpenHands](https://www.openhands.dev/) | Agent dans un environnement isolé, interface web.                                                   |
+
 
 ## Choisir
 

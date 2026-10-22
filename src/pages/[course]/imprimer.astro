@@ -45,10 +45,6 @@ const summary = intro(course.body);
     <PageHead title={title} pageTitle={`${title} | Carnet`} summary="" />
     <!-- Copie des chapitres publiés : seules leurs pages sont indexées -->
     <meta name="robots" content="noindex" />
-    <!-- Thème clair : Mermaid calcule les couleurs des diagrammes au rendu, pas à l'impression -->
-    <script is:inline>
-      document.documentElement.dataset.theme = "light";
-    </script>
   </head>
   <body>
     <p class="print-bar cluster">

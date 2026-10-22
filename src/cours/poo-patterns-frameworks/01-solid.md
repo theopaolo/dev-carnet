@@ -1,23 +1,29 @@
 ---
 title: 'SOLID, comprendre les cinq principes'
-order: 2.5
+order: 10
 publishedAt: "2026-10-16"
-updatedAt: "2026-10-16"
+updatedAt: "2026-10-22"
 ---
 
 # SOLID, comprendre les cinq principes
 
-Une modification de tarif oblige à relire le code qui rédige les courriels. Un écran de consultation exige des méthodes de suppression. Une sous-classe refuse une opération pourtant promise par sa classe parente. SOLID donne cinq angles pour comprendre ce genre de difficultés et décider où intervenir.
+Quand une application évolue, son organisation peut compliquer un changement pourtant limité. Modifier un tarif oblige parfois à relire le code des courriels, tandis qu'un écran de consultation exige inutilement des méthodes de suppression. Une sous-classe peut aussi refuser une opération promise par sa classe parente. Les cinq principes SOLID aident à comprendre ces difficultés et à choisir quelle partie du code modifier.
 
-Ces principes prolongent les [bases POO](/poo-patterns-frameworks/01-fondations/). Ils concernent aussi les fonctions et les modules. Leur intérêt dépend du problème rencontré et du coût de la séparation proposée.
+Ces principes prolongent les [bases POO](/poo-patterns-frameworks/01-fondations/), mais concernent aussi les fonctions et les modules. Ils proposent des questions pour examiner une conception, pas des règles à appliquer à chaque classe. Une séparation se justifie si elle rend un changement plus compréhensible ou moins risqué, compte tenu du code supplémentaire à maintenir.
 
-Les exemples suivants reprennent le domaine des [réservations d'ateliers](/poo-patterns-frameworks/10-exercice/). Chaque bloc s'exécute dans un fichier séparé. Les variantes avant et après illustrent la même question. Ces exemples traitent des décisions distinctes, sans construire progressivement une nouvelle application. Les montants sont des nombres entiers de centimes. Les assertions vérifient un résultat précis et lèvent une erreur si ce résultat change. Comme dans le premier atelier, un fichier `.ts` s'exécute avec Node.js 24 ou une version ultérieure. Une exécution réussie de ces extraits n'affiche rien.
+Ce chapitre fait partie des approfondissements du cours, car les séances de patterns n'en ont pas besoin. Si vous manquez de temps, lisez S et D, puis la section [Choisir quel principe examiner](#choisir-quel-principe-examiner). Ces deux principes reviennent dans la plupart des projets web. O, L et I deviennent utiles plus tard, quand une hiérarchie de classes ou une interface trop large rend un changement difficile.
+
+Les exemples reprennent le domaine des [réservations d'ateliers](/poo-patterns-frameworks/10-exercice/). Pour chaque principe, les variantes avant et après traitent le même problème. Elles restent indépendantes des autres exemples, sans construire progressivement une nouvelle application. Les montants sont des nombres entiers de centimes.
+
+Exécutez chaque bloc dans un fichier séparé. Comme dans le premier atelier, un fichier `.ts` s'exécute avec Node.js 24 ou une version ultérieure. Les assertions comparent les résultats observés aux résultats attendus et lèvent une erreur en cas de différence. Une exécution réussie de ces extraits n'affiche rien.
+
+La vérification des types par TypeScript examine le code avant son exécution. Node.js efface ici les annotations de type sans effectuer ce contrôle. Lorsque le chapitre indique que TypeScript refuse un appel, il parle donc du contrôle des types, pas de l'exécution des assertions.
 
 ## S, responsabilité unique
 
-L'équipe qui décide des tarifs demande de modifier la réduction solidaire des ateliers. Au même moment, l'équipe qui rédige les confirmations souhaite changer le texte envoyé aux participants. Une personne qui travaille sur les tarifs doit-elle aussi relire la rédaction des messages ?
+L'équipe qui décide des tarifs demande de modifier la réduction solidaire des ateliers. Au même moment, l'équipe qui rédige les confirmations souhaite changer le texte envoyé aux participants. Ces demandes peuvent arriver séparément et pour des raisons différentes. On cherche donc à modifier l'une sans intervenir dans le code de l'autre.
 
-Dans le premier programme, ces deux demandes conduisent au même endroit. Le programme donne pourtant le résultat attendu. Le problème apparaît quand on cherche quelle partie modifier pour répondre à chaque équipe.
+Dans le premier programme, ces deux demandes obligent à modifier la même méthode de la classe de réservation. Le résultat calculé est correct, mais les deux règles sont réunies dans cette méthode. Le problème apparaît donc au moment de faire évoluer le code, pas au moment de l'exécuter.
 
 ### Avant, le calcul et la rédaction changent ensemble
 
@@ -52,13 +58,13 @@ assert.equal(
 );
 ```
 
-Suivons l'appel de l'assertion. Le constructeur a rangé `2001` dans `this.prixCentimes` et `true` dans `this.solidaire`. La méthode divise donc `2001` par deux, puis `Math.round` arrondit `1000.5` à `1001`. Le `return` insère ensuite ce montant et `this.email` dans le message.
+Dans l'appel vérifié par l'assertion, le constructeur a rangé `2001` dans `this.prixCentimes` et `true` dans `this.solidaire`. La méthode divise donc `2001` par deux, puis `Math.round` arrondit `1000.5` à `1001`. Le `return` insère ensuite ce montant et `this.email` dans le message.
 
-L'assertion confirme que toute cette préparation fonctionne. Elle ne dit pas si le calcul et la rédaction ont de bonnes raisons de rester ensemble. Changer la formule de réduction ou remplacer la phrase oblige à modifier `preparerConfirmation`. Chaque intervention touche une méthode qui porte aussi la décision de l'autre équipe.
+L'assertion confirme le message obtenu pour cette réservation solidaire. Elle ne dit pas si le calcul et la rédaction ont de bonnes raisons de rester ensemble. Changer la formule de réduction ou remplacer la phrase oblige à modifier `preparerConfirmation`. On intervient donc dans la même méthode pour deux décisions indépendantes, avec le risque de toucher à l'autre en la modifiant.
 
 ### Après, chaque règle appartient à une classe identifiable
 
-Gardons les mêmes étapes, mais confions chacune à la classe qui la concerne. `Reservation` garde ses données et calcule son montant avec `montantCentimes()`. Une nouvelle classe, `Confirmation`, compose le message à partir de ce montant déjà connu.
+On conserve le même résultat en séparant le calcul du montant et la rédaction du message. `Reservation` garde ses données et calcule son montant avec `montantCentimes()`. Une nouvelle classe, `Confirmation`, demande ce montant, puis l'insère dans le texte.
 
 ```ts
 import assert from "node:assert/strict";
@@ -101,19 +107,21 @@ assert.equal(
 
 L'appel `new Confirmation().rediger(lea)` reçoit ensuite la réservation entière. La méthode lit son adresse, demande son montant à `montantCentimes()`, puis renvoie le même message que le premier programme. La rédaction n'a plus à savoir si le tarif était normal ou solidaire, parce que la réservation a déjà tranché cette question.
 
-Les assertions peuvent maintenant vérifier le calcul sans passer par le message. Elles vérifient aussi que la rédaction utilise le montant de la réservation. Si le texte change, nous modifions la classe `Confirmation`. Si la réduction change, nous examinons `montantCentimes()` et les résultats attendus de ses tests.
+Les deux premières assertions vérifient désormais le calcul sans passer par le message, pour un tarif solidaire puis un tarif normal. La dernière vérifie le texte produit pour la réservation de Léa. Si le texte change, on modifie la classe `Confirmation`. Si la réduction change, on examine `montantCentimes()` et les résultats attendus de ses tests. Le code de rédaction reste inchangé tant qu'il doit afficher le montant calculé.
 
-Cette séparation illustre la responsabilité unique, ou *Single Responsibility Principle* (**SRP**). Une responsabilité correspond ici à une raison de changer liée à un besoin. Robert C. Martin précise cette idée en regardant les acteurs qui demandent les changements. Dans notre exemple, les équipes de tarification et de rédaction portent deux besoins indépendants. `Reservation` répond donc désormais à la première, et `Confirmation` à la seconde.
+Cette séparation illustre la responsabilité unique, ou *Single Responsibility Principle* (**SRP**). Une responsabilité correspond ici à une raison de changer. Robert C. Martin relie cette raison à un acteur, la personne ou le groupe qui décide d'une règle. On distingue ce rôle de celui du développeur chargé de modifier le fichier. Dans notre exemple, les équipes de tarification et de rédaction prennent deux décisions indépendantes. `Reservation` porte la première, et `Confirmation` la seconde.
 
-Une classe peut avoir plusieurs méthodes qui répondent au même besoin. Une responsabilité ne signifie donc ni une seule méthode par classe, ni un fichier pour chaque ligne. La séparation doit aider à comprendre et à modifier le programme. Elle ne prouve pas que tous les découpages plus fins seraient utiles. Les contrôles des saisies et l'envoi du message restent hors de cet exemple.
+Le nombre de personnes ne dicte pas le nombre de classes. Une même personne peut décider des tarifs et rédiger les courriels, sans que ces deux activités aient les mêmes raisons d'évoluer. À l'inverse, plusieurs personnes peuvent travailler sur une même règle. Pour choisir une séparation, on regarde quelles décisions changent ensemble et lesquelles doivent pouvoir changer séparément.
 
-Pour poursuivre en français, lire [le support ENSICAEN, section 2.1, pages 1 et 2](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=1). Son importateur CSV distingue la lecture du fichier et l'écriture des données. Chercher les raisons qui conduiraient à changer chaque partie.
+Une classe peut donc avoir plusieurs méthodes qui répondent au même besoin. Une responsabilité ne signifie ni une seule méthode par classe, ni un fichier pour chaque ligne. Ici, le découpage ajoute une classe et un appel à suivre. Ce coût se justifie si les deux décisions évoluent séparément, pas parce que toute rédaction exige une classe. Les contrôles des saisies et l'envoi du message restent hors de cet exemple.
 
-En complément facultatif, [l'article de Robert C. Martin sur la responsabilité unique](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html) est en anglais. Repérer les acteurs de son exemple, puis comparer leurs demandes à celles des deux équipes de notre atelier.
+Pour poursuivre en français, lisez [le support ENSICAEN, section 2.1, pages 1 et 2](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=1). Son importateur CSV distingue la lecture du fichier et l'écriture des données. Cherchez les raisons qui conduiraient à changer chaque partie.
+
+En complément facultatif, [l'article de Robert C. Martin sur la responsabilité unique](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html) est en anglais. Repérez les acteurs de son exemple, puis comparez leurs demandes à celles des deux équipes de notre atelier.
 
 ## O, ouvert à l'extension, fermé à la modification
 
-Les ateliers proposent déjà un tarif normal et un tarif solidaire. L'association demande maintenant un tarif adhérent qui retire 300 centimes au prix, sans rendre le montant négatif. Où faut-il intervenir pour ajouter cette règle ?
+Les ateliers proposent déjà un tarif normal et un tarif solidaire. L'association demande maintenant un tarif adhérent qui retire 300 centimes au prix, sans rendre le montant négatif. Où faut-il intervenir pour ajouter cette règle ?
 
 La question concerne la formule tarifaire. Les réservations, les places disponibles et les confirmations ne changent pas dans cet exemple.
 
@@ -143,11 +151,13 @@ assert.equal(new Reservation(2001, "solidaire").montantCentimes(), 1001);
 
 Le constructeur reçoit ici un nom de tarif et le range dans `this.tarif`. Avec `"solidaire"`, la condition de `montantCentimes()` est vraie et la méthode renvoie la moitié du prix arrondie. Avec `"normal"`, elle atteint le dernier `return` et renvoie le prix entier. Les assertions vérifient ces deux trajets pour `2001` centimes.
 
-Le type du champ autorise seulement `"normal"` et `"solidaire"`. Pour ajouter le tarif adhérent, il faut modifier ce type, puis ajouter une condition et son calcul. Si les demandes tarifaires se répètent, chaque nouvelle formule nous oblige à rouvrir la classe `Reservation`.
+Le type du champ autorise seulement `"normal"` et `"solidaire"`. Pour ajouter le tarif adhérent, il faut modifier ce type, puis ajouter une condition et son calcul. Si les demandes tarifaires se répètent, chaque nouvelle formule oblige à modifier la classe `Reservation`.
 
 ### Après, la réservation reçoit la règle qui varie
 
-Nous pouvons transmettre la formule elle-même, sous la forme d'un objet. L'interface `Tarif` décrit ce que la réservation attend de cet objet, une méthode `appliquer` qui transforme un prix en montant. Chaque formule devient alors une classe qui implémente cette interface. `Reservation` garde le travail qui reste identique pour tous les tarifs. Son constructeur vérifie le prix, puis `montantCentimes()` exécute la formule reçue et vérifie le montant avant de le renvoyer.
+On peut transmettre la formule elle-même sous la forme d'un objet. L'interface `Tarif` décrit l'opération attendue, une méthode `appliquer` qui transforme un prix en montant. Chaque formule devient alors une classe qui implémente cette interface.
+
+Cette version ajoute aussi des contrôles absents du premier extrait. `Reservation` vérifie le prix dans son constructeur, puis `montantCentimes()` exécute la formule reçue et vérifie le montant avant de le renvoyer. Ces contrôles sont communs à tous les tarifs, indépendamment du déplacement de la formule dans un objet.
 
 ```ts
 import assert from "node:assert/strict";
@@ -217,35 +227,41 @@ assert.throws(() => new Reservation(2001, new TarifFixe(-1)).montantCentimes(), 
 assert.throws(() => new Reservation(2001, new TarifFixe(10.5)).montantCentimes(), /Montant invalide/);
 ```
 
-`Tarif` décrit le contrat d'une formule. Toute classe qui l'implémente doit fournir `appliquer`, une méthode qui reçoit un nombre de centimes et renvoie un nombre de centimes. `TarifNormal`, `TarifSolidaire`, `TarifAdherent` et `TarifFixe` respectent ce contrat, chacune avec son propre calcul. `TarifFixe` ignore le prix et renvoie le montant reçu par son constructeur. Sa méthode `appliquer()` ne déclare donc aucun paramètre, ce que TypeScript accepte, car une méthode peut utiliser moins de paramètres que le contrat n'en prévoit.
+`Tarif` décrit la forme attendue d'une formule. Toute classe qui l'implémente doit fournir `appliquer`, une méthode appelable avec un nombre de centimes et qui renvoie un nombre. `TarifNormal`, `TarifSolidaire`, `TarifAdherent` et `TarifFixe` respectent cette signature, chacune avec son propre calcul. Le sens de ces nombres, notamment l'interdiction des montants négatifs, doit être précisé en plus des types.
 
-Dans `new Reservation(2001, new TarifAdherent())`, nous créons un objet `TarifAdherent` et le transmettons au constructeur, qui le range dans le champ privé `#tarif`. La réservation ne connaît pas la classe exacte de cet objet. Son champ est déclaré avec le type `Tarif`, donc elle sait seulement qu'il possède une méthode `appliquer`, et c'est elle qui décide quand l'appeler.
+`TarifFixe` ignore le prix et renvoie le montant reçu par son constructeur. Sa méthode `appliquer()` ne déclare donc aucun paramètre, ce que TypeScript accepte. L'appel effectué par la réservation lui passe le prix prévu par l'interface, mais cette formule n'a pas besoin de le lire.
 
-Le contrôle du constructeur accepte `2001`, car c'est un entier sûr, positif ou nul. Quand l'assertion appelle `montantCentimes()`, la ligne `this.#tarif.appliquer(this.#prixCentimes)` exécute la méthode de l'objet reçu. Pour cette réservation, `#tarif` désigne un `TarifAdherent`, si bien que c'est sa version d'`appliquer` qui s'exécute. Le calcul `2001 - 300` produit `1701`, et `Math.max(0, 1701)` conserve ce montant. Le second contrôle l'accepte, puis le dernier `return` le renvoie. La même ligne produit donc un calcul différent selon l'objet transmis. Les bases POO appellent ce mécanisme le [polymorphisme](/poo-patterns-frameworks/01-fondations/#contrats-et-polymorphisme).
+Dans `new Reservation(2001, new TarifAdherent())`, on crée un objet `TarifAdherent` et on le transmet au constructeur, qui le range dans le champ privé `#tarif`. La réservation ne connaît pas la classe exacte de cet objet. Son champ est déclaré avec le type `Tarif`, donc elle sait seulement qu'il possède une méthode `appliquer`, et c'est elle qui décide quand l'appeler.
+
+Le contrôle du constructeur accepte `2001`, car c'est un entier positif situé dans la plage où JavaScript représente tous les entiers exactement. C'est ce que signifie ici « entier sûr ».
+
+Quand l'assertion appelle `montantCentimes()`, la ligne `this.#tarif.appliquer(this.#prixCentimes)` exécute la méthode de l'objet reçu. Pour cette réservation, `#tarif` désigne un `TarifAdherent`, si bien que c'est sa version d'`appliquer` qui s'exécute. Le calcul `2001 - 300` produit `1701`, et `Math.max(0, 1701)` conserve ce montant. Le second contrôle l'accepte, puis le dernier `return` le renvoie.
+
+La même ligne produit donc un calcul différent selon l'objet transmis. Les bases POO appellent ce mécanisme le [polymorphisme](/poo-patterns-frameworks/01-fondations/#contrats-et-polymorphisme).
 
 Avec un prix de `200`, le retrait de `300` donnerait `-100`. `Math.max(0, -100)` choisit `0` et évite un montant négatif. Les dernières assertions vérifient aussi les refus. Un prix de `-1` échoue dès la construction de la réservation, avant tout appel du tarif. Un `TarifFixe` de `-1` ou de `10.5` respecte la signature de `Tarif`, mais son résultat échoue au contrôle du montant. Une signature TypeScript compatible ne garantit donc pas, à elle seule, un montant acceptable.
 
-Le principe ouvert-fermé, ou *Open-Closed Principle* (**OCP**), décrit l'objectif de cette correction. Nous pouvons ajouter une classe de tarif sans modifier `Reservation`, qui l'utilise. Ici, `Reservation` reste fermée aux modifications nécessaires pour ajouter un tarif, tout en restant ouverte à cette extension.
+Le principe ouvert-fermé, ou *Open-Closed Principle* (**OCP**), décrit l'objectif de cette séparation. Ajouter une formule revient à fournir un nouvel objet, sans modifier `Reservation`, qui l'utilise. On dit que `Reservation` est ouverte à l'extension par de nouveaux tarifs et fermée aux modifications causées par cet ajout. Elle reste stable parce qu'elle demande toujours la même opération, quelle que soit la formule choisie.
 
-Le code qui choisit le tarif change toujours quelque part. L'application doit savoir quand fournir un `TarifAdherent` plutôt qu'un `TarifNormal`. Le principe aide à concentrer ce changement. Il ne promet pas qu'une nouvelle demande n'aura aucun effet sur le programme.
+En revanche, le code qui choisit le tarif doit encore évoluer. L'application doit savoir quand fournir un `TarifAdherent` plutôt qu'un `TarifNormal`. On ajoute donc du code pour la formule et pour son choix, mais pas de nouvelle branche dans le calcul commun. Le principe ne promet pas qu'une nouvelle demande laissera tout le programme inchangé.
 
-Cette stabilité concerne une variation précise. Une nouvelle règle sur les places disponibles demanderait une autre modification. OCP n'interdit ni les `if` ni la correction d'un bogue dans le calcul commun. Si deux tarifs restent stables et que la condition initiale se lit bien, la conserver peut suffire. Les assertions vérifient les résultats choisis ici, mais elles ne décident pas quelle réduction l'association doit proposer.
+Cette stabilité concerne une variation précise, la formule tarifaire compatible avec le contrat actuel. Une nouvelle règle sur les places disponibles demanderait une autre modification. OCP n'interdit ni les `if` ni la correction d'un bogue dans le calcul commun. Si deux tarifs restent stables et que la condition initiale se lit bien, ajouter une interface et plusieurs classes peut coûter plus qu'il ne rapporte. Les assertions vérifient les résultats choisis ici, mais elles ne décident pas quelle réduction l'association doit proposer.
 
-Le chapitre [Strategy](/poo-patterns-frameworks/02-strategy/) applique cette décision à l'application complète. Pour une autre explication en français, lire la partie sur le principe ouvert-fermé de [l'article de Philippe Vialatte sur SOLID](https://philippe.developpez.com/articles/SOLIDdotNet/). Ses exemples sont en C#. Chercher ce qui varie et ce qui reste inchangé quand une variante s'ajoute.
+Le chapitre [Strategy](/poo-patterns-frameworks/02-strategy/) applique cette décision à l'application complète. Pour une autre explication en français, lisez la partie sur le principe ouvert-fermé de [l'article de Philippe Vialatte sur SOLID](https://philippe.developpez.com/articles/SOLIDdotNet/). Ses exemples sont en C#. Cherchez ce qui varie et ce qui reste inchangé quand une variante s'ajoute.
 
 ## L, substitution de Liskov
 
 ### Remplacer sans rompre le contrat
 
-Imaginons un écran de réservation avec un bouton **Annuler**. Au clic, l'écran transmet la réservation à une fonction `annulerEtConfirmer`. Cette fonction demande l'annulation, puis renvoie le message « Annulation confirmée ». Elle doit pouvoir se fier à l'objet qu'elle reçoit.
+Prenons un écran de réservation avec un bouton **Annuler**. Au clic, l'écran transmet la réservation à une fonction `annulerEtConfirmer`. Cette fonction demande l'annulation, puis renvoie le message « Annulation confirmée ». Elle doit pouvoir se fier à l'objet qu'elle reçoit.
 
-Le code qui utilise un objet est son **appelant**. Ici, `annulerEtConfirmer` est l'appelant de la réservation. Il attend que `annuler()` rende `annulee` vrai sans lever d'erreur, y compris si la réservation est déjà annulée. C'est la promesse choisie pour cet exemple.
+Le code qui utilise un objet est son **appelant**. Ici, `annulerEtConfirmer` est l'appelant de la réservation. Il attend que `annuler()` rende `annulee` vrai sans lever d'erreur, y compris si la réservation est déjà annulée. Cette promesse permet d'afficher une confirmation sans ajouter de contrôle après l'appel. Elle est choisie pour cet exemple, pas imposée à toutes les applications de réservation.
 
 Le principe de substitution de Liskov, ou *Liskov Substitution Principle* (**LSP**), demande de préserver cette promesse quand on remplace un objet par un autre du même type attendu. **Le code qui utilise l'objet doit pouvoir continuer à compter sur les mêmes garanties.**
 
 ### Un remplacement qui échoue
 
-Dans ce premier modèle, `Reservation` permet l'annulation. Nous ajoutons une réservation ferme, dont les conditions interdisent l'annulation. `ReservationFerme` hérite de `Reservation`, mais remplace sa méthode `annuler()` par une erreur.
+Dans ce premier modèle, `Reservation` permet l'annulation. On ajoute une réservation ferme, dont les conditions interdisent l'annulation. `ReservationFerme` hérite de `Reservation`, mais remplace sa méthode `annuler()` par une erreur.
 
 Le problème se voit en donnant cette nouvelle réservation à la même fonction `annulerEtConfirmer`.
 
@@ -284,9 +300,9 @@ assert.throws(() => annulerEtConfirmer(ferme), /ne peut pas être annulée/);
 assert.equal(ferme.annulee, false);
 ```
 
-Avec `flexible`, l'appel `reservation.annuler()` met l'état à `true`. L'exécution continue jusqu'au `return`, qui produit le message attendu.
+Avec `flexible`, l'état est d'abord confirmé. L'appel `reservation.annuler()` met ensuite l'état d'annulation à `true`. L'exécution continue jusqu'au `return`, qui produit le message attendu. Les deux premières assertions vérifient donc le message et l'état obtenu.
 
-La ligne `const ferme: Reservation = new ReservationFerme()` présente ensuite la réservation ferme comme une `Reservation`. TypeScript l'accepte, car elle possède une méthode `annuler()` dont la signature convient. Le compilateur ne vérifie pas qu'elle tient la promesse d'annulation.
+La ligne `const ferme: Reservation = new ReservationFerme()` présente ensuite la réservation ferme comme une `Reservation`. TypeScript accepte cette sous-classe, dont la méthode `annuler()` conserve une signature compatible. Le compilateur ne vérifie pas qu'elle tient la promesse d'annulation. Le type attendu autorise donc l'appel, alors que l'objet reçu en détermine le comportement réel.
 
 Quand `annulerEtConfirmer` reçoit `ferme`, la même ligne `reservation.annuler()` lève cette fois une erreur. Le `return` n'est jamais atteint et la réservation reste confirmée. Le remplacement a rompu la promesse faite à l'appelant. C'est la violation de Liskov.
 
@@ -294,7 +310,7 @@ Quand `annulerEtConfirmer` reçoit `ferme`, la même ligne `reservation.annuler(
 
 ### Annoncer seulement les capacités possibles
 
-Le refus d'annuler une réservation ferme est une règle métier légitime. C'est le contrat annoncé par le type qui doit changer. Les deux réservations peuvent être consultées. Seule la réservation flexible peut être annulée.
+Le refus d'annuler une réservation ferme est une règle métier légitime. Il faut donc changer le contrat annoncé par le type, plutôt que permettre une annulation interdite. Les deux réservations peuvent être consultées, mais seule la réservation flexible peut être annulée.
 
 Le second extrait remplace le précédent. `ReservationConsultable` permet de lire l'état, et `ReservationAnnulable` y ajoute l'opération d'annulation. La classe `ReservationFerme` implémente donc seulement `ReservationConsultable`, si bien qu'elle expose son état, toujours confirmé, sans hériter d'une méthode impossible à respecter.
 
@@ -350,33 +366,35 @@ assert.equal(annulerEtConfirmer(flexible), "Annulation confirmée");
 assert.equal(consulter(flexible), "Annulée");
 ```
 
-`consulter` attend une `ReservationConsultable`. Les deux objets conviennent, et les premières assertions vérifient que leur lecture laisse `annulee` à `false`.
+`consulter` attend une `ReservationConsultable`. Les deux objets conviennent, et les premières assertions vérifient qu'ils sont confirmés. Dans ces appels, leur lecture laisse bien `annulee` à `false`. La fonction de consultation n'a pas besoin de savoir quelle réservation pourrait ensuite être annulée.
 
-`annulerEtConfirmer` attend désormais une `ReservationAnnulable`. Elle accepte `flexible`. Après son appel, `consulter(flexible)` renvoie « Annulée », tandis que `consulter(ferme)` renvoie toujours « Confirmée ». La dernière paire d'assertions vérifie qu'une seconde annulation réussit et laisse la réservation annulée.
+`annulerEtConfirmer` attend désormais une `ReservationAnnulable`. Elle accepte donc `flexible`, qui possède cette capacité. Après son appel, `consulter(flexible)` renvoie « Annulée », tandis que `consulter(ferme)` renvoie toujours « Confirmée ». La dernière paire d'assertions vérifie qu'une seconde annulation réussit et laisse la réservation annulée.
 
-Écrire `annulerEtConfirmer(ferme)` provoque maintenant une erreur TypeScript, car la classe `ReservationFerme` ne possède pas `annuler()`. Nous n'avons pas besoin d'ajouter un `if` dans cette fonction pour reconnaître les réservations fermes. Elles ne sont plus présentées comme annulables.
+Écrire `annulerEtConfirmer(ferme)` provoque maintenant une erreur TypeScript, car la classe `ReservationFerme` ne possède pas `annuler()`. On n'a pas besoin d'ajouter un `if` dans cette fonction pour reconnaître les réservations fermes. Elles ne sont plus présentées comme annulables.
 
 ### Vérifier les promesses du contrat
 
-La correction rend les capacités explicites, mais la présence d'une méthode ne garantit pas son comportement. Une autre implémentation pourrait proposer `annuler()` et ne rien faire. Elle laisserait `annulee` à `false` et romprait encore la promesse. Le [duck typing](/poo-patterns-frameworks/01-fondations/#duck-typing-et-typage-structurel) et la compatibilité des types ne suffisent donc pas à vérifier Liskov.
+La correction rend les capacités explicites, mais la présence d'une méthode ne garantit pas son comportement. Une autre implémentation, c'est-à-dire un autre objet qui fournit les opérations du contrat, pourrait proposer `annuler()` et ne rien faire. Elle laisserait `annulee` à `false` et romprait encore la promesse. Le [duck typing](/poo-patterns-frameworks/01-fondations/#duck-typing-et-typage-structurel) et la compatibilité des types ne suffisent donc pas à vérifier Liskov.
 
-Pour chaque implémentation de `ReservationAnnulable`, les tests doivent vérifier l'annulation et sa répétition. Pour chaque objet consultable, ils doivent aussi vérifier que la lecture ne change pas l'état. Ces vérifications concernent les interfaces et les objets sans héritage autant que les sous-classes.
+Pour chaque implémentation de `ReservationAnnulable`, les tests doivent vérifier l'annulation et sa répétition. Pour chaque objet consultable, ils doivent aussi vérifier que la lecture ne change pas l'état. Une même série de vérifications peut être appliquée à chaque implémentation, parce que la promesse attendue reste la même. Ces vérifications concernent les interfaces et les objets sans héritage autant que les sous-classes.
 
-Le vocabulaire du contrat précise ces attentes.
+Pour décrire ces garanties, on distingue ce qui est exigé avant l'appel, ce qui est garanti après et ce qui doit rester vrai.
 
 - Une **précondition** est une exigence avant un appel. Ici, `annuler()` ne demande pas que la réservation soit encore confirmée. Une nouvelle implémentation qui refuse les réservations déjà annulées ajouterait une exigence et romprait ce contrat.
 - Une **postcondition** est une garantie après un appel réussi. Ici, `annulee` vaut `true` après `annuler()`. Une méthode qui ne fait rien ne tient pas cette garantie.
-- Un **invariant** est une règle qui reste vraie dans chaque état valide de l'objet. Ici, l'état d'annulation reste un booléen. Chaque opération doit préserver cette règle.
+- Un **invariant** est une règle qui reste vraie dans chaque état valide de l'objet. Ici, l'état d'annulation reste un booléen. Chaque opération doit préserver cette règle. Ce seul invariant ne garantit pas que l'annulation a eu lieu, d'où la postcondition précédente.
 
-Un objet remplaçant doit préserver les invariants, sans exiger davantage avant l'appel ni garantir moins après. Lever une erreur n'est pas automatiquement une violation de Liskov. Un contrat peut prévoir des refus. La violation vient ici d'un refus supplémentaire là où notre contrat garantit l'annulation.
+Un objet remplaçant doit préserver les invariants, sans exiger davantage avant l'appel ni garantir moins après. On examine aussi les suites d'appels permises par le contrat, comme deux annulations successives suivies d'une consultation. Les assertions en vérifient quelques-unes, sans constituer une preuve pour tous les comportements possibles.
 
-La séparation des capacités prépare le principe suivant, la ségrégation des interfaces. Les deux questions restent différentes. Liskov demande si un objet tient les promesses du type attendu. La ségrégation demande si le code dépend seulement des opérations dont il a besoin.
+Lever une erreur ne viole pas ce principe si le contrat prévoit ce refus. La violation vient ici d'un refus supplémentaire là où notre contrat garantit l'annulation. On ne décide donc pas si une sous-classe est correcte en regardant seulement si elle lève une erreur, mais en comparant son comportement aux promesses du type attendu.
 
-### Approfondir en français
+La séparation des capacités prépare le principe suivant, la ségrégation des interfaces, mais les deux questions restent différentes. Liskov demande si un objet tient les promesses du type attendu. La ségrégation demande si le code dépend seulement des opérations dont il a besoin.
 
-Dans [le support ENSICAEN, section 2.3, pages 3 et 4](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=3), `Square` ne respecte pas les promesses des méthodes de `Rectangle`. La correction utilise la composition. Repérer la promesse perdue. Le problème concerne des objets modifiables.
+### Approfondir
 
-Lire aussi [la partie Liskov de Philippe Vialatte](https://philippe.developpez.com/articles/SOLIDdotNet/#LIV). Pour chaque sous-classe de son exemple, écrire la promesse du type parent, puis la promesse que l'appelant perd.
+Dans [le support ENSICAEN, section 2.3, pages 3 et 4](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=3), `Square` ne respecte pas les promesses des méthodes de `Rectangle`. La correction utilise la composition. Repérez la promesse perdue lorsque l'on modifie ces objets.
+
+Lisez aussi [la partie Liskov de Philippe Vialatte](https://philippe.developpez.com/articles/SOLIDdotNet/#LIV). Pour chaque sous-classe de son exemple, écrivez la promesse du type parent, puis la promesse que l'appelant perd.
 
 ### Repère historique
 
@@ -384,9 +402,9 @@ Le principe porte le nom de [Barbara Liskov, chercheuse au MIT](https://www.csai
 
 ## I, ségrégation des interfaces
 
-Imaginons un écran qui consulte une réservation pour afficher l'adresse du participant. Cet écran ne crée aucune réservation et ne peut pas en supprimer. Pourtant, la classe qui prépare son affichage exige, dans son constructeur, un objet capable de lire, d'enregistrer et de supprimer.
+Prenons un écran qui consulte une réservation pour afficher l'adresse du participant. Cet écran ne crée ni ne supprime de réservation. Pourtant, la classe qui prépare son affichage exige, dans son constructeur, un objet capable de lire, d'enregistrer et de supprimer.
 
-Cela devient gênant quand nous voulons lui fournir une source qui permet seulement la lecture. Le résultat à afficher ne demande aucune écriture, mais le contrat demandé par l'écran en exige.
+Cette exigence apparaît lorsqu'on veut consulter une archive qui ne propose que la lecture. Elle contient les données nécessaires à l'écran, mais ne satisfait pas le contrat de son constructeur. Pour réutiliser l'écran, il faut revoir ce qu'il exige de sa source, plutôt qu'inventer des opérations d'écriture sans utilité.
 
 ### Avant, consulter exige aussi le contrat d'administration
 
@@ -445,9 +463,9 @@ assert.equal(ecran.afficher(1), "lea@example.org");
 assert.equal(ecran.afficher(999), "Réservation introuvable");
 ```
 
-La classe `ReservationsEnMemoire` range les réservations dans une `Map`, une collection qui associe ici un identifiant à une réservation. La préparation de l'exemple crée une instance de cette classe, puis appelle `source.enregistrer` pour y placer la réservation `1`. Cette écriture fournit les données de départ. Elle ne fait pas partie du travail de l'écran, qui reçoit ensuite `source` dans son constructeur et la garde dans son champ privé `#source`.
+La classe `ReservationsEnMemoire` range les réservations dans une `Map`, une collection qui associe ici un identifiant à une réservation. La préparation de l'exemple crée une instance de cette classe, puis appelle `source.enregistrer` pour y placer la réservation `1`. Cette écriture prépare les données avant de construire l'écran. L'écran reçoit ensuite `source` dans son constructeur et la garde dans son champ privé `#source`. Il peut ainsi consulter les données sans les avoir enregistrées lui-même.
 
-Quand nous appelons `ecran.afficher(1)`, la ligne `this.#source.lire(id)` retrouve la réservation dans la `Map`. La méthode renvoie son adresse, `lea@example.org`. Avec l'identifiant `999`, `lire` renvoie `undefined`, car aucune réservation ne correspond. La méthode choisit alors le texte « Réservation introuvable ».
+Quand on appelle `ecran.afficher(1)`, la ligne `this.#source.lire(id)` retrouve la réservation dans la `Map`. La méthode renvoie son adresse, `lea@example.org`. Avec l'identifiant `999`, `lire` renvoie `undefined`, car aucune réservation ne correspond. La méthode choisit alors le texte « Réservation introuvable ».
 
 Ces deux trajets utilisent seulement `lire`. Pourtant, le paramètre du constructeur, `source: GestionReservations`, exige les trois méthodes de l'interface. TypeScript refuse donc de construire l'écran avec un objet qui propose uniquement `lire`. Les méthodes `enregistrer` et `supprimer` lui manquent, même si l'écran ne les appelle jamais.
 
@@ -455,7 +473,7 @@ Dans ce contexte, le **client** est le code qui utilise l'objet. Il ne s'agit pa
 
 ### Après, l'écran annonce son besoin de lecture
 
-Changeons le contrat demandé par le constructeur pour annoncer ce besoin. `LectureReservations` exige seulement une méthode `lire`. La méthode `afficher` garde les mêmes instructions, car son travail ne change pas. Pour le vérifier, nous fournissons cette fois une source en lecture seule, `ArchiveReservations`, qui ne sait ni enregistrer ni supprimer.
+On peut donc limiter le contrat demandé par le constructeur à ce besoin de lecture. `LectureReservations` exige seulement une méthode `lire`. La méthode `afficher` garde les mêmes instructions, car son travail ne change pas. Pour le vérifier, on fournit cette fois `ArchiveReservations`, une source dont l'interface publique ne propose ni enregistrement ni suppression. « En lecture seule » décrit ici les opérations offertes par cette source, pas une garantie que ses données ne peuvent jamais changer.
 
 ```ts
 import assert from "node:assert/strict";
@@ -509,27 +527,27 @@ assert.equal(archive.lire(1)?.montantCentimes, 2000);
 
 `ArchiveReservations` reçoit ses réservations dans son constructeur et ne propose qu'une méthode publique. Lors de `lire(1)`, `find` parcourt le tableau et retrouve la réservation dont l'identifiant vaut `1`. La méthode renvoie alors une copie de cette réservation. `afficher` reçoit cette copie et renvoie la même adresse que précédemment.
 
-Lors de `lire(999)`, `find` ne trouve aucune réservation et renvoie `undefined`. La source renvoie donc `undefined`, puis l'écran produit le même message d'absence. Les premières assertions vérifient que le changement de contrat n'a pas changé ces résultats. La dernière retrouve le montant `2000` dans la réservation lue.
+Lors de `lire(999)`, `find` ne trouve aucune réservation et renvoie `undefined`. La source renvoie donc `undefined`, puis l'écran produit le même message d'absence. Les premières assertions vérifient que le changement de contrat n'a pas changé ces résultats. La dernière retrouve le montant `2000` dans la réservation lue. Elle observe une donnée de l'archive, sans prouver que celle-ci est immuable.
 
 L'interface décrit ce que l'écran exige de l'objet reçu. Elle n'impose pas que cet objet possède uniquement ces méthodes. Grâce au [typage structurel](/poo-patterns-frameworks/01-fondations/#duck-typing-et-typage-structurel) de TypeScript, une instance de `ReservationsEnMemoire`, la classe du premier exemple, pourrait aussi convenir sans déclarer `implements LectureReservations`. Elle possède bien `lire`, même si elle sait également enregistrer et supprimer.
 
-La ségrégation des interfaces, ou *Interface Segregation Principle* (**ISP**), consiste à adapter les contrats aux besoins de leurs clients. Ici, un contrat de consultation évite à l'écran d'exiger les opérations d'administration.
+La ségrégation des interfaces, ou *Interface Segregation Principle* (**ISP**), consiste à adapter les contrats aux besoins de leurs clients. Ici, un contrat de consultation évite à l'écran d'exiger les opérations d'administration. On peut donc réutiliser cet écran avec une archive comme avec une source modifiable, sans imposer à l'archive des méthodes qu'elle ne peut pas fournir utilement.
 
-Nous avons utilisé une seule méthode parce que cet écran n'en utilise qu'une. Si plusieurs opérations sont toujours nécessaires ensemble pour un même rôle, une interface peut les regrouper. Le principe ne demande pas une interface par méthode.
+Le contrat contient une seule méthode parce que cet écran n'en utilise qu'une. Si plusieurs opérations sont toujours nécessaires ensemble pour un même rôle, une interface peut les regrouper. Le principe ne demande pas une interface par méthode.
 
-Une déclaration TypeScript ne protège pas les données contre un accès interdit. Le contrat de lecture n'enlève pas les capacités d'écriture d'un objet qui en possède. Les permissions réelles doivent être contrôlées par le système qui exécute ces opérations. Les assertions de cet exemple vérifient l'affichage, sans prouver une politique de sécurité.
+Ce contrat minimal ne constitue pas un système d'autorisations. Si l'objet fourni possède aussi des opérations d'écriture, le contrat de lecture ne les supprime pas. Il limite ce que l'écran peut demander dans le code vérifié par TypeScript, pas ce qu'un autre code peut faire du même objet. Les permissions réelles doivent être contrôlées par le système qui exécute ces opérations. Les assertions de cet exemple vérifient l'affichage, sans prouver une politique de sécurité.
 
-La question diffère aussi de celle de Liskov. Ici, nous cherchons quelles opérations le client a besoin d'exiger. Liskov demande ensuite si les objets acceptés tiennent les promesses de ces opérations.
+La question diffère aussi de celle de Liskov. Ici, on cherche quelles opérations le client a besoin d'exiger. Liskov demande ensuite si les objets acceptés tiennent les promesses de ces opérations.
 
-Dans [le support ENSICAEN, section 2.4, pages 4 et 5](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=4), les clients d'un distributeur n'utilisent pas les mêmes opérations de dépôt et de retrait. Identifier le besoin de chaque client avant de lire le découpage proposé.
+Dans [le support ENSICAEN, section 2.4, pages 4 et 5](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=4), les clients d'un distributeur n'utilisent pas les mêmes opérations de dépôt et de retrait. Identifiez le besoin de chaque client avant de lire le découpage proposé.
 
-Pour une autre lecture en français, [l'article SOLID de DigitalOcean](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design-fr) présente aussi la ségrégation des interfaces, avec du code PHP. Rechercher, dans son exemple, quelles opérations chaque client utilise réellement.
+Pour une autre lecture en français, [l'article SOLID de DigitalOcean](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design-fr) présente aussi la ségrégation des interfaces, avec du code PHP. Recherchez, dans son exemple, quelles opérations chaque client utilise réellement.
 
 ## D, inversion des dépendances
 
-L'association veut réorganiser les données de son application. Aujourd'hui, les réservations se trouvent dans `stockage.tables.reservations`. Cette organisation pourrait changer sans que le besoin de consultation change. Nous voulons toujours obtenir le montant d'une réservation à partir de son identifiant.
+L'association veut réorganiser les données de son application. Aujourd'hui, les réservations se trouvent dans `stockage.tables.reservations`. Cette organisation pourrait changer sans que le besoin de consultation change. On veut toujours obtenir le montant d'une réservation à partir de son identifiant.
 
-Faut-il alors réécrire la consultation du montant chaque fois que le stockage change de structure ? Le premier programme nous y oblige, car la classe de consultation connaît le chemin exact vers les données.
+Le code métier exprime ici ce besoin lié à l'activité de l'association. Le code de stockage précise comment retrouver les données. Dans le premier programme, ces deux rôles sont mêlés, car la consultation connaît le chemin exact vers les réservations. Réorganiser le stockage oblige donc à modifier la consultation, même si son travail reste le même.
 
 ### Avant, le métier connaît l'organisation du stockage
 
@@ -565,15 +583,15 @@ assert.equal(consultation.montant(1), 2000);
 assert.throws(() => consultation.montant(999), /Réservation introuvable/);
 ```
 
-Suivons `consultation.montant(1)`. La méthode part de l'objet `stockage`, lit sa propriété `tables`, puis accède à `reservations`. Elle appelle ensuite la méthode `get(1)` de cette `Map`. La réservation existe, donc le dernier `return` renvoie son montant, `2000` centimes.
+Lors de l'appel `consultation.montant(1)`, la méthode part de l'objet `stockage`, lit sa propriété `tables`, puis accède à `reservations`. Elle appelle ensuite la méthode `get(1)` de cette `Map`. La réservation existe, donc le dernier `return` renvoie son montant, `2000` centimes.
 
 Avec `consultation.montant(999)`, la `Map` ne trouve aucune réservation et renvoie `undefined`. Le contrôle `if (!reservation)` provoque alors l'erreur annoncée par la seconde assertion. La méthode ne doit pas inventer un montant quand la réservation est absente.
 
-La classe `ConsultationMontant` dépend de l'organisation du stockage. Une **dépendance** désigne ici une connaissance dont le code a besoin pour fonctionner. Nous devons connaître `tables`, `reservations` et la méthode `get` pour écrire cette consultation. Renommer ou déplacer une table oblige à revenir dans la classe, alors que son besoin n'a pas changé.
+La classe `ConsultationMontant` dépend de l'organisation du stockage. Une **dépendance** désigne ici une connaissance dont le code a besoin pour fonctionner. Pour écrire cette consultation, on doit connaître `tables`, `reservations` et la méthode `get`. Renommer ou déplacer une table oblige à revenir dans la classe, alors que son besoin n'a pas changé.
 
 ### Après, le stockage satisfait le contrat demandé par le métier
 
-La consultation a besoin d'une opération plus précise que l'accès à toutes les tables. Elle veut trouver une réservation par son identifiant. Nous exprimons ce besoin avec l'interface `LectureReservations`, puis nous écrivons une classe qui réalise cette lecture et nous en donnons une instance à la consultation.
+La consultation a besoin d'une opération plus précise que l'accès à toutes les tables. Elle veut trouver une réservation par son identifiant. On exprime ce besoin avec l'interface `LectureReservations`. Une classe fournit ensuite cette opération de lecture, et on en transmet une instance à la consultation.
 
 ```ts
 import assert from "node:assert/strict";
@@ -632,13 +650,15 @@ assert.throws(() => enPanne.montant(1), /Stockage indisponible/);
 
 `ConsultationMontant` reçoit maintenant, dans son constructeur, l'objet à qui elle demandera de retrouver les réservations. Elle le garde dans son champ privé `#lecture`, si bien que l'appel `consultation.montant(1)` ne transmet plus que l'identifiant recherché. À l'intérieur, `this.#lecture.trouverParId(id)` remplace tout le chemin vers la `Map`.
 
-La classe `LectureEnMemoire` fait le lien avec le stockage actuel. Sa méthode `trouverParId` reçoit l'identifiant et exécute `stockage.tables.reservations.get(id)`. Pour `1`, elle renvoie la réservation, puis `montant` renvoie `2000`. Pour `999`, elle renvoie `undefined` et la consultation conserve son erreur « Réservation introuvable ».
+La classe `LectureEnMemoire` fait le lien avec le stockage actuel. Sa méthode `trouverParId` reçoit l'identifiant et exécute `stockage.tables.reservations.get(id)`. Pour `1`, elle renvoie la réservation, puis `montant` renvoie `2000`. Pour `999`, elle renvoie `undefined` et la consultation conserve son erreur « Réservation introuvable ».
 
-Si nous réorganisons les tables, ce chemin se modifie dans `LectureEnMemoire`. La classe `ConsultationMontant` continue de demander une réservation par identifiant. Elle n'a plus besoin de connaître les noms des tables ou la `Map`.
+Si on réorganise les tables, on modifie ce chemin dans `LectureEnMemoire`. La classe `ConsultationMontant` continue de demander une réservation par identifiant. Elle n'a plus besoin de connaître les noms des tables ou la `Map`.
 
-Le principe d'inversion des dépendances, ou *Dependency Inversion Principle* (**DIP**), décrit cette direction de conception. La règle de **haut niveau** exprime le besoin utile à l'application, ici consulter le montant d'une réservation. Le **détail technique** est la manière de fournir les données, ici une `Map` rangée dans un objet `tables`. Ces termes distinguent des rôles dans le programme.
+Le principe d'inversion des dépendances, ou *Dependency Inversion Principle* (**DIP**), décrit cette direction de conception. La règle de **haut niveau** exprime ce que l'application veut faire, ici consulter le montant d'une réservation. Le **détail technique** est la manière de fournir les données, ici une `Map` rangée dans un objet `tables`. Ces termes distinguent des rôles dans le programme.
 
-Le contrat `LectureReservations` exprime le besoin de la consultation. Dans une application répartie en modules, il appartient à la partie métier. Le module de stockage dépend de ce contrat pour fournir l'opération attendue. Le module métier n'importe pas l'organisation du stockage. Cet exemple reste dans un seul fichier pour suivre les appels. Il illustre la séparation sans réaliser ce découpage en modules.
+Le contrat `LectureReservations` exprime le besoin de la consultation, plutôt que de reproduire toutes les possibilités du stockage. Dans une application répartie en modules, on le définit du côté du code métier. Le module de stockage dépend alors de ce contrat pour fournir l'opération attendue. Le module métier n'importe pas l'organisation du stockage.
+
+C'est cette relation qui est inversée. Au lieu d'adapter la consultation aux détails du stockage, on adapte le stockage au besoin annoncé par la consultation. Les deux parties dépendent du contrat. Cet exemple reste dans un seul fichier pour suivre les appels. Il illustre la séparation sans réaliser ce découpage en modules.
 
 ```mermaid
 flowchart LR
@@ -650,17 +670,19 @@ flowchart LR
 
 Ces flèches représentent les dépendances du code. Elles indiquent ce que chaque partie doit connaître. Elles ne montrent pas le trajet des appels pendant l'exécution. `ConsultationMontant` appelle bien l'objet `LectureEnMemoire`, puis cet objet accède à la `Map`. Le changement concerne les connaissances nécessaires pour écrire la consultation.
 
-Le contrat distingue aussi une absence et une panne. `undefined` signifie que la lecture a réussi sans trouver cette réservation. La classe `StockageEnPanne`, elle, lève une erreur dès qu'on lui demande une lecture. La dernière assertion vérifie que cette erreur traverse `montant` et arrive jusqu'à son appelant. La même classe `ConsultationMontant` fonctionne ainsi avec deux implémentations du contrat, sans qu'on modifie une seule de ses lignes.
+Le contrat distingue aussi une absence et une panne. `undefined` signifie que la lecture a réussi sans trouver cette réservation. La classe `StockageEnPanne`, elle, lève une erreur dès qu'on lui demande une lecture. La dernière assertion vérifie que cette erreur traverse `montant` et arrive jusqu'à son appelant. La même classe `ConsultationMontant` peut donc être utilisée avec ces deux implémentations, sans changer son code. Cela ne signifie pas qu'elle peut fournir un montant lorsque le stockage est indisponible.
 
 Transformer cette panne en `undefined` ferait croire qu'aucune réservation ne correspond à l'identifiant. Cela masquerait l'échec de la lecture. Le contrat doit donc préciser les résultats attendus et les erreurs possibles. Le nom d'une interface ne suffit pas à garantir ce comportement.
 
-Le passage de l'objet de lecture au constructeur est une **injection de dépendances**, plus précisément une injection par le constructeur. Nous fournissons à la classe l'objet dont elle a besoin, plutôt que de lui faire choisir ou construire son stockage avec `new`. L'injection décrit cette manière de fournir un objet. DIP concerne ce que les différentes parties du programme connaissent et la direction de leurs dépendances. Passer directement l'objet `stockage` au constructeur serait aussi une injection, mais la classe devrait encore connaître ses tables.
+Le passage de l'objet de lecture au constructeur est une **injection de dépendances**, plus précisément une injection par le constructeur. On fournit à la classe l'objet dont elle a besoin, plutôt que de lui faire choisir ou construire son stockage avec `new`. L'injection décrit cette manière de fournir un objet. DIP concerne ce que les différentes parties du programme connaissent et la direction de leurs dépendances.
 
-L'**inversion de contrôle** désigne l'idée plus générale de confier à un autre code une partie du pilotage des appels. Un framework qui appelle votre gestionnaire lors d'un événement en est un exemple. Dans notre extrait, les appels restent visibles et nous créons nous-mêmes `new LectureEnMemoire()`. Aucun framework ni outil d'injection n'est nécessaire pour effectuer cette séparation.
+Passer directement l'objet `stockage` au constructeur serait aussi une injection. Mais la consultation devrait encore suivre ses tables et leur organisation. On aurait déplacé le choix de l'objet sans supprimer la connaissance du détail technique. Ici, le contrat de lecture permet de séparer ces deux questions.
+
+L'**inversion de contrôle** désigne l'idée plus générale de confier à un autre code une partie du pilotage des appels. Un framework qui appelle votre gestionnaire lors d'un événement en est un exemple. Dans cet extrait, les appels restent visibles et on crée soi-même `new LectureEnMemoire()`. Aucun framework ni outil d'injection n'est nécessaire pour effectuer cette séparation.
 
 La `Map` reste un stockage en mémoire. Elle perd ses données quand le processus s'arrête. Le contrat et les assertions n'apportent aucune garantie de persistance ou de résistance aux accès concurrents. Le chapitre [Repository](/poo-patterns-frameworks/07-repository/) poursuit la discussion sur les contrats de stockage.
 
-Pour approfondir en français, lire [le support ENSICAEN, section 2.5, pages 5 et 6](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=5). Il place des contrats de lecture et d'écriture entre la règle et les outils utilisés. Rechercher quel besoin chaque contrat exprime.
+Pour approfondir en français, lisez [le support ENSICAEN, section 2.5, pages 5 et 6](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=5). Il place des contrats de lecture et d'écriture entre la règle et les outils utilisés. Recherchez quel besoin chaque contrat exprime.
 
 En complément facultatif, [l'article de Martin Fowler sur l'injection de dépendances](https://martinfowler.com/articles/injection.html) est en anglais. Sa séparation entre la configuration des objets et leur utilisation aide à relire le rôle de la ligne `new ConsultationMontant(new LectureEnMemoire())`.
 
@@ -672,22 +694,22 @@ Robert C. Martin est aussi l'auteur de [*Clean Code: A Handbook of Agile Softwar
 
 ## Choisir quel principe examiner
 
-Commencer par décrire le changement qui pose problème. Si changer un texte menace le calcul du montant, examiner les responsabilités avec S. Si une nouvelle formule tarifaire oblige à modifier un traitement commun déjà stable, examiner la variation avec O.
+Commencez par décrire le changement qui pose problème. Si changer un texte menace le calcul du montant, examinez les responsabilités avec S. Si une nouvelle formule tarifaire oblige à modifier un traitement commun déjà stable, examinez la variation avec O.
 
-Si un objet accepté par une fonction refuse une opération promise, écrire le contrat et examiner L. Si une vue de consultation exige des opérations d'administration, partir du besoin de ce client et examiner I. Si une règle métier connaît les noms de tables ou les méthodes d'un fournisseur, suivre les dépendances et examiner D.
+Si un objet accepté par une fonction refuse une opération promise, écrivez le contrat et examinez L. Si une vue de consultation exige des opérations d'administration, partez du besoin de ce client et examinez I. Si une règle métier connaît les noms de tables ou les méthodes d'un fournisseur, suivez les dépendances et examinez D.
 
-Une même modification peut concerner plusieurs principes. La séparation entre consultation et annulation répond à une promesse impossible dans l'exemple Liskov. Elle donne aussi aux clients des contrats adaptés à leurs besoins. Les lettres servent à expliquer la décision. Elles ne décident pas à la place du besoin observé.
+Une même modification peut concerner plusieurs principes. La séparation entre consultation et annulation répond à une promesse impossible dans l'exemple Liskov. Elle donne aussi aux clients des contrats adaptés à leurs besoins.
 
 ## Exercice, une réservation ferme dans une liste
 
 Une liste doit afficher le statut de toutes les réservations. Une nouvelle réservation ferme peut être consultée mais ne peut jamais être annulée. Une proposition consiste à la faire hériter de `ReservationFlexible`, puis à redéfinir `annuler()` pour ne rien faire.
 
-Avant de lire la réponse, formuler la promesse rompue, choisir le contrat à donner à la liste et décrire une vérification du résultat. Examiner aussi cette question. Faut-il ajouter une méthode d'annulation à la liste pour qu'elle accepte cette réservation ?
+Avant de lire la réponse, formulez la promesse rompue et choisissez le contrat à donner à la liste. Décrivez ensuite une vérification du résultat. Expliquez aussi si la liste doit proposer une méthode d'annulation pour accepter cette réservation.
 
 ### Réponse expliquée
 
-Le problème principal est L. `ReservationFlexible` promet que l'annulation rend `annulee` vrai. Une méthode qui ne fait rien conserve la signature mais ne tient pas cette postcondition. Supprimer l'exception du premier contre-exemple ne corrige donc pas le modèle.
+`ReservationFlexible` promet que l'annulation rend `annulee` vrai. Une méthode qui ne fait rien conserve la signature mais ne tient pas cette postcondition. La fonction d'annulation pourrait alors annoncer une réussite qui n'a pas eu lieu. Le problème principal relève donc de L, la substitution. Supprimer l'exception du premier contre-exemple ne corrige pas le modèle.
 
-La liste doit recevoir des objets `ReservationConsultable`. Elle n'a besoin que de lire `annulee`. Les réservations fermes et flexibles satisfont toutes deux ce contrat. Cette décision suit aussi I, car le client de consultation n'exige plus une opération d'annulation.
+La liste doit recevoir des objets `ReservationConsultable`, car elle n'a besoin que de lire `annulee`. Les réservations fermes et flexibles satisfont toutes deux ce contrat. La liste peut donc afficher les deux sans connaître leurs conditions d'annulation. Cette décision suit aussi I, car le client de consultation n'exige plus une opération dont il ne se sert pas.
 
 Les assertions de la solution Liskov vérifient que les deux réservations se consultent à l'état confirmé, puis que seule la flexible change après son annulation. La seconde annulation garde le même état. Le code qui annule reçoit `ReservationAnnulable`. Passer une réservation ferme à ce code doit être refusé par TypeScript, plutôt que conduire à une annulation silencieusement ignorée.

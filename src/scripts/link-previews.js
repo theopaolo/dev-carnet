@@ -149,7 +149,7 @@ for (const button of document.querySelectorAll(".glossary-term")) {
 
 for (const link of document.querySelectorAll(".content a[href]")) {
   if (
-    link.closest("nav, .toc, .pager") ||
+    link.closest("nav, .toc, .pager, .pocket-card, .pocket-back") ||
     link.matches("[download], .heading-link") ||
     link.querySelector("img")
   )

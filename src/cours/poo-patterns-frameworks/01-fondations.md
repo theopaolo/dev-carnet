@@ -2,24 +2,28 @@
 title: 'Les bases de la programmation orientée objet'
 order: 2
 publishedAt: "2026-10-15"
-updatedAt: "2026-10-16"
+updatedAt: "2026-10-22"
 ---
 
 # Les bases de la programmation orientée objet
 
 <span id="poo-solid-et-responsabilites"></span>
 
-Un objet regroupe des données et les opérations qui les utilisent. Pour concevoir un objet, il faut préciser ce qu'il représente, les règles qu'il protège et ce que son code appelant peut lui demander. Ce chapitre explique ces bases avant d'aborder les choix de conception dans le chapitre [SOLID, comprendre les cinq principes](/poo-patterns-frameworks/01-solid/).
+Dans l'application de réservation, on vérifie qu'il reste une place et que la personne n'est pas déjà inscrite avant d'ajouter son inscription. La programmation orientée objet permet de réunir un état et les opérations qui le consultent ou le modifient. On peut ainsi confier ces règles à un objet, plutôt que demander à chaque code qui l'utilise de les vérifier lui-même. Ce code est son appelant.
 
-Les exemples sont autonomes. Ils aident à relire l'application de [réservation d'ateliers](/poo-patterns-frameworks/10-exercice/), dont les règles guident les séances du parcours. Le [glossaire](/poo-patterns-frameworks/12-glossaire/) rassemble le vocabulaire du parcours.
+Pour concevoir un objet, on précise donc ce qu'il représente, les données qu'il conserve et les opérations qu'il autorise. Ce chapitre explique comment lire et utiliser ces objets. Les séances de patterns montrent ensuite comment ils collaborent dans l'application.
+
+Les exemples sont autonomes et se lisent séparément, même lorsque plusieurs blocs reprennent un même nom de classe. Les créatures permettent d'observer la construction, l'état et les comportements sans lire toute l'application. On revient ensuite aux règles de [réservation d'ateliers](/poo-patterns-frameworks/10-exercice/), qui guident les séances du parcours. Le [glossaire](/poo-patterns-frameworks/12-glossaire/) rassemble le vocabulaire utilisé.
 
 ## Objets, classes et encapsulation
 
-Un objet possède un état et expose des opérations. Une classe décrit comment créer des objets de même structure. Chaque objet créé est une instance, avec son propre état. JavaScript permet aussi de créer des objets sans classe.
+L'état d'un objet correspond aux valeurs qu'il conserve dans ses propriétés à un moment donné. Ses méthodes sont les opérations que l'on peut lui demander d'exécuter. Une créature peut ainsi conserver son énergie et proposer une méthode pour avancer en utilisant cette énergie.
+
+Une classe décrit comment créer des objets de même structure et les méthodes qu'ils proposent. Chaque objet créé à partir de cette classe est une instance, avec son propre état. La classe n'est donc pas une créature particulière, mais la description qui permet d'en créer plusieurs. JavaScript permet aussi de créer des objets sans classe, notamment avec des accolades, comme on le verra avec les réservations.
 
 ### Lire une classe pas à pas
 
-Pour commencer, une créature possède un nom et sait se présenter. On écrit la classe, puis on crée deux objets à partir de cette description.
+Pour commencer, une créature possède un nom et sait se présenter. La déclaration de classe décrit ces deux éléments, mais ne crée encore aucune créature. Les deux appels qui suivent créent chacun un objet, puis les assertions vérifient sa présentation et son identité.
 
 ```ts
 import assert from "node:assert/strict";
@@ -44,19 +48,21 @@ assert.equal(poisson.sePresenter(), "Je m'appelle Mina.");
 assert.notEqual(grenouille, poisson);
 ```
 
-`class Creature` donne un nom à la classe. À l'intérieur des accolades, `nom: string` déclare une propriété qui contiendra du texte. Cette notation TypeScript vérifie le type des valeurs avant l'exécution. Elle ne donne donc pas encore de nom à une créature.
+`class Creature` donne un nom à la classe. À l'intérieur des accolades, `nom: string` déclare une propriété qui contiendra du texte. Cette annotation indique à TypeScript quel type vérifier avant l'exécution. Elle ne fournit pas de valeur à la propriété. Le constructeur s'en chargera pour chaque objet créé.
 
 L'expression `new Creature("René")` crée une instance et appelle son `constructor`, le constructeur. Le paramètre `nom` reçoit la valeur `"René"`. Dans `this.nom = nom`, la partie droite désigne ce paramètre, tandis que `this.nom` désigne la propriété de l'objet en cours de construction. L'affectation conserve donc le nom dans cet objet.
 
-Le second `new`, avec `"Mina"`, crée un autre objet et appelle à nouveau le constructeur. Le paramètre porte le même nom dans les deux appels, mais chaque instance conserve sa propre propriété. Les assertions vérifient les deux présentations et le fait qu'il s'agit de deux objets distincts.
+Le second `new`, avec `"Mina"`, crée un autre objet et appelle à nouveau le constructeur. Le paramètre porte le même nom dans les deux appels, mais chaque instance conserve sa propre propriété. Changer le nom de la grenouille ne changerait donc pas celui du poisson. Les assertions vérifient les deux présentations et le fait qu'il s'agit de deux objets distincts.
 
 `sePresenter()` est une méthode d'instance. Dans l'appel `grenouille.sePresenter()`, `this` désigne `grenouille`. La méthode lit donc son nom. Dans `poisson.sePresenter()`, elle lit celui de `poisson`. L'annotation `: string` après les parenthèses indique que la méthode renvoie du texte. On peut retrouver cette syntaxe dans la [présentation des classes de MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes).
 
 ### Protéger les règles de l'objet
 
-On peut utiliser un objet comme une boîte noire. Pour conduire une voiture, on utilise le volant et les pédales sans intervenir dans le moteur. De même, le code qui utilise un objet connaît ses opérations publiques sans devoir connaître son organisation interne. Ces opérations constituent son interface publique.
+Le premier exemple rend le nom directement accessible. L'appelant peut donc le lire ou le remplacer. Cette liberté ne convient pas à toutes les données. Si une créature possède une énergie limitée, autoriser n'importe quelle affectation permettrait de lui donner une énergie négative. On doit définir les modifications autorisées avant de choisir comment exposer cette donnée.
 
-L'encapsulation réserve la modification de l'état à des opérations qui préservent ses règles. Une créature possède entre 0 et 100 points d'énergie. Se déplacer coûte 10 points. Se reposer en rend 20, sans dépasser 100.
+Le code appelant passe alors par les opérations publiques de l'objet, sans devoir reproduire ses contrôles ni connaître son organisation interne. Les membres accessibles à l'appelant constituent son interface publique. Le mot « interface » désigne ici ce que l'objet expose, pas encore une déclaration de type TypeScript.
+
+L'encapsulation consiste à contrôler les accès à l'état d'un objet pour préserver ses règles. Dans ce nouvel exemple, une créature commence avec 100 points d'énergie et doit rester entre 0 et 100. Se déplacer lui coûte 10 points, tandis que se reposer lui en rend 20, sans dépasser 100. La classe reprend le nom de l'exemple précédent, mais on laisse de côté la présentation pour se concentrer sur l'énergie.
 
 ```mermaid
 flowchart TB
@@ -67,7 +73,7 @@ flowchart TB
   Classe -->|new Creature| Poisson["Objet poisson<br/>Instance de Creature<br/>#energie = 100"]
 ```
 
-Chaque objet possède ses variables d'instance. Les méthodes `avancer()` et `seReposer()` agissent sur l'objet qui les reçoit. La variable de classe, déclarée `static`, appartient à `Creature` et se consulte avec `Creature.energieMax`. Elle est ici `readonly`, donc TypeScript interdit de lui affecter une autre valeur.
+Les propriétés propres à chaque objet sont appelées variables d'instance. Les méthodes `avancer()` et `seReposer()` agissent sur l'énergie de l'objet qui les reçoit. Dans le schéma, déplacer la grenouille ne consomme donc pas l'énergie du poisson. En revanche, la variable de classe, déclarée `static`, appartient à `Creature` et se consulte avec `Creature.energieMax`. Elle indique une limite commune, pas une réserve d'énergie partagée. Elle est ici `readonly`, donc TypeScript interdit de lui affecter une autre valeur.
 
 ```ts
 class Creature {
@@ -94,21 +100,25 @@ grenouille.avancer();
 console.log(grenouille.energie); // 90
 ```
 
-Le champ `#energie` est privé. Le getter donne accès à sa valeur sans autoriser une affectation directe.
+Le champ `#energie` est privé. L'appelant ne peut pas le lire ou le modifier directement. Le getter, c'est-à-dire l'accesseur en lecture, permet de consulter sa valeur depuis l'extérieur. La lecture `grenouille.energie`, sans parenthèses, exécute le corps de cet accesseur et renvoie le nombre conservé dans le champ privé. Elle ne rend pas ce champ modifiable.
 
-Le code appelant connaît `avancer()` et son résultat, sans devoir reproduire le contrôle d'énergie. L'invariant, ici l'intervalle de 0 à 100, reste sous la responsabilité de l'objet. Cacher un champ sans contrôler les modifications ne suffit pas à protéger cet invariant.
+Au premier déplacement, le contrôle constate que la créature possède au moins 10 points. La méthode en retire 10 et renvoie `true` pour signaler la réussite. C'est pourquoi le programme affiche 90. Lorsque l'énergie est insuffisante, la méthode renvoie `false` avant la soustraction et laisse l'état inchangé. Lors du repos, le choix du minimum entre 100 et l'énergie augmentée empêche de dépasser la limite.
 
-Un *getter* permet de lire une valeur, un *setter* permet de la modifier. Ajouter un setter qui accepte n'importe quel nombre rendrait possible une énergie de -50 ou de 500. Ici, `avancer()` et `seReposer()` expriment les actions autorisées et contrôlent leurs effets. Chaque champ privé n'a donc pas besoin de son couple getter/setter.
+Dans les signatures, `boolean` annonce une réponse `true` ou `false`, tandis que `void` indique que l'appelant n'attend pas de valeur de retour. Une méthode peut donc modifier l'état sans renvoyer de résultat.
+
+Le code appelant connaît `avancer()` et son résultat, sans devoir reproduire le contrôle d'énergie. La limite de 0 à 100 est un invariant, c'est-à-dire une règle vraie à la création de l'objet et préservée après ses opérations publiques. Pour la vérifier, on examine donc aussi bien l'état initial que les déplacements réussis, les déplacements refusés et les repos. Cacher un champ sans contrôler les modifications ne suffit pas à protéger cet invariant.
+
+Un *getter* exécute du code à la lecture d'une propriété, un *setter* en exécute lors d'une affectation. Un setter peut contrôler la valeur reçue, mais en ajouter un qui accepte n'importe quel nombre rendrait possible une énergie de -50 ou de 500. Ici, `avancer()` et `seReposer()` expriment les actions autorisées et contrôlent leurs effets. L'appelant demande un déplacement ou un repos au lieu de choisir lui-même la nouvelle énergie. Chaque champ privé n'a donc pas besoin de son couple getter/setter.
 
 En TypeScript, une propriété ou une méthode est `public` par défaut, comme `nom` et `sePresenter()` dans le premier exemple. Le mot `private`, dans une déclaration telle que `private energie = 100`, réserve l'accès au code de cette classe pendant la vérification des types. `protected` autorise aussi le code des sous-classes, que l'on découvre [avec l'héritage](#lire-extends-super-et-implements).
 
 Ces mots-clés TypeScript disparaissent du JavaScript exécuté. Ils aident à détecter des accès interdits dans le code vérifié, mais ne constituent pas une protection de sécurité. La syntaxe JavaScript `#energie`, utilisée dans notre exemple, contrôle aussi l'accès au champ à l'exécution. Le nom `#energie` n'est pas une propriété publique nommée `energie` que l'on pourrait retrouver avec une chaîne de caractères.
 
-De même, `readonly` est un contrôle TypeScript. Dans `static readonly energieMax = 100`, il interdit de réaffecter ce membre après son initialisation. Appliqué à une propriété qui contient un objet, il ne rend pas toutes les propriétés de cet objet immuables. Protéger les règles exige donc de choisir les opérations disponibles et de contrôler leurs effets.
+De même, `readonly` est un contrôle TypeScript. Dans `static readonly energieMax = 100`, il interdit de réaffecter ce membre après son initialisation. Appliqué à une propriété qui contient un objet, il empêche d'y affecter une autre référence, sans interdire les modifications des propriétés de cet objet. Protéger les règles exige donc de choisir les opérations disponibles et de contrôler leurs effets.
 
 ### Distinguer deux objets et deux références
 
-Deux appels à `new Creature("René")` créent deux objets, même s'ils contiennent le même nom. À l'inverse, l'affectation `b = a` ne crée aucun objet. Elle copie une référence, c'est-à-dire une valeur qui permet de retrouver le même objet. `a` et `b` deviennent alors deux noms pour cet objet.
+L'encapsulation oblige aussi à distinguer l'objet des variables qui le désignent. Deux appels à `new Creature("René")` créent deux objets, même s'ils contiennent le même nom. À l'inverse, l'affectation `b = a` ne crée aucun objet. Elle copie une référence, c'est-à-dire une valeur qui permet de retrouver le même objet. `a` et `b` deviennent alors deux noms pour cet objet. Une modification autorisée par l'un est donc visible par l'autre.
 
 Le même mécanisme s'applique aux objets écrits avec des accolades. On peut l'observer avec une réservation dont les champs sont des nombres et du texte.
 
@@ -136,19 +146,21 @@ assert.equal(copieAtelier.participants === atelier.participants, true);
 assert.deepEqual(atelier.participants, ["Léa", "Sam"]);
 ```
 
-Pour des objets, `===` compare l'identité, donc le fait de désigner le même objet. Il ne compare pas le contenu des propriétés. La première assertion vaut ainsi `false`, même si les deux réservations possèdent initialement les mêmes valeurs. Après `const alias = reservation`, modifier `alias.montantCentimes` modifie la réservation que les deux variables désignent.
+Pour des objets, `===` compare l'identité, donc le fait de désigner le même objet. Il ne compare pas le contenu des propriétés. La première assertion vaut ainsi `false`, même si les deux réservations possèdent initialement les mêmes valeurs, y compris le même identifiant. Le champ qui identifie une réservation dans l'application ne détermine pas l'identité de l'objet JavaScript. Après `const alias = reservation`, modifier `alias.montantCentimes` modifie au contraire la réservation que les deux variables désignent. L'alias n'en est pas une copie indépendante.
 
 `const` interdit de réaffecter une variable à une autre valeur. Il n'interdit pas de modifier les propriétés de l'objet qu'elle désigne. C'est pourquoi l'affectation à `alias.montantCentimes` est possible dans cet exemple.
 
-La [syntaxe de décomposition `...`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax) crée ici une copie superficielle. `{ ...reservation }` produit un nouvel objet avec les valeurs de ses propriétés. Modifier le nombre `copie.montantCentimes` laisse donc l'original intact. Dans `atelier`, en revanche, la propriété `participants` contient une référence vers un tableau. La copie conserve cette référence, donc les deux objets partagent le même tableau.
+La [syntaxe de décomposition `...`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax) crée ici une copie superficielle. `{ ...reservation }` produit un nouvel objet avec les valeurs de ses propriétés. Modifier le nombre `copie.montantCentimes` laisse donc l'original intact.
+
+Dans `atelier`, en revanche, la propriété `participants` contient une référence vers un tableau. La copie conserve cette référence, donc les deux objets partagent le même tableau. Ajouter Sam depuis la copie modifie ce tableau partagé, ce que vérifie la dernière assertion. « Superficielle » signifie que la copie s'arrête au premier niveau de propriétés, sans recopier les objets et les tableaux qu'elles désignent.
 
 Dans la [séance Repository](/poo-patterns-frameworks/07-repository/#simuler-le-contrat-en-memoire), les champs d'une réservation sont tous primitifs, comme les nombres et les chaînes de cet exemple. Une copie superficielle suffit alors à éviter qu'un résultat reçu serve à modifier les enregistrements internes. Si on ajoute un tableau ou un objet imbriqué, il faudra revoir cette garantie.
 
 ## Modéliser un écosystème
 
-Cette illustration facultative permet de transposer les mêmes questions dans un autre domaine.
+On peut retrouver ces questions d'état et de responsabilité dans une simulation d'écosystème. Cette illustration facultative propose de distinguer ce qui relève de chaque créature de ce qui relève du monde qui les réunit.
 
-Murmur simule des écosystèmes, dont la forêt Plot. Un modèle pédagogique de mare, nommé `Pond`, peut distinguer l'état des créatures, la météo et les événements. Chaque créature protège ses règles d'énergie. Le monde coordonne leurs interactions, et un journal affiche les événements observables. Ce découpage est un exemple de conception, indépendant de l'architecture interne de Murmur.
+Murmur simule des écosystèmes, dont la forêt Plot. Un modèle pédagogique de mare, nommé `Pond`, peut distinguer l'état des créatures, la météo et les événements. Le monde pourrait demander aux créatures d'avancer, tandis que chaque créature déciderait si son énergie lui permet ce déplacement. Le monde n'aurait alors pas à reproduire les contrôles d'énergie. Un journal pourrait afficher les événements observables. Ce découpage illustre des responsabilités possibles, indépendamment de l'architecture interne de Murmur.
 
 <figure class="course-figure">
 <img src="/ressources/poo-patterns-frameworks/visuels/murmur-plot.webp" width="1300" height="1200" loading="lazy" alt="L'écosystème forestier Plot de Murmur, avec des créatures, les conditions météo et un journal d'événements.">
@@ -157,9 +169,11 @@ Murmur simule des écosystèmes, dont la forêt Plot. Un modèle pédagogique de
 
 ## Contrats et polymorphisme
 
-Un contrat précise ce que l'appelant peut demander et ce que l'objet garantit en retour. Il comprend les opérations disponibles, leurs conditions d'utilisation et leurs effets. Une interface TypeScript décrit la partie vérifiable par le système de types, comme les noms des méthodes et leurs types de retour.
+On a décrit ce qu'un déplacement peut faire à l'énergie de la créature et comment l'appelant sait s'il a réussi. Ces précisions forment un contrat. L'appelant peut demander un déplacement, mais celui-ci peut être refusé. En cas de refus, il sait que l'énergie reste inchangée. Un contrat indique donc les opérations disponibles, leurs conditions d'utilisation et les garanties sur leur résultat ou leurs effets.
 
-TypeScript utilise un **typage structurel**. Le compilateur compare les membres et leurs types pour vérifier leur compatibilité. Une classe peut donc satisfaire une interface sans déclarer qu'elle l'implémente.
+Une interface TypeScript décrit la partie que le système de types peut vérifier, comme les noms des méthodes et leurs types de retour. Dans l'exemple suivant, on veut décrire un animal qui sait nager. La fonction n'a besoin de connaître ni son espèce ni ses autres capacités. On nomme donc la capacité attendue plutôt qu'une classe particulière. L'interface déclare une méthode sans argument qui renvoie du texte, mais ne fournit pas le code de cette méthode.
+
+TypeScript utilise un **typage structurel**. Le compilateur compare les membres et leurs types pour vérifier leur compatibilité. Une classe peut donc satisfaire une interface sans déclarer qu'elle l'implémente, c'est-à-dire qu'elle fournit les membres décrits. La [documentation TypeScript sur la compatibilité des types](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) détaille cette vérification.
 
 ```ts
 import assert from "node:assert/strict";
@@ -192,15 +206,17 @@ assert.equal(decrire(new Canard()), "Le canard nage.");
 assert.equal(decrire(new Poisson()), "Le poisson nage.");
 ```
 
-Ni `Canard` ni `Poisson` ne mentionnent `Nageur`. TypeScript accepte pourtant leurs instances, parce que chacune possède une méthode `nager()` qui renvoie du texte. La section [Lire extends, super et implements](#lire-extends-super-et-implements) montre comment déclarer ce lien explicitement.
+Ni `Canard` ni `Poisson` ne mentionnent `Nageur`. TypeScript accepte pourtant leurs instances, parce que chacune possède une méthode `nager()` qui renvoie du texte. L'interface exprime ici une capacité commune, pas un ancêtre commun. La section [Lire extends, super et implements](#lire-extends-super-et-implements) montre comment déclarer ce lien explicitement.
 
-Le polymorphisme permet à `decrire` d'appeler la même opération sur des objets de classes différentes. La ligne `animal.nager()` exécute la méthode du canard ou celle du poisson, selon l'objet reçu. Le canard possède aussi une méthode `voler()` que cette fonction n'a pas besoin de connaître.
+Le polymorphisme permet à `decrire` d'appeler la même opération sur des objets de classes différentes. La ligne `animal.nager()` exécute la méthode du canard ou celle du poisson, selon l'objet reçu. La fonction n'a pas besoin de tester l'espèce pour choisir la bonne méthode. Le canard possède aussi une méthode `voler()` que cette fonction n'a pas besoin de connaître. Elle utilise seulement la capacité de nage annoncée par son paramètre.
+
+Dans l'application d'ateliers, on retrouvera cette organisation avec les tarifs. Un calcul de réservation pourra demander un montant à une règle de tarification, sans connaître le détail de chaque tarif. Le contrat devra alors préciser davantage qu'un type de retour, notamment l'unité du montant.
 
 ## Duck typing et typage structurel
 
 Le **duck typing**, ou typage canard, consiste à utiliser les opérations d'un objet sans exiger une classe précise. L'image du canard donne son nom à cette approche. Si l'objet fournit l'opération attendue, le code l'utilise. Le [glossaire Python](https://docs.python.org/fr/3/glossary.html#term-duck-typing) décrit ce style, également courant en JavaScript.
 
-En JavaScript, cet appel se résout à l'exécution. Il ne nécessite ni interface déclarée ni test de classe.
+En JavaScript, cet appel se résout à l'exécution. Il ne nécessite ni interface déclarée ni test de classe. L'objet écrit directement avec des accolades dans le premier appel suffit, parce qu'il fournit la méthode attendue. Le second objet ne la fournit pas, et l'appel échoue.
 
 ```js
 import assert from "node:assert/strict";
@@ -213,13 +229,17 @@ assert.equal(decrire({ nager: () => "Je nage." }), "Je nage.");
 assert.throws(() => decrire({ voler: () => "Je vole." }), TypeError);
 ```
 
-Le typage structurel de l'exemple TypeScript précédent effectue une vérification avant l'exécution. Le duck typing désigne la manière d'utiliser l'objet. Les deux favorisent l'utilisation d'objets indépendants d'une hiérarchie de classes, mais n'interviennent pas au même moment.
+La première assertion vérifie la phrase renvoyée. La seconde vérifie qu'essayer d'appeler la méthode absente provoque une erreur. Le code ne rejette pas une espèce d'animal, il tente une opération que l'objet ne permet pas d'exécuter.
 
-La présence de `nager()` ne prouve pas le respect du contrat comportemental. Une méthode peut renvoyer une chaîne tout en produisant un effet interdit ou en levant une erreur inattendue. Le compilateur contrôle des types. La description du contrat et les tests précisent le comportement attendu.
+Le typage structurel de l'exemple TypeScript précédent effectue une vérification avant l'exécution. Le duck typing désigne la manière d'utiliser l'objet, pas une vérification du compilateur. Les deux approches permettent d'utiliser des objets indépendants d'une hiérarchie de classes.
+
+Même lorsque le compilateur accepte le code, la présence de `nager()` ne prouve pas le respect du contrat comportemental. Une méthode peut renvoyer une chaîne tout en produisant un effet interdit ou en levant une erreur inattendue. Le compilateur contrôle des types, tandis que la description du contrat et les tests précisent le comportement attendu.
 
 ## Cohésion, couplage et responsabilités
 
-Un module cohésif regroupe des éléments qui contribuent au même rôle. Le couplage décrit les connaissances et dépendances entre modules. Si chaque écran connaît les champs propres à un fournisseur, changer ce fournisseur oblige à modifier plusieurs écrans.
+Pour examiner comment les objets travaillent ensemble, on regarde ce qui est regroupé et ce que chaque partie connaît des autres. Un module est une partie du programme qui regroupe du code, par exemple dans un fichier. Sa cohésion est forte lorsque ses éléments contribuent au même rôle. Des calculs de tarifs peuvent ainsi former un ensemble cohérent sans prendre aussi en charge le texte des confirmations.
+
+Le couplage décrit ce qu'un module doit connaître des autres pour fonctionner. Si chaque écran connaît les champs propres à un fournisseur, changer ce fournisseur oblige à modifier plusieurs écrans. On peut limiter cette connaissance en intercalant un contrat adapté aux opérations de réservation, comme dans le schéma suivant.
 
 ```mermaid
 flowchart LR
@@ -230,21 +250,23 @@ flowchart LR
   Stockage[Stockage] -.->|implémente| Contrat
 ```
 
-Les flèches représentent des dépendances de code. Les données peuvent circuler dans les deux sens. Une séparation par responsabilités cherche à contenir un changement, par exemple celui du format du fournisseur, sans multiplier les modules sans raison.
+L'interface appelle le code qui applique les règles de réservation. Ces règles utilisent un contrat pour demander l'enregistrement ou la lecture des réservations. Le stockage fournit les opérations annoncées par ce contrat. Les règles peuvent ainsi exprimer ce dont elles ont besoin sans connaître le format propre au stockage.
+
+Les flèches représentent ce que chaque partie du code doit connaître pour fonctionner, et non le sens de circulation des données. Celles-ci peuvent circuler dans les deux sens. Séparer les responsabilités vise à limiter le nombre de parties à modifier quand le format du fournisseur change. Ce découpage ajoute cependant des éléments à comprendre. Il se justifie par les connaissances qu'il permet de séparer, pas par le nombre de modules obtenus.
 
 ## Les principes SOLID
 
-Les principes SOLID aident à examiner les responsabilités, les variations et les dépendances du code. Ils disposent désormais d'un [chapitre complet avec des exemples avant et après](/poo-patterns-frameworks/01-solid/). Les bases POO décrivent les objets. SOLID aide à juger leurs collaborations face à un changement précis.
+L'encapsulation explique comment un objet protège son état. Les contrats expliquent comment d'autres codes peuvent l'utiliser. Les principes SOLID prolongent ces questions en examinant les responsabilités, les variations et les dépendances face à un changement précis. Le [chapitre complet avec des exemples avant et après](/poo-patterns-frameworks/01-solid/) les étudie à partir des réservations, plutôt que comme une liste de règles à appliquer partout. Il fait partie des approfondissements, que vous pouvez lire après les séances de patterns.
 
 ### Remplacer sans rompre le contrat
 
-Une réservation non annulable ne peut pas tenir la promesse d'un type qui garantit l'annulation. Le principe de Liskov explique cette difficulté. L'[exemple corrigé de réservation](/poo-patterns-frameworks/01-solid/#remplacer-sans-rompre-le-contrat) distingue les capacités de consultation et d'annulation, puis vérifie leurs garanties.
+Le polymorphisme suppose que les objets proposés à l'appelant tiennent les promesses sur lesquelles son code s'appuie. Une réservation non annulable ne peut donc pas tenir la promesse d'un type qui garantit l'annulation. Présenter une méthode portant le bon nom ne résout pas cette incompatibilité. Le principe de Liskov explique cette difficulté. L'[exemple corrigé de réservation](/poo-patterns-frameworks/01-solid/#remplacer-sans-rompre-le-contrat) distingue les capacités de consultation et d'annulation, puis vérifie leurs garanties.
 
 ## Composition et héritage
 
-Hériter, c'est définir une classe à partir d'une autre. Une classe `CommandePromotionnelle` est une sorte de `Commande`. Elle doit respecter les promesses de sa classe parente. Une réservation non annulable, par exemple, ne peut pas remplacer un type qui promet une annulation sans condition.
+Pour partager un comportement ou le faire varier, on dispose notamment de l'héritage et de la composition. Hériter, c'est définir une classe à partir d'une autre en reprenant ses membres. Si une classe `CommandePromotionnelle` est utilisable comme une sorte de `Commande`, elle doit respecter les promesses de sa classe parente. Reprendre le code du parent ne suffit pas à prouver cette compatibilité. Une réservation non annulable, par exemple, ne peut pas remplacer un type qui promet une annulation sans condition.
 
-Composer, c'est assembler des objets ou des fonctions qui travaillent ensemble. Une commande a une règle de réduction et lui confie le calcul de la remise. On peut changer cette règle sans créer une nouvelle sous-classe de commande pour chaque promotion.
+Composer, c'est assembler des objets ou des fonctions qui travaillent ensemble. Au lieu d'hériter d'une nouvelle sorte de commande pour chaque promotion, une commande peut recevoir une règle de réduction et lui confier le calcul de la remise. Le traitement de la commande utilise le résultat, tandis que la règle choisie détermine le calcul. Un changement de promotion revient alors à lui fournir une autre règle.
 
 ```mermaid
 classDiagram
@@ -255,15 +277,17 @@ classDiagram
   Commande --> Reduction : utilise
 ```
 
-On lit "une commande promotionnelle est une commande" et "une commande a une réduction". Le triangle pointe vers la classe parente. La flèche simple représente le collaborateur utilisé. Ces deux liens peuvent coexister, mais ils n'engagent pas les mêmes règles. Partager quelques lignes de code ne suffit pas à justifier un héritage.
+On lit « une commande promotionnelle est une commande » et « une commande a une réduction ». Le triangle pointe vers la classe parente, dont la sous-classe reprend le code. La flèche simple représente le collaborateur utilisé, auquel la commande confie une partie du travail. Ces deux liens peuvent coexister. L'héritage lie les classes entre elles, tandis que la collaboration demande au collaborateur de satisfaire le contrat attendu. Partager quelques lignes de code ne suffit donc pas à justifier un héritage.
 
-L'article [Héritage vs composition de LeanDeep](https://leandeep.com/h%C3%A9ritage-vs-composition-en-programmation-orient%C3%A9e-objet/) introduit cette distinction avec des exemples Python. Les formulations "est un" et "a un" aident à commencer. Le chapitre [UML, lire et dessiner un diagramme de classes](/poo-patterns-frameworks/01-uml/) explique les flèches, les multiplicités et le sens plus précis de la composition en UML.
+L'article [Héritage vs composition de LeanDeep](https://leandeep.com/h%C3%A9ritage-vs-composition-en-programmation-orient%C3%A9e-objet/) introduit cette distinction avec des exemples Python. Les formulations « est un » et « a un » aident à distinguer ces deux relations. Le chapitre [UML, lire et dessiner un diagramme de classes](/poo-patterns-frameworks/01-uml/) explique les flèches, les multiplicités et le sens plus précis de la composition en UML.
 
-[Strategy](/poo-patterns-frameworks/02-strategy/) illustre cette composition. [DRY, KISS et YAGNI](/lire-une-codebase/10-principes/) aident à juger son coût. Le [refactoring](/lire-une-codebase/03-refactoriser/) change la structure tout en préservant le comportement observé.
+Dans le code web, l'héritage sert surtout à étendre une classe fournie par la plateforme ou par une bibliothèque. Un élément HTML personnalisé hérite ainsi de `HTMLElement`, et une erreur propre à l'application peut hériter de `Error` pour garder sa pile d'appels et se reconnaître avec `instanceof`. On dépasse rarement ce premier niveau. Pour faire varier un comportement, on fournit plutôt un objet ou une fonction à la classe qui l'utilise, ce qui revient à composer.
+
+Le chapitre [Strategy](/poo-patterns-frameworks/02-strategy/) montre comment utiliser cette composition pour changer une règle de calcul. Pour évaluer si cette organisation reste proportionnée au besoin, on peut s'appuyer sur [DRY, KISS et YAGNI](/lire-une-codebase/10-principes/). Une telle réorganisation est un [refactoring](/lire-une-codebase/03-refactoriser/) lorsqu'elle préserve le comportement observé.
 
 ### Lire extends, super et implements
 
-Le code suivant montre comment déclarer un héritage et un contrat. `Presentable` décrit une opération attendue. `Creature` fournit du code pour cette opération, puis `Grenouille` le complète.
+Le code suivant reprend les créatures pour distinguer deux relations. `Presentable` décrit une opération que l'appelant veut utiliser. `Creature` fournit le code de cette opération, puis `Grenouille` hérite de ce code et le complète. Satisfaire le contrat et hériter d'une classe sont donc deux décisions distinctes.
 
 ```ts
 import assert from "node:assert/strict";
@@ -301,15 +325,19 @@ assert.equal(presentation.sePresenter(), "Je m'appelle René. Je vis près de la
 
 `extends Creature` fait de `Grenouille` une sous-classe de `Creature`. Dans son constructeur, `super(nom)` appelle le constructeur parent, qui initialise le nom. Dans un constructeur de sous-classe, cet appel doit avoir lieu avant d'utiliser `this`. La propriété `nom` est ici `protected`, donc la classe parente et ses sous-classes peuvent l'utiliser dans le code TypeScript.
 
-La méthode `sePresenter()` existe déjà dans la classe parente. La sous-classe la redéfinit pour compléter la présentation. `super.sePresenter()` exécute la version parente, puis la méthode ajoute une phrase. Le mot TypeScript `override` permet au compilateur de vérifier qu'une méthode de ce nom existe bien dans la classe parente.
+La méthode `sePresenter()` existe déjà dans la classe parente. La sous-classe la redéfinit pour compléter la présentation. `super.sePresenter()` exécute la version parente sur la même grenouille, puis la méthode ajoute une phrase. Cet appel ne crée pas une seconde créature. Le mot TypeScript `override` permet au compilateur de vérifier qu'une méthode de ce nom existe bien dans la classe parente.
 
-`implements Presentable` demande une autre vérification. TypeScript contrôle que `Creature` fournit l'opération décrite par l'interface, avec les types compatibles. Ce mot n'ajoute donc aucun code à la classe. Avec `extends`, on hérite du code de la classe parente. Avec `implements`, on annonce explicitement un contrat de types que son propre code doit satisfaire.
+`implements Presentable` demande une autre vérification. TypeScript contrôle que `Creature` fournit l'opération décrite par l'interface, avec les types compatibles. Ce mot n'ajoute donc aucun code à la classe. Avec `extends`, on hérite du code de la classe parente. Avec `implements`, on annonce explicitement un contrat de types que son propre code doit satisfaire. La [documentation des classes TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html#implements-clauses) précise cette distinction.
 
-L'affectation à `presentation` permet ensuite d'utiliser la grenouille à travers ce contrat. Le [typage structurel](#contrats-et-polymorphisme) reste valable. Un objet qui possède une méthode `sePresenter(): string` peut convenir même sans écrire `implements Presentable`. Aucune de ces vérifications ne prouve à elle seule que les promesses comportementales sont respectées, comme le montre [Liskov](/poo-patterns-frameworks/01-solid/#remplacer-sans-rompre-le-contrat).
+L'affectation à `presentation` permet ensuite d'utiliser la grenouille à travers ce contrat. Elle ne crée pas un nouvel objet et ne retire pas les capacités de la grenouille. Elle indique quelles opérations le code peut utiliser à travers cette variable. L'appel final exécute donc toujours la méthode redéfinie par la grenouille.
+
+Le [typage structurel](#contrats-et-polymorphisme) reste valable. Un objet qui possède une méthode `sePresenter(): string` peut convenir même sans écrire `implements Presentable`. Aucune de ces vérifications ne prouve à elle seule que les promesses comportementales sont respectées, comme le montre [Liskov](/poo-patterns-frameworks/01-solid/#remplacer-sans-rompre-le-contrat).
 
 ### Comparer une interface et une classe abstraite
 
-Une interface décrit les membres attendus, sans fournir leur code. Une classe abstraite peut aussi conserver un état et fournir des méthodes communes, tout en laissant certaines méthodes à écrire dans les sous-classes. Ce second outil est facultatif dans nos exercices. On peut d'abord réussir les collaborations avec des interfaces et des objets indépendants.
+Une interface décrit les membres attendus, sans fournir leur code. Une classe abstraite peut aussi conserver un état et fournir des méthodes communes, tout en laissant certaines méthodes à écrire dans les sous-classes. Elle associe donc du code partagé à des opérations encore incomplètes.
+
+Dans l'exemple suivant, le poisson hérite d'une façon de conserver son nom et de se présenter, mais fournit sa propre façon de nager. L'observateur demande seulement la capacité de nage, ce qui lui permet aussi d'accepter un robot indépendant de cette hiérarchie. La classe abstraite reste facultative dans les exercices.
 
 ```ts
 import assert from "node:assert/strict";
@@ -358,6 +386,6 @@ assert.equal(observerNage(new Robot()), "Le robot avance à la surface.");
 
 `Poisson` hérite ici de la présentation sans la réécrire. Comme `Poisson` ne déclare pas de constructeur, son constructeur par défaut transmet le nom au constructeur de `CreatureAquatique`. À l'inverse, `Robot` n'hérite d'aucune de ces classes et ne déclare pas `implements Nageur`. Ses instances satisfont pourtant l'interface `Nageur`, donc `observerNage` les accepte.
 
-Une interface convient lorsque l'appelant a seulement besoin d'une capacité. Une classe abstraite peut convenir si plusieurs sous-classes ont réellement un état et du code communs à conserver. On ne crée pas une hiérarchie pour obliger tous les objets capables de nager à partager un ancêtre.
+Une interface convient lorsque l'appelant a seulement besoin d'une capacité. Une classe abstraite peut convenir si plusieurs sous-classes ont réellement un état et du code communs à conserver. Dans cet exemple, le partage du nom et de la présentation concerne les créatures aquatiques, pas tous les objets que l'observateur accepte. On ne crée donc pas une hiérarchie pour obliger tous les objets capables de nager à partager un ancêtre.
 
 Les [trois mini-exercices progressifs](/poo-patterns-frameworks/13-entrainement/#construire-des-creatures-en-trois-etapes) permettent maintenant de pratiquer la construction, l'encapsulation et les capacités, avec des résultats attendus et des corrections expliquées.

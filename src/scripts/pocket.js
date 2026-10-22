@@ -13,6 +13,13 @@ import { renderNotebook } from "./notebook.js";
 
 const status = document.querySelector(".pocket-status");
 
+// Retour à la page d'où vient la Pochette, sinon le lien mène à l'accueil
+document.querySelector("[data-back]").addEventListener("click", (event) => {
+  if (!document.referrer.startsWith(location.origin)) return;
+  event.preventDefault();
+  history.back();
+});
+
 function renderNotes(notes, linked) {
   return byPage(notes)
     .map(

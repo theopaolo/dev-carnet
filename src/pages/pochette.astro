@@ -1,5 +1,6 @@
 ---
 import Lesson from "../layouts/Lesson.astro";
+import { base } from "../lib/urls";
 ---
 
 <Lesson
@@ -8,11 +9,9 @@ import Lesson from "../layouts/Lesson.astro";
 >
   <header class="hero">
     <div class="wrap">
+      <a class="pocket-back" href={base + "/"} data-back>← Retour</a>
       <h1>Pochette</h1>
-      <p class="lede">
-        Les rubans et les notes posés dans les cours. Ils restent dans ce navigateur : l'export les
-        met à l'abri et les ramène sur un autre ordinateur.
-      </p>
+      <p class="lede">Marques pages et notes posés dans les cours.</p>
     </div>
   </header>
 
@@ -21,8 +20,8 @@ import Lesson from "../layouts/Lesson.astro";
       <h2 id="rubans">Rubans</h2>
       <ul class="pocket-ribbons"></ul>
       <p class="pocket-empty" data-empty="ribbons">
-        Aucun ruban. Dans le sommaire d'un chapitre, le ruban à droite d'une section la marque.
-        Trois rubans au plus, comme dans un carnet.
+        Aucun marque-page. Dans le sommaire d'un chapitre, le ruban à droite d'une section sert à
+        marquer une page.
       </p>
     </section>
 
@@ -30,25 +29,19 @@ import Lesson from "../layouts/Lesson.astro";
       <h2 id="notes">Notes</h2>
       <div class="pocket-notes"></div>
       <p class="pocket-empty" data-empty="notes">
-        Aucune note. Dans un chapitre, sélectionnez un passage puis Annoter pour le surligner et
-        écrire une note.
+        Pas encore de notes. Dans un chapitre, surligner une passage pour écrire une note.
       </p>
     </section>
 
     <section aria-labelledby="detachees" data-detached hidden>
       <h2 id="detachees">Notes détachées</h2>
-      <p class="pocket-help">
-        Le passage de ces notes a été modifié ou retiré de sa page. La note reste ici.
-      </p>
+      <p class="pocket-help">Le passage de ces notes a été modifié ou retiré de sa page.</p>
       <div class="pocket-detached"></div>
     </section>
 
     <section aria-labelledby="sauvegarde">
       <h2 id="sauvegarde">Sauvegarde et affichage</h2>
-      <p class="pocket-help">
-        L'export est un fichier Markdown lisible, avec les liens vers les pages. Il se réimporte
-        ici, sur ce navigateur ou un autre.
-      </p>
+      <p class="pocket-help">L'export est un fichier Markdown, avec les liens vers les pages.</p>
       <div class="pocket-actions cluster">
         <button type="button" class="button" data-export>
           Exporter en Markdown
@@ -61,7 +54,7 @@ import Lesson from "../layouts/Lesson.astro";
       <p class="pocket-status" role="status"></p>
       <label class="pocket-switch cluster">
         <input type="checkbox" data-show />
-        Afficher les rubans et les notes dans les pages
+        Afficher les marques-pages et les notes dans les pages
       </label>
       <p class="pocket-help">
         À décocher avant de projeter un cours : les notes restent dans la Pochette.
@@ -86,6 +79,20 @@ import Lesson from "../layouts/Lesson.astro";
 
     .pocket > * {
       max-width: 48rem;
+    }
+
+    .pocket-back {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .pocket-back:hover {
+      color: var(--heading);
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 4px;
     }
 
     .pocket h2 {
