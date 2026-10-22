@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aide-mémoire Template Method</title>
+<meta name="description" content="Fiche courte du pattern Template Method : un squelette dans la classe mère, des étapes et des crochets dans les sous-classes, et où le reconnaître dans les frameworks.">
+<script>try { const t = localStorage.getItem("theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch {}</script>
+<link rel="stylesheet" href="fiche.css">
+</head>
+<body>
+<main>
+	<header>
+		<p class="kicker">Aide-mémoire, <i>Head First Design Patterns</i>, chapitre 8</p>
+		<h1>Template Method</h1>
+		<p class="lede">Une classe mère fixe l'ordre des étapes d'un traitement. Les sous-classes remplissent certaines étapes sans toucher à cet ordre. Vous le croiserez surtout dans les frameworks, qui appellent vos méthodes au bon moment.</p>
+		<p class="origine">«&nbsp;Définir le squelette d'un algorithme dans une opération, en laissant certaines étapes aux sous-classes. Template Method permet aux sous-classes de redéfinir certaines étapes d'un algorithme sans changer sa structure.&nbsp;» <cite>Gamma, Helm, Johnson et Vlissides, <i>Design Patterns</i>, 1994</cite></p>
+	</header>
+
+	<div class="haut">
+		<figure class="sketch">
+			<svg viewBox="0 0 360 358" role="img" aria-labelledby="sk-titre sk-desc">
+				<title id="sk-titre">Template Method appliqué à l'envoi d'un colis</title>
+				<desc id="sk-desc">La classe abstraite Envoi possède la méthode expedier, qui appelle preparer, emballer puis remettre. EnvoiRelais et EnvoiCoursier héritent d'Envoi. EnvoiRelais écrit remettre. EnvoiCoursier écrit emballer et remettre. La classe mère appelle les méthodes des sous-classes.</desc>
+				<defs>
+					<filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="360" height="358">
+						<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"/>
+						<feDisplacementMap in="SourceGraphic" scale="2"/>
+					</filter>
+					<marker id="fleche-stylo" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+						<path class="tete-stylo" d="M1.5 1.5 L8 5 L1.5 8.5"/>
+					</marker>
+				</defs>
+
+				<g filter="url(#crayon)">
+					<rect class="sk-box" x="16" y="24" width="210" height="124"/>
+					<path class="sk-line" d="M16 70 L226 70"/>
+					<polygon class="sk-tri" points="121,148 113,162 129,162"/>
+					<path class="sk-line" d="M121 162 L121 180 M91 180 L269 180 M91 180 L91 200 M269 180 L269 200"/>
+					<rect class="sk-box" x="16" y="200" width="150" height="52"/>
+					<rect class="sk-box" x="194" y="200" width="150" height="52"/>
+					<path class="sk-pen" d="M262 94 C254 100 240 96 232 90" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M226 128 C300 128 330 160 318 196" marker-end="url(#fleche-stylo)"/>
+				</g>
+
+				<text class="t-stereo" x="121" y="42" text-anchor="middle">«abstract»</text>
+				<text class="t-name" x="121" y="60" text-anchor="middle">Envoi</text>
+				<text class="t-code" x="28" y="90">expedier()</text>
+				<text class="t-code-muted" x="28" y="106">→ preparer()</text>
+				<text class="t-code-muted" x="28" y="120">→ emballer()</text>
+				<text class="t-code-muted" x="28" y="134">→ remettre()</text>
+				<text class="t-hand" x="134" y="121">crochet</text>
+				<text class="t-hand" x="134" y="136">à remplir</text>
+
+				<text class="t-hand"><tspan class="b" x="238" y="44">Le squelette.</tspan><tspan x="238" y="62">L'ordre des</tspan><tspan x="238" y="80">étapes est fixé.</tspan></text>
+				<text class="t-hand" x="240" y="152">appelle</text>
+
+				<text class="t-name" x="91" y="222" text-anchor="middle">EnvoiRelais</text>
+				<text class="t-code-muted" x="91" y="240" text-anchor="middle">remettre()</text>
+				<text class="t-name" x="269" y="222" text-anchor="middle">EnvoiCoursier</text>
+				<text class="t-code-muted" x="269" y="240" text-anchor="middle">emballer(), remettre()</text>
+
+				<text class="t-hand"><tspan class="b" x="16" y="280">Les sous-classes remplissent</tspan><tspan x="16" y="298">les étapes sans changer l'ordre.</tspan></text>
+				<text class="t-hand"><tspan class="b" x="16" y="330">«&nbsp;Ne nous appelez pas,</tspan><tspan class="b" x="16" y="348">nous vous appellerons.&nbsp;»</tspan></text>
+			</svg>
+		</figure>
+
+		<section class="roles">
+			<h2>Les rôles</h2>
+			<dl>
+				<div>
+					<dt>La méthode squelette, <code>expedier()</code></dt>
+					<dd>Elle appartient à la classe mère <code>Envoi</code> et appelle les étapes dans un ordre fixé&nbsp;: préparer, emballer, remettre.</dd>
+				</div>
+				<div>
+					<dt>Les étapes à remplir, <code>remettre()</code></dt>
+					<dd>Une méthode abstraite. Chaque sous-classe doit l'écrire.</dd>
+				</div>
+				<div>
+					<dt>Les crochets, <code>emballer()</code></dt>
+					<dd>Une étape facultative avec un comportement par défaut, ici un carton simple. <code>EnvoiCoursier</code> la redéfinit pour un emballage isotherme. On parle aussi de <i>hook</i>.</dd>
+				</div>
+			</dl>
+		</section>
+	</div>
+
+	<div class="fiches">
+		<section>
+			<h2>Le reconnaître dans les frameworks</h2>
+			<p>Le framework fixe le déroulement, et vous écrivez des méthodes aux noms imposés qu'il appelle au bon moment. La classe de base d'un composant Lit appelle <code>render()</code> depuis sa propre méthode <code>update()</code>, ce qui correspond au pattern exact. Angular appelle <code>ngOnInit</code> une fois que le composant a reçu ses entrées.</p>
+		</section>
+
+		<section>
+			<h2>Le cas des éléments personnalisés</h2>
+			<p>Le navigateur appelle <code>connectedCallback</code> quand un élément entre dans la page et <code>disconnectedCallback</code> quand il en sort, comme pour <code>CarteAtelier</code> dans le cours. L'ordre de ces appels appartient au navigateur, et non à une méthode de <code>HTMLElement</code>. Le cours y voit donc une inversion de contrôle comparable plutôt que le pattern exact.</p>
+		</section>
+
+		<section>
+			<h2>Le principe du chapitre</h2>
+			<p>«&nbsp;Ne nous appelez pas, nous vous appellerons.&nbsp;» Le livre l'appelle le principe d'Hollywood. La classe mère appelle le code des sous-classes au moment qu'elle choisit, et les sous-classes attendent qu'on les appelle.</p>
+		</section>
+
+		<section>
+			<h2>En TypeScript</h2>
+			<p>Dans votre propre code, une fonction reçue en paramètre remplace souvent la sous-classe, par exemple <code>expedier(commande, remettre)</code>. On retrouve alors Strategy, et la composition évite une hiérarchie de classes.</p>
+		</section>
+	</div>
+
+	<section class="avous">
+		<h2>À vous</h2>
+		<p>Dans un composant Lit, quel code appelle <code>render()</code>, et à quel moment&nbsp;?</p>
+		<details>
+			<summary>Voir la réponse</summary>
+			<p>Lit l'appelle lui-même. La classe de base exécute <code>render()</code> pendant chaque mise à jour, déclenchée par le changement d'une propriété réactive. Votre classe remplit seulement cette étape du squelette.</p>
+		</details>
+	</section>
+
+	<footer>
+		<p>Séance du cours&nbsp;: <a href="/poo-patterns-frameworks/08-3-composants/#template-method-le-squelette-et-les-crochets">Frameworks 3, Template Method, le squelette et les crochets</a>.</p>
+		<p>Pour aller plus loin, la <a href="https://refactoring.guru/fr/design-patterns/template-method">fiche Template Method de Refactoring.Guru</a>.</p>
+	</footer>
+</main>
+</body>
+</html>

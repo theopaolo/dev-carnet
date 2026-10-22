@@ -2,20 +2,16 @@
 title: 'Lire les places du partenaire avec Adapter'
 order: 6
 publishedAt: "2026-10-15"
-updatedAt: "2026-10-22"
+updatedAt: "2026-10-23"
 ---
 
 # Lire les places du partenaire avec Adapter
 
-Pour afficher les places annoncées par un partenaire, notre application doit lire le champ `remaining_seats` de sa réponse. Ce nom appartient au partenaire, alors que notre liste d'ateliers utilise le mot « places ». On va comparer deux façons de traduire cette réponse, en conservant la distinction entre un atelier complet et un appel qui échoue. Une réponse invalide ou une panne doit rester un échec visible, et non devenir zéro place ou un succès inventé.
+Un partenaire annonce lui aussi les places de nos ateliers, et l'application doit les afficher. Sa réponse utilise son propre vocabulaire, avec un champ `remaining_seats`, alors que notre code parle de « places ». Cette séance range la traduction entre les deux dans une seule classe. Elle utilise un partenaire simulé, dont vous choisissez les réponses sans contacter de service externe. Travaillez dans une copie d'[`ateliers.ts`](/ressources/poo-patterns-frameworks/ateliers.ts) et gardez ses assertions de départ.
 
-Cette séance utilise un **partenaire simulé**, dont on contrôle les réponses sans contacter de service externe. Dans une copie d'[`ateliers.ts`](/ressources/poo-patterns-frameworks/ateliers.ts), retrouvez la méthode `listerAteliers` de la classe `Inscriptions` et le calcul local des places. Ce calcul repose sur `capacite` et `this.#reservations`, mais le partenaire ne connaît pas ces réservations locales. Ses places annoncées constituent donc une information distincte.
+## Le problème
 
-Ajoutez une méthode `listerAteliersPartenaire` à la classe, en conservant la méthode de liste locale. Gardez aussi `reserver`, `annuler` et les assertions de départ. La réponse du partenaire indique une disponibilité, mais elle ne permet ni de réserver ni d'annuler chez lui. Relier ces opérations au partenaire demanderait donc un autre contrat.
-
-## Essayer une traduction directe
-
-Déclarez l'interface suivante pour décrire la méthode que le partenaire simulé fournit à notre application.
+Le partenaire fournit la méthode décrite par cette interface. Ajoutez-la après les types du fichier.
 
 ```ts
 interface Partenaire {
@@ -23,27 +19,29 @@ interface Partenaire {
 }
 ```
 
-`Promise` indique que l'appel fournit son résultat de façon asynchrone, sans le renvoyer directement. Le type `unknown` oblige ensuite à vérifier la forme de ce résultat avant d'en lire les valeurs. En effet, une déclaration TypeScript ne vérifie pas le contenu d'une réponse externe à l'exécution.
+`Promise` indique que la réponse arrive plus tard. Le type `unknown` oblige à vérifier sa forme avant de la lire, car TypeScript ne contrôle pas le contenu d'une réponse externe pendant l'exécution.
 
-Pour une première solution, placez l'appel et sa validation dans `listerAteliersPartenaire`, qui reçoit un `Partenaire` en paramètre. Pour chaque élément de `this.#ateliers`, demandez `getAvailability` avec le code `atelier-${atelier.id}`. Contrôlez que la réponse est un objet non nul avec un champ `remaining_seats`. Ce champ doit être un entier sûr, positif ou nul. Renvoyez l'atelier avec cette valeur dans `places`.
+La solution directe ajoute à `Inscriptions` une méthode qui construit le code `atelier-1` attendu par le partenaire, appelle `getAvailability`, puis vérifie que la réponse contient un `remaining_seats` entier et positif. La classe des règles de réservation connaît alors le format du partenaire. Une deuxième méthode qui aurait besoin des places répéterait ce travail, et un changement de format chez le partenaire obligerait à modifier `Inscriptions`.
 
-Utilisez `Promise.all` pour attendre l'ensemble des réponses. Si un appel échoue ou qu'une réponse est invalide, la construction de la liste doit échouer aussi. N'ajoutez pas de `catch` qui renvoie un tableau vide, car l'appelant ne pourrait plus distinguer une panne d'une liste sans atelier.
+Adapter place un objet intermédiaire entre notre code et le service. Notre code demande les places avec ses propres mots, et l'adaptateur traduit cette demande dans la langue du partenaire.
 
-## Adapter, un intermédiaire
+## La refacto pas à pas
 
-Adapter place un objet intermédiaire entre un client et un service dont les méthodes ou les données ne correspondent pas au contrat attendu. Cet objet traduit les appels pour que le client utilise le service sans connaître ses particularités. La [fiche Adapter de Refactoring.Guru](https://refactoring.guru/fr/design-patterns/adapter) représente ces rôles dans son schéma.
+### Étape 1, le contrat
 
-Dans notre exemple, le client est la méthode `listerAteliersPartenaire`, qui attendra le contrat de l'interface `Places`. Le service à adapter est `Partenaire`. Pour les relier, la classe `AdaptateurPlaces` implémente `Places`, reçoit le partenaire dans son constructeur et traduit les appels entre les deux. L'objet ne se contente donc pas de convertir les données reçues, il adapte aussi la façon de demander les places au service.
-
-## Extraire la traduction
-
-Comparez votre première solution à cette variante, qui garde le vocabulaire du partenaire dans une classe identifiée. Ajoutez l'interface et l'adaptateur avant la classe `Inscriptions`, puisque sa méthode de liste va les utiliser.
+Le contrat exprime, avec le vocabulaire de l'application, la seule question qu'elle pose au partenaire, le nombre de places d'un atelier. Ajoutez-le après l'interface `Partenaire`.
 
 ```ts
 interface Places {
 	disponibles(atelierId: number): Promise<number>;
 }
+```
 
+### Étape 2, la classe qui le respecte
+
+`AdaptateurPlaces` reçoit le partenaire, construit son code et vérifie sa réponse. Une réponse invalide lance une erreur au lieu de devenir zéro place, car zéro signifierait « atelier complet ». Ajoutez cette classe avant `Inscriptions`.
+
+```ts
 class AdaptateurPlaces implements Places {
 	#api: Partenaire;
 
@@ -63,7 +61,9 @@ class AdaptateurPlaces implements Places {
 }
 ```
 
-La méthode de `Inscriptions` demande désormais les places à travers le contrat `Places`. Elle n'a plus à construire le code attendu par le partenaire ni à vérifier le format de sa réponse, car l'adaptateur s'en charge.
+### Étape 3, le code qui utilise le contrat
+
+Ajoutez cette méthode à `Inscriptions`. Elle demande les places à travers `Places`, sans connaître `remaining_seats` ni le code `atelier-1`.
 
 ```ts
 class Inscriptions {
@@ -78,66 +78,53 @@ class Inscriptions {
 }
 ```
 
-La correspondance entre l'identifiant `2` et le code `atelier-2` est une convention de notre simulation.
+`Promise.all` attend toutes les réponses, et la liste échoue dès qu'une réponse échoue. N'ajoutez pas de `catch` qui renverrait un tableau vide, sinon l'appelant confondrait une panne avec une liste sans atelier.
 
-## Vérifier les valeurs et les échecs
+### Étape 4, le branchement
 
-Ajoutez ces assertions à la fin de la copie du programme. `await` attend le résultat avant de poursuivre le contrôle. Les trois classes de partenaire simulent une réponse correcte, une réponse imposée et une panne.
+Le partenaire se choisit hors de `Inscriptions`, au moment où l'on crée l'adaptateur. Ajoutez ce bloc à la fin du fichier. Il crée un partenaire simulé, qui renvoie la réponse prévue pour chaque code, le branche, puis vérifie la liste et le refus des réponses invalides. `await` attend la réponse, et `assert.rejects` vérifie qu'une promesse échoue.
 
 ```ts
 class PartenaireSimule implements Partenaire {
-	codesDemandes: string[] = [];
+	#reponses: Record<string, unknown>;
+
+	constructor(reponses: Record<string, unknown>) {
+		this.#reponses = reponses;
+	}
 
 	async getAvailability(code: string): Promise<unknown> {
-		this.codesDemandes.push(code);
-		return { remaining_seats: code === "atelier-1" ? 3 : 0 };
+		return this.#reponses[code];
 	}
 }
 
-class PartenaireFixe implements Partenaire {
-	#reponse: unknown;
+const partenaire = new PartenaireSimule({
+	"atelier-1": { remaining_seats: 3 },
+	"atelier-2": { remaining_seats: 0 },
+});
+const places = new AdaptateurPlaces(partenaire);
+const liste = await inscriptions.listerAteliersPartenaire(places);
+assert.deepEqual(liste.map(a => a.places), [3, 0]);
 
-	constructor(reponse: unknown) {
-		this.#reponse = reponse;
-	}
-
-	async getAvailability(): Promise<unknown> {
-		return this.#reponse;
-	}
-}
-
-class PartenaireEnPanne implements Partenaire {
-	async getAvailability(): Promise<unknown> {
-		throw new Error("Partenaire indisponible");
-	}
-}
-
-const partenaire = new PartenaireSimule();
-const listePartenaire = await inscriptions.listerAteliersPartenaire(new AdaptateurPlaces(partenaire));
-assert.deepEqual(listePartenaire.map(a => a.places), [3, 0]);
-assert.deepEqual(partenaire.codesDemandes, ["atelier-1", "atelier-2"]);
-
-for (const valeur of [null, {}, { remaining_seats: "3" },
-	{ remaining_seats: -1 }, { remaining_seats: 1.5 }, { remaining_seats: NaN },
-	{ remaining_seats: Infinity }, { remaining_seats: Number.MAX_SAFE_INTEGER + 1 }]) {
-	const invalide = new AdaptateurPlaces(new PartenaireFixe(valeur));
+for (const reponse of [null, {}, { remaining_seats: "3" }, { remaining_seats: -1 }, { remaining_seats: 1.5 }]) {
+	const invalide = new AdaptateurPlaces(new PartenaireSimule({ "atelier-1": reponse }));
 	await assert.rejects(() => invalide.disponibles(1));
 }
-const indisponible = new AdaptateurPlaces(new PartenaireEnPanne());
-await assert.rejects(() => inscriptions.listerAteliersPartenaire(indisponible), /Partenaire indisponible/);
 ```
 
-La liste obtenue contient trois places pour Dessin, même si notre catalogue local annonce une capacité de deux. Cet écart est volontaire, car le partenaire annonce ses propres disponibilités sans tenir compte de nos réservations locales. On ne peut donc pas combiner ces deux sources sans définir quelle règle doit s'appliquer.
+Pour brancher le vrai service, seule la création de l'adaptateur changera. La liste annonce trois places pour Dessin alors que notre catalogue en prévoit deux, car le partenaire publie ses propres disponibilités sans connaître nos réservations.
 
-## Isoler le format du partenaire
+## À vous
 
-La classe `AdaptateurPlaces` regroupe la traduction du partenaire et permet de la réutiliser dans plusieurs opérations.
+Écrivez une classe `PartenaireEnPanne` dont `getAvailability` lance l'erreur « Partenaire indisponible ». Ces lignes doivent alors passer, ce qui montre qu'une panne reste visible.
 
-Lire une disponibilité ne réserve aucune place, et cette disponibilité peut changer avant une inscription. Un autre besoin consiste à conserver les réservations au redémarrage, ce que prépare la [séance Repository](/poo-patterns-frameworks/07-repository/).
+```ts
+const enPanne = new AdaptateurPlaces(new PartenaireEnPanne());
+await assert.rejects(() => inscriptions.listerAteliersPartenaire(enPanne), /Partenaire indisponible/);
+```
 
 ## La même idée avec une fonction
 
-Le contrat `Places` ne contient qu'une méthode, si bien qu'un type de fonction peut le remplacer. Le partenaire n'est plus reçu par un constructeur, mais par une fonction qui renvoie l'adaptateur. La fonction renvoyée garde accès au paramètre `api` après la fin de cet appel. Ce mécanisme s'appelle une [fermeture](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Closures).
+`Places` ne contient qu'une méthode, donc un type de fonction peut le remplacer. `placesDuPartenaire` reçoit le partenaire et renvoie l'adaptateur. La fonction renvoyée garde accès à `api` après l'appel, grâce à une [fermeture](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Closures).
 
 ```ts
 type Places = (atelierId: number) => Promise<number>;
@@ -155,6 +142,8 @@ function placesDuPartenaire(api: Partenaire): Places {
 }
 ```
 
-Dans `listerAteliersPartenaire`, l'appel `places.disponibles(atelier.id)` devient `places(atelier.id)`. Dans les assertions, chaque `new AdaptateurPlaces(...)` devient `placesDuPartenaire(...)`, et `invalide.disponibles(1)` devient `invalide(1)`. Les contrôles ne changent pas, donc une réponse invalide est toujours rejetée.
+Les appels `places.disponibles(atelier.id)` deviennent `places(atelier.id)`, et chaque `new AdaptateurPlaces(...)` devient `placesDuPartenaire(...)`. Vous écrirez cette traduction dans presque tous les projets qui appellent une API. Après un `fetch`, une fonction vérifie le JSON et renvoie un objet qui porte les noms de l'application. La classe redevient utile quand l'adaptateur expose plusieurs méthodes qui partagent le même client, par exemple pour lire les places, réserver et annuler avec le même jeton d'accès.
 
-Vous écrirez cette traduction dans presque tous les projets qui appellent une API. Après un `fetch`, une fonction reçoit le JSON, vérifie sa forme et renvoie un objet qui porte les noms de l'application. Le reste du code ne voit alors jamais `remaining_seats`, et un changement de format chez le partenaire ne touche que cette fonction. La classe redevient utile quand l'adaptateur expose plusieurs méthodes qui partagent le même client, par exemple pour lire les places, réserver et annuler avec le même jeton d'accès.
+## Pour réviser
+
+La [fiche Adapter et Facade](/ressources/poo-patterns-frameworks/fiches/adapter-facade.html) résume le pattern sur un schéma, et la [fiche Adapter de Refactoring.Guru](https://refactoring.guru/fr/design-patterns/adapter) le reprend avec d'autres exemples. La [séance Repository](/poo-patterns-frameworks/07-repository/) traite le besoin suivant, conserver les réservations après un redémarrage.

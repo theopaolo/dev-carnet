@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aide-mémoire Adapter et Facade</title>
+<meta name="description" content="Fiche des patterns Adapter et Facade sur l'exemple d'une boutique : traduire le JSON d'un transporteur, cacher le passage d'une commande, comparer trois enveloppes.">
+<script>try { const t = localStorage.getItem("theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch {}</script>
+<link rel="stylesheet" href="fiche.css">
+</head>
+<body>
+<main>
+	<header>
+		<p class="kicker">Aide-mémoire, <i>Head First Design Patterns</i>, chapitre 7</p>
+		<h1>Adapter et Facade</h1>
+		<p class="lede">Ces deux patterns enveloppent des objets qui existent déjà. Adapter traduit une interface étrangère vers celle que le code attend. Facade cache plusieurs objets derrière une méthode simple.</p>
+		<p class="origine">Adapter&nbsp;: «&nbsp;Convertir l'interface d'une classe en une autre interface, conforme à l'attente du client.&nbsp;» Facade&nbsp;: «&nbsp;Fournir une interface unifiée à l'ensemble des interfaces d'un sous-système.&nbsp;» <cite>Gamma, Helm, Johnson et Vlissides, <i>Design Patterns</i>, 1994</cite></p>
+	</header>
+
+	<div class="haut">
+		<figure class="sketch">
+			<svg viewBox="0 0 360 518" role="img" aria-labelledby="sk-titre sk-desc">
+				<title id="sk-titre">Adapter et Facade dans une boutique</title>
+				<desc id="sk-desc">En haut, Commande utilise l'interface ModeLivraison. ModeTransporteur implémente cette interface et traduit le JSON de l'API ColisRapide, dont les champs price_cents et delivery_days deviennent frais() et delaiJours(). En bas, un contrôleur appelle Caisse.passerCommande(), qui appelle à son tour Panier, Paiement, Stock et Courriel.</desc>
+				<defs>
+					<filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="360" height="518">
+						<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"/>
+						<feDisplacementMap in="SourceGraphic" scale="2"/>
+					</filter>
+					<marker id="fleche-stylo" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+						<path class="tete-stylo" d="M1.5 1.5 L8 5 L1.5 8.5"/>
+					</marker>
+					<marker id="fleche-trait" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse">
+						<path class="tete-trait" d="M1 1 L8 5 L1 9"/>
+					</marker>
+				</defs>
+
+				<g filter="url(#crayon)">
+					<rect class="sk-box" x="16" y="30" width="120" height="34"/>
+					<path class="sk-line sk-dash" d="M76 64 L76 91" marker-end="url(#fleche-trait)"/>
+					<rect class="sk-box" x="16" y="94" width="190" height="52"/>
+					<polygon class="sk-tri" points="111,146 103,160 119,160"/>
+					<path class="sk-line sk-dash" d="M111 160 L111 184"/>
+					<rect class="sk-box" x="16" y="184" width="190" height="62"/>
+					<path class="sk-line" d="M16 212 L206 212"/>
+					<rect class="sk-ext" x="228" y="184" width="120" height="62"/>
+					<path class="sk-line" d="M206 215 L225 215" marker-end="url(#fleche-trait)"/>
+					<path class="sk-pen" d="M322 68 C342 100 338 152 318 180" marker-end="url(#fleche-stylo)"/>
+
+					<path class="sk-line sk-dash" d="M16 306 L344 306"/>
+
+					<rect class="sk-box" x="16" y="348" width="140" height="44"/>
+					<path class="sk-line" d="M156 370 L193 370" marker-end="url(#fleche-trait)"/>
+					<rect class="sk-box" x="196" y="348" width="150" height="44"/>
+					<path class="sk-line" d="M271 392 L271 410 M51 410 L309 410"/>
+					<path class="sk-line" d="M51 410 L51 431" marker-end="url(#fleche-trait)"/>
+					<path class="sk-line" d="M137 410 L137 431" marker-end="url(#fleche-trait)"/>
+					<path class="sk-line" d="M223 410 L223 431" marker-end="url(#fleche-trait)"/>
+					<path class="sk-line" d="M309 410 L309 431" marker-end="url(#fleche-trait)"/>
+					<rect class="sk-box" x="12" y="434" width="78" height="30"/>
+					<rect class="sk-box" x="98" y="434" width="78" height="30"/>
+					<rect class="sk-box" x="184" y="434" width="78" height="30"/>
+					<rect class="sk-box" x="270" y="434" width="78" height="30"/>
+				</g>
+
+				<text class="t-hand"><tspan class="b" x="16" y="18">Adapter, traduire</tspan></text>
+				<text class="t-name" x="76" y="52" text-anchor="middle">Commande</text>
+				<text class="t-hand" x="84" y="84">utilise</text>
+				<text class="t-hand"><tspan class="b" x="150" y="42">Le transporteur</tspan><tspan x="150" y="60">parle son propre JSON.</tspan></text>
+
+				<text class="t-stereo" x="111" y="113" text-anchor="middle">«interface»</text>
+				<text class="t-name" x="111" y="134" text-anchor="middle">ModeLivraison</text>
+				<text class="t-hand"><tspan class="b" x="216" y="114">Le contrat</tspan><tspan x="216" y="132">de Commande.</tspan></text>
+
+				<text class="t-name" x="111" y="204" text-anchor="middle">ModeTransporteur</text>
+				<text class="t-code" x="24" y="228">price_cents → frais()</text>
+				<text class="t-code" x="24" y="241">delivery_days → delaiJours()</text>
+				<text class="t-name" x="288" y="204" text-anchor="middle">ColisRapide</text>
+				<text class="t-code-muted" x="236" y="226">price_cents: 590</text>
+				<text class="t-code-muted" x="236" y="240">delivery_days: 2</text>
+
+				<text class="t-hand"><tspan class="b" x="16" y="272">L'adaptateur vérifie le JSON,</tspan><tspan x="16" y="290">puis le traduit pour Commande.</tspan></text>
+
+				<text class="t-hand"><tspan class="b" x="16" y="334">Facade, simplifier</tspan></text>
+				<text class="t-name" x="86" y="366" text-anchor="middle">Contrôleur</text>
+				<text class="t-code-muted" x="86" y="383" text-anchor="middle">POST /commande</text>
+				<text class="t-name" x="271" y="366" text-anchor="middle">Caisse</text>
+				<text class="t-code" x="271" y="383" text-anchor="middle">passerCommande()</text>
+				<text class="t-name" x="51" y="454" text-anchor="middle">Panier</text>
+				<text class="t-name" x="137" y="454" text-anchor="middle">Paiement</text>
+				<text class="t-name" x="223" y="454" text-anchor="middle">Stock</text>
+				<text class="t-name" x="309" y="454" text-anchor="middle">Courriel</text>
+
+				<text class="t-hand"><tspan class="b" x="16" y="492">Une méthode cache quatre objets.</tspan><tspan x="16" y="510">Le contrôleur ne connaît que Caisse.</tspan></text>
+			</svg>
+		</figure>
+
+		<section class="roles">
+			<h2>Adapter, traduire</h2>
+			<dl>
+				<div>
+					<dt>La cible, <code>ModeLivraison</code></dt>
+					<dd>Le contrat que <code>Commande</code> attend déjà.</dd>
+				</div>
+				<div>
+					<dt>Le service adapté, <code>ColisRapide</code></dt>
+					<dd>Une API externe qui répond <code>{ "price_cents": 590, "delivery_days": 2 }</code>. Ses noms ne sont pas ceux de l'application.</dd>
+				</div>
+				<div>
+					<dt>L'adaptateur, <code>ModeTransporteur</code></dt>
+					<dd>Il vérifie la réponse, refuse un devis invalide avec une erreur, puis expose <code>frais()</code> et <code>delaiJours()</code>.</dd>
+				</div>
+			</dl>
+			<h2>Facade, simplifier</h2>
+			<p><code>Caisse.passerCommande()</code> lit le panier, débite le paiement, réserve le stock et envoie le courriel de confirmation. Le contrôleur appelle une méthode au lieu de coordonner quatre objets. Les objets cachés restent accessibles au code qui en a besoin.</p>
+		</section>
+	</div>
+
+	<section class="comparaison">
+		<h2>Trois enveloppes, trois intentions</h2>
+		<div class="tableau">
+			<table>
+				<thead>
+					<tr><th>Pattern</th><th>Interface présentée au client</th><th>Intention</th><th>Exemple</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>Decorator</td><td>La même que l'objet entouré</td><td>Ajouter un comportement</td><td><code>EmballageCadeau</code></td></tr>
+					<tr><td>Adapter</td><td>Celle que le client attend</td><td>Traduire</td><td><code>ModeTransporteur</code></td></tr>
+					<tr><td>Facade</td><td>Une interface nouvelle et plus simple</td><td>Simplifier</td><td><code>Caisse</code></td></tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<div class="fiches">
+		<section>
+			<h2>Le reconnaître</h2>
+			<p>Adapter répond à des noms étrangers qui se répandent dans le code, comme <code>price_cents</code> ou <code>delivery_days</code>, ou à une même conversion répétée à chaque appel.</p>
+			<p>Facade répond à un contrôleur qui enchaîne plusieurs services dans un ordre précis, quand ce même enchaînement se retrouve copié ailleurs.</p>
+		</section>
+
+		<section>
+			<h2>Le principe du chapitre</h2>
+			<p>«&nbsp;Ne parlez qu'à vos amis immédiats.&nbsp;» Le livre appelle ce principe la connaissance minimale. Le contrôleur parle à <code>Caisse</code>, et <code>Caisse</code> parle au paiement, au stock et au courriel. Le contrôleur n'a pas à connaître leurs méthodes.</p>
+		</section>
+
+		<section>
+			<h2>Dans le code web</h2>
+			<p>Après un <code>fetch</code>, une fonction qui vérifie le JSON et renvoie un objet aux noms de l'application est un adaptateur. Une bibliothèque de validation comme Zod peut faire la vérification, et l'adaptateur garde la traduction.</p>
+			<p>Un module <code>commandes.ts</code> qui expose <code>passerCommande</code> aux routes d'une API est une façade. Les SDK de paiement en sont une aussi, puisqu'ils cachent les requêtes HTTP derrière quelques méthodes.</p>
+		</section>
+
+		<section>
+			<h2>Le piège</h2>
+			<p>Un adaptateur qui renvoie zéro quand la réponse est invalide transforme une panne en livraison gratuite. Il doit lever une erreur.</p>
+			<p>Une façade qui accumule toutes les opérations de l'application devient une classe géante. Elle reste utile tant qu'elle sert un usage précis.</p>
+		</section>
+	</div>
+
+	<section class="avous">
+		<h2>À vous</h2>
+		<p>Le transporteur renomme <code>delivery_days</code> en <code>eta_days</code>. Quels fichiers de l'application changent&nbsp;?</p>
+		<details>
+			<summary>Voir la réponse</summary>
+			<p>Seulement l'adaptateur <code>ModeTransporteur</code>. <code>Commande</code> et le reste du code ne connaissent que <code>ModeLivraison</code>, donc le changement ne les atteint pas.</p>
+		</details>
+	</section>
+
+	<footer>
+		<p>Séance du cours&nbsp;: <a href="/poo-patterns-frameworks/05-adapter/">Lire les places du partenaire avec Adapter</a>.</p>
+		<p>Pour aller plus loin, les fiches <a href="https://refactoring.guru/fr/design-patterns/adapter">Adapter</a> et <a href="https://refactoring.guru/fr/design-patterns/facade">Facade</a> de Refactoring.Guru.</p>
+	</footer>
+</main>
+</body>
+</html>

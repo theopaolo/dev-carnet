@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aide-mémoire Observer</title>
+<meta name="description" content="Fiche du pattern Observer sur l'exemple du panier d'une boutique : schéma annoté, rôles, push ou pull et question.">
+<script>try { const t = localStorage.getItem("theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch {}</script>
+<link rel="stylesheet" href="fiche.css">
+</head>
+<body>
+<main>
+	<header>
+		<p class="kicker">Aide-mémoire, <i>Head First Design Patterns</i>, chapitre 2</p>
+		<h1>Observer</h1>
+		<p class="lede">Un objet prévient tous ses abonnés quand son état change. Il ne connaît d'eux que le contrat, et chacun peut s'abonner ou se désabonner pendant l'exécution.</p>
+		<p class="origine">«&nbsp;Définir une dépendance un-à-plusieurs entre des objets, de sorte que, quand un objet change d'état, tous ceux qui en dépendent soient prévenus et mis à jour automatiquement.&nbsp;» <cite>Gamma, Helm, Johnson et Vlissides, <i>Design Patterns</i>, 1994</cite></p>
+	</header>
+
+	<div class="haut">
+		<figure class="sketch">
+			<svg viewBox="0 0 360 494" role="img" aria-labelledby="sk-titre sk-desc">
+				<title id="sk-titre">Observer appliqué au panier d'une boutique</title>
+				<desc id="sk-desc">Panier garde une liste d'observateurs et envoie à chacun un EtatPanier après chaque changement. Badge, Recap et Sauvegarde implémentent l'interface ObservateurPanier. Un nouvel abonné, Fidelite, s'ajouterait par un appel à abonner sans modifier Panier.</desc>
+				<defs>
+					<filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="360" height="494">
+						<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"/>
+						<feDisplacementMap in="SourceGraphic" scale="2"/>
+					</filter>
+					<marker id="fleche-stylo" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+						<path class="tete-stylo" d="M1.5 1.5 L8 5 L1.5 8.5"/>
+					</marker>
+					<marker id="fleche-trait" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse">
+						<path class="tete-trait" d="M1 1 L8 5 L1 9"/>
+					</marker>
+				</defs>
+
+				<g filter="url(#crayon)">
+					<rect class="sk-box" x="16" y="22" width="170" height="112"/>
+					<path class="sk-line" d="M16 54 L186 54 M16 80 L186 80"/>
+					<path class="sk-line" d="M101 134 L101 175" marker-end="url(#fleche-trait)"/>
+					<rect class="sk-box" x="16" y="178" width="230" height="66"/>
+					<path class="sk-line" d="M16 222 L246 222"/>
+					<path class="sk-line sk-dash" d="M131 258 L131 276 M64 276 L296 276 M64 276 L64 296 M180 276 L180 296 M296 276 L296 296"/>
+					<polygon class="sk-tri" points="131,244 123,258 139,258"/>
+					<rect class="sk-box" x="12" y="296" width="104" height="58"/>
+					<rect class="sk-box" x="128" y="296" width="104" height="58"/>
+					<rect class="sk-box" x="244" y="296" width="104" height="58"/>
+					<path class="sk-line" d="M12 326 L116 326 M128 326 L232 326 M244 326 L348 326"/>
+					<rect class="sk-ghost" x="244" y="392" width="104" height="50"/>
+					<path class="sk-pen" d="M214 104 C204 110 196 104 192 96" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M300 246 C288 254 260 250 251 234" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M150 380 Q146 366 112 358" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M322 456 Q326 450 318 446" marker-end="url(#fleche-stylo)"/>
+				</g>
+
+				<text class="t-name" x="101" y="44" text-anchor="middle">Panier</text>
+				<text class="t-code-muted" x="28" y="71">#observateurs: […]</text>
+				<text class="t-code" x="28" y="97">abonner(o)</text>
+				<text class="t-code" x="28" y="111">desabonner(o)</text>
+				<text class="t-code" x="28" y="125">#notifier()</text>
+
+				<text class="t-code-muted" x="110" y="171">*</text>
+
+				<text class="t-stereo" x="131" y="197" text-anchor="middle">«interface»</text>
+				<text class="t-name" x="131" y="214" text-anchor="middle">ObservateurPanier</text>
+				<text class="t-code" x="28" y="238">panierModifie(etat: EtatPanier)</text>
+
+				<text class="t-name" x="64" y="318" text-anchor="middle">Badge</text>
+				<text class="t-code-muted" x="64" y="344" text-anchor="middle">nombreArticles</text>
+				<text class="t-name" x="180" y="318" text-anchor="middle">Recap</text>
+				<text class="t-code-muted" x="180" y="344" text-anchor="middle">totalCentimes</text>
+				<text class="t-name" x="296" y="318" text-anchor="middle">Sauvegarde</text>
+				<text class="t-code-muted" x="296" y="344" text-anchor="middle">lignes</text>
+
+				<text class="t-ghost" x="296" y="414" text-anchor="middle">Fidelite</text>
+				<text class="t-hand" x="296" y="433" text-anchor="middle">demain&nbsp;?</text>
+
+				<text class="t-hand"><tspan class="b" x="198" y="36">Le sujet.</tspan><tspan x="198" y="54">Il garde la liste</tspan><tspan x="198" y="72">de ses abonnés</tspan><tspan x="198" y="90">et les prévient tous.</tspan></text>
+				<text class="t-hand" x="120" y="160">prévient</text>
+				<text class="t-hand"><tspan class="b" x="258" y="194">Le contrat.</tspan><tspan x="258" y="212">Une méthode</tspan><tspan x="258" y="230">pour tous.</tspan></text>
+				<text class="t-hand" x="190" y="270">implémentent</text>
+				<text class="t-hand"><tspan class="b" x="18" y="386">Les observateurs.</tspan><tspan x="18" y="404">Chacun lit dans etat</tspan><tspan x="18" y="422">ce qui l'intéresse.</tspan></text>
+				<text class="t-hand" text-anchor="end"><tspan x="346" y="470">Un abonné de plus&nbsp;? Un appel à abonner().</tspan><tspan x="346" y="488">Panier ne change pas.</tspan></text>
+			</svg>
+		</figure>
+
+		<section class="roles">
+			<h2>Les trois rôles</h2>
+			<dl>
+				<div>
+					<dt>Le sujet, <code>Panier</code></dt>
+					<dd>Il garde la liste de ses observateurs. Après chaque changement, dans <code>ajouter</code> comme dans <code>vider</code>, il appelle <code>#notifier</code>, qui envoie l'état à chacun.</dd>
+				</div>
+				<div>
+					<dt>Le contrat, <code>ObservateurPanier</code></dt>
+					<dd>Une seule méthode, <code>panierModifie(etat)</code>, que le sujet appelle sur chaque abonné.</dd>
+				</div>
+				<div>
+					<dt>Les observateurs, <code>Badge</code>, <code>Recap</code>, <code>Sauvegarde</code></dt>
+					<dd>Chacun réagit à sa façon. Aucun ne connaît les autres.</dd>
+				</div>
+			</dl>
+			<p>Le code qui assemble l'application branche les abonnés de l'extérieur avec <code>panier.abonner(badge)</code>. Il peut aussi en retirer un avec <code>panier.desabonner(badge)</code>.</p>
+			<p>Le livre compare le sujet à un éditeur de journal, et les observateurs à ses abonnés.</p>
+		</section>
+	</div>
+
+	<div class="fiches">
+		<section>
+			<h2>Le reconnaître</h2>
+			<p>Un changement doit déclencher plusieurs réactions sans rapport entre elles, et leur liste varie. Le signal le plus courant est une méthode qui appelle à la suite des objets étrangers à son travail. Dans le panier de départ, <code>ajouter</code> mettait à jour le badge, le récapitulatif et la barre de livraison offerte.</p>
+			<p>Avec un seul destinataire qui ne change pas, un appel direct reste plus simple à suivre.</p>
+		</section>
+
+		<section>
+			<h2>Push ou pull</h2>
+			<p>Le panier de l'exercice pousse (push) une photo de son état, <code>EtatPanier</code>, qui contient le nombre d'articles, le total et les lignes. Chaque observateur y lit ce qui l'intéresse. Un observateur qui aurait besoin d'une autre donnée obligerait à enrichir cette photo.</p>
+			<p>En pull, le sujet envoie sa propre référence, <code>panierModifie(panier)</code>, et chaque observateur appelle les méthodes dont il a besoin. L'observateur dépend alors des méthodes publiques du sujet.</p>
+		</section>
+
+		<section>
+			<h2>Le principe du chapitre</h2>
+			<p>«&nbsp;Efforcez-vous de coupler faiblement les objets qui interagissent.&nbsp;» <code>Panier</code> connaît <code>ObservateurPanier</code> et ignore <code>Badge</code>. On ajoute, retire ou remplace un observateur sans modifier une ligne du panier.</p>
+			<p>Les principes du chapitre 1 reviennent aussi. Le panier programme pour une interface, et il compose une liste d'observateurs.</p>
+		</section>
+
+		<section>
+			<h2>Classe ou fonction</h2>
+			<p>Quand le contrat tient en une méthode, l'observateur peut être une simple fonction. <code>abonner</code> renvoie alors la fonction qui désabonne, et l'appelant n'a rien d'autre à garder&nbsp;: <code>const arreter = panier.abonner(majBadge)</code>, puis <code>arreter()</code>.</p>
+		</section>
+
+		<section>
+			<h2>Dans le code web</h2>
+			<p><code>addEventListener</code> abonne une fonction aux événements d'un élément du DOM, qui joue le rôle du sujet. <code>removeEventListener</code> ou un <code>AbortController</code> la désabonnent.</p>
+			<p>Les stores de Svelte et de Redux exposent <code>subscribe</code>, qui renvoie la fonction de désabonnement. L'<code>EventEmitter</code> de Node applique le même pattern avec <code>on</code>, <code>off</code> et <code>emit</code>. Les signaux d'Angular et de Svelte 5 créent ces abonnements tout seuls quand un effet lit une valeur.</p>
+		</section>
+
+		<section>
+			<h2>Le piège</h2>
+			<p>Un observateur oublié reste en mémoire et continue de réagir. Un composant qui s'abonne doit donc se désabonner quand il disparaît, par exemple dans <code>onDestroy</code>, dans la fonction renvoyée par <code>$effect</code> ou avec <code>controller.abort()</code>.</p>
+		</section>
+	</div>
+
+	<section class="avous">
+		<h2>À vous</h2>
+		<p>Strategy et Observer ont tous les deux une interface et plusieurs classes qui l'implémentent. Qu'est-ce qui les distingue&nbsp;?</p>
+		<details>
+			<summary>Voir la réponse</summary>
+			<p>Le client de Strategy reçoit une seule variante, choisie de l'extérieur, et lui confie un calcul dont il attend le résultat. Le sujet d'Observer prévient tous ses abonnés après un changement, sans rien attendre en retour.</p>
+		</details>
+	</section>
+
+	<footer>
+		<p>Séance du cours&nbsp;: <a href="/poo-patterns-frameworks/03-observer/">Faire réagir les vues avec Observer</a>.</p>
+		<p>Pour aller plus loin, la <a href="https://refactoring.guru/fr/design-patterns/observer">fiche Observer de Refactoring.Guru</a> reprend le même schéma avec d'autres exemples.</p>
+	</footer>
+</main>
+</body>
+</html>

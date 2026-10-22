@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aide-mémoire Strategy</title>
+<meta name="description" content="Fiche du pattern Strategy sur l'exemple des modes de livraison d'une boutique : schéma annoté, rôles et question.">
+<script>try { const t = localStorage.getItem("theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch {}</script>
+<link rel="stylesheet" href="fiche.css">
+</head>
+<body>
+<main>
+	<header>
+		<p class="kicker">Aide-mémoire, <i>Head First Design Patterns</i>, chapitre 1</p>
+		<h1>Strategy</h1>
+		<p class="lede">Plusieurs façons de faire la même chose, rangées derrière un même contrat. Le code client reçoit l'une d'elles et s'en sert sans savoir laquelle.</p>
+		<p class="origine">«&nbsp;Définir une famille d'algorithmes, encapsuler chacun d'eux et les rendre interchangeables. Strategy laisse l'algorithme varier indépendamment des clients qui l'utilisent.&nbsp;» <cite>Gamma, Helm, Johnson et Vlissides, <i>Design Patterns</i>, 1994</cite></p>
+	</header>
+
+	<div class="haut">
+		<figure class="sketch">
+			<svg viewBox="0 0 360 476" role="img" aria-labelledby="sk-titre sk-desc">
+				<title id="sk-titre">Strategy appliqué aux modes de livraison</title>
+				<desc id="sk-desc">Commande utilise l'interface ModeLivraison. Standard, Express et Relais implémentent cette interface. Un nouveau mode, Coursier, s'ajouterait sans modifier Commande.</desc>
+				<defs>
+					<filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="360" height="476">
+						<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"/>
+						<feDisplacementMap in="SourceGraphic" scale="2"/>
+					</filter>
+					<marker id="fleche-stylo" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+						<path class="tete-stylo" d="M1.5 1.5 L8 5 L1.5 8.5"/>
+					</marker>
+					<marker id="fleche-trait" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse">
+						<path class="tete-trait" d="M1 1 L8 5 L1 9"/>
+					</marker>
+				</defs>
+
+				<g filter="url(#crayon)">
+					<rect class="sk-box" x="16" y="22" width="150" height="54"/>
+					<path class="sk-line sk-dash" d="M91 76 L91 127" marker-end="url(#fleche-trait)"/>
+					<rect class="sk-box" x="16" y="130" width="230" height="82"/>
+					<path class="sk-line" d="M16 176 L246 176"/>
+					<path class="sk-line sk-dash" d="M131 226 L131 246 M64 246 L296 246 M64 246 L64 268 M180 246 L180 268 M296 246 L296 268"/>
+					<polygon class="sk-tri" points="131,212 123,226 139,226"/>
+					<rect class="sk-box" x="12" y="268" width="104" height="70"/>
+					<rect class="sk-box" x="128" y="268" width="104" height="70"/>
+					<rect class="sk-box" x="244" y="268" width="104" height="70"/>
+					<path class="sk-line" d="M12 298 L116 298 M128 298 L232 298 M244 298 L348 298"/>
+					<rect class="sk-ghost" x="244" y="374" width="104" height="50"/>
+					<path class="sk-pen" d="M188 82 C178 82 172 74 171 62" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M300 213 C290 222 262 216 252 202" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M132 362 Q128 348 106 343" marker-end="url(#fleche-stylo)"/>
+					<path class="sk-pen" d="M322 437 Q326 431 318 428" marker-end="url(#fleche-stylo)"/>
+				</g>
+
+				<text class="t-name" x="91" y="46" text-anchor="middle">Commande</text>
+				<text class="t-code-muted" x="91" y="65" text-anchor="middle">recapitulatif(mode)</text>
+
+				<text class="t-stereo" x="131" y="149" text-anchor="middle">«interface»</text>
+				<text class="t-name" x="131" y="167" text-anchor="middle">ModeLivraison</text>
+				<text class="t-code" x="28" y="194">frais(sousTotal): number</text>
+				<text class="t-code" x="28" y="207">delaiJours(): number</text>
+
+				<text class="t-name" x="64" y="290" text-anchor="middle">Standard</text>
+				<text class="t-code-muted" x="64" y="316" text-anchor="middle">490 centimes</text>
+				<text class="t-code-muted" x="64" y="330" text-anchor="middle">3 jours</text>
+				<text class="t-name" x="180" y="290" text-anchor="middle">Express</text>
+				<text class="t-code-muted" x="180" y="316" text-anchor="middle">990 + 5 %</text>
+				<text class="t-code-muted" x="180" y="330" text-anchor="middle">1 jour</text>
+				<text class="t-name" x="296" y="290" text-anchor="middle">Relais</text>
+				<text class="t-code-muted" x="296" y="316" text-anchor="middle">290 centimes</text>
+				<text class="t-code-muted" x="296" y="330" text-anchor="middle">4 jours</text>
+
+				<text class="t-ghost" x="296" y="396" text-anchor="middle">Coursier</text>
+				<text class="t-hand" x="296" y="415" text-anchor="middle">demain&nbsp;?</text>
+
+				<text class="t-hand"><tspan class="b" x="186" y="34">Le client.</tspan><tspan x="186" y="52">Il appelle mode.frais()</tspan><tspan x="186" y="70">sans savoir qui répond.</tspan></text>
+				<text class="t-hand" x="100" y="108">utilise</text>
+				<text class="t-hand"><tspan class="b" x="258" y="146">Le contrat.</tspan><tspan x="258" y="164">La même</tspan><tspan x="258" y="182">question</tspan><tspan x="258" y="200">pour tous.</tspan></text>
+				<text class="t-hand" x="190" y="240">implémentent</text>
+				<text class="t-hand"><tspan class="b" x="18" y="368">Les variantes.</tspan><tspan x="18" y="386">Même contrat, chacune</tspan><tspan x="18" y="404">sa règle de calcul.</tspan></text>
+				<text class="t-hand" text-anchor="end"><tspan x="346" y="452">Un mode de plus&nbsp;? Une classe de plus.</tspan><tspan x="346" y="470">Commande ne change pas.</tspan></text>
+			</svg>
+		</figure>
+
+		<section class="roles">
+			<h2>Les trois rôles</h2>
+			<dl>
+				<div>
+					<dt>Le client, <code>Commande</code></dt>
+					<dd>Il dépend du contrat et appelle <code>mode.frais(...)</code>. Il ne teste pas le nom du mode.</dd>
+				</div>
+				<div>
+					<dt>Le contrat, <code>ModeLivraison</code></dt>
+					<dd>Toutes les variantes répondent à la même question, avec les mêmes signatures.</dd>
+				</div>
+				<div>
+					<dt>Les variantes, <code>Standard</code>, <code>Express</code>, <code>Relais</code></dt>
+					<dd>Chacune garde ses chiffres et sa règle de calcul.</dd>
+				</div>
+			</dl>
+			<p>Le choix de la variante se fait hors du client, au moment de l'appel&nbsp;: <code>commande.recapitulatif(new Relais())</code>.</p>
+		</section>
+	</div>
+
+	<div class="fiches">
+		<section>
+			<h2>Le reconnaître</h2>
+			<p>Une stratégie est en place quand une variante peut en remplacer une autre sans toucher au client. Des petites classes qui font des travaux différents, comme imprimer une facture et décompter le stock, relèvent d'un autre principe, le découpage en responsabilités.</p>
+			<p>Le signal le plus courant est un <code>switch</code> sur le nom du mode, répété dans plusieurs méthodes. Le code de départ de la boutique en avait deux, dans <code>fraisLivraison</code> et <code>delaiJours</code>. Avec une seule variante, ou une liste qui ne bouge pas, un <code>if</code> reste plus simple à lire.</p>
+		</section>
+
+		<section>
+			<h2>Classe ou fonction</h2>
+			<p>Quand le contrat tient en une opération, un type de fonction suffit&nbsp;: <code>type Frais = (sousTotal: number) =&gt; number</code>. Avec deux opérations, les frais et le délai, un objet les garde ensemble. Il peut venir d'une classe ou d'un littéral <code>{ frais, delaiJours }</code>.</p>
+			<p>Angular et NestJS gardent des classes, parce que leur injection de dépendances fournit des instances.</p>
+		</section>
+
+		<section>
+			<h2>Les trois principes du chapitre</h2>
+			<ul>
+				<li>Isoler ce qui varie. Les règles propres à chaque mode sortent de <code>Commande</code>.</li>
+				<li>Programmer pour une interface. <code>Commande</code> connaît <code>ModeLivraison</code> et ignore <code>Express</code>.</li>
+				<li>Préférer la composition à l'héritage. <code>Commande</code> reçoit un mode au lieu d'avoir une sous-classe <code>CommandeExpress</code>.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Dans le code web</h2>
+			<p>Passport.js nomme «&nbsp;stratégies&nbsp;» ses méthodes de connexion. L'application enregistre <code>new LocalStrategy(...)</code> ou <code>new GoogleStrategy(...)</code> avec <code>passport.use</code>, et ses routes appellent <code>passport.authenticate</code> de la même façon pour toutes.</p>
+			<p>Un composant qui reçoit sa fonction de formatage en prop, comme <code>format={formatEuros}</code>, applique la même idée.</p>
+		</section>
+	</div>
+
+	<section class="avous">
+		<h2>À vous</h2>
+		<p>Dans <code>produits.sort((a, b) =&gt; a.prix - b.prix)</code>, où est la stratégie, et quel code joue le rôle de <code>Commande</code>&nbsp;?</p>
+		<details>
+			<summary>Voir la réponse</summary>
+			<p>La stratégie est la fonction de comparaison <code>(a, b) =&gt; a.prix - b.prix</code>. La méthode <code>sort</code> joue le rôle de <code>Commande</code>&nbsp;: elle appelle cette fonction sans savoir comment elle compare. Une autre fonction trie autrement sans changer <code>sort</code>.</p>
+		</details>
+	</section>
+
+	<footer>
+		<p>Séance du cours&nbsp;: <a href="/poo-patterns-frameworks/02-strategy/">Ajouter un tarif avec Strategy</a>.</p>
+		<p>Pour aller plus loin, la <a href="https://refactoring.guru/fr/design-patterns/strategy">fiche Strategy de Refactoring.Guru</a> reprend le même schéma avec d'autres exemples.</p>
+	</footer>
+</main>
+</body>
+</html>

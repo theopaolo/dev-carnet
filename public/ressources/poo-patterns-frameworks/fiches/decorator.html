@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aide-mémoire Decorator</title>
+<meta name="description" content="Fiche du pattern Decorator sur l'exemple des options de livraison d'une boutique : enveloppes emboîtées, ordre des enveloppes et question.">
+<script>try { const t = localStorage.getItem("theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch {}</script>
+<link rel="stylesheet" href="fiche.css">
+</head>
+<body>
+<main>
+	<header>
+		<p class="kicker">Aide-mémoire, <i>Head First Design Patterns</i>, chapitre 3</p>
+		<h1>Decorator</h1>
+		<p class="lede">Une enveloppe entoure un objet, respecte le même contrat que lui et ajoute un comportement autour de ses appels. Les enveloppes s'emboîtent, et le client ne voit pas la différence.</p>
+		<p class="origine">«&nbsp;Attacher dynamiquement des responsabilités supplémentaires à un objet. Les décorateurs offrent une alternative souple à l'héritage pour étendre des fonctionnalités.&nbsp;» <cite>Gamma, Helm, Johnson et Vlissides, <i>Design Patterns</i>, 1994</cite></p>
+	</header>
+
+	<div class="haut">
+		<figure class="sketch">
+			<svg viewBox="0 0 360 430" role="img" aria-labelledby="sk-titre sk-desc">
+				<title id="sk-titre">Decorator appliqué aux options de livraison</title>
+				<desc id="sk-desc">Commande appelle frais(6000) sur LivraisonOfferte, qui entoure EmballageCadeau, qui entoure Express. Express renvoie 1290, EmballageCadeau ajoute 300 et renvoie 1590, LivraisonOfferte renvoie 0 car la commande atteint 5000 centimes. Le total vaut 6000 centimes, livrés sous 2 jours.</desc>
+				<defs>
+					<filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="360" height="430">
+						<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"/>
+						<feDisplacementMap in="SourceGraphic" scale="2"/>
+					</filter>
+					<marker id="fleche-stylo" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+						<path class="tete-stylo" d="M1.5 1.5 L8 5 L1.5 8.5"/>
+					</marker>
+					<marker id="fleche-trait" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse">
+						<path class="tete-trait" d="M1 1 L8 5 L1 9"/>
+					</marker>
+				</defs>
+
+				<g filter="url(#crayon)">
+					<rect class="sk-box" x="196" y="8" width="130" height="34"/>
+					<rect class="sk-box" x="14" y="56" width="332" height="296"/>
+					<rect class="sk-box" x="30" y="108" width="300" height="218"/>
+					<rect class="sk-box" x="46" y="160" width="268" height="140"/>
+					<path class="sk-line" d="M261 42 L261 214" marker-end="url(#fleche-trait)"/>
+					<path class="sk-pen" d="M300 344 L300 226" marker-end="url(#fleche-stylo)"/>
+				</g>
+
+				<text class="t-name" x="261" y="30" text-anchor="middle">Commande</text>
+				<text class="t-hand"><tspan class="b" x="16" y="22">Le client ne voit que</tspan><tspan x="16" y="40">l'enveloppe extérieure.</tspan></text>
+				<text class="t-hand" x="268" y="88">frais(6000)</text>
+
+				<text class="t-name" x="26" y="78">LivraisonOfferte</text>
+				<text class="t-code-muted" x="26" y="94">frais nuls dès 5000</text>
+				<text class="t-name" x="42" y="130">EmballageCadeau</text>
+				<text class="t-code-muted" x="42" y="146">+300 centimes, +1 jour</text>
+				<text class="t-name" x="58" y="182">Express</text>
+				<text class="t-code-muted" x="58" y="198">990 + 5 %, 1 jour</text>
+
+				<text class="t-hand"><tspan class="b" x="58" y="236">L'objet entouré</tspan><tspan x="58" y="254">fait le calcul de base.</tspan></text>
+				<text class="t-hand" x="58" y="290">renvoie 990 + 300 = 1290</text>
+				<text class="t-hand" x="42" y="318">renvoie 1290 + 300 = 1590</text>
+				<text class="t-hand" x="26" y="344">6000 ≥ 5000, renvoie 0</text>
+
+				<text class="t-hand"><tspan class="b" x="14" y="380">Total 6000 + 0 = 6000 centimes, sous 2 jours.</tspan><tspan x="14" y="402">Chaque enveloppe est aussi un ModeLivraison</tspan><tspan x="14" y="420">et transmet l'appel à celle qu'elle entoure.</tspan></text>
+			</svg>
+		</figure>
+
+		<section class="roles">
+			<h2>Les rôles</h2>
+			<dl>
+				<div>
+					<dt>Le contrat, <code>ModeLivraison</code></dt>
+					<dd>L'objet entouré et toutes ses enveloppes le respectent.</dd>
+				</div>
+				<div>
+					<dt>L'objet entouré, <code>Express</code></dt>
+					<dd>Il fait le calcul de base et ignore qu'on l'entoure.</dd>
+				</div>
+				<div>
+					<dt>Les enveloppes, <code>LivraisonOfferte</code>, <code>EmballageCadeau</code></dt>
+					<dd>Chacune garde le mode reçu dans son constructeur, lui transmet l'appel, puis modifie le résultat.</dd>
+				</div>
+			</dl>
+			<p>Le client, <code>Commande</code>, reçoit l'enveloppe extérieure et s'en sert comme de n'importe quel mode&nbsp;: <code>commande.recapitulatif(new LivraisonOfferte(new EmballageCadeau(new Express())))</code>.</p>
+			<p>L'ordre des enveloppes change le résultat. Sur une commande de 6&nbsp;000 centimes, l'ordre du schéma donne 6&nbsp;000 centimes, car la livraison offerte annule aussi l'emballage. Dans l'ordre inverse, <code>new EmballageCadeau(new LivraisonOfferte(new Express()))</code>, l'emballage reste payant et le total monte à 6&nbsp;300 centimes.</p>
+		</section>
+	</div>
+
+	<div class="fiches">
+		<section>
+			<h2>Le reconnaître</h2>
+			<p>Une option s'applique à n'importe quelle variante, et les options se combinent. Avec l'héritage, chaque combinaison devient une sous-classe. Pour Express, il faut <code>ExpressCadeau</code>, <code>ExpressOfferte</code> et <code>ExpressCadeauOfferte</code>, car une classe ne peut pas hériter des deux premières à la fois. Avec quatre modes, cela fait 12&nbsp;classes. Avec Decorator, il en faut deux en tout, une par option, et chacune entoure n'importe quel mode.</p>
+			<p>Quand une seule classe a besoin d'un ajout, la modifier directement reste plus simple.</p>
+		</section>
+
+		<section>
+			<h2>Le principe du chapitre</h2>
+			<p>«&nbsp;Les classes doivent être ouvertes à l'extension, mais fermées à la modification.&nbsp;» L'emballage cadeau s'ajoute dans une nouvelle classe, sans toucher à <code>Express</code> ni à <code>Commande</code>.</p>
+			<p>L'enveloppe compose un objet au lieu d'en hériter, comme le recommandait déjà le chapitre 1.</p>
+		</section>
+
+		<section>
+			<h2>Dans le code web</h2>
+			<p>Une fonction qui reçoit <code>fetch</code> et renvoie une fonction de même signature est une enveloppe. Elle peut ajouter un en-tête d'authentification ou réessayer après une panne, et le code appelant ne voit pas la différence.</p>
+			<p>Un middleware de Hono s'exécute autour du gestionnaire de la route. Son code avant <code>await next()</code> agit sur la requête, son code après agit sur la réponse. Les middlewares s'empilent comme les enveloppes du schéma, et leur ordre compte de la même façon.</p>
+		</section>
+
+		<section>
+			<h2>Le piège</h2>
+			<p>Les décorateurs de TypeScript, écrits <code>@Component</code> ou <code>@Injectable</code> dans Angular, portent le même nom. Ils annotent une classe au moment de sa déclaration et ne créent aucune enveloppe autour d'un objet.</p>
+			<p>Une enveloppe doit transmettre chaque méthode du contrat. Si <code>LivraisonOfferte</code> oubliait de transmettre <code>delaiJours</code>, le client recevrait un délai faux sans aucune erreur.</p>
+		</section>
+	</div>
+
+	<section class="avous">
+		<h2>À vous</h2>
+		<p>La boutique propose une assurance qui ajoute 2 % du sous-total aux frais, avec n'importe quel mode. Quelles classes faut-il modifier&nbsp;?</p>
+		<details>
+			<summary>Voir la réponse</summary>
+			<p>Aucune. On écrit une nouvelle enveloppe <code>Assurance</code> qui implémente <code>ModeLivraison</code>, garde le mode reçu et ajoute <code>Math.round(sousTotal * 0.02)</code> à ses frais. <code>Commande</code>, les modes et les autres enveloppes restent tels quels.</p>
+		</details>
+	</section>
+
+	<footer>
+		<p>Séance du cours&nbsp;: <a href="/poo-patterns-frameworks/06-decorator/">Tracer une réservation avec Decorator</a>.</p>
+		<p>Pour aller plus loin, la <a href="https://refactoring.guru/fr/design-patterns/decorator">fiche Decorator de Refactoring.Guru</a> reprend le même schéma avec d'autres exemples.</p>
+	</footer>
+</main>
+</body>
+</html>

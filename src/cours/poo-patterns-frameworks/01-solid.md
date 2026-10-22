@@ -115,9 +115,9 @@ Le nombre de personnes ne dicte pas le nombre de classes. Une même personne peu
 
 Une classe peut donc avoir plusieurs méthodes qui répondent au même besoin. Une responsabilité ne signifie ni une seule méthode par classe, ni un fichier pour chaque ligne. Ici, le découpage ajoute une classe et un appel à suivre. Ce coût se justifie si les deux décisions évoluent séparément, pas parce que toute rédaction exige une classe. Les contrôles des saisies et l'envoi du message restent hors de cet exemple.
 
-Pour poursuivre en français, lisez [le support ENSICAEN, section 2.1, pages 1 et 2](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=1). Son importateur CSV distingue la lecture du fichier et l'écriture des données. Cherchez les raisons qui conduiraient à changer chaque partie.
+Le [support ENSICAEN, section 2.1, pages 1 et 2](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=1) illustre cette séparation avec un importateur CSV qui distingue la lecture du fichier et l'écriture des données.
 
-En complément facultatif, [l'article de Robert C. Martin sur la responsabilité unique](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html) est en anglais. Repérez les acteurs de son exemple, puis comparez leurs demandes à celles des deux équipes de notre atelier.
+L'[article en anglais de Robert C. Martin sur la responsabilité unique](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html) développe le lien avec les acteurs du changement.
 
 ## O, ouvert à l'extension, fermé à la modification
 
@@ -247,7 +247,7 @@ En revanche, le code qui choisit le tarif doit encore évoluer. L'application do
 
 Cette stabilité concerne une variation précise, la formule tarifaire compatible avec le contrat actuel. Une nouvelle règle sur les places disponibles demanderait une autre modification. OCP n'interdit ni les `if` ni la correction d'un bogue dans le calcul commun. Si deux tarifs restent stables et que la condition initiale se lit bien, ajouter une interface et plusieurs classes peut coûter plus qu'il ne rapporte. Les assertions vérifient les résultats choisis ici, mais elles ne décident pas quelle réduction l'association doit proposer.
 
-Le chapitre [Strategy](/poo-patterns-frameworks/02-strategy/) applique cette décision à l'application complète. Pour une autre explication en français, lisez la partie sur le principe ouvert-fermé de [l'article de Philippe Vialatte sur SOLID](https://philippe.developpez.com/articles/SOLIDdotNet/). Ses exemples sont en C#. Cherchez ce qui varie et ce qui reste inchangé quand une variante s'ajoute.
+Le chapitre [Strategy](/poo-patterns-frameworks/02-strategy/) applique cette décision à l'application complète. La partie sur le principe ouvert-fermé de [l'article de Philippe Vialatte sur SOLID](https://philippe.developpez.com/articles/SOLIDdotNet/) donne d'autres exemples en C#.
 
 ## L, substitution de Liskov
 
@@ -394,7 +394,7 @@ La séparation des capacités prépare le principe suivant, la ségrégation des
 
 Dans [le support ENSICAEN, section 2.3, pages 3 et 4](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=3), `Square` ne respecte pas les promesses des méthodes de `Rectangle`. La correction utilise la composition. Repérez la promesse perdue lorsque l'on modifie ces objets.
 
-Lisez aussi [la partie Liskov de Philippe Vialatte](https://philippe.developpez.com/articles/SOLIDdotNet/#LIV). Pour chaque sous-classe de son exemple, écrivez la promesse du type parent, puis la promesse que l'appelant perd.
+La [partie Liskov de Philippe Vialatte](https://philippe.developpez.com/articles/SOLIDdotNet/#LIV) présente un autre exemple de substitution.
 
 ### Repère historique
 
@@ -539,9 +539,9 @@ Ce contrat minimal ne constitue pas un système d'autorisations. Si l'objet four
 
 La question diffère aussi de celle de Liskov. Ici, on cherche quelles opérations le client a besoin d'exiger. Liskov demande ensuite si les objets acceptés tiennent les promesses de ces opérations.
 
-Dans [le support ENSICAEN, section 2.4, pages 4 et 5](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=4), les clients d'un distributeur n'utilisent pas les mêmes opérations de dépôt et de retrait. Identifiez le besoin de chaque client avant de lire le découpage proposé.
+Dans [le support ENSICAEN, section 2.4, pages 4 et 5](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=4), les clients d'un distributeur n'utilisent pas les mêmes opérations de dépôt et de retrait.
 
-Pour une autre lecture en français, [l'article SOLID de DigitalOcean](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design-fr) présente aussi la ségrégation des interfaces, avec du code PHP. Recherchez, dans son exemple, quelles opérations chaque client utilise réellement.
+L'[article SOLID de DigitalOcean](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design-fr) illustre la ségrégation des interfaces avec du code PHP.
 
 ## D, inversion des dépendances
 
@@ -682,9 +682,9 @@ L'**inversion de contrôle** désigne l'idée plus générale de confier à un a
 
 La `Map` reste un stockage en mémoire. Elle perd ses données quand le processus s'arrête. Le contrat et les assertions n'apportent aucune garantie de persistance ou de résistance aux accès concurrents. Le chapitre [Repository](/poo-patterns-frameworks/07-repository/) poursuit la discussion sur les contrats de stockage.
 
-Pour approfondir en français, lisez [le support ENSICAEN, section 2.5, pages 5 et 6](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=5). Il place des contrats de lecture et d'écriture entre la règle et les outils utilisés. Recherchez quel besoin chaque contrat exprime.
+Le [support ENSICAEN, section 2.5, pages 5 et 6](https://foad.ensicaen.fr/pluginfile.php/1214/course/section/633/DP-Handout-02.pdf#page=5) place des contrats de lecture et d'écriture entre la règle et les outils utilisés.
 
-En complément facultatif, [l'article de Martin Fowler sur l'injection de dépendances](https://martinfowler.com/articles/injection.html) est en anglais. Sa séparation entre la configuration des objets et leur utilisation aide à relire le rôle de la ligne `new ConsultationMontant(new LectureEnMemoire())`.
+L'[article en anglais de Martin Fowler sur l'injection de dépendances](https://martinfowler.com/articles/injection.html) distingue la configuration des objets de leur utilisation. On retrouve cette séparation dans `new ConsultationMontant(new LectureEnMemoire())`.
 
 ## Situer SOLID et Clean Code
 
@@ -704,7 +704,7 @@ Une même modification peut concerner plusieurs principes. La séparation entre 
 
 Une liste doit afficher le statut de toutes les réservations. Une nouvelle réservation ferme peut être consultée mais ne peut jamais être annulée. Une proposition consiste à la faire hériter de `ReservationFlexible`, puis à redéfinir `annuler()` pour ne rien faire.
 
-Avant de lire la réponse, formulez la promesse rompue et choisissez le contrat à donner à la liste. Décrivez ensuite une vérification du résultat. Expliquez aussi si la liste doit proposer une méthode d'annulation pour accepter cette réservation.
+La liste a-t-elle besoin d'une méthode d'annulation pour afficher ces deux types de réservations ? Proposez une interface adaptée à son affichage.
 
 ### Réponse expliquée
 

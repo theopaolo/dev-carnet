@@ -9,23 +9,19 @@ updatedAt: "2026-10-21"
 
 Au [chapitre 2](/poo-patterns-frameworks/08-2-etat/), chaque écriture dans le store remplaçait toute la page. Ce remplacement faisait perdre le focus au champ et permettait au texte saisi d'être interprété comme du HTML. On va maintenant conserver les éléments pendant les mises à jour et modifier seulement leur contenu ou leurs propriétés.
 
-Chaque ligne d'atelier deviendra un composant chargé de son propre affichage. On l'écrira d'abord comme une fonction, puis comme une classe dont le navigateur appelle les méthodes à l'insertion et au retrait. La comparaison portera notamment sur le nettoyage des abonnements. Elle permettra aussi de rapprocher ces méthodes du pattern Template Method, sans confondre le mécanisme du navigateur avec sa forme classique.
+Chaque ligne d'atelier deviendra un composant chargé de son affichage. On l'écrira comme une fonction, puis comme une classe dont le navigateur appelle les méthodes à l'insertion et au retrait. On pourra ainsi comparer le nettoyage des abonnements et retrouver l'idée des crochets de Template Method.
 
 ## Un composant regroupe ce qui change ensemble
 
 Un **composant** regroupe les éléments d'une partie de l'interface et le code qui les fait réagir. Dans notre page, une ligne d'atelier affiche le titre et les places libres, puis propose un bouton de réservation. Le texte dépend de l'atelier, et le bouton dépend aussi du courriel saisi. Réunir ces éléments dans un composant permet de décrire leur création et leurs mises à jour sans répéter ce code pour chaque atelier.
 
-Repérez les signes qui appellent un composant dans votre propre code :
-
-- Un même groupe d'éléments se répète, comme une ligne par atelier.
-- Ces éléments changent pour les mêmes raisons, comme le texte et le bouton d'une ligne qui dépendent des places.
-- Une partie de la page pourrait apparaître ou disparaître seule, ce qui demande de savoir quoi nettoyer à ce moment-là.
+Ce regroupement convient aux éléments qui se répètent ou changent ensemble, comme le texte et le bouton d'une ligne. Si cette partie de la page disparaît seule, le composant permet aussi de rassembler son nettoyage.
 
 ## Écrire le composant comme une fonction
 
 Dans `src/main.ts`, conservez le catalogue, le type `Etat`, le store et l'action `reserver` du chapitre 2. Gardez les imports, sauf celui de `monterGabarit`, à remplacer par `monter`. Supprimez la fonction `gabarit`, la constante `racine`, l'appel à `monterGabarit` et les deux écouteurs posés sur la racine.
 
-Ajoutez ensuite le composant ci-dessous. On étudie d'abord son fonctionnement, puis on écrira la page qui l'utilise. À cette étape intermédiaire, le fichier ne contient donc plus de code pour monter la page.
+Ajoutez ce composant. La page qui l'utilise sera écrite plus bas. Pour l'instant, le fichier ne contient donc plus de code de montage.
 
 ```ts
 function CarteAtelier(atelierId: number): [HTMLElement, () => void] {
@@ -52,7 +48,7 @@ L'affectation à `textContent` traite le titre et les places comme du texte. On 
 
 La fonction renvoie un tableau dont les deux positions ont un sens fixe, appelé un tuple. La première contient l'élément à insérer, la seconde la fonction de désabonnement fournie par le store. Le composant donne ainsi à son appelant les moyens de l'afficher et de cesser ses mises à jour.
 
-Ce contrat ne dit pourtant pas quand appeler le désabonnement. La fonction ignore à quel moment son élément sera retiré de la page. Son appelant doit donc conserver le nettoyage et l'exécuter au retrait. S'il ne le fait pas, le store continue d'appeler `afficher`, même quand ses éléments ne sont plus visibles. Ce problème ne vient pas de la syntaxe des fonctions, mais de l'absence d'un code chargé de suivre leur durée de vie.
+La fonction ignore à quel moment son élément sera retiré de la page. Son appelant doit donc conserver le nettoyage et l'exécuter au retrait. Sinon, le store continue d'appeler `afficher` sur des éléments devenus invisibles. Il manque un code chargé de suivre leur durée de vie.
 
 ## Le navigateur sait quand un élément est retiré
 
@@ -104,7 +100,7 @@ Le corps de `connectedCallback` reprend la création des éléments, le premier 
 
 `replaceChildren` remplace les enfants de la carte au lieu d'en ajouter après les précédents. Lors d'un déplacement classique qui déconnecte puis reconnecte l'élément, le navigateur appelle `disconnectedCallback`, puis `connectedCallback`. La carte se désabonne, reconstruit ses enfants et s'abonne de nouveau. Les enfants restent donc stables pendant les changements du store, pas pendant toute la vie de l'objet.
 
-Le champ `#desabonner` contient d'abord une fonction vide. Ainsi, un appel à `disconnectedCallback` n'a pas besoin de tester si un abonnement a été enregistré. Cette valeur initiale ne remplace pas le désabonnement installé lors de la connexion.
+Le champ `#desabonner` contient d'abord une fonction vide, remplacée à la connexion. `disconnectedCallback` peut ainsi l'appeler sans tester si un abonnement existe.
 
 Écrivez maintenant la page. Elle reste une fonction, que `monter` appelle.
 
@@ -172,7 +168,7 @@ Le store conserve la fonction d'affichage, qui garde elle-même une référence 
 
 ## Template Method, le squelette et les crochets
 
-Le catalogue GoF de 1994 décrit le pattern **Template Method**. [Refactoring.Guru](https://refactoring.guru/fr/design-patterns/template-method) en donne cette définition : il « permet de mettre le squelette d'un algorithme dans la classe mère, mais laisse les sous-classes redéfinir certaines étapes de l'algorithme sans changer sa structure ». La classe mère fixe l'ordre des étapes, et les sous-classes remplissent certaines d'entre elles. Une étape facultative, dont le corps est vide par défaut, s'appelle un **crochet**, ou *hook* en anglais.
+Le catalogue GoF de 1994 décrit le pattern **Template Method**. [Refactoring.Guru](https://refactoring.guru/fr/design-patterns/template-method) en donne cette définition : il « permet de mettre le squelette d'un algorithme dans la classe mère, mais laisse les sous-classes redéfinir certaines étapes de l'algorithme sans changer sa structure ». La classe mère fixe l'ordre des étapes, et les sous-classes remplissent certaines d'entre elles. Une étape facultative, vide ou dotée d'un comportement par défaut, s'appelle un **crochet**, ou *hook* en anglais.
 
 Dans la forme classique du pattern, une méthode de la classe mère contient l'enchaînement des opérations. Elle appelle certaines méthodes que les sous-classes peuvent redéfinir. La sous-classe change ainsi une étape sans réécrire l'ensemble. Le GoF rattache cette organisation au principe d'Hollywood du [chapitre 1](/poo-patterns-frameworks/08-frameworks/#ce-que-dit-la-definition). Le code qui coordonne le traitement appelle les extensions fournies par l'application.
 
@@ -194,7 +190,9 @@ classDiagram
   HTMLElement <|-- CarteAtelier
 ```
 
-La flèche à pointe creuse se lit « CarteAtelier hérite de HTMLElement », comme dans le [chapitre UML](/poo-patterns-frameworks/01-uml/). Les callbacks figurent sur la carte, car ils ne sont pas des méthodes définies sur `HTMLElement`. Lors de `customElements.define`, le navigateur recherche les callbacks sur le prototype de la classe enregistrée. Retenez donc l'appel de crochets par un code extérieur, sans en déduire que toute classe à callbacks constitue un Template Method.
+La flèche à pointe creuse se lit « CarteAtelier hérite de HTMLElement », comme dans le [chapitre UML](/poo-patterns-frameworks/01-uml/). Les callbacks figurent sur la carte, car ils ne sont pas des méthodes définies sur `HTMLElement`. Lors de `customElements.define`, le navigateur les recherche sur le prototype de la classe enregistrée.
+
+La [fiche aide-mémoire Template Method](/ressources/poo-patterns-frameworks/fiches/template-method.html) présente la forme classique du pattern sur l'envoi d'un colis, puis montre où le reconnaître dans les frameworks.
 
 ## Les classes et les fonctions dans les frameworks réels
 

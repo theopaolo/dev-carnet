@@ -9,7 +9,7 @@ updatedAt: "2026-10-21"
 
 Au [chapitre 3](/poo-patterns-frameworks/08-3-composants/), les composants conservaient leurs éléments au lieu de reconstruire la page. Leurs mises à jour restaient pourtant trop larges. Chaque carte s'abonnait au store entier, si bien que taper une lettre recalculait son texte alors que seul son bouton dépend du courriel.
 
-On pourrait séparer les données et écrire un abonnement pour chaque affichage, mais il faudrait alors maintenir à la main la liste de ses dépendances. Dans ce chapitre, on construit des signaux qui déduisent ces abonnements des valeurs lues par le code. Le texte d'une carte ne sera ainsi plus recalculé pendant la saisie du courriel.
+Nous allons remplacer le store par des signaux qui déduisent les abonnements des valeurs lues par le code. Le texte d'une carte ne sera ainsi plus recalculé pendant la saisie du courriel.
 
 ## Ce que dit la définition
 
@@ -27,11 +27,7 @@ Prenons le bouton d'une carte. Son état dépend du courriel et des places de l'
 
 ## Repérer le besoin
 
-Dans votre code, les signaux deviennent utiles quand ces situations apparaissent :
-
-- Une fonction comme `afficher` met à jour plusieurs éléments à chaque changement, y compris ceux qui ne dépendent pas de la donnée modifiée.
-- Vous écrivez à la main la liste des données dont dépend un affichage, puis l'abonnement et le désabonnement correspondants.
-- Un oubli dans cette liste laisse un élément afficher une valeur périmée.
+Notre fonction `afficher` met à jour plusieurs éléments à chaque changement, même ceux qui ne dépendent pas de la donnée modifiée. Séparer ces mises à jour demanderait de gérer à la main leurs abonnements et leurs désabonnements. Un oubli dans la liste des dépendances laisserait alors un élément afficher une valeur périmée.
 
 ## Construire Signal et effet
 
@@ -95,7 +91,7 @@ export function effet(fonction: () => void): void {
 }
 ```
 
-La variable de module `effetCourant` permet à une lecture de savoir pour quel effet elle a lieu. Elle vaut `null` lorsqu'aucun effet ne s'exécute. Pour comprendre les abonnements, il faut suivre le premier appel, puis une lecture et enfin une écriture.
+La variable de module `effetCourant` indique pour quel effet une lecture a lieu. Elle vaut `null` lorsqu'aucun effet ne s'exécute.
 
 `effet(fonction)` crée un objet `Effet` et l'exécute aussitôt. Ce premier passage produit l'affichage initial et découvre les dépendances. `executer` place l'objet dans `effetCourant` avant d'appeler sa fonction, puis restaure la valeur précédente dans le bloc `finally`, même si la fonction lève une erreur. Cette sauvegarde permet aussi les effets imbriqués. Quand l'effet intérieur se termine, `effetCourant` désigne de nouveau l'effet extérieur, auquel les lectures suivantes seront rattachées.
 
@@ -275,14 +271,14 @@ Solid sépare les opérations en deux API. La fonction `createSignal` renvoie un
 
 Angular propose `signal`, `computed` et `effect` pour distinguer l'état modifiable, les valeurs calculées et les effets. Svelte 5 expose les runes `$state` et `$effect` plutôt que des appels explicites de lecture et d'écriture. Son compilateur ajoute les opérations nécessaires au suivi. On retrouve donc le même besoin, relier un calcul aux valeurs qu'il lit, sans retrouver nécessairement les mêmes appels dans le code de l'application.
 
-Ryan Carniato, l'auteur de Solid, construit une bibliothèque semblable dans l'article [*Building a Reactive Library from Scratch*](https://dev.to/ryansolid/building-a-reactive-library-from-scratch-1i0p), publié en 2021. Son code utilise la même copie des abonnés avant de les relancer et le même nettoyage avant chaque exécution. Le lire après ce chapitre permet de comparer les choix.
+Ryan Carniato, l'auteur de Solid, construit une bibliothèque semblable dans l'article [*Building a Reactive Library from Scratch*](https://dev.to/ryansolid/building-a-reactive-library-from-scratch-1i0p), publié en 2021. Son code copie aussi les abonnés avant de les relancer et nettoie les dépendances avant chaque exécution.
 
 ## Nuance, ce que notre version ne fait pas
 
-Nos effets se relancent immédiatement, pendant chaque écriture. Quand `reserver` écrit dans `ateliers` puis dans `message`, les effets abonnés au premier signal s'exécutent avant que le second soit mis à jour. Un effet qui lirait les deux signaux pourrait donc observer le nouvel état des ateliers avec l'ancien message, puis s'exécuter de nouveau. La [documentation de Svelte](https://svelte.dev/docs/svelte/$effect) décrit un autre choix pour les effets. Les nouvelles exécutions sont groupées et ont lieu après la mise à jour du DOM. Il ne faut donc pas supposer que toutes les API d'effets s'exécutent au même moment.
+Nos effets se relancent immédiatement, pendant chaque écriture. Quand `reserver` écrit dans `ateliers` puis dans `message`, un effet qui lit les deux voit d'abord les nouveaux ateliers avec l'ancien message, puis s'exécute de nouveau. La [documentation de Svelte](https://svelte.dev/docs/svelte/$effect) décrit un autre choix. Les nouvelles exécutions y sont groupées après la mise à jour du DOM. Le moment d'exécution varie donc selon le framework.
 
 Les frameworks proposent aussi des **valeurs calculées**, comme `computed` dans Angular et Vue. Notre fonction `atelier` refait sa recherche à chaque appel, même si les données n'ont pas changé. Une valeur calculée conserve son résultat et suit les signaux nécessaires au calcul. Si aucun d'eux n'a changé, une nouvelle lecture réutilise ce résultat. Sinon, elle le recalcule à la demande. Ce mécanisme évite les recherches répétées sans maintenir manuellement une seconde copie de l'état.
 
 Le synchronisme impose aussi des limites. Un effet qui modifie un signal qu'il vient de lire peut se rappeler lui-même sans fin. La copie des abonnés protège le parcours de l'ensemble, mais pas contre cette récursion. De même, le bloc `finally` restaure l'effet courant après une erreur sans la traiter. Si un effet lève une erreur, celle-ci interrompt la boucle d'écriture, et les lecteurs suivants ne sont pas exécutés.
 
-Enfin, l'abonnement automatique a un revers. Toute lecture faite pendant un effet crée un abonnement, y compris une lecture que vous n'aviez pas prévue. Le chapitre 5 en montre un exemple, et Solid propose la fonction `untrack` pour lire une valeur sans s'y abonner.
+Toute lecture faite pendant un effet crée un abonnement, y compris une lecture involontaire. Le chapitre 5 en montre un exemple, et Solid propose la fonction `untrack` pour lire une valeur sans s'y abonner.

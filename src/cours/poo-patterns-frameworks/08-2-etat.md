@@ -2,12 +2,12 @@
 title: "Frameworks 2, un état observé et un rendu naïf"
 order: 9.1
 publishedAt: "2026-10-21"
-updatedAt: "2026-10-21"
+updatedAt: "2026-10-23"
 ---
 
 # Frameworks 2, un état observé et un rendu naïf
 
-À la fin du [chapitre 1](/poo-patterns-frameworks/08-frameworks/), la réservation réussit, mais la page affiche toujours le même nombre de places libres. `PageAteliers` a lu les ateliers au montage, sans prévoir de mise à jour. Il manque un lien entre les données qui changent et le code qui les affiche. On va établir ce lien avec un objet qui conserve l'état de l'interface et prévient les vues à chaque modification. On commencera par remplacer toute la page, afin d'observer les limites de cette solution avant de l'améliorer.
+À la fin du [chapitre 1](/poo-patterns-frameworks/08-frameworks/), la réservation réussit, mais la page affiche toujours le même nombre de places libres. `PageAteliers` n'a lu les ateliers qu'au montage. Nous allons ajouter un objet qui conserve l'état de l'interface et prévient les vues à chaque modification, puis remplacer toute la page pour afficher ce nouvel état.
 
 ## L'état de l'interface
 
@@ -17,7 +17,7 @@ Cet état ne remplace pas les données conservées par `Inscriptions`. La classe
 
 ## Un store est le sujet d'un Observer
 
-L'architecture Flux, présentée par Facebook en 2014, emploie le terme **store** pour les objets qui conservent l'état de l'application et préviennent les vues de ses changements. La bibliothèque Redux, créée en 2015 à l'initiative de Dan Abramov, a diffusé l'idée d'un store unique pour toute l'application. La [page d'histoire de Redux](https://redux.js.org/understanding/history-and-design/history-of-redux) retrace cette évolution. Notre exemple reprend le stockage et les notifications, pas toute l'architecture de Flux ou de Redux.
+Un **store** est un objet qui conserve l'état de l'application et prévient les vues de ses changements. Le terme vient de l'architecture Flux, présentée par Facebook en 2014, et la bibliothèque Redux l'a diffusé à partir de 2015. Notre exemple en garde seulement le stockage et les notifications.
 
 Le store que l'on va écrire permet de lire l'état, de le remplacer et de s'abonner à ses changements. Il reprend l'organisation de la séance [Observer](/poo-patterns-frameworks/03-observer/). Le sujet est le store, et ses observateurs sont les fonctions qui mettent la page à jour. Au lieu de transmettre un événement comme « confirmation », chaque notification leur fournit l'état complet. Tous les abonnés le reçoivent, même si seule une donnée qui ne les concerne pas a changé.
 
@@ -49,11 +49,9 @@ export function creerStore<E>(initial: E): Store<E> {
 }
 ```
 
-Le paramètre de type `E` représente la forme de l'état. Le framework peut ainsi conserver un nombre, un objet ou une autre valeur sans connaître les ateliers. `creerStore` est une fabrique, au sens de la séance [Factory](/poo-patterns-frameworks/04-factory/#lire-une-fabrique-qui-garde-une-configuration). Les méthodes renvoyées gardent accès aux variables `etat` et `abonnes` après la fin de l'appel. C'est une fermeture. Le code extérieur ne peut pas atteindre directement ces variables, comme avec les champs privés d'une classe.
+Le paramètre de type `E` représente la forme de l'état, si bien que le framework peut conserver n'importe quelle valeur sans connaître les ateliers. `creerStore` est une [fabrique](/poo-patterns-frameworks/04-factory/#lire-une-fabrique-qui-garde-une-configuration) : les méthodes renvoyées gardent accès aux variables `etat` et `abonnes` après la fin de l'appel. Cette fermeture les protège comme des champs privés. En revanche, `lire` renvoie l'objet lui-même, sans copie. Si un appelant le modifie directement, le store ne prévient personne, donc notre application passe toujours par `ecrire`.
 
-Cette protection ne rend pas l'objet d'état immuable. La méthode `lire` renvoie sa référence, sans le copier. Si un appelant modifie cet objet directement, le store ne le détecte pas et ne prévient personne. Pour déclencher une notification, notre application doit passer par `ecrire`.
-
-`ecrire` parcourt une copie des abonnés, `[...abonnes]`, plutôt que l'ensemble lui-même, parce qu'un `Set` parcouru par `for...of` visite aussi les éléments ajoutés pendant le parcours. Sans la copie, une fonction qui abonne une nouvelle vue pendant une notification ferait recevoir cette même notification à la nouvelle vue. La copie fige la liste au moment de l'écriture.
+`ecrire` parcourt une copie des abonnés, `[...abonnes]`. Ainsi, une vue abonnée pendant une notification ne reçoit pas cette même notification.
 
 `abonner` ajoute une fonction à la liste des destinataires, mais ne l'appelle pas immédiatement. Il faut donc lire l'état pour afficher la vue une première fois. La fonction renvoyée par `abonner` permet ensuite de se désabonner. Le code qui crée la vue doit la conserver pour interrompre les notifications quand cette vue disparaît.
 
@@ -76,11 +74,11 @@ assert.equal(store.lire().places, 0);
 console.log("Vérifications réussies.");
 ```
 
-Exécutez `node tests/store.test.ts`. Le terminal doit afficher « Vérifications réussies. ». L'abonné a reçu la valeur 1, mais pas la valeur 0 écrite après son désabonnement. Le store, lui, conserve bien 0. Avec une version récente de Node.js capable d'exécuter le TypeScript du parcours, aucun outil supplémentaire n'est nécessaire. L'import de `framework.ts` fonctionne hors du navigateur, car il ne manipule aucun élément de page au chargement du module.
+Exécutez `node tests/store.test.ts`. Le terminal doit afficher « Vérifications réussies. ». L'abonné a reçu la valeur 1, mais pas la valeur 0 écrite après son désabonnement, que le store conserve bien. Node.js exécute ce test sans navigateur, car `framework.ts` ne touche à aucun élément de page au chargement.
 
 ## Redessiner toute la page à chaque changement
 
-Le **rendu** est l'opération qui produit l'affichage à partir de l'état. Une fonction reçoit les données et décrit la page correspondante. Au lieu de prévoir une modification pour chaque événement possible, on peut donc recalculer cette description après chaque écriture dans le store. Reste à décider comment la reporter dans les éléments de la page.
+Le **rendu** produit l'affichage à partir de l'état. Une fonction reçoit les données et décrit la page correspondante. Recalculer cette description après chaque écriture dans le store évite de prévoir une modification pour chaque événement possible.
 
 La façon la plus directe d'appliquer cette idée consiste à écrire la page sous forme de texte HTML, puis à le donner à `innerHTML`. Ajoutez cette fonction au framework.
 
@@ -162,7 +160,7 @@ racine.addEventListener("click", evenement => {
 
 Le bouton reste désactivé tant que le courriel est vide ou que l'atelier est complet. Le gabarit a donc besoin du texte saisi pour calculer son état, ce qui explique la présence d'`email` dans le store. Chaque frappe enregistre la valeur du champ et déclenche un nouveau rendu. Un courriel non vide n'est pas forcément valide. La vérification de sa forme reste dans les règles de réservation.
 
-Avec `Readonly`, TypeScript interdit de réaffecter les propriétés directes de l'état. Notre code construit donc un nouvel objet avec la décomposition `{ ...etat }`, puis le transmet au store. Cette vérification est superficielle. Le tableau des ateliers et les objets qu'il contient restent modifiables, et rien n'est gelé à l'exécution.
+Avec `Readonly`, TypeScript interdit de réaffecter les propriétés de l'état. Le code construit donc un nouvel objet avec `{ ...etat }` et le transmet au store. Cette vérification reste superficielle, car le tableau des ateliers peut encore être modifié.
 
 Dans cet exemple, une **action** est une fonction qui traite une demande et reporte son résultat dans l'état de l'interface. La fonction `reserver` demande d'abord à la classe de créer la réservation. Si elle réussit, l'action relit les places disponibles, prépare le message de confirmation et écrit l'ensemble en une fois dans le store. Si la classe refuse la demande, l'action conserve les ateliers et le courriel, puis remplace seulement le message. Le rendu reçoit ainsi un état qui correspond au résultat de la demande.
 
@@ -178,7 +176,7 @@ flowchart LR
   Montage -->|innerHTML| Racine[Racine]
 ```
 
-Relancez la page. Collez une adresse complète dans le champ, puis réservez l'atelier Dessin. Le nombre de places passe de 2 à 1. On colle l'adresse pour observer d'abord ce résultat, car la saisie lettre par lettre révèle le défaut suivant. L'affichage se met maintenant à jour, mais le remplacement du HTML pose trois problèmes.
+Relancez la page. Collez une adresse complète dans le champ, puis réservez l'atelier Dessin. Le nombre de places passe de 2 à 1. La saisie lettre par lettre révèle le premier des trois problèmes du remplacement du HTML.
 
 ## Premier défaut, le champ perd le focus
 
@@ -188,7 +186,7 @@ La frappe déclenche l'événement `input`, qui écrit le courriel dans le store
 
 ## Deuxième défaut, les écouteurs disparaissent
 
-Pour comprendre le problème des écouteurs, considérons une autre façon de traiter les clics. On pourrait inscrire une fonction sur chaque bouton après le montage. Lisez ce contre-exemple sans l'ajouter à votre fichier, qui traite déjà les clics sur la racine.
+Un écouteur posé sur un bouton reste attaché à ce bouton quand le rendu le retire. Lisez ce contre-exemple sans l'ajouter à votre fichier, qui traite déjà les clics sur la racine.
 
 ```ts
 for (const bouton of racine.querySelectorAll<HTMLButtonElement>("button[data-atelier]")) {
@@ -216,7 +214,7 @@ On pourrait échapper les caractères `<`, `>`, `&` et les guillemets pour qu'il
 
 ## Nuance, l'idée reste bonne
 
-Décrire la page à partir de l'état évite de disperser les mises à jour dans chaque écouteur. Cela ne garantit pas que le gabarit affiche les bonnes données, mais permet de relire à un seul endroit comment il les utilise. Les trois défauts observés viennent du choix d'`innerHTML`, qui remplace les éléments existants et interprète la chaîne reçue comme du HTML.
+Décrire la page à partir de l'état rassemble les mises à jour dans le gabarit. Les trois défauts observés viennent du choix d'`innerHTML`, qui remplace les éléments existants et interprète la chaîne reçue comme du HTML.
 
 On peut conserver cette description à partir de l'état sans remplacer toute la page. React recalcule une description, la compare avec la précédente, puis détermine les modifications à appliquer aux éléments existants. Le DOM virtuel, présenté au [chapitre 7](/poo-patterns-frameworks/08-7-bilan/), repose sur cette approche. Les chapitres 3 et 4 explorent une autre solution. On crée les éléments au montage, puis on met à jour leur texte ou leurs propriétés sans les remplacer à chaque changement d'état.
 

@@ -9,7 +9,7 @@ updatedAt: "2026-10-21"
 
 Après le [chapitre 5](/poo-patterns-frameworks/08-5-nettoyage/), `src/main.ts` réunit le catalogue, quatre signaux, deux actions et quatre composants. Tant que tout reste dans ce fichier, les composants accèdent aux variables du module, comme `email` ou `reserver`. Si on les déplace, cet accès disparaît. Il faut alors décider quel code construit l'état de la page et comment les composants le reçoivent.
 
-On va d'abord regrouper l'état et les actions dans une classe, puis comparer plusieurs façons de la transmettre. On construira ensuite un contexte qui rend une valeur accessible aux descendants d'une même portée. L'état jouera ici le rôle d'un **service**, un objet qui donne aux composants accès à des données et à des opérations communes. L'objectif n'est pas de supprimer tous les paramètres, mais de comprendre ce que ce partage apporte et ce qu'il rend moins visible.
+Nous allons regrouper l'état et les actions dans une classe, puis transmettre une instance aux composants. Cet état jouera le rôle d'un **service**, un objet qui donne accès à des données et à des opérations communes. Après les paramètres, on essaiera un contexte qui partage une valeur avec les descendants d'une même portée.
 
 ## Regrouper l'état et les actions dans une classe
 
@@ -69,7 +69,7 @@ Les signaux restent publics. Le mot-clé `readonly` empêche de remplacer un sig
 
 La méthode `titre` remplace la `Map` du chapitre 5. Elle lit le catalogue sans passer par un signal. Si une ligne l'appelle pendant l'effet qui reconstruit la liste des réservations, cet appel n'abonne donc pas l'effet au signal des ateliers. On conserve ainsi la séparation entre les données nécessaires à la création d'une ligne et celles dont on veut suivre les changements.
 
-La dernière ligne crée une clé qui permettra aux composants de demander cet état sans importer une instance particulière. Le type `Cle` n'existe pas encore dans le framework. Une erreur TypeScript à cet endroit est donc attendue jusqu'à l'ajout de ce type, plus bas dans le chapitre.
+La dernière ligne crée une clé pour demander cet état sans importer une instance particulière. Le type `Cle` sera ajouté au framework plus bas. D'ici là, TypeScript signale une erreur à cet endroit.
 
 Cette classe ne crée aucun élément HTML. On peut donc vérifier sans navigateur qu'une réservation met à jour les places, qu'un refus produit un message et qu'une annulation libère sa place. Créez `tests/etat.test.ts`.
 
@@ -102,7 +102,7 @@ Déplacez maintenant les quatre composants de `main.ts` dans un nouveau fichier,
 
 La première consiste à créer une instance dans un module et à l'importer partout. On écrirait dans `etat.ts` une ligne comme `export const etat = new EtatAteliers(new Inscriptions([...]))`, puis chaque composant ferait `import { etat } from "./etat.ts"`. Tous ces composants utiliseraient alors la même instance, construite avec le catalogue défini dans le module. Deux pages montées sur le même écran partageraient leurs réservations, même si on voulait les rendre indépendantes.
 
-Le problème ne vient pas des modules, mais du choix d'exporter une instance unique. Un module peut aussi exporter une classe ou une fonction qui crée plusieurs états. Il reste alors à transmettre à chaque composant l'instance qui lui est destinée.
+Exporter une classe ou une fabrique permettrait de créer plusieurs états. Il resterait alors à transmettre à chaque composant l'instance qui lui est destinée.
 
 La deuxième consiste à passer l'état en paramètre de composant en composant :
 
@@ -126,11 +126,11 @@ Avec les paramètres, les dépendances de chaque composant apparaissent dans sa 
 
 La transmission devient plus encombrante lorsqu'une valeur traverse plusieurs composants qui n'en ont pas besoin. Une zone intermédiaire doit alors recevoir l'état uniquement pour le transmettre à une liste située plus bas. La documentation de Vue appelle cette situation le *props drilling*, c'est-à-dire la transmission répétée de propriétés à travers plusieurs niveaux.
 
-La troisième solution associe une valeur à un contexte partagé. Un ancêtre **fournit** la valeur, puis un descendant l'**injecte** sans que les composants intermédiaires la transmettent. On va construire cette solution pour observer son fonctionnement, même si les paramètres suffiraient encore dans notre exemple.
+La troisième solution associe une valeur à un contexte partagé. Un ancêtre **fournit** la valeur, puis un descendant l'**injecte** sans que les composants intermédiaires la transmettent.
 
 ## Ce que dit la définition
 
-Une **dépendance** est un objet dont un autre code a besoin pour travailler. `EtatAteliers` est ainsi une dépendance des composants, et la classe qui vérifie les réservations est une dépendance de l'état. La question est de savoir qui choisit ces objets et comment le code utilisateur les obtient.
+Une **dépendance** est un objet dont un autre code a besoin pour travailler. `EtatAteliers` est une dépendance des composants, et la classe qui vérifie les réservations est une dépendance de l'état.
 
 Martin Fowler décrit l'**injection de dépendances** dans l'article [*Inversion of Control Containers and the Dependency Injection pattern*](https://martinfowler.com/articles/injection.html), publié le 23 janvier 2004. Il emploie ce nom pour distinguer une manière d'assembler les objets de l'inversion de contrôle, notion plus générale.
 
@@ -182,7 +182,7 @@ export function injecter<T>(cle: Cle<T>): T {
 
 `fournir` range une valeur dans la portée courante, sous une clé. `injecter` cherche cette clé dans la portée courante, puis remonte vers les parents jusqu'à la racine. La première valeur trouvée est celle que la fonction renvoie. Une portée enfant peut donc masquer la valeur d'un parent sans modifier celle du parent. Si aucune portée ne contient la clé, l'erreur indique quelle dépendance manque.
 
-Le lien `parent` du chapitre 5 permet cette recherche. Il relie des contextes d'exécution, pas directement les éléments HTML. Dans notre code, les fonctions composants ne créent pas chacune une portée. `PageAteliers` et `ListeReservations` s'exécutent dans celle créée par `monter`. L'effet de la liste crée ensuite sa propre portée, dont le parent est cette portée de montage. Une ligne créée par cet effet y cherche l'état, puis le retrouve dans la portée de `monter`, où `main.ts` l'a fourni.
+Le lien `parent` du chapitre 5 relie les contextes d'exécution. `PageAteliers` et `ListeReservations` partagent la portée créée par `monter`, puisque les fonctions composants ne créent pas chacune une portée. L'effet de la liste crée une portée enfant. Une ligne créée par cet effet y cherche l'état, puis le retrouve dans la portée de `monter`, où `main.ts` l'a fourni. La recherche suit donc les portées, plutôt que les éléments HTML.
 
 ```mermaid
 flowchart BT
@@ -245,7 +245,7 @@ monter(document.querySelector<HTMLElement>("#app")!, () => {
 });
 ```
 
-Ce fichier choisit le catalogue, construit `Inscriptions` puis `EtatAteliers`, et fournit cette instance à la racine. Les composants demandent l'état sans connaître le catalogue qui a servi à le construire. Un test peut donc monter la même page avec une autre instance et un catalogue adapté au scénario. En revanche, la clé désigne ici une classe concrète avec un champ privé. Une fausse classe indépendante ne serait pas interchangeable sans modifier ce contrat.
+Ce fichier choisit le catalogue, construit `Inscriptions` puis `EtatAteliers`, et fournit cette instance à la racine. Les composants demandent l'état sans connaître son catalogue. Un test peut ainsi monter la page avec une autre instance et un autre catalogue. La clé désigne toutefois une classe concrète avec un champ privé, ce qui empêche de lui substituer une fausse classe indépendante sans modifier ce contrat.
 
 ## Vérifier
 
@@ -293,6 +293,6 @@ Notre `injecter` exige aussi qu'une portée soit active. C'est le cas pendant le
 
 Vue et React encadrent eux aussi l'endroit où ces fonctions peuvent être appelées, mais leurs règles ne sont pas celles de notre miniature. Dans sa Composition API, Vue demande d'appeler `inject` pendant la préparation du composant. React impose d'appeler [`useContext`](https://react.dev/reference/react/useContext) au niveau supérieur d'un composant fonctionnel ou d'un Hook personnalisé, et non dans un écouteur d'événement. Le contexte d'appel fait donc partie du contrat de ces API, autant que la valeur qu'elles renvoient.
 
-Gardez donc le paramètre quand il suffit. Un composant qui reçoit ses données de son parent direct rend ses besoins visibles et se teste sans contexte de montage. Le contexte partagé devient utile lorsque plusieurs niveaux intermédiaires devraient transmettre une dépendance qu'ils n'utilisent pas. En contrepartie, il faut connaître la clé, le fournisseur et le moment où la recherche est autorisée. Fournir tout l'état donne aussi accès à toutes ses opérations publiques, même à un composant qui n'en utilise qu'une partie. Le contexte ne remplace donc pas le choix des données et des actions que l'on souhaite exposer.
+Un paramètre rend les besoins du composant visibles et permet de le tester sans contexte de montage. Lorsqu'une dépendance traverse plusieurs composants qui ne l'utilisent pas, le contexte partagé évite cette transmission répétée. En échange, il faut connaître la clé, le fournisseur et le moment où la recherche est autorisée. Fournir tout l'état expose aussi toutes ses opérations publiques, même à un composant qui n'en utilise qu'une partie.
 
-La version pédagogique du framework possède désormais toutes les fonctions prévues dans cette série. Le [chapitre 7](/poo-patterns-frameworks/08-7-bilan/) le compare aux frameworks réels et propose une grille pour lire celui de votre projet.
+Le framework est complet pour cette série. Le [chapitre 7](/poo-patterns-frameworks/08-7-bilan/) le compare aux frameworks réels.

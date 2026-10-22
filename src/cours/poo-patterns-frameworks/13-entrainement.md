@@ -15,11 +15,9 @@ Les mini-exercices peuvent se faire après les [fondations](/poo-patterns-framew
 
 ### Étape 1, créer deux instances
 
-Avant de commencer, on relit [la construction d'une instance](/poo-patterns-frameworks/01-fondations/#lire-une-classe-pas-a-pas). On cherche à distinguer la valeur reçue par le constructeur de la propriété conservée dans l'objet, puis à comprendre quel objet `this` désigne.
-
 On écrit une classe `Creature` dont le constructeur reçoit un nom. Chaque instance conserve ce nom et commence avec 100 points d'énergie. Le nom est déclaré `readonly`, tandis que l'énergie est un champ JavaScript privé `#energie`, lisible par un getter `energie`. Une méthode `sePresenter()` renvoie une phrase qui contient le nom. On ne demande pas encore de modifier l'énergie.
 
-On crée ensuite une grenouille nommée René et un poisson nommé Mina. Leurs présentations doivent être différentes, leurs énergies doivent toutes deux valoir 100 et les variables doivent désigner deux objets distincts. On écrit des assertions pour vérifier ces attentes avant de consulter la correction.
+On crée ensuite une grenouille nommée René et un poisson nommé Mina. Leurs présentations doivent être différentes, leurs énergies doivent toutes deux valoir 100 et les variables doivent désigner deux objets distincts. Vérifiez ces résultats avec des assertions.
 
 <details class="course-details">
 <summary>Comparer avec une correction expliquée</summary>
@@ -61,7 +59,7 @@ Les deux objets sont distincts parce qu'on a exécuté deux fois `new`. Avec `co
 
 ### Étape 2, protéger l'énergie
 
-On part de la correction de l'étape 1 et on relit [l'invariant d'énergie](/poo-patterns-frameworks/01-fondations/#proteger-les-regles-de-lobjet). L'invariant est la règle qui doit rester vraie après chaque opération. Ici, l'énergie reste comprise entre 0 et 100.
+Reprenez `Creature` de l'étape 1. Son énergie doit rester comprise entre 0 et 100 après chaque action. C'est son [invariant](/poo-patterns-frameworks/01-fondations/#proteger-les-regles-de-lobjet).
 
 On ajoute `avancer(): boolean`. Cette méthode retire 10 points seulement si la créature en possède au moins 10. Elle renvoie `true` après un déplacement. Si l'énergie est insuffisante, elle renvoie `false` et laisse l'énergie inchangée. On ajoute aussi `seReposer(): void`, qui rend 20 points sans dépasser 100. Le nom et la présentation ne changent pas.
 
@@ -127,7 +125,7 @@ Le contrôle précède la soustraction. Il laisse donc l'objet intact quand l'é
 
 ### Étape 3, demander une capacité à un collaborateur
 
-On part de la correction de l'étape 2. On relit les [contrats et le polymorphisme](/poo-patterns-frameworks/01-fondations/#contrats-et-polymorphisme), puis la différence entre [hériter du code et satisfaire une interface](/poo-patterns-frameworks/01-fondations/#lire-extends-super-et-implements).
+Reprenez `Creature` de l'étape 2 pour la faire collaborer avec une mare.
 
 On décrit dans une interface `Deplacable` la capacité attendue par la mare, avec une méthode `avancer(): boolean`. Elle renvoie `true` après un déplacement. En cas de refus, elle renvoie `false` et laisse son état inchangé. Les créatures conservent en plus leurs règles d'énergie. La classe `Creature` annonce qu'elle satisfait cette interface. On écrit ensuite une classe `Mare`, qui reçoit des `Deplacable` dans son constructeur. Sa méthode `faireUnTour(): number` demande une seule fois à chacun d'avancer, puis renvoie le nombre de déplacements réussis.
 
@@ -281,7 +279,7 @@ Un programme calcule deux tarifs stables au même endroit et ne prévoit aucune 
 
 Une condition peut suffire à ce besoin. Elle garde les deux cas près du calcul et reste facile à vérifier. La présence d'un `if` ne signale pas, à elle seule, un défaut de conception.
 
-Passer un objet de tarif devient intéressant lorsque plusieurs règles doivent être choisies indépendamment de la réservation, comparées ou remplacées dans les tests. La [séance Strategy](/poo-patterns-frameworks/02-strategy/) étudie ce changement précis. On compare le coût du paramètre, de l'interface et des classes séparées au coût réel des modifications attendues, sans inventer une variation pour justifier le pattern.
+Passer un objet de tarif devient intéressant lorsque plusieurs règles doivent être choisies indépendamment de la réservation, comparées ou remplacées dans les tests. La [séance Strategy](/poo-patterns-frameworks/02-strategy/) étudie ce changement précis.
 
 </details>
 

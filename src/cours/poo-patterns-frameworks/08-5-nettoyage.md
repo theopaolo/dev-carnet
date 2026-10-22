@@ -9,7 +9,7 @@ updatedAt: "2026-10-21"
 
 Au [chapitre 4](/poo-patterns-frameworks/08-4-signaux/), les signaux ont permis de mettre à jour seulement les affichages qui en dépendent. Il leur manque pourtant une information. Quand une liste remplace ses lignes, les effets des anciennes lignes restent abonnés, car le framework ne sait pas qu'ils ne servent plus.
 
-Un écouteur posé sur un objet qui survit au composant, comme `document`, pose le même problème. Retirer un élément de la page ne suffit pas à arrêter ce qui le référence ailleurs. Dans ce chapitre, on va rattacher chaque effet et chaque nettoyage à une durée de vie, afin que le framework les arrête avant une reconstruction ou au démontage de la page.
+Un écouteur posé sur `document`, qui survit au composant, pose le même problème. Nous allons rattacher les effets et les nettoyages à une durée de vie pour les arrêter avant une reconstruction ou au démontage de la page.
 
 ## Ce que dit la définition
 
@@ -27,11 +27,7 @@ Dans notre framework, appeler une fonction composant ne crée pas de portée sup
 
 ## Le repérer dans le code
 
-Posez ces questions à chaque composant :
-
-- Le composant s'abonne-t-il à un objet qui vivra plus longtemps que lui, comme un signal global, `document` ou `window` ?
-- Lance-t-il une minuterie avec `setInterval`, ou une requête qui pourrait répondre après son démontage ?
-- Un effet crée-t-il des éléments ou d'autres effets à chaque exécution ?
+Un abonnement à un signal global, à `document` ou à `window` peut survivre au composant. Il en va de même d'une minuterie lancée avec `setInterval` ou d'une requête encore en cours. Les effets qui créent des éléments ou d'autres effets à chaque exécution doivent aussi arrêter ceux du passage précédent.
 
 Un écouteur posé sur un bouton du composant n'a généralement pas besoin d'être retiré séparément. Le bouton et son écouteur peuvent être libérés ensemble, dès que plus rien ne référence le bouton. Un écouteur posé sur `document` est différent, car `document` vit aussi longtemps que la page. Il conserve la fonction d'écoute et, par elle, les éléments auxquels cette fonction accède.
 
@@ -39,7 +35,7 @@ Un écouteur posé sur un bouton du composant n'a généralement pas besoin d'ê
 
 Pour observer les deux problèmes, on ajoute une liste de réservations et un raccourci clavier. Sous les ateliers, chaque réservation aura un bouton d'annulation. La liste masquera les réservations dont le courriel diffère de celui du champ, sans les supprimer de l'état. La touche `/` placera le curseur dans ce champ.
 
-Les deux composants suivants montrent comment construire la liste. Lisez-les d'abord pour repérer leurs effets. Ils seront assemblés dans la version de l'interface présentée après la correction du framework, avec l'état et l'action d'annulation dont ils ont besoin.
+Ces deux composants construisent la liste. Ils seront assemblés après la correction du framework, avec l'état et l'action d'annulation dont ils ont besoin.
 
 ```ts
 function LigneReservation(reservation: Reservation): HTMLLIElement {
@@ -74,7 +70,7 @@ Le raccourci clavier pose le second problème. Son écouteur sera inscrit sur `d
 
 ## Construire les portées
 
-Réorganisez `src/framework.ts` selon la version suivante, qui modifie `Effet` et `monter` et ajoute la gestion des portées. Conservez intégralement la classe `Signal` du chapitre 4 à l'emplacement indiqué. Son corps est abrégé dans le bloc pour ne pas répéter le même code, il ne faut donc pas le remplacer par le commentaire.
+Réorganisez `src/framework.ts` selon cette version, qui modifie `Effet` et `monter` et ajoute les portées. À l'emplacement indiqué, conservez la classe `Signal` du chapitre 4. Le commentaire abrège son corps, il ne le remplace pas.
 
 ```ts
 type Portee = { parent: Portee | null; nettoyages: (() => void)[] };
@@ -183,9 +179,9 @@ Les composants appellent `auNettoyage` pour inscrire une fonction dans la porté
 
 Dans `Effet`, le constructeur crée une portée pour les ressources de l'effet, puis inscrit l'arrêt de l'effet auprès de la portée courante. La méthode `executer` lance ensuite la fonction dans cette portée propre, si bien que les effets enfants et les nettoyages créés pendant l'appel lui appartiennent.
 
-Avant chaque nouvelle exécution, `#nettoyer` retire les abonnements et vide la portée de l'effet. Dans la liste de réservations, ce nettoyage arrête les effets des anciennes lignes avant de construire les nouvelles. Arrêter l'effet parent produit le même nettoyage, mais empêche en plus toute exécution ultérieure. On ne confond donc pas remettre à zéro les ressources d'un effet qui continue et arrêter définitivement cet effet.
+Avant chaque nouvelle exécution, `#nettoyer` retire les abonnements et vide la portée de l'effet. Dans la liste de réservations, ce nettoyage arrête les effets des anciennes lignes avant de construire les nouvelles. Arrêter l'effet parent produit le même nettoyage et empêche toute exécution ultérieure.
 
-Le champ `#actif` empêche aussi de relancer un effet déjà arrêté. La méthode `ecrire` copie ses lecteurs avant de les exécuter. Si l'un d'eux arrête un autre effet présent dans cette copie, celui-ci reste tout de même dans le tableau à parcourir. Le contrôle de `#actif` lui fait ignorer cette demande d'exécution, sinon il pourrait se réabonner après son arrêt. Ce cas peut se produire lorsqu'un effet parent et ses enfants lisent le même signal. Dans la liste actuelle, le parent lit les réservations et les enfants lisent le courriel, mais le framework doit aussi rester correct lorsque ces dépendances se recoupent.
+Le champ `#actif` empêche de relancer un effet déjà arrêté. `ecrire` copie ses lecteurs avant de les exécuter. Si l'un d'eux en arrête un autre, ce dernier reste dans la copie, mais ignore la demande d'exécution grâce à `#actif`. Sans ce contrôle, il pourrait se réabonner après son arrêt. Ce cas apparaît quand un parent et ses enfants lisent le même signal. Dans notre liste, leurs dépendances sont distinctes, puisque le parent lit les réservations et les enfants le courriel.
 
 ```mermaid
 flowchart TB
@@ -350,6 +346,6 @@ Pour les requêtes et les écouteurs multiples, le navigateur propose [`AbortCon
 
 La gestion des erreurs reste limitée. Si un nettoyage lève une erreur, `detruire` interrompt sa boucle. Les nettoyages restants, déjà retirés de la liste, ne seront pas appelés par une seconde destruction. De même, une erreur pendant la construction restaure la portée précédente grâce à `finally`, mais ne détruit pas automatiquement les ressources déjà créées. Cette version suppose donc que la construction et les nettoyages se terminent sans erreur.
 
-Enfin, un effet créé hors de toute portée parente n'a aucun propriétaire chargé de l'arrêter. Les effets qu'il crée seront nettoyés avant ses nouvelles exécutions, mais lui-même restera abonné. Solid [émet un avertissement en développement](https://github.com/solidjs/solid/blob/main/packages/solid/src/reactive/signal.ts) lorsque des calculs sont créés sans propriétaire de leur durée de vie. Notre framework l'accepte, et c'est à vous de créer vos effets dans un composant monté ou dans une portée créée avec `creerPortee`.
+Un effet créé hors de toute portée parente n'a aucun propriétaire chargé de l'arrêter. Ses effets enfants sont nettoyés avant chaque nouvelle exécution, mais lui-même reste abonné. Solid [émet un avertissement en développement](https://github.com/solidjs/solid/blob/main/packages/solid/src/reactive/signal.ts) dans ce cas. Notre framework l'accepte. Créez donc les effets dans un composant monté ou dans une portée créée avec `creerPortee`.
 
 Le [chapitre 6](/poo-patterns-frameworks/08-6-injection/) range les composants dans leur propre fichier. Ils ne pourront plus lire les variables de `main.ts`, et il faudra leur fournir l'état autrement.

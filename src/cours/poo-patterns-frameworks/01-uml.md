@@ -15,7 +15,7 @@ Ce chapitre fait partie des approfondissements. Pour lire les schémas des autre
 
 ## Choisir ce que le diagramme doit montrer
 
-UML signifie *Unified Modeling Language*. Ce langage propose plusieurs types de diagrammes, selon la question que l'on cherche à résoudre. Le diagramme de classes décrit les types d'objets du modèle et les relations possibles entre leurs instances. Un [diagramme de séquence](/poo-patterns-frameworks/03-observer/#la-duree-dun-abonnement) montre plutôt qui appelle qui, dans quel ordre.
+UML signifie *Unified Modeling Language*. Ce langage propose plusieurs types de diagrammes, selon la question que l'on cherche à résoudre. Le diagramme de classes décrit les types d'objets du modèle et les relations possibles entre leurs instances. Un [diagramme de séquence](/poo-patterns-frameworks/03-observer/#etape-4-le-branchement) montre plutôt qui appelle qui, dans quel ordre.
 
 Le même langage permet de travailler à des niveaux différents. Pour discuter des règles de réservation, on peut représenter un atelier et une réservation sans décider comment les coder. Pour expliquer un programme existant, on montre plutôt ses classes, leurs membres et leur visibilité. Il faut annoncer si le dessin décrit les concepts de l'activité ou des choix de programmation.
 
