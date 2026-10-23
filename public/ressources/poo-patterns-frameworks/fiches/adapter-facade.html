@@ -21,7 +21,7 @@
 		<figure class="sketch">
 			<svg viewBox="0 0 360 518" role="img" aria-labelledby="sk-titre sk-desc">
 				<title id="sk-titre">Adapter et Facade dans une boutique</title>
-				<desc id="sk-desc">En haut, Commande utilise l'interface ModeLivraison. ModeTransporteur implémente cette interface et traduit le JSON de l'API ColisRapide, dont les champs price_cents et delivery_days deviennent frais() et delaiJours(). En bas, un contrôleur appelle Caisse.passerCommande(), qui appelle à son tour Panier, Paiement, Stock et Courriel.</desc>
+				<desc id="sk-desc">En haut, Commande utilise l'interface ModeLivraison. ModeColisRapide implémente cette interface et traduit le JSON de l'API ColisRapide, dont les champs price_cents et delivery_days deviennent frais() et delaiJours(). En bas, un contrôleur appelle Caisse.passerCommande(), qui appelle à son tour Panier, Paiement, Stock et Courriel.</desc>
 				<defs>
 					<filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="360" height="518">
 						<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"/>
@@ -72,7 +72,7 @@
 				<text class="t-name" x="111" y="134" text-anchor="middle">ModeLivraison</text>
 				<text class="t-hand"><tspan class="b" x="216" y="114">Le contrat</tspan><tspan x="216" y="132">de Commande.</tspan></text>
 
-				<text class="t-name" x="111" y="204" text-anchor="middle">ModeTransporteur</text>
+				<text class="t-name" x="111" y="204" text-anchor="middle">ModeColisRapide</text>
 				<text class="t-code" x="24" y="228">price_cents → frais()</text>
 				<text class="t-code" x="24" y="241">delivery_days → delaiJours()</text>
 				<text class="t-name" x="288" y="204" text-anchor="middle">ColisRapide</text>
@@ -107,7 +107,7 @@
 					<dd>Une API externe qui répond <code>{ "price_cents": 590, "delivery_days": 2 }</code>. Ses noms ne sont pas ceux de l'application.</dd>
 				</div>
 				<div>
-					<dt>L'adaptateur, <code>ModeTransporteur</code></dt>
+					<dt>L'adaptateur, <code>ModeColisRapide</code></dt>
 					<dd>Il vérifie la réponse, refuse un devis invalide avec une erreur, puis expose <code>frais()</code> et <code>delaiJours()</code>.</dd>
 				</div>
 			</dl>
@@ -125,7 +125,7 @@
 				</thead>
 				<tbody>
 					<tr><td>Decorator</td><td>La même que l'objet entouré</td><td>Ajouter un comportement</td><td><code>EmballageCadeau</code></td></tr>
-					<tr><td>Adapter</td><td>Celle que le client attend</td><td>Traduire</td><td><code>ModeTransporteur</code></td></tr>
+					<tr><td>Adapter</td><td>Celle que le client attend</td><td>Traduire</td><td><code>ModeColisRapide</code></td></tr>
 					<tr><td>Facade</td><td>Une interface nouvelle et plus simple</td><td>Simplifier</td><td><code>Caisse</code></td></tr>
 				</tbody>
 			</table>
@@ -162,7 +162,7 @@
 		<p>Le transporteur renomme <code>delivery_days</code> en <code>eta_days</code>. Quels fichiers de l'application changent&nbsp;?</p>
 		<details>
 			<summary>Voir la réponse</summary>
-			<p>Seulement l'adaptateur <code>ModeTransporteur</code>. <code>Commande</code> et le reste du code ne connaissent que <code>ModeLivraison</code>, donc le changement ne les atteint pas.</p>
+			<p>Seulement l'adaptateur <code>ModeColisRapide</code>. <code>Commande</code> et le reste du code ne connaissent que <code>ModeLivraison</code>, donc le changement ne les atteint pas.</p>
 		</details>
 	</section>
 

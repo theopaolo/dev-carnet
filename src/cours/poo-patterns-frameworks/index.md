@@ -2,7 +2,7 @@
 title: 'POO, design patterns et frameworks'
 order: 4
 publishedAt: "2026-10-15"
-updatedAt: "2026-10-22"
+updatedAt: "2026-10-23"
 ---
 
 # POO, design patterns et frameworks
@@ -36,6 +36,16 @@ Ce parcours rassemble ce qu'un développeur TypeScript utilise le plus souvent d
 | Prévenir plusieurs destinataires après une réservation. | [Observer](/poo-patterns-frameworks/03-observer/) | `addEventListener`, les stores et les signaux des frameworks. |
 
 Chaque séance sur un pattern utilise une copie du programme de départ. Les chapitres du mini framework se suivent et font évoluer les mêmes fichiers.
+
+## Les fiches aide-mémoire
+
+Chaque fiche résume un pattern sur une page illustrée, avec son schéma, son code et une question pour vérifier que vous l'avez compris. Ouvrez-la à la fin de la séance, ou relisez-la avant un exercice.
+
+- [Strategy](/ressources/poo-patterns-frameworks/fiches/strategy.html) range plusieurs façons de faire la même chose derrière un même contrat.
+- [Observer](/ressources/poo-patterns-frameworks/fiches/observer.html) prévient tous les abonnés quand l'état d'un objet change.
+- [Adapter et Facade](/ressources/poo-patterns-frameworks/fiches/adapter-facade.html) traduisent une interface étrangère ou cachent plusieurs objets derrière une méthode simple.
+- [Decorator](/ressources/poo-patterns-frameworks/fiches/decorator.html) ajoute un comportement autour d'un objet sans changer son contrat.
+- [Template Method](/ressources/poo-patterns-frameworks/fiches/template-method.html) fixe l'ordre des étapes et laisse les sous-classes en remplir certaines, comme le font les frameworks.
 
 ## Approfondir
 
