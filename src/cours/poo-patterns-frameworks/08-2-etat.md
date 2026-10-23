@@ -62,14 +62,14 @@ import assert from "node:assert/strict";
 import { creerStore } from "../src/framework.ts";
 
 const store = creerStore({ places: 2 });
-const vus: number[] = [];
-const desabonner = store.abonner(etat => vus.push(etat.places));
+const recues: number[] = [];
+const desabonner = store.abonner(etat => recues.push(etat.places));
 
 store.ecrire({ places: 1 });
 desabonner();
 store.ecrire({ places: 0 });
 
-assert.deepEqual(vus, [1]);
+assert.deepEqual(recues, [1]);
 assert.equal(store.lire().places, 0);
 console.log("Vérifications réussies.");
 ```

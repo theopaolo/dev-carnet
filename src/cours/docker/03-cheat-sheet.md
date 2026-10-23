@@ -447,14 +447,14 @@ En développement :
 
 gitignored :
 
-```gitignore
+```text
 .env
 .env.*
 ```
 
 et `.dockerignore` :
 
-```dockerignore
+```text
 .env
 .env.*
 ```
