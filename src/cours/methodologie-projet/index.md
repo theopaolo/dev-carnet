@@ -7,18 +7,17 @@ updatedAt: "2026-09-24"
 
 # Méthodologie de projet numérique
 
-Cette fiche présente trois façons de démarrer et d'organiser un projet numérique : une commande, un projet perso utilitaire, ou un projet expressif qui part d'une envie.
+Cette fiche présente trois façons de démarrer et d'organiser un projet numérique que ce soit : une commande, un projet perso utilitaire, ou un projet qui part d'une envie.
 
-Au démarrage, les mêmes questions reviennent : par où commencer ? quand fait-on les maquettes ? à quel moment parle-t-on aux utilisateurs ? a-t-on besoin d'un cahier des charges ? La réponse dépend du projet. Les trois approches plus bas correspondent à trois situations.
+Au démarrage on se posse souvent les mêmes questions : par où commencer ? quand fait-on les maquettes ? à quel moment parle-t-on aux utilisateurs ? a-t-on besoin d'un cahier des charges ? 
 
 ## Objectifs
-
-1.  Commencer son dossier pro dans un document (Markdown, page HTML, .odt)
+1.  Commencer son dossier pro dans un document (Markdown, page HTML, .odt, notion, google docs etc...)
 2.  Y mettre le contexte du projet
 3.  Commencer à faire des personae
 4.  Faire émerger des fonctionnalités
 
----
+--- 
 
 ## Questionnaire
 
