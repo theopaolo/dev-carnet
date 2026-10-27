@@ -159,7 +159,8 @@ npm create astro@latest -- --template blog
 
 **2** Ouvrez `src/content.config.ts`. La collection `blog` décrit les articles : son schéma liste les champs attendus dans le frontmatter, l'en-tête placé entre deux lignes `---` en haut de chaque fichier Markdown. Astro arrête la compilation si un article ne respecte pas ce schéma.
 
-**3** Ajoutez une collection `ressources` pour votre veille.
+**3** Ajoutez une collection `ressources` pour votre veille. Elle met en place le [data layer](#le-data-layer) décrit plus haut : `src/content.config.ts` le déclare, le dossier `src/content/ressources/` le remplit, et les pages le lisent avec `getCollection()`.
+
 On ajoute notre nouvelle collection dans `src/content.config.ts`, sous la collection `blog`. Le loader `glob` indique à Astro où trouver les fichiers Markdown, et le schéma liste les champs attendus. `z.enum` limite le type à des valeurs predéfinies.
 
 ```ts
