@@ -159,9 +159,111 @@ npm create astro@latest -- --template blog
 
 **2** Ouvrez `src/content.config.ts`. La collection `blog` décrit les articles : son schéma liste les champs attendus dans le frontmatter, l'en-tête placé entre deux lignes `---` en haut de chaque fichier Markdown. Astro arrête la compilation si un article ne respecte pas ce schéma.
 
-**3** Ajoutez une collection `ressources` pour votre veille, avec un titre, un lien, un type et des tags. Limitez le type à trois valeurs avec `z.enum(["article", "vidéo", "outil"])`. Créez ensuite sa page de liste en vous inspirant de `src/pages/blog/index.astro`.
+**3** Ajoutez une collection `ressources` pour votre veille.
+On ajoute notre nouvelle collection dans `src/content.config.ts`, sous la collection `blog`. Le loader `glob` indique à Astro où trouver les fichiers Markdown, et le schéma liste les champs attendus. `z.enum` limite le type à des valeurs predéfinies.
 
-**4** Ajoutez un champ `tags` au schéma de la collection `blog`, avec une valeur par défaut (`z.array(z.string()).default([])`) pour que les articles sans tags restent valides, puis une page par tag. Le fichier `src/pages/tags/[tag].astro` exporte une fonction `getStaticPaths()` qui renvoie la liste des tags, et Astro génère une page HTML par tag au moment du build. Le tutoriel d'Astro détaille cette étape : [générer des pages d'étiquettes](https://docs.astro.build/fr/tutorial/5-astro-api/2/).
+```ts
+const ressources = defineCollection({
+  loader: glob({ base: "./src/content/ressources", pattern: "**/*.md" }),
+  schema: z.object({
+    title: z.string(),
+    description : z.string(),
+    url: z.url(),
+    category: z.enum(["audio", "vidéo",  "gif"]),
+  }),
+});
+
+// On export la nouvelle collection
+export const collections = { blog, ressources };
+```
+
+Créez ensuite le dossier `src/content/ressources/` et un premier fichier, par exemple `docs-astro.md`. Astro fabrique le slug de l'url à partir du nom du fichier `mon-site.fr/docs-astro/`
+
+```md
+---
+title: "Documentation d'Astro"
+description: "Documentation officielle d'Astro"
+url: "https://docs.astro.build/fr/"
+category: "outil"
+---
+
+Quelque ligne sur ce quie cette ressource apporte.
+```
+
+Le dossier `src/pages` contient les routes du site : chaque fichier y devient une URL. Créez `src/pages/ressources/index.astro`, qui s'affiche quand on visite l'adresse `/ressources/` et nous serviras à lister les ressources. 
+
+```astro
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+
+const ressources = await getCollection("ressources");
+---
+
+<html lang="fr">
+  <head>
+    <BaseHead title="Ressources" description="Ma veille" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Ressources</h1>
+      <ul>
+        {ressources.map((ressource) => (
+          <li>
+            <a href={`/ressources/${ressource.id}/`}>{ressource.data.title}</a>
+            ({ressource.data.category})
+          </li>
+        ))}
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>
+```
+
+Créez enfin `src/pages/ressources/[...slug].astro`, qui affiche une ressource. Les crochets signalent une route dynamique.
+
+```astro
+---
+import { getCollection, render } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+
+// la fonction `getStaticPaths()` renvoie un chemin par fichier de `src/content/ressources/`
+export async function getStaticPaths() {
+  const ressources = await getCollection("ressources");
+  return ressources.map((ressource) => ({
+    params: { slug: ressource.id },
+    props: ressource,
+  }));
+}
+
+const ressource = Astro.props;
+// La fonction `render()` transforme le Markdown de la ressource en composant `<Content />`
+const { Content } = await render(ressource);
+---
+
+<html lang="fr">
+  <head>
+    <BaseHead title={ressource.data.title} description={ressource.data.description} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>{ressource.data.title}</h1>
+      <p><a href={ressource.data.url}>Voir la ressource</a> ({ressource.data.category})</p>
+      <Content />  <!-- Le contenu de la page .md, const { Content } = await render(ressource); --->
+    </main>
+    <Footer />
+  </body>
+</html>
+```
+
+Lancez `npm run dev` et ouvrez `/ressources/` : la liste affiche votre ressource, et le lien mène à sa page.
 
 ### Tester le schéma en local
 
@@ -181,14 +283,16 @@ Le build s'arrête et indique la collection, le fichier et le champ fautifs :
 
 Remettez une valeur valide et relancez le build. Le schéma contrôle donc la qualité des contenus avant la mise en ligne : une erreur dans un fichier bloque la publication au lieu de produire une page cassée en production.
 
-Avec `npm run dev`, l'erreur est plus discrète. Le serveur garde la dernière version valide de la page et écrit l'erreur dans le terminal, sans rien afficher dans le navigateur. Quand une modification ne semble pas prise en compte, regardez donc le terminal.
+> **À noter** : le schéma ne vérifie pas les liens, les images ou les dates.
+
+Maintenant ajouter un nouvelle `collection "evenements"`, avec une `url` vers un formulaire d'inscription, une `date` et un `lieu`. 
 
 ## Mettre en ligne sur GitHub Pages
 
 GitHub Pages permet de servir gratuitement des fichiers statiques depuis un dépôt Git.
 
 ```mermaid
-flowchart TB
+flowchart LR
     A["Écriture Markdown"] --> B["Git push"]
     B --> C["GitHub Actions"]
     C --> D["Build Astro"]
@@ -198,28 +302,15 @@ flowchart TB
 
 ### Mise en place pas à pas
 
-**1** **Créez un dépôt GitHub** nommé `votre-username.github.io` (pour un site racine) ou n'importe quel nom (pour un sous-chemin).
+**1** **Créez un dépôt GitHub** nommé `votre-username.github.io`. GitHub publie ce dépôt à la racine de `https://votre-username.github.io`, si bien que les liens du site fonctionnent sans modification.
 
-**2** **Configurez la base URL** dans votre générateur.
+**2** **Indiquez l'adresse du site** dans `astro.config.mjs`, à la place de `https://example.com` :
 
-Pour Astro (`astro.config.mjs`) :
-
-```
-export default defineConfig({
-  site: 'https://username.github.io',
-  base: '/nom-du-repo', // seulement si ce n'est pas le repo racine
-});
+```js
+site: 'https://votre-username.github.io',
 ```
 
-Pour 11ty (`.eleventy.js`) :
-
-```
-module.exports = function(eleventyConfig) {
-  return {
-    pathPrefix: "/nom-du-repo/"
-  };
-};
-```
+Si vous donnez un autre nom au dépôt, GitHub le publie dans un sous-dossier, `https://votre-username.github.io/nom-du-repo/`. Ajoutez alors `base: '/nom-du-repo'` sous la ligne `site`. Un lien écrit en dur comme `/blog/` mène ensuite à une 404, et le modèle de blog écrit tous ses liens ainsi. Préfixez-les avec `import.meta.env.BASE_URL`, par exemple `href={import.meta.env.BASE_URL + href}` dans `src/components/HeaderLink.astro`, puis dans `src/components/Header.astro`, `src/pages/blog/index.astro` et `src/pages/ressources/index.astro`. Avec 11ty, l'option équivalente à `base` s'appelle `pathPrefix`.
 
 **3** **Créez le workflow GitHub Actions** dans `.github/workflows/deploy.yml`. Ce fichier lance le build et le déploiement à chaque `git push`. La documentation d'Astro fournit le fichier complet : [déployer sur GitHub Pages](https://docs.astro.build/fr/guides/deploy/github/).
 
@@ -229,23 +320,33 @@ module.exports = function(eleventyConfig) {
 
 Si le build échoue, par exemple parce qu'un contenu ne respecte pas le schéma, le workflow s'arrête avant le déploiement et le site en ligne reste dans son état précédent. L'onglet _Actions_ du dépôt affiche alors le même message d'erreur qu'en local.
 
-**Astuce :** votre URL ressemblera à `https://username.github.io/nom-du-repo`. Pour un domaine personnalisé, ajoutez un fichier `CNAME` (gratuit côté GitHub, le domaine reste à acheter).
+**Astuce :** pour un domaine personnalisé, ajoutez un fichier `CNAME` (gratuit côté GitHub, le domaine reste à acheter).
 
 ## Faire évoluer l'architecture
 
-Votre blog grandit et de nouveaux besoins apparaissent. Choisissez-en un et réalisez la version la plus simple qui y réponde.
+- Vos lecteurs souhaitent pouvoir commenter. [giscus](https://giscus.app/fr) stocke les commentaires dans les discussions GitHub.
+- Vos lecteurs veulent se tenir informé des nouveaux articles. Ajouter un flux RSS, le template blog possède déjà cette fontionnalité (`src/pages/rss.xml.js`).
+- Pour ajouter de la recherche il exite [Pagefind](https://pagefind.app/).
+- Vous voulez publier depuis votre téléphone, sans Git. Branchez [Pages CMS](https://pagescms.org/) ou [Sveltia](https://sveltiacms.app/en/) à votre dépôt.
 
-- Vos lecteurs veulent commenter. [giscus](https://giscus.app/fr) stocke les commentaires dans les discussions GitHub de votre dépôt et les affiche dans un îlot.
-- Vos lecteurs veulent recevoir les nouveaux articles. Le modèle de blog génère déjà un flux RSS (`src/pages/rss.xml.js`). Pour une newsletter, envoyez le formulaire d'inscription vers un service hébergé. C'est la première donnée personnelle que vous collectez, et elle part chez un tiers : cherchez où elle est stockée (voir la page [RGPD](/rgpd/)).
-- Vos lecteurs cherchent un article. [Pagefind](https://pagefind.app/) construit un index de recherche au moment du build, et la recherche s'exécute ensuite dans le navigateur.
-- Vous voulez publier depuis votre téléphone, sans Git. Branchez Pages CMS ou Sveltia sur votre dépôt : vous remplissez un formulaire, le CMS enregistre le fichier Markdown dans le dépôt et ce commit déclenche le déploiement.
-
-Chacune de ces solutions ajoute une brique sans ajouter de serveur à maintenir. Un espace personnel ou des contenus mis à jour chaque minute demandent en revanche un serveur : le chapitre [Frontend, backend et rendu](/architecture-logicielle/02-rendu-web/) présente les stratégies de rendu qui y répondent.
+Chacune de ces solutions ajoute une brique sans avoir beosin d'ajouter un de serveur et du code backend. Cepandant, si jamais on as besoin d'un espace personnel ou bien que les contenus soient mis à jour à l minute, dans ce cas un serveur est nécessaire : le chapitre [Frontend, backend et rendu](/architecture-logicielle/02-rendu-web/) présente les stratégies de rendu qui peuvent y répondre.
 
   ## Retour au schéma d'architecture
+
+  Revenons au schéma de l'association et ses besoins. On peut répondre à une partie avec les mêmes briques que notre SSG : Publication via un CMS git pour les bénévoles, les inscriptions peuvent passer par un formulaire hébergé sur un autres service (tally, google form), et pour la monté en charge et le budget; l'hébergement statique absorbe à la fois les coûts et le pic de trafic, puisque GitHub sert les fichiers à travers un CDN (Content Delivery Network).
   
-  Revenons au schéma de l'association et ses besoins. On peut répondre à une partie avec les mêmes briques que notre SSG : Publication via un CMS git pour les bénévoles, les inscriptions peuvent passer par un formulaire hébergé sur un autres service, et pour la monté en charge et le budget; l'hébergement statique absorbe à la fois les coûts et le pic de trafic, puisque GitHub sert les fichiers à travers un CDN (Content Delivery Network).
-  
+  Le schéma ci-dessous rassemble ces briques :
+
+  ```mermaid
+  flowchart TD
+    B["Bénévole"] -->|"remplit un formulaire"| CMS["Pages CMS ou Sveltia"]
+    CMS -->|"commit d'un fichier Markdown"| G["Dépôt GitHub : articles, ressources, événements"]
+    G -->|"chaque commit déclenche"| GA["GitHub Actions : build Astro et validation Zod"]
+    GA -->|"déploie le HTML"| P["GitHub Pages, servi par un CDN"]
+    V["Visiteur"] -->|HTTPS| P
+    V -->|"s'inscrit à un événement"| T["Formulaire hébergé, par exemple Tally"]
+  ```
+
   Reprenez le schéma que vous avez dessiné au début de la page et comparez-le avec cette solution. À l'écrit, répondez aux questions suivantes :
   
   1. Que changez-vous dans votre schéma ?
@@ -256,9 +357,9 @@ Chacune de ces solutions ajoute une brique sans ajouter de serveur à maintenir.
   
   > 1. Je remplace la table `inscriptions` et l'API qui l'alimente par un formulaire hébergé sur un service comme Tally.
   > 2. L'association n'a pas de développeur pour mettre à jour un serveur et sa base de données. Le service hébergé tient aussi le pic de trafic après le passage à la télévision.
-  > 3. Les données des inscrits sont stockées chez ce service et non chez l'association. Je dois donc vérifier où elles sont hébergées et en informer les inscrits (voir la page [RGPD](/rgpd/)). Les bénévoles consultent aussi les inscriptions dans l'interface du service, sans tableau de bord pensé pour l'association.
+  > 3. Les données des inscrits sont stockées chez ce service et non chez l'association. Je dois donc vérifier où elles sont hébergées et en informer les inscrits (voir la page [RGPD](/rgpd/)).
   
-  Ces trois réponses gardent la trace de votre choix : dans six mois, vous saurez encore pourquoi l'architecture a cette forme. Ce type de trace s'appelle un ADR.
+  Ces trois réponses gardent la trace de votre choix : dans six mois, vous saurez encore pourquoi l'architecture a cette forme. Ce type de trace s'appelle un [ADR](/architecture-logicielle/06-adr/).
   
   Répondez enfin aux questions de départ, en une ou deux phrases chacune. Pour la troisième, le SSG existe aussi dans les frameworks que vous connaissez : Next.js (`output: 'export'`), Nuxt (`nuxt generate`) et SvelteKit (`adapter-static`) génèrent un site statique, donc ce que vous avez appris ici s'applique aussi à eux.
 
@@ -267,6 +368,7 @@ La veille fait partie des compétences transversales attendues du métier de dev
 
 **Idées pour faire évoluer votre site**
 
+- Ajouter un champ `tags` à la collection `ressources`, avec une valeur par défaut (`z.array(z.string()).default([])`) pour que les ressources sans tags restent valides, puis générer une page par tag. Le fichier `src/pages/tags/[tag].astro` exporte une fonction `getStaticPaths()` qui renvoie la liste des tags, et Astro génère une page HTML par tag au moment du build. Le tutoriel d'Astro détaille cette étape : [générer des pages d'étiquettes](https://docs.astro.build/fr/tutorial/5-astro-api/2/).
 - Filtrer les ressources par type ou par tag dans un îlot Svelte, Vue ou React.
 - Récupérer des contenus depuis une API au moment du build, avec un loader de Content Collections.
 - Dessiner l'architecture qui intégrerait un CMS headless, puis argumenter les compromis.
