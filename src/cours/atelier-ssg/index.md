@@ -145,6 +145,21 @@ flowchart TD
     G["Îlots interactifs"] --> C
 ```
 
+Astro fonctionne aussi sans Content Collections. Un fichier Markdown placé dans `src/pages` devient une page, et `import.meta.glob()` liste ces fichiers depuis une autre page :
+
+```astro
+---
+const articles = Object.values(import.meta.glob("./articles/*.md", { eager: true }));
+---
+<ul>
+  {articles.map((article) => (
+    <li><a href={article.url}>{article.frontmatter.title}</a></li>
+  ))}
+</ul>
+```
+
+Chaque page lit alors les fichiers elle-même, et rien ne vérifie leur forme. Si un article écrit `titre:` au lieu de `title:`, le build réussit quand même : la liste affiche un lien vide et l'article un titre vide. Avec une collection, le schéma Zod arrête le build sur ce fichier et nomme le champ manquant. Des pages Markdown suffisent pour quelques pages écrites à la main, comme un portfolio. Une collection devient utile dès que de nombreux fichiers partagent la même forme, comme des articles ou des ressources.
+
 Dans **11ty**, le data layer passe par la [Data Cascade](https://www.11ty.dev/docs/data-cascade/) : des fichiers `.json`, `.js` ou `.11tydata.js` fournissent des données globales ou par dossier.
 
 Le data layer sépare _ce que vous savez_ (vos données) de _la façon de l'afficher_ (vos templates).
