@@ -242,21 +242,28 @@ Votre blog grandit et de nouveaux besoins apparaissent. Choisissez-en un et réa
 
 Chacune de ces solutions ajoute une brique sans ajouter de serveur à maintenir. Un espace personnel ou des contenus mis à jour chaque minute demandent en revanche un serveur : le chapitre [Frontend, backend et rendu](/architecture-logicielle/02-rendu-web/) présente les stratégies de rendu qui y répondent.
 
-## Retour au schéma d'architecture
-
-Revenez au schéma de l'association. Ses besoins se règlent avec les mêmes briques que votre blog : les bénévoles publient avec un CMS branché sur Git, les inscriptions passent par un formulaire hébergé, et l'hébergement statique absorbe à la fois les coûts et le pic de trafic, car GitHub Pages sert les fichiers à travers un CDN (Content Delivery Network).
-
-Comparez avec votre schéma et ajoutez-y trois phrases :
-
-1. ce que vous avez ajouté
-2. pourquoi vous l'avez ajouté
-3. ce à quoi vous avez renoncé
-
-Revenez ensuite aux questions de départ. Le SSG existe aussi dans les frameworks que vous connaissez : Next.js (`output: 'export'`), Nuxt (`nuxt generate`) et SvelteKit (`adapter-static`) savent générer un site statique.
+  ## Retour au schéma d'architecture
+  
+  Revenons au schéma de l'association et ses besoins. On peut répondre à une partie avec les mêmes briques que notre SSG : Publication via un CMS git pour les bénévoles, les inscriptions peuvent passer par un formulaire hébergé sur un autres service, et pour la monté en charge et le budget; l'hébergement statique absorbe à la fois les coûts et le pic de trafic, puisque GitHub sert les fichiers à travers un CDN (Content Delivery Network).
+  
+  Reprenez le schéma que vous avez dessiné au début de la page et comparez-le avec cette solution. À l'écrit, répondez aux questions suivantes :
+  
+  1. Que changez-vous dans votre schéma ?
+  2. Pourquoi le changez-vous ?
+  3. À quoi renoncez-vous en échange ?
+  
+  Par exemple, pour les inscriptions aux événements :
+  
+  > 1. Je remplace la table `inscriptions` et l'API qui l'alimente par un formulaire hébergé sur un service comme Tally.
+  > 2. L'association n'a pas de développeur pour mettre à jour un serveur et sa base de données. Le service hébergé tient aussi le pic de trafic après le passage à la télévision.
+  > 3. Les données des inscrits sont stockées chez ce service et non chez l'association. Je dois donc vérifier où elles sont hébergées et en informer les inscrits (voir la page [RGPD](/rgpd/)). Les bénévoles consultent aussi les inscriptions dans l'interface du service, sans tableau de bord pensé pour l'association.
+  
+  Ces trois réponses gardent la trace de votre choix : dans six mois, vous saurez encore pourquoi l'architecture a cette forme. Ce type de trace s'appelle un ADR.
+  
+  Répondez enfin aux questions de départ, en une ou deux phrases chacune. Pour la troisième, le SSG existe aussi dans les frameworks que vous connaissez : Next.js (`output: 'export'`), Nuxt (`nuxt generate`) et SvelteKit (`adapter-static`) génèrent un site statique, donc ce que vous avez appris ici s'applique aussi à eux.
 
 ## Et après : votre blog de veille
-
-Votre blog est en ligne. Publiez-y vos lectures, vos découvertes et vos questions au fil de l'eau. La veille fait partie des compétences transversales attendues par le RNCP, et un blog en garde une trace que vous pourrez montrer.
+La veille fait partie des compétences transversales attendues du métier de dev. Avec votre blog maintenant en ligne, vous pouvez y publier vos découvertes, questionnements, expérimentations etc. C'est une vitrine supplémentaire sur vous que vous pourrez partager.
 
 **Idées pour faire évoluer votre site**
 
