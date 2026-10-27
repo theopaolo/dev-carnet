@@ -338,6 +338,8 @@ Un lien écrit en dur comme `/blog/` mène ensuite à une 404, et le modèle de 
 
 **3** **Créez le workflow GitHub Actions** dans `.github/workflows/deploy.yml`. Ce fichier lance le build et le déploiement à chaque `git push`. La documentation d'Astro fournit le fichier complet : [déployer sur GitHub Pages](https://docs.astro.build/fr/guides/deploy/github/).
 
+_Note: la github action officiel d'astro n'est pas à jours et utilise node v20, se référer à la dernier version compatible avec astro, en générale la dernier LTS devrait fonctionner_
+
 **4** **Activez GitHub Pages** dans les settings du dépôt : _Settings → Pages → Source : GitHub Actions_.
 
 **5** **Poussez votre code** avec `git push`. Le site est en ligne en 1 ou 2 minutes à l'adresse indiquée dans l'onglet Pages.
