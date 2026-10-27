@@ -326,7 +326,15 @@ flowchart LR
 site: 'https://votre-username.github.io',
 ```
 
-Si vous donnez un autre nom au dépôt, GitHub le publie dans un sous-dossier, `https://votre-username.github.io/nom-du-repo/`. Ajoutez alors `base: '/nom-du-repo'` sous la ligne `site`. Un lien écrit en dur comme `/blog/` mène ensuite à une 404, et le modèle de blog écrit tous ses liens ainsi. Préfixez-les avec `import.meta.env.BASE_URL`, par exemple `href={import.meta.env.BASE_URL + href}` dans `src/components/HeaderLink.astro`, puis dans `src/components/Header.astro`, `src/pages/blog/index.astro` et `src/pages/ressources/index.astro`. Avec 11ty, l'option équivalente à `base` s'appelle `pathPrefix`.
+Si vous donnez un autre nom au dépôt, GitHub le publie dans un sous-dossier, `https://votre-username.github.io/nom-du-repo/`. Ajoutez alors `base: '/nom-du-repo'` sous la ligne `site`, comme indiqué dans le [guide astro](https://docs.astro.build/fr/guides/deploy/github/#comment-d%C3%A9ployer).
+
+```js
+export default defineConfig({
+	site: 'https://theopaolo.github.io',
+	base: '/demo-astro', // demo-astro est le nom du repo
+```
+
+Un lien écrit en dur comme `/blog/` mène ensuite à une 404, et le modèle de blog écrit tous ses liens ainsi. Préfixez-les avec le lien de base `/demo-astro`, par exemple `href=demo-astro/href` dans `src/components/HeaderLink.astro`, puis dans `src/components/Header.astro`, `src/pages/blog/index.astro` et `src/pages/ressources/index.astro`.
 
 **3** **Créez le workflow GitHub Actions** dans `.github/workflows/deploy.yml`. Ce fichier lance le build et le déploiement à chaque `git push`. La documentation d'Astro fournit le fichier complet : [déployer sur GitHub Pages](https://docs.astro.build/fr/guides/deploy/github/).
 
