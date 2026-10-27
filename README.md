@@ -6,4 +6,12 @@ Carnet est le site où je publie mes cours de développement : https://carnet.lu
 
 Une recherche couvre tous les cours, et la page d'accueil propose de reprendre la lecture là où on l'a laissée. On peut agrandir le texte, passer en thème sombre ou activer le mode Focus, qui masque la navigation pour lire ou projeter. Les schémas s'ouvrent en plein écran et certains se déroulent étape par étape.
 
-On peut créer des marque-pages et annoter un passage. La Pochette les regroupe et les exporte en Markdown. 
+On peut créer des marque-pages et annoter un passage. La Pochette les regroupe et les exporte en Markdown.
+
+## Licence
+
+Les cours de Carnet sont publiés sous licence [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr). Vous pouvez les copier, les adapter et les utiliser dans vos propres formations, y compris payantes, à deux conditions : citer Carnet avec un lien vers https://carnet.ludique.dev, et publier vos versions modifiées sous la même licence.
+
+La licence ne couvre pas les images et les captures d'autres auteurs. Elles gardent leur propre licence, comme les visuels listés dans [les crédits du cours sur la documentation](src/cours/documentation/16-credits.md).
+
+Le code du site est publié sous [licence MIT](LICENSE) : les composants, les scripts, les styles et la configuration. Les polices Inclusive Sans et Roboto Mono gardent leur licence SIL OFL, jointe dans `src/assets/fonts/`.
